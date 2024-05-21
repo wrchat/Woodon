@@ -60,7 +60,7 @@ namespace Mascari4615
 				_syncedScore = value;
 
 				if (useSync)
-					SetScore(_syncedScore);
+					SetScore(_syncedScore, isReciever: true);
 			}
 		}
 		private int _score;
@@ -103,40 +103,47 @@ namespace Mascari4615
 				SetScore(Mathf.Clamp(Score, minScore, maxScore));
 		}
 
-		public void SetScore(int newScore)
+		public void SetScore(int newScore, bool isReciever = false)
 		{
 			MDebugLog($"{nameof(SetScore)}");
+
+			int actualScore = newScore;
+
 			if (useClamp)
 			{
-				newScore = Mathf.Clamp(newScore, minScore, maxScore);
+				actualScore = Mathf.Clamp(actualScore, minScore, maxScore);
 			}
 			else if (useLoop)
 			{
-				if (newScore > maxScore)
-					newScore = newScore - maxScore - 1;
+				if (actualScore > maxScore)
+					actualScore = actualScore - maxScore - 1;
 
-				if (newScore < minScore)
-					newScore = maxScore + newScore;
+				if (actualScore < minScore)
+					actualScore = maxScore + actualScore;
 			}
 			else
 			{
-				if (newScore > maxScore)
+				if (actualScore > maxScore)
 					return;
 
-				if (newScore < minScore)
+				if (actualScore < minScore)
 					return;
 			}
 
 			if (useSync)
 			{
-				SetOwner();
-				SyncedScore = newScore;
-				RequestSerialization();
+				if (SyncedScore != actualScore)
+				{
+					if (isReciever == false)
+					{
+						SetOwner();
+						SyncedScore = actualScore;
+						RequestSerialization();
+					}
+				}
 			}
-			else
-			{
-				Score = newScore;
-			}
+
+			Score = actualScore;
 		}
 
 		public void SetScore0() => SetScore(0);

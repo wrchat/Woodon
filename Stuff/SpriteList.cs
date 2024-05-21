@@ -10,23 +10,33 @@ namespace Mascari4615
 		[Header("_" + nameof(SpriteList))]
 		[SerializeField] private MScore mScore;
 		[SerializeField] private Sprite[] spriteList;
-		[SerializeField] private Image targetImage;
-		[SerializeField] private SpriteRenderer targetSpriteRenderer;
+		[SerializeField] private Image[] targetImages;
+		[SerializeField] private SpriteRenderer[] targetSpriteRenderers;
 
+		[ContextMenu(nameof(UpdateSpriteByScore))]
 		public void UpdateSpriteByScore()
 		{
+			MDebugLog(nameof(UpdateSpriteByScore));
 			if (mScore)
 				UpdateSprite(mScore.Score);
 		}
 
 		public void UpdateSprite(int index)
 		{
-			if (targetImage)
-				for (var i = 0; i < spriteList.Length; i++)
+			MDebugLog(nameof(UpdateSprite));
+
+			if (index < 0 || index >= spriteList.Length)
+			{
+				MDebugLog($"Index out of range: {index}");
+				return;
+			}
+
+			if (targetImages != null)
+				foreach (Image targetImage in targetImages)
 					targetImage.sprite = spriteList[index];
 
-			if (targetSpriteRenderer)
-				for (var i = 0; i < spriteList.Length; i++)
+			if (targetSpriteRenderers != null)
+				foreach (SpriteRenderer targetSpriteRenderer in targetSpriteRenderers)
 					targetSpriteRenderer.sprite = spriteList[index];
 		}
 	}

@@ -48,10 +48,16 @@ namespace Mascari4615
 			Active = targetActive;
 		}
 
+		[ContextMenu(nameof(ToggleActive))]
 		public void ToggleActive() => SetActive(!Active);
+
+		[ContextMenu(nameof(SetActiveTrue))]
 		public void SetActiveTrue() => SetActive(true);
+
+		[ContextMenu(nameof(SetActiveFalse))]
 		public void SetActiveFalse() => SetActive(false);
 
+		[ContextMenu(nameof(UpdateValue))]
 		public void UpdateValue()
 		{
 			if (customBool)
