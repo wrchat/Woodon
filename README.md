@@ -8,8 +8,8 @@
 
 ## Require
 
-- UdonSharpVideo : MUI/MFullScreen, VideoPlayerController 등
-- QvPen : CloverSketchbook, RusukBar 등
+- [UdonSharpVideo](https://github.com/MerlinVR/USharpVideo/releases) : MUI/MFullScreen, VideoPlayerController 등
+- [QvPen](https://booth.pm/ja/items/1555789) : CloverSketchbook, RusukBar 등
 
 ## 제발 내 코드에 훈수하세요
 
