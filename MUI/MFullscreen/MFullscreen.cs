@@ -6,7 +6,7 @@ using VRC.SDK3.Video.Components.Base;
 
 namespace Mascari4615
 {
-	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
+	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class MFullscreen : MBase
 	{
 		[SerializeField] private Renderer internalAvProRenderer;

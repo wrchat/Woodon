@@ -28,12 +28,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 663563172873480258}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 663563173535624865}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &663563172873480280
 MeshFilter:
@@ -54,10 +55,12 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -82,6 +85,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &663563172873480262
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -90,9 +94,17 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 663563172873480258}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &663563172873480261
@@ -117,11 +129,12 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 663563172873480260}
-  debug: 0
-  targetUdons: []
+  DEBUG: 0
+  targetUdons:
+  - {fileID: 663563173535624877}
   eventNames:
   - ToggleValue
-  isGlobal: 0
+  sendGlobal: 0
 --- !u!114 &663563172873480260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,13 +188,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 663563173535624876}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.057, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 663563172873480259}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &663563173535624864
 MonoBehaviour:
@@ -205,16 +219,16 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 663563173535624879}
-  debug: 0
+  DEBUG: 0
   targetUdons: []
   eventNames: []
-  isGlobal: 0
+  sendGlobal: 0
   activeObjects: []
   disableObjects: []
   buttonUIImages: []
   buttonUISprites: []
   defaultActive: 0
-  customBool: {fileID: 0}
+  customBool: {fileID: 663563173535624878}
 --- !u!114 &663563173535624879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,22 +277,15 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 663563173535624877}
-  debug: 0
+  DEBUG: 0
   targetUdons:
   - {fileID: 663563173535624879}
-  eventNames: []
-  isGlobal: 0
+  eventNames:
+  - UpdateValue
+  sendGlobal: 0
   defaultValue: 1
-  sync: 0
   buttonUIImages: []
   buttonUISprites: []
-  targetUdonsAtSetTime: []
-  trueEventNamesAtSetTime: []
-  falseEventNamesAtSetTime: []
-  trueEventNames:
-  - SetActiveTrue
-  falseEventNames:
-  - SetActiveFalse
 --- !u!114 &663563173535624877
 MonoBehaviour:
   m_ObjectHideFlags: 0

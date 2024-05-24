@@ -7,7 +7,7 @@ using VRC.Udon;
 
 namespace Mascari4615
 {
-    [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
+	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public class VideoPlayerController : MBase
 	{
 		[SerializeField] private USharpVideoPlayer usharpVideoPlayer;
@@ -39,6 +39,12 @@ namespace Mascari4615
 		}
 
 		public void PlayVideo(int index) => usharpVideoPlayer.PlayVideo(VideoDatas[index].VRCUrl);
+
+		[ContextMenu(nameof(PlayVideo0))]
+		public void PlayVideo0() => PlayVideo(0);
+		public void PlayVideo1() => PlayVideo(1);
+		public void PlayVideo2() => PlayVideo(2);
+
 		public void StopVideo()
 		{
 			MDebugLog(nameof(StopVideo));
