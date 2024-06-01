@@ -24,27 +24,29 @@ namespace Mascari4615
 
 		public const int NO_ONE = -2;
 
-		[UdonSynced(UdonSyncMode.None), FieldChangeCallback(nameof(OwnerIndex))] private int _ownerIndex = NO_ONE;
-		public int OwnerIndex
+		[UdonSynced(UdonSyncMode.None), FieldChangeCallback(nameof(OwnerWaktaIndex))] private int ownerWaktaIndex = NO_ONE;
+		public int OwnerWaktaIndex
 		{
-			get => _ownerIndex;
+			get => ownerWaktaIndex;
 			set
 			{
-				_ownerIndex = value;
+				ownerWaktaIndex = value;
 				OnOwnerChange();
 			}
 		}
 
 		private void OnOwnerChange()
 		{
-			button.SetActive(_ownerIndex == NO_ONE);
-			button2.SetActive(_ownerIndex != NO_ONE);
-			effect.SetActive(_ownerIndex != NO_ONE);
+			button.SetActive(ownerWaktaIndex == NO_ONE);
+			button2.SetActive(ownerWaktaIndex != NO_ONE);
+			effect.SetActive(ownerWaktaIndex != NO_ONE);
 
-			if (_ownerIndex != NO_ONE)
+			if (ownerWaktaIndex != NO_ONE)
 			{
-				Sprite sprite = _ownerIndex != NONE_INT ? playerIcons[_ownerIndex] : nullIcon;
-				string _name = _ownerIndex != NONE_INT ? $"{waktaNicknameDic[_ownerIndex]} 발견 !" : "이파리가 발견 !";
+				string nickname = WaktaverseNickname.GetNickname(OwnerWaktaIndex);
+
+				Sprite sprite = ownerWaktaIndex != NONE_INT ? playerIcons[ownerWaktaIndex] : nullIcon;
+				string _name = ownerWaktaIndex != NONE_INT ? $"{nickname} 발견 !" : "이파리가 발견 !";
 
 				// _name += "\n<size=15>이세돌 데뷔 2주년을 축하합니다 !";
 
@@ -63,7 +65,7 @@ namespace Mascari4615
 		public void Find()
 		{
 			SetOwner();
-			OwnerIndex = GetWaktaIndexByDisplayName(Networking.LocalPlayer.displayName);
+			OwnerWaktaIndex = WaktaverseNickname.GetIndex(Networking.LocalPlayer.displayName);
 			RequestSerialization();
 		}
 	}

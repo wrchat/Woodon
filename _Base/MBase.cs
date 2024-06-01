@@ -12,7 +12,7 @@ namespace Mascari4615
 		protected const char DATA_PACK_SEPARATOR = '_';
 		protected const char DATA_SEPARATOR = '@';
 
-		protected const int NONE_INT = -1;
+		public const int NONE_INT = -1;
 		protected const string NONE_STRING = "SANS";
 		protected const string TRUE_STRING = "TRUE";
 		protected const string FALSE_STRING = "FALSE";
@@ -164,88 +164,6 @@ namespace Mascari4615
 		protected string WakgoodName => "VRwakgood";
 		protected bool IsLocalWakgood => Networking.LocalPlayer.displayName.Equals(WakgoodName);
 		protected VRCPlayerApi Wakgood => GetPlayerByName(WakgoodName);
-
-		// TODO: 어칼님께서 업데이트 해주신 걸로 수정
-		protected readonly string[] waktaDisplayNameDic =
-		{
-			"VRwakgood",
-
-			"INE_아이네",
-			"jingburger",
-			"LILPAAA",
-			"jururu_twitch",
-			"gosegu",
-			"VIichan",
-
-			"병장 곽춘식",
-			"KwonMin",
-			"김치만두번영택사스가",
-			"Nosferatu Hodd",
-			"망령벌레",
-			"Dr Dopamine",
-			"독고혜지",
-			"roentgenium",
-			"부정형인간",
-			"비밀소녀",
-			"비즈니스킴 6ecf",
-			"새우튀김70",
-			"-소피아-",
-			"왁파고_",
-			"이덕수할아바이",
-			"카르나르 융터르 39c8",
-			"Cally Carly Davidson c76f",
-			"(풍신)",
-			"Freeter",
-			"HAKU0089",
-			"RUSUK",
-			"Hiki King",
-		};
-
-		protected readonly string[] waktaNicknameDic =
-		{
-			"우왁굳",
-
-			"아이네",
-			"징버거",
-			"릴파",
-			"주르르",
-			"고세구",
-			"비챤",
-
-			"곽춘식",
-			"권민",
-			"김치만두번영택사스가",
-			"노스페라투 호드",
-			"단답벌레",
-			"도파민",
-			"독고혜지",
-			"뢴트게늄",
-			"부정형인간",
-			"비밀소녀",
-			"비즈니스킴",
-			"새우튀김",
-			"소피아",
-			"왁파고",
-			"이덕수할아바이",
-			"카르나르융터르",
-			"캘리칼리 데이비슨",
-			"풍신",
-			"프리터",
-			"하쿠0089",
-			"해루석",
-			"히키킹",
-		};
-
-		protected int GetWaktaIndexByDisplayName(string displayName)
-		{
-			for (int i = 0; i < waktaDisplayNameDic.Length; i++)
-			{
-				if (waktaDisplayNameDic[i] == displayName)
-					return i;
-			}
-
-			return NONE_INT;
-		}
 		#endregion
 	}
 }

@@ -40,7 +40,7 @@ namespace Mascari4615
 			if (IsOwner())
 			{
 				for (int i = 0; i < wGameHiddenObjects.Length; i++)
-					if (wGameHiddenObjects[i].OwnerIndex == WGameHiddenObject.NO_ONE)
+					if (wGameHiddenObjects[i].OwnerWaktaIndex == WGameHiddenObject.NO_ONE)
 						return;
 
 				DoorOpen = true;

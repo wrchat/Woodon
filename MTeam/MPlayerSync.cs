@@ -47,14 +47,10 @@ namespace Mascari4615
 
 			if (playerAPI != null)
 				if (convertWaktaNickname)
-					for (var i = 0; i < waktaDisplayNameDic.Length; i++)
-						if (waktaDisplayNameDic[i] == playerNickname)
-						{
-							playerNickname = waktaNicknameDic[i];
-							break;
-						}
+					playerNickname = WaktaverseNickname.GetNickname(playerAPI.displayName);
 
-			foreach (var nicknameText in nicknameTexts) nicknameText.text = playerNickname;
+			foreach (TextMeshProUGUI nicknameText in nicknameTexts)
+				nicknameText.text = playerNickname;
 
 			if (PlayerID != NONE_INT && playerAPI == null && IsOwner())
 			{
