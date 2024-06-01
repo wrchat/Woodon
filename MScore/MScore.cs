@@ -184,7 +184,7 @@ namespace Mascari4615
 			if (uiParent != null)
 				uiParent.SetActive(CanvasActive);
 			if (uiActiveButtonImage != null)
-				uiActiveButtonImage.color = GetGreenOrRed(CanvasActive);
+				uiActiveButtonImage.color = MColorUtil.GetGreenOrRed(CanvasActive);
 		}
 
 		public void ToggleCanvas()

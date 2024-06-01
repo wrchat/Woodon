@@ -5,71 +5,76 @@ using UnityEngine.UI;
 
 namespace Mascari4615
 {
-    [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-    public class CameraActive : MBase
-    {
-        [SerializeField] private Camera[] cameras;
-        [SerializeField] private Image[] buttonUIImages;
-        [SerializeField] private TextMeshProUGUI[] buttonUITexts;
-        [SerializeField] private bool defaultActive;
-        [SerializeField] private bool useCustomBool;
+	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
+	public class CameraActive : MBase
+	{
+		[SerializeField] private Camera[] cameras;
+		[SerializeField] private Image[] buttonUIImages;
+		[SerializeField] private TextMeshProUGUI[] buttonUITexts;
+		[SerializeField] private bool defaultActive;
+		[SerializeField] private CustomBool customBool;
 
-        private bool active;
+		private bool active;
 
-        public bool Active
-        {
-            get => active;
-            private set
-            {
-                active = value;
-                OnActiveChange();
-            }
-        }
+		public bool Active
+		{
+			get => active;
+			private set
+			{
+				active = value;
+				OnActiveChange();
+			}
+		}
 
-        private void Start()
-        {
-            if (useCustomBool == false)
-                Active = defaultActive;
+		private void Start()
+		{
+			if (customBool == null)
+			{
+				Active = defaultActive;
+			}
+			else
+			{
 
-            OnActiveChange();
-        }
+			}
 
-        public void SetActive(bool targetActive)
-        {
-            if (DEBUG)
-                MDebugLog($"{nameof(SetActive)}({targetActive})");
+			OnActiveChange();
+		}
 
-            Active = targetActive;
-        }
+		public void SetActive(bool targetActive)
+		{
+			MDebugLog($"{nameof(SetActive)}({targetActive})");
 
-        public void ToggleActive()
-        {
-            SetActive(!Active);
-        }
+			Active = targetActive;
+		}
 
-        public void SetActiveTrue()
-        {
-            SetActive(true);
-        }
+		[ContextMenu(nameof(ToggleActive))]
+		public void ToggleActive() => SetActive(!Active);
+	
+		[ContextMenu(nameof(SetActiveTrue))]
+		public void SetActiveTrue() => SetActive(true);
+		
+		[ContextMenu(nameof(SetActiveFalse))]
+		public void SetActiveFalse() => SetActive(false);
 
-        public void SetActiveFalse()
-        {
-            SetActive(false);
-        }
+		[ContextMenu(nameof(UpdateValue))]
+		public void UpdateValue()
+		{
+			if (customBool)
+				SetActive(customBool.Value);
+		}
 
-        private void OnActiveChange()
-        {
-            if (DEBUG)
-                MDebugLog($"{nameof(OnActiveChange)}");
+		private void OnActiveChange()
+		{
+			MDebugLog($"{nameof(OnActiveChange)}");
 
-            foreach (var i in buttonUIImages)
-                i.color = GetGreenOrRed(Active);
+			foreach (Image i in buttonUIImages)
+				i.color = MColorUtil.GetGreenOrRed(Active);
 
-            foreach (var t in buttonUITexts)
-                t.color = GetGreenOrRed(Active);
+			foreach (TextMeshProUGUI t in buttonUITexts)
+				t.color = MColorUtil.GetGreenOrRed(Active);
 
-            foreach (var camera in cameras)
-                camera.enabled = Active;
-        }
-    }
+			foreach (Camera camera in cameras)
+				camera.enabled = Active;
+		}
+	}
 }

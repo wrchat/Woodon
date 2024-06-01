@@ -7,74 +7,77 @@ using VRC.Udon;
 
 namespace Mascari4615
 {
-    [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-    public class RotatingMeetingVoice : VoiceUpdater
-    {
-        [SerializeField] private VoiceManager voiceManager;
-        [SerializeField] private CupPicker[] cupPickers;
+	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
+	public class RotatingMeetingVoice : VoiceUpdater
+	{
+		[SerializeField] private VoiceManager voiceManager;
+		[SerializeField] private CupPicker[] cupPickers;
 
-        [SerializeField] private Image[] icons;
+		[SerializeField] private Image[] icons;
 
-        private int curFocusState = NONE_INT;
+		private int curFocusState = NONE_INT;
 
-        public void SetFocusState0() => SetFocusState(0);
-        public void SetFocusState1() => SetFocusState(1);
-        public void SetFocusState2() => SetFocusState(2);
+		public void SetFocusState0() => SetFocusState(0);
+		public void SetFocusState1() => SetFocusState(1);
+		public void SetFocusState2() => SetFocusState(2);
 
-        private void Start()
-        {
-            SetFocusState(NONE_INT);
-        }
+		private void Start()
+		{
+			SetFocusState(NONE_INT);
+		}
 
-        private void SetFocusState(int newState)
-        {
-            if (curFocusState == newState)
-                curFocusState = NONE_INT;
-            else
-                curFocusState = newState;
+		private void SetFocusState(int newState)
+		{
+			if (curFocusState == newState)
+				curFocusState = NONE_INT;
+			else
+				curFocusState = newState;
 
-            for (int i = 0; i < 3; i++)
-            {
-                icons[i * 2 + 0].color = i == curFocusState ? GREEN : GRAY;
-                icons[i * 2 + 1].color = i == curFocusState ? GREEN : GRAY;
-            }
-        }
+			for (int i = 0; i < 3; i++)
+			{
+				bool isFocus = i == curFocusState;
+				Color color = MColorUtil.GetColorByBool(isFocus, MColor.Green, MColor.Gray);
 
-        public override void UpdateVoice()
-        {
-            for (int index = 0; index < voiceManager.VoiceStates.Length; index++)
-                voiceManager.VoiceStates[index] = VoiceState.Default;
+				icons[i * 2 + 0].color = color;
+				icons[i * 2 + 1].color = color;
+			}
+		}
 
-            for (int cupPickerIndex = 0; cupPickerIndex < cupPickers.Length; cupPickerIndex++)
-            {
-                // 여성 ID
-                int pickerOwnerId = cupPickers[cupPickerIndex].OwnerID;
+		public override void UpdateVoice()
+		{
+			for (int index = 0; index < voiceManager.VoiceStates.Length; index++)
+				voiceManager.VoiceStates[index] = VoiceState.Default;
 
-                if (cupPickers[cupPickerIndex].TargetCupIndex == NONE_INT)
-                    continue;
+			for (int cupPickerIndex = 0; cupPickerIndex < cupPickers.Length; cupPickerIndex++)
+			{
+				// 여성 ID
+				int pickerOwnerId = cupPickers[cupPickerIndex].OwnerID;
 
-                // 남성 ID
-                int cupOwnerId = cupPickers[cupPickerIndex].TargetCup.OwnerID;
+				if (cupPickers[cupPickerIndex].TargetCupIndex == NONE_INT)
+					continue;
 
-                bool isLocalPlayerTarget = (pickerOwnerId == Networking.LocalPlayer.playerId) ||
-                                           (cupOwnerId == Networking.LocalPlayer.playerId) ||
-                                           (curFocusState == cupPickerIndex);
+				// 남성 ID
+				int cupOwnerId = cupPickers[cupPickerIndex].TargetCup.OwnerID;
 
-                if (!isLocalPlayerTarget)
-                    continue;
+				bool isLocalPlayerTarget = (pickerOwnerId == Networking.LocalPlayer.playerId) ||
+										   (cupOwnerId == Networking.LocalPlayer.playerId) ||
+										   (curFocusState == cupPickerIndex);
 
-                for (int vi = 0; vi < voiceManager.VoiceStates.Length; vi++)
-                {
-                    VRCPlayerApi targetPlayer = voiceManager.PlayerApis[vi];
+				if (!isLocalPlayerTarget)
+					continue;
 
-                    bool targetPlayerState = (pickerOwnerId == targetPlayer.playerId) ||
-                                             (cupOwnerId == targetPlayer.playerId);
+				for (int vi = 0; vi < voiceManager.VoiceStates.Length; vi++)
+				{
+					VRCPlayerApi targetPlayer = voiceManager.PlayerApis[vi];
 
-                    voiceManager.VoiceStates[vi] = (targetPlayerState ? VoiceState.Default : VoiceState.Quiet);
-                }
+					bool targetPlayerState = (pickerOwnerId == targetPlayer.playerId) ||
+											 (cupOwnerId == targetPlayer.playerId);
 
-                break;
-            }
-        }
-    }
+					voiceManager.VoiceStates[vi] = (targetPlayerState ? VoiceState.Default : VoiceState.Quiet);
+				}
+
+				break;
+			}
+		}
+	}
 }

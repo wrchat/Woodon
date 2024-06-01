@@ -182,7 +182,7 @@ namespace Mascari4615
 		public void UpdateMusicPlayIcon(bool isPaused)
 		{
 			musicPlayButtonImage.sprite = isPaused ? musicPlayButtonSprites[1] : musicPlayButtonSprites[0];
-			musicToggleImage.color = GetGreenOrRed(!isPaused);
+			musicToggleImage.color = MColorUtil.GetGreenOrRed(!isPaused);
 		}
 
 		public void NextMusic()
@@ -205,7 +205,7 @@ namespace Mascari4615
 
 		public void SetMusicShuffleUI(bool musicShuffle)
 		{
-			musicShuffleToggleButtonImage.color = GetWhiteOrGray(musicShuffle);
+			musicShuffleToggleButtonImage.color = MColorUtil.GetWhiteOrGray(musicShuffle);
 		}
 
 		public void MusicLoopSwitch()
@@ -219,17 +219,17 @@ namespace Mascari4615
 			if (loopType == 0) // None
 			{
 				SetMusicLoopTypeImage(curMusicLoopTypeText, true, true);
-				musicLoopSwitchButtonImage.color = WHITE;
+				musicLoopSwitchButtonImage.color = MColorUtil.GetColor(MColor.White);
 			}
 			else if (loopType == 1) // All
 			{
 				SetMusicLoopTypeImage(curMusicLoopTypeText, false, true);
-				musicLoopSwitchButtonImage.color = WHITE;
+				musicLoopSwitchButtonImage.color = MColorUtil.GetColor(MColor.White);
 			}
 			else // One
 			{
 				SetMusicLoopTypeImage(curMusicLoopTypeText, false, false);
-				musicLoopSwitchButtonImage.color = GRAY;
+				musicLoopSwitchButtonImage.color = MColorUtil.GetColor(MColor.Gray);
 			}
 		}
 
@@ -282,7 +282,7 @@ namespace Mascari4615
 		public void MusicCooling()
 		{
 			canMusic = true;
-			musicCooltimeImage.color = GetGreenOrRed(canMusic);
+			musicCooltimeImage.color = MColorUtil.GetGreenOrRed(canMusic);
 		}
 
 		public void PlayMusic(int index)
@@ -291,7 +291,7 @@ namespace Mascari4615
 				return;
 
 			canMusic = false;
-			musicCooltimeImage.color = GetGreenOrRed(canMusic);
+			musicCooltimeImage.color = MColorUtil.GetGreenOrRed(canMusic);
 			SendCustomEventDelayedSeconds(nameof(MusicCooling), musicButtonCooltime);
 
 			//for (var i = 0; i < playListCurs.Length; i++)
@@ -307,7 +307,7 @@ namespace Mascari4615
 				return;
 
 			canMusic = false;
-			musicCooltimeImage.color = GetGreenOrRed(canMusic);
+			musicCooltimeImage.color = MColorUtil.GetGreenOrRed(canMusic);
 			SendCustomEventDelayedSeconds(nameof(MusicCooling), musicButtonCooltime);
 
 			for (var i = 0; i < playListCurs.Length; i++)
@@ -1056,7 +1056,7 @@ namespace Mascari4615
 
 		public void SetGuitarToggleImage(bool actice)
 		{
-			guitarToggleImage.color = GetGreenOrRed(actice);
+			guitarToggleImage.color = MColorUtil.GetGreenOrRed(actice);
 		}
 
 		public void ToggleDrum()
@@ -1067,7 +1067,7 @@ namespace Mascari4615
 
 		public void SetDrumToggleImage(bool actice)
 		{
-			drumToggleImage.color = GetGreenOrRed(actice);
+			drumToggleImage.color = MColorUtil.GetGreenOrRed(actice);
 		}
 
 		public void TogglePiano()
@@ -1078,7 +1078,7 @@ namespace Mascari4615
 
 		public void SetPianoToggleImage(bool actice)
 		{
-			pianoToggleImage.color = GetGreenOrRed(actice);
+			pianoToggleImage.color = MColorUtil.GetGreenOrRed(actice);
 		}
 
 		public void ToggleMikeActive()
@@ -1089,7 +1089,7 @@ namespace Mascari4615
 
 		public void SetMikeActiveToggleImage(bool actice)
 		{
-			standMikeActiveToggleImage.color = GetGreenOrRed(actice);
+			standMikeActiveToggleImage.color = MColorUtil.GetGreenOrRed(actice);
 		}
 
 		public void ToggleBell()
@@ -1100,7 +1100,7 @@ namespace Mascari4615
 
 		public void SetBellToggleImage(bool actice)
 		{
-			bellToggleImage.color = GetGreenOrRed(actice);
+			bellToggleImage.color = MColorUtil.GetGreenOrRed(actice);
 		}
 
 		public void TogglePostProcess()
@@ -1111,7 +1111,7 @@ namespace Mascari4615
 
 		public void SetPostProcessToggleImage(bool actice)
 		{
-			postProcessToggleImage.color = GetGreenOrRed(actice);
+			postProcessToggleImage.color = MColorUtil.GetGreenOrRed(actice);
 		}
 
 		public void ToggleColliders()
@@ -1122,7 +1122,7 @@ namespace Mascari4615
 
 		public void SetColliderToggleImage(bool enabled)
 		{
-			colliderToggleImage.color = GetGreenOrRed(enabled);
+			colliderToggleImage.color = MColorUtil.GetGreenOrRed(enabled);
 		}
 
 		#endregion

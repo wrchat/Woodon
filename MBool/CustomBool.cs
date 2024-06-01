@@ -46,7 +46,7 @@ namespace Mascari4615
 				if (buttonUISprites != null && buttonUISprites.Length > 0)
 					i.sprite = buttonUISprites[Value ? 0 : 1];
 				else
-					i.color = GetGreenOrRed(Value);
+					i.color = MColorUtil.GetGreenOrRed(Value);
 			}
 		}
 

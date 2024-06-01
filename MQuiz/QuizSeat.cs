@@ -72,7 +72,7 @@ namespace Mascari4615
 			MDebugLog($"{nameof(OnExpectedAnswerChange)}, {ExpectedAnswer}");
 
 			for (int i = 0; i < selectAnswerDecoImages.Length; i++)
-				selectAnswerDecoImages[i].color = (i == (int)_expectedAnswer) ? GREEN : WHITE_GRAY;
+				selectAnswerDecoImages[i].color = MColorUtil.GetColorByBool(i == (int)_expectedAnswer, MColor.Green, MColor.WhiteGray);
 			foreach (var expectedAnswerText in expectedAnswerTexts)
 				expectedAnswerText.text = (ExpectedAnswer != QuizAnswerType.None) ? answerToString[(int)ExpectedAnswer] : string.Empty;
 			foreach (var expectedAnswerImage in expectedAnswerImages)

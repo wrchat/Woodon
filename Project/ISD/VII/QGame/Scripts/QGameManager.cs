@@ -72,11 +72,11 @@ namespace Mascari4615
 			{
 				case QuizAnswerType.O:
 					showAnswerText.text = "O";
-					showAnswerText.color = BLUE;
+					showAnswerText.color = MColorUtil.GetColor(MColor.Blue);
 					break;
 				case QuizAnswerType.X:
 					showAnswerText.text = "X";
-					showAnswerText.color = RED;
+					showAnswerText.color = MColorUtil.GetColor(MColor.Red);
 					break;
 				case QuizAnswerType.String:
 					showAnswerText.text = CurQuizData.QuizAnswerString;

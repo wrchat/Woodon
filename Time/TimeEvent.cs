@@ -73,7 +73,7 @@ namespace Mascari4615
 				isCounting.SetValue(ExpireTime != NONE_INT);
 
 			foreach (Image buttonUIImage in buttonUIImages)
-				buttonUIImage.color = GetGreenOrRed(isCounting);
+				buttonUIImage.color = MColorUtil.GetGreenOrRed(isCounting);
 		}
 
 		public void ResetTimeIfOwner()

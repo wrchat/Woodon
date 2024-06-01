@@ -72,7 +72,7 @@ namespace Mascari4615
 		{
 			MDebugLog(nameof(OnHitsActiveChange));
 
-			hitsActiveButtonImage.color = GetGreenOrRed(hitsActive);
+			hitsActiveButtonImage.color = MColorUtil.GetGreenOrRed(hitsActive);
 
 			foreach (var hit in hits)
 				hit.SetActive(hitsActive);
@@ -91,7 +91,7 @@ namespace Mascari4615
 		{
 			MDebugLog(nameof(OnGameStateChange));
 
-			gameActiveStateUIImage.color = GetGreenOrRed(!GameState);
+			gameActiveStateUIImage.color = MColorUtil.GetGreenOrRed(!GameState);
 			gameStateText.text = GameState ? "RESET" : "START";
 		}
 

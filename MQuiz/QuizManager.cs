@@ -156,7 +156,7 @@ namespace Mascari4615
 				quizSeat.UpdateStuff();
 
 			for (int i = 0; i < stateButtonImages.Length; i++)
-				stateButtonImages[i].color = i == (int)CurGameState ? GREEN : GRAY;
+				stateButtonImages[i].color = MColorUtil.GetColorByBool(i == (int)CurGameState, MColor.Green, MColor.Gray);
 
 			if (curQuizIndexText)
 				curQuizIndexText.text = (_curQuizIndex + 1).ToString();

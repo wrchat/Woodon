@@ -52,7 +52,7 @@ namespace Mascari4615
 
 			{
 				for (int i = 0; i < detailAnswerButtonImages.Length; i++)
-					detailAnswerButtonImages[i].color = GetBlackOrGray(i != CurDetailAnswerIndex);
+					detailAnswerButtonImages[i].color = MColorUtil.GetBlackOrGray(i != CurDetailAnswerIndex);
 
 				string[] qasArr = CurQuizData.QuizAnswerString.Split(DATA_SEPARATOR);
 
@@ -70,7 +70,7 @@ namespace Mascari4615
 
 			{
 				for (int i = 0; i < kakaotalkButtonImages.Length; i++)
-					kakaotalkButtonImages[i].color = GetBlackOrGray(i != CurKakaotalkIndex);
+					kakaotalkButtonImages[i].color = MColorUtil.GetBlackOrGray(i != CurKakaotalkIndex);
 
 				bool noKakao = (CurKakaotalkIndex == 5);
 

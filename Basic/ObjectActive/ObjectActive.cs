@@ -29,7 +29,7 @@ namespace Mascari4615
 
 		private void Start()
 		{
-			if (!customBool)
+			if (customBool == null)
 			{
 				Active = defaultActive;
 			}
@@ -79,7 +79,7 @@ namespace Mascari4615
 				if (buttonUISprites != null && buttonUISprites.Length > 0)
 					i.sprite = buttonUISprites[Active ? 0 : 1];
 				else
-					i.color = GetGreenOrRed(Active);
+					i.color = MColorUtil.GetGreenOrRed(Active);
 			}
 
 			foreach (var o in activeObjects)
