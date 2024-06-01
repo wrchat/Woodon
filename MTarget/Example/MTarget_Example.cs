@@ -13,6 +13,11 @@ namespace Mascari4615
 
 		public override void Interact()
 		{
+			TryTeleport_G();
+		}
+
+		public void TryTeleport_G()
+		{
 			SendCustomNetworkEvent(NetworkEventTarget.All, nameof(TryTeleport));
 		}
 
