@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
-  m_Name: RespawnPickup
+  m_Name: UIHeartBlock
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 643718d8bbf34e4418cfb0e5be520c16,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 7c591caedc818554d82c45f741723c30,
     type: 2}
   udonAssembly: 
   assemblyError: 
-  sourceCsScript: {fileID: 11500000, guid: 9aec33020cd18af469e67c612e289999, type: 3}
+  sourceCsScript: {fileID: 11500000, guid: 5c3616489bf4f17488a8768a3f4bd2be, type: 3}
   scriptVersion: 2
   compiledVersion: 2
   behaviourSyncMode: 1
   hasInteractEvent: 0
-  scriptID: 4723349461316071926
+  scriptID: -2326726845514014536
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
@@ -899,19 +899,19 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 1
-      Data: objectSyncs
+      Data: hearts
     - Name: $v
       Entry: 7
       Data: 41|UdonSharp.Compiler.FieldDefinition, UdonSharp.Editor
     - Name: <Name>k__BackingField
       Entry: 1
-      Data: objectSyncs
+      Data: hearts
     - Name: <UserType>k__BackingField
       Entry: 7
       Data: 42|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: VRC.SDK3.Components.VRCObjectSync[], VRCSDK3
+      Data: UnityEngine.UI.Image[], UnityEngine.UI
     - Name: 
       Entry: 8
       Data: 
@@ -929,19 +929,13 @@ MonoBehaviour:
       Data: 
     - Name: <IsSerialized>k__BackingField
       Entry: 5
-      Data: true
+      Data: false
     - Name: _fieldAttributes
       Entry: 7
       Data: 43|System.Collections.Generic.List`1[[System.Attribute, mscorlib]], mscorlib
     - Name: 
       Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 44|UnityEngine.SerializeField, UnityEngine.CoreModule
-    - Name: 
-      Entry: 8
-      Data: 
+      Data: 0
     - Name: 
       Entry: 13
       Data: 
