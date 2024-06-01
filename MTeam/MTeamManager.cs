@@ -5,24 +5,6 @@ using VRC.Udon;
 
 namespace Mascari4615
 {
-	public enum TeamType
-	{
-		A,
-		B,
-		C,
-		D,
-		E,
-		F,
-		G,
-		H,
-		I,
-		J,
-		K,
-		L,
-		M,
-		None
-	}
-
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public class MTeamManager : MEventSender
 	{
