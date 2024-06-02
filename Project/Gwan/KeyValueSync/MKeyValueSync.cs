@@ -24,7 +24,7 @@ namespace Mascari4615
 		[SerializeField] private TextMeshProUGUI nofi;
 
 		// [SerializeField] private MKeyValueUpdateListener[] mKeyValueUpdateListeners;
-		[SerializeField] private UdonBehaviour[] mKeyValueUpdateListeners;
+		[SerializeField] private UdonSharpBehaviour[] mKeyValueUpdateListeners;
 
 		[SerializeField] private TextMeshProUGUI[] debugTexts;
 

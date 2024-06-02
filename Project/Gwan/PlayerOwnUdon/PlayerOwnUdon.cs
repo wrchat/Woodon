@@ -9,7 +9,7 @@ namespace Mascari4615
 	public class PlayerOwnUdon : MBase
 	{
 		[UdonSynced()] public bool isSynced;
-		private UdonBehaviour[] childUdons;
+		private UdonSharpBehaviour[] childUdons;
 		private int index = NONE_INT;
 
 		[UdonSynced()]

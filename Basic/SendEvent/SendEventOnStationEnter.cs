@@ -10,8 +10,8 @@ namespace Mascari4615
 	public class SendEventOnStationEnter : MBase
 	{
 		[Header("_" + nameof(SendEventOnStationEnter))]
-		[SerializeField] private UdonBehaviour[] enterUdons;
-		[SerializeField] private UdonBehaviour[] exitUdons;
+		[SerializeField] private UdonSharpBehaviour[] enterUdons;
+		[SerializeField] private UdonSharpBehaviour[] exitUdons;
 
 		[SerializeField] private bool[] isEnterEventGlobal;
 		[SerializeField] private bool[] isExitEventGlobal;

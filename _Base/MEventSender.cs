@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using UdonSharp;
 using UnityEngine;
 using VRC.Udon;
 using VRC.Udon.Common.Interfaces;
@@ -9,7 +8,7 @@ namespace Mascari4615
 	public class MEventSender : MBase
 	{
 		[Header("_" + nameof(MEventSender))]
-		[SerializeField] protected UdonBehaviour[] targetUdons;
+		[SerializeField] protected UdonSharpBehaviour[] targetUdons;
 		[SerializeField] protected string[] eventNames;
 		[SerializeField] protected bool sendGlobal;
 

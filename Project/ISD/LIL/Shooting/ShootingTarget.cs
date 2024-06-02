@@ -8,7 +8,7 @@ namespace Mascari4615
 	public class ShootingTarget : MBase
 	{
 		[SerializeField] private ShootingManager shootingManager;
-		[SerializeField] private UdonBehaviour[] targetUdonBehaviours;
+		[SerializeField] private UdonSharpBehaviour[] targetUdonBehaviours;
 		[SerializeField] private string[] eventNames;
 
 		public void Ahh()
