@@ -18,6 +18,8 @@ namespace Mascari4615
 		[SerializeField] private int teamCount = 2; // 팀 수
 		[SerializeField] private int teamPlayerCount = 2; // 팀당 인원 수
 
+		[SerializeField] private UIDraw[] drawUIs;
+
 		private DrawElementData[] drawElementDatas;
 
 		[UdonSynced(UdonSyncMode.None), FieldChangeCallback(nameof(DataPacks))] private string dataPacks = string.Empty;
@@ -41,6 +43,9 @@ namespace Mascari4615
 			string[] dataPacks = DataPacks.Split(DATA_PACK_SEPARATOR);
 			for (int i = 0; i < drawElementDatas.Length; i++)
 				drawElementDatas[i].ParseDataPack(dataPacks[i]);
+
+			foreach (UIDraw drawUI in drawUIs)
+				drawUI.UpdateUI(drawElementDatas);
 		}
 
 		public void SyncData()
@@ -64,6 +69,9 @@ namespace Mascari4615
 		{
 			drawElementDatas = GetComponentsInChildren<DrawElementData>(true);
 
+			foreach (UIDraw drawUI in drawUIs)
+				drawUI.Init();
+
 			InitData();
 			SyncData();
 		}
@@ -78,6 +86,8 @@ namespace Mascari4615
 				drawElementDatas[i].Index = i;
 				drawElementDatas[i].TeamType = drawElementDatas[i].InitTeamType;
 				drawElementDatas[i].Role = drawElementDatas[i].InitRole;
+
+				drawElementDatas[i].IsShowing = true;
 			}
 
 			// 2. 랜덤으로 데이터 생성해서 남은 자리 채워넣기
@@ -109,7 +119,47 @@ namespace Mascari4615
 
 				drawElementDatas[i].TeamType = (TeamType)randomTeamIndex;
 				drawElementDatas[i].Role = DrawRole.Normal;
+
+				drawElementDatas[i].IsShowing = false;
 			}
+		}
+
+		[ContextMenu(nameof(ShowTeamA))]
+		public void ShowTeamA() => ShowTeam(TeamType.A);
+		public void ShowTeamB() => ShowTeam(TeamType.B);
+		public void ShowTeamC() => ShowTeam(TeamType.C);
+		public void ShowTeamD() => ShowTeam(TeamType.D);
+		public void ShowTeamE() => ShowTeam(TeamType.E);
+		public void ShowTeamF() => ShowTeam(TeamType.F);
+		public void ShowTeamG() => ShowTeam(TeamType.G);
+		public void ShowTeamH() => ShowTeam(TeamType.H);
+		public void ShowTeamI() => ShowTeam(TeamType.I);
+		public void ShowTeamJ() => ShowTeam(TeamType.J);
+		public void ShowTeamK() => ShowTeam(TeamType.K);
+		public void ShowTeamL() => ShowTeam(TeamType.L);
+		public void ShowTeamM() => ShowTeam(TeamType.M);
+		public void ShowTeamN() => ShowTeam(TeamType.N);
+		public void ShowTeamO() => ShowTeam(TeamType.O);
+		public void ShowTeamP() => ShowTeam(TeamType.P);
+		public void ShowTeamQ() => ShowTeam(TeamType.Q);
+		public void ShowTeamR() => ShowTeam(TeamType.R);
+		public void ShowTeamS() => ShowTeam(TeamType.S);
+		public void ShowTeamT() => ShowTeam(TeamType.T);
+		public void ShowTeamU() => ShowTeam(TeamType.U);
+		public void ShowTeamV() => ShowTeam(TeamType.V);
+		public void ShowTeamW() => ShowTeam(TeamType.W);
+		public void ShowTeamX() => ShowTeam(TeamType.X);
+		public void ShowTeamY() => ShowTeam(TeamType.Y);
+		public void ShowTeamZ() => ShowTeam(TeamType.Z);
+
+		public void ShowTeam(TeamType teamType)
+		{
+			foreach (DrawElementData drawElementData in drawElementDatas)
+			{
+				if (drawElementData.TeamType == teamType)
+					drawElementData.IsShowing = true;
+			}
+			SyncData();
 		}
 	}
 }

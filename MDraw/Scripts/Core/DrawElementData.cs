@@ -20,6 +20,8 @@ namespace Mascari4615
 		public TeamType TeamType { get; set; } = TeamType.None;
 		public DrawRole Role { get; set; } = DrawRole.None;
 
+		public bool IsShowing { get; set; } = false;
+
 		public string ToStringData()
 		{
 			string data = string.Empty;

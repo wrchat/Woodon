@@ -18,7 +18,7 @@ namespace Mascari4615
 		public const string FALSE_STRING = "FALSE";
 
 		[Header("_" + nameof(MBase))]
-		[SerializeField] protected bool DEBUG;
+		[SerializeField] protected bool DEBUG = true;
 
 		#region HACKs
 		protected void MDebugLog(string log = NONE_STRING)
