@@ -1,0 +1,2349 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &973217167
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 973217168}
+  m_Layer: 0
+  m_Name: RespawnPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &973217168
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 973217167}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.26, y: 0, z: -4.36}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4745238673149497848}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4745238673149497853
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4745238673149497848}
+  - component: {fileID: 4745238673149497855}
+  - component: {fileID: 4745238673149497854}
+  m_Layer: 0
+  m_Name: ChickenFightManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4745238673149497848
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4745238673149497853}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 6985899228030243213}
+  - {fileID: 9084838778704134397}
+  - {fileID: 9084838778727392978}
+  - {fileID: 9084838777302110264}
+  - {fileID: 9084838779314166872}
+  - {fileID: 9084838778378301194}
+  - {fileID: 6985899228504964197}
+  - {fileID: 9112488982700481798}
+  - {fileID: 9112488982608719685}
+  - {fileID: 9112488983552600793}
+  - {fileID: 9112488982252101412}
+  - {fileID: 9112488984176748851}
+  - {fileID: 973217168}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4745238673149497855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4745238673149497853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dc0977463084984fb72f8706ade4429, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  _udonSharpBackingUdonBehaviour: {fileID: 4745238673149497854}
+  debug: 0
+  curGame: {fileID: 0}
+  gameIndex: 0
+  respawnPos: {fileID: 973217168}
+--- !u!114 &4745238673149497854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4745238673149497853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45115577ef41a5b4ca741ed302693907, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactTextPlacement: {fileID: 0}
+  interactText: Use
+  interactTextGO: {fileID: 0}
+  proximity: 2
+  SynchronizePosition: 0
+  AllowCollisionOwnershipTransfer: 0
+  Reliable: 0
+  _syncMethod: 3
+  serializedProgramAsset: {fileID: 11400000, guid: 57c128c9544eff542a9ce9d06ee38c99,
+    type: 2}
+  programSource: {fileID: 11400000, guid: 31a9fe7ceb47d5046b6e15232ffcaad6, type: 2}
+  serializedPublicVariablesBytesString: Ai8AAAAAATIAAABWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgAuAFUAZABvAG4AVgBhAHIAaQBhAGIAbABlAFQAYQBiAGwAZQAsACAAVgBSAEMALgBVAGQAbwBuAC4AQwBvAG0AbQBvAG4AAAAAAAYBAAAAAAAAACcBBAAAAHQAeQBwAGUAAWgAAABTAHkAcwB0AGUAbQAuAEMAbwBsAGwAZQBjAHQAaQBvAG4AcwAuAEcAZQBuAGUAcgBpAGMALgBMAGkAcwB0AGAAMQBbAFsAVgBSAEMALgBVAGQAbwBuAC4AQwBvAG0AbQBvAG4ALgBJAG4AdABlAHIAZgBhAGMAZQBzAC4ASQBVAGQAbwBuAFYAYQByAGkAYQBiAGwAZQAsACAAVgBSAEMALgBVAGQAbwBuAC4AQwBvAG0AbQBvAG4AXQBdACwAIABtAHMAYwBvAHIAbABpAGIAAQEJAAAAVgBhAHIAaQBhAGIAbABlAHMALwEAAAABaAAAAFMAeQBzAHQAZQBtAC4AQwBvAGwAbABlAGMAdABpAG8AbgBzAC4ARwBlAG4AZQByAGkAYwAuAEwAaQBzAHQAYAAxAFsAWwBWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgAuAEkAbgB0AGUAcgBmAGEAYwBlAHMALgBJAFUAZABvAG4AVgBhAHIAaQBhAGIAbABlACwAIABWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgBdAF0ALAAgAG0AcwBjAG8AcgBsAGkAYgABAAAABgEAAAAAAAAAAi8CAAAAAUkAAABWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgAuAFUAZABvAG4AVgBhAHIAaQBhAGIAbABlAGAAMQBbAFsAUwB5AHMAdABlAG0ALgBJAG4AdAAzADIALAAgAG0AcwBjAG8AcgBsAGkAYgBdAF0ALAAgAFYAUgBDAC4AVQBkAG8AbgAuAEMAbwBtAG0AbwBuAAIAAAAGAgAAAAAAAAAnAQQAAAB0AHkAcABlAAEXAAAAUwB5AHMAdABlAG0ALgBTAHQAcgBpAG4AZwAsACAAbQBzAGMAbwByAGwAaQBiACcBCgAAAFMAeQBtAGIAbwBsAE4AYQBtAGUAAR8AAABfAF8AXwBVAGQAbwBuAFMAaABhAHIAcABCAGUAaABhAHYAaQBvAHUAcgBWAGUAcgBzAGkAbwBuAF8AXwBfACcBBAAAAHQAeQBwAGUAARYAAABTAHkAcwB0AGUAbQAuAEkAbgB0ADMAMgAsACAAbQBzAGMAbwByAGwAaQBiABcBBQAAAFYAYQBsAHUAZQACAAAABwUHBQcF
+  publicVariablesUnityEngineObjects: []
+  publicVariablesSerializationDataFormat: 0
+--- !u!1001 &4745238673128816113
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4745238673149497848}
+    m_Modifications:
+    - target: {fileID: 3105291494329078410, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195075, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_Name
+      value: A_Horse1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195085, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c330f094c690504195ae43943d57cdb,
+        type: 2}
+    - target: {fileID: 4596396015788195086, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: karmoPlayerSync
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195086, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 4596396015788195086, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+    - target: {fileID: 7448562583735317806, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 43587a3fdfa5c0641ae824f8ed6d873f,
+        type: 2}
+    - target: {fileID: 9217863419811521811, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 9217863419811521811, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d149fa54724e20d4d98bf59eb2d37869, type: 3}
+--- !u!4 &9084838778704134397 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+    type: 3}
+  m_PrefabInstance: {fileID: 4745238673128816113}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4745238673152154590
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4745238673149497848}
+    m_Modifications:
+    - target: {fileID: 3105291494329078410, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195075, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_Name
+      value: A_Horse2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195085, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c330f094c690504195ae43943d57cdb,
+        type: 2}
+    - target: {fileID: 4596396015788195086, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: karmoPlayerSync
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195086, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 4596396015788195086, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+    - target: {fileID: 7448562583735317806, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 43587a3fdfa5c0641ae824f8ed6d873f,
+        type: 2}
+    - target: {fileID: 9217863419811521811, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 9217863419811521811, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d149fa54724e20d4d98bf59eb2d37869, type: 3}
+--- !u!4 &9084838778727392978 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+    type: 3}
+  m_PrefabInstance: {fileID: 4745238673152154590}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4745238673341927942
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4745238673149497848}
+    m_Modifications:
+    - target: {fileID: 3105291494329078410, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195075, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_Name
+      value: B_Horse2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195085, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c330f094c690504195ae43943d57cdb,
+        type: 2}
+    - target: {fileID: 4596396015788195086, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: karmoPlayerSync
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195086, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 4596396015788195086, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+    - target: {fileID: 7448562583735317806, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 43587a3fdfa5c0641ae824f8ed6d873f,
+        type: 2}
+    - target: {fileID: 9217863419811521811, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 9217863419811521811, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d149fa54724e20d4d98bf59eb2d37869, type: 3}
+--- !u!4 &9084838778378301194 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+    type: 3}
+  m_PrefabInstance: {fileID: 4745238673341927942}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4745238673354935208
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4745238673149497848}
+    m_Modifications:
+    - target: {fileID: 335322792999817031, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 335322792999817031, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 1190836965566532081, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c330f094c690504195ae43943d57cdb,
+        type: 2}
+    - target: {fileID: 1441606589661091308, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: karmoPlayerSync
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1441606589661091308, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 1441606589661091308, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 1445572541551896794, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1705454025372219729, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 1705454025372219729, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 2137282476341666230, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 2137282476341666230, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 2201966183057231224, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: karmoPlayerSync
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2201966183057231224, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 2201966183057231224, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 2878148536753112185, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 2878148536753112185, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 3393076127170518737, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c330f094c690504195ae43943d57cdb,
+        type: 2}
+    - target: {fileID: 3649276902835776107, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: karmoPlayerSync
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3649276902835776107, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 3649276902835776107, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 4029281862001286375, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c330f094c690504195ae43943d57cdb,
+        type: 2}
+    - target: {fileID: 4087709406815073130, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: teamManager
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4087709406815073130, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: chickenFightManager
+      value: 
+      objectReference: {fileID: 4745238673149497855}
+    - target: {fileID: 4087709406815073130, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 4087709406815073130, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 4588157697141268848, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c330f094c690504195ae43943d57cdb,
+        type: 2}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.000000014901159
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268851, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: karmoPlayerSync
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268851, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 4588157697141268851, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 4588157697141268862, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_Name
+      value: B_HorseMan3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5028204735992013226, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: _syncMethod
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5178484494505151007, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: cabbdf858ee391340a58ea2f34fe209f,
+        type: 2}
+    - target: {fileID: 5947574897397154413, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: karmoPlayerSync
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5947574897397154413, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 5947574897397154413, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 6003183663720677403, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: cabbdf858ee391340a58ea2f34fe209f,
+        type: 2}
+    - target: {fileID: 6203926938350945758, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: teamManager
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6203926938350945758, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: karmoPlayerSync
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6203926938350945758, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: chickenFightManager
+      value: 
+      objectReference: {fileID: 4745238673149497855}
+    - target: {fileID: 6203926938350945758, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 6203926938350945758, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 6502327594707343300, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c330f094c690504195ae43943d57cdb,
+        type: 2}
+    - target: {fileID: 8478280814886124514, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 8478280814886124514, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 9015188009070166651, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 392e3eb66768f254999763a61aebb80e,
+        type: 2}
+    - target: {fileID: 9190062599225080174, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 9190062599225080174, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3423dd3a65e934d48a801b91824563e1, type: 3}
+--- !u!4 &9112488983552600793 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+    type: 3}
+  m_PrefabInstance: {fileID: 4745238673354935208}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4745238673470366036
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4745238673149497848}
+    m_Modifications:
+    - target: {fileID: 3105291494329078410, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195075, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_Name
+      value: B_Horse1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195085, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c330f094c690504195ae43943d57cdb,
+        type: 2}
+    - target: {fileID: 4596396015788195086, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: karmoPlayerSync
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195086, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 4596396015788195086, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+    - target: {fileID: 7448562583735317806, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 43587a3fdfa5c0641ae824f8ed6d873f,
+        type: 2}
+    - target: {fileID: 9217863419811521811, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 9217863419811521811, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d149fa54724e20d4d98bf59eb2d37869, type: 3}
+--- !u!4 &9084838779314166872 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+    type: 3}
+  m_PrefabInstance: {fileID: 4745238673470366036}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4745238673796597826
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4745238673149497848}
+    m_Modifications:
+    - target: {fileID: 335322792999817031, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 335322792999817031, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 1190836965566532081, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c330f094c690504195ae43943d57cdb,
+        type: 2}
+    - target: {fileID: 1441606589661091308, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: karmoPlayerSync
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1441606589661091308, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 1441606589661091308, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 1445572541551896794, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1705454025372219729, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 1705454025372219729, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 2137282476341666230, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 2137282476341666230, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 2201966183057231224, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: karmoPlayerSync
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2201966183057231224, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 2201966183057231224, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 2878148536753112185, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 2878148536753112185, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 3393076127170518737, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c330f094c690504195ae43943d57cdb,
+        type: 2}
+    - target: {fileID: 3649276902835776107, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: karmoPlayerSync
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3649276902835776107, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 3649276902835776107, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 4029281862001286375, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c330f094c690504195ae43943d57cdb,
+        type: 2}
+    - target: {fileID: 4087709406815073130, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: teamManager
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4087709406815073130, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: chickenFightManager
+      value: 
+      objectReference: {fileID: 4745238673149497855}
+    - target: {fileID: 4087709406815073130, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 4087709406815073130, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 4588157697141268848, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c330f094c690504195ae43943d57cdb,
+        type: 2}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.000000014901159
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268851, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: karmoPlayerSync
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268851, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 4588157697141268851, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 4588157697141268862, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_Name
+      value: B_HorseMan5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5028204735992013226, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: _syncMethod
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5178484494505151007, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: cabbdf858ee391340a58ea2f34fe209f,
+        type: 2}
+    - target: {fileID: 5947574897397154413, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: karmoPlayerSync
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5947574897397154413, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 5947574897397154413, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 6003183663720677403, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: cabbdf858ee391340a58ea2f34fe209f,
+        type: 2}
+    - target: {fileID: 6203926938350945758, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: teamManager
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6203926938350945758, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: karmoPlayerSync
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6203926938350945758, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: chickenFightManager
+      value: 
+      objectReference: {fileID: 4745238673149497855}
+    - target: {fileID: 6203926938350945758, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 6203926938350945758, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 6502327594707343300, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c330f094c690504195ae43943d57cdb,
+        type: 2}
+    - target: {fileID: 8478280814886124514, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 8478280814886124514, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 9015188009070166651, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 392e3eb66768f254999763a61aebb80e,
+        type: 2}
+    - target: {fileID: 9190062599225080174, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 9190062599225080174, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3423dd3a65e934d48a801b91824563e1, type: 3}
+--- !u!4 &9112488984176748851 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+    type: 3}
+  m_PrefabInstance: {fileID: 4745238673796597826}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4745238674119622229
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4745238673149497848}
+    m_Modifications:
+    - target: {fileID: 335322792999817031, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 335322792999817031, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 1190836965566532081, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c330f094c690504195ae43943d57cdb,
+        type: 2}
+    - target: {fileID: 1441606589661091308, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: karmoPlayerSync
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1441606589661091308, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 1441606589661091308, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 1445572541551896794, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1705454025372219729, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 1705454025372219729, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 2137282476341666230, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 2137282476341666230, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 2201966183057231224, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: karmoPlayerSync
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2201966183057231224, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 2201966183057231224, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 2878148536753112185, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 2878148536753112185, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 3393076127170518737, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c330f094c690504195ae43943d57cdb,
+        type: 2}
+    - target: {fileID: 3649276902835776107, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: karmoPlayerSync
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3649276902835776107, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 3649276902835776107, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 4029281862001286375, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c330f094c690504195ae43943d57cdb,
+        type: 2}
+    - target: {fileID: 4087709406815073130, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: teamManager
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4087709406815073130, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: chickenFightManager
+      value: 
+      objectReference: {fileID: 4745238673149497855}
+    - target: {fileID: 4087709406815073130, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 4087709406815073130, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 4588157697141268848, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c330f094c690504195ae43943d57cdb,
+        type: 2}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.000000014901159
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268851, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: karmoPlayerSync
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268851, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 4588157697141268851, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 4588157697141268862, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_Name
+      value: B_HorseMan4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5028204735992013226, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: _syncMethod
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5178484494505151007, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: cabbdf858ee391340a58ea2f34fe209f,
+        type: 2}
+    - target: {fileID: 5947574897397154413, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: karmoPlayerSync
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5947574897397154413, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 5947574897397154413, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 6003183663720677403, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: cabbdf858ee391340a58ea2f34fe209f,
+        type: 2}
+    - target: {fileID: 6203926938350945758, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: teamManager
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6203926938350945758, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: karmoPlayerSync
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6203926938350945758, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: chickenFightManager
+      value: 
+      objectReference: {fileID: 4745238673149497855}
+    - target: {fileID: 6203926938350945758, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 6203926938350945758, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 6502327594707343300, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c330f094c690504195ae43943d57cdb,
+        type: 2}
+    - target: {fileID: 8478280814886124514, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 8478280814886124514, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 9015188009070166651, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 392e3eb66768f254999763a61aebb80e,
+        type: 2}
+    - target: {fileID: 9190062599225080174, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 9190062599225080174, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3423dd3a65e934d48a801b91824563e1, type: 3}
+--- !u!4 &9112488982252101412 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+    type: 3}
+  m_PrefabInstance: {fileID: 4745238674119622229}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4745238674291674676
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4745238673149497848}
+    m_Modifications:
+    - target: {fileID: 335322792999817031, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 335322792999817031, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 1190836965566532081, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c330f094c690504195ae43943d57cdb,
+        type: 2}
+    - target: {fileID: 1441606589661091308, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: karmoPlayerSync
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1441606589661091308, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 1441606589661091308, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 1445572541551896794, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1705454025372219729, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 1705454025372219729, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 2137282476341666230, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 2137282476341666230, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 2201966183057231224, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: karmoPlayerSync
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2201966183057231224, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 2201966183057231224, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 2878148536753112185, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 2878148536753112185, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 3393076127170518737, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c330f094c690504195ae43943d57cdb,
+        type: 2}
+    - target: {fileID: 3649276902835776107, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: karmoPlayerSync
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3649276902835776107, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 3649276902835776107, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 4029281862001286375, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c330f094c690504195ae43943d57cdb,
+        type: 2}
+    - target: {fileID: 4087709406815073130, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: teamManager
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4087709406815073130, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: chickenFightManager
+      value: 
+      objectReference: {fileID: 4745238673149497855}
+    - target: {fileID: 4087709406815073130, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 4087709406815073130, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 4588157697141268848, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c330f094c690504195ae43943d57cdb,
+        type: 2}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.000000014901159
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268851, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: karmoPlayerSync
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268851, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 4588157697141268851, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 4588157697141268862, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_Name
+      value: A_HorseMan5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5028204735992013226, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: _syncMethod
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5178484494505151007, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: cabbdf858ee391340a58ea2f34fe209f,
+        type: 2}
+    - target: {fileID: 5947574897397154413, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: karmoPlayerSync
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5947574897397154413, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 5947574897397154413, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 6003183663720677403, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: cabbdf858ee391340a58ea2f34fe209f,
+        type: 2}
+    - target: {fileID: 6203926938350945758, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: teamManager
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6203926938350945758, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: karmoPlayerSync
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6203926938350945758, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: chickenFightManager
+      value: 
+      objectReference: {fileID: 4745238673149497855}
+    - target: {fileID: 6203926938350945758, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 6203926938350945758, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 6502327594707343300, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c330f094c690504195ae43943d57cdb,
+        type: 2}
+    - target: {fileID: 8478280814886124514, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 8478280814886124514, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 9015188009070166651, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 392e3eb66768f254999763a61aebb80e,
+        type: 2}
+    - target: {fileID: 9190062599225080174, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 9190062599225080174, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3423dd3a65e934d48a801b91824563e1, type: 3}
+--- !u!4 &9112488982608719685 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+    type: 3}
+  m_PrefabInstance: {fileID: 4745238674291674676}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4745238674413333812
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4745238673149497848}
+    m_Modifications:
+    - target: {fileID: 3105291494329078410, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195075, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_Name
+      value: B_Horse0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195085, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c330f094c690504195ae43943d57cdb,
+        type: 2}
+    - target: {fileID: 4596396015788195086, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: karmoPlayerSync
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195086, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 4596396015788195086, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+    - target: {fileID: 7448562583735317806, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 43587a3fdfa5c0641ae824f8ed6d873f,
+        type: 2}
+    - target: {fileID: 9217863419811521811, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 9217863419811521811, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d149fa54724e20d4d98bf59eb2d37869, type: 3}
+--- !u!4 &9084838777302110264 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+    type: 3}
+  m_PrefabInstance: {fileID: 4745238674413333812}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4745238674735742071
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4745238673149497848}
+    m_Modifications:
+    - target: {fileID: 335322792999817031, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 335322792999817031, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 1190836965566532081, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c330f094c690504195ae43943d57cdb,
+        type: 2}
+    - target: {fileID: 1441606589661091308, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: karmoPlayerSync
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1441606589661091308, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 1441606589661091308, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 1445572541551896794, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1705454025372219729, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 1705454025372219729, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 2137282476341666230, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 2137282476341666230, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 2201966183057231224, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: karmoPlayerSync
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2201966183057231224, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 2201966183057231224, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 2878148536753112185, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 2878148536753112185, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 3393076127170518737, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c330f094c690504195ae43943d57cdb,
+        type: 2}
+    - target: {fileID: 3649276902835776107, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: karmoPlayerSync
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3649276902835776107, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 3649276902835776107, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 4029281862001286375, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c330f094c690504195ae43943d57cdb,
+        type: 2}
+    - target: {fileID: 4087709406815073130, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: teamManager
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4087709406815073130, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: chickenFightManager
+      value: 
+      objectReference: {fileID: 4745238673149497855}
+    - target: {fileID: 4087709406815073130, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 4087709406815073130, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 4588157697141268848, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c330f094c690504195ae43943d57cdb,
+        type: 2}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.000000014901159
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268851, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: karmoPlayerSync
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268851, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 4588157697141268851, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 4588157697141268862, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_Name
+      value: A_HorseMan4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5028204735992013226, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: _syncMethod
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5178484494505151007, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: cabbdf858ee391340a58ea2f34fe209f,
+        type: 2}
+    - target: {fileID: 5947574897397154413, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: karmoPlayerSync
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5947574897397154413, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 5947574897397154413, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 6003183663720677403, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: cabbdf858ee391340a58ea2f34fe209f,
+        type: 2}
+    - target: {fileID: 6203926938350945758, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: teamManager
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6203926938350945758, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: karmoPlayerSync
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6203926938350945758, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: chickenFightManager
+      value: 
+      objectReference: {fileID: 4745238673149497855}
+    - target: {fileID: 6203926938350945758, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 6203926938350945758, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 6502327594707343300, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c330f094c690504195ae43943d57cdb,
+        type: 2}
+    - target: {fileID: 8478280814886124514, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 8478280814886124514, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 9015188009070166651, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 392e3eb66768f254999763a61aebb80e,
+        type: 2}
+    - target: {fileID: 9190062599225080174, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 9190062599225080174, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3423dd3a65e934d48a801b91824563e1, type: 3}
+--- !u!4 &9112488982700481798 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+    type: 3}
+  m_PrefabInstance: {fileID: 4745238674735742071}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6862161500882627713
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4745238673149497848}
+    m_Modifications:
+    - target: {fileID: 3105291494329078410, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195075, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_Name
+      value: A_Horse0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195085, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c330f094c690504195ae43943d57cdb,
+        type: 2}
+    - target: {fileID: 4596396015788195086, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: karmoPlayerSync
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596396015788195086, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 4596396015788195086, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+    - target: {fileID: 7448562583735317806, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 43587a3fdfa5c0641ae824f8ed6d873f,
+        type: 2}
+    - target: {fileID: 9217863419811521811, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 9217863419811521811, guid: d149fa54724e20d4d98bf59eb2d37869,
+        type: 3}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d149fa54724e20d4d98bf59eb2d37869, type: 3}
+--- !u!4 &6985899228030243213 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4596396015788195084, guid: d149fa54724e20d4d98bf59eb2d37869,
+    type: 3}
+  m_PrefabInstance: {fileID: 6862161500882627713}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6872087621085093140
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4745238673149497848}
+    m_Modifications:
+    - target: {fileID: 335322792999817031, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 335322792999817031, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 1190836965566532081, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c330f094c690504195ae43943d57cdb,
+        type: 2}
+    - target: {fileID: 1441606589661091308, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: karmoPlayerSync
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1441606589661091308, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 1441606589661091308, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 1445572541551896794, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1705454025372219729, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 1705454025372219729, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 2137282476341666230, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 2137282476341666230, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 2201966183057231224, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: karmoPlayerSync
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2201966183057231224, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 2201966183057231224, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 2878148536753112185, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 2878148536753112185, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 3393076127170518737, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c330f094c690504195ae43943d57cdb,
+        type: 2}
+    - target: {fileID: 3649276902835776107, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: karmoPlayerSync
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3649276902835776107, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 3649276902835776107, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 4029281862001286375, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c330f094c690504195ae43943d57cdb,
+        type: 2}
+    - target: {fileID: 4087709406815073130, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: teamManager
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4087709406815073130, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: chickenFightManager
+      value: 
+      objectReference: {fileID: 4745238673149497855}
+    - target: {fileID: 4087709406815073130, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 4087709406815073130, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 4588157697141268848, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c330f094c690504195ae43943d57cdb,
+        type: 2}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.000000014901159
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268851, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: karmoPlayerSync
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588157697141268851, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 4588157697141268851, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 4588157697141268862, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: m_Name
+      value: A_HorseMan3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5028204735992013226, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: _syncMethod
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5178484494505151007, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: cabbdf858ee391340a58ea2f34fe209f,
+        type: 2}
+    - target: {fileID: 5947574897397154413, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: karmoPlayerSync
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5947574897397154413, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 5947574897397154413, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 6003183663720677403, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: cabbdf858ee391340a58ea2f34fe209f,
+        type: 2}
+    - target: {fileID: 6203926938350945758, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: teamManager
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6203926938350945758, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: karmoPlayerSync
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6203926938350945758, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: chickenFightManager
+      value: 
+      objectReference: {fileID: 4745238673149497855}
+    - target: {fileID: 6203926938350945758, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 6203926938350945758, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 6502327594707343300, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c330f094c690504195ae43943d57cdb,
+        type: 2}
+    - target: {fileID: 8478280814886124514, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 8478280814886124514, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    - target: {fileID: 9015188009070166651, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializedProgramAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 392e3eb66768f254999763a61aebb80e,
+        type: 2}
+    - target: {fileID: 9190062599225080174, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 9190062599225080174, guid: 3423dd3a65e934d48a801b91824563e1,
+        type: 3}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3423dd3a65e934d48a801b91824563e1, type: 3}
+--- !u!4 &6985899228504964197 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4588157697141268849, guid: 3423dd3a65e934d48a801b91824563e1,
+    type: 3}
+  m_PrefabInstance: {fileID: 6872087621085093140}
+  m_PrefabAsset: {fileID: 0}

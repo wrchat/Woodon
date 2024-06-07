@@ -1,0 +1,371 @@
+﻿using System;
+using TMPro;
+using UdonSharp;
+using UnityEngine;
+using VRC.SDKBase;
+using VRC.Udon.Common.Interfaces;
+
+namespace Mascari4615
+{
+    [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
+    public class Cup : MBase
+    {
+        [Header("_" + nameof(Cup))] [SerializeField]
+        private RotatingMeetingManager rotatingMeetingManager;
+
+        private DollyCartSync targetDollyCart;
+        private Transform targetPosTransform;
+
+        public int OwnerID
+        {
+            get => _ownerID;
+            set
+            {
+                _ownerID = value;
+                var OwnerPlayer = VRCPlayerApi.GetPlayerById(_ownerID);
+                ownerText.text = $"{_ownerID} : {(OwnerPlayer != null ? OwnerPlayer.displayName : "NONE")}";
+                usedUlt = false;
+                canvas.SetActive(_ownerID == Networking.LocalPlayer.playerId);
+            }
+        }
+
+        [SerializeField] private TextMeshProUGUI ownerText;
+
+        [UdonSynced, FieldChangeCallback(nameof(OwnerID))]
+        private int _ownerID = NONE_INT;
+
+        [SerializeField] private int index;
+        [SerializeField] private GameObject canvas;
+
+        [UdonSynced] public int turn = 0;
+        [UdonSynced] public int totalMeetingTime0 = 0;
+        [UdonSynced] public int totalMeetingTime1 = 0;
+        [UdonSynced] public int totalMeetingTime2 = 0;
+
+        [SerializeField] private float lerpSpeed = 1;
+        [SerializeField] private TextMeshProUGUI debugText;
+        [SerializeField] private VRCStation _station;
+        [SerializeField] private GameObject ultButton;
+        [SerializeField] private Animator ultAnimator;
+        private bool usedUlt = false;
+
+        [UdonSynced(), FieldChangeCallback(nameof(TargetPos))]
+        private CupPosition targetPos = CupPosition.None;
+
+        /// <summary>
+        /// Lerp 목표로 하는 위치 데이터
+        /// </summary>
+        public CupPosition TargetPos
+        {
+            get => targetPos;
+            set
+            {
+                targetPos = value;
+                OnTargetPosChange();
+            }
+        }
+
+        /// <summary>
+        /// Lerp 목표로 하는 위치 Transform 설정
+        /// </summary>
+        private void OnTargetPosChange()
+        {
+            if (targetPos != CupPosition.None)
+            {
+                targetPosTransform = rotatingMeetingManager.GetTargetPosTransform(targetPos);
+                targetDollyCart = rotatingMeetingManager.GetDollyCart(targetPos);
+            }
+        }
+
+        private void Start()
+        {
+            OnTargetPosChange();
+            canvas.SetActive(OwnerID == Networking.LocalPlayer.playerId);
+        }
+
+        private void Update()
+        {
+            UpdateTransform();
+            TryReturnToPlatform();
+            UpdateTurn();
+            UpdateUltButton();
+        }
+
+        private void UpdateUltButton()
+        {
+            bool isInRail = ((int)TargetPos <= (int)CupPosition.Platform7);
+            bool canUseUlt = rotatingMeetingManager.CanSetAmplification();
+
+            ultButton.SetActive(isInRail && canUseUlt && !usedUlt);
+        }
+
+        public void SetTurn(int newValue)
+        {
+            // MDebugLog(nameof(SetTurn) + newValue);
+            SetOwner();
+            turn = newValue;
+            RequestSerialization();
+        }
+
+        private void UpdateTurn()
+        {
+            if ((int)TargetPos > (int)CupPosition.Platform7)
+                return;
+
+            bool turnIsOdd = turn % 2 != 0;
+
+            if (turnIsOdd)
+            {
+                if (targetDollyCart.Position > 8)
+                {
+                    if (!IsOwner(rotatingMeetingManager.gameObject))
+                        return;
+
+                    SetTurn(turn + 1);
+                }
+            }
+            else
+            {
+                if (targetDollyCart.Position < 8)
+                {
+                    if (!IsOwner(rotatingMeetingManager.gameObject))
+                        return;
+
+                    SetTurn(turn + 1);
+                }
+            }
+
+            if (turn >= 10 * 2)
+            {
+                // MDebugLog((targetDollyCart.Position > 11).ToString());
+
+                if (targetDollyCart.Position > 11.5f)
+                {
+                    if (!IsOwner(rotatingMeetingManager.gameObject))
+                        return;
+
+                    SetOwner();
+                    turn = 0;
+                    totalMeetingTime0 = 0;
+                    totalMeetingTime1 = 0;
+                    totalMeetingTime2 = 0;
+                    RequestSerialization();
+                    rotatingMeetingManager.UploadCup(this);
+                }
+            }
+
+            if (turn >= 100)
+                debugText.text = $"탈락";
+            else
+                debugText.text = $"{(turn + 1) / 2} / 10 바퀴 째";
+        }
+
+        /// <summary>
+        /// 위치 Lerp 업데이트 (로컬, 데이터만 싱크됨)
+        /// </summary>
+        private void UpdateTransform()
+        {
+            if (!targetPosTransform)
+                return;
+
+            transform.position =
+                Vector3.Lerp(transform.position, targetPosTransform.position, lerpSpeed * Time.deltaTime);
+            transform.rotation =
+                Quaternion.Lerp(transform.rotation, targetPosTransform.rotation, lerpSpeed * Time.deltaTime);
+        }
+
+        private void TryReturnToPlatform()
+        {
+            debugText.text = "-";
+
+            // 오너가 아니거나, TargetPos가 초기화되지 않았다면 Return
+            if (!IsOwner(rotatingMeetingManager.gameObject) || (TargetPos == CupPosition.None))
+                return;
+
+            // 미팅 중이 아니거나, 진입 대기 중이 아니라면 
+            if ((int)TargetPos <= (int)CupPosition.Platform7)
+            {
+                // debugText.text = "_Not Meeting";
+                // MDebugLog(nameof(TryReturnToPlatform) + "_Not Meeting");
+                return;
+            }
+
+            // 미팅 중이었다면
+            if ((int)CupPosition.Meeting0 <= (int)TargetPos && (int)TargetPos <= (int)CupPosition.Meeting2)
+            {
+                int sushiPickerIndex = (int)TargetPos - (int)(CupPosition.Meeting0);
+
+                // 대기 상태가 아니면 Return
+                if (!rotatingMeetingManager.CupPickers[sushiPickerIndex].CupHaveToReturn)
+                {
+                    // debugText.text = "_No State";
+                    // MDebugLog(nameof(TryReturnToPlatform) + "_No State");
+                    return;
+                }
+
+                // 판정 범위 내에 플랫폼이 없다면 Return
+                if (!rotatingMeetingManager.TryGetNearestPlatform_Meeting(out var platformIndex, sushiPickerIndex))
+                {
+                    // debugText.text = "_No Platform";
+                    // MDebugLog(nameof(TryReturnToPlatform) + "_No Platform");
+                    return;
+                }
+
+                // 플랫폼에 카트가 이미 있다면 Return
+                foreach (var cup in rotatingMeetingManager.Cups)
+                {
+                    if (cup.TargetPos == platformIndex)
+                    {
+                        // debugText.text = "_Already Cart";
+                        // MDebugLog(nameof(TryReturnToPlatform) + "_Already Cart");
+                        return;
+                    }
+                }
+
+                // MDebugLog(nameof(TryReturnToPlatform) + "_ReturnA");
+                SetTargetPos(platformIndex);
+            }
+            // 진입 대기 중이었다면
+            else if ((int)CupPosition.Down0 <= (int)TargetPos && (int)TargetPos <= (int)CupPosition.Down3)
+            {
+                // 대기 중인 컵이라면
+                if (!rotatingMeetingManager.CanDownload(TargetPos))
+                {
+                    // debugText.text = "_Cant Download";
+                    // MDebugLog(nameof(TryReturnToPlatform) + "_No Platform");
+                    return;
+                }
+
+                // TODO : '정말' 대기 중인지 확인 (아직 내려가고 있는 중이라던지, 올라가고 있는 중이라던지)
+                // TODO : 한 번에 한 컵만 업로드 가능하게 (본 레일 진입 시 대기 시간 가능성)
+
+                // 판정 범위 내에 플랫폼이 없다면 Return
+                if (!rotatingMeetingManager.TryGetNearestPlatform_Download(out var platformIndex))
+                {
+                    // debugText.text = "_No Platform";
+                    // MDebugLog(nameof(TryReturnToPlatform) + "_No Platform");
+                    return;
+                }
+
+                // 플랫폼에 카트가 이미 있다면 Return
+                foreach (var sushiCart in rotatingMeetingManager.Cups)
+                {
+                    if (sushiCart.TargetPos == platformIndex)
+                    {
+                        // debugText.text = "_Already Cart";
+                        // MDebugLog(nameof(TryReturnToPlatform) + "_Already Cart");
+                        return;
+                    }
+                }
+
+                // MDebugLog(nameof(TryReturnToPlatform) + "_ReturnB");
+                SetTargetPos(platformIndex);
+            }
+        }
+
+        public void SetTargetPos(CupPosition targetPos)
+        {
+            SetOwner();
+            TargetPos = targetPos;
+            RequestSerialization();
+        }
+
+        public void SetTotalMeetingTime(int time, int index)
+        {
+            SetOwner();
+            switch (index)
+            {
+                case 0:
+                    totalMeetingTime0 = time;
+                    break;
+                case 1:
+                    totalMeetingTime1 = time;
+                    break;
+                case 2:
+                    totalMeetingTime2 = time;
+                    break;
+            }
+
+            RequestSerialization();
+        }
+
+        public int GetTotalMeetingTime(int index)
+        {
+            switch (index)
+            {
+                case 0:
+                    return totalMeetingTime0;
+                case 1:
+                    return totalMeetingTime1;
+                case 2:
+                    return totalMeetingTime2;
+                default:
+                    return NONE_INT;
+            }
+        }
+
+        public void SitCup()
+        {
+            // MDebugLog(nameof(SitCup));
+
+            if (OwnerID != NONE_INT)
+                return;
+
+            SetOwner();
+            OwnerID = Networking.LocalPlayer.playerId;
+            RequestSerialization();
+        }
+
+        public void ExitCup()
+        {
+            // MDebugLog(nameof(ExitCup));
+
+            if (OwnerID != Networking.LocalPlayer.playerId)
+                return;
+
+            _station.ExitStation(Networking.LocalPlayer);
+
+            SetOwner();
+            OwnerID = NONE_INT;
+            RequestSerialization();
+        }
+
+        public void ForceReset()
+        {
+            _station.ExitStation(Networking.LocalPlayer);
+
+            SetOwner();
+            OwnerID = NONE_INT;
+            RequestSerialization();
+        }
+
+        public override void OnPlayerRespawn(VRCPlayerApi player)
+        {
+            if (!player.isLocal)
+                return;
+
+            if (player.playerId == OwnerID)
+            {
+                SetOwner();
+                OwnerID = NONE_INT;
+                RequestSerialization();
+            }
+        }
+
+        public void Ult()
+        {
+            bool can = rotatingMeetingManager.CanSetAmplification();
+            MDebugLog(nameof(Ult) + can);
+            if (!can)
+                return;
+
+            usedUlt = true;
+            rotatingMeetingManager.IsStop.SetValue(true);
+            rotatingMeetingManager.SetVoiceAmplification();
+            rotatingMeetingManager.OpenVote_Global(index);
+            SendCustomNetworkEvent(NetworkEventTarget.All, nameof(TriggerUltAnimator));
+        }
+
+        public void TriggerUltAnimator() => ultAnimator.SetTrigger("POP");
+    }
+}
