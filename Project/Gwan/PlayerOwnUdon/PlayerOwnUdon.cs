@@ -1,7 +1,6 @@
 ﻿using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
-using VRC.Udon;
 
 namespace Mascari4615
 {
@@ -58,7 +57,7 @@ namespace Mascari4615
 		private void Start()
 		{
 			ownUdonManager = GameObject.Find(nameof(PlayerOwnUdonManager)).GetComponent<PlayerOwnUdonManager>();
-			childUdons = GetComponentsInChildren<UdonBehaviour>();
+			childUdons = GetComponentsInChildren<UdonSharpBehaviour>();
 
 			// OnStateChanged();
 			OnOwnerChanged();

@@ -41,7 +41,7 @@ namespace Mascari4615
 		public void Refresh()
 		{
 			loadingPanel.SetActive(true);
-			VRCStringDownloader.LoadUrl(jsonLink, (IUdonEventReceiver)this);
+			VRCStringDownloader.LoadUrl(jsonLink);
 		}
 
 		public override void OnStringLoadSuccess(IVRCStringDownload result)
