@@ -8,6 +8,7 @@ using VRC.SDK3.Video.Components;
 
 namespace Mascari4615
 {
+	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class VideoLoader : MBase
 	{
 		[SerializeField] private VRCUnityVideoPlayer unityVideoPlayer;
