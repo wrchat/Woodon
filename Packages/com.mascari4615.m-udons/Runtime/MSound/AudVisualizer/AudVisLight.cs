@@ -6,7 +6,7 @@ namespace Mascari4615
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
     public class AudVisLight : UdonSharpBehaviour
     {
-        [SerializeField] private Light light;
+        [SerializeField] private new Light light;
         [SerializeField] private AudVisManager audioPeer;
         [SerializeField] private int band;
         [SerializeField] private float minIntensity, intensityMultiplier = .05f;

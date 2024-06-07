@@ -11,7 +11,7 @@ namespace Mascari4615
         [SerializeField] private AudioSource audioSource;
         [SerializeField] private AudioClip audioClip;
 
-        [SerializeField] private ParticleSystem particleSystem;
+        [SerializeField] private new ParticleSystem particleSystem;
         [SerializeField] private float lerpAddSpeed = 1;
         [SerializeField] private float lerpStaySpeed = 1;
         [SerializeField] private float lerpSubSpeed = 1;
