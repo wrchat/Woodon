@@ -1,19 +1,14 @@
-﻿
-using UdonSharp;
-using UdonSharp.Video;
+﻿using UdonSharp;
 using UnityEngine;
-using VRC.SDKBase;
-using VRC.Udon;
 
 namespace Mascari4615
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class VideoPlayerController : MBase
+	public class MVideoPlayerController : MBase
 	{
-		[SerializeField] private USharpVideoPlayer usharpVideoPlayer;
-		[SerializeField] private VideoControlHandler videoControlHandler;
+		[SerializeField] private MVideoPlayer mVideoPlayer;
 		[SerializeField] private Transform videoDatasParent;
-		[SerializeField] private VideoPlayerControllerUI[] UIs;
+		[SerializeField] private MVideoPlayerControllerUI[] UIs;
 
 		public VideoData[] VideoDatas
 		{
@@ -38,7 +33,7 @@ namespace Mascari4615
 				ui.Init(this);
 		}
 
-		public void PlayVideo(int index) => usharpVideoPlayer.PlayVideo(VideoDatas[index].VRCUrl);
+		public void PlayVideo(int index) => mVideoPlayer.PlayURL(VideoDatas[index].VRCUrl);
 
 		[ContextMenu(nameof(PlayVideo0))]
 		public void PlayVideo0() => PlayVideo(0);
@@ -48,13 +43,13 @@ namespace Mascari4615
 		public void StopVideo()
 		{
 			MDebugLog(nameof(StopVideo));
-			usharpVideoPlayer.StopVideo();
+			mVideoPlayer.Stop();
 		}
-		public void PauseVideo()
+
+		public void PauseResumeVideo()
 		{
-			MDebugLog(nameof(PauseVideo));
-			SetOwner(usharpVideoPlayer.gameObject);
-			videoControlHandler.OnPlayButtonPress();
+			MDebugLog(nameof(PauseResumeVideo));
+			mVideoPlayer.PauseResume();
 		}
 	}
 }
