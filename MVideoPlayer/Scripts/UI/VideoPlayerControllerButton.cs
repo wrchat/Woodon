@@ -11,10 +11,10 @@ namespace Mascari4615
 	public class VideoPlayerControllerButton : MBase
 	{
 		[SerializeField] private TextMeshProUGUI videoNameText;
-		private VideoPlayerControllerUI videoPlayerControllerUI;
+		private MVideoPlayerControllerUI videoPlayerControllerUI;
 		private int index;
 
-		public void Init(VideoPlayerControllerUI videoPlayerControllerUI, int index, string videoName)
+		public void Init(MVideoPlayerControllerUI videoPlayerControllerUI, int index, string videoName)
 		{
 			this.videoPlayerControllerUI = videoPlayerControllerUI;
 			this.index = index;

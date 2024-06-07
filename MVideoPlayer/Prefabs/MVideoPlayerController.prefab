@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1065487480071608750}
   - component: {fileID: 1065487480071608751}
   m_Layer: 0
-  m_Name: VideoPlayerController
+  m_Name: MVideoPlayerController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,9 +57,8 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 1065487480071608751}
-  debug: 1
-  usharpVideoPlayer: {fileID: 0}
-  videoControlHandler: {fileID: 0}
+  DEBUG: 1
+  mVideoPlayer: {fileID: 0}
   videoDatasParent: {fileID: 7212323656416985235}
   UIs:
   - {fileID: 3648129711869400574}
@@ -144,7 +143,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 1029859797782994800}
-  debug: 0
+  DEBUG: 1
   _vrcURL:
     url: https://youtu.be/6fdhRnIqePI?si=bkG4xzRaS_NHrzoX
   videoName: "\uCA5D"
@@ -262,7 +261,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 7212323656657176100}
-  debug: 0
+  DEBUG: 1
   _vrcURL:
     url: https://youtu.be/MUwKSiDZ_MU?si=moZnTz3fC4xGn7g5
   videoName: "\uC644\uC870\uAC01"
@@ -452,6 +451,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1640424537876987479, guid: 2483efda4ca128c47a35d7eaabdebb23,
         type: 3}
+    - target: {fileID: 1640424538303800302, guid: 2483efda4ca128c47a35d7eaabdebb23,
+        type: 3}
+      propertyPath: m_text
+      value: MVideoPlayerController
+      objectReference: {fileID: 0}
     - target: {fileID: 2717559597472406735, guid: 2483efda4ca128c47a35d7eaabdebb23,
         type: 3}
       propertyPath: serializedProgramAsset
