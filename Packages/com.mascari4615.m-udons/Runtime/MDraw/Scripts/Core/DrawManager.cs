@@ -5,20 +5,14 @@ using VRC.Udon;
 
 namespace Mascari4615
 {
-	// 조추첨
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class DrawManager : MBase
 	{
-		// 문자열 데이터팩 만들어서 싱크
-		// 파싱하고 정보랑 엮어서 출력
-
-		// 미리 조추첨 데이터를 랜덤으로 생성해서 저장해두고
-		// 이를 하나씩 보여주는 방식
-
 		[SerializeField] private int teamCount = 2; // 팀 수
 		[SerializeField] private int teamPlayerCount = 2; // 팀당 인원 수
 
 		[SerializeField] private UIDraw[] drawUIs;
+		[SerializeField] private UIDrawController[] drawControllers;
 
 		private DrawElementData[] drawElementDatas;
 
@@ -71,6 +65,9 @@ namespace Mascari4615
 
 			foreach (UIDraw drawUI in drawUIs)
 				drawUI.Init();
+
+			foreach (UIDrawController drawController in drawControllers)
+				drawController.Init(this);
 
 			InitData();
 			SyncData();

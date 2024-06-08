@@ -20,7 +20,7 @@ namespace Mascari4615
 	}
 
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class QuizManager : MEventSender
+	public class QuizManager : MTurnSeatManager
 	{
 		[Header("_" + nameof(QuizManager))]
 		[SerializeField] protected int playerCount = 10;
@@ -45,15 +45,11 @@ namespace Mascari4615
 		[SerializeField] private AudioClip checkAnswerSFX;
 		[SerializeField] private AudioClip scoringSFX;
 
-		[Header("_" + nameof(QuizManager) + "_GameRule")]
-		[SerializeField] private bool gameRule_AddScoreWhenCorrectAnswer = false;
-		public bool GameRule_ADD_SCORE_WHEN_CORRECT_ANSWER => gameRule_AddScoreWhenCorrectAnswer;
-		[SerializeField] private bool gameRule_SubScoreWhenWrongAnswer = false;
-		public bool GameRule_SUB_SCORE_WHEN_WRONG_ANSWER => gameRule_SubScoreWhenWrongAnswer;
-		[SerializeField] private bool gameRule_DropPlayerWhenWrongAnswer = false;
-		public bool GameRule_DROP_PLAYER_WHEN_WRONG_ANSWER => gameRule_DropPlayerWhenWrongAnswer;
-		[SerializeField] private bool gameRule_DropPlayerWhenZeroScore = false;
-		public bool GameRule_DROP_PLAYER_WHEN_ZERO_SCORE => gameRule_DropPlayerWhenZeroScore;
+		[field: Header("_" + nameof(QuizManager) + "_GameRule")]
+		[field: SerializeField] public bool GameRule_ADD_SCORE_WHEN_CORRECT_ANSWER { get; private set; } = false;
+		[field: SerializeField] public bool GameRule_SUB_SCORE_WHEN_WRONG_ANSWER { get; private set; } = false;
+		[field: SerializeField] public bool GameRule_DROP_PLAYER_WHEN_WRONG_ANSWER { get; private set; } = false;
+		[field: SerializeField] public bool GameRule_DROP_PLAYER_WHEN_ZERO_SCORE { get; private set; } = false;
 
 		protected int[] answerCount = new int[10];
 
@@ -82,52 +78,25 @@ namespace Mascari4615
 		[UdonSynced(UdonSyncMode.None), FieldChangeCallback(nameof(CurQuizIndex))]
 		private int _curQuizIndex = 0;
 
-		public QuizGameState CurGameState
+		protected override void OnGameStateChange(int origin, int value)
 		{
-			get => _curGameState;
-			set
+			if (value != origin)
 			{
-				MDebugLog($"{nameof(CurGameState)} Changed, {CurGameState} to {value}");
-
-				if (value != CurGameState)
-				{
-					if (value == QuizGameState.Wait) OnWait();
-					else if (value == QuizGameState.QuizTime) OnQuizTime();
-					else if (value == QuizGameState.SelectAnswer) OnSelectAnswer();
-					else if (value == QuizGameState.ShowPlayerAnswer) OnShowPlayerAnswer();
-					else if (value == QuizGameState.CheckAnswer) OnCheckAnswer();
-					else if (value == QuizGameState.Scoring) OnScoring();
-				}
-
-				_curGameState = value;
-				UpdateStuff();
-				SendEvents();
+				if (value == (int)QuizGameState.Wait) OnWait();
+				else if (value == (int)QuizGameState.QuizTime) OnQuizTime();
+				else if (value == (int)QuizGameState.SelectAnswer) OnSelectAnswer();
+				else if (value == (int)QuizGameState.ShowPlayerAnswer) OnShowPlayerAnswer();
+				else if (value == (int)QuizGameState.CheckAnswer) OnCheckAnswer();
+				else if (value == (int)QuizGameState.Scoring) OnScoring();
 			}
 		}
-		[UdonSynced(UdonSyncMode.None), FieldChangeCallback(nameof(CurGameState))]
-		private QuizGameState _curGameState = QuizGameState.Wait;
 
 		public QuizData CurQuizData => QuizDatas[CurQuizIndex];
 
-		public QuizSeat[] QuizSeats
-		{
-			get
-			{
-				if (_quizSeats == null || _quizSeats.Length == 0)
-					_quizSeats = quizSeatsParent.GetComponentsInChildren<QuizSeat>();
-
-				return _quizSeats;
-			}
-		}
-		[SerializeField] private QuizSeat[] _quizSeats;
-
-		protected virtual void Start()
+		protected override void Start()
 		{
 			curQuizIndex_MScore.SetMinMaxScore(0, QuizDatas.Length - 1);
-
-			for (int i = 0; i < QuizSeats.Length; i++)
-				QuizSeats[i].Init(this, i + 1);
-
+			base.Start();
 			UpdateStuff();
 		}
 
@@ -136,10 +105,7 @@ namespace Mascari4615
 		public void SetCurGameState(QuizGameState newGameState)
 		{
 			MDebugLog($"{nameof(SetCurGameState)}, {newGameState}");
-
-			SetOwner();
-			CurGameState = newGameState;
-			RequestSerialization();
+			SetGameState((int)newGameState);
 		}
 		public void SetCurGameState_Wait() => SetCurGameState(QuizGameState.Wait);
 		public void SetCurGameState_QuizTime() => SetCurGameState(QuizGameState.QuizTime);
@@ -148,22 +114,22 @@ namespace Mascari4615
 		public void SetCurGameState_CheckAnswer() => SetCurGameState(QuizGameState.CheckAnswer);
 		public void SetCurGameState_Scoring() => SetCurGameState(QuizGameState.Scoring);
 
-		public virtual void UpdateStuff()
+		public override void UpdateStuff()
 		{
-			MDebugLog($"{nameof(UpdateStuff)}");
-
-			foreach (var quizSeat in QuizSeats)
-				quizSeat.UpdateStuff();
+			base.UpdateStuff();
+			
+			foreach (MTurnSeat turnSeat in TurnSeats)
+				turnSeat.UpdateStuff();
 
 			for (int i = 0; i < stateButtonImages.Length; i++)
-				stateButtonImages[i].color = MColorUtil.GetColorByBool(i == (int)CurGameState, MColor.Green, MColor.Gray);
+				stateButtonImages[i].color = MColorUtil.GetColorByBool(i == CurGameState, MColor.Green, MColor.Gray);
 
 			if (curQuizIndexText)
 				curQuizIndexText.text = (_curQuizIndex + 1).ToString();
 
 			answerCount = new int[(int)QuizAnswerType.None + 1];
-			foreach (var quizSeat in QuizSeats)
-				answerCount[(int)quizSeat.ExpectedAnswer]++;
+			foreach (MTurnSeat turnSeat in TurnSeats)
+				answerCount[turnSeat.TurnData]++;
 
 			foreach (var curQuizText in curQuizTexts)
 			{
@@ -171,7 +137,7 @@ namespace Mascari4615
 				// curQuizText.gameObject.SetActive(!(CurGameState == QuizGameState.Wait || CurGameState == QuizGameState.FindWrongPlayer));
 			}
 
-			bool isCurStateWaiting = CurGameState == QuizGameState.Wait;
+			bool isCurStateWaiting = CurGameState == (int)QuizGameState.Wait;
 			foreach (GameObject waitTimeObject in waitTimeObjects)
 				waitTimeObject.SetActive(isCurStateWaiting);
 
@@ -195,11 +161,11 @@ namespace Mascari4615
 			if (0 <= newIndex && newIndex <= QuizDatas.Length - 1)
 			{
 				if (IsOwner())
-					foreach (var quizSeat in QuizSeats)
-						quizSeat.ResetAnswer();
+					foreach (MTurnSeat turnSeat in TurnSeats)
+						turnSeat.ResetData();
 
 				SetOwner();
-				CurGameState = QuizGameState.Wait;
+				CurGameState = (int)QuizGameState.Wait;
 				CurQuizIndex = newIndex;
 				RequestSerialization();
 			}
@@ -219,7 +185,7 @@ namespace Mascari4615
 			int seatIndex = int.Parse(seatIndexInputField.SyncText);
 
 			if (0 < seatIndex && seatIndex <= playerCount)
-				TP(QuizSeats[seatIndex - 1].transform);
+				TP(TurnSeats[seatIndex - 1].transform);
 		}
 
 		public void TP_WrongPos()
@@ -231,42 +197,42 @@ namespace Mascari4615
 		public virtual void OnWait()
 		{
 			MDebugLog($"{nameof(OnWait)}");
-			foreach (var quizSeat in QuizSeats)
+			foreach (QuizSeat quizSeat in TurnSeats)
 				quizSeat.OnWait();
 			PlaySFX(waitSFX);
 		}
 		public virtual void OnQuizTime()
 		{
 			MDebugLog($"{nameof(OnQuizTime)}");
-			foreach (var quizSeat in QuizSeats)
+			foreach (QuizSeat quizSeat in TurnSeats)
 				quizSeat.OnQuizTime();
 			PlaySFX(quizTimeSFX);
 		}
 		public virtual void OnSelectAnswer()
 		{
 			MDebugLog($"{nameof(OnSelectAnswer)}");
-			foreach (var quizSeat in QuizSeats)
+			foreach (QuizSeat quizSeat in TurnSeats)
 				quizSeat.OnSelectAnswer();
 			PlaySFX(selectAnswerSFX);
 		}
 		public virtual void OnShowPlayerAnswer()
 		{
 			MDebugLog($"{nameof(OnShowPlayerAnswer)}");
-			foreach (var quizSeat in QuizSeats)
+			foreach (QuizSeat quizSeat in TurnSeats)
 				quizSeat.OnShowPlayerAnswer();
 			PlaySFX(showPlayerAnswerSFX);
 		}
 		public virtual void OnCheckAnswer()
 		{
 			MDebugLog($"{nameof(OnCheckAnswer)}");
-			foreach (var quizSeat in QuizSeats)
+			foreach (QuizSeat quizSeat in TurnSeats)
 				quizSeat.OnCheckAnswer();
 			PlaySFX(checkAnswerSFX);
 		}
 		public virtual void OnScoring()
 		{
 			MDebugLog($"{nameof(OnScoring)}");
-			foreach (var quizSeat in QuizSeats)
+			foreach (QuizSeat quizSeat in TurnSeats)
 				quizSeat.OnScoring();
 			PlaySFX(scoringSFX);
 		}
@@ -288,18 +254,10 @@ namespace Mascari4615
 		public void SelectAnswerFive() => SelectAnswer(QuizAnswerType.Five);
 		public void SelectAnswer(QuizAnswerType quizAnswerType)
 		{
-			QuizSeat localplayerQuizSeat = null;
-			foreach (QuizSeat quizSeat in QuizSeats)
-				if (quizSeat.IsLocalPlayerOwner)
-				{
-					localplayerQuizSeat = quizSeat;
-					break;
-				}
+			MTurnSeat localplayerSeat = FindLocalPlayerSeat();
 
-			if (localplayerQuizSeat == null)
-				return;
-
-			localplayerQuizSeat.SelectAnswer(quizAnswerType);
+			if (localplayerSeat)
+				localplayerSeat.SetData((int)quizAnswerType);
 		}
 	}
 }

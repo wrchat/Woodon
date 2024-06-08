@@ -13,7 +13,7 @@ namespace Mascari4615
 		{
 			this.videoPlayerController = videoPlayerController;
 
-			VideoPlayerControllerButton[] videoPlayerControllerButtons = videoButtonsParent.GetComponentsInChildren<VideoPlayerControllerButton>();
+			MVideoPlayerControllerButton[] videoPlayerControllerButtons = videoButtonsParent.GetComponentsInChildren<MVideoPlayerControllerButton>();
 			for (int i = 0; i < videoPlayerControllerButtons.Length; i++)
 			{
 				if (i < videoPlayerController.VideoDatas.Length)

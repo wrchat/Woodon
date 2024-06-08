@@ -30,7 +30,7 @@ namespace Mascari4615
 
 		[SerializeField] private ObjectActive mirror;
 		[SerializeField] private ObjectActive mirrorQuility;
-		private int curVRUIPosIndex = -1;
+		// private int curVRUIPosIndex = -1;
 
 		[Header("ETC")] private bool isBellOn = true;
 
