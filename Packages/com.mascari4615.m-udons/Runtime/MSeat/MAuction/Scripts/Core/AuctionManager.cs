@@ -17,15 +17,12 @@ namespace Mascari4615
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class AuctionManager : MTurnSeatManager
 	{
-		// 최소 10포인트 단위로 경매에 참여
-
 		[Header("_" + nameof(AuctionManager))]
 		[SerializeField] private TextMeshProUGUI debugText;
+		public int WinnerIndex { get; private set; } = NONE_INT;
 
 		protected override void OnGameStateChange(int origin, int value)
 		{
-			base.OnGameStateChange(origin, value);
-
 			AuctionState originState = (AuctionState)origin;
 			AuctionState newState = (AuctionState)value;
 
@@ -36,6 +33,7 @@ namespace Mascari4615
 			{
 				case AuctionState.Wait:
 					// 경매 대기
+					WinnerIndex = NONE_INT;
 					debugText.text = "Wait";
 					break;
 				case AuctionState.ShowTarget:
@@ -59,6 +57,8 @@ namespace Mascari4615
 					OnApplyResult();
 					break;
 			}
+
+			base.OnGameStateChange(origin, value);
 		}
 
 		protected virtual void OnCheckResult()
@@ -71,6 +71,7 @@ namespace Mascari4615
 				if (auctionSeat.TryPoint == maxTryPoint)
 				{
 					// 최고 입찰자
+					WinnerIndex = auctionSeat.Index;
 					debugText.text = $"{auctionSeat.OwnerID} is Winner. ({auctionSeat.TryPoint})";
 					break;
 				}

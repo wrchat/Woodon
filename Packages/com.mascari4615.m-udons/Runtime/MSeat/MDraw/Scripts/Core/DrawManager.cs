@@ -5,6 +5,12 @@ using VRC.Udon;
 
 namespace Mascari4615
 {
+	public enum DrawType
+	{
+		AllRandom,
+		Auction
+	}
+
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class DrawManager : MBase
 	{
@@ -14,7 +20,9 @@ namespace Mascari4615
 		[SerializeField] private UIDraw[] drawUIs;
 		[SerializeField] private UIDrawController[] drawControllers;
 
-		private DrawElementData[] drawElementDatas;
+		[SerializeField] private DrawType drawType = DrawType.AllRandom;
+
+		public DrawElementData[] DrawElementDatas { get; private set; }
 
 		[UdonSynced(UdonSyncMode.None), FieldChangeCallback(nameof(DataPacks))] private string dataPacks = string.Empty;
 		public string DataPacks
@@ -35,11 +43,11 @@ namespace Mascari4615
 				return;
 
 			string[] dataPacks = DataPacks.Split(DATA_PACK_SEPARATOR);
-			for (int i = 0; i < drawElementDatas.Length; i++)
-				drawElementDatas[i].ParseDataPack(dataPacks[i]);
+			for (int i = 0; i < DrawElementDatas.Length; i++)
+				DrawElementDatas[i].ParseDataPack(dataPacks[i]);
 
 			foreach (UIDraw drawUI in drawUIs)
-				drawUI.UpdateUI(drawElementDatas);
+				drawUI.UpdateUI(DrawElementDatas);
 		}
 
 		public void SyncData()
@@ -47,7 +55,7 @@ namespace Mascari4615
 			SetOwner();
 
 			string data = string.Empty;
-			foreach (DrawElementData drawElementData in drawElementDatas)
+			foreach (DrawElementData drawElementData in DrawElementDatas)
 				data += drawElementData.ToStringData() + DATA_PACK_SEPARATOR;
 			DataPacks = data;
 
@@ -61,7 +69,7 @@ namespace Mascari4615
 
 		private void Init()
 		{
-			drawElementDatas = GetComponentsInChildren<DrawElementData>(true);
+			DrawElementDatas = GetComponentsInChildren<DrawElementData>(true);
 
 			foreach (UIDraw drawUI in drawUIs)
 				drawUI.Init();
@@ -77,17 +85,30 @@ namespace Mascari4615
 		{
 			// 팀당 인원 수 * 팀 수 만큼 데이터 생성
 			
-			// 1. 사전 데이터 설정
-			for (int i = 0; i < drawElementDatas.Length; i++)
+			// 1. 사전 정의 데이터 설정
+			for (int i = 0; i < DrawElementDatas.Length; i++)
 			{
-				drawElementDatas[i].Index = i;
-				drawElementDatas[i].TeamType = drawElementDatas[i].InitTeamType;
-				drawElementDatas[i].Role = drawElementDatas[i].InitRole;
+				DrawElementDatas[i].Index = i;
+				DrawElementDatas[i].TeamType = DrawElementDatas[i].InitTeamType;
+				DrawElementDatas[i].Role = DrawElementDatas[i].InitRole;
 
-				drawElementDatas[i].IsShowing = true;
+				DrawElementDatas[i].IsShowing = DrawElementDatas[i].TeamType != TeamType.None;
 			}
+		
+			switch (drawType)
+			{
+				case DrawType.AllRandom:
+					SetAllRemainRandom();
+					break;
+				case DrawType.Auction:
+					// 하나씩 뽑아서 팀 설정
+					break;
+			}
+		}
 
-			// 2. 랜덤으로 데이터 생성해서 남은 자리 채워넣기
+		private void SetAllRemainRandom()
+		{
+			// 랜덤으로 데이터 생성해서 남은 자리 채워넣기
 			int[] remainTeamPlayerCounts = new int[teamCount];
 			for (int i = 0; i < teamCount; i++)
 				remainTeamPlayerCounts[i] = teamPlayerCount;
@@ -96,9 +117,9 @@ namespace Mascari4615
 			for (int i = 0; i < teamCount * teamPlayerCount; i++)
 			{
 				// 이미 설정된 팀이 있으면 패스
-				if (drawElementDatas[i].TeamType != TeamType.None)
+				if (DrawElementDatas[i].TeamType != TeamType.None)
 				{
-					remainTeamPlayerCounts[(int)drawElementDatas[i].TeamType]--;
+					remainTeamPlayerCounts[(int)DrawElementDatas[i].TeamType]--;
 					continue;
 				}
 
@@ -114,11 +135,15 @@ namespace Mascari4615
 					}
 				}
 
-				drawElementDatas[i].TeamType = (TeamType)randomTeamIndex;
-				drawElementDatas[i].Role = DrawRole.Normal;
-
-				drawElementDatas[i].IsShowing = false;
+				SetElementData(i, (TeamType)randomTeamIndex, DrawRole.Normal, false);
 			}
+		}
+
+		public void SetElementData(int index, TeamType teamType, DrawRole role, bool IsShowing)
+		{
+			DrawElementDatas[index].TeamType = teamType;
+			DrawElementDatas[index].Role = role;
+			DrawElementDatas[index].IsShowing = IsShowing;
 		}
 
 		[ContextMenu(nameof(ShowTeamA))]
@@ -151,7 +176,7 @@ namespace Mascari4615
 
 		public void ShowTeam(TeamType teamType)
 		{
-			foreach (DrawElementData drawElementData in drawElementDatas)
+			foreach (DrawElementData drawElementData in DrawElementDatas)
 			{
 				if (drawElementData.TeamType == teamType)
 					drawElementData.IsShowing = true;

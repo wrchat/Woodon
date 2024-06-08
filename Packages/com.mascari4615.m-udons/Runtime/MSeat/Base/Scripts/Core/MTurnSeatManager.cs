@@ -48,7 +48,7 @@ namespace Mascari4615
 		public void SetGameState(int newGameState)
 		{
 			SetOwner();
-			CurGameState = newGameState % StateToString.Length;
+			CurGameState = (newGameState + StateToString.Length) % StateToString.Length;
 			RequestSerialization();
 		}
 

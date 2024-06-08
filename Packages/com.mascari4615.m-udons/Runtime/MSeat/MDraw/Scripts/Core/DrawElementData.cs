@@ -1,9 +1,5 @@
-﻿
-using System;
-using UdonSharp;
+﻿using UdonSharp;
 using UnityEngine;
-using VRC.SDKBase;
-using VRC.Udon;
 
 namespace Mascari4615
 {
@@ -36,7 +32,7 @@ namespace Mascari4615
 			TeamType = (TeamType)int.Parse(datas[0]);
 			Role = (DrawRole)int.Parse(datas[1]);
 
-			MDebugLog($"{nameof(ParseDataPack)}, Index : {Index}, TeamType : {TeamType}, Role : {Role}");
+			// MDebugLog($"{nameof(ParseDataPack)}, Index : {Index}, TeamType : {TeamType}, Role : {Role}");
 		}
 	}
 }
