@@ -15,6 +15,7 @@ namespace Mascari4615
 			mScore.SetMinMaxScore(0, objectList.Length - 1);
 		}
 
+		[ContextMenu(nameof(UpdateObjectByScore))]
 		public void UpdateObjectByScore()
 		{
 			if (mScore)
@@ -23,12 +24,17 @@ namespace Mascari4615
 
 		public void SetObject(int targetIndex)
 		{
-			for (int oi = 0; oi < objectList.Length; oi++)
-				objectList[oi].SetActive(oi == targetIndex);
+			for (int i = 0; i < objectList.Length; i++)
+				objectList[i].SetActive(i == targetIndex);
 		}
 
+		[ContextMenu(nameof(SetObject0))]
 		public void SetObject0() => SetObject(0);
+
+		[ContextMenu(nameof(SetObject1))]
 		public void SetObject1() => SetObject(1);
+
+		[ContextMenu(nameof(SetObject2))]
 		public void SetObject2() => SetObject(2);
 	}
 }
