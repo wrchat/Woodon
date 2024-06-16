@@ -43,7 +43,7 @@ namespace Mascari4615
 
 			if (ownerWaktaIndex != NO_ONE)
 			{
-				string nickname = WaktaverseNickname.GetNickname(OwnerWaktaIndex);
+				string nickname = Waktaverse.GetNickname(OwnerWaktaIndex);
 
 				Sprite sprite = ownerWaktaIndex != NONE_INT ? playerIcons[ownerWaktaIndex] : nullIcon;
 				string _name = ownerWaktaIndex != NONE_INT ? $"{nickname} 발견 !" : "이파리가 발견 !";
@@ -65,7 +65,7 @@ namespace Mascari4615
 		public void Find()
 		{
 			SetOwner();
-			OwnerWaktaIndex = WaktaverseNickname.GetIndex(Networking.LocalPlayer.displayName);
+			OwnerWaktaIndex = Waktaverse.GetIndex(Networking.LocalPlayer.displayName);
 			RequestSerialization();
 		}
 	}

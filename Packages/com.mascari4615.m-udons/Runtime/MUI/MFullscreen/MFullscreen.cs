@@ -18,8 +18,11 @@ namespace Mascari4615
 				SetActiveFalse();
 		}
 
-		public void SetActive(bool value) => canvasGroup.alpha = value ? 1 : 0;
-
+		public void SetActive(bool value)
+		{
+			MDebugLog($"{nameof(SetActive)}({value})");
+			canvasGroup.alpha = value ? 1 : 0;
+		}
 
 		[ContextMenu(nameof(ToggleActive))]
 		public void ToggleActive() => SetActive(canvasGroup.alpha != 1);

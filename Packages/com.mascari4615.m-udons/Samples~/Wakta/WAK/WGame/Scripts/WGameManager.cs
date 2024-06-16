@@ -89,7 +89,7 @@ namespace Mascari4615
 				Sprite sprite = nullIcon;
 				if (playerApi != null)
 				{
-					int waktaIndex = WaktaverseNickname.GetIndex(playerApi.displayName);
+					int waktaIndex = Waktaverse.GetIndex(playerApi.displayName);
 					if (waktaIndex != NONE_INT)
 						sprite = playerIcons[waktaIndex];
 				}

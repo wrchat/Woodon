@@ -1,8 +1,4 @@
-﻿using System;
-using UdonSharp;
-using UnityEngine;
-using VRC.Udon;
-using VRC.Udon.Common.Interfaces;
+﻿using UnityEngine;
 
 namespace Mascari4615
 {
@@ -12,16 +8,22 @@ namespace Mascari4615
 		[Header("_" + nameof(SendEventOnKeyInput))]
 		[SerializeField] private KeyCode keyCode;
 
-		[SerializeField] private bool whenGetKeyDown;
+		[SerializeField] private bool whenGetKeyDown = true;
 		[SerializeField] private bool whenGetKeyUp;
 
 		private void Update()
 		{
 			if (whenGetKeyDown && Input.GetKeyDown(keyCode))
+			{
+				MDebugLog($"{nameof(Update)} : {nameof(keyCode)} = {keyCode}");
 				SendEvents();
+			}
 
 			if (whenGetKeyUp && Input.GetKeyUp(keyCode))
+			{
+				MDebugLog($"{nameof(Update)} : {nameof(keyCode)} = {keyCode}");
 				SendEvents();
+			}
 		}
 	}
 }
