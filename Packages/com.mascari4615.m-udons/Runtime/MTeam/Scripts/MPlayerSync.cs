@@ -47,7 +47,7 @@ namespace Mascari4615
 
 			if (playerAPI != null)
 				if (convertWaktaNickname)
-					playerNickname = WaktaverseNickname.GetNickname(playerAPI.displayName);
+					playerNickname = Waktaverse.GetNickname(playerAPI.displayName);
 
 			foreach (TextMeshProUGUI nicknameText in nicknameTexts)
 				nicknameText.text = playerNickname;

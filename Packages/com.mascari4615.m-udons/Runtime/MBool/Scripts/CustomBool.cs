@@ -59,8 +59,11 @@ namespace Mascari4615
 		}
 
 		// Called By Other Udons
+		[ContextMenu(nameof(ToggleValue))]
 		public virtual void ToggleValue() => SetValue(!Value);
+		[ContextMenu(nameof(SetValueTrue))]
 		public void SetValueTrue() => SetValue(true);
+		[ContextMenu(nameof(SetValueFalse))]
 		public void SetValueFalse() => SetValue(false);
 	}
 }
