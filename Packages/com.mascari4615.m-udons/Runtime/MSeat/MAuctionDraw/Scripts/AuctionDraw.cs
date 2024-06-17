@@ -7,11 +7,11 @@ namespace Mascari4615
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class AuctionDraw : MBase
 	{
-		[SerializeField] private AuctionManager auctionManager;
-		[SerializeField] private DrawManager drawManager;
+		[field: SerializeField] public DrawManager DrawManager { get; private set; }
+		[field: SerializeField] public AuctionManager AuctionManager { get; private set; }
+		[SerializeField] private MUI[] uis;
 
-		// TODO: UI
-		[SerializeField] private TextMeshProUGUI targetNameText;
+		private bool _isInit = false;
 
 		[UdonSynced(UdonSyncMode.None), FieldChangeCallback(nameof(TargetIndex))] private int _targetIndex = NONE_INT;
 		public int TargetIndex
@@ -28,51 +28,55 @@ namespace Mascari4615
 		{
 			MDebugLog($"{nameof(OnTargetIndexChanged)}, TargetIndex : {TargetIndex}");
 
-			if (drawManager.DrawElementDatas == null)
+			if (DrawManager.DrawElementDatas == null)
 				return;
 
-			if (TargetIndex == NONE_INT)
-			{
-				targetNameText.text = string.Empty;
-				return;
-			}
-
-			foreach (DrawElementData drawElementData in drawManager.DrawElementDatas)
-			{
-				if (drawElementData.Index == TargetIndex)
-				{
-					targetNameText.text = drawElementData.Name;
-					break;
-				}
-			}
+			UpdateUI();
 		}
 
 		private void Start()
 		{
 			Init();
+			UpdateUI();
 		}
 
 		private void Init()
 		{
-			targetNameText.text = string.Empty;
-			targetNameText.gameObject.SetActive(false);
+			MDebugLog(nameof(Init));
+		
+			if (_isInit)
+				return;
+			_isInit = true;
+
+			foreach (MUI ui in uis)
+				ui.Init(this);
+
 			OnTargetIndexChanged();
+		}
+
+		private void UpdateUI()
+		{
+			MDebugLog(nameof(UpdateUI));
+		
+			if (_isInit == false)
+				Init();
+
+			foreach (MUI ui in uis)
+				ui.UpdateUI(this);
 		}
 
 		public void UpdateDrawByAuction()
 		{
 			MDebugLog(nameof(UpdateDrawByAuction));
 
-			switch ((AuctionState)auctionManager.CurGameState)
+			switch ((AuctionState)AuctionManager.CurGameState)
 			{
 				case AuctionState.Wait:
 					// 아직 팀이 정해지지 않은 랜덤한 한 명 (미리 설정)
-					targetNameText.gameObject.SetActive(false);
 					OnWait();
 					break;
 				case AuctionState.ShowTarget:
 					// 경매 대상 공개
-					targetNameText.gameObject.SetActive(true);
 					break;
 				case AuctionState.AuctionTime:
 					break;
@@ -85,6 +89,8 @@ namespace Mascari4615
 					OnApplyResult();
 					break;
 			}
+
+			UpdateUI();
 		}
 
 		private void OnWait()
@@ -99,6 +105,7 @@ namespace Mascari4615
 			if (noneTeamDrawElementData != null)
 			{
 				DrawElementData randomNoneTeamDrawElementData = GetRandomNoneTeamDrawElementData();
+
 				SetOwner();
 				TargetIndex = randomNoneTeamDrawElementData.Index;
 				RequestSerialization();
@@ -113,24 +120,24 @@ namespace Mascari4615
 		{
 			MDebugLog(nameof(OnApplyResult));
 
-			if (IsOwner(drawManager.gameObject) == false)
+			if (IsOwner(DrawManager.gameObject) == false)
 				return;
 
-			if (auctionManager.WinnerIndex == NONE_INT)
+			if (AuctionManager.WinnerIndex == NONE_INT)
 				return;
 
 			// HACK: AuctionSeat와 DrawElementData의 Index가 같다면, 둘 다 동일한 플레이어를 대상으로 한다고 가정
-			TeamType teamType = drawManager.DrawElementDatas[auctionManager.WinnerIndex].TeamType;
-			drawManager.SetElementData(TargetIndex, teamType, DrawRole.Normal, true);
-			drawManager.SyncData();
+			TeamType teamType = DrawManager.DrawElementDatas[AuctionManager.WinnerIndex].TeamType;
+			DrawManager.SetElementData(TargetIndex, teamType, DrawRole.Normal, true);
+			DrawManager.SyncData();
 		}
 
 		private DrawElementData FindNoneTeamDrawElementData()
 		{
-			if (drawManager.DrawElementDatas == null)
+			if (DrawManager.DrawElementDatas == null)
 				return null;
 
-			foreach (DrawElementData drawElementData in drawManager.DrawElementDatas)
+			foreach (DrawElementData drawElementData in DrawManager.DrawElementDatas)
 			{
 				if (drawElementData.TeamType == TeamType.None)
 					return drawElementData;
@@ -141,13 +148,13 @@ namespace Mascari4615
 
 		private DrawElementData GetRandomNoneTeamDrawElementData()
 		{
-			if (drawManager.DrawElementDatas == null)
+			if (DrawManager.DrawElementDatas == null)
 				return null;
 
-			DrawElementData[] noneTeamDrawElementDatas = new DrawElementData[drawManager.DrawElementDatas.Length];
+			DrawElementData[] noneTeamDrawElementDatas = new DrawElementData[DrawManager.DrawElementDatas.Length];
 			int count = 0;
 
-			foreach (DrawElementData drawElementData in drawManager.DrawElementDatas)
+			foreach (DrawElementData drawElementData in DrawManager.DrawElementDatas)
 			{
 				if (drawElementData.TeamType == TeamType.None)
 					noneTeamDrawElementDatas[count++] = drawElementData;

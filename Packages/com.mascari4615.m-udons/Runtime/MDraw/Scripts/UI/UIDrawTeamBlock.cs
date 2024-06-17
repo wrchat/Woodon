@@ -1,8 +1,5 @@
-﻿
-using UdonSharp;
-using UnityEngine;
-using VRC.SDKBase;
-using VRC.Udon;
+﻿using UdonSharp;
+using UnityEngine.UI;
 
 namespace Mascari4615
 {
@@ -11,11 +8,15 @@ namespace Mascari4615
 	{
 		private TeamType teamType = TeamType.None;
 		private UIDrawElementBlock[] elementBlocks;
+		private LayoutGroup layoutGroup;
 
 		public void Init(TeamType teamType)
 		{
 			this.teamType = teamType;
 			elementBlocks = GetComponentsInChildren<UIDrawElementBlock>(true);
+			
+			layoutGroup = GetComponent<LayoutGroup>();
+			layoutGroup.enabled = false;
 		}
 
 		public void UpdateUI(DrawElementData[] drawElementDatas)
