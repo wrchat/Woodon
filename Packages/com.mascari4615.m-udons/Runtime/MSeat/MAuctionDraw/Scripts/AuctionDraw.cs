@@ -1,6 +1,7 @@
 ﻿using TMPro;
 using UdonSharp;
 using UnityEngine;
+using VRC.SDKBase;
 
 namespace Mascari4615
 {
@@ -50,6 +51,9 @@ namespace Mascari4615
 
 			foreach (MUI ui in uis)
 				ui.Init(this);
+
+			if (Networking.IsMaster)
+				OnWait();
 
 			OnTargetIndexChanged();
 		}
