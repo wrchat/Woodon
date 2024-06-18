@@ -1,15 +1,33 @@
-# VRC_MUdons
+# MUdons
 
-- 왁타버스 VRChat 컨텐츠 맵에 사용하고 있는 기능들을 모았습니다.
-
-- 성능을 일부 포기히고, 개발 편의/재사용에 중점을 뒀습니다.
+- VRChat 컨텐츠 맵에 사용하고 있는 우동/프리팹들을 모은 유니티 패키지입니다.
+- 성능을 일부 포기하는 대신, 개발 편의/재사용에 중점을 뒀습니다.
   - U#을 사용하지만, UdonGraph 같이 Event (C# 리플렉션/Unity 메시지 브로드캐스트) 기반으로 구현
   - Static 사용에 제한이 있기에, Util/공통적인 기능을 모아둔 클래스를 직접 상속
 
+## How to Use
+
+### 설치
+
+- [여기](vcc://vpm/addRepo?url=https://mascari4615.github.io/MUdons-Listing/index.json)를 눌러, 간편하게 `MUdons`를 `VCC (VRChat Creator Conpanion)`에 등록하세요!
+- `VCC`에서, `MUdons`를 사용하고자 하는 프로젝트의 `Manage Project` 페이지를 열고, 해당 프로젝트에 `MUdons` 패키지를 추가하세요.
+
+### 사용
+
+- 유니티 에디터의 `Project` 창에서, `Package/MUdons` 폴더를 찾고, `Runtime` 폴더에서 우동/프리팹을 찾아보세요.
+- 유니티 에디터의 `Package Manager` 창에서, `MUdons` 패키지를 찾고, `Samples` 페이지에서 샘플들을 찾아보세요.
+
 ## Require
 
-- [UdonSharpVideo](https://github.com/MerlinVR/USharpVideo/releases)
-- [QvPen](https://booth.pm/ja/items/1555789)
+아래 에셋을 반드시 같이 사용해 주세요.  
+
+- [QvPen (Booth)](https://booth.pm/ja/items/1555789)
+  - [여기](https://vpm.ureishi.net/install)를 눌러, `QvPen`을 `VCC (VRChat Creator Conpanion)`에 등록해주세요.
+  - (위 링크는 해당 부스 페이지의 설명란에도 명시되어 있습니다.)
+
+아래 에셋은 일부 샘플에서 사용하지만, 반드시 추가할 필요는 없습니다.
+
+- [UdonSharpVideo (Github)](https://github.com/MerlinVR/USharpVideo/releases)
 
 ## 제발 내 코드에 훈수하세요
 
@@ -17,14 +35,12 @@
 
 ## 기능
 
-### ⭐ MBase
+### ⭐ _Base
 
 Util 클래스 모음
 
 - `MBase` : 자주 사용하는 코드 블럭 모음 (직접 상속받아 사용)
 - `MEventSender` : 이벤트 발생 시, 다른 오브젝트에게 이벤트 전달
-- `WaktaverseNickname` : 왁타버스 닉네임 관리
-  - ['어둠속의 칼날'](https://cafe.naver.com/steamindiegame/11576279)님의 `WaktaverseNameChanger`스크립트 참고
 
 ### ⭐ Basic
 
@@ -35,11 +51,15 @@ Util 클래스 모음
   - `MEventSender`와 함께 활용
   - (`Interact`, `OnPlayerTriggerEnter`, `KetInput` 등)
 - `Teleport` : 단순 텔레포트 기능
+- `Waktaverse` : 왁타버스 관련 기능 (왁타버스 멤버 추적/닉네임 불러오기 등)
+  - ['어둠속의 칼날'](https://cafe.naver.com/steamindiegame/11576279)님의 `WaktaverseNameChanger`스크립트를 일부 참고했습니다.
 
 ### ⭐ MBool
 
 동기화되는 Bool 변수의 값 변화에 따른 Event 호출.  
-`MEventSender`와 함께 활용
+`_Base/MEventSender`와 함께 활용
+
+### ⭐ MCamera
 
 ### ⭐ [MPlayerUdonIndex](https://cafe.naver.com/steamindiegame/14065241)
 
@@ -47,9 +67,10 @@ Util 클래스 모음
 
 - VRChat에서 제공하는 `PlayerID`는 플레이어가 들어올 때마다 제한없이 계속 커지기 때문에, 플레이어에게 고유한 오브젝트를 할당하는 등의 상황에서 쓰기에 어려움이 있음
 
-### ⭐ MQuiz
+### ⭐ MSeat
 
-퀴즈 관련 컨텐츠 대부분에 응용될 수 있는 기반 제공
+`다수의 플레이어`, `턴`이 존재하는 시스템 대부분에 응용될 수 있는 기반 제공  
+i.e. 경매, 조추첨, 퀴즈 컨텐츠  
 
 ### ⭐ MScore
 
@@ -81,11 +102,6 @@ UI 관련
 
 - `FollowBone` : 특정 플레이어 본 위치에 오브젝트 붙이기
 
-### ⭐ Project
-
-위 기능들을 활용하여, 특정 프로젝트를 위해 만들어진 @기능/프리팹 모음
-
-기능은 꾸준히 디벨롭 했지만,  
-오래된 기능/프리팹들은 대부분 유지보수를 하지 않아서 Missing이 뜨거나 제대로 작동하지 않는 경우가 많음 (하하)
+### ⭐ Shooting
 
 ### ⭐ 그 외 잡다한 기능들
