@@ -7,7 +7,6 @@ namespace Mascari4615
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public class VoiceReseter : VoiceUpdater
 	{
-		[SerializeField] private VoiceManager voiceManager;
 		[SerializeField] private MTarget[] ignoreTargets;
 
 		[SerializeField] private bool useIngnoreTargetTag;

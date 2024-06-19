@@ -10,8 +10,15 @@ namespace Mascari4615
 	// 이 클래스를 상속받아서 UpdateVoice()를 구현해야 함
 	public class VoiceUpdater : MBase
 	{
+		protected VoiceManager voiceManager;
+
 		[SerializeField] protected CustomBool enable;
 		[SerializeField] protected bool usePrevData;
+
+		public virtual void Init(VoiceManager voiceManager)
+		{
+			this.voiceManager = voiceManager;
+		}
 
 		public virtual void UpdateVoice() { }
 

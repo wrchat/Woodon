@@ -81,7 +81,7 @@ namespace Mascari4615
 			{
 				_canInteract = value;
 
-				if ((_canInteract == false) && IsLocalPlayerHolding(gunObject))
+				if ((_canInteract == false) && IsPlayerHolding(Networking.LocalPlayer, gunObject))
 					gunObject.Drop();
 
 				gunObject.pickupable = _canInteract;
@@ -95,10 +95,10 @@ namespace Mascari4615
 
 			if (pcCanReloadByKeyR)
 				if (Input.GetKeyDown(KeyCode.E))
-					if (IsLocalPlayerHolding(gunObject))
+					if (IsPlayerHolding(Networking.LocalPlayer, gunObject))
 						Reload();
 
-			if (IsLocalPlayerHolding(gunObject))
+			if (IsPlayerHolding(Networking.LocalPlayer, gunObject))
 			{
 				if (ui.activeSelf == false)
 					ui.SetActive(true);
@@ -117,7 +117,7 @@ namespace Mascari4615
 
 		private void OnParticleCollision(GameObject other)
 		{
-			if (sendEventWhenLocalPlayerIsGunOwner && !IsLocalPlayerHolding(gunObject))
+			if (sendEventWhenLocalPlayerIsGunOwner && !IsPlayerHolding(Networking.LocalPlayer, gunObject))
 				return;
 
 			shootingManager.Ahh(other);
@@ -137,7 +137,7 @@ namespace Mascari4615
 
 		public void TryBBang()
 		{
-			if (IsLocalPlayerHolding(gunObject))
+			if (IsPlayerHolding(Networking.LocalPlayer, gunObject))
 			{
 				if (reloadCooltime.IsExpired == false)
 					return;
@@ -207,7 +207,7 @@ namespace Mascari4615
 		{
 			if (IsOwner(gunObject.gameObject))
 			{
-				if (IsLocalPlayerHolding(gunObject))
+				if (IsPlayerHolding(Networking.LocalPlayer, gunObject))
 					gunObject.Drop(Networking.LocalPlayer);
 				objectSync.Respawn();
 			}
@@ -217,7 +217,7 @@ namespace Mascari4615
 		{
 			if (IsOwner(gunObject.gameObject))
 			{
-				if (IsLocalPlayerHolding(gunObject))
+				if (IsPlayerHolding(Networking.LocalPlayer, gunObject))
 					gunObject.Drop(Networking.LocalPlayer);
 				gunObject.transform.position = position;
 			}

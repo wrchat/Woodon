@@ -65,7 +65,22 @@ namespace Mascari4615
 
 		public bool CanUpdateNow => (PlayerApis != null) && (PlayerApis.Length == VRCPlayerApi.GetPlayerCount()) && (VoiceStates != null);
 
-		private void Start() => UpdateVoiceLoop();
+		private bool isInited = false;
+
+		private void Start() => Init();
+
+		private void Init()
+		{
+			if (isInited)
+				return;
+			isInited = true;
+
+			foreach (VoiceUpdater voiceUpdater in voiceUpdaters)
+				voiceUpdater.Init(this);
+
+			UpdateVoiceLoop();
+		}
+
 		public void UpdateVoiceLoop()
 		{
 			if (updateTerm <= 0)
@@ -83,6 +98,9 @@ namespace Mascari4615
 
 		public void UpdateVoice()
 		{
+			if (!isInited)
+				Init();
+
 			// 플레이어 리스트 유효성 확인
 			if (!CanUpdateNow)
 			{

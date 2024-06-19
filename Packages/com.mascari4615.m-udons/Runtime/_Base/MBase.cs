@@ -89,13 +89,13 @@ namespace Mascari4615
 			return true;
 		}
 
-		protected bool IsLocalPlayerHolding(VRC_Pickup pickup)
+		protected bool IsPlayerHolding(VRCPlayerApi targetPlayer, VRC_Pickup pickup)
 		{
 			if (NotOnline)
 				return false;
 
-			return Networking.LocalPlayer.GetPickupInHand(VRC_Pickup.PickupHand.Left) == pickup ||
-				   Networking.LocalPlayer.GetPickupInHand(VRC_Pickup.PickupHand.Right) == pickup;
+			return targetPlayer.GetPickupInHand(VRC_Pickup.PickupHand.Left) == pickup ||
+				   targetPlayer.GetPickupInHand(VRC_Pickup.PickupHand.Right) == pickup;
 		}
 
 		protected void TP(Transform tr) => Networking.LocalPlayer.TeleportTo(tr.position, tr.rotation);

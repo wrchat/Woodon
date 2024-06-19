@@ -7,7 +7,6 @@ namespace Mascari4615
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public class VoiceUpdater_Tag : VoiceUpdater
 	{
-		[SerializeField] private VoiceManager voiceManager;
 		[SerializeField] private VoiceTagger[] voiceTaggers;
 
 		public override void UpdateVoice()

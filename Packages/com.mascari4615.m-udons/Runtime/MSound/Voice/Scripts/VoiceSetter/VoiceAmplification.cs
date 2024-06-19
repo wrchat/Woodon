@@ -9,8 +9,7 @@ namespace Mascari4615
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public abstract class VoiceAmplification : VoiceUpdater
 	{
-		[Header("_" + nameof(VoiceAmplification))]
-		[SerializeField] protected VoiceManager voiceManager;
+		// [Header("_" + nameof(VoiceAmplification))]
 
 		public override void UpdateVoice()
 		{
