@@ -10,7 +10,6 @@ namespace Mascari4615
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public class RotatingMeetingVoice : VoiceUpdater
 	{
-		[SerializeField] private VoiceManager voiceManager;
 		[SerializeField] private CupPicker[] cupPickers;
 
 		[SerializeField] private Image[] icons;

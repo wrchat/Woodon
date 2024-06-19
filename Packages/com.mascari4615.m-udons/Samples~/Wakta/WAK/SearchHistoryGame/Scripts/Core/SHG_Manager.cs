@@ -83,5 +83,18 @@ namespace Mascari4615
 			SelectedMember = WaktaMember.None;
 			RequestSerialization();
 		}
+
+		public void ResetAll()
+		{
+			SetOwner();
+		
+			WaktaverseData waktaverseData = WaktaverseData.GetInstance();
+			foreach (WaktaverseMemberData data in waktaverseData.Datas)
+				data.SetSyncData(GetWaktaMemberInitSyncData());
+
+			SelectedMember = WaktaMember.None;
+			
+			RequestSerialization();
+		}
 	}
 }

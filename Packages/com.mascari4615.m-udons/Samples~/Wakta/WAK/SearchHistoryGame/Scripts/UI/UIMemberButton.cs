@@ -13,9 +13,12 @@ namespace Mascari4615
 
 		private Button button;
 
-		[SerializeField] private Image profile;
+		// HACK:
+		[SerializeField] private Image[] profileImages;
 		[SerializeField] private TextMeshProUGUI nameText;
 		[SerializeField] private Image disableImage;
+		[SerializeField] private bool onlyShowOnce = false;
+
 
 		public void Init(UIMemberListPanel panel, WaktaverseMemberData data)
 		{
@@ -24,14 +27,17 @@ namespace Mascari4615
 
 			button = GetComponent<Button>();
 
-			profile.sprite = data.Profile;
+			foreach (Image profileImage in profileImages)
+				profileImage.sprite = data.Profile;
 			nameText.text = Waktaverse.GetNickname(data.Member);
 		}
 
 		public void UpdateUI()
 		{
 			disableImage.gameObject.SetActive(data.SyncData == SHG_Manager.GetWaktaMemberClearSyncData());
-			button.interactable = data.SyncData != SHG_Manager.GetWaktaMemberClearSyncData();
+
+			if (onlyShowOnce)
+				button.interactable = data.SyncData != SHG_Manager.GetWaktaMemberClearSyncData();
 		}
 
 		public void Click()
