@@ -1,8 +1,4 @@
-﻿
-using UdonSharp;
-using UnityEngine;
-using VRC.SDKBase;
-using VRC.Udon;
+﻿using UdonSharp;
 
 namespace Mascari4615
 {

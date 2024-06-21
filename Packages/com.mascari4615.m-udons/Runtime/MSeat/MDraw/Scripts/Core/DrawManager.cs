@@ -1,16 +1,8 @@
 ﻿using UdonSharp;
 using UnityEngine;
-using VRC.SDKBase;
-using VRC.Udon;
 
 namespace Mascari4615
 {
-	public enum DrawType
-	{
-		AllRandom,
-		Auction
-	}
-
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class DrawManager : MBase
 	{
@@ -70,7 +62,7 @@ namespace Mascari4615
 		private void Init()
 		{
 			MDebugLog(nameof(Init));
-			
+
 			DrawElementDatas = GetComponentsInChildren<DrawElementData>(true);
 
 			foreach (UIDraw drawUI in drawUIs)
@@ -88,7 +80,7 @@ namespace Mascari4615
 			MDebugLog(nameof(InitData));
 
 			// 팀당 인원 수 * 팀 수 만큼 데이터 생성
-			
+
 			// 1. 사전 정의 데이터 설정
 			for (int i = 0; i < DrawElementDatas.Length; i++)
 			{
@@ -98,7 +90,7 @@ namespace Mascari4615
 
 				DrawElementDatas[i].IsShowing = DrawElementDatas[i].TeamType != TeamType.None;
 			}
-		
+
 			switch (drawType)
 			{
 				case DrawType.AllRandom:
@@ -146,7 +138,7 @@ namespace Mascari4615
 		public void SetElementData(int index, TeamType teamType, DrawRole role, bool IsShowing)
 		{
 			MDebugLog($"{nameof(SetElementData)}, Index : {index}, TeamType : {teamType}, Role : {role}, IsShowing : {IsShowing}");
-			
+
 			DrawElementDatas[index].TeamType = teamType;
 			DrawElementDatas[index].Role = role;
 			DrawElementDatas[index].IsShowing = IsShowing;

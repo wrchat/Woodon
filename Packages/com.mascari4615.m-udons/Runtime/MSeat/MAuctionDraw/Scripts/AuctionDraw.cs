@@ -5,6 +5,7 @@ using VRC.SDKBase;
 
 namespace Mascari4615
 {
+	[DefaultExecutionOrder(100)]
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class AuctionDraw : MBase
 	{

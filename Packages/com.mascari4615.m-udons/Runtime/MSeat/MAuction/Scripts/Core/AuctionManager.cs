@@ -35,18 +35,22 @@ namespace Mascari4615
 					// 경매 대기
 					WinnerIndex = NONE_INT;
 					debugText.text = "Wait";
+					OnWait();
 					break;
 				case AuctionState.ShowTarget:
 					// 경매 대상 공개
 					debugText.text = "ShowTarget";
+					OnShowTarget();
 					break;
 				case AuctionState.AuctionTime:
 					// 경매 시간
 					debugText.text = "AuctionTime";
+					OnAuctionTime();
 					break;
 				case AuctionState.WaitForResult:
 					// 경매 결과 대기
 					debugText.text = "WaitForResult";
+					OnWaitForResult();
 					break;
 				case AuctionState.CheckResult:
 					// 경매 결과 확인
@@ -59,6 +63,26 @@ namespace Mascari4615
 			}
 
 			base.OnGameStateChange(origin, value);
+		}
+
+		protected virtual void OnWait()
+		{
+
+		}
+
+		protected virtual void OnShowTarget()
+		{
+
+		}
+
+		protected virtual void OnAuctionTime()
+		{
+
+		}
+
+		protected virtual void OnWaitForResult()
+		{
+
 		}
 
 		protected virtual void OnCheckResult()

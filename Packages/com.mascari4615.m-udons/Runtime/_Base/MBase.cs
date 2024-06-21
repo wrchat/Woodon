@@ -99,6 +99,7 @@ namespace Mascari4615
 		}
 
 		protected void TP(Transform tr) => Networking.LocalPlayer.TeleportTo(tr.position, tr.rotation);
+		protected void TP(Vector3 pos, Quaternion rot = default) => Networking.LocalPlayer.TeleportTo(pos, rot);
 		#endregion
 
 		#region Wakgood

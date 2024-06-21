@@ -17,8 +17,8 @@ namespace Mascari4615
 
 			memberButtons = GetComponentsInChildren<UIMemberButton>(true);
 
-			members = Waktaverse.GetMembersByType(memberType);
 			waktaverseData = WaktaverseData.GetInstance();
+			members = Waktaverse.GetEnabledMembersByType(memberType, waktaverseData);
 
 			for (int i = 0; i < memberButtons.Length; i++)
 			{

@@ -38,6 +38,9 @@ namespace Mascari4615
 				elementBlock.gameObject.SetActive(true);
 
 				elementIndex++;
+
+				if (elementIndex >= elementBlocks.Length)
+					break;
 			}
 		}
 	}

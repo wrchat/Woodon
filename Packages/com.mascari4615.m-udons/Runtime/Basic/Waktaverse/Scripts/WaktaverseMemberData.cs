@@ -17,6 +17,9 @@ namespace Mascari4615
 			}
 		}
 
+		[field: Header("Setting")]
+		[field: SerializeField] public bool Enable { get; private set; } = true;
+
 		[field: Header("Member Data")]
 		[field: SerializeField] public WaktaMember Member { get; private set; }
 		[field: SerializeField] public Sprite Profile { get; private set; }
