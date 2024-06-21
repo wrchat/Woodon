@@ -94,8 +94,10 @@ namespace Mascari4615
 			if (NotOnline)
 				return false;
 
-			return targetPlayer.GetPickupInHand(VRC_Pickup.PickupHand.Left) == pickup ||
-				   targetPlayer.GetPickupInHand(VRC_Pickup.PickupHand.Right) == pickup;
+			return pickup.currentPlayer == targetPlayer;
+
+			// return targetPlayer.GetPickupInHand(VRC_Pickup.PickupHand.Left) == pickup ||
+			// 	   targetPlayer.GetPickupInHand(VRC_Pickup.PickupHand.Right) == pickup;
 		}
 
 		protected void TP(Transform tr) => Networking.LocalPlayer.TeleportTo(tr.position, tr.rotation);

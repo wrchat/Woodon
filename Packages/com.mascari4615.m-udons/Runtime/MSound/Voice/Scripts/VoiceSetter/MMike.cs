@@ -5,7 +5,7 @@ using VRC.SDKBase;
 namespace Mascari4615
 {
 	[RequireComponent(typeof(VRC_Pickup))]
-	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
+	[UdonBehaviourSyncMode(BehaviourSyncMode.Continuous)]
 	public class MMike : MBase
 	{
 		[SerializeField] private VRC_Pickup pickup;
