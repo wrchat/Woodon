@@ -30,7 +30,8 @@ namespace Mascari4615
 		private void Init()
 		{
 			ccPos = new Transform[transform.childCount];
-			for (var ci = 0; ci < transform.childCount; ci++) ccPos[ci] = transform.GetChild(ci);
+			for (int ci = 0; ci < transform.childCount; ci++)
+				ccPos[ci] = transform.GetChild(ci);
 		}
 	}
 }

@@ -1,29 +1,69 @@
 ﻿using UdonSharp;
+using UnityEngine;
+using VRC.SDKBase;
 
 namespace Mascari4615
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Continuous)]
-	public class MCameraFovSync : UdonSharpBehaviour
+	public class MCameraFovSync : MBase
 	{
-		/*[UdonSynced(UdonSyncMode.Smooth)]
-		[FieldChangeCallback(nameof(FovValue))]
-		private float fovValue;
-
 		private MCameraController mCameraController;
 
+		[SerializeField] private float fovDefault = 60;
+		[SerializeField] private float fovSpeed = 1;
+		[SerializeField] private float fovMin = 20;
+		[SerializeField] private float fovMax = 100;
+
+		private bool isInited = false;
+
+		[UdonSynced(UdonSyncMode.Smooth), FieldChangeCallback(nameof(FovValue))] private float fovValue;
 		public float FovValue
 		{
 			get => fovValue;
 			set
 			{
+				MDebugLog($"{nameof(FovValue)} : {value}");
+
 				fovValue = value;
-				mCameraController.FovValue = fovValue;
+
+				if (mCameraController != null)
+					mCameraController.FovValue = fovValue;
 			}
 		}
 
-		private void Start()
+		public void Init(MCameraController cameraController)
 		{
-			mCameraController = transform.GetComponent<MCameraController>();
-		}*/
+			if (isInited)
+				return;
+			isInited = true;
+
+			mCameraController = cameraController;
+			FovValue = fovDefault;
+		}
+
+		private void Update()
+		{
+			if (isInited == false)
+				return;
+
+			UpdateFov();
+		}
+
+		private void UpdateFov()
+		{
+			if (mCameraController.IsPlayerHolding(Networking.LocalPlayer) == false)
+				return;
+
+			// float scroll = Input.GetAxis("Mouse ScrollWheel");
+			float scroll = 0;
+			scroll += Input.GetKey(KeyCode.UpArrow) ? 1 : 0;
+			scroll -= Input.GetKey(KeyCode.DownArrow) ? 1 : 0;
+			
+			fovValue += scroll * fovSpeed;
+
+			MDebugLog($"{nameof(UpdateFov)} : +{scroll}");
+
+			FovValue = Mathf.Clamp(fovValue, fovMin, fovMax);
+		}
 	}
 }

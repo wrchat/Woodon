@@ -8,9 +8,9 @@ using VRC.Udon;
 namespace Mascari4615
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class MCameraData : MBase
+	public class M_CCData : MBase
 	{
-		[field: Header("_" + nameof(MCameraData))]
+		[field: Header("_" + nameof(M_CCData))]
 		[field: SerializeField] public KeyCode KeyCode { get; set; } = KeyCode.None;
 
 		public CinemachineVirtualCamera Camera

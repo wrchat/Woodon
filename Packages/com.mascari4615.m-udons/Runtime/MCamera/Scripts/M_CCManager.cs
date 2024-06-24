@@ -8,12 +8,12 @@ using VRC.SDKBase;
 namespace Mascari4615
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class MCameraManager : MBase
+	public class M_CCManager : MBase
 	{
-		[Header("_" + nameof(MCameraManager))]
+		[Header("_" + nameof(M_CCManager))]
 		[SerializeField] private Camera cameraBrain;
 
-		private MCameraData[] cameraDatas;
+		private M_CCData[] cameraDatas;
 		private int lastCameraIndex = NONE_INT;
 		// private bool useOmakaseCam = false;
 
@@ -36,7 +36,12 @@ namespace Mascari4615
 
 		private void Start()
 		{
-			cameraDatas = transform.GetComponentsInChildren<MCameraData>();
+			Init();
+		}
+
+		private void Init()
+		{
+			cameraDatas = transform.GetComponentsInChildren<M_CCData>();
 			TurnOffCamera();
 		}
 

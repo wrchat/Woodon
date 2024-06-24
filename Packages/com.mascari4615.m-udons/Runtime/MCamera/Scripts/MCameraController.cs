@@ -4,133 +4,152 @@ using VRC.SDKBase;
 
 namespace Mascari4615
 {
-    [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-    public class MCameraController : MBase
-    {
-        /*private CameraManager cameraManager;
+	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
+	public class MCameraController : MBase
+	{
+		[SerializeField] private CustomBool isHolding;
+		[SerializeField] private VRC_Pickup pickup;
 
-        private int curCCPosData;
+		// private CameraManager cameraManager;
 
-        private readonly float[] fovData = new float[108];
+		public bool IsPlayerHolding(VRCPlayerApi playerApi)
+		{
+			return IsPlayerHolding(playerApi, pickup);
+		}
 
-        private float fovValue = 40;
-        private bool isLocal;
-        private readonly bool isLookingAt = false;
-        private MCameraFovSync mCameraFovSync;
-        private MCameraPosSync mCameraPosSync;
-        private Camera targetCamera;
+		private int curCCPosData;
 
-        public int CurCCPosData
-        {
-            get => curCCPosData;
-            set
-            {
-                curCCPosData = value;
+		private readonly float[] fovData = new float[108];
 
-                // i.e. CC 3-5
-                // ccPosData : (2 * 10) + 4 = 24
-                // ccPosIndex : 24 / 10 = 2
-                // ccPosNum : 24 % 10 = 4
+		private float fovValue = 40;
+		private bool isLocal;
+		private readonly bool isLookingAt = false;
+		[SerializeField] private MCameraFovSync mCameraFovSync;
+		[SerializeField] private MCameraPosSync mCameraPosSync;
+		[SerializeField] private Camera targetCamera;
 
-                var ccPosIndex = curCCPosData / 10;
-                var ccPosNum = curCCPosData % 10;
+		public int CurCCPosData
+		{
+			get => curCCPosData;
+			set
+			{
+				curCCPosData = value;
 
-                targetCamera.transform.parent = cameraManager.GetCCPos(ccPosIndex, ccPosNum);
-                targetCamera.transform.localPosition = Vector3.zero;
-                targetCamera.transform.localRotation = Quaternion.identity;
+				// i.e. CC 3-5
+				// ccPosData : (2 * 10) + 4 = 24
+				// ccPosIndex : 24 / 10 = 2
+				// ccPosNum : 24 % 10 = 4
 
-                FovValue = fovData[curCCPosData];
+				var ccPosIndex = curCCPosData / 10;
+				var ccPosNum = curCCPosData % 10;
 
-                // isLookingAt = !(
-                //     (ccPosIndex == 0 && ccPosNum == 1) ||
-                //     (ccPosIndex == 1 && ccPosNum == 1) ||
-                //     (ccPosIndex == 1 && ccPosNum == 2) ||
-                //     (ccPosIndex == 2 && ccPosNum == 0) ||
-                //     (ccPosIndex == 3) ||
-                //     (ccPosIndex == 4) ||
-                //     (ccPosIndex == 5 && ccPosNum == 1) ||
-                //     (ccPosIndex == 9));
-            }
-        }
+				// targetCamera.transform.parent = cameraManager.GetCCPos(ccPosIndex, ccPosNum);
+				// targetCamera.transform.localPosition = Vector3.zero;
+				// targetCamera.transform.localRotation = Quaternion.identity;
 
-        public float FovValue
-        {
-            get => fovValue;
-            set
-            {
-                fovValue = value;
-                targetCamera.fieldOfView = fovValue;
-                fovData[curCCPosData] = fovValue;
-            }
-        }
+				FovValue = fovData[curCCPosData];
 
-        private void Start()
-        {
-            cameraManager = GameObject.Find(nameof(CameraManager)).GetComponent<CameraManager>();
+				// isLookingAt = !(
+				//     (ccPosIndex == 0 && ccPosNum == 1) ||
+				//     (ccPosIndex == 1 && ccPosNum == 1) ||
+				//     (ccPosIndex == 1 && ccPosNum == 2) ||
+				//     (ccPosIndex == 2 && ccPosNum == 0) ||
+				//     (ccPosIndex == 3) ||
+				//     (ccPosIndex == 4) ||
+				//     (ccPosIndex == 5 && ccPosNum == 1) ||
+				//     (ccPosIndex == 9));
+			}
+		}
 
-            targetCamera = transform.GetChild(0).GetComponent<Camera>();
-            targetCamera.transform.localPosition = Vector3.zero;
-            targetCamera.transform.localRotation = Quaternion.identity;
+		public float FovValue
+		{
+			get => fovValue;
+			set
+			{
+				MDebugLog("FovValue: " + value);
 
-            mCameraPosSync = transform.GetComponent<MCameraPosSync>();
-            mCameraFovSync = transform.GetComponent<MCameraFovSync>();
+				fovValue = value;
+				targetCamera.fieldOfView = fovValue;
+				fovData[curCCPosData] = fovValue;
+			}
+		}
 
-            isLocal = (mCameraPosSync || mCameraFovSync) == false;
+		private void Start()
+		{
+			Init();
+		}
 
-            for (var i = 0; i < fovData.Length; i++)
-                fovData[i] = 40f;
-        }
+		private void Init()
+		{
+			// cameraManager = GameObject.Find(nameof(CameraManager)).GetComponent<CameraManager>();
 
-        private void LateUpdate()
-        {
-            if (isLookingAt)
-                targetCamera.transform.LookAt(cameraManager.LookAt);
-        }
+			// targetCamera = transform.GetChild(0).GetComponent<Camera>();
+			// targetCamera.transform.localPosition = Vector3.zero;
+			// targetCamera.transform.localRotation = Quaternion.identity;
 
-        public void AddFov(float amount)
-        {
-            if (isLocal)
-                FovValue += amount;
-            else if (Networking.IsOwner(Networking.LocalPlayer, gameObject))
-                mCameraFovSync.FovValue = FovValue + amount;
-        }
+			// mCameraPosSync = transform.GetComponent<MCameraPosSync>();
+			// mCameraFovSync = transform.GetComponent<MCameraFovSync>();
 
-        public void SetFOV(float newFov)
-        {
-            if (isLocal)
-                FovValue = newFov;
-            else if (Networking.IsOwner(Networking.LocalPlayer, gameObject)) mCameraFovSync.FovValue = newFov;
-        }
+			isLocal = (mCameraPosSync || mCameraFovSync) == false;
 
-        public void SetCCPosData(int newCCPosData)
-        {
-            if (isLocal)
-                CurCCPosData = newCCPosData;
-            else if (Networking.IsOwner(Networking.LocalPlayer, gameObject))
-                mCameraPosSync.SetCCPosData(newCCPosData);
-        }
+			for (var i = 0; i < fovData.Length; i++)
+				fovData[i] = 40f;
 
-        public RenderTexture GetCameraTargetTexture()
-        {
-            if (targetCamera == null)
-                targetCamera = transform.GetChild(0).GetComponent<Camera>();
+			mCameraFovSync.Init(this);
+		}
 
-            return targetCamera.targetTexture;
-        }
+		private void Update()
+		{
+			if (isHolding != null)
+				isHolding.SetValue(IsPlayerHolding(Networking.LocalPlayer, pickup));
+		}
 
-        public void TakeOwner()
-        {
-            if (!isLocal)
-            {
-                if (!Networking.IsOwner(Networking.LocalPlayer, gameObject))
-                    Networking.SetOwner(Networking.LocalPlayer, gameObject);
+		private void LateUpdate()
+		{
+			// if (isLookingAt)
+			// 	targetCamera.transform.LookAt(cameraManager.LookAt);
+		}
 
-                if (!Networking.IsOwner(Networking.LocalPlayer, mCameraPosSync.gameObject))
-                    Networking.SetOwner(Networking.LocalPlayer, mCameraPosSync.gameObject);
+		public void AddFov(float amount)
+		{
+			if (isLocal)
+				FovValue += amount;
+			else if (IsOwner())
+				mCameraFovSync.FovValue = FovValue + amount;
+		}
 
-                if (!Networking.IsOwner(Networking.LocalPlayer, mCameraFovSync.gameObject))
-                    Networking.SetOwner(Networking.LocalPlayer, mCameraFovSync.gameObject);
-            }
-        }*/
-    }
+		public void SetFOV(float newFov)
+		{
+			if (isLocal)
+				FovValue = newFov;
+			else if (IsOwner())
+				mCameraFovSync.FovValue = newFov;
+		}
+
+		public void SetCCPosData(int newCCPosData)
+		{
+			if (isLocal)
+				CurCCPosData = newCCPosData;
+			// else if (IsOwner())
+			// 	mCameraPosSync.SetCCPosData(newCCPosData);
+		}
+
+		// public RenderTexture GetCameraTargetTexture()
+		// {
+		// 	if (targetCamera == null)
+		// 		targetCamera = transform.GetChild(0).GetComponent<Camera>();
+
+		// 	return targetCamera.targetTexture;
+		// }
+
+		public void TakeOwner()
+		{
+			if (!isLocal)
+			{
+				SetOwner();
+				SetOwner(mCameraPosSync.gameObject);
+				SetOwner(mCameraFovSync.gameObject);
+			}
+		}
+	}
 }
