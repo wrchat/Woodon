@@ -70,7 +70,7 @@ namespace Mascari4615
 		{
 			for (int i = 0; i < mTargets.Length; i++)
 			{
-				if (mTargets[i].IsLocalPlayerTarget)
+				if (mTargets[i].IsTargetPlayer())
 					return i;
 			}
 

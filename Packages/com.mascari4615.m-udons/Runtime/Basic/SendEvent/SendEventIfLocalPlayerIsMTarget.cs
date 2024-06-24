@@ -1,6 +1,4 @@
-﻿using System;
-using UdonSharp;
-using UnityEngine;
+﻿using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon.Common.Interfaces;
 
@@ -14,7 +12,7 @@ namespace Mascari4615
 
 		public void Check()
 		{
-			if (mTarget.IsLocalPlayerTarget)
+			if (mTarget.IsTargetPlayer())
 			{
 				SendEvents();
 			}

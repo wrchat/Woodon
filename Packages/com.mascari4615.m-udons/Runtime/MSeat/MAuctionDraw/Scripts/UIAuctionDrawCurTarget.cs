@@ -10,6 +10,7 @@ namespace Mascari4615
 	{
 		[SerializeField] private Image elementImage;
 		[SerializeField] private TextMeshProUGUI elementText;
+		[SerializeField] private TextMeshProUGUI[] stringDataTexts;
 
 		private AuctionDraw auctionDraw;
 		private CanvasGroup canvasGroup;
@@ -50,6 +51,10 @@ namespace Mascari4615
 				{
 					elementImage.sprite = drawElementData.Sprite;
 					elementText.text = drawElementData.Name;
+
+					for (int i = 0; i < stringDataTexts.Length; i++)
+						stringDataTexts[i].text = drawElementData.StringData[i];
+
 					canvasGroup.alpha = 1;
 					break;
 				}

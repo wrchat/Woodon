@@ -23,7 +23,7 @@ namespace Mascari4615
 
 		public void TryTeleport()
 		{
-			if (mTarget.IsLocalPlayerTarget)
+			if (mTarget.IsTargetPlayer())
 				Networking.LocalPlayer.TeleportTo(teleportPos.position, teleportPos.rotation);
 		}
 	}

@@ -23,7 +23,7 @@ namespace Mascari4615
 			// 타겟이라면 무시
 			foreach (MTarget ignoreTarget in ignoreTargets)
 			{
-				if (ignoreTarget.IsLocalPlayerTarget)
+				if (ignoreTarget.IsTargetPlayer(Networking.LocalPlayer))
 					return;
 			}
 

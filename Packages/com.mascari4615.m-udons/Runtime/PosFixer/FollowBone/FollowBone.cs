@@ -21,7 +21,6 @@ namespace Mascari4615
 		private Quaternion[] originRots;
 
 		[Header("_TargetPlayer")]
-		[SerializeField] private MPlayerSync mPlayerSync;
 		[SerializeField] private MTarget mTarget;
 
 		private void Start()
@@ -40,18 +39,11 @@ namespace Mascari4615
 		{
 			VRCPlayerApi targetPlayer;
 
-			if (mPlayerSync)
+			if (mTarget)
 			{
 				targetPlayer = (mTarget != null) && (mTarget.CurTargetPlayerID != NONE_INT)
 					? VRCPlayerApi.GetPlayerById(mTarget.CurTargetPlayerID)
 					: null;
-			}
-			else if (mTarget)
-			{
-
-				targetPlayer = mPlayerSync == null
-					? null
-					: VRCPlayerApi.GetPlayerById(mPlayerSync.PlayerID);
 			}
 			else
 			{

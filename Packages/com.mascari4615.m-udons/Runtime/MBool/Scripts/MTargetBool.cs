@@ -1,8 +1,6 @@
-﻿
-using UdonSharp;
+﻿using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
-using VRC.Udon;
 
 namespace Mascari4615
 {
@@ -20,7 +18,7 @@ namespace Mascari4615
 		// Should Called By MTarget Change Event
 		public void UpdateValue()
 		{
-			SetValue(MTarget.IsLocalPlayerTarget);
+			SetValue(MTarget.IsTargetPlayer());
 		}
 	}
 }

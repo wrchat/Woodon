@@ -11,6 +11,7 @@ namespace Mascari4615
 
 		[field: SerializeField] public TeamType InitTeamType { get; private set; } = TeamType.None;
 		[field: SerializeField] public DrawRole InitRole { get; private set; } = DrawRole.None;
+		[field: SerializeField] public string[] StringData { get; private set; }
 
 		public int Index { get; set; } = NONE_INT;
 		public TeamType TeamType { get; set; } = TeamType.None;
@@ -23,6 +24,7 @@ namespace Mascari4615
 			string data = string.Empty;
 			data += $"{(int)TeamType}{DATA_SEPARATOR}";
 			data += $"{(int)Role}{DATA_SEPARATOR}";
+			data += $"{IsShowing}{DATA_SEPARATOR}";
 			return data;
 		}
 
@@ -31,6 +33,7 @@ namespace Mascari4615
 			string[] datas = data.Split(DATA_SEPARATOR);
 			TeamType = (TeamType)int.Parse(datas[0]);
 			Role = (DrawRole)int.Parse(datas[1]);
+			IsShowing = bool.Parse(datas[2]);
 
 			// MDebugLog($"{nameof(ParseDataPack)}, Index : {Index}, TeamType : {TeamType}, Role : {Role}");
 		}

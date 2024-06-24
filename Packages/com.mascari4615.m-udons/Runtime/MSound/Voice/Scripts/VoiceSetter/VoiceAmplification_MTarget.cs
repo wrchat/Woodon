@@ -26,7 +26,7 @@ namespace Mascari4615
 
 		public void SetPlayer(int id, int index = 0)
 		{
-			targetPlayers[index].SetPlayer(id);
+			targetPlayers[index].SetPlayerID(id);
 		}
 	}
 }

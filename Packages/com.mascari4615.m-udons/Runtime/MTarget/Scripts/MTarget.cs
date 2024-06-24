@@ -1,5 +1,4 @@
-﻿using TMPro;
-using UdonSharp;
+﻿using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
 
@@ -34,41 +33,39 @@ namespace Mascari4615
 
 		public int[] PlayerIDBuffer { get; private set; } = new int[80];
 
-		public bool IsLocalPlayerTarget => IsLocalPlayerID(CurTargetPlayerID);
+		public bool IsTargetPlayer(VRCPlayerApi targetPlayer = null)
+		{
+			if (targetPlayer == null)
+				targetPlayer = Networking.LocalPlayer;
+			
+			return targetPlayer.playerId == CurTargetPlayerID;
+		}
 
 		public VRCPlayerApi GetTargetPlayerAPI() => VRCPlayerApi.GetPlayerById(CurTargetPlayerID);
 
-		public void SelectPlayer(int index)
-		{
-			SetOwner();
-			CurTargetPlayerID = PlayerIDBuffer[index - 1];
-			RequestSerialization();
-		}
-
-		public void SetPlayer(int id)
+		public void SetPlayerID(int id)
 		{
 			SetOwner();
 			CurTargetPlayerID = id;
 			RequestSerialization();
 		}
 
-		public void SetLocalPlayer()
+		public void SetLocalPlayer() => SetPlayerID(Networking.LocalPlayer.playerId);
+		public void SetNone() => SetPlayerID(NONE_INT);
+
+		public void ToggleLocalPlayer()
 		{
-			SetOwner();
-			CurTargetPlayerID = Networking.LocalPlayer.playerId;
-			RequestSerialization();
+			if (IsTargetPlayer(Networking.LocalPlayer))
+				SetNone();
+			else
+				SetLocalPlayer();
 		}
 
-		public void SetNone()
-		{
-			SetOwner();
-			CurTargetPlayerID = NONE_INT;
-			RequestSerialization();
-		}
+		public void SelectPlayer(int index) => SetPlayerID(PlayerIDBuffer[index - 1]);
 
 		public void UpdateUI()
 		{
-			foreach (var mTargetUI in mTargetUIs)
+			foreach (MTargetUI mTargetUI in mTargetUIs)
 				mTargetUI.UpdatePlayerList();
 		}
 
