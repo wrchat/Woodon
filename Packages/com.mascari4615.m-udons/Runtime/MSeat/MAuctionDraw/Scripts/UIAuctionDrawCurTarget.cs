@@ -41,6 +41,7 @@ namespace Mascari4615
 
 			if (auctionDraw.TargetIndex == NONE_INT)
 			{
+				MDebugLog($"{nameof(UpdateUI)}, TargetIndex is NONE_INT");
 				canvasGroup.alpha = 0;
 				return;
 			}

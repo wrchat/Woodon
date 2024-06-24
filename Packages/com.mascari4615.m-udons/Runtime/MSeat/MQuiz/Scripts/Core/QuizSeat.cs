@@ -16,11 +16,11 @@ namespace Mascari4615
 		public bool HasSelectedAnswer => ExpectedAnswer != QuizAnswerType.None;
 		public bool IsAnswerCorrect => ExpectedAnswer == quizManager.CurQuizData.QuizAnswer;
 
-		protected override void OnTurnDataChange()
+		protected override void OnTurnDataChange(DataChangeState changeState)
 		{
 			for (int i = 0; i < selectAnswerDecoImages.Length; i++)
 				selectAnswerDecoImages[i].color = MColorUtil.GetColorByBool(i == (int)ExpectedAnswer, MColor.Green, MColor.WhiteGray);
-			base.OnTurnDataChange();
+			base.OnTurnDataChange(changeState);
 		}
 
 		[SerializeField] private Image[] selectAnswerDecoImages;
@@ -33,7 +33,7 @@ namespace Mascari4615
 		private void Start()
 		{
 			OnOwnerChange();
-			OnTurnDataChange();
+			OnTurnDataChange(DataChangeState.None);
 		}
 
 		public void SelectAnswer(QuizAnswerType newAnswer)

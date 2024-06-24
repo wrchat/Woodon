@@ -1,7 +1,4 @@
 ﻿using UdonSharp;
-using UnityEngine;
-using VRC.SDKBase;
-using VRC.Udon;
 
 namespace Mascari4615
 {
@@ -35,7 +32,7 @@ namespace Mascari4615
 			}
 
 			foreach (UIAuctionDrawTargetElement element in elements)
-				element.Init(this);
+				element.Init(this.auctionDraw, this);
 
 			UpdateUI(this);
 		}

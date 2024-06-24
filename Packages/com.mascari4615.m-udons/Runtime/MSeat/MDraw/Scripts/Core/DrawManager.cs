@@ -4,17 +4,18 @@ using UnityEngine;
 namespace Mascari4615
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class DrawManager : MBase
+	public class DrawManager : MEventSender
 	{
 		[SerializeField] private int teamCount = 2; // 팀 수
 		[SerializeField] private int teamPlayerCount = 2; // 팀당 인원 수
 
-		[SerializeField] private UIDraw[] drawUIs;
+		[SerializeField] private UIDrawTeamList[] drawUIs;
 		[SerializeField] private UIDrawController[] drawControllers;
 
 		[SerializeField] private DrawType drawType = DrawType.AllRandom;
 
 		public DrawElementData[] DrawElementDatas { get; private set; }
+		public bool IsInited { get; private set; } = false;
 
 		[UdonSynced(UdonSyncMode.None), FieldChangeCallback(nameof(DataPacks))] private string dataPacks = string.Empty;
 		public string DataPacks
@@ -38,8 +39,10 @@ namespace Mascari4615
 			for (int i = 0; i < DrawElementDatas.Length; i++)
 				DrawElementDatas[i].ParseDataPack(dataPacks[i]);
 
-			foreach (UIDraw drawUI in drawUIs)
+			foreach (UIDrawTeamList drawUI in drawUIs)
 				drawUI.UpdateUI(DrawElementDatas);
+
+			SendEvents();
 		}
 
 		public void SyncData()
@@ -63,16 +66,19 @@ namespace Mascari4615
 		{
 			MDebugLog(nameof(Init));
 
+			if (IsInited)
+				return;
+			IsInited = true;
+
 			DrawElementDatas = GetComponentsInChildren<DrawElementData>(true);
 
-			foreach (UIDraw drawUI in drawUIs)
+			foreach (UIDrawTeamList drawUI in drawUIs)
 				drawUI.Init();
 
 			foreach (UIDrawController drawController in drawControllers)
 				drawController.Init(this);
 
-			InitData();
-			SyncData();
+			InitDataAndSync();
 		}
 
 		private void InitData()
@@ -85,10 +91,13 @@ namespace Mascari4615
 			for (int i = 0; i < DrawElementDatas.Length; i++)
 			{
 				DrawElementDatas[i].Index = i;
-				DrawElementDatas[i].TeamType = DrawElementDatas[i].InitTeamType;
-				DrawElementDatas[i].Role = DrawElementDatas[i].InitRole;
-
-				DrawElementDatas[i].IsShowing = DrawElementDatas[i].TeamType != TeamType.None;
+				
+				SetElementData(
+					index: i,
+					teamType: DrawElementDatas[i].InitTeamType,
+					role: DrawElementDatas[i].InitRole,
+					isShowing: DrawElementDatas[i].InitTeamType != TeamType.None,
+					syncData: "");
 			}
 
 			switch (drawType)
@@ -102,7 +111,15 @@ namespace Mascari4615
 			}
 		}
 
-		private void SetAllRemainRandom()
+		public void InitDataAndSync()
+		{
+			MDebugLog(nameof(InitDataAndSync));
+
+			InitData();
+			SyncData();
+		}
+
+		public void SetAllRemainRandom(bool isShowing = false, string syncData = NONE_STRING)
 		{
 			// 랜덤으로 데이터 생성해서 남은 자리 채워넣기
 			int[] remainTeamPlayerCounts = new int[teamCount];
@@ -131,17 +148,18 @@ namespace Mascari4615
 					}
 				}
 
-				SetElementData(i, (TeamType)randomTeamIndex, DrawRole.Normal, false);
+				SetElementData(i, (TeamType)randomTeamIndex, DrawRole.Normal, isShowing, syncData);
 			}
 		}
 
-		public void SetElementData(int index, TeamType teamType, DrawRole role, bool IsShowing)
+		public void SetElementData(int index, TeamType teamType, DrawRole role, bool isShowing, string syncData = NONE_STRING)
 		{
-			MDebugLog($"{nameof(SetElementData)}, Index : {index}, TeamType : {teamType}, Role : {role}, IsShowing : {IsShowing}");
+			MDebugLog($"{nameof(SetElementData)}, Index : {index}, TeamType : {teamType}, Role : {role}, IsShowing : {isShowing}");
 
 			DrawElementDatas[index].TeamType = teamType;
 			DrawElementDatas[index].Role = role;
-			DrawElementDatas[index].IsShowing = IsShowing;
+			DrawElementDatas[index].IsShowing = isShowing;
+			DrawElementDatas[index].SyncData = syncData;
 		}
 
 		[ContextMenu(nameof(ShowTeamA))]

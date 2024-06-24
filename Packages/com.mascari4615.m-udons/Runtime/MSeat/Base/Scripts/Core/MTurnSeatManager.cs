@@ -45,6 +45,8 @@ namespace Mascari4615
 		[field: SerializeField] public Sprite[] TurnDataSprites{ get; private set; }
 		[field: SerializeField] public Sprite TurnDataNoneSprite{ get; private set; }
 
+		public bool IsInited { get; private set; } = false;
+
 		public void SetGameState(int newGameState)
 		{
 			SetOwner();
@@ -67,6 +69,12 @@ namespace Mascari4615
 
 		protected virtual void Init()
 		{
+			// MDebugLog($"{nameof(Init)}");
+
+			if (IsInited)
+				return;
+			IsInited = true;
+
 			TurnSeats = GetComponentsInChildren<MTurnSeat>();
 
 			foreach (UISeatManagerController ui in uis)

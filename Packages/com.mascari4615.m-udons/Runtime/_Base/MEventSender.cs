@@ -55,6 +55,11 @@ namespace Mascari4615
 			return true;
 		}
 
+		/// <summary>
+		/// 호출하는 이벤트의 접근제한자는 public 이여야 함.
+		/// </summary>
+		/// <param name="newUdon"></param>
+		/// <param name="eventName"></param>
 		public void RegisterListener(UdonSharpBehaviour newUdon, string eventName)
 		{
 			if (targetUdons == null)

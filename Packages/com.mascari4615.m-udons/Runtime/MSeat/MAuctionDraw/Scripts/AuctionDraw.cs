@@ -1,11 +1,10 @@
-﻿using TMPro;
-using UdonSharp;
+﻿using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
 
 namespace Mascari4615
 {
-	[DefaultExecutionOrder(100)]
+	// [DefaultExecutionOrder(100)]
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class AuctionDraw : MBase
 	{
@@ -13,7 +12,7 @@ namespace Mascari4615
 		[field: SerializeField] public AuctionManager AuctionManager { get; private set; }
 		[SerializeField] private MUI[] uis;
 
-		private bool _isInit = false;
+		public bool IsInited { get; private set; } = false;
 
 		[UdonSynced(UdonSyncMode.None), FieldChangeCallback(nameof(TargetIndex))] private int _targetIndex = NONE_INT;
 		public int TargetIndex
@@ -36,35 +35,42 @@ namespace Mascari4615
 			UpdateUI();
 		}
 
-		private void Start()
+		private void Update()
 		{
-			Init();
-			UpdateUI();
+			if (IsInited == false)
+			{
+				if (AuctionManager.IsInited && DrawManager.IsInited)
+				{
+					Init();
+					UpdateUI();
+				}
+			}
 		}
 
 		private void Init()
 		{
 			MDebugLog(nameof(Init));
 		
-			if (_isInit)
+			if (IsInited)
 				return;
-			_isInit = true;
+			IsInited = true;
 
 			foreach (MUI ui in uis)
 				ui.Init(this);
 
+			DrawManager.RegisterListener(this, nameof(UpdateUI));
+			DrawManager.RegisterListener(AuctionManager, nameof(AuctionManager.UpdateStuff));
+
 			if (Networking.IsMaster)
 				OnWait();
-
-			OnTargetIndexChanged();
 		}
 
-		private void UpdateUI()
+		public void UpdateUI()
 		{
 			MDebugLog(nameof(UpdateUI));
-		
-			if (_isInit == false)
-				Init();
+
+			if (IsInited == false)
+				return;
 
 			foreach (MUI ui in uis)
 				ui.UpdateUI(this);
@@ -88,6 +94,7 @@ namespace Mascari4615
 				case AuctionState.WaitForResult:
 					break;
 				case AuctionState.CheckResult:
+					OnCheckResult();
 					break;
 				case AuctionState.ApplyResult:
 					// 경매 결과 적용
@@ -96,6 +103,11 @@ namespace Mascari4615
 			}
 
 			UpdateUI();
+		}
+
+		protected virtual void OnCheckResult()
+		{
+
 		}
 
 		private void OnWait()
@@ -110,10 +122,7 @@ namespace Mascari4615
 			if (noneTeamDrawElementData != null)
 			{
 				DrawElementData randomNoneTeamDrawElementData = GetRandomNoneTeamDrawElementData();
-
-				SetOwner();
-				TargetIndex = randomNoneTeamDrawElementData.Index;
-				RequestSerialization();
+				SetTargetIndex(randomNoneTeamDrawElementData.Index);
 			}
 			else
 			{
@@ -133,14 +142,18 @@ namespace Mascari4615
 
 			// HACK: AuctionSeat와 DrawElementData의 Index가 같다면, 둘 다 동일한 플레이어를 대상으로 한다고 가정
 			TeamType teamType = DrawManager.DrawElementDatas[AuctionManager.WinnerIndex].TeamType;
-			DrawManager.SetElementData(TargetIndex, teamType, DrawRole.Normal, true);
+			int point = AuctionManager.GetMaxTurnData();
+			DrawManager.SetElementData(TargetIndex, teamType, DrawRole.Normal, true, point.ToString());
 			DrawManager.SyncData();
 		}
 
 		private DrawElementData FindNoneTeamDrawElementData()
 		{
 			if (DrawManager.DrawElementDatas == null)
+			{
+				MDebugLog("DrawElementDatas is null");
 				return null;
+			}
 
 			foreach (DrawElementData drawElementData in DrawManager.DrawElementDatas)
 			{
@@ -169,6 +182,23 @@ namespace Mascari4615
 				return null;
 
 			return noneTeamDrawElementDatas[Random.Range(0, count)];
+		}
+
+		public void SetTargetIndex(int targetIndex)
+		{
+			MDebugLog($"{nameof(SetTargetIndex)}, TargetIndex : {targetIndex}");
+
+			SetOwner();
+			TargetIndex = targetIndex;
+			RequestSerialization();
+		}
+
+		public void SetAllRemainRandomAndSync()
+		{
+			MDebugLog(nameof(SetAllRemainRandomAndSync));
+
+			DrawManager.SetAllRemainRandom(true, "0");
+			DrawManager.SyncData();
 		}
 	}
 }

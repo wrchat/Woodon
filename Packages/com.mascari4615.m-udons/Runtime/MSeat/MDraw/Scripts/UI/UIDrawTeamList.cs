@@ -1,15 +1,17 @@
 ﻿using UdonSharp;
+using UnityEngine;
 
 namespace Mascari4615
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class UIDraw : MBase
+	public class UIDrawTeamList : MBase
 	{
-		private UIDrawTeamBlock[] teamBlocks;
+		[SerializeField] private UIDrawTeamBlock[] teamBlocks;
 
 		public void Init()
 		{
-			teamBlocks = GetComponentsInChildren<UIDrawTeamBlock>(true);
+			if (teamBlocks == null || teamBlocks.Length == 0)
+				teamBlocks = GetComponentsInChildren<UIDrawTeamBlock>(true);
 
 			for (int i = 0; i < teamBlocks.Length; i++)
 				teamBlocks[i].Init((TeamType)i);

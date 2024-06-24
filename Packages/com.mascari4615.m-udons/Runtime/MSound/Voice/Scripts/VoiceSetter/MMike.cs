@@ -18,7 +18,10 @@ namespace Mascari4615
 		
 		public bool IsEnabled()
 		{
-			return enable.Value;
+			if (enable != null)
+				return enable.Value;
+			else
+				return true;
 		}
 
 		public bool IsPlayerHoldingAndEnabled(VRCPlayerApi targetPlayer)
@@ -33,7 +36,8 @@ namespace Mascari4615
 
 		public void ToggleEnable()
 		{
-			enable.ToggleValue();
+			if (enable != null)
+				enable.ToggleValue();
 		}
 	}
 }

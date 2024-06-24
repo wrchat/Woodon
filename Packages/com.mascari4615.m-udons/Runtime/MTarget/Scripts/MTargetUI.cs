@@ -11,7 +11,7 @@ namespace Mascari4615
 		[Header("_" + nameof(MTargetUI))]
 		[SerializeField] private RectTransform background;
 		[SerializeField] private GameObject noneButton;
-		[SerializeField] private TextMeshProUGUI targetPlayerUI;
+		[SerializeField] private TextMeshProUGUI[] targetPlayerTexts;
 		[SerializeField] private TextMeshProUGUI localPlayerUI;
 
 		[SerializeField] private Transform buttonsParent;
@@ -64,7 +64,8 @@ namespace Mascari4615
 				}
 			}
 
-			targetPlayerUI.text = s;
+			foreach (TextMeshProUGUI targetPlayerText in targetPlayerTexts)
+				targetPlayerText.text = s;
 		}
 
 		public void UpdatePlayerList()

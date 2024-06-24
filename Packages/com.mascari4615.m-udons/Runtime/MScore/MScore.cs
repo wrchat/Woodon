@@ -169,10 +169,10 @@ namespace Mascari4615
 
 		public void IncreaseScore() => SetScore(Score + increaseAmount);
 		public void AddScore(int amount) => SetScore(Score + amount);
-		public void AddScore10() => AddScore(10);
+		public void AddScore10() => AddScore(increaseAmount * 10);
 		public void DecreaseScore() => SetScore(Score - decreaseAmount);
 		public void SubScore(int amount) => SetScore(Score - amount);
-		public void SubScore10() => SubScore(10);
+		public void SubScore10() => SubScore(decreaseAmount * 10);
 		public void ResetScore() => SetScore(defaultScore);
 		#endregion
 

@@ -2,32 +2,49 @@
 using UdonSharp;
 using UnityEngine;
 using UnityEngine.UI;
-using VRC.SDKBase;
-using VRC.Udon;
 
 namespace Mascari4615
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class UIAuctionDrawTargetElement : MUI
+	public class UIAuctionDrawTargetElement : MBase
 	{
 		[SerializeField] private Image elementImage;
 		[SerializeField] private TextMeshProUGUI elementText;
+		[SerializeField] private TextMeshProUGUI[] indexTexts;
+		[SerializeField] private TextMeshProUGUI[] pointTexts;
 		[SerializeField] private Image hasTeamImage;
 
+		private AuctionDraw auctionDraw;
 		private UIAuctionDrawTargetPanel panel;
+		private DrawElementData drawElementData;
 
-		public override void Init(MBase panel = null)
+		public void Init(AuctionDraw auctionDraw, UIAuctionDrawTargetPanel panel)
 		{
-			this.panel = (UIAuctionDrawTargetPanel)panel;
-
+			this.auctionDraw = auctionDraw;
+			this.panel = panel;
 		}
-		public override void UpdateUI(MBase data = null)
+
+		public void UpdateUI(DrawElementData drawElementData)
 		{
-			DrawElementData drawElementData = (DrawElementData)data;
+			this.drawElementData = drawElementData;
 
 			elementImage.sprite = drawElementData.Sprite;
 			elementText.text = drawElementData.Name;
+			foreach (TextMeshProUGUI indexText in indexTexts)
+				indexText.text = drawElementData.Index.ToString();
 			hasTeamImage.gameObject.SetActive(drawElementData.TeamType != TeamType.None);
+			foreach (TextMeshProUGUI pointText in pointTexts)
+			{
+				if (drawElementData.SyncData == NONE_STRING)
+					pointText.text = string.Empty;
+				else
+					pointText.text = drawElementData.SyncData;
+			}
+		}
+
+		public void SelectTarget()
+		{
+			auctionDraw.SetTargetIndex(drawElementData.Index);
 		}
 	}
 }

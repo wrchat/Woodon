@@ -15,7 +15,7 @@ namespace Mascari4615
 			this.teamType = teamType;
 			elementBlocks = GetComponentsInChildren<UIDrawElementBlock>(true);
 			
-			layoutGroup = GetComponent<LayoutGroup>();
+			layoutGroup = GetComponentInChildren<LayoutGroup>(true);
 			layoutGroup.enabled = false;
 		}
 

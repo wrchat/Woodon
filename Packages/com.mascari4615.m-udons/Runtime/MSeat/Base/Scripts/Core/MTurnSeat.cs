@@ -15,8 +15,9 @@ namespace Mascari4615
 			get => _turnData;
 			set
 			{
+				int origin = _turnData;
 				_turnData = value;
-				OnTurnDataChange();
+				OnTurnDataChange(DataChangeStateUtil.GetChangeState(origin, value));
 			}
 		}
 
@@ -29,7 +30,7 @@ namespace Mascari4615
 			base.Init(seatManager, index);
 
 			SetTurnData(seatManager.DefaultTurnData);
-			OnTurnDataChange();
+			OnTurnDataChange(DataChangeState.None);
 		}
 
 		public void SetTurnData(int newTurnData)
@@ -46,7 +47,7 @@ namespace Mascari4615
 			SetTurnData(seatManager.DefaultTurnData);
 		}
 
-		protected virtual void OnTurnDataChange()
+		protected virtual void OnTurnDataChange(DataChangeState changeState)
 		{
 			// MDebugLog($"{nameof(OnTurnDataChange)}, {TurnData}");
 
@@ -83,7 +84,7 @@ namespace Mascari4615
 		{
 			// MDebugLog($"{nameof(UpdateStuff)}");
 
-			OnTurnDataChange();
+			OnTurnDataChange(DataChangeState.None);
 		}
 
 		protected override void OnOwnerChange()

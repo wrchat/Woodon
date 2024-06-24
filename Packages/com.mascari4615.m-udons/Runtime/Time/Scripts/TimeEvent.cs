@@ -15,7 +15,6 @@ namespace Mascari4615
 		[SerializeField] private TextMeshProUGUI[] timeTexts;
 		[SerializeField] private TimeEventBarUI[] timeEventBarUIs;
 		[SerializeField] private Image[] buttonUIImages;
-		[SerializeField] private GameObject ownerObject;
 		[field: SerializeField] public int TimeByDecisecond { get; set; } = 50;
 		[SerializeField] private CustomBool isCounting;
 
@@ -76,17 +75,6 @@ namespace Mascari4615
 				buttonUIImage.color = MColorUtil.GetGreenOrRed(isCounting);
 		}
 
-		public void ResetTimeIfOwner()
-		{
-			MDebugLog(nameof(ResetTimeIfOwner));
-
-			if (ownerObject != null)
-				if (!IsOwner(ownerObject))
-					return;
-
-			ResetTime();
-		}
-
 		public void ResetTime()
 		{
 			MDebugLog(nameof(ResetTime));
@@ -94,17 +82,6 @@ namespace Mascari4615
 			SetOwner();
 			ExpireTime = NONE_INT;
 			RequestSerialization();
-		}
-
-		public void SetTimeIfOwner()
-		{
-			MDebugLog(nameof(SetTimeIfOwner));
-
-			if (ownerObject != null)
-				if (!IsOwner(ownerObject))
-					return;
-
-			SetTime();
 		}
 
 		public void SetTime()
