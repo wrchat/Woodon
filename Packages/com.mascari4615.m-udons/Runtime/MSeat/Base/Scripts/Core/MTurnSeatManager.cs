@@ -102,6 +102,26 @@ namespace Mascari4615
 			return maxData;
 		}
 
+		public MTurnSeat[] GetMaxDataSeats()
+		{
+			int maxData = GetMaxData();
+			int maxDataCount = 0;
+			MTurnSeat[] maxDataSeats = new MTurnSeat[TurnSeats.Length];
+
+			foreach (MTurnSeat seat in TurnSeats)
+			{
+				if (seat.Data == maxData)
+				{
+					maxDataSeats[maxDataCount] = seat;
+					maxDataCount++;
+				}
+			}
+
+			MDataUtil.ResizeArr(ref maxDataSeats, maxDataCount);
+
+			return maxDataSeats;
+		}
+
 		public int GetMaxTurnData()
 		{
 			int maxTurnData = 0;
@@ -112,7 +132,27 @@ namespace Mascari4615
 			return maxTurnData;
 		}
 
-		public MTurnSeat FindLocalPlayerSeat()
+		public MTurnSeat[] GetMaxTurnDataSeats()
+		{
+			int maxTurnData = GetMaxTurnData();
+			int maxTurnDataCount = 0;
+			MTurnSeat[] maxTurnDataSeats = new MTurnSeat[TurnSeats.Length];
+
+			foreach (MTurnSeat seat in TurnSeats)
+			{
+				if (seat.TurnData == maxTurnData)
+				{
+					maxTurnDataSeats[maxTurnDataCount] = seat;
+					maxTurnDataCount++;
+				}
+			}
+
+			MDataUtil.ResizeArr(ref maxTurnDataSeats, maxTurnDataCount);
+
+			return maxTurnDataSeats;
+		}
+
+		public MTurnSeat GetLocalPlayerSeat()
 		{
 			foreach (MTurnSeat turnSeat in TurnSeats)
 				if (IsLocalPlayerID(turnSeat.OwnerID))

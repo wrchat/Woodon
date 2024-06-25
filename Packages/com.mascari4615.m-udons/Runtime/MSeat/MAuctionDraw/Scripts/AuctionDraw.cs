@@ -142,8 +142,8 @@ namespace Mascari4615
 
 			// HACK: AuctionSeat와 DrawElementData의 Index가 같다면, 둘 다 동일한 플레이어를 대상으로 한다고 가정
 			TeamType teamType = DrawManager.DrawElementDatas[AuctionManager.WinnerIndex].TeamType;
-			int point = AuctionManager.GetMaxTurnData();
-			DrawManager.SetElementData(TargetIndex, teamType, DrawRole.Normal, true, point.ToString());
+			int maxTryPoint = AuctionManager.GetMaxTurnData();
+			DrawManager.SetElementData(TargetIndex, teamType, DrawRole.Normal, true, maxTryPoint.ToString());
 			DrawManager.SyncData();
 		}
 

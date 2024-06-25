@@ -49,8 +49,8 @@ namespace Mascari4615
 			foreach (TextMeshProUGUI text in targetTexts)
 				text.text = targetData.Name;
 
-			int max = auctionDraw.AuctionManager.GetMaxTurnData();
-			if (max == 0)
+			int maxTryPoint = auctionDraw.AuctionManager.GetMaxTurnData();
+			if (maxTryPoint == 0)
 			{
 				foreach (Image image in teamLeaderImages)
 				{
@@ -75,7 +75,7 @@ namespace Mascari4615
 				AuctionSeat winner = null;
 				foreach (AuctionSeat auctionSeat in auctionDraw.AuctionManager.TurnSeats)
 				{
-					if (auctionSeat.TurnData == max)
+					if (auctionSeat.TryPoint == maxTryPoint)
 					{
 						winner = auctionSeat;
 						break;
@@ -94,7 +94,7 @@ namespace Mascari4615
 					text.text = winnerData.Name;
 
 				foreach (TextMeshProUGUI text in pointTexts)
-					text.text = $"<color=#FFC049>{max}</color> 포인트로 '{winnerData.Name}' 팀에 낙찰";
+					text.text = $"<color=#FFC049>{maxTryPoint}</color> 포인트로 '{winnerData.Name}' 팀에 낙찰";
 			}
 		}
 	}

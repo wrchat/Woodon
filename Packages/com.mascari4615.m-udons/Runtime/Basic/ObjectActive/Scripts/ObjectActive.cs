@@ -1,7 +1,5 @@
-﻿using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using VRC.Udon;
 
 namespace Mascari4615
 {
@@ -74,7 +72,7 @@ namespace Mascari4615
 		{
 			MDebugLog($"{nameof(OnActiveChange)}");
 
-			foreach (var i in buttonUIImages)
+			foreach (Image i in buttonUIImages)
 			{
 				if (buttonUISprites != null && buttonUISprites.Length > 0)
 					i.sprite = buttonUISprites[Active ? 0 : 1];
@@ -82,17 +80,17 @@ namespace Mascari4615
 					i.color = MColorUtil.GetGreenOrRed(Active);
 			}
 
-			foreach (var o in activeObjects)
+			foreach (GameObject o in activeObjects)
 				if (o)
 				{
-					MDebugLog(o.name);
+					// MDebugLog(o.name);
 					o.SetActive(Active);
 				}
 
-			foreach (var o in disableObjects)
+			foreach (GameObject o in disableObjects)
 				if (o)
 				{
-					MDebugLog(o.name);
+					// MDebugLog(o.name);
 					o.SetActive(!Active);
 				}
 

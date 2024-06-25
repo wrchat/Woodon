@@ -30,14 +30,19 @@ namespace Mascari4615
 
 		private void OnDataChanged()
 		{
-			MDebugLog($"{nameof(OnDataChanged)}, DataPack : {DataPacks}");
+			string[] dataPacks = DataPacks.Split(DATA_PACK_SEPARATOR);
+		
+			string debugString = string.Empty;
+			for (int i = 0; i < DrawElementDatas.Length; i++)
+				debugString += $"{i} :: {dataPacks[i]}\n";
+
+			MDebugLog($"{nameof(OnDataChanged)}, DataPack : {debugString}");
 
 			if (string.IsNullOrEmpty(DataPacks))
 				return;
 
-			string[] dataPacks = DataPacks.Split(DATA_PACK_SEPARATOR);
 			for (int i = 0; i < DrawElementDatas.Length; i++)
-				DrawElementDatas[i].ParseDataPack(dataPacks[i]);
+				DrawElementDatas[i].Load(dataPacks[i]);
 
 			foreach (UIDrawTeamList drawUI in drawUIs)
 				drawUI.UpdateUI(DrawElementDatas);
@@ -51,7 +56,7 @@ namespace Mascari4615
 
 			string data = string.Empty;
 			foreach (DrawElementData drawElementData in DrawElementDatas)
-				data += drawElementData.ToStringData() + DATA_PACK_SEPARATOR;
+				data += drawElementData.Save() + DATA_PACK_SEPARATOR;
 			DataPacks = data;
 
 			RequestSerialization();
@@ -121,20 +126,25 @@ namespace Mascari4615
 
 		public void SetAllRemainRandom(bool isShowing = false, string syncData = NONE_STRING)
 		{
+			MDebugLog($"{nameof(SetAllRemainRandom)}, IsShowing : {isShowing}, SyncData : {syncData}");
+
 			// 랜덤으로 데이터 생성해서 남은 자리 채워넣기
 			int[] remainTeamPlayerCounts = new int[teamCount];
 			for (int i = 0; i < teamCount; i++)
 				remainTeamPlayerCounts[i] = teamPlayerCount;
 
+			// 이미 설정된 팀이 있으면 패스
+			foreach (DrawElementData drawElementData in DrawElementDatas)
+			{
+				if (drawElementData.TeamType != TeamType.None)
+					remainTeamPlayerCounts[(int)drawElementData.TeamType]--;
+			}
+
 			// 각 플레이어에 대해 팀과 역할 설정
 			for (int i = 0; i < teamCount * teamPlayerCount; i++)
 			{
-				// 이미 설정된 팀이 있으면 패스
 				if (DrawElementDatas[i].TeamType != TeamType.None)
-				{
-					remainTeamPlayerCounts[(int)DrawElementDatas[i].TeamType]--;
 					continue;
-				}
 
 				// 랜덤으로 팀 뽑기
 				int randomTeamIndex;
@@ -154,7 +164,7 @@ namespace Mascari4615
 
 		public void SetElementData(int index, TeamType teamType, DrawRole role, bool isShowing, string syncData = NONE_STRING)
 		{
-			MDebugLog($"{nameof(SetElementData)}, Index : {index}, TeamType : {teamType}, Role : {role}, IsShowing : {isShowing}");
+			// MDebugLog($"{nameof(SetElementData)}, Index : {index}, TeamType : {teamType}, Role : {role}, IsShowing : {isShowing}, SyncData : {syncData}");
 
 			DrawElementDatas[index].TeamType = teamType;
 			DrawElementDatas[index].Role = role;
@@ -192,6 +202,8 @@ namespace Mascari4615
 
 		public void ShowTeam(TeamType teamType)
 		{
+			MDebugLog($"{nameof(ShowTeam)}, TeamType : {teamType}");
+
 			foreach (DrawElementData drawElementData in DrawElementDatas)
 			{
 				if (drawElementData.TeamType == teamType)

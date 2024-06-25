@@ -1,11 +1,7 @@
-﻿
-using System.Configuration;
-using TMPro;
+﻿using TMPro;
 using UdonSharp;
 using UnityEngine;
 using UnityEngine.UI;
-using VRC.SDKBase;
-using VRC.Udon;
 
 namespace Mascari4615
 {
@@ -118,8 +114,8 @@ namespace Mascari4615
 		{
 			base.UpdateStuff();
 			
-			foreach (MTurnSeat turnSeat in TurnSeats)
-				turnSeat.UpdateStuff();
+			foreach (QuizSeat quizSeat in TurnSeats)
+				quizSeat.UpdateStuff();
 
 			for (int i = 0; i < stateButtonImages.Length; i++)
 				stateButtonImages[i].color = MColorUtil.GetColorByBool(i == CurGameState, MColor.Green, MColor.Gray);
@@ -128,10 +124,10 @@ namespace Mascari4615
 				curQuizIndexText.text = (_curQuizIndex + 1).ToString();
 
 			answerCount = new int[(int)QuizAnswerType.None + 1];
-			foreach (MTurnSeat turnSeat in TurnSeats)
-				answerCount[turnSeat.TurnData]++;
+			foreach (QuizSeat quizSeat in TurnSeats)
+				answerCount[(int)quizSeat.ExpectedAnswer]++;
 
-			foreach (var curQuizText in curQuizTexts)
+			foreach (TextMeshProUGUI curQuizText in curQuizTexts)
 			{
 				curQuizText.text = CurQuizData.Quiz;
 				// curQuizText.gameObject.SetActive(!(CurGameState == QuizGameState.Wait || CurGameState == QuizGameState.FindWrongPlayer));
@@ -142,7 +138,7 @@ namespace Mascari4615
 				waitTimeObject.SetActive(isCurStateWaiting);
 
 			Sprite targetSprite = (waitTimeQuizSprite && isCurStateWaiting) ? waitTimeQuizSprite : CurQuizData.QuizSprite;
-			foreach (var curQuizImage in curQuizImages)
+			foreach (Image curQuizImage in curQuizImages)
 				curQuizImage.sprite = targetSprite;
 
 			SendEvents();
@@ -254,7 +250,7 @@ namespace Mascari4615
 		public void SelectAnswerFive() => SelectAnswer(QuizAnswerType.Five);
 		public void SelectAnswer(QuizAnswerType quizAnswerType)
 		{
-			MTurnSeat localplayerSeat = FindLocalPlayerSeat();
+			MTurnSeat localplayerSeat = GetLocalPlayerSeat();
 
 			if (localplayerSeat)
 				localplayerSeat.SetData((int)quizAnswerType);

@@ -84,10 +84,11 @@ namespace Mascari4615
 		protected virtual void OnAuctionTime()
 		{
 			MDebugLog(nameof(OnAuctionTime));
+
 			if (IsOwner())
 			{
 				mSFXManager.PlaySFX_G(0);
-				
+
 				if (timeEvent != null)
 					timeEvent.SetTime();
 			}
@@ -96,6 +97,7 @@ namespace Mascari4615
 		protected virtual void OnWaitForResult()
 		{
 			MDebugLog(nameof(OnWaitForResult));
+
 			if (IsOwner())
 			{
 				mSFXManager.PlaySFX_G(1);
@@ -108,42 +110,35 @@ namespace Mascari4615
 		protected virtual void OnCheckResult()
 		{
 			MDebugLog(nameof(OnCheckResult));
-			// 경매 결과 확인
-			int maxTryPoint = GetMaxTurnData();
 
-			if (maxTryPoint == 0)
+			// 경매 결과 확인 (적용 전)
+			AuctionSeat maxTryPointSeat = GetMaxTryPointSeat();
+
+			if (maxTryPointSeat == null)
 			{
-				debugText.text = $"No Winner. ({maxTryPoint})";
+				debugText.text = $"No Winner.";
+				return;
 			}
-			else
-			{
-				foreach (AuctionSeat auctionSeat in TurnSeats)
-				{
-					if (auctionSeat.TryPoint == maxTryPoint)
-					{
-						// 최고 입찰자
-						WinnerIndex = auctionSeat.Index;
-						debugText.text = $"{auctionSeat.OwnerID} is Winner. ({auctionSeat.TryPoint})";
-						break;
-					}
-				}
-			}
+
+			WinnerIndex = maxTryPointSeat.Index;
+			debugText.text = $"{maxTryPointSeat.OwnerID} is Winner. ({maxTryPointSeat.TryPoint})";
 		}
 
 		protected virtual void OnApplyResult()
 		{
 			MDebugLog(nameof(OnApplyResult));
-			
+
 			// 경매 결과 적용
-			int maxTryPoint = GetMaxTurnData();
+			AuctionSeat maxTryPointSeat = GetMaxTryPointSeat();
 
-			foreach (AuctionSeat auctionSeat in TurnSeats)
+			if (maxTryPointSeat == null)
 			{
-				if (auctionSeat.TryPoint == maxTryPoint)
-					auctionSeat.SetData(auctionSeat.Point - auctionSeat.TryPoint);
-
-				// auctionSeat.SetTurnData(0);
+				debugText.text = $"No Winner.";
+				return;
 			}
+
+			maxTryPointSeat.SetData(maxTryPointSeat.RemainPoint - maxTryPointSeat.TryPoint);
+			debugText.text = $"{maxTryPointSeat.OwnerID} Gets @ by {maxTryPointSeat.TryPoint} Point";
 		}
 
 		public override void UpdateStuff()
@@ -151,8 +146,9 @@ namespace Mascari4615
 			MDebugLog(nameof(UpdateStuff));
 			base.UpdateStuff();
 
+			int maxPoint = GetMaxTurnData();
 			foreach (TextMeshProUGUI maxTryPointText in maxTryPointTexts)
-				maxTryPointText.text = GetMaxTurnData().ToString();
+				maxTryPointText.text = maxPoint.ToString();
 		}
 
 		public void NextStateWhenTimeOver()
@@ -160,6 +156,22 @@ namespace Mascari4615
 			MDebugLog(nameof(NextStateWhenTimeOver));
 			if (CurGameState == (int)AuctionState.AuctionTime)
 				SetGameState((int)AuctionState.WaitForResult);
+		}
+
+		public AuctionSeat GetMaxTryPointSeat()
+		{
+			MTurnSeat[] maxTryPointSeats = GetMaxTurnDataSeats();
+
+			// 최고 입찰가가 0이거나, 최고 입찰자가 없거나 2명 이상이면
+			if (maxTryPointSeats[0].TurnData == 0 ||
+				maxTryPointSeats.Length == 0 ||
+				maxTryPointSeats.Length >= 2)
+			{
+				debugText.text = $"No Winner.";
+				return null;
+			}
+
+			return (AuctionSeat)maxTryPointSeats[0];
 		}
 	}
 }

@@ -20,19 +20,22 @@ namespace Mascari4615
 
 		public bool IsShowing { get; set; } = false;
 
-		public string ToStringData()
+		public string Save()
 		{
 			string data = string.Empty;
+
 			data += $"{(int)TeamType}{DATA_SEPARATOR}";
 			data += $"{(int)Role}{DATA_SEPARATOR}";
 			data += $"{IsShowing}{DATA_SEPARATOR}";
 			data += $"{SyncData}{DATA_SEPARATOR}";
+
 			return data;
 		}
 
-		public void ParseDataPack(string data)
+		public void Load(string data)
 		{
 			string[] datas = data.Split(DATA_SEPARATOR);
+
 			TeamType = (TeamType)int.Parse(datas[0]);
 			Role = (DrawRole)int.Parse(datas[1]);
 			IsShowing = bool.Parse(datas[2]);

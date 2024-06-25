@@ -6,7 +6,7 @@ namespace Mascari4615
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class AuctionSeat : MTurnSeat
 	{
-		public int Point => Data;
+		public int RemainPoint => Data;
 		public int TryPoint => TurnData;
 
 		[field: Header("_" + nameof(AuctionSeat))]
@@ -20,6 +20,7 @@ namespace Mascari4615
 				return;
 
 			AuctionManager auctionManager = (AuctionManager)seatManager;
+
 			if (auctionManager.GetMaxTurnData() >= tryPointMScore.Score)
 				return;
 
