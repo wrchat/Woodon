@@ -1,5 +1,7 @@
-﻿using UdonSharp;
+﻿using System;
+using UdonSharp;
 using UnityEngine;
+using VRC.SDK3.Data;
 using VRC.Udon;
 using VRC.Udon.Common.Interfaces;
 
@@ -65,15 +67,13 @@ namespace Mascari4615
 			if (targetUdons == null)
 				targetUdons = new UdonSharpBehaviour[0];
 
-			UdonSharpBehaviour[] newListeners = new UdonSharpBehaviour[targetUdons.Length + 1];
-			targetUdons.CopyTo(newListeners, 0);
-			newListeners[newListeners.Length - 1] = newUdon;
-			targetUdons = newListeners;
+			MDebugLog($"AAA :: {nameof(targetUdons)} = {targetUdons.Length}");
+			MDataUtil.ResizeArr(ref targetUdons, targetUdons.Length + 1);
+			targetUdons[targetUdons.Length - 1] = newUdon;
+			MDebugLog($"BBB :: {nameof(targetUdons)} = {targetUdons.Length}");
 
-			string[] newEventNames = new string[eventNames.Length + 1];
-			eventNames.CopyTo(newEventNames, 0);
-			newEventNames[newEventNames.Length - 1] = eventName;
-			eventNames = newEventNames;
+			MDataUtil.ResizeArr(ref eventNames, eventNames.Length + 1);
+			eventNames[eventNames.Length - 1] = eventName;
 		}
 
 		public void RemoveListener(UdonSharpBehaviour newUdon)
@@ -91,29 +91,8 @@ namespace Mascari4615
 				}
 			}
 
-			UdonSharpBehaviour[] newListeners = new UdonSharpBehaviour[targetUdons.Length - 1];
-			int index = 0;
-			for (int i = 0; i < targetUdons.Length; i++)
-			{
-				if (i == targetIndex)
-					continue;
-
-				newListeners[index] = targetUdons[i];
-				index++;
-			}
-			targetUdons = newListeners;
-
-			string[] newEventNames = new string[eventNames.Length - 1];
-			index = 0;
-			for (int i = 0; i < eventNames.Length; i++)
-			{
-				if (i == targetIndex)
-					continue;
-
-				newEventNames[index] = eventNames[i];
-				index++;
-			}
-			eventNames = newEventNames;
+			MDataUtil.RemoveAt(ref targetUdons, targetIndex);
+			MDataUtil.RemoveAt(ref eventNames, targetIndex);
 		}
 	}
 }
