@@ -67,10 +67,8 @@ namespace Mascari4615
 			if (targetUdons == null)
 				targetUdons = new UdonSharpBehaviour[0];
 
-			MDebugLog($"AAA :: {nameof(targetUdons)} = {targetUdons.Length}");
 			MDataUtil.ResizeArr(ref targetUdons, targetUdons.Length + 1);
 			targetUdons[targetUdons.Length - 1] = newUdon;
-			MDebugLog($"BBB :: {nameof(targetUdons)} = {targetUdons.Length}");
 
 			MDataUtil.ResizeArr(ref eventNames, eventNames.Length + 1);
 			eventNames[eventNames.Length - 1] = eventName;

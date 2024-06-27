@@ -164,7 +164,7 @@ namespace Mascari4615
 
 		public void SetElementData(int index, TeamType teamType, DrawRole role, bool isShowing, string syncData = NONE_STRING)
 		{
-			// MDebugLog($"{nameof(SetElementData)}, Index : {index}, TeamType : {teamType}, Role : {role}, IsShowing : {isShowing}, SyncData : {syncData}");
+			MDebugLog($"{nameof(SetElementData)}, Index : {index}, TeamType : {teamType}, Role : {role}, IsShowing : {isShowing}, SyncData : {syncData}");
 
 			DrawElementDatas[index].TeamType = teamType;
 			DrawElementDatas[index].Role = role;
@@ -172,6 +172,47 @@ namespace Mascari4615
 			DrawElementDatas[index].SyncData = syncData;
 		}
 
+		public void ShowTeam(TeamType teamType)
+		{
+			MDebugLog($"{nameof(ShowTeam)}, TeamType : {teamType}");
+
+			foreach (DrawElementData drawElementData in DrawElementDatas)
+			{
+				if (drawElementData.TeamType == teamType)
+					drawElementData.IsShowing = true;
+			}
+			SyncData();
+		}
+
+		public DrawElementData GetNoneTeamElement()
+		{
+			foreach (DrawElementData drawElementData in DrawElementDatas)
+			{
+				if (drawElementData.TeamType == TeamType.None)
+					return drawElementData;
+			}
+
+			return null;
+		}
+
+		public DrawElementData GetRandomNoneTeamElement()
+		{
+			DrawElementData[] noneTeamDrawElementDatas = new DrawElementData[DrawElementDatas.Length];
+			
+			int noneTeamElementCount = 0;
+			foreach (DrawElementData drawElementData in DrawElementDatas)
+			{
+				if (drawElementData.TeamType == TeamType.None)
+					noneTeamDrawElementDatas[noneTeamElementCount++] = drawElementData;
+			}
+
+			if (noneTeamElementCount == 0)
+				return null;
+
+			return noneTeamDrawElementDatas[Random.Range(0, noneTeamElementCount)];
+		}
+
+		#region HorribleEvents
 		[ContextMenu(nameof(ShowTeamA))]
 		public void ShowTeamA() => ShowTeam(TeamType.A);
 		public void ShowTeamB() => ShowTeam(TeamType.B);
@@ -199,17 +240,6 @@ namespace Mascari4615
 		public void ShowTeamX() => ShowTeam(TeamType.X);
 		public void ShowTeamY() => ShowTeam(TeamType.Y);
 		public void ShowTeamZ() => ShowTeam(TeamType.Z);
-
-		public void ShowTeam(TeamType teamType)
-		{
-			MDebugLog($"{nameof(ShowTeam)}, TeamType : {teamType}");
-
-			foreach (DrawElementData drawElementData in DrawElementDatas)
-			{
-				if (drawElementData.TeamType == teamType)
-					drawElementData.IsShowing = true;
-			}
-			SyncData();
-		}
+		#endregion
 	}
 }

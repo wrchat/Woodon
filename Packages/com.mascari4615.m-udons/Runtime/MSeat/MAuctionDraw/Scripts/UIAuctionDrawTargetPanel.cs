@@ -3,16 +3,16 @@
 namespace Mascari4615
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class UIAuctionDrawTargetPanel : MUI
+	public class UIAuctionDrawTargetPanel : MBase
 	{
 		private AuctionDraw auctionDraw;
 		private UIAuctionDrawTargetElement[] elements;
 
-		public override void Init(MBase auctionDraw = null)
+		public void Init(AuctionDraw auctionDraw)
 		{
 			MDebugLog($"{nameof(Init)}({auctionDraw})");
 			
-			this.auctionDraw = (AuctionDraw)auctionDraw;
+			this.auctionDraw = auctionDraw;
 
 			elements = GetComponentsInChildren<UIAuctionDrawTargetElement>(true);
 
@@ -34,10 +34,10 @@ namespace Mascari4615
 			foreach (UIAuctionDrawTargetElement element in elements)
 				element.Init(this.auctionDraw, this);
 
-			UpdateUI(this);
+			UpdateUI();
 		}
 
-		public override void UpdateUI(MBase _ = null)
+		public void UpdateUI()
 		{
 			MDebugLog(nameof(UpdateUI));
 		

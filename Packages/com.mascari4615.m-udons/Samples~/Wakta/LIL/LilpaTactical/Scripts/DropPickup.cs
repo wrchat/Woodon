@@ -8,7 +8,7 @@ namespace Mascari4615
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class DropPickup : MBase
 	{
-		[SerializeField] private MPlayerSync mPlayerSync;
+		[SerializeField] private MTarget mTarget;
 		[SerializeField] private VRC_Pickup[] pickups;
 
 		public void Drop_Global()
@@ -24,10 +24,10 @@ namespace Mascari4615
 			if (DEBUG)
 				Debug.Log(nameof(Drop));
 
-			if (mPlayerSync.PlayerID != Networking.LocalPlayer.playerId)
+			if (mTarget.IsTargetPlayer())
 				return;
 
-			foreach (var pickup in pickups)
+			foreach (VRC_Pickup pickup in pickups)
 				if (IsOwner(pickup.gameObject))
 					pickup.Drop();
 		}

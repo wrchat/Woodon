@@ -1,15 +1,17 @@
 ﻿using UdonSharp;
 using UnityEngine;
+using VRC.SDKBase;
 
 namespace Mascari4615
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class AuctionSeat : MTurnSeat
 	{
+		[field: Header("_" + nameof(AuctionSeat))]
+		[field: UdonSynced(UdonSyncMode.None)] public int TryTime { get; private set; } = NONE_INT;
 		public int RemainPoint => Data;
 		public int TryPoint => TurnData;
-
-		[field: Header("_" + nameof(AuctionSeat))]
+		
 		[SerializeField] private MScore tryPointMScore;
 		[SerializeField] private TimeEvent timeEvent;
 		[SerializeField] private MSFXManager mSFXManager;
@@ -24,14 +26,22 @@ namespace Mascari4615
 			if (auctionManager.GetMaxTurnData() >= tryPointMScore.Score)
 				return;
 
+			SetTryTime(Networking.GetServerTimeInMilliseconds());
 			SetTurnData(tryPointMScore.Score);
+		}
+
+		public void SetTryTime(int newTryTime)
+		{
+			SetOwner();
+			TryTime = newTryTime;
+			RequestSerialization();
 		}
 
 		protected override void OnDataChange()
 		{
 			base.OnDataChange();
 
-			tryPointMScore.SetMinMaxScore(0, Data);
+			tryPointMScore.SetMinMaxScore(0, Data, IsOwner());
 		}
 
 		protected override void OnOwnerChange()

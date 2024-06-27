@@ -10,10 +10,7 @@ namespace Mascari4615
 	{
 		[field: SerializeField] public DrawManager DrawManager { get; private set; }
 		[field: SerializeField] public AuctionManager AuctionManager { get; private set; }
-		[SerializeField] private MUI[] uis;
-
-		public bool IsInited { get; private set; } = false;
-
+		[SerializeField] private UIAuctionDraw[] uis;
 		[UdonSynced(UdonSyncMode.None), FieldChangeCallback(nameof(TargetIndex))] private int _targetIndex = NONE_INT;
 		public int TargetIndex
 		{
@@ -29,11 +26,13 @@ namespace Mascari4615
 		{
 			MDebugLog($"{nameof(OnTargetIndexChanged)}, TargetIndex : {TargetIndex}");
 
-			if (DrawManager.DrawElementDatas == null)
-				return;
+			if (TargetIndex != NONE_INT)
+				MDebugLog($"{nameof(OnTargetIndexChanged)}, DrawElementData : {DrawManager.DrawElementDatas[TargetIndex].Name}");
 
 			UpdateUI();
 		}
+
+		public bool IsInited { get; private set; } = false;
 
 		private void Update()
 		{
@@ -55,7 +54,7 @@ namespace Mascari4615
 				return;
 			IsInited = true;
 
-			foreach (MUI ui in uis)
+			foreach (UIAuctionDraw ui in uis)
 				ui.Init(this);
 
 			DrawManager.RegisterListener(this, nameof(UpdateUI));
@@ -72,8 +71,8 @@ namespace Mascari4615
 			if (IsInited == false)
 				return;
 
-			foreach (MUI ui in uis)
-				ui.UpdateUI(this);
+			foreach (UIAuctionDraw ui in uis)
+				ui.UpdateUI();
 		}
 
 		public void UpdateDrawByAuction()
@@ -88,12 +87,18 @@ namespace Mascari4615
 					break;
 				case AuctionState.ShowTarget:
 					// 경매 대상 공개
+					OnShowTarget();
 					break;
 				case AuctionState.AuctionTime:
+					// 경매 시간
+					OnAuctionTime();
 					break;
 				case AuctionState.WaitForResult:
+					// 경매 결과 대기
+					OnWaitForResult();
 					break;
 				case AuctionState.CheckResult:
+					// 경매 결과 확인
 					OnCheckResult();
 					break;
 				case AuctionState.ApplyResult:
@@ -105,24 +110,18 @@ namespace Mascari4615
 			UpdateUI();
 		}
 
-		protected virtual void OnCheckResult()
-		{
-
-		}
-
-		private void OnWait()
+		protected virtual void OnWait()
 		{
 			MDebugLog(nameof(OnWait));
 
 			if (IsOwner() == false)
 				return;
 
-			DrawElementData noneTeamDrawElementData = FindNoneTeamDrawElementData();
-
-			if (noneTeamDrawElementData != null)
+			DrawElementData randomNoneTeamElement = DrawManager.GetRandomNoneTeamElement();
+			
+			if (randomNoneTeamElement != null)
 			{
-				DrawElementData randomNoneTeamDrawElementData = GetRandomNoneTeamDrawElementData();
-				SetTargetIndex(randomNoneTeamDrawElementData.Index);
+				SetTargetIndex(randomNoneTeamElement.Index);
 			}
 			else
 			{
@@ -130,7 +129,39 @@ namespace Mascari4615
 			}
 		}
 
-		private void OnApplyResult()
+		protected virtual void OnShowTarget()
+		{
+			MDebugLog(nameof(OnShowTarget));
+
+			if (IsOwner() == false)
+				return;
+		}
+
+		protected virtual void OnAuctionTime()
+		{
+			MDebugLog(nameof(OnAuctionTime));
+
+			if (IsOwner() == false)
+				return;
+		}
+
+		protected virtual void OnWaitForResult()
+		{
+			MDebugLog(nameof(OnWaitForResult));
+
+			if (IsOwner() == false)
+				return;
+		}
+
+		protected virtual void OnCheckResult()
+		{
+			MDebugLog(nameof(OnCheckResult));
+
+			if (IsOwner() == false)
+				return;
+		}
+
+		protected virtual void OnApplyResult()
 		{
 			MDebugLog(nameof(OnApplyResult));
 
@@ -145,43 +176,6 @@ namespace Mascari4615
 			int maxTryPoint = AuctionManager.GetMaxTurnData();
 			DrawManager.SetElementData(TargetIndex, teamType, DrawRole.Normal, true, maxTryPoint.ToString());
 			DrawManager.SyncData();
-		}
-
-		private DrawElementData FindNoneTeamDrawElementData()
-		{
-			if (DrawManager.DrawElementDatas == null)
-			{
-				MDebugLog("DrawElementDatas is null");
-				return null;
-			}
-
-			foreach (DrawElementData drawElementData in DrawManager.DrawElementDatas)
-			{
-				if (drawElementData.TeamType == TeamType.None)
-					return drawElementData;
-			}
-
-			return null;
-		}
-
-		private DrawElementData GetRandomNoneTeamDrawElementData()
-		{
-			if (DrawManager.DrawElementDatas == null)
-				return null;
-
-			DrawElementData[] noneTeamDrawElementDatas = new DrawElementData[DrawManager.DrawElementDatas.Length];
-			int count = 0;
-
-			foreach (DrawElementData drawElementData in DrawManager.DrawElementDatas)
-			{
-				if (drawElementData.TeamType == TeamType.None)
-					noneTeamDrawElementDatas[count++] = drawElementData;
-			}
-
-			if (count == 0)
-				return null;
-
-			return noneTeamDrawElementDatas[Random.Range(0, count)];
 		}
 
 		public void SetTargetIndex(int targetIndex)

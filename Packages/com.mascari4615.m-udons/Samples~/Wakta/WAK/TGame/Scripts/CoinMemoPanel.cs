@@ -112,7 +112,7 @@ namespace Mascari4615
 		public void A_SetCurCoinBox(bool isRemainCoinBox)
 		{
 			var target = isRemainCoinBox ? remainCoinBoxes[coinMemo.TargetCoinBoxIndex] : stealCoinBoxes[coinMemo.TargetCoinBoxIndex];
-			coinMemo.MScore.SetCanvasActive(!target.IsLock);
+			// coinMemo.MScore.SetCanvasActive(!target.IsLock);
 			coinMemo.MScore.SetScore(target.Coin);
 
 			for (int i = 0; i < remainCoinBoxes.Length; i++)
@@ -196,13 +196,13 @@ namespace Mascari4615
 
 		public void SubScore10()
 		{
-			coinMemo.MScore.SubScore10();
+			coinMemo.MScore.SubScore(coinMemo.MScore.DecreaseAmount * 10);
 			coinMemo.UpdateUI();
 		}
 
 		public void AddScore10()
 		{
-			coinMemo.MScore.AddScore10();
+			coinMemo.MScore.AddScore(coinMemo.MScore.IncreaseAmount * 10);
 			coinMemo.UpdateUI();
 		}
 

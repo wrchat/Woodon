@@ -13,9 +13,7 @@ namespace Mascari4615
 		[field: SerializeField] public int IncreaseAmount { get; private set; } = 1;
 		[field: SerializeField] public int DecreaseAmount { get; private set; }= 1;
 		[SerializeField] private int defaultScore = 0;
-		[SerializeField] private bool useClamp;
-		[SerializeField] private bool useLoop;
-		[SerializeField] private bool loopOption;
+		[SerializeField] private MScoreStyle style = MScoreStyle.Clamp;
 
 		[SerializeField] private bool useSync;
 		[SerializeField] private CustomBool isMaxScore;
@@ -74,15 +72,15 @@ namespace Mascari4615
 			OnScoreChange();
 		}
 
-		public void SetMinMaxScore(int min, int max)
+		public void SetMinMaxScore(int min, int max, bool recalcScore = true)
 		{
 			MDebugLog($"{nameof(SetMinMaxScore)}");
 
 			MinScore = min;
 			MaxScore = max;
 
-			if (Score < MinScore || Score > MaxScore)
-				SetScore(Mathf.Clamp(Score, MinScore, MaxScore));
+			if (recalcScore)
+				SetScore(Score);
 		}
 
 		public void SetScore(int newScore, bool isReciever = false)
@@ -91,24 +89,38 @@ namespace Mascari4615
 
 			int actualScore = newScore;
 
-			if (useClamp)
+			switch (style)
 			{
-				actualScore = Mathf.Clamp(actualScore, MinScore, MaxScore);
-			}
-			else if (useLoop)
-			{
-				if (actualScore > MaxScore)
-					actualScore = MinScore + (actualScore - MaxScore) + (loopOption ? -1 : 0);
-				else if (actualScore < MinScore)
-					actualScore = MaxScore - (MinScore - actualScore) + (loopOption ? 1 : 0);
-			}
-			else
-			{
-				if (actualScore > MaxScore)
-					return;
-
-				if (actualScore < MinScore)
-					return;
+				case MScoreStyle.None:
+					if (actualScore > MaxScore)
+						return;
+					if (actualScore < MinScore)
+						return;
+					break;
+				// Clamp
+				case MScoreStyle.Clamp:
+					actualScore = Mathf.Clamp(actualScore, MinScore, MaxScore);
+					break;
+				// LoopA : 초과/미만 시 반대쪽으로 이동 (이때 MinScore, MaxScore는 포함되지 않음)
+				// { ..., Max - 1, Max == Min, Min + 1, ... }
+				// ex) MinScore : 0, MaxScore : 100, Score : 101 -> 1
+				// ex) MinScore : 0, MaxScore : 100, Score : -1 -> 99
+				case MScoreStyle.LoopA:
+					if (actualScore > MaxScore)
+						actualScore = MinScore + (actualScore - MaxScore);
+					else if (actualScore < MinScore)
+						actualScore = MaxScore - (MinScore - actualScore);
+					break;
+				// LoopB : 초과/미만 시 반대쪽으로 이동 (이때 MinScore, MaxScore는 포함됨)
+				// { ..., Max - 1, Max, Min, Min + 1, ... }
+				// ex) MinScore : 0, MaxScore : 100, Score : 101 -> 0
+				// ex) MinScore : 0, MaxScore : 100, Score : -1 -> 100
+				case MScoreStyle.LoopB:
+					if (actualScore > MaxScore)
+						actualScore = MinScore + (actualScore - MaxScore) - 1;
+					else if (actualScore < MinScore)
+						actualScore = MaxScore - (MinScore - actualScore) + 1;
+					break;
 			}
 
 			if (useSync)

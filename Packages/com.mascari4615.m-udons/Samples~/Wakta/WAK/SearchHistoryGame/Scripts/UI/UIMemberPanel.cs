@@ -35,16 +35,26 @@ namespace Mascari4615
 			WaktaverseMemberData memberData = waktaverseData.GetData(manager.SelectedMember);
 			string[] data = memberData.SyncData.Split(DATA_SEPARATOR);
 
+			memberProfile.sprite = memberData.Profile;
+			memberName.text = Waktaverse.GetNickname(memberData.Member);
+
 			historyButtons[0].SetData(memberData, 0);
 			historyButtons[1].SetData(memberData, 1);
 			historyButtons[2].SetData(memberData, 2);
 
+			if (data.Length < 3)
+			{
+				historyButtons[0].SetEnabled(false);
+				historyButtons[1].SetEnabled(false);
+				historyButtons[2].SetEnabled(false);
+
+				MDebugLog($"Data length is less than 3: {data.Length}");
+				return;
+			}
+
 			historyButtons[0].SetEnabled(data[0] == TRUE_STRING);
 			historyButtons[1].SetEnabled(data[1] == TRUE_STRING);
 			historyButtons[2].SetEnabled(data[2] == TRUE_STRING);
-
-			memberProfile.sprite = memberData.Profile;
-			memberName.text = Waktaverse.GetNickname(memberData.Member);
 		}
 
 		[ContextMenu(nameof(ShowFirst))]

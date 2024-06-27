@@ -128,7 +128,7 @@ namespace Mascari4615
 		[SerializeField] private MTarget jrrTarget;
 		[SerializeField] private GameObject uiPanrt_JRR;
 
-		[SerializeField] private MCameraManager cameraManager;
+		[SerializeField] private M_CCManager cameraManager;
 
 		public void FullScreenOn_Global() => SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, nameof(FullScreenOn));
 		public void FullScreenOn() => cameraManager.SetCamera(4, alwaysOn: true);

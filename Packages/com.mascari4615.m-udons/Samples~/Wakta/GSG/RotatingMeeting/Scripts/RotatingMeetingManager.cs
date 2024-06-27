@@ -330,7 +330,7 @@ namespace Mascari4615
 
 		public void SetOwnerCurMTarget()
 		{
-			if (mTarget.IsLocalPlayerTarget)
+			if (mTarget.IsTargetPlayer())
 			{
 				SetOwner();
 

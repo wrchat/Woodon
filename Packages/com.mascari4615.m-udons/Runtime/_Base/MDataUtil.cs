@@ -7,8 +7,6 @@ namespace Mascari4615
 	{
 		public static void ResizeArr<T>(ref T[] originArr, int size)
 		{
-			Debug.Log($"Sans {nameof(MDataUtil)}.{nameof(ResizeArr)}");
-
 			T[] newArr = new T[size];
 
 			// 기존 요소 복사
