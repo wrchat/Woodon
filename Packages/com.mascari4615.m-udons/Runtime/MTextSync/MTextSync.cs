@@ -1,9 +1,7 @@
 ﻿using TMPro;
 using UdonSharp;
 using UnityEngine;
-using UnityEngine.UI;
 using VRC.SDKBase;
-using VRC.Udon;
 
 namespace Mascari4615
 {
@@ -13,8 +11,8 @@ namespace Mascari4615
 		[Header("_" + nameof(MTextSync))]
 		[SerializeField] private bool useDefaultWhenEmpty = true;
 		[SerializeField] private string defaultString = string.Empty;
-		[SerializeField] private TextMeshProUGUI[] childTexts;
-		[SerializeField] private InputField inputField;
+		[SerializeField] private TextMeshProUGUI[] texts;
+		[SerializeField] private TMP_InputField inputField;
 		[SerializeField] private bool sync;
 		[SerializeField] private bool onlyDigit;
 		// [SerializeField] private int lengthLimit = 5000;
@@ -50,7 +48,7 @@ namespace Mascari4615
 		{
 			MDebugLog(nameof(OnSyncTextChange));
 
-			var newText = SyncText;
+			string newText = SyncText;
 
 			if (newText == string.Empty || newText.Length == 0)
 				if (useDefaultWhenEmpty)
@@ -58,7 +56,7 @@ namespace Mascari4615
 
 			inputField.text = newText;
 
-			foreach (var child in childTexts)
+			foreach (TextMeshProUGUI child in texts)
 				child.text = newText;
 
 			SendEvents();
@@ -66,7 +64,7 @@ namespace Mascari4615
 
 		public void SyncInputFieldText()
 		{
-			var newText = inputField.text;
+			string newText = inputField.text;
 			newText = newText.TrimStart('\n', ' ');
 			newText = newText.TrimEnd('\n', ' ');
 

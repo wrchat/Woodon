@@ -53,6 +53,7 @@ namespace Mascari4615
 		{
 			if (mCameraController.IsPlayerHolding(Networking.LocalPlayer) == false)
 				return;
+			SetOwner();
 
 			// float scroll = Input.GetAxis("Mouse ScrollWheel");
 			float scroll = 0;
@@ -60,9 +61,8 @@ namespace Mascari4615
 			scroll -= Input.GetKey(KeyCode.DownArrow) ? 1 : 0;
 			
 			fovValue += scroll * fovSpeed;
-
 			MDebugLog($"{nameof(UpdateFov)} : +{scroll}");
-
+		
 			FovValue = Mathf.Clamp(fovValue, fovMin, fovMax);
 		}
 	}

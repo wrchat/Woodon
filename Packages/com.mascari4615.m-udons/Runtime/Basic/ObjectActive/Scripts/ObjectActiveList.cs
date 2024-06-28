@@ -25,16 +25,17 @@ namespace Mascari4615
 		public void SetObject(int targetIndex)
 		{
 			for (int i = 0; i < objectList.Length; i++)
-				objectList[i].SetActive(i == targetIndex);
+			{
+				if (objectList[i])
+					objectList[i].SetActive(i == targetIndex);
+			}
 		}
 
+		#region HorribleEvents
 		[ContextMenu(nameof(SetObject0))]
 		public void SetObject0() => SetObject(0);
-
-		[ContextMenu(nameof(SetObject1))]
 		public void SetObject1() => SetObject(1);
-
-		[ContextMenu(nameof(SetObject2))]
 		public void SetObject2() => SetObject(2);
+		#endregion
 	}
 }
