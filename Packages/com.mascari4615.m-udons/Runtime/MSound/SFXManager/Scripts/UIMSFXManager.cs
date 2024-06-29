@@ -1,0 +1,51 @@
+﻿using UdonSharp;
+using UnityEngine;
+
+namespace Mascari4615
+{
+	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
+	public class UIMSFXManager : MBase
+	{
+		[SerializeField] private MSFXManager sfxManager;
+		[SerializeField] private bool global = false;
+		private UIMSFXManagerButton[] buttons;
+
+		private void Start()
+		{
+			Init();
+		}
+
+		private void Init()
+		{
+			buttons = GetComponentsInChildren<UIMSFXManagerButton>(true);
+
+			if (buttons == null)
+				return;
+
+			for (int i = 0; i < buttons.Length; i++)
+			{
+				if (i >= sfxManager.AudioClips.Length)
+				{
+					buttons[i].gameObject.SetActive(false);
+					continue;
+				}
+
+				buttons[i].gameObject.SetActive(true);
+				buttons[i].Init(this, i, sfxManager.AudioClips[i].name);
+			}
+		}
+
+		public void PlaySFX(int index)
+		{
+			if (global)
+				sfxManager.PlaySFX_G(index);
+			else
+				sfxManager.PlaySFX_L(index);
+		}
+
+		#region HorribleEvents
+		public void StopSFX_Global() => sfxManager.StopSFX_Global();
+		public void StopSFX() => sfxManager.StopSFX();
+		#endregion HorribleEvents
+	}
+}
