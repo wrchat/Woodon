@@ -9,8 +9,10 @@ namespace Mascari4615
 	{
 		[Header("_" + nameof(UIMScore))]
 		[SerializeField] private TextMeshProUGUI[] scoreTexts;
+		[SerializeField] private string format = "{0}";
 		[SerializeField] private GameObject[] hardButtons;
-		[SerializeField] private bool printPlusOne;
+		[SerializeField] private float printMultiply = 1;
+		[SerializeField] private int printPlus = 0;
 		private MScore mScore;
 
 		public void Init(MScore mScore)
@@ -22,7 +24,7 @@ namespace Mascari4615
 		public void UpdateUI()
 		{
 			int score = mScore.Score;
-			string scoreString = (score + (printPlusOne ? 1 : 0)).ToString();
+			string scoreString = string.Format(format, ((int)(score * printMultiply) + printPlus).ToString());
 
 			foreach (TextMeshProUGUI scoreText in scoreTexts)
 				scoreText.text = scoreString;

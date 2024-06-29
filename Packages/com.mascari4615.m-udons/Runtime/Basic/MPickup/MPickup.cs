@@ -43,6 +43,8 @@ namespace Mascari4615
 		[field: SerializeField] public MeshRenderer[] MeshRenderers { get; private set; }
 		[field: SerializeField] public GameObject[] Childs { get; private set; }
 		[field: SerializeField] public Collider[] Colliders { get; private set; }
+		[field: SerializeField] public Rigidbody Rigidbody { get; private set; }
+		[SerializeField] private bool useGravityWhenOncePickedUp = false;
 		// [field: SerializeField] public CustomBool CustomBool { get; private set; }
 
 		public bool IsHolding(VRCPlayerApi targetPlayer = null)
@@ -56,7 +58,10 @@ namespace Mascari4615
 		public void Drop()
 		{
 			if (IsHolding())
+			{
+				UseGravity(false);
 				Pickup.Drop();
+			}
 		}
 
 		public void Drop_G()
@@ -66,6 +71,8 @@ namespace Mascari4615
 
 		public void Respawn()
 		{
+			UseGravity(false);
+
 			if (ObjectSync)
 				ObjectSync.Respawn();
 		}
@@ -86,6 +93,21 @@ namespace Mascari4615
 		public void DropAndRespawn_G()
 		{
 			SendCustomNetworkEvent(NetworkEventTarget.All, nameof(DropAndRespawn));
+		}
+
+		public override void OnPickup()
+		{
+			if (useGravityWhenOncePickedUp)
+				UseGravity(true);
+		}
+
+		public void UseGravity(bool useGravity)
+		{
+			if (Rigidbody != null)
+			{
+				Rigidbody.isKinematic = !useGravity;
+				Rigidbody.useGravity = useGravity;
+			}
 		}
 	}
 }

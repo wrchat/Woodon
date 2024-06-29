@@ -7,12 +7,19 @@ namespace Mascari4615
 	public class ObjectActiveList : MBase
 	{
 		[Header("_" + nameof(ObjectActiveList))]
-		[SerializeField] private GameObject[] objectList;
 		[SerializeField] private MScore mScore;
+		
+		[SerializeField] private GameObject[] objectList;
+		[SerializeField] private CanvasGroup[] canvasGroups;
+		[SerializeField] private MPickup[] pickups;
 
 		private void Start()
 		{
-			mScore.SetMinMaxScore(0, objectList.Length - 1);
+			int maxLen = objectList.Length;
+			maxLen = Mathf.Max(maxLen, canvasGroups.Length);
+			maxLen = Mathf.Max(maxLen, pickups.Length);
+
+			mScore.SetMinMaxScore(0, maxLen - 1);
 		}
 
 		[ContextMenu(nameof(UpdateObjectByScore))]
@@ -28,6 +35,22 @@ namespace Mascari4615
 			{
 				if (objectList[i])
 					objectList[i].SetActive(i == targetIndex);
+			}
+
+			for (int i = 0; i < canvasGroups.Length; i++)
+			{
+				if (canvasGroups[i])
+				{
+					canvasGroups[i].alpha = i == targetIndex ? 1 : 0;
+					canvasGroups[i].blocksRaycasts = i == targetIndex;
+					canvasGroups[i].interactable = i == targetIndex;
+				}
+			}
+
+			for (int i = 0; i < pickups.Length; i++)
+			{
+				if (pickups[i])
+					pickups[i].SetEnabled(i == targetIndex);
 			}
 		}
 

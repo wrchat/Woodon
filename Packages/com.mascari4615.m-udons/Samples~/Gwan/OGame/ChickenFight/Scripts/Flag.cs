@@ -97,8 +97,8 @@ namespace Mascari4615
 			if (IsLocalPlayerOwner)
 				if (shieldCoolTime.ExpireTime == NONE_INT)
 				{
-					shieldDuration.SetTime();
-					shieldCoolTime.SetTime();
+					shieldDuration.SetTimer();
+					shieldCoolTime.SetTimer();
 				}
 		}
 

@@ -97,7 +97,7 @@ namespace Mascari4615
 				return;
 			
 			if (timeEvent != null)
-				timeEvent.SetTime();
+				timeEvent.SetTimer();
 		}
 
 		protected virtual void OnWaitForResult()

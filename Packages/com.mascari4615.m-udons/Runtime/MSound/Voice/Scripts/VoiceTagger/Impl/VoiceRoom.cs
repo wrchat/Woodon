@@ -80,7 +80,7 @@ namespace Mascari4615
 		public void Lock()
 		{
 			// isLocked.SetValue(true);
-			isLocked_TimeEvent.SetTime();
+			isLocked_TimeEvent.SetTimer();
 		}
 		public void Unlock()
 		{

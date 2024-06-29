@@ -12,7 +12,7 @@ namespace Mascari4615
 		[SerializeField] private float fovDefault = 60;
 		[SerializeField] private float fovSpeed = 1;
 		[SerializeField] private float fovMin = 20;
-		[SerializeField] private float fovMax = 100;
+		[SerializeField] private float fovMax = 60;
 
 		private bool isInited = false;
 

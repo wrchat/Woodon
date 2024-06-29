@@ -104,7 +104,7 @@ namespace Mascari4615
             SetOwner();
 
             CurPlayingPlayerID = targetPlayerID;
-            timeEvent.SetTime();
+            timeEvent.SetTimer();
 
             targetPlayer.TeleportTo(stagePos.position, stagePos.rotation);
             //targetPlayer.TeleportTo(stagePos.position, stagePos.rotation);

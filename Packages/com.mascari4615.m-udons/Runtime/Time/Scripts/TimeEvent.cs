@@ -1,8 +1,5 @@
-﻿using System;
-using TMPro;
-using UdonSharp;
+﻿using UdonSharp;
 using UnityEngine;
-using UnityEngine.UI;
 using VRC.SDKBase;
 
 namespace Mascari4615
@@ -10,18 +7,15 @@ namespace Mascari4615
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class TimeEvent : MEventSender
 	{
-		[Header("_" + nameof(TimeEvent))]
-		[SerializeField] private TextMeshProUGUI[] timeTexts;
-		[SerializeField] private TimeEventBarUI[] timeEventBarUIs;
-		[SerializeField] private Image[] buttonUIImages;
-		[SerializeField] private string format = "{0:mm\\:ss.ff}";
+		[field: Header("_" + nameof(TimeEvent))]
 		[field: SerializeField] public int TimeByDecisecond { get; set; } = 50;
 		[SerializeField] private MScore mScore;
 		[SerializeField] private CustomBool isCounting;
 
-		[UdonSynced(UdonSyncMode.None), FieldChangeCallback(nameof(ExpireTime))]
-		private int _expireTime = NONE_INT;
+		[SerializeField] private UITimeEvent[] timeEventUIs;
+		[SerializeField] private UITimeEventBar[] timeEventBarUIs;
 
+		[UdonSynced(UdonSyncMode.None), FieldChangeCallback(nameof(ExpireTime))] private int _expireTime = NONE_INT;
 		public int ExpireTime
 		{
 			get => _expireTime;
@@ -32,38 +26,36 @@ namespace Mascari4615
 			}
 		}
 
-		public bool IsExpired => (ExpireTime == NONE_INT);
+		[UdonSynced(UdonSyncMode.None), FieldChangeCallback(nameof(TimeSpeed))] private int _timeSpeed = 1;
+		public int TimeSpeed
+		{
+			get => _timeSpeed;
+			set
+			{
+				_timeSpeed = value;
+				// OnExpireTimeChange();
+			}
+		}
+
+		public bool IsExpired => ExpireTime == NONE_INT;
 
 		private void Start()
 		{
-			foreach (TimeEventBarUI timeEventBarUI in timeEventBarUIs)
+			Init();
+		}
+
+		private void Init()
+		{
+			foreach (UITimeEvent uiTimeEvent in timeEventUIs)
+				uiTimeEvent.Init(this);
+
+			foreach (UITimeEventBar timeEventBarUI in timeEventBarUIs)
 				timeEventBarUI.Init(this);
 		}
 
 		private void Update()
 		{
-			TimeSpan timeSpan = TimeSpan.FromMilliseconds(0);
-
-			if (ExpireTime == NONE_INT)
-			{
-			}
-			else
-			{
-				if (Networking.GetServerTimeInMilliseconds() >= ExpireTime)
-				{
-				}
-				else
-				{
-					int diff = ExpireTime - Networking.GetServerTimeInMilliseconds();
-					timeSpan = TimeSpan.FromMilliseconds(diff);
-				}
-			}
-
-			foreach (TextMeshProUGUI timeText in timeTexts)
-				timeText.text = string.Format(format, timeSpan);
-
-			foreach (TimeEventBarUI timeEventBarUI in timeEventBarUIs)
-				timeEventBarUI.UpdateUI();
+			// UpdateUI();
 
 			if (IsOwner() == false)
 				return;
@@ -79,6 +71,15 @@ namespace Mascari4615
 			}
 		}
 
+		private void UpdateUI()
+		{
+			foreach (UITimeEvent uiTimeEvent in timeEventUIs)
+				uiTimeEvent.UpdateUI();
+
+			foreach (UITimeEventBar timeEventBarUI in timeEventBarUIs)
+				timeEventBarUI.UpdateUI();
+		}
+
 		private void OnExpireTimeChange()
 		{
 			MDebugLog($"{nameof(OnExpireTimeChange)} : ChangeTo = {ExpireTime}");
@@ -86,74 +87,65 @@ namespace Mascari4615
 			if (isCounting)
 				isCounting.SetValue(ExpireTime != NONE_INT);
 
-			foreach (Image buttonUIImage in buttonUIImages)
-				buttonUIImage.color = MColorUtil.GetGreenOrRed(isCounting);
+			UpdateUI();
+		}
+
+		public void SetExpireTime(int newExpireTime)
+		{
+			SetOwner();
+			ExpireTime = newExpireTime;
+			RequestSerialization();
 		}
 
 		public void ResetTime()
 		{
 			MDebugLog(nameof(ResetTime));
-
-			SetOwner();
-			ExpireTime = NONE_INT;
-			RequestSerialization();
+			SetExpireTime(NONE_INT);
 		}
 
-		public void SetTime()
+		public void SetTimer()
 		{
-			MDebugLog(nameof(SetTime));
-
-			SetOwner();
-			ExpireTime = Networking.GetServerTimeInMilliseconds() + (TimeByDecisecond * 100);
-			RequestSerialization();
+			MDebugLog(nameof(SetTimer));
+			SetExpireTime(Networking.GetServerTimeInMilliseconds() + (TimeByDecisecond * 100));
 		}
 
 		public void SetTimeByMScore()
 		{
 			MDebugLog(nameof(SetTimeByMScore));
 
-			if (mScore == null)
-				return;
-
-			SetOwner();
-			ExpireTime = Networking.GetServerTimeInMilliseconds() + (mScore.Score * 100);
-			RequestSerialization();
+			if (mScore != null)
+				SetExpireTime(Networking.GetServerTimeInMilliseconds() + (mScore.Score * 100));
 		}
 
 		public void AddTime()
 		{
 			MDebugLog(nameof(AddTime));
 
-			if (ExpireTime == NONE_INT)
-				return;
-
-			SetOwner();
-			ExpireTime += TimeByDecisecond * 100;
-			RequestSerialization();
+			if (ExpireTime != NONE_INT)
+				SetExpireTime(ExpireTime + TimeByDecisecond * 100);
 		}
 
 		public void AddTimeByMScore()
 		{
 			MDebugLog(nameof(AddTimeByMScore));
 
-			if (ExpireTime == NONE_INT)
-				return;
-
 			if (mScore == null)
 				return;
 
-			SetOwner();
-			ExpireTime += mScore.Score * 100;
-			RequestSerialization();
+			if (ExpireTime == NONE_INT)
+				return;
+
+			SetExpireTime(ExpireTime + mScore.Score * 100);
 		}
 
 		public void ToggleTime()
 		{
 			MDebugLog(nameof(ToggleTime));
 
-			SetOwner();
-			ExpireTime = ExpireTime == NONE_INT ? Networking.GetServerTimeInMilliseconds() + (TimeByDecisecond * 100) : NONE_INT;
-			RequestSerialization();
+			if (ExpireTime == NONE_INT)
+				SetTimer();
+			else
+				ResetTime();
 		}
 	}
 }
