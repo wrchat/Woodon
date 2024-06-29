@@ -23,7 +23,12 @@ namespace Mascari4615
 		private int lastExpireTime = NONE_INT;
 		private TimeEvent timeEvent;
 
-		public bool IsLerping => (timeEvent != null) && lerp && (lastExpireTime != timeEvent.ExpireTime);
+		public bool IsLerping =>
+		(timeEvent != null) &&
+		(lerp == true) &&
+		(lastExpireTime != timeEvent.ExpireTime) &&
+		(lastExpireTime != NONE_INT) &&
+		(timeEvent.ExpireTime != NONE_INT);
 
 		public void Init(TimeEvent timeEvent)
 		{
@@ -34,7 +39,7 @@ namespace Mascari4615
 		{
 			if (timeEvent == null)
 				return;
-			
+
 			CalcTime();
 			UpdateUI();
 		}
@@ -75,25 +80,37 @@ namespace Mascari4615
 
 		private void CalcTime()
 		{
-			// 타이머가 멈춰있거나, Lerp 하지 않는 경우
-			if (timeEvent.ExpireTime == NONE_INT ||
-				lerp == false)
+			// 타이머가 멈춰있거나,
+			if (timeEvent.ExpireTime == NONE_INT)
+			{
+				lastExpireTime = NONE_INT;
+				return;
+			}
+
+			// Lerp 하지 않는 경우
+			if (lerp == false)
 			{
 				lastExpireTime = timeEvent.ExpireTime;
 				return;
 			}
 
+			if (lastExpireTime == timeEvent.ExpireTime)
+				return;
+
 			// 1. Lerp
+
 			// 1-1. Init
 			if (lastExpireTime == NONE_INT)
 			{
 				lastExpireTime = timeEvent.ExpireTime;
+				return;
 			}
+
 			// 1-2. Lerp
-			else if (lastExpireTime != timeEvent.ExpireTime)
+			if (lastExpireTime != timeEvent.ExpireTime)
 			{
 				// 강제 보정 (.5초)
-				if (Mathf.Abs(lastExpireTime - timeEvent.ExpireTime) < 5)
+				if (Mathf.Abs(lastExpireTime - timeEvent.ExpireTime) <= 500)
 				{
 					lastExpireTime = timeEvent.ExpireTime;
 				}
