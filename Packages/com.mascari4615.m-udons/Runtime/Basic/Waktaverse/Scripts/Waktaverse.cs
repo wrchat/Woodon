@@ -4,6 +4,9 @@
 // 24.06.01
 // refactor by Mascari4615
 
+using VRC.SDKBase;
+using static Mascari4615.MUtil;
+
 namespace Mascari4615
 {
 	public class Waktaverse : MBase

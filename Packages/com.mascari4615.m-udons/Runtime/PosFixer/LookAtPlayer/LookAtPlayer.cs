@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using VRC.SDKBase;
+using static Mascari4615.MUtil;
 
 namespace Mascari4615
 {
@@ -12,7 +13,7 @@ namespace Mascari4615
 
 		private void Update()
 		{
-			if (NotOnline)
+			if (IsNotOnline())
 				return;
 
 			VRCPlayerApi targetPlayer = Networking.LocalPlayer;

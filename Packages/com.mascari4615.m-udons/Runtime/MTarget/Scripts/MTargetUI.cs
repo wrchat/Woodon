@@ -2,6 +2,7 @@
 using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
+using static Mascari4615.MUtil;
 
 namespace Mascari4615
 {
@@ -70,7 +71,7 @@ namespace Mascari4615
 
 		public void UpdatePlayerList()
 		{
-			var players = Players;
+			VRCPlayerApi[] players = GetPlayers();
 
 			if (players.Length != VRCPlayerApi.GetPlayerCount())
 			{

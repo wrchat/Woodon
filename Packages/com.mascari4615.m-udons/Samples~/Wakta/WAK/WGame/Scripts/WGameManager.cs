@@ -3,7 +3,7 @@ using UdonSharp;
 using UnityEngine;
 using UnityEngine.UI;
 using VRC.SDKBase;
-using VRC.Udon;
+using static Mascari4615.MUtil;
 
 namespace Mascari4615
 {

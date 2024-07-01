@@ -1,6 +1,7 @@
 ﻿using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
+using static Mascari4615.MUtil;
 
 namespace Mascari4615
 {
@@ -11,7 +12,7 @@ namespace Mascari4615
 
 		public override void UpdateVoice()
 		{
-			if (NotOnline)
+			if (IsNotOnline())
 				return;
 
 			if (voiceManager.PlayerApis == null)

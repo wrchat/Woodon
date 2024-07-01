@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using VRC.SDKBase;
+using static Mascari4615.MUtil;
 
 namespace Mascari4615
 {
@@ -26,7 +25,7 @@ namespace Mascari4615
 
 		protected virtual void UpdateAllTag()
 		{
-			if (NotOnline)
+			if (IsNotOnline())
 				return;
 
 			isLocalPlayerIn = false;

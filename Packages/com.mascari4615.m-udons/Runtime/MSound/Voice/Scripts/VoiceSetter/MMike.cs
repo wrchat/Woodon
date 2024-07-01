@@ -1,6 +1,7 @@
 ﻿using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
+using static Mascari4615.MUtil;
 
 namespace Mascari4615
 {
@@ -11,7 +12,7 @@ namespace Mascari4615
 		[SerializeField] private VRC_Pickup pickup;
 		[SerializeField] private SyncedBool enable;
 
-		public bool IsPlayerHolding(VRCPlayerApi targetPlayer)
+		public bool IsPlayerHoldingThis(VRCPlayerApi targetPlayer)
 		{
 			return IsPlayerHolding(targetPlayer, pickup);
 		}
@@ -26,7 +27,7 @@ namespace Mascari4615
 
 		public bool IsPlayerHoldingAndEnabled(VRCPlayerApi targetPlayer)
 		{
-			return IsPlayerHolding(targetPlayer) && IsEnabled();
+			return IsPlayerHoldingThis(targetPlayer) && IsEnabled();
 		}
 
 		public override void OnPickupUseDown()

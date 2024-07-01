@@ -1,5 +1,4 @@
-﻿using QvPen.UdonScript;
-using TMPro;
+﻿using TMPro;
 using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
@@ -34,15 +33,15 @@ namespace Mascari4615
 
 		[Header("ETC")] private bool isBellOn = true;
 
-		private QvPen_Pen[] pens;
+		private UdonSharpBehaviour[] qvPens;
 
 		[Header("Sounds")] private AudioSource sfxAS;
 
 		private void Start()
 		{
-			Debug.Log(nameof(Start));
+			MDebugLog(nameof(Start));
 
-			pens = GameObject.Find("Pens").GetComponentsInChildren<QvPen_Pen>();
+			qvPens = GameObject.Find("Pens").GetComponentsInChildren<UdonSharpBehaviour>();
 			sfxAS = transform.Find("Sound").Find("SFX").GetComponent<AudioSource>();
 
 			mainUI.SetActive(false);
@@ -62,14 +61,14 @@ namespace Mascari4615
 
 			if (Input.GetKeyDown(KeyCode.Tab))
 			{
-				foreach (var item in canvasManagers)
+				foreach (CanvasManager item in canvasManagers)
 					item.ChangeCocktail();
 				mainUI.SetActive(true);
 				canvasManagers[0].Init();
 			}
 			else if (Input.GetKeyUp(KeyCode.Tab))
 			{
-				foreach (var item in canvasManagers)
+				foreach (CanvasManager item in canvasManagers)
 					item.ChangeCocktail();
 				mainUI.SetActive(false);
 				canvasManagers[0].Init();
@@ -88,8 +87,10 @@ namespace Mascari4615
 
 		public override void OnPlayerJoined(VRCPlayerApi player)
 		{
-			if (player == Networking.LocalPlayer) SendCustomNetworkEvent(NetworkEventTarget.All, nameof(Bell));
-			Debug.Log(nameof(OnPlayerJoined));
+			MDebugLog(nameof(OnPlayerJoined));
+			
+			if (player == Networking.LocalPlayer)
+				SendCustomNetworkEvent(NetworkEventTarget.All, nameof(Bell));
 		}
 
 		public void Bell()
@@ -101,48 +102,48 @@ namespace Mascari4615
 		public void ToggleBell()
 		{
 			isBellOn = !isBellOn;
-			foreach (var canvas in canvasManagers)
+			foreach (CanvasManager canvas in canvasManagers)
 				canvas.SetBellToggleImage(isBellOn);
 		}
 
 		public void MusicPause(bool isPaused)
 		{
-			foreach (var canvas in canvasManagers)
+			foreach (CanvasManager canvas in canvasManagers)
 				canvas.UpdateMusicPlayIcon(isPaused);
 		}
 
 		public void ToggleMike()
 		{
 			ToggleObject(mike);
-			foreach (var canvas in canvasManagers)
+			foreach (CanvasManager canvas in canvasManagers)
 				canvas.SetMikeActiveToggleImage(mike.activeSelf);
 		}
 
 		public void TogglePostProcess()
 		{
 			ToggleObject(postprocessObject);
-			foreach (var canvas in canvasManagers)
+			foreach (CanvasManager canvas in canvasManagers)
 				canvas.SetPostProcessToggleImage(postprocessObject.activeSelf);
 		}
 
 		public void TogglePiano()
 		{
 			ToggleObject(piano);
-			foreach (var canvas in canvasManagers)
+			foreach (CanvasManager canvas in canvasManagers)
 				canvas.SetPianoToggleImage(piano.activeSelf);
 		}
 
 		public void ToggleDrum()
 		{
 			ToggleObject(drum);
-			foreach (var canvas in canvasManagers)
+			foreach (CanvasManager canvas in canvasManagers)
 				canvas.SetDrumToggleImage(drum.activeSelf);
 		}
 
 		public void ToggleGuitar()
 		{
 			ToggleObject(guitar);
-			foreach (var canvas in canvasManagers)
+			foreach (CanvasManager canvas in canvasManagers)
 				canvas.SetGuitarToggleImage(guitar.activeSelf);
 		}
 
@@ -153,14 +154,14 @@ namespace Mascari4615
 
 		public void ToggleColliders()
 		{
-			foreach (var collider in colliders)
+			foreach (Collider collider in colliders)
 			{
 				if (collider == null)
 					continue;
 				collider.enabled = !collider.enabled;
 			}
 
-			foreach (var canvas in canvasManagers)
+			foreach (CanvasManager canvas in canvasManagers)
 				canvas.SetColliderToggleImage(colliders[0].enabled);
 		}
 
@@ -193,10 +194,10 @@ namespace Mascari4615
 
 		private void ResetPos(VRC_Pickup[] pickups)
 		{
-			foreach (var pickup in pickups)
+			foreach (VRC_Pickup pickup in pickups)
 			{
-				if (!Networking.IsOwner(Networking.LocalPlayer, pickup.gameObject))
-					Networking.SetOwner(Networking.LocalPlayer, pickup.gameObject);
+				SetOwner(pickup.gameObject);
+			
 				pickup.Drop();
 				pickup.transform.position = Vector3.down * 444f;
 			}
@@ -204,22 +205,26 @@ namespace Mascari4615
 
 		public void ResetPens_Global()
 		{
-			if (Networking.LocalPlayer.isMaster) SendCustomNetworkEvent(NetworkEventTarget.All, nameof(ResetPens));
+			if (Networking.LocalPlayer.isMaster)
+				SendCustomNetworkEvent(NetworkEventTarget.All, nameof(ResetPens));
 		}
 
 		public void ResetPens()
 		{
-			foreach (var pen in pens) pen._Respawn();
+			foreach (UdonSharpBehaviour pen in qvPens)
+				pen.SendCustomEvent("_Respawn");
 		}
 
 		public void ClearPens_Global()
 		{
-			if (Networking.LocalPlayer.isMaster) SendCustomNetworkEvent(NetworkEventTarget.All, nameof(ClearPens));
+			if (Networking.LocalPlayer.isMaster)
+				SendCustomNetworkEvent(NetworkEventTarget.All, nameof(ClearPens));
 		}
 
 		public void ClearPens()
 		{
-			foreach (var pen in pens) pen._Clear();
+			foreach (UdonSharpBehaviour pen in qvPens)
+				pen.SendCustomEvent("_Clear");
 		}
 	}
 }

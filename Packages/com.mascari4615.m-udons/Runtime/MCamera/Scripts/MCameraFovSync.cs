@@ -51,7 +51,7 @@ namespace Mascari4615
 
 		private void UpdateFov()
 		{
-			if (mCameraController.IsPlayerHolding(Networking.LocalPlayer) == false)
+			if (mCameraController.IsPlayerHoldingThis(Networking.LocalPlayer) == false)
 				return;
 			SetOwner();
 

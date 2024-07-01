@@ -8,31 +8,40 @@ namespace Mascari4615
 	public class UIMScore : MBase
 	{
 		[Header("_" + nameof(UIMScore))]
+		[SerializeField] private MScore mScore;
 		[SerializeField] private TextMeshProUGUI[] scoreTexts;
 		[SerializeField] private string format = "{0}";
 		[SerializeField] private GameObject[] hardButtons;
 		[SerializeField] private float printMultiply = 1;
 		[SerializeField] private int printPlus = 0;
-		private MScore mScore;
 
-		public void Init(MScore mScore)
+		private void Start()
 		{
-			this.mScore = mScore;
+			Init();
+		}
+
+		public void Init()
+		{
 			mScore.RegisterListener(this, nameof(UpdateUI));
+			UpdateUI();
 		}
 
 		public void UpdateUI()
 		{
 			int score = mScore.Score;
-			string scoreString = string.Format(format, ((int)(score * printMultiply) + printPlus).ToString());
+
+			string scoreString = ((int)(score * printMultiply) + printPlus).ToString();
+			string finalString = string.Format(format, scoreString);
+			finalString = finalString.Replace("MAX", mScore.MaxScore.ToString());
 
 			foreach (TextMeshProUGUI scoreText in scoreTexts)
-				scoreText.text = scoreString;
+				scoreText.text = finalString;
 
 			for (int i = 0; i < hardButtons.Length; i++)
 				hardButtons[i].SetActive(mScore.MinScore <= i && i <= mScore.MaxScore);
 		}
 
+		#region HorribleEvents
 		public void IncreaseScore() => mScore.IncreaseScore();
 		public void AddScore10() => mScore.AddScore(mScore.IncreaseAmount * 10);
 		public void DecreaseScore() => mScore.DecreaseScore();
@@ -49,5 +58,6 @@ namespace Mascari4615
 		public void SetScore7() => mScore.SetScore(7);
 		public void SetScore8() => mScore.SetScore(8);
 		public void SetScore9() => mScore.SetScore(9);
+		#endregion
 	}
 }

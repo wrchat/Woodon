@@ -19,8 +19,6 @@ namespace Mascari4615
 		[SerializeField] private CustomBool isMaxScore;
 		[SerializeField] private CustomBool isMinScore;
 
-		[SerializeField] private UIMScore[] uis;
-
 		[UdonSynced(), FieldChangeCallback(nameof(SyncedScore))] private int _syncedScore;
 		public int SyncedScore
 		{
@@ -52,9 +50,6 @@ namespace Mascari4615
 		private void Init()
 		{
 			MDebugLog($"{nameof(Init)}");
-
-			foreach (UIMScore ui in uis)
-				ui.Init(this);
 
 			if (useSync)
 			{

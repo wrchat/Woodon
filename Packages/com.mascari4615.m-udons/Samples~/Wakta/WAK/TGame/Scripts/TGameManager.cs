@@ -3,11 +3,11 @@ using TMPro;
 using UdonSharp;
 using UnityEngine;
 using UnityEngine.UI;
-using VRC.SDK3.Components;
 using VRC.SDK3.Video.Components;
 using VRC.SDKBase;
 using VRC.Udon.Common.Enums;
 using VRC.Udon.Common.Interfaces;
+using static Mascari4615.MUtil;
 
 namespace Mascari4615
 {

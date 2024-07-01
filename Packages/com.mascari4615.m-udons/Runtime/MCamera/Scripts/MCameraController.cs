@@ -1,6 +1,7 @@
 ﻿using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
+using static Mascari4615.MUtil;
 
 namespace Mascari4615
 {
@@ -12,7 +13,7 @@ namespace Mascari4615
 
 		// private CameraManager cameraManager;
 
-		public bool IsPlayerHolding(VRCPlayerApi playerApi)
+		public bool IsPlayerHoldingThis(VRCPlayerApi playerApi)
 		{
 			return IsPlayerHolding(playerApi, pickup);
 		}

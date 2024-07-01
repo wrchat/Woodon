@@ -1,8 +1,6 @@
-﻿
-using UdonSharp;
-using UnityEngine;
+﻿using UnityEngine;
 using VRC.SDKBase;
-using VRC.Udon;
+using static Mascari4615.MUtil;
 
 namespace Mascari4615
 {
@@ -14,7 +12,7 @@ namespace Mascari4615
 
 		private void Update()
 		{
-			if (NotOnline)
+			if (IsNotOnline())
 				return;
 
 			if (Networking.LocalPlayer.GetPosition().y < yPos)

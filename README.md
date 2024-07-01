@@ -1,9 +1,6 @@
 # MUdons
 
 - VRChat 컨텐츠 맵에 사용하고 있는 우동/프리팹들을 모은 유니티 패키지입니다.
-- 성능을 일부 포기하는 대신, 개발 편의/재사용에 중점을 뒀습니다.
-  - U#을 사용하지만, UdonGraph 같이 Event (C# 리플렉션/Unity 메시지 브로드캐스트) 기반으로 구현
-  - Static 사용에 제한이 있기에, Util/공통적인 기능을 모아둔 클래스를 직접 상속
 
 ## How to Use
 
@@ -19,12 +16,6 @@
 - 유니티 에디터의 `Package Manager` 창에서, `MUdons` 패키지를 찾고, `Samples` 페이지에서 샘플들을 찾아보세요.
 
 ## Require
-
-아래 에셋을 반드시 같이 사용해 주세요.  
-
-- [QvPen (Booth)](https://booth.pm/ja/items/1555789)
-  - [여기](https://vpm.ureishi.net/install)를 눌러, `QvPen`을 `VCC (VRChat Creator Conpanion)`에 등록해주세요.
-  - (위 링크는 해당 부스 페이지의 설명란에도 명시되어 있습니다.)
 
 아래 에셋은 일부 샘플에서 사용하지만, 반드시 추가할 필요는 없습니다.
 
@@ -96,7 +87,7 @@ UI 관련
 - [`KoreanKeyboard`](https://cafe.naver.com/steamindiegame/12922263) : VR 플레이어를 위한 한글 키보드
 - [`LoadingPanel`](https://karmotrine.booth.pm/items/4330479) : 월드 입장 시 잠깐 이미지 띄우기
 - Prefabs : 빠른 UI 제작을 위한 단순 Helper 프리팹
-  - `Flexible ~` : 자식 요소 크기에 따라 배경 크기도 동적으로 변경됨
+  - `AutoSize ~` : 자식 요소 크기에 따라 배경 크기도 동적으로 변경됨
   - `[Canvas] WorldSpace` : RenderMode WorldSpace, 스케일 .002 로 설정된 캔버스
 
 ### ⭐ PosFixer

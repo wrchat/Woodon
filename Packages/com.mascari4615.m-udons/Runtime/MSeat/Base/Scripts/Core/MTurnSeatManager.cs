@@ -1,5 +1,6 @@
 using UdonSharp;
 using UnityEngine;
+using static Mascari4615.MUtil;
 
 namespace Mascari4615
 {

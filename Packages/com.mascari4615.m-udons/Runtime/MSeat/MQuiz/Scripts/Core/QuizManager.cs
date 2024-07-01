@@ -2,6 +2,7 @@
 using UdonSharp;
 using UnityEngine;
 using UnityEngine.UI;
+using static Mascari4615.MUtil;
 
 namespace Mascari4615
 {

@@ -1,11 +1,5 @@
-﻿using System;
-using QvPen.UdonScript;
-using TMPro;
-using UdonSharp;
+﻿using UdonSharp;
 using UnityEngine;
-using UnityEngine.UI;
-using VRC.SDK3.Components;
-using VRC.SDKBase;
 using VRC.Udon.Common.Interfaces;
 
 namespace Mascari4615
@@ -14,63 +8,53 @@ namespace Mascari4615
 	public class QvPenSketchbook : MBase
 	{
 		[SerializeField] private GameObject[] sketchbooks;
-		[SerializeField] private QvPen_PenManager[] team0qvpens;
+		[SerializeField] private UdonSharpBehaviour[] qvPenManagers;
 
 		private Camera[] sketchbookCameras;
+		[SerializeField] private float screenShotDelay = .3f;
 
 		private void Start()
 		{
 			sketchbookCameras = new Camera[sketchbooks.Length];
-			ScreenShot();
-			for (var i = 0; i < sketchbooks.Length; i++)
+			for (int i = 0; i < sketchbooks.Length; i++)
 				sketchbookCameras[i] = sketchbooks[i].GetComponentInChildren<Camera>();
+			SetCameraActive(false);
 		}
 
-		[SerializeField] private float screenShotDelay = .3f;
 
-		public void ScreenShot_Delay()
+		public void ScreenShot_G()
 		{
-			SendCustomNetworkEvent(NetworkEventTarget.All, nameof(ScreenShot2));
-		}
-
-		public void ScreenShot2()
-		{
-			foreach (var sketchbookCamera in sketchbookCameras)
-				sketchbookCamera.gameObject.SetActive(true);
-			SendCustomEventDelayedSeconds(nameof(ScreenShot), screenShotDelay);
+			MDebugLog($"{nameof(ScreenShot_G)}");
+			SendCustomNetworkEvent(NetworkEventTarget.All, nameof(ScreenShot));
 		}
 
 		public void ScreenShot()
 		{
-			foreach (var sketchbookCamera in sketchbookCameras)
-				sketchbookCamera.gameObject.SetActive(false);
+			MDebugLog($"{nameof(ScreenShot)}");
+			SetCameraActive(true);
+			SendCustomEventDelayedSeconds(nameof(TurnOffCameras), screenShotDelay);
 		}
 
-		public void ResetQVPen_Global()
-		{
-			MDebugLog($"{nameof(ResetQVPen_Global)}");
+		public void TurnOnCameras() => SetCameraActive(true);
+		public void TurnOffCameras() => SetCameraActive(false);
 
-			SetOwner();
+		public void SetCameraActive(bool active)
+		{
+			foreach (Camera sketchbookCamera in sketchbookCameras)
+				sketchbookCamera.gameObject.SetActive(active);
+		}
+
+		public void ResetQVPen_G()
+		{
+			MDebugLog($"{nameof(ResetQVPen_G)}");
 			SendCustomNetworkEvent(NetworkEventTarget.All, nameof(ResetQVPen));
 		}
 
 		public void ResetQVPen()
 		{
 			MDebugLog($"{nameof(ResetQVPen)}");
-
-			foreach (var team0qvpen in team0qvpens)
-				team0qvpen.Clear();
-		}
-
-		[Header("TEMP")]
-		[SerializeField] private GameObject targetObject;
-		[SerializeField] private KeyCode targetKeyCode = KeyCode.Backspace;
-		private void Update()
-		{
-			if (Input.GetKeyDown(targetKeyCode))
-			{
-				targetObject.SetActive(false);
-			}
+			foreach (UdonSharpBehaviour qvPenManager in qvPenManagers)
+				qvPenManager.SendCustomEvent("Clear");
 		}
 	}
 }
