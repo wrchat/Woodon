@@ -1,7 +1,4 @@
-﻿using System;
-using UdonSharp;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UdonSharp;
 using VRC.SDKBase;
 
 namespace Mascari4615

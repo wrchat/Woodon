@@ -6,16 +6,6 @@ using static Mascari4615.MUtil;
 
 namespace Mascari4615
 {
-	public enum QuizGameState
-	{
-		Wait,
-		QuizTime,
-		SelectAnswer,
-		ShowPlayerAnswer,
-		CheckAnswer,
-		Scoring
-	}
-
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class QuizManager : MTurnSeatManager
 	{

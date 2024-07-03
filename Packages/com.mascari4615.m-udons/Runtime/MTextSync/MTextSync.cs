@@ -10,37 +10,23 @@ namespace Mascari4615
 	public class MTextSync : MEventSender
 	{
 		[Header("_" + nameof(MTextSync))]
-		[SerializeField] private bool useDefaultWhenEmpty = true;
-		[SerializeField] private string defaultString = string.Empty;
-		[SerializeField] private TextMeshProUGUI[] texts;
 		[SerializeField] private TMP_InputField inputField;
+		[SerializeField] private TextMeshProUGUI[] texts;
+
+		[Header("_" + nameof(MTextSync) + " - Options")]
+		[SerializeField] private string defaultString = string.Empty;
+		[SerializeField] private bool useDefaultWhenEmpty = true;
 		[SerializeField] private bool sync;
 		[SerializeField] private bool onlyDigit;
 		// [SerializeField] private int lengthLimit = 5000;
 
-		[UdonSynced]
-		[FieldChangeCallback(nameof(SyncText))]
-		private string syncText;
-
+		[UdonSynced, FieldChangeCallback(nameof(SyncText))] private string syncText;
 		public string SyncText
 		{
 			get => syncText;
 			set
 			{
 				syncText = value;
-				OnSyncTextChange();
-			}
-		}
-
-		private void Start()
-		{
-			if (Networking.IsMaster)
-			{
-				SyncText = defaultString;
-				RequestSerialization();
-			}
-			else
-			{
 				OnSyncTextChange();
 			}
 		}
@@ -61,6 +47,24 @@ namespace Mascari4615
 				child.text = newText;
 
 			SendEvents();
+		}
+
+		private void Start()
+		{
+			Init();
+		}
+		
+		private void Init()
+		{
+			if (Networking.IsMaster)
+			{
+				SyncText = defaultString;
+				RequestSerialization();
+			}
+			else
+			{
+				OnSyncTextChange();
+			}
 		}
 
 		public void SyncInputFieldText()
@@ -89,12 +93,11 @@ namespace Mascari4615
 
 		public bool IsVaildText(string targetText)
 		{
-			if (onlyDigit)
-				if (!IsDigit(targetText))
-				{
-					inputField.text = "숫자가 아닙니다";
-					return false;
-				}
+			if (onlyDigit && (IsDigit(targetText) == false))
+			{
+				inputField.text = "숫자가 아닙니다";
+				return false;
+			}
 
 			/*if (inputField.text.Length > lengthLimit)
 			{

@@ -29,27 +29,23 @@ namespace Mascari4615
 
 		private void InitUI()
 		{
-			foreach (var ui in UIs)
+			foreach (MVideoPlayerControllerUI ui in UIs)
 				ui.Init(this);
 		}
 
 		public void PlayVideo(int index) => mVideoPlayer.PlayURL(VideoDatas[index].VRCUrl);
 
+		#region HorribleEvents
 		[ContextMenu(nameof(PlayVideo0))]
 		public void PlayVideo0() => PlayVideo(0);
 		public void PlayVideo1() => PlayVideo(1);
 		public void PlayVideo2() => PlayVideo(2);
 
-		public void StopVideo()
-		{
-			MDebugLog(nameof(StopVideo));
-			mVideoPlayer.Stop();
-		}
+		[ContextMenu(nameof(StopVideo))]
+		public void StopVideo() => mVideoPlayer.Stop();
 
-		public void PauseResumeVideo()
-		{
-			MDebugLog(nameof(PauseResumeVideo));
-			mVideoPlayer.PauseResume();
-		}
+		[ContextMenu(nameof(PauseResumeVideo))]
+		public void PauseResumeVideo() => mVideoPlayer.PauseResume();
+		#endregion
 	}
 }

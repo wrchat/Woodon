@@ -52,11 +52,11 @@ namespace Mascari4615
 
 		public void SelectAnswerO() => SelectAnswer(QuizAnswerType.O);
 		public void SelectAnswerX() => SelectAnswer(QuizAnswerType.X);
-		public void SelectAnswerOne() => SelectAnswer(QuizAnswerType.One);
-		public void SelectAnswerTwo() => SelectAnswer(QuizAnswerType.Two);
-		public void SelectAnswerThree() => SelectAnswer(QuizAnswerType.Three);
-		public void SelectAnswerFour() => SelectAnswer(QuizAnswerType.Four);
-		public void SelectAnswerFive() => SelectAnswer(QuizAnswerType.Five);
+		public void SelectAnswer1() => SelectAnswer(QuizAnswerType.One);
+		public void SelectAnswer2() => SelectAnswer(QuizAnswerType.Two);
+		public void SelectAnswer3() => SelectAnswer(QuizAnswerType.Three);
+		public void SelectAnswer4() => SelectAnswer(QuizAnswerType.Four);
+		public void SelectAnswer5() => SelectAnswer(QuizAnswerType.Five);
 
 		public virtual void OnWait()
 		{

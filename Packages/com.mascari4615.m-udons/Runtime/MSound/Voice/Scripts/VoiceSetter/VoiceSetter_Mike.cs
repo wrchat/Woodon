@@ -9,6 +9,17 @@ namespace Mascari4615
 	{
 		[Header("_" + nameof(VoiceSetter_Mike))]
 		[SerializeField] private MMike[] mikes;
+		[SerializeField] private Transform mikesParent;
+		
+		public override void Init(VoiceManager voiceManager)
+		{
+			base.Init(voiceManager);
+
+			if (mikesParent == null)
+				return;
+			
+			mikes = mikesParent.GetComponentsInChildren<MMike>(true);
+		}
 
 		protected override bool IsAmplification(VRCPlayerApi playerAPI)
 		{

@@ -18,9 +18,9 @@ namespace Mascari4615
 		[field: SerializeField] public GameObject[] Childs { get; private set; }
 		[field: SerializeField] public Collider[] Colliders { get; private set; }
 		[field: SerializeField] public Rigidbody Rigidbody { get; private set; }
-		[SerializeField] private bool useGravityWhenOncePickedUp = false;
+		[SerializeField] protected bool useGravityWhenOncePickedUp = false;
 
-		[SerializeField] private CustomBool isHolding;
+		[SerializeField] protected CustomBool isHolding;
 		// [field: SerializeField] public CustomBool CustomBool { get; private set; }
 
 		private bool _enabled = true;

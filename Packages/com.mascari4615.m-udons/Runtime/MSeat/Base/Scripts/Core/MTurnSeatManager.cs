@@ -46,7 +46,7 @@ namespace Mascari4615
 		[field: SerializeField] public Sprite[] TurnDataSprites{ get; private set; }
 		[field: SerializeField] public Sprite TurnDataNoneSprite{ get; private set; }
 
-		public bool IsInited { get; private set; } = false;
+		public bool IsInited { get; protected set; } = false;
 
 		public void SetGameState(int newGameState)
 		{

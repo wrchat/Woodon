@@ -1,44 +1,38 @@
 ﻿using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
-using static Mascari4615.MUtil;
 
 namespace Mascari4615
 {
 	[RequireComponent(typeof(VRC_Pickup))]
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Continuous)]
-	public class MMike : MBase
+	public class MMike : MPickup
 	{
-		[SerializeField] private VRC_Pickup pickup;
-		[SerializeField] private SyncedBool enable;
-
-		public bool IsPlayerHoldingThis(VRCPlayerApi targetPlayer)
-		{
-			return IsPlayerHolding(targetPlayer, pickup);
-		}
+		[Header("_" + nameof(MMike))]
+		[SerializeField] private CustomBool mikeEnable;
 		
-		public bool IsEnabled()
+		public bool IsMikeEnabled()
 		{
-			if (enable != null)
-				return enable.Value;
+			if (mikeEnable != null)
+				return mikeEnable.Value;
 			else
 				return true;
 		}
 
 		public bool IsPlayerHoldingAndEnabled(VRCPlayerApi targetPlayer)
 		{
-			return IsPlayerHoldingThis(targetPlayer) && IsEnabled();
+			return IsHolding(targetPlayer) && IsMikeEnabled();
 		}
 
 		public override void OnPickupUseDown()
 		{
-			ToggleEnable();
+			ToggleMikeEnable();
 		}
 
-		public void ToggleEnable()
+		public void ToggleMikeEnable()
 		{
-			if (enable != null)
-				enable.ToggleValue();
+			if (mikeEnable != null)
+				mikeEnable.ToggleValue();
 		}
 	}
 }
