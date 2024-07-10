@@ -15,7 +15,7 @@ namespace Mascari4615
 		[SerializeField] private UITimeEvent[] timeEventUIs;
 		[SerializeField] private UITimeEventBar[] timeEventBarUIs;
 
-		[UdonSynced(UdonSyncMode.None), FieldChangeCallback(nameof(ExpireTime))] private int _expireTime = NONE_INT;
+		[UdonSynced(), FieldChangeCallback(nameof(ExpireTime))] private int _expireTime = NONE_INT;
 		public int ExpireTime
 		{
 			get => _expireTime;
@@ -26,7 +26,7 @@ namespace Mascari4615
 			}
 		}
 
-		[UdonSynced(UdonSyncMode.None), FieldChangeCallback(nameof(TimeSpeed))] private int _timeSpeed = 1;
+		[UdonSynced(), FieldChangeCallback(nameof(TimeSpeed))] private int _timeSpeed = 1;
 		public int TimeSpeed
 		{
 			get => _timeSpeed;
@@ -114,7 +114,7 @@ namespace Mascari4615
 			MDebugLog(nameof(SetTimeByMScore));
 
 			if (mScore != null)
-				SetExpireTime(Networking.GetServerTimeInMilliseconds() + (mScore.Score * 100));
+				SetExpireTime(Networking.GetServerTimeInMilliseconds() + (mScore.Value * 100));
 		}
 
 		public void AddTime()
@@ -135,7 +135,7 @@ namespace Mascari4615
 			if (ExpireTime == NONE_INT)
 				return;
 
-			SetExpireTime(ExpireTime + mScore.Score * 100);
+			SetExpireTime(ExpireTime + mScore.Value * 100);
 		}
 
 		public void ToggleTime()

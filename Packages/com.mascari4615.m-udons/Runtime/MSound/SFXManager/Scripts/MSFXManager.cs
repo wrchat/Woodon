@@ -24,6 +24,12 @@ namespace Mascari4615
 		{
 			MDebugLog($"{nameof(PlaySFX_L)} : {nameof(index)} = {index}");
 
+			bool isInvalidIndex = index >= AudioClips.Length;
+			bool isElementNull = isInvalidIndex && AudioClips[index] == null;
+			
+			if (isInvalidIndex || isElementNull)
+				return;
+
 			if (onlyOne)
 			{
 				audioSource.Stop();

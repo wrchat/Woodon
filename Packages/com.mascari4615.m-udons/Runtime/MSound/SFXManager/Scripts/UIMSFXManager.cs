@@ -24,8 +24,12 @@ namespace Mascari4615
 
 			for (int i = 0; i < buttons.Length; i++)
 			{
-				if (i >= sfxManager.AudioClips.Length)
+				bool isInvalidIndex = i >= sfxManager.AudioClips.Length;
+				bool isElementNull = (isInvalidIndex == false) && sfxManager.AudioClips[i] == null;
+
+				if (isInvalidIndex || isElementNull)
 				{
+					MDebugLog($"Invalid index: {i} | Element is null: {isElementNull}");
 					buttons[i].gameObject.SetActive(false);
 					continue;
 				}

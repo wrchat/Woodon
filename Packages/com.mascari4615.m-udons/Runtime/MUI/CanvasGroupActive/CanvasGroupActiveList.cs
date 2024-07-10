@@ -12,14 +12,14 @@ namespace Mascari4615
 
 		private void Start()
 		{
-			mScore.SetMinMaxScore(0, canvasGroups.Length - 1);
+			mScore.SetMinMaxValue(0, canvasGroups.Length - 1);
 		}
 
 		[ContextMenu(nameof(UpdateCanvasGroupByScore))]
 		public void UpdateCanvasGroupByScore()
 		{
 			if (mScore)
-				SetCanvasGroup(mScore.Score);
+				SetCanvasGroup(mScore.Value);
 		}
 
 		public void SetCanvasGroup(int targetIndex)

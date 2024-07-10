@@ -15,7 +15,7 @@ namespace Mascari4615
 
 		public void SetSeatDataByMScore()
 		{
-			mSeat.SetData(mScore.Score);
+			mSeat.SetData(mScore.Value);
 		}
 	}
 }

@@ -34,7 +34,7 @@ namespace Mascari4615
 				SetBool(customBool.Value);
 		}
 
-		public void SetBool(bool value)
+		public void SetBool(string boolName, bool value)
 		{
 			if (string.IsNullOrEmpty(boolName))
 				return;
@@ -42,6 +42,8 @@ namespace Mascari4615
 			foreach (Animator animator in Animators)
 				animator.SetBool(boolName, value);
 		}
+
+		public void SetBool(bool value) => SetBool(boolName, value);
 		
 		[ContextMenu(nameof(SetBoolTrue))]
 		public void SetBoolTrue() => SetBool(true);

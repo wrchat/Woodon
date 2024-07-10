@@ -9,7 +9,7 @@ namespace Mascari4615
 	public class AuctionSeat : MTurnSeat
 	{
 		[field: Header("_" + nameof(AuctionSeat))]
-		[field: UdonSynced(UdonSyncMode.None)] public int TryTime { get; private set; } = NONE_INT;
+		[field: UdonSynced()] public int TryTime { get; private set; } = NONE_INT;
 		public int RemainPoint => Data;
 		public int TryPoint => TurnData;
 		
@@ -24,11 +24,11 @@ namespace Mascari4615
 
 			AuctionManager auctionManager = (AuctionManager)seatManager;
 
-			if (auctionManager.GetMaxTurnData() >= tryPointMScore.Score)
+			if (auctionManager.GetMaxTurnData() >= tryPointMScore.Value)
 				return;
 
 			SetTryTime(Networking.GetServerTimeInMilliseconds());
-			SetTurnData(tryPointMScore.Score);
+			SetTurnData(tryPointMScore.Value);
 		}
 
 		public void SetTryTime(int newTryTime)
@@ -42,7 +42,7 @@ namespace Mascari4615
 		{
 			base.OnDataChange();
 
-			tryPointMScore.SetMinMaxScore(0, Data, IsOwner());
+			tryPointMScore.SetMinMaxValue(0, Data, IsOwner());
 		}
 
 		protected override void OnOwnerChange()
@@ -50,7 +50,7 @@ namespace Mascari4615
 			base.OnOwnerChange();
 
 			if (IsLocalPlayerID(OwnerID))
-				tryPointMScore.SetScore(0);
+				tryPointMScore.SetValue(0);
 		}
 
 		protected override void OnTurnDataChange(DataChangeState changeState)

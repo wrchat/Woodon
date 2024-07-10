@@ -62,7 +62,7 @@ namespace Mascari4615
 				OnQuizIndexChange();
 			}
 		}
-		[UdonSynced(UdonSyncMode.None), FieldChangeCallback(nameof(CurQuizIndex))]
+		[UdonSynced(), FieldChangeCallback(nameof(CurQuizIndex))]
 		private int _curQuizIndex = 0;
 
 		protected override void OnGameStateChange(int origin, int value)
@@ -82,7 +82,7 @@ namespace Mascari4615
 
 		protected override void Start()
 		{
-			curQuizIndex_MScore.SetMinMaxScore(0, QuizDatas.Length - 1);
+			curQuizIndex_MScore.SetMinMaxValue(0, QuizDatas.Length - 1);
 			base.Start();
 			UpdateStuff();
 		}
@@ -141,7 +141,7 @@ namespace Mascari4615
 		{
 			// Called By MScore Event
 			if (IsOwner())
-				SetQuizIndex(curQuizIndex_MScore.SyncedScore);
+				SetQuizIndex(curQuizIndex_MScore.SyncedValue);
 		}
 		public virtual void SetQuizIndex(int newIndex)
 		{

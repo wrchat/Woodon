@@ -9,8 +9,8 @@ namespace Mascari4615
     [UdonBehaviourSyncMode(BehaviourSyncMode.Continuous)]
     public class TransformSync : MBase
     {
-        [UdonSynced(UdonSyncMode.None)] private Vector3 syncPos;
-        [UdonSynced(UdonSyncMode.None)] private Quaternion syncRot;
+        [UdonSynced()] private Vector3 syncPos;
+        [UdonSynced()] private Quaternion syncRot;
 
         private void Start()
         {

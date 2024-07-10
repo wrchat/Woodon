@@ -10,7 +10,7 @@ namespace Mascari4615
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class MSeat : MBase
 	{
-		[UdonSynced(UdonSyncMode.None), FieldChangeCallback(nameof(OwnerID))]
+		[UdonSynced(), FieldChangeCallback(nameof(OwnerID))]
 		private int _ownerID = NONE_INT;
 		public int OwnerID
 		{
@@ -22,7 +22,7 @@ namespace Mascari4615
 			}
 		}
 
-		[UdonSynced(UdonSyncMode.None), FieldChangeCallback(nameof(Data))]
+		[UdonSynced(), FieldChangeCallback(nameof(Data))]
 		private int _data = NONE_INT;
 		public int Data
 		{

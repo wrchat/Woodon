@@ -24,7 +24,7 @@ namespace Mascari4615
 
 		public const int NO_ONE = -2;
 
-		[UdonSynced(UdonSyncMode.None), FieldChangeCallback(nameof(OwnerWaktaIndex))] private int ownerWaktaIndex = NO_ONE;
+		[UdonSynced(), FieldChangeCallback(nameof(OwnerWaktaIndex))] private int ownerWaktaIndex = NO_ONE;
 		public int OwnerWaktaIndex
 		{
 			get => ownerWaktaIndex;

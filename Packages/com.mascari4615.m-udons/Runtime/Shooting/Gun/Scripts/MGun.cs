@@ -38,10 +38,10 @@ namespace Mascari4615
 		{
 			shootingManager = GameObject.Find(nameof(ShootingManager)).GetComponent<ShootingManager>();
 
-			curAmmo.SetMinMaxScore(0, maxAmmo, recalcScore: false);
+			curAmmo.SetMinMaxValue(0, maxAmmo, recalcValue: false);
 
 			if (Networking.IsMaster)
-				curAmmo.SetScore(maxAmmo);
+				curAmmo.SetValue(maxAmmo);
 
 			reloadButton.SetActive((autoReload == false) && (maxAmmo != 0));
 		}
@@ -72,7 +72,7 @@ namespace Mascari4615
 						Reload();
 
 			if (IsHolding())
-				if (autoReload && (curAmmo.Score == 0))
+				if (autoReload && (curAmmo.Value == 0))
 					Reload();
 		}
 
@@ -93,7 +93,7 @@ namespace Mascari4615
 
 				if (maxAmmo != 0)
 				{
-					if (curAmmo.Score <= 0)
+					if (curAmmo.Value <= 0)
 					{
 						SendCustomNetworkEvent(NetworkEventTarget.All, nameof(BBangFailed));
 						return;
@@ -120,10 +120,10 @@ namespace Mascari4615
 
 			// if (LocalPlayerHolding())
 			{
-				if (curAmmo.Score == maxAmmo)
+				if (curAmmo.Value == maxAmmo)
 					return;
 
-				curAmmo.SetScore(maxAmmo);
+				curAmmo.SetValue(maxAmmo);
 
 				SendCustomNetworkEvent(NetworkEventTarget.All, nameof(ReloadSFX));
 

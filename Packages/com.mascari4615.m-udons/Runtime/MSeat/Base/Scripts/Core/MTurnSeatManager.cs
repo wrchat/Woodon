@@ -7,7 +7,7 @@ namespace Mascari4615
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class MTurnSeatManager : MEventSender
 	{
-		[UdonSynced(UdonSyncMode.None), FieldChangeCallback(nameof(CurGameState))]
+		[UdonSynced(), FieldChangeCallback(nameof(CurGameState))]
 		private int _curGameState = 0;
 		public int CurGameState
 		{
@@ -24,8 +24,7 @@ namespace Mascari4615
 
 		public MTurnSeat[] TurnSeats { get; private set; }
 
-		[Header("_" + nameof(MTurnSeatManager))]
-		[SerializeField] private UISeatManagerController[] uis;
+		[field: Header("_" + nameof(MTurnSeatManager))]
 		[field: SerializeField] public string[] StateToString { get; private set; }
 
 		[field: Header("_" + nameof(MTurnSeatManager) + "_Data")]
@@ -55,6 +54,9 @@ namespace Mascari4615
 			RequestSerialization();
 		}
 
+		public void NextGameState() => SetGameState(CurGameState + 1);
+		public void PrevGameState() => SetGameState(CurGameState - 1);
+
 		protected virtual void OnGameStateChange(int origin, int value)
 		{
 			// MDebugLog($"{nameof(OnGameStateChange)}, {origin} to {value}");
@@ -78,9 +80,6 @@ namespace Mascari4615
 
 			TurnSeats = GetComponentsInChildren<MTurnSeat>();
 
-			foreach (UISeatManagerController ui in uis)
-				ui.Init(this);
-
 			for (int i = 0; i < TurnSeats.Length; i++)
 				TurnSeats[i].Init(this, i);
 		}
@@ -88,9 +87,6 @@ namespace Mascari4615
 		public virtual void UpdateStuff()
 		{
 			// MDebugLog($"{nameof(UpdateStuff)}");
-
-			foreach (UISeatManagerController ui in uis)
-				ui.UpdateUI();
 		}
 
 		public int GetMaxData()

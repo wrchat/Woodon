@@ -36,7 +36,7 @@ namespace Mascari4615
 				mScoreSlider.Init();
 			}
 		}
-		[UdonSynced(UdonSyncMode.None), FieldChangeCallback(nameof(RemainCoin))] private int _bankCoin = 0;
+		[UdonSynced(), FieldChangeCallback(nameof(RemainCoin))] private int _bankCoin = 0;
 
 		private void Start()
 		{

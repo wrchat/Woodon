@@ -8,10 +8,14 @@ namespace Mascari4615
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public class VoiceReseter : VoiceUpdater
 	{
+		[Header("_" + nameof(VoiceReseter))]
 		[SerializeField] private MTarget[] ignoreTargets;
 
 		[SerializeField] private bool useIngnoreTargetTag;
 		[SerializeField] private VoiceAreaTag IgnoreTargetTag;
+
+		[SerializeField] private bool useTargetTag;
+		[SerializeField] private VoiceAreaTag targetTag;
 
 		public override void UpdateVoice()
 		{
@@ -21,20 +25,30 @@ namespace Mascari4615
 			if (voiceManager.PlayerApis == null)
 				return;
 
-			// 타겟이라면 무시
+			// 무시 MTarget 대상이라면 return
 			foreach (MTarget ignoreTarget in ignoreTargets)
 			{
 				if (ignoreTarget.IsTargetPlayer(Networking.LocalPlayer))
 					return;
 			}
 
-			// 타겟 태그를 가지고 있으면 무시
+			// 무시 태그를 가지고 있으면 return
 			if (useIngnoreTargetTag)
 			{
 				string tag =
 					Networking.LocalPlayer.GetPlayerTag($"{Networking.LocalPlayer.playerId}{IgnoreTargetTag}");
 
 				if (tag == TRUE_STRING)
+					return;
+			}
+
+			// 타겟 태그를 가지고 있지 않으면 return
+			if (useTargetTag)
+			{
+				string tag =
+					Networking.LocalPlayer.GetPlayerTag($"{Networking.LocalPlayer.playerId}{targetTag}");
+
+				if (tag != TRUE_STRING)
 					return;
 			}
 

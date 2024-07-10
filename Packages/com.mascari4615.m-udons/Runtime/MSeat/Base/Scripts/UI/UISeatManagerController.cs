@@ -7,17 +7,15 @@ namespace Mascari4615
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public class UISeatManagerController : MBase
 	{
+		[Header("_" + nameof(UISeatManagerController))]
+		[SerializeField] private MTurnSeatManager turnSeatManager;
 		[SerializeField] private TextMeshProUGUI curStateText;
-		private MTurnSeatManager turnSeatManager;
-		private bool isInit;
 
-		public void Init(MTurnSeatManager turnSeatManager)
+		private void Start() => Init();
+
+		public void Init()
 		{
-			if (isInit)
-				return;
-			isInit = true;
-
-			this.turnSeatManager = turnSeatManager;
+			turnSeatManager.RegisterListener(this, nameof(UpdateUI));
 		}
 
 		public void PrevState()
@@ -32,9 +30,6 @@ namespace Mascari4615
 
 		public void UpdateUI()
 		{
-			if (isInit == false)
-				return;
-
 			curStateText.text = turnSeatManager.StateToString[turnSeatManager.CurGameState];
 		}
 	}

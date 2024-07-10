@@ -28,7 +28,7 @@ namespace Mascari4615
 					SetCamera(OmakaseCamIndex);
 			}
 		}
-		[UdonSynced(UdonSyncMode.None), FieldChangeCallback(nameof(OmakaseCamIndex))] private int _omakaseCamIndex = 0;
+		[UdonSynced(), FieldChangeCallback(nameof(OmakaseCamIndex))] private int _omakaseCamIndex = 0;
 
 		[SerializeField] private TextMeshProUGUI curOwnerText;*/
 		[SerializeField] private KeyCode camOffKeyCode = KeyCode.Backspace;

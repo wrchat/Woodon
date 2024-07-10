@@ -9,7 +9,7 @@ public class SkyboxTransition : UdonSharpBehaviour
 {
     [SerializeField] private Material[] skyBoxes;
 
-    [UdonSynced(UdonSyncMode.None), FieldChangeCallback(nameof(State))]
+    [UdonSynced(), FieldChangeCallback(nameof(State))]
     private int state = 0;
 
     public int State

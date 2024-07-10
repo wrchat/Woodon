@@ -29,7 +29,7 @@ namespace Mascari4615
 
 		public bool IsLastRound => CurRound == RoundDatas.Length - 1;
 
-		[UdonSynced(UdonSyncMode.None), FieldChangeCallback(nameof(GameData))]
+		[UdonSynced(), FieldChangeCallback(nameof(GameData))]
 		private string _gameData = string.Empty;
 		public string GameData
 		{

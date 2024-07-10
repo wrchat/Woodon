@@ -1,8 +1,5 @@
-﻿using System;
-using UdonSharp;
+﻿using UdonSharp;
 using UnityEngine;
-using VRC.SDK3.Data;
-using VRC.Udon;
 using VRC.Udon.Common.Interfaces;
 
 namespace Mascari4615
@@ -13,6 +10,9 @@ namespace Mascari4615
 		[SerializeField] protected UdonSharpBehaviour[] targetUdons = new UdonSharpBehaviour[0];
 		[SerializeField] protected string[] eventNames = new string[0];
 		[SerializeField] protected bool sendGlobal;
+
+		protected UdonSharpBehaviour[][] targetUdonss = new UdonSharpBehaviour[0][];
+		protected string[][] eventNamess = new string[0][];
 
 		protected void SendEvents()
 		{
@@ -30,17 +30,34 @@ namespace Mascari4615
 			}
 		}
 
-		protected void SendEvent(int index)
-		{
-			MDebugLog($"{nameof(SendEvent)}, {nameof(index)} = {index}");
+		// protected void SendEvent(int index)
+		// {
+		// 	MDebugLog($"{nameof(SendEvent)}, {nameof(index)} = {index}");
 
+		// 	if (IsEventValid() == false)
+		// 		return;
+
+		// 	if (sendGlobal)
+		// 		targetUdons[index].SendCustomNetworkEvent(NetworkEventTarget.All, eventNames[index]);
+		// 	else
+		// 		targetUdons[index].SendCustomEvent(eventNames[index]);
+		// }
+
+		protected void SendEvents(int index)
+		{
 			if (IsEventValid() == false)
 				return;
 
-			if (sendGlobal)
-				targetUdons[index].SendCustomNetworkEvent(NetworkEventTarget.All, eventNames[index]);
-			else
-				targetUdons[index].SendCustomEvent(eventNames[index]);
+			UdonSharpBehaviour[] targetUdons = targetUdonss[index];
+			string[] eventNames = eventNamess[index];
+
+			for (int i = 0; i < targetUdons.Length; i++)
+			{
+				if (sendGlobal)
+					targetUdons[i].SendCustomNetworkEvent(NetworkEventTarget.All, eventNames[i]);
+				else
+					targetUdons[i].SendCustomEvent(eventNames[i]);
+			}
 		}
 
 		private bool IsEventValid()
@@ -62,10 +79,37 @@ namespace Mascari4615
 		/// </summary>
 		/// <param name="newUdon"></param>
 		/// <param name="eventName"></param>
-		public void RegisterListener(UdonSharpBehaviour newUdon, string eventName)
+		public void RegisterListener(UdonSharpBehaviour newUdon, string eventName, int index = NONE_INT)
+		{
+			if (index == NONE_INT)
+				RegisterListener_(ref targetUdons, ref eventNames, newUdon, eventName);
+			else
+			{
+				if (targetUdonss == null)
+					targetUdonss = new UdonSharpBehaviour[0][];
+
+				if (eventNamess == null)
+					eventNamess = new string[0][];
+
+				if (targetUdonss.Length <= index)
+					MDataUtil.ResizeArr(ref targetUdonss, index + 1);
+
+				if (eventNamess.Length <= index)
+					MDataUtil.ResizeArr(ref eventNamess, index + 1);
+
+				RegisterListener_(ref targetUdonss[index], ref eventNamess[index], newUdon, eventName);
+			}
+		}
+		
+		private void RegisterListener_(ref UdonSharpBehaviour[] targetUdons, ref string[] eventNames, UdonSharpBehaviour newUdon, string eventName)
 		{
 			if (targetUdons == null)
 				targetUdons = new UdonSharpBehaviour[0];
+
+			if (eventNames == null)
+				eventNames = new string[0];
+
+			MDebugLog($"{nameof(RegisterListener_)} : {newUdon.name}, {eventName}");
 
 			MDataUtil.ResizeArr(ref targetUdons, targetUdons.Length + 1);
 			targetUdons[targetUdons.Length - 1] = newUdon;
@@ -74,15 +118,36 @@ namespace Mascari4615
 			eventNames[eventNames.Length - 1] = eventName;
 		}
 
-		public void RemoveListener(UdonSharpBehaviour newUdon)
+		public void RemoveListener(UdonSharpBehaviour targetUdon, string targetEventName, int index = NONE_INT)
 		{
-			if (targetUdons == null)
+			if (index == NONE_INT)
+				RemoveListener_(ref targetUdons, ref eventNames, targetUdon, targetEventName);
+			else
+			{
+				if (targetUdonss == null || targetUdonss.Length <= index)
+					return;
+
+				if (eventNamess == null || eventNamess.Length <= index)
+					return;
+
+				RemoveListener_(ref targetUdonss[index], ref eventNamess[index], targetUdon, targetEventName);
+			}
+		}
+
+		private void RemoveListener_(ref UdonSharpBehaviour[] targetUdons, ref string[] eventNames, UdonSharpBehaviour targetUdon, string targetEventName)
+		{
+			if (targetUdons == null || targetUdons.Length == 0)
 				return;
+
+			if (eventNames == null || eventNames.Length == 0)
+				return;
+
+			MDebugLog($"{nameof(RemoveListener_)} : {targetUdon.name}");
 
 			int targetIndex = 0;
 			for (int i = 0; i < targetUdons.Length; i++)
 			{
-				if (targetUdons[i] == newUdon)
+				if (targetUdons[i] == targetUdon && eventNames[i] == targetEventName)
 				{
 					targetIndex = i;
 					break;

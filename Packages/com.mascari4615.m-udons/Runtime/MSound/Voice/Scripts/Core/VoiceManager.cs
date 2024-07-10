@@ -4,38 +4,6 @@ using VRC.SDKBase;
 
 namespace Mascari4615
 {
-	public enum VoiceState
-	{
-		Default,
-		Quiet,
-		Mute,
-		Amplification
-	}
-
-
-	public enum VoiceAreaTag
-	{
-		AREA_1,
-		AREA_2,
-		AREA_3,
-		AREA_4,
-
-		AREA_A,
-		AREA_B,
-		AREA_C,
-		AREA_D,
-
-		ROOM_1,
-		ROOM_2,
-		ROOM_3,
-		ROOM_4,
-
-		ROOM_A,
-		ROOM_B,
-		ROOM_C,
-		ROOM_D,
-	}
-
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public class VoiceManager : MBase
 	{
@@ -83,7 +51,7 @@ namespace Mascari4615
 
 		public void UpdateVoiceLoop()
 		{
-			if (updateTerm <= 0)
+			if (useLerp || updateTerm <= 0)
 				return;
 
 			SendCustomEventDelayedSeconds(nameof(UpdateVoiceLoop), updateTerm);
@@ -92,17 +60,17 @@ namespace Mascari4615
 
 		private void Update()
 		{
-			if (updateTerm <= 0)
+			if (useLerp || updateTerm <= 0)
 				UpdateVoice();
 		}
 
 		public void UpdateVoice()
 		{
-			if (!isInited)
+			if (isInited == false)
 				Init();
 
 			// 플레이어 리스트 유효성 확인
-			if (!CanUpdateNow)
+			if (CanUpdateNow == false)
 			{
 				UpdatePlayerList();
 				return;

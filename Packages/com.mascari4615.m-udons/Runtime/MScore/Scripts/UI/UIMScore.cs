@@ -28,7 +28,7 @@ namespace Mascari4615
 
 		public void UpdateUI()
 		{
-			int score = mScore.Score;
+			int score = mScore.Value;
 
 			string scoreString = ((int)(score * printMultiply) + printPlus).ToString();
 			string finalString = string.Format(format, scoreString);
@@ -43,21 +43,21 @@ namespace Mascari4615
 
 		#region HorribleEvents
 		public void IncreaseScore() => mScore.IncreaseScore();
-		public void AddScore10() => mScore.AddScore(mScore.IncreaseAmount * 10);
+		public void AddScore10() => mScore.AddValue(mScore.IncreaseAmount * 10);
 		public void DecreaseScore() => mScore.DecreaseScore();
-		public void SubScore10() => mScore.SubScore(mScore.DecreaseAmount * 10);
+		public void SubScore10() => mScore.SubValue(mScore.DecreaseAmount * 10);
 		public void ResetScore() => mScore.ResetScore();
 
-		public void SetScore0() => mScore.SetScore(0);
-		public void SetScore1() => mScore.SetScore(1);
-		public void SetScore2() => mScore.SetScore(2);
-		public void SetScore3() => mScore.SetScore(3);
-		public void SetScore4() => mScore.SetScore(4);
-		public void SetScore5() => mScore.SetScore(5);
-		public void SetScore6() => mScore.SetScore(6);
-		public void SetScore7() => mScore.SetScore(7);
-		public void SetScore8() => mScore.SetScore(8);
-		public void SetScore9() => mScore.SetScore(9);
+		public void SetScore0() => mScore.SetValue(0);
+		public void SetScore1() => mScore.SetValue(1);
+		public void SetScore2() => mScore.SetValue(2);
+		public void SetScore3() => mScore.SetValue(3);
+		public void SetScore4() => mScore.SetValue(4);
+		public void SetScore5() => mScore.SetValue(5);
+		public void SetScore6() => mScore.SetValue(6);
+		public void SetScore7() => mScore.SetValue(7);
+		public void SetScore8() => mScore.SetValue(8);
+		public void SetScore9() => mScore.SetValue(9);
 		#endregion
 	}
 }

@@ -197,9 +197,13 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 2609624310217218436}
   DEBUG: 1
-  timeTexts:
-  - {fileID: 7288669593463964581}
-  format: '{0:mm\:ss.ff}'
+  remainTimeTexts: []
+  format: '{0:mm\:ss}<size=100>.{0:ff}</size>'
+  remainTimeFlags: []
+  remainTimeColors: []
+  lerpColor: {r: 0, g: 0, b: 0, a: 0}
+  lerp: 0
+  lerpTime: 2
 --- !u!114 &2609624310217218436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,7 +276,7 @@ PrefabInstance:
     - target: {fileID: 2014848354449385375, guid: e002ba941fe96334da2a46058c114815,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 69.94
       objectReference: {fileID: 0}
     - target: {fileID: 2014848354449385375, guid: e002ba941fe96334da2a46058c114815,
         type: 3}
@@ -282,7 +286,7 @@ PrefabInstance:
     - target: {fileID: 2014848354449385375, guid: e002ba941fe96334da2a46058c114815,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 44.97
       objectReference: {fileID: 0}
     - target: {fileID: 2014848354449385375, guid: e002ba941fe96334da2a46058c114815,
         type: 3}

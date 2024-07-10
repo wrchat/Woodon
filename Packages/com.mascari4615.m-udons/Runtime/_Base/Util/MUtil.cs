@@ -56,5 +56,12 @@ namespace Mascari4615
 
 		public static void TP(Transform tr) => Networking.LocalPlayer.TeleportTo(tr.position, tr.rotation);
 		public static void TP(Vector3 pos, Quaternion rot = default) => Networking.LocalPlayer.TeleportTo(pos, rot);
+
+		public static void SetCanvasGroupActive(CanvasGroup canvasGroup, bool active)
+		{
+			canvasGroup.alpha = active ? 1 : 0;
+			canvasGroup.blocksRaycasts = active;
+			canvasGroup.interactable = active;
+		}
 	}
 }

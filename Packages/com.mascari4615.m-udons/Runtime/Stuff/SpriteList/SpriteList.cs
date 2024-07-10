@@ -50,7 +50,7 @@ namespace Mascari4615
 		{
 			MDebugLog(nameof(SetAllByMScore));
 			if (mScore_SpriteIndex)
-				SetAll(mScore_SpriteIndex.Score);
+				SetAll(mScore_SpriteIndex.Value);
 		}
 
 		public void SetAll(int spriteIndex)

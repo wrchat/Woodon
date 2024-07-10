@@ -24,7 +24,7 @@ namespace Mascari4615
 
 		private float fovValue = 40;
 		private bool isLocal;
-		private readonly bool isLookingAt = false;
+		// private readonly bool isLookingAt = false;
 		[SerializeField] private MCameraFovSync mCameraFovSync;
 		[SerializeField] private MCameraPosSync mCameraPosSync;
 		[SerializeField] private Camera targetCamera;

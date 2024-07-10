@@ -15,30 +15,30 @@ namespace Mascari4615
 		[SerializeField] private int defaultScore = 0;
 		[SerializeField] private MScoreStyle style = MScoreStyle.Clamp;
 
-		[SerializeField] private bool useSync;
+		[SerializeField] private bool useSync = true;
 		[SerializeField] private CustomBool isMaxScore;
 		[SerializeField] private CustomBool isMinScore;
 
-		[UdonSynced(), FieldChangeCallback(nameof(SyncedScore))] private int _syncedScore;
-		public int SyncedScore
+		[UdonSynced(), FieldChangeCallback(nameof(SyncedValue))] private int _syncedValue;
+		public int SyncedValue
 		{
-			get => _syncedScore;
+			get => _syncedValue;
 			set
 			{
-				_syncedScore = value;
+				_syncedValue = value;
 
 				if (useSync)
-					SetScore(_syncedScore, isReciever: true);
+					SetValue(_syncedValue, isReciever: true);
 			}
 		}
-		private int _score;
-		public int Score
+		private int _value;
+		public int Value
 		{
-			get => _score;
+			get => _value;
 			set
 			{
-				_score = value;
-				OnScoreChange();
+				_value = value;
+				OnValueChange();
 			}
 		}
 
@@ -55,102 +55,102 @@ namespace Mascari4615
 			{
 				if (Networking.IsMaster)
 				{
-					SyncedScore = defaultScore;
+					SyncedValue = defaultScore;
 					RequestSerialization();
 				}
 			}
 			else
 			{
-				SetScore(defaultScore);
+				SetValue(defaultScore);
 			}
 
-			OnScoreChange();
+			OnValueChange();
 		}
 
-		public void SetMinMaxScore(int min, int max, bool recalcScore = true)
+		public void SetMinMaxValue(int min, int max, bool recalcValue = true)
 		{
-			MDebugLog($"{nameof(SetMinMaxScore)}");
+			MDebugLog($"{nameof(SetMinMaxValue)}");
 
 			MinScore = min;
 			MaxScore = max;
 
-			if (recalcScore)
-				SetScore(Score);
+			if (recalcValue)
+				SetValue(Value);
 		}
 
-		public void SetScore(int newScore, bool isReciever = false)
+		public void SetValue(int newValue, bool isReciever = false)
 		{
-			MDebugLog($"{nameof(SetScore)}");
+			MDebugLog($"{nameof(SetValue)}");
 
-			int actualScore = newScore;
+			int actualValue = newValue;
 
 			switch (style)
 			{
 				case MScoreStyle.None:
-					if (actualScore > MaxScore)
+					if (actualValue > MaxScore)
 						return;
-					if (actualScore < MinScore)
+					if (actualValue < MinScore)
 						return;
 					break;
 				// Clamp
 				case MScoreStyle.Clamp:
-					actualScore = Mathf.Clamp(actualScore, MinScore, MaxScore);
+					actualValue = Mathf.Clamp(actualValue, MinScore, MaxScore);
 					break;
 				// LoopA : 초과/미만 시 반대쪽으로 이동 (이때 MinScore, MaxScore는 포함되지 않음)
 				// { ..., Max - 1, Max == Min, Min + 1, ... }
 				// ex) MinScore : 0, MaxScore : 100, Score : 101 -> 1
 				// ex) MinScore : 0, MaxScore : 100, Score : -1 -> 99
 				case MScoreStyle.LoopA:
-					if (actualScore > MaxScore)
-						actualScore = MinScore + (actualScore - MaxScore);
-					else if (actualScore < MinScore)
-						actualScore = MaxScore - (MinScore - actualScore);
+					if (actualValue > MaxScore)
+						actualValue = MinScore + (actualValue - MaxScore);
+					else if (actualValue < MinScore)
+						actualValue = MaxScore - (MinScore - actualValue);
 					break;
 				// LoopB : 초과/미만 시 반대쪽으로 이동 (이때 MinScore, MaxScore는 포함됨)
 				// { ..., Max - 1, Max, Min, Min + 1, ... }
 				// ex) MinScore : 0, MaxScore : 100, Score : 101 -> 0
 				// ex) MinScore : 0, MaxScore : 100, Score : -1 -> 100
 				case MScoreStyle.LoopB:
-					if (actualScore > MaxScore)
-						actualScore = MinScore + (actualScore - MaxScore) - 1;
-					else if (actualScore < MinScore)
-						actualScore = MaxScore - (MinScore - actualScore) + 1;
+					if (actualValue > MaxScore)
+						actualValue = MinScore + (actualValue - MaxScore) - 1;
+					else if (actualValue < MinScore)
+						actualValue = MaxScore - (MinScore - actualValue) + 1;
 					break;
 			}
 
 			if (useSync)
 			{
-				if (SyncedScore != actualScore)
+				if (SyncedValue != actualValue)
 				{
 					if (isReciever == false)
 					{
 						SetOwner();
-						SyncedScore = actualScore;
+						SyncedValue = actualValue;
 						RequestSerialization();
 					}
 				}
 			}
 
-			Score = actualScore;
+			Value = actualValue;
 		}
 
-		private void OnScoreChange()
+		private void OnValueChange()
 		{
-			MDebugLog(nameof(OnScoreChange));
+			MDebugLog(nameof(OnValueChange));
 
 			if (isMaxScore != null)
-				isMaxScore.SetValue(Score == MaxScore);
+				isMaxScore.SetValue(Value == MaxScore);
 			
 			if (isMinScore != null)
-				isMinScore.SetValue(Score == MinScore);
+				isMinScore.SetValue(Value == MinScore);
 
 			SendEvents();
 		}
 
-		public void IncreaseScore() => SetScore(Score + IncreaseAmount);
-		public void AddScore(int amount) => SetScore(Score + amount);
-		public void DecreaseScore() => SetScore(Score - DecreaseAmount);
-		public void SubScore(int amount) => SetScore(Score - amount);
-		public void ResetScore() => SetScore(defaultScore);
+		public void IncreaseScore() => SetValue(Value + IncreaseAmount);
+		public void AddValue(int amount) => SetValue(Value + amount);
+		public void DecreaseScore() => SetValue(Value - DecreaseAmount);
+		public void SubValue(int amount) => SetValue(Value - amount);
+		public void ResetScore() => SetValue(defaultScore);
 	}
 }

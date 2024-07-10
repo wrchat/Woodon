@@ -36,7 +36,7 @@ namespace Mascari4615
 				newMaterial = materials[switcher.Value ? 1 : 0];
 
 			if (materialIndex)
-				newMaterial = materials[materialIndex.Score];
+				newMaterial = materials[materialIndex.Value];
 
 			for (int i = 0; i < meshRenderers.Length; i++)
 			{

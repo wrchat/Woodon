@@ -17,7 +17,7 @@ namespace Mascari4615
 		public DrawElementData[] DrawElementDatas { get; private set; }
 		public bool IsInited { get; private set; } = false;
 
-		[UdonSynced(UdonSyncMode.None), FieldChangeCallback(nameof(DataPacks))] private string dataPacks = string.Empty;
+		[UdonSynced(), FieldChangeCallback(nameof(DataPacks))] private string dataPacks = string.Empty;
 		public string DataPacks
 		{
 			get => dataPacks;

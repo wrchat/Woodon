@@ -11,7 +11,7 @@ namespace Mascari4615
 		/*private const char DATA_SET_SEPARATER = '#';
         private const char DATA_SEPARATER = '|';
 
-        // [UdonSynced(UdonSyncMode.None), FieldChangeCallback(nameof(Money))]
+        // [UdonSynced(), FieldChangeCallback(nameof(Money))]
         public int _money;
         private int Money
         {
@@ -67,7 +67,7 @@ namespace Mascari4615
         [SerializeField] private TextMeshProUGUI debugText;
         [SerializeField] private string format = "$ {0:F0}";
 
-        [UdonSynced(UdonSyncMode.None), FieldChangeCallback(nameof(GlobalMoneyData))] private string _globalMoneyData = "";
+        [UdonSynced(), FieldChangeCallback(nameof(GlobalMoneyData))] private string _globalMoneyData = "";
         public string GlobalMoneyData
         {
             get => _globalMoneyData;

@@ -79,7 +79,7 @@ namespace Mascari4615
 			return order;
 		}
 
-		[UdonSynced(UdonSyncMode.None), FieldChangeCallback(nameof(Lock))] private bool _lock;
+		[UdonSynced(), FieldChangeCallback(nameof(Lock))] private bool _lock;
 		public bool Lock
 		{
 			get => _lock;

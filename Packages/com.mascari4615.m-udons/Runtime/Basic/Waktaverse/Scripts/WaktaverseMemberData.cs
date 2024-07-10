@@ -6,7 +6,7 @@ namespace Mascari4615
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class WaktaverseMemberData : MBase
 	{
-		[UdonSynced(UdonSyncMode.None), FieldChangeCallback(nameof(SyncData))] private string _syncData;
+		[UdonSynced(), FieldChangeCallback(nameof(SyncData))] private string _syncData;
 		public string SyncData
 		{
 			get => _syncData;

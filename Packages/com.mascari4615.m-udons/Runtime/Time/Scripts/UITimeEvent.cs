@@ -14,9 +14,10 @@ namespace Mascari4615
 		[SerializeField] private string format = "{0:mm\\:ss.ff}";
 		[SerializeField] private float[] remainTimeFlags;
 		[SerializeField] private Color[] remainTimeColors;
+		private Color[] defaultColors;
 
 		[Header("_ Lerp")]
-		[SerializeField] private Color lerpColor;
+		[SerializeField] private Color lerpColor = Color.red;
 		[SerializeField] private bool lerp;
 		[SerializeField] private float lerpTime = 2;
 		private float curLerpTime = 0;
@@ -36,6 +37,10 @@ namespace Mascari4615
 		public void Init(TimeEvent timeEvent)
 		{
 			this.timeEvent = timeEvent;
+
+			defaultColors = new Color[remainTimeTexts.Length];
+			for (int i = 0; i < remainTimeTexts.Length; i++)
+				defaultColors[i] = remainTimeTexts[i].color;
 		}
 
 		private void Update()
@@ -60,11 +65,11 @@ namespace Mascari4615
 
 			string formatedString = string.Format(format, timeSpan);
 
-			Color color = Color.white;
+			Color color = default;
 
 			if (timeEvent.ExpireTime == NONE_INT)
 			{
-				color = Color.white;
+				color = default;
 			}
 			else if (IsLerping)
 			{
@@ -79,17 +84,15 @@ namespace Mascari4615
 				}
 			}
 
-			foreach (TextMeshProUGUI remainTimeText in remainTimeTexts)
+			for (int i = 0; i < remainTimeTexts.Length; i++)
 			{
-				remainTimeText.text = formatedString;
-				remainTimeText.color = color;
+				remainTimeTexts[i].text = formatedString;
+				remainTimeTexts[i].color = color == default ? defaultColors[i] : color;
 			}
 		}
 
 		private void CalcTime()
 		{
-			// remainChangeTime = Mathf.Lerp(remainChangeTime, 0, Time.deltaTime * lerpSpeed);
-			// remainChangeTime = Mathf.Max(remainChangeTime - Time.deltaTime * lerpSpeed, 0);
 			curLerpTime = Mathf.Max(curLerpTime - Time.deltaTime, 0);
 
 			// 타이머가 멈춰있거나,
@@ -127,22 +130,10 @@ namespace Mascari4615
 			// 1-2. Lerp
 			if (lastExpireTime != timeEvent.ExpireTime)
 			{
-				// // 강제 보정 (.5초)
-				// if (Mathf.Abs(lastExpireTime - timeEvent.ExpireTime) <= 500)
-				// {
-				// 	lastExpireTime = timeEvent.ExpireTime;
-				// }
-				// else
-				// {
-				// 	lastExpireTime = (int)Mathf.Lerp(lastExpireTime, timeEvent.ExpireTime, Time.deltaTime * lerpSpeed);
-				// }
-
 				int Max = Mathf.Max(lastExpireTime, timeEvent.ExpireTime);
 				int Min = Mathf.Min(lastExpireTime, timeEvent.ExpireTime);
 
-				// remainChangeTime = timeEvent.ExpireTime - lastExpireTime;
 				changedTimeDiff = Max - Min;
-				// MDebugLog($"remainChangeTime: {remainChangeTime} = {timeEvent.ExpireTime} - {lastExpireTime}");
 				MDebugLog($"remainChangeTime: {changedTimeDiff} = {Max} - {Min}");
 				lastExpireTime = timeEvent.ExpireTime;
 

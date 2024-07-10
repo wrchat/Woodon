@@ -15,7 +15,7 @@ namespace Mascari4615
 		//[SerializeField] private string[] trueEventNames;
 		//[SerializeField] private string[] falseEventNames;
 
-		[UdonSynced(UdonSyncMode.None), FieldChangeCallback(nameof(SyncValue))]
+		[UdonSynced(), FieldChangeCallback(nameof(SyncValue))]
 		private bool _syncValue;
 		public bool SyncValue
 		{

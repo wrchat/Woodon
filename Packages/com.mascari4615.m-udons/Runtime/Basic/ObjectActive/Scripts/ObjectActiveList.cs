@@ -19,14 +19,14 @@ namespace Mascari4615
 			maxLen = Mathf.Max(maxLen, canvasGroups.Length);
 			maxLen = Mathf.Max(maxLen, pickups.Length);
 
-			mScore.SetMinMaxScore(0, maxLen - 1);
+			mScore.SetMinMaxValue(0, maxLen - 1);
 		}
 
 		[ContextMenu(nameof(UpdateObjectByScore))]
 		public void UpdateObjectByScore()
 		{
 			if (mScore)
-				SetObject(mScore.Score);
+				SetObject(mScore.Value);
 		}
 
 		public void SetObject(int targetIndex)

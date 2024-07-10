@@ -13,10 +13,10 @@ namespace Mascari4615
 
 		public void SetPlayerTeamByDropdown()
 		{
-			if ((drawManager.DrawElementDatas.Length <= mScore.Score) || (0 > mScore.Score))
+			if ((drawManager.DrawElementDatas.Length <= mScore.Value) || (0 > mScore.Value))
 				return;
 
-			drawManager.SetElementData(mScore.Score, (TeamType)(dropdown.value - 1), DrawRole.Normal, true);
+			drawManager.SetElementData(mScore.Value, (TeamType)(dropdown.value - 1), DrawRole.Normal, true);
 			drawManager.SyncData();
 		}
 	}
