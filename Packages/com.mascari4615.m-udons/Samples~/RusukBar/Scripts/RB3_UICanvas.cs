@@ -1,16 +1,79 @@
-﻿
-using UdonSharp;
+﻿using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
-using VRC.Udon;
 
-namespace Mascari4615
+namespace Mascari4615.Project.RusukBar
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public class RB3_UICanvas : UdonSharpBehaviour
 	{
-		[SerializeField] private Canvas canvas;
+		[Header("_" + nameof(RB3_UICanvas))]
+		[SerializeField] private bool isOverlayCanvas;
+		private UISettingButton[] settingButtons;
+
 		[SerializeField] private Transform[] uiPositions;
+
+		private RB3_GameManager gameManager;
+
+		public void Init()
+		{
+			gameManager = GameObject.Find("GameManager").GetComponent<RB3_GameManager>();
+		
+			settingButtons = GetComponentsInChildren<UISettingButton>(true);
+			foreach (UISettingButton uiSettingButton in settingButtons)
+				uiSettingButton.Init(this);
+		}
+
+		public void ResetAllPos()
+		{
+			gameManager.ResetAllPos();
+		}
+
+		public void ResetCocktailPos()
+		{
+			gameManager.ResetCocktailPos();
+		}
+
+		public void ResetPizzaPos()
+		{
+			gameManager.ResetPizzaPos();
+		}
+
+		public void ResetChessPos()
+		{
+			gameManager.ResetChessPos();
+		}
+
+		public void ResetPens_Global()
+		{
+			gameManager.ResetPens_Global();
+		}
+
+		public void ResetPens()
+		{
+			gameManager.ResetPens();
+		}
+
+		public void ClearPens_Global()
+		{
+			gameManager.ClearPens_Global();
+		}
+
+		public void ClearPens()
+		{
+			gameManager.ClearPens();
+		}
+
+		public void ToggleObject(ToggleType objectType)
+		{
+			gameManager.ToggleObject(objectType);
+		}
+
+		public void UpdateToggleUI(bool[] bools)
+		{
+			foreach (UISettingButton uiSettingButton in settingButtons)
+				uiSettingButton.UpdateUI(bools[(int)uiSettingButton.ToggleObjectType]);
+		}
 
 		private void Update()
 		{

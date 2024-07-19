@@ -10,6 +10,6 @@ namespace Mascari4615
         [SerializeField] private MScore curGame;
         [SerializeField] private int gameIndex;
         
-        public bool IsCurGame => curGame.SyncedScore == gameIndex;
+        public bool IsCurGame => curGame.SyncedValue == gameIndex;
     }
 }

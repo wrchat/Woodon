@@ -13,7 +13,7 @@ namespace Mascari4615
 		public void ResetAllSeats()
 		{
 			foreach (var v in v2GameSeats)
-				v.SetScore(0);
+				v.SetValue(0);
 		}
 	}
 }

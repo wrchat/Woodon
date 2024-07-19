@@ -23,7 +23,7 @@ namespace Mascari4615
 		[SerializeField] private Image[] playerFades;
 		[SerializeField] private Button[] playerButtons;
 
-		[UdonSynced(), FieldChangeCallback(nameof(TargetPlayerIndex))]
+		[UdonSynced(UdonSyncMode.None), FieldChangeCallback(nameof(TargetPlayerIndex))]
 		private int _targetPlayerIndex = NONE_INT;
 		public int TargetPlayerIndex
 		{

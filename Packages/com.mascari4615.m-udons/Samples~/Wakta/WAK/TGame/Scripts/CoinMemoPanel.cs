@@ -54,7 +54,7 @@ namespace Mascari4615
 		public void UpdateMemo()
 		{
 			MDebugLog(nameof(UpdateMemo));
-			coinText.text = coinMemo.MScore.Score.ToString();
+			coinText.text = coinMemo.MScore.Value.ToString();
 
 			if (gameManager.IsGaming == false)
 				return;
@@ -73,9 +73,9 @@ namespace Mascari4615
 			}
 
 			if (coinMemo.IsTargetRemainCoinBox)
-				remainCoinBoxes[coinMemo.TargetCoinBoxIndex].UpdateCoin(coinMemo.MScore.Score);
+				remainCoinBoxes[coinMemo.TargetCoinBoxIndex].UpdateCoin(coinMemo.MScore.Value);
 			else
-				stealCoinBoxes[coinMemo.TargetCoinBoxIndex].UpdateCoin(coinMemo.MScore.Score);
+				stealCoinBoxes[coinMemo.TargetCoinBoxIndex].UpdateCoin(coinMemo.MScore.Value);
 
 			if (gameManager.IsGaming)
 				for (int i = 0; i < TGameManager.PLAYER_COUNT; i++)
@@ -113,7 +113,7 @@ namespace Mascari4615
 		{
 			var target = isRemainCoinBox ? remainCoinBoxes[coinMemo.TargetCoinBoxIndex] : stealCoinBoxes[coinMemo.TargetCoinBoxIndex];
 			// coinMemo.MScore.SetCanvasActive(!target.IsLock);
-			coinMemo.MScore.SetScore(target.Coin);
+			coinMemo.MScore.SetValue(target.Coin);
 
 			for (int i = 0; i < remainCoinBoxes.Length; i++)
 				remainCoinBoxes[i].UpdateColor(isRemainCoinBox && (i == coinMemo.TargetCoinBoxIndex));
@@ -196,13 +196,13 @@ namespace Mascari4615
 
 		public void SubScore10()
 		{
-			coinMemo.MScore.SubScore(coinMemo.MScore.DecreaseAmount * 10);
+			coinMemo.MScore.SubValue(coinMemo.MScore.DecreaseAmount * 10);
 			coinMemo.UpdateUI();
 		}
 
 		public void AddScore10()
 		{
-			coinMemo.MScore.AddScore(coinMemo.MScore.IncreaseAmount * 10);
+			coinMemo.MScore.AddValue(coinMemo.MScore.IncreaseAmount * 10);
 			coinMemo.UpdateUI();
 		}
 

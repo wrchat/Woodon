@@ -21,6 +21,7 @@ namespace Mascari4615
 		[SerializeField] protected bool useGravityWhenOncePickedUp = false;
 
 		[SerializeField] protected CustomBool isHolding;
+		[SerializeField] protected CustomBool isSomeoneHolding;
 		// [field: SerializeField] public CustomBool CustomBool { get; private set; }
 
 		private bool _enabled = true;
@@ -118,6 +119,8 @@ namespace Mascari4615
 
 		public override void OnPickup()
 		{
+			// MDebugLog(nameof(OnPickup));
+
 			if (useGravityWhenOncePickedUp)
 				UseGravity(true);
 
@@ -127,8 +130,28 @@ namespace Mascari4615
 
 		public override void OnDrop()
 		{
+			// MDebugLog(nameof(OnDrop));
+		
 			if (isHolding != null)
 				isHolding.SetValue(false);
+		}
+
+		protected virtual void Update()
+		{
+			if (isSomeoneHolding == null)
+				return;
+
+			VRCPlayerApi[] players = GetPlayers();
+			foreach (VRCPlayerApi player in players)
+			{
+				if (IsPlayerHolding(player, Pickup))
+				{
+					isSomeoneHolding.SetValue(true);
+					return;
+				}
+			}
+
+			isSomeoneHolding.SetValue(false);
 		}
 
 		public void UseGravity(bool useGravity)

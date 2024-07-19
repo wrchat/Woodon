@@ -100,7 +100,7 @@ namespace Mascari4615
 			if (parse < 0 || parse >= QuizDatas.Length)
 				return;
 
-			curQuizIndex_MScore.SetScore(parse);
+			curQuizIndex_MScore.SetValue(parse);
 		}
 
 		[SerializeField] private MTargetBool wallActiveViichanBool;

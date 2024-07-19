@@ -8,7 +8,7 @@ namespace Mascari4615
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class WGameHiddenManager : MBase
 	{
-		[UdonSynced(), FieldChangeCallback(nameof(DoorOpen))] private bool _doorOpen = false;
+		[UdonSynced(UdonSyncMode.None), FieldChangeCallback(nameof(DoorOpen))] private bool _doorOpen = false;
 		public bool DoorOpen
 		{
 			get => _doorOpen;

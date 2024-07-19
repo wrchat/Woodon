@@ -10,7 +10,7 @@ namespace Mascari4615
 		public static string GetWaktaMemberInitSyncData() => $"{FALSE_STRING}{DATA_SEPARATOR}{FALSE_STRING}{DATA_SEPARATOR}{FALSE_STRING}";
 		public static string GetWaktaMemberClearSyncData() => $"{TRUE_STRING}{DATA_SEPARATOR}{TRUE_STRING}{DATA_SEPARATOR}{TRUE_STRING}";
 
-		[UdonSynced(), FieldChangeCallback(nameof(SelectedMember))] private WaktaMember _selectedMember = WaktaMember.None;
+		[UdonSynced(UdonSyncMode.None), FieldChangeCallback(nameof(SelectedMember))] private WaktaMember _selectedMember = WaktaMember.None;
 		public WaktaMember SelectedMember
 		{
 			get => _selectedMember;

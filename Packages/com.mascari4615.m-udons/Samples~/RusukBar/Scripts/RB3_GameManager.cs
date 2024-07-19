@@ -1,61 +1,73 @@
-﻿
-using UdonSharp;
+﻿using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
-using VRC.Udon;
 using VRC.Udon.Common.Interfaces;
 
-namespace Mascari4615
+namespace Mascari4615.Project.RusukBar
 {
+	public enum ToggleType
+	{
+		PostProcess = 0,
+		Bell,
+		Mike,
+		Piano,
+		Drum,
+		Guitar,
+		Collider,
+		Music,
+	}
+
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class RB3_GameManager : MBase
 	{
-		/*[SerializeField] private GameObject mainUI;
-		[SerializeField] private Transform[] vrUIPos;
-		public CanvasManager[] canvasManagers;
+		[Header("_" + nameof(RB3_GameManager))]
+		public RB3_UICanvas[] uis;
 		private bool isVR = false;
 
-		[Header("Objects")][SerializeField] private GameObject postprocessObject;
-
-		[SerializeField] private GameObject piano;
-		[SerializeField] private GameObject guitar;
-		[SerializeField] private GameObject drum;
-		[SerializeField] private GameObject mike;
+		[Header("Objects")]
+		[SerializeField] private GameObject[] toggleObjects;
 		[SerializeField] private Collider[] colliders;
 
-		[Header("Objects")][SerializeField] private VRC_Pickup[] cocktails;
+		[Header("Objects")]
+		[SerializeField] private Transform cocktailsParent;
+		private VRC_Pickup[] cocktailPickups;
 
-		[SerializeField] private VRC_Pickup[] pizzas;
-		[SerializeField] private VRC_Pickup[] chesses;
-		[SerializeField] private AudioClip[] sfxDB;
+		[SerializeField] private Transform pizzaParent;
+		private VRC_Pickup[] pizzaPickups;
+
+		[SerializeField] private Transform chessParent;
+		private VRC_Pickup[] chessPickups;
 
 		[SerializeField] private ObjectActive mirror;
 		[SerializeField] private ObjectActive mirrorQuility;
-		private int curVRUIPosIndex = -1;
+		// private int curVRUIPosIndex = -1;
 
-		[Header("ETC")] private bool isBellOn = true;
+		private UdonSharpBehaviour[] qvPens;
 
-		private QvPen_Pen[] pens;
+		private void Start() => Init();
 
-		[Header("Sounds")] private AudioSource sfxAS;
-
-		private void Start()
+		private void Init()
 		{
-			Debug.Log(nameof(Start));
+			MDebugLog(nameof(Init));
 
-			pens = GameObject.Find("Pens").GetComponentsInChildren<QvPen_Pen>();
-			sfxAS = transform.Find("Sound").Find("SFX").GetComponent<AudioSource>();
+			qvPens = GameObject.Find("Pens").GetComponentsInChildren<UdonSharpBehaviour>();
 
-			mainUI.SetActive(false);
+			foreach (RB3_UICanvas ui in uis)
+				ui.Init();
+			uis[0].gameObject.SetActive(false);
 			// mainUI.GetComponent<Animator>().keepAnimatorControllerStateOnDisable = true;
-			mike.transform.localScale = new Vector3(0.9f, 0.9f, 0.9f);
+
+			toggleObjects[(int)ToggleType.Mike].transform.localScale = new Vector3(0.9f, 0.9f, 0.9f);
 
 			isVR = Networking.LocalPlayer.IsUserInVR();
-
 			if (isVR)
-				ToggleColliders();
+				ToggleObject(ToggleType.Collider);
 
-			ToggleVRUI0();
+			cocktailPickups = cocktailsParent.GetComponentsInChildren<VRC_Pickup>();
+			pizzaPickups = pizzaParent.GetComponentsInChildren<VRC_Pickup>();
+			chessPickups = chessParent.GetComponentsInChildren<VRC_Pickup>();
+
+			UpdateStuff();
 		}
 
 		private void Update()
@@ -65,17 +77,35 @@ namespace Mascari4615
 
 			if (Input.GetKeyDown(KeyCode.Tab))
 			{
-				foreach (var item in canvasManagers)
-					item.ChangeCocktail();
-				mainUI.SetActive(true);
-				canvasManagers[0].Init();
+				// foreach (CanvasManager item in canvasManagers)
+				// 	item.ChangeCocktail();
+				uis[0].gameObject.SetActive(true);
+				uis[0].Init();
 			}
 			else if (Input.GetKeyUp(KeyCode.Tab))
 			{
-				foreach (var item in canvasManagers)
-					item.ChangeCocktail();
-				mainUI.SetActive(false);
-				canvasManagers[0].Init();
+				// foreach (CanvasManager item in canvasManagers)
+				// 	item.ChangeCocktail();
+				uis[0].gameObject.SetActive(false);
+				uis[0].Init();
+			}
+		}
+
+		private void UpdateStuff()
+		{
+			foreach (RB3_UICanvas ui in uis)
+			{
+				bool[] bools = new bool[100];
+
+				bools[(int)ToggleType.PostProcess] = toggleObjects[(int)ToggleType.PostProcess].activeSelf;
+				bools[(int)ToggleType.Bell] = toggleObjects[(int)ToggleType.Bell].activeSelf;
+				bools[(int)ToggleType.Mike] = toggleObjects[(int)ToggleType.Mike].activeSelf;
+				bools[(int)ToggleType.Piano] = toggleObjects[(int)ToggleType.Piano].activeSelf;
+				bools[(int)ToggleType.Drum] = toggleObjects[(int)ToggleType.Drum].activeSelf;
+				bools[(int)ToggleType.Guitar] = toggleObjects[(int)ToggleType.Guitar].activeSelf;
+				bools[(int)ToggleType.Collider] = colliders[0].enabled;
+
+				ui.UpdateToggleUI(bools);
 			}
 		}
 
@@ -89,117 +119,24 @@ namespace Mascari4615
 			mirrorQuility.ToggleActive();
 		}
 
-		public override void OnPlayerJoined(VRCPlayerApi player)
+		public void ToggleObject(ToggleType objectType)
 		{
-			if (player == Networking.LocalPlayer) SendCustomNetworkEvent(NetworkEventTarget.All, nameof(Bell));
-			Debug.Log(nameof(OnPlayerJoined));
-		}
-
-		public void Bell()
-		{
-			if (isBellOn)
-				sfxAS.PlayOneShot(sfxDB[0]);
-		}
-
-		public void ToggleBell()
-		{
-			isBellOn = !isBellOn;
-			foreach (var canvas in canvasManagers)
-				canvas.SetBellToggleImage(isBellOn);
-		}
-
-		public void MusicPause(bool isPaused)
-		{
-			foreach (var canvas in canvasManagers)
-				canvas.UpdateMusicPlayIcon(isPaused);
-		}
-
-		public void ToggleMike()
-		{
-			ToggleObject(mike);
-			foreach (var canvas in canvasManagers)
-				canvas.SetMikeActiveToggleImage(mike.activeSelf);
-		}
-
-		public void TogglePostProcess()
-		{
-			ToggleObject(postprocessObject);
-			foreach (var canvas in canvasManagers)
-				canvas.SetPostProcessToggleImage(postprocessObject.activeSelf);
-		}
-
-		public void TogglePiano()
-		{
-			ToggleObject(piano);
-			foreach (var canvas in canvasManagers)
-				canvas.SetPianoToggleImage(piano.activeSelf);
-		}
-
-		public void ToggleDrum()
-		{
-			ToggleObject(drum);
-			foreach (var canvas in canvasManagers)
-				canvas.SetDrumToggleImage(drum.activeSelf);
-		}
-
-		public void ToggleGuitar()
-		{
-			ToggleObject(guitar);
-			foreach (var canvas in canvasManagers)
-				canvas.SetGuitarToggleImage(guitar.activeSelf);
-		}
-
-		public void ToggleObject(GameObject target)
-		{
-			target.SetActive(!target.activeSelf);
-		}
-
-		public void ToggleColliders()
-		{
-			foreach (var collider in colliders)
+			if (objectType == ToggleType.Collider)
 			{
-				if (collider == null)
-					continue;
-				collider.enabled = !collider.enabled;
-			}
-
-			foreach (var canvas in canvasManagers)
-				canvas.SetColliderToggleImage(colliders[0].enabled);
-		}
-
-		public void ButtonSFX()
-		{
-			sfxAS.PlayOneShot(sfxDB[1]);
-		}
-
-		public void ToggleVRUI(int posIndex)
-		{
-			if (curVRUIPosIndex == posIndex)
-			{
-				canvasManagers[1].gameObject.SetActive(!canvasManagers[1].gameObject.activeSelf);
+				foreach (Collider collider in colliders)
+				{
+					if (collider == null)
+						continue;
+					collider.enabled = !collider.enabled;
+				}
 			}
 			else
 			{
-				canvasManagers[1].transform.SetPositionAndRotation(vrUIPos[curVRUIPosIndex = posIndex].position,
-					vrUIPos[curVRUIPosIndex = posIndex].rotation);
-				canvasManagers[1].gameObject.SetActive(false);
-				canvasManagers[1].gameObject.SetActive(true);
+				GameObject target = toggleObjects[(int)objectType];
+				target.SetActive(!target.activeSelf);
 			}
-		}
 
-		public void ToggleVRUI0()
-		{
-			ToggleVRUI(0);
-		}
-
-		public void ToggleVRUI1()
-		{
-			ToggleVRUI(1);
-		}
-
-		public void ToggleVRUI2()
-		{
-			ToggleVRUI(2);
+			UpdateStuff();
 		}
 
 		public void ResetAllPos()
@@ -209,27 +146,16 @@ namespace Mascari4615
 			ResetChessPos();
 		}
 
-		public void ResetCocktailPos()
-		{
-			ResetPos(cocktails);
-		}
-
-		public void ResetPizzaPos()
-		{
-			ResetPos(pizzas);
-		}
-
-		public void ResetChessPos()
-		{
-			ResetPos(chesses);
-		}
+		public void ResetCocktailPos() => ResetPos(cocktailPickups);
+		public void ResetPizzaPos() => ResetPos(pizzaPickups);
+		public void ResetChessPos() => ResetPos(chessPickups);
 
 		private void ResetPos(VRC_Pickup[] pickups)
 		{
-			foreach (var pickup in pickups)
+			foreach (VRC_Pickup pickup in pickups)
 			{
-				if (!Networking.IsOwner(Networking.LocalPlayer, pickup.gameObject))
-					Networking.SetOwner(Networking.LocalPlayer, pickup.gameObject);
+				SetOwner(pickup.gameObject);
+
 				pickup.Drop();
 				pickup.transform.position = Vector3.down * 444f;
 			}
@@ -237,22 +163,26 @@ namespace Mascari4615
 
 		public void ResetPens_Global()
 		{
-			if (Networking.LocalPlayer.isMaster) SendCustomNetworkEvent(NetworkEventTarget.All, nameof(ResetPens));
+			if (Networking.LocalPlayer.isMaster)
+				SendCustomNetworkEvent(NetworkEventTarget.All, nameof(ResetPens));
 		}
 
 		public void ResetPens()
 		{
-			foreach (var pen in pens) pen._Respawn();
+			foreach (UdonSharpBehaviour pen in qvPens)
+				pen.SendCustomEvent("_Respawn");
 		}
 
 		public void ClearPens_Global()
 		{
-			if (Networking.LocalPlayer.isMaster) SendCustomNetworkEvent(NetworkEventTarget.All, nameof(ClearPens));
+			if (Networking.LocalPlayer.isMaster)
+				SendCustomNetworkEvent(NetworkEventTarget.All, nameof(ClearPens));
 		}
 
 		public void ClearPens()
 		{
-			foreach (var pen in pens) pen._Clear();
-		}*/
+			foreach (UdonSharpBehaviour pen in qvPens)
+				pen.SendCustomEvent("_Clear");
+		}
 	}
 }

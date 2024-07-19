@@ -36,33 +36,33 @@ namespace Mascari4615.Project.ISD.JRR.DateWithJRR
 
 			{
 				for (int i = 0; i < detailAnswerButtonImages.Length; i++)
-					detailAnswerButtonImages[i].color = MColorUtil.GetBlackOrGray(i != CurDetailAnswerIndex.Score);
+					detailAnswerButtonImages[i].color = MColorUtil.GetBlackOrGray(i != CurDetailAnswerIndex.Value);
 
 				string[] qasArr = CurQuizData.QuizAnswerString.Split(DATA_SEPARATOR);
 
-				bool noImage = (CurDetailAnswerIndex.Score == 6) || (CurDetailAnswerIndex.Score >= qasArr.Length);
+				bool noImage = (CurDetailAnswerIndex.Value == 6) || (CurDetailAnswerIndex.Value >= qasArr.Length);
 
 				answerImage.gameObject.SetActive(!noImage);
 				if (!noImage)
 				{
-					answerImage.sprite = answerSprites[CurDetailAnswerIndex.Score];
-					answerText.text = qasArr[CurDetailAnswerIndex.Score].Split('_')[0];
+					answerImage.sprite = answerSprites[CurDetailAnswerIndex.Value];
+					answerText.text = qasArr[CurDetailAnswerIndex.Value].Split('_')[0];
 				}
 
-				curQuizImages[0].gameObject.SetActive(CurDetailAnswerIndex.Score == 5);
+				curQuizImages[0].gameObject.SetActive(CurDetailAnswerIndex.Value == 5);
 			}
 
 			{
 				for (int i = 0; i < kakaotalkButtonImages.Length; i++)
-					kakaotalkButtonImages[i].color = MColorUtil.GetBlackOrGray(i != CurKakaotalkIndex.Score);
+					kakaotalkButtonImages[i].color = MColorUtil.GetBlackOrGray(i != CurKakaotalkIndex.Value);
 
-				bool noKakao = (CurKakaotalkIndex.Score == 5);
+				bool noKakao = (CurKakaotalkIndex.Value == 5);
 
 				foreach (var kakaotalkBackground in kakaotalkBackgrounds)
 					kakaotalkBackground.gameObject.SetActive(!noKakao);
 				if (!noKakao)
 					foreach (var kakaotalkText in kakaotalkTexts)
-						kakaotalkText.text = kakaotalkTextSyncs[CurKakaotalkIndex.Score].SyncText;
+						kakaotalkText.text = kakaotalkTextSyncs[CurKakaotalkIndex.Value].SyncText;
 			}
 
 			CanSelectAnsewr = CurGameState == (int)QuizGameState.SelectAnswer;

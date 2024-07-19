@@ -36,7 +36,7 @@ namespace Mascari4615
 				mScoreSlider.Init();
 			}
 		}
-		[UdonSynced(), FieldChangeCallback(nameof(RemainCoin))] private int _bankCoin = 0;
+		[UdonSynced(UdonSyncMode.None), FieldChangeCallback(nameof(RemainCoin))] private int _bankCoin = 0;
 
 		private void Start()
 		{
@@ -50,7 +50,7 @@ namespace Mascari4615
 			if (gameManager.IsGaming == false)
 				return;
 
-			stealCoinAmount.SetMinMaxScore(min: 0, max: Mathf.Min(RemainCoin, MAX_COIN_BY_ROUND[gameManager.Data.CurRound] / 5));
+			stealCoinAmount.SetMinMaxValue(min: 0, max: Mathf.Min(RemainCoin, MAX_COIN_BY_ROUND[gameManager.Data.CurRound] / 5));
 			closedUI.SetActive((int)gameManager.CurRoundData.CurState > (int)TGameRoundState.Steal6);
 
 			for (int i = goldBars.Length - 1; i >= 0; i--)
@@ -61,7 +61,7 @@ namespace Mascari4615
 			for (int i = goldBars.Length - 1; i >= 0; i--)
 				goldBars[i].material = (
 					i >= (goldBars.Length - RemainCoin) &&
-					i < (goldBars.Length - RemainCoin) + stealCoinAmount.Score)
+					i < (goldBars.Length - RemainCoin) + stealCoinAmount.Value)
 					? selectedGoldBarMaterial
 					: originGoldBarMaterial;
 		}
@@ -78,8 +78,8 @@ namespace Mascari4615
 			if (!gameManager.IsLocalPlayerNumber(curPlayerIndex))
 				return;
 
-			int stealAmount = stealCoinAmount.Score;
-			if (RemainCoin < stealCoinAmount.Score)
+			int stealAmount = stealCoinAmount.Value;
+			if (RemainCoin < stealCoinAmount.Value)
 				return;
 
 			SetOwner();
@@ -97,7 +97,7 @@ namespace Mascari4615
 			gameManager.Data.SyncGameData();
 			RequestSerialization();
 
-			stealCoinAmount.SetScore(0);
+			stealCoinAmount.SetValue(0);
 			mScoreSlider.Init();
 			hasGateOpen.SetValue(true);
 		}

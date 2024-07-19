@@ -14,6 +14,7 @@ namespace Mascari4615
 
 		[Header("_" + nameof(MScoreSlider) + " - Options")]
 		[SerializeField] private bool logDetail = false;
+		[SerializeField] private CustomBool isSliderPressed;
 
 		bool forceChange = false;
 
@@ -31,6 +32,8 @@ namespace Mascari4615
 
 		public void OnSliderValueChanged()
 		{
+			MDebugLog($"{nameof(OnSliderValueChanged)}");
+
 			if (forceChange)
 			{
 				forceChange = false;
@@ -69,6 +72,15 @@ namespace Mascari4615
 					MDebugLog($"{nameof(UpdateSlider)}");
 
 				slider.value = (float)mScore.Value / mScore.MaxScore;
+			}
+		}
+
+		private void Update()
+		{
+			if (isSliderPressed)
+			{
+				Animator sliderAnimator = slider.GetComponent<Animator>();
+				isSliderPressed.SetValue(sliderAnimator.GetCurrentAnimatorStateInfo(0).IsName("Pressed"));
 			}
 		}
 	}

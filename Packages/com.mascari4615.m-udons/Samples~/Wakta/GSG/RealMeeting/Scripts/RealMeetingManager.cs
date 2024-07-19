@@ -66,7 +66,7 @@ namespace Mascari4615.Project.ISD.GSG.RealMeeting
 			for (int i = 0; i < mScores.Length / 2; i++)
 			{
 				int actualIndex = targetMale ? i : (i + mScores.Length / 2);
-				int score = mScores[actualIndex].Score;
+				int score = mScores[actualIndex].Value;
 
 				heartBlocks[i].UpdateUI(heartSprite, score);
 			}

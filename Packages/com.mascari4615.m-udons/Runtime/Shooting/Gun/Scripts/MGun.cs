@@ -61,8 +61,10 @@ namespace Mascari4615
 			}
 		}
 
-		private void Update()
+		protected override void Update()
 		{
+			base.Update();
+		
 			if (reloadCooltime.IsExpired == false)
 				return;
 

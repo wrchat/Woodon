@@ -37,8 +37,8 @@ namespace Mascari4615
 			if (gameManager.IsGaming == false)
 				return;
 			
-			MScore.SetMinMaxScore(0, gameManager.Bank.MAX_COIN_BY_ROUND[gameManager.Data.CurRound] / 5);
-			MScore.SetScore(0);
+			MScore.SetMinMaxValue(0, gameManager.Bank.MAX_COIN_BY_ROUND[gameManager.Data.CurRound] / 5);
+			MScore.SetValue(0);
 			UpdateUI();
 		}
 
