@@ -4,7 +4,7 @@ using VRC.SDKBase;
 
 namespace Mascari4615.Project.RusukBar
 {
-	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
+	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class JoinBell : MBase
 	{
 		[Header("_" + nameof(JoinBell))]
@@ -14,8 +14,8 @@ namespace Mascari4615.Project.RusukBar
 		{
 			MDebugLog(nameof(OnPlayerJoined));
 
-			if (player != null && player != Networking.LocalPlayer)
-				mSFXManager.PlaySFX_L(0);
+			if (player == Networking.LocalPlayer)
+				mSFXManager.PlaySFX_G(0);
 		}
 	}
 }

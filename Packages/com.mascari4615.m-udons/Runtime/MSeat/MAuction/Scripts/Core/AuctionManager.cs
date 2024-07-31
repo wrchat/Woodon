@@ -7,15 +7,14 @@ namespace Mascari4615
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class AuctionManager : MTurnSeatManager
 	{
-		[field: Header("_" + nameof(AuctionManager))]
-
-		public int WinnerIndex { get; private set; } = NONE_INT;
-		public AuctionSeat MaxTryPointSeat { get; private set; } = null;
-		
+		[Header("_" + nameof(AuctionManager))]
 		[SerializeField] private TextMeshProUGUI debugText;
 		[SerializeField] private TimeEvent timeEvent;
 		[SerializeField] private TextMeshProUGUI[] maxTryPointTexts;
 		[SerializeField] private MSFXManager mSFXManager;
+
+		public int WinnerIndex { get; private set; } = NONE_INT;
+		public AuctionSeat MaxTryPointSeat { get; private set; } = null;
 
 		protected override void OnGameStateChange(int origin, int value)
 		{
@@ -32,22 +31,18 @@ namespace Mascari4615
 				case AuctionState.Wait:
 					// 경매 대기
 					WinnerIndex = NONE_INT;
-					debugText.text = "Wait";
 					OnWait();
 					break;
 				case AuctionState.ShowTarget:
 					// 경매 대상 공개
-					debugText.text = "ShowTarget";
 					OnShowTarget();
 					break;
 				case AuctionState.AuctionTime:
 					// 경매 시간
-					debugText.text = "AuctionTime";
 					OnAuctionTime();
 					break;
 				case AuctionState.WaitForResult:
 					// 경매 결과 대기
-					debugText.text = "WaitForResult";
 					OnWaitForResult();
 					break;
 				case AuctionState.CheckResult:

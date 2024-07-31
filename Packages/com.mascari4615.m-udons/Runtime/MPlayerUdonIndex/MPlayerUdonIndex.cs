@@ -1,9 +1,7 @@
-﻿
-using TMPro;
+﻿using TMPro;
 using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
-using VRC.Udon;
 
 namespace Mascari4615
 {
@@ -20,20 +18,28 @@ namespace Mascari4615
 			{
 				_playerUdonIndexDataPack = value;
 				MDebugLog($"{nameof(_playerUdonIndexDataPack)}, = {_playerUdonIndexDataPack}");
-				string debugS = $"{_playerUdonIndexDataPack}\n" +
-					$"LOCAL = {Networking.LocalPlayer.displayName} - {Networking.LocalPlayer.playerId}, {Networking.IsMaster}\n" +
-					$"PlayerCount = {VRCPlayerApi.GetPlayerCount()},\n" +
-					$"{nameof(enableUdonCount)} = {enableUdonCount}, {CanUpdateNow}\n";
-				string[] datas = _playerUdonIndexDataPack.Split(DATA_SEPARATOR);
-				for (int i = 0; i < datas.Length; i++)
-					debugS += datas[i] + '\n';
-				debugText.text = debugS;
+
+				if (DEBUG && debugText != null)
+				{
+					string debugS = $"{_playerUdonIndexDataPack}\n" +
+						$"LOCAL = {Networking.LocalPlayer.displayName} - {Networking.LocalPlayer.playerId}, {Networking.IsMaster}\n" +
+						$"PlayerCount = {VRCPlayerApi.GetPlayerCount()},\n" +
+						$"{nameof(enableUdonCount)} = {enableUdonCount}, {CanUpdateNow}\n";
+					string[] datas = _playerUdonIndexDataPack.Split(DATA_SEPARATOR);
+					for (int i = 0; i < datas.Length; i++)
+						debugS += datas[i] + '\n';
+					debugText.text = debugS;
+				}
 			}
 		}
 
-		public int GetUdonIndex(VRCPlayerApi targetPlayer)
+		public int GetUdonIndex(VRCPlayerApi targetPlayer = null)
 		{
-			MDebugLog(nameof(GetUdonIndex));
+			MDebugLog($"{nameof(GetUdonIndex)} : {targetPlayer}");
+
+			if (targetPlayer == null)
+				targetPlayer = Networking.LocalPlayer;
+
 			for (int i = 0; i < playerNameByUdonIndex.Length; i++)
 			{
 				if (playerNameByUdonIndex[i] == (targetPlayer.displayName + nickSeparater + targetPlayer.playerId))

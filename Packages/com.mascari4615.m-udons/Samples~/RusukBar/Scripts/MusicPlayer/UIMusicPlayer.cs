@@ -194,6 +194,8 @@ namespace Mascari4615
 				// cooltimeUI.color = MColorUtil.GetGreenOrRed(musicManager.Cooling);
 				cooltimeUI.gameObject.SetActive(musicManager.Cooling);
 			}
+
+			musicPlayButtonImage.sprite = musicPlayButtonSprites[musicManager.IsPlaying ? 1 : 0];
 		}
 	}
 }

@@ -1,6 +1,7 @@
 ﻿using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
+using static Mascari4615.MUtil;
 
 namespace Mascari4615
 {
@@ -8,11 +9,8 @@ namespace Mascari4615
 	public class MTarget : MEventSender
 	{
 		[Header("_" + nameof(MTarget))]
-		[SerializeField] private MTargetUI[] mTargetUIs;
-
-		[SerializeField] private bool useNone = true;
 		[SerializeField] private string autoTargetName = "-";
-		
+
 		// If You Use UdonGraph, Don't Change The '_curTargetPlayerID' Variable's Access Modifier To Private.
 		// If You Don't, You Can Just Change It If You Want.
 		[UdonSynced(), FieldChangeCallback(nameof(CurTargetPlayerID))]
@@ -23,16 +21,17 @@ namespace Mascari4615
 			set
 			{
 				_curTargetPlayerID = value;
-
-				foreach (MTargetUI mTargetUI in mTargetUIs)
-					mTargetUI.UpdateTargetPlayerUI(_curTargetPlayerID);
-
 				SendEvents();
 			}
 		}
 
 		public int[] PlayerIDBuffer { get; private set; } = new int[80];
 
+		[field: Header("_" + nameof(MTarget) + " - Options")]
+		[field: SerializeField] public bool UseNone { get; private set; } = true;
+
+		// ---- ---- ---- ----
+		
 		public bool IsTargetPlayer(VRCPlayerApi targetPlayer = null)
 		{
 			if (targetPlayer == null)
@@ -63,12 +62,6 @@ namespace Mascari4615
 
 		public void SelectPlayer(int index) => SetPlayerID(PlayerIDBuffer[index - 1]);
 
-		public void UpdateUI()
-		{
-			foreach (MTargetUI mTargetUI in mTargetUIs)
-				mTargetUI.UpdatePlayerList();
-		}
-
 		// ---- ---- ---- ----
 
 		private void Start()
@@ -78,16 +71,10 @@ namespace Mascari4615
 
 		private void Init()
 		{
-			foreach (MTargetUI mTargetUI in mTargetUIs)
-			{
-				mTargetUI.SetMTarget(this);
-				mTargetUI.SetNoneButton(useNone);
-			}
-
 			if (Networking.LocalPlayer.isMaster)
 			{
 				SetOwner();
-				CurTargetPlayerID = useNone ? NONE_INT : Networking.LocalPlayer.playerId;
+				CurTargetPlayerID = UseNone ? NONE_INT : Networking.LocalPlayer.playerId;
 				RequestSerialization();
 			}
 		}
@@ -101,7 +88,7 @@ namespace Mascari4615
 			}
 			else
 			{
-				UpdateUI();
+				UpdatePlayerIDBuffer();
 			}
 		}
 
@@ -109,13 +96,38 @@ namespace Mascari4615
 		{
 			if (IsOwner() && (player.playerId == CurTargetPlayerID))
 			{
-				CurTargetPlayerID = useNone ? NONE_INT : Networking.LocalPlayer.playerId;
+				CurTargetPlayerID = UseNone ? NONE_INT : Networking.LocalPlayer.playerId;
 				RequestSerialization();
 			}
 			else
 			{
-				UpdateUI();
+				UpdatePlayerIDBuffer();
 			}
+		}
+
+		public void UpdatePlayerIDBuffer()
+		{
+			VRCPlayerApi[] players = GetPlayers();
+
+			if (players.Length != VRCPlayerApi.GetPlayerCount())
+			{
+				SendCustomEventDelayedSeconds(nameof(UpdatePlayerIDBuffer), .3f);
+				return;
+			}
+
+			for (int i = 0; i < PlayerIDBuffer.Length; i++)
+			{
+				if (i >= players.Length)
+				{
+					PlayerIDBuffer[i] = -1;
+				}
+				else
+				{
+					PlayerIDBuffer[i] = players[i].playerId;
+				}
+			}
+
+			SendEvents();
 		}
 	}
 }

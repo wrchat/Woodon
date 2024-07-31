@@ -66,8 +66,8 @@ namespace Mascari4615
 			if (Networking.GetServerTimeInMilliseconds() >= ExpireTime)
 			{
 				MDebugLog("Expired!");
-				SendEvents();
 				ResetTime();
+				SendEvents();
 			}
 		}
 
@@ -103,10 +103,12 @@ namespace Mascari4615
 			SetExpireTime(NONE_INT);
 		}
 
-		public void SetTimer()
+		public void SetTimer() => SetTimer(TimeByDecisecond);
+
+		public void SetTimer(int timeByDecisecond)
 		{
-			MDebugLog(nameof(SetTimer));
-			SetExpireTime(Networking.GetServerTimeInMilliseconds() + (TimeByDecisecond * 100));
+			MDebugLog($"{nameof(SetTimer)} : {timeByDecisecond}");
+			SetExpireTime(Networking.GetServerTimeInMilliseconds() + (timeByDecisecond * 100));
 		}
 
 		public void SetTimeByMScore()

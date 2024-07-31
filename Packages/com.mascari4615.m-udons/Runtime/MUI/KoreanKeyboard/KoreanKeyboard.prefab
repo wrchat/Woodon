@@ -31,10 +31,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5835511537020146052}
   m_Father: {fileID: 5835511537506139779}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -64,6 +64,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.17254902, g: 0.17254902, b: 0.17254902, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -92,6 +93,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -122,6 +124,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5835511536724852018}
+        m_TargetAssemblyTypeName: 
         m_MethodName: SendCustomEvent
         m_Mode: 5
         m_Arguments:
@@ -144,6 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: -1533785930, guid: 661092b4961be7145bfbe56e1e62337b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AllowFocusView: 1
 --- !u!65 &567837005595694677
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -152,9 +156,17 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 149060580721752804}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 1
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4757965294693744748
@@ -188,10 +200,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4757965295493498685}
   m_Father: {fileID: 5835511536538232408}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -221,6 +233,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.17254902, g: 0.17254902, b: 0.17254902, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -249,6 +262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -279,6 +293,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5835511536724852018}
+        m_TargetAssemblyTypeName: 
         m_MethodName: SendCustomEvent
         m_Mode: 5
         m_Arguments:
@@ -301,6 +316,7 @@ MonoBehaviour:
   m_Script: {fileID: -1533785930, guid: 661092b4961be7145bfbe56e1e62337b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AllowFocusView: 1
 --- !u!65 &5185751259045375197
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -309,9 +325,17 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4757965294693744748}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 1
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4757965295493498686
@@ -342,9 +366,9 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4757965294693744739}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -374,14 +398,15 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
   m_text: "\u3161"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 56cc580d002b37c4a8ddcb842c2f8d56, type: 2}
-  m_sharedMaterial: {fileID: -2434294036112554905, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
+  m_fontAsset: {fileID: 11400000, guid: 099e905781af5a54092659ce4fd3b049, type: 2}
+  m_sharedMaterial: {fileID: -3840619290954953387, guid: 099e905781af5a54092659ce4fd3b049,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -406,7 +431,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 61.9
+  m_fontSize: 58.65
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -476,6 +501,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5835511536177598173}
   - {fileID: 336882227603525965}
@@ -488,7 +514,6 @@ RectTransform:
   - {fileID: 336882227276239537}
   - {fileID: 336882226856398982}
   m_Father: {fileID: 5835511536744645501}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -520,6 +545,7 @@ MonoBehaviour:
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!114 &5835511536166919181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -565,10 +591,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5835511537887824612}
   m_Father: {fileID: 5835511536598207519}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -598,6 +624,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.17254902, g: 0.17254902, b: 0.17254902, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -626,6 +653,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -656,6 +684,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5835511536724852018}
+        m_TargetAssemblyTypeName: 
         m_MethodName: SendCustomEvent
         m_Mode: 5
         m_Arguments:
@@ -678,6 +707,7 @@ MonoBehaviour:
   m_Script: {fileID: -1533785930, guid: 661092b4961be7145bfbe56e1e62337b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AllowFocusView: 1
 --- !u!65 &5835511536391110493
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -686,9 +716,17 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5835511536391110483}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 1
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5835511536538232409
@@ -719,10 +757,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4757965294693744739}
   m_Father: {fileID: 5835511536744645501}
-  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -754,6 +792,7 @@ MonoBehaviour:
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!114 &5835511536538232411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -796,10 +835,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5835511536391110482}
   m_Father: {fileID: 5835511536744645501}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -831,6 +870,7 @@ MonoBehaviour:
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!114 &5835511536598207518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -870,13 +910,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5835511536724852016}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.61, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1091975383228876496}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5835511536724852029
 MonoBehaviour:
@@ -959,6 +1000,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5835511536598207519}
   - {fileID: 5835511536166919170}
@@ -966,7 +1008,6 @@ RectTransform:
   - {fileID: 5835511537506139779}
   - {fileID: 5835511536538232408}
   m_Father: {fileID: 1091975383228876496}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -998,6 +1039,7 @@ MonoBehaviour:
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!114 &5835511536744645500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1040,9 +1082,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 149060580721752811}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1072,14 +1114,15 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
   m_text: Shift
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 56cc580d002b37c4a8ddcb842c2f8d56, type: 2}
-  m_sharedMaterial: {fileID: -2434294036112554905, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
+  m_fontAsset: {fileID: 11400000, guid: 099e905781af5a54092659ce4fd3b049, type: 2}
+  m_sharedMaterial: {fileID: -3840619290954953387, guid: 099e905781af5a54092659ce4fd3b049,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1104,7 +1147,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 79.6
+  m_fontSize: 75.4
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1174,6 +1217,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 149060580721752811}
   - {fileID: 336882228049331608}
@@ -1184,7 +1228,6 @@ RectTransform:
   - {fileID: 336882226786826163}
   - {fileID: 336882227874205152}
   m_Father: {fileID: 5835511536744645501}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -1216,6 +1259,7 @@ MonoBehaviour:
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!114 &5835511537506139778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1258,6 +1302,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 336882226910108698}
   - {fileID: 336882226505169731}
@@ -1269,7 +1314,6 @@ RectTransform:
   - {fileID: 336882227052937209}
   - {fileID: 336882226746246722}
   m_Father: {fileID: 5835511536744645501}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -1301,6 +1345,7 @@ MonoBehaviour:
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!114 &5835511537739216175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1343,9 +1388,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5835511536391110482}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1375,14 +1420,15 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
   m_text: "\u2190"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 56cc580d002b37c4a8ddcb842c2f8d56, type: 2}
-  m_sharedMaterial: {fileID: -2434294036112554905, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
+  m_fontAsset: {fileID: 11400000, guid: 099e905781af5a54092659ce4fd3b049, type: 2}
+  m_sharedMaterial: {fileID: -3840619290954953387, guid: 099e905781af5a54092659ce4fd3b049,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1407,7 +1453,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 61.9
+  m_fontSize: 58.65
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1454,12 +1500,13 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 5835511536166919170}
     m_Modifications:
     - target: {fileID: 6077394713352995190, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_Name
-      value: KoreanKey
+      value: '[Button] KoreanKey'
       objectReference: {fileID: 0}
     - target: {fileID: 6077394713352995193, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
@@ -1598,24 +1645,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: af4e2b5841fd53246aa71610b3117549,
         type: 2}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_fontSize
-      value: 79.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -2434294036112554905, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e543cf741c3adf7499834f1424a261c9, type: 3}
 --- !u!224 &5835511536177598173 stripped
 RectTransform:
@@ -1628,12 +1661,13 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 5835511537739216172}
     m_Modifications:
     - target: {fileID: 6077394713352995190, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_Name
-      value: KoreanKey (6)
+      value: '[Button] KoreanKey'
       objectReference: {fileID: 0}
     - target: {fileID: 6077394713352995193, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
@@ -1775,21 +1809,12 @@ PrefabInstance:
     - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_fontSize
-      value: 79.6
+      value: 75.4
       objectReference: {fileID: 0}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -2434294036112554905, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e543cf741c3adf7499834f1424a261c9, type: 3}
 --- !u!224 &336882227298204847 stripped
 RectTransform:
@@ -1802,6 +1827,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 5835511536724852019}
     m_Modifications:
     - target: {fileID: 6318350859022185536, guid: 4f57e62219b6d8647ae6d1ad7f67b079,
@@ -1920,6 +1946,17 @@ PrefabInstance:
       value: 25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 6907570752410614896, guid: 4f57e62219b6d8647ae6d1ad7f67b079,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3985108418524913867}
+    - targetCorrespondingSourceObject: {fileID: 6907570752410614896, guid: 4f57e62219b6d8647ae6d1ad7f67b079,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5835511536744645501}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f57e62219b6d8647ae6d1ad7f67b079, type: 3}
 --- !u!224 &1091975383228876496 stripped
 RectTransform:
@@ -1932,12 +1969,13 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 5835511536166919170}
     m_Modifications:
     - target: {fileID: 6077394713352995190, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_Name
-      value: KoreanKey (2)
+      value: '[Button] KoreanKey'
       objectReference: {fileID: 0}
     - target: {fileID: 6077394713352995193, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
@@ -2084,21 +2122,12 @@ PrefabInstance:
     - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_fontSize
-      value: 79.6
+      value: 75.4
       objectReference: {fileID: 0}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -2434294036112554905, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e543cf741c3adf7499834f1424a261c9, type: 3}
 --- !u!224 &336882227178213600 stripped
 RectTransform:
@@ -2111,12 +2140,13 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 5835511536166919170}
     m_Modifications:
     - target: {fileID: 6077394713352995190, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_Name
-      value: KoreanKey (4)
+      value: '[Button] KoreanKey'
       objectReference: {fileID: 0}
     - target: {fileID: 6077394713352995193, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
@@ -2263,21 +2293,12 @@ PrefabInstance:
     - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_fontSize
-      value: 79.6
+      value: 75.4
       objectReference: {fileID: 0}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -2434294036112554905, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e543cf741c3adf7499834f1424a261c9, type: 3}
 --- !u!224 &336882227184158829 stripped
 RectTransform:
@@ -2290,12 +2311,13 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 5835511536166919170}
     m_Modifications:
     - target: {fileID: 6077394713352995190, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_Name
-      value: KoreanKey (8)
+      value: '[Button] KoreanKey'
       objectReference: {fileID: 0}
     - target: {fileID: 6077394713352995193, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
@@ -2442,21 +2464,12 @@ PrefabInstance:
     - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_fontSize
-      value: 79.6
+      value: 75.4
       objectReference: {fileID: 0}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -2434294036112554905, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e543cf741c3adf7499834f1424a261c9, type: 3}
 --- !u!224 &336882227276239537 stripped
 RectTransform:
@@ -2469,12 +2482,13 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 5835511537739216172}
     m_Modifications:
     - target: {fileID: 6077394713352995190, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_Name
-      value: KoreanKey (7)
+      value: '[Button] KoreanKey'
       objectReference: {fileID: 0}
     - target: {fileID: 6077394713352995193, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
@@ -2616,21 +2630,12 @@ PrefabInstance:
     - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_fontSize
-      value: 79.6
+      value: 75.4
       objectReference: {fileID: 0}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -2434294036112554905, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e543cf741c3adf7499834f1424a261c9, type: 3}
 --- !u!224 &336882227052937209 stripped
 RectTransform:
@@ -2643,12 +2648,13 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 5835511537506139779}
     m_Modifications:
     - target: {fileID: 6077394713352995190, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_Name
-      value: KoreanKey (1)
+      value: '[Button] KoreanKey'
       objectReference: {fileID: 0}
     - target: {fileID: 6077394713352995193, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
@@ -2790,21 +2796,12 @@ PrefabInstance:
     - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_fontSize
-      value: 79.6
+      value: 75.4
       objectReference: {fileID: 0}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -2434294036112554905, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e543cf741c3adf7499834f1424a261c9, type: 3}
 --- !u!224 &336882227081931461 stripped
 RectTransform:
@@ -2817,12 +2814,13 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 5835511537739216172}
     m_Modifications:
     - target: {fileID: 6077394713352995190, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_Name
-      value: KoreanKey (5)
+      value: '[Button] KoreanKey'
       objectReference: {fileID: 0}
     - target: {fileID: 6077394713352995193, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
@@ -2964,21 +2962,12 @@ PrefabInstance:
     - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_fontSize
-      value: 79.6
+      value: 75.4
       objectReference: {fileID: 0}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -2434294036112554905, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e543cf741c3adf7499834f1424a261c9, type: 3}
 --- !u!224 &336882227994476853 stripped
 RectTransform:
@@ -2991,12 +2980,13 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 5835511537506139779}
     m_Modifications:
     - target: {fileID: 6077394713352995190, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_Name
-      value: KoreanKey
+      value: '[Button] KoreanKey'
       objectReference: {fileID: 0}
     - target: {fileID: 6077394713352995193, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
@@ -3133,21 +3123,12 @@ PrefabInstance:
     - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_fontSize
-      value: 79.6
+      value: 75.4
       objectReference: {fileID: 0}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -2434294036112554905, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e543cf741c3adf7499834f1424a261c9, type: 3}
 --- !u!224 &336882228049331608 stripped
 RectTransform:
@@ -3160,12 +3141,13 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 5835511537506139779}
     m_Modifications:
     - target: {fileID: 6077394713352995190, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_Name
-      value: KoreanKey (6)
+      value: '[Button] KoreanKey'
       objectReference: {fileID: 0}
     - target: {fileID: 6077394713352995193, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
@@ -3307,21 +3289,12 @@ PrefabInstance:
     - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_fontSize
-      value: 79.6
+      value: 75.4
       objectReference: {fileID: 0}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -2434294036112554905, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e543cf741c3adf7499834f1424a261c9, type: 3}
 --- !u!224 &336882227874205152 stripped
 RectTransform:
@@ -3334,8 +3307,21 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 1091975383228876496}
     m_Modifications:
+    - target: {fileID: 613757047644303135, guid: d0df0c6eb6b37c349b0b337e51414e73,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
+    - target: {fileID: 613757047644303135, guid: d0df0c6eb6b37c349b0b337e51414e73,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3840619290954953387, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
     - target: {fileID: 2014848354449385375, guid: d0df0c6eb6b37c349b0b337e51414e73,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -3349,7 +3335,7 @@ PrefabInstance:
     - target: {fileID: 2014848354449385375, guid: d0df0c6eb6b37c349b0b337e51414e73,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 104.86
+      value: 103.74
       objectReference: {fileID: 0}
     - target: {fileID: 2014848354449385375, guid: d0df0c6eb6b37c349b0b337e51414e73,
         type: 3}
@@ -3359,7 +3345,7 @@ PrefabInstance:
     - target: {fileID: 2014848354449385375, guid: d0df0c6eb6b37c349b0b337e51414e73,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 62.43
+      value: 61.87
       objectReference: {fileID: 0}
     - target: {fileID: 2014848354449385375, guid: d0df0c6eb6b37c349b0b337e51414e73,
         type: 3}
@@ -3507,7 +3493,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0df0c6eb6b37c349b0b337e51414e73, type: 3}
+--- !u!224 &3985108418524913867 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7473182815853782158, guid: d0df0c6eb6b37c349b0b337e51414e73,
+    type: 3}
+  m_PrefabInstance: {fileID: 5835511536992126021}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &6376927864707033946 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 613757047644303135, guid: d0df0c6eb6b37c349b0b337e51414e73,
@@ -3525,12 +3520,13 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 5835511536166919170}
     m_Modifications:
     - target: {fileID: 6077394713352995190, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_Name
-      value: KoreanKey (1)
+      value: '[Button] KoreanKey'
       objectReference: {fileID: 0}
     - target: {fileID: 6077394713352995193, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
@@ -3674,24 +3670,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: af4e2b5841fd53246aa71610b3117549,
         type: 2}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_fontSize
-      value: 79.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -2434294036112554905, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e543cf741c3adf7499834f1424a261c9, type: 3}
 --- !u!224 &336882227603525965 stripped
 RectTransform:
@@ -3704,12 +3686,13 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 5835511536166919170}
     m_Modifications:
     - target: {fileID: 6077394713352995190, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_Name
-      value: KoreanKey (3)
+      value: '[Button] KoreanKey'
       objectReference: {fileID: 0}
     - target: {fileID: 6077394713352995193, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
@@ -3856,21 +3839,12 @@ PrefabInstance:
     - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_fontSize
-      value: 79.6
+      value: 75.4
       objectReference: {fileID: 0}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -2434294036112554905, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e543cf741c3adf7499834f1424a261c9, type: 3}
 --- !u!224 &336882227634567421 stripped
 RectTransform:
@@ -3883,12 +3857,13 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 5835511537739216172}
     m_Modifications:
     - target: {fileID: 6077394713352995190, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_Name
-      value: KoreanKey (3)
+      value: '[Button] KoreanKey'
       objectReference: {fileID: 0}
     - target: {fileID: 6077394713352995193, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
@@ -4030,21 +4005,12 @@ PrefabInstance:
     - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_fontSize
-      value: 79.6
+      value: 75.4
       objectReference: {fileID: 0}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -2434294036112554905, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e543cf741c3adf7499834f1424a261c9, type: 3}
 --- !u!224 &336882226463925251 stripped
 RectTransform:
@@ -4057,12 +4023,13 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 5835511537506139779}
     m_Modifications:
     - target: {fileID: 6077394713352995190, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_Name
-      value: KoreanKey (4)
+      value: '[Button] KoreanKey'
       objectReference: {fileID: 0}
     - target: {fileID: 6077394713352995193, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
@@ -4204,21 +4171,12 @@ PrefabInstance:
     - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_fontSize
-      value: 79.6
+      value: 75.4
       objectReference: {fileID: 0}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -2434294036112554905, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e543cf741c3adf7499834f1424a261c9, type: 3}
 --- !u!224 &336882226262514705 stripped
 RectTransform:
@@ -4231,12 +4189,13 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 5835511536166919170}
     m_Modifications:
     - target: {fileID: 6077394713352995190, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_Name
-      value: KoreanKey (6)
+      value: '[Button] KoreanKey'
       objectReference: {fileID: 0}
     - target: {fileID: 6077394713352995193, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
@@ -4378,21 +4337,12 @@ PrefabInstance:
     - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_fontSize
-      value: 79.6
+      value: 75.4
       objectReference: {fileID: 0}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -2434294036112554905, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e543cf741c3adf7499834f1424a261c9, type: 3}
 --- !u!224 &336882226271196683 stripped
 RectTransform:
@@ -4405,12 +4355,13 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 5835511536166919170}
     m_Modifications:
     - target: {fileID: 6077394713352995190, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_Name
-      value: KoreanKey (5)
+      value: '[Button] KoreanKey'
       objectReference: {fileID: 0}
     - target: {fileID: 6077394713352995193, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
@@ -4552,21 +4503,12 @@ PrefabInstance:
     - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_fontSize
-      value: 79.6
+      value: 75.4
       objectReference: {fileID: 0}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -2434294036112554905, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e543cf741c3adf7499834f1424a261c9, type: 3}
 --- !u!224 &336882226036599307 stripped
 RectTransform:
@@ -4579,12 +4521,13 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 5835511537739216172}
     m_Modifications:
     - target: {fileID: 6077394713352995190, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_Name
-      value: KoreanKey (2)
+      value: '[Button] KoreanKey'
       objectReference: {fileID: 0}
     - target: {fileID: 6077394713352995193, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
@@ -4726,21 +4669,12 @@ PrefabInstance:
     - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_fontSize
-      value: 79.6
+      value: 75.4
       objectReference: {fileID: 0}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -2434294036112554905, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e543cf741c3adf7499834f1424a261c9, type: 3}
 --- !u!224 &336882226046506980 stripped
 RectTransform:
@@ -4753,12 +4687,13 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 5835511537739216172}
     m_Modifications:
     - target: {fileID: 6077394713352995190, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_Name
-      value: KoreanKey
+      value: '[Button] KoreanKey'
       objectReference: {fileID: 0}
     - target: {fileID: 6077394713352995193, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
@@ -4895,21 +4830,12 @@ PrefabInstance:
     - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_fontSize
-      value: 79.6
+      value: 75.4
       objectReference: {fileID: 0}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -2434294036112554905, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e543cf741c3adf7499834f1424a261c9, type: 3}
 --- !u!224 &336882226910108698 stripped
 RectTransform:
@@ -4922,12 +4848,13 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 5835511537739216172}
     m_Modifications:
     - target: {fileID: 6077394713352995190, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_Name
-      value: KoreanKey (4)
+      value: '[Button] KoreanKey'
       objectReference: {fileID: 0}
     - target: {fileID: 6077394713352995193, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
@@ -5069,21 +4996,12 @@ PrefabInstance:
     - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_fontSize
-      value: 79.6
+      value: 75.4
       objectReference: {fileID: 0}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -2434294036112554905, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e543cf741c3adf7499834f1424a261c9, type: 3}
 --- !u!224 &336882227006754809 stripped
 RectTransform:
@@ -5096,12 +5014,13 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 5835511537739216172}
     m_Modifications:
     - target: {fileID: 6077394713352995190, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_Name
-      value: KoreanKey (8)
+      value: '[Button] KoreanKey'
       objectReference: {fileID: 0}
     - target: {fileID: 6077394713352995193, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
@@ -5243,21 +5162,12 @@ PrefabInstance:
     - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_fontSize
-      value: 79.6
+      value: 75.4
       objectReference: {fileID: 0}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -2434294036112554905, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e543cf741c3adf7499834f1424a261c9, type: 3}
 --- !u!224 &336882226746246722 stripped
 RectTransform:
@@ -5270,12 +5180,13 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 5835511537506139779}
     m_Modifications:
     - target: {fileID: 6077394713352995190, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_Name
-      value: KoreanKey (5)
+      value: '[Button] KoreanKey'
       objectReference: {fileID: 0}
     - target: {fileID: 6077394713352995193, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
@@ -5417,21 +5328,12 @@ PrefabInstance:
     - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_fontSize
-      value: 79.6
+      value: 75.4
       objectReference: {fileID: 0}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -2434294036112554905, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e543cf741c3adf7499834f1424a261c9, type: 3}
 --- !u!224 &336882226786826163 stripped
 RectTransform:
@@ -5444,12 +5346,13 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 5835511536166919170}
     m_Modifications:
     - target: {fileID: 6077394713352995190, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_Name
-      value: KoreanKey (9)
+      value: '[Button] KoreanKey'
       objectReference: {fileID: 0}
     - target: {fileID: 6077394713352995193, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
@@ -5596,21 +5499,12 @@ PrefabInstance:
     - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_fontSize
-      value: 79.6
+      value: 75.4
       objectReference: {fileID: 0}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -2434294036112554905, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e543cf741c3adf7499834f1424a261c9, type: 3}
 --- !u!224 &336882226856398982 stripped
 RectTransform:
@@ -5623,12 +5517,13 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 5835511536166919170}
     m_Modifications:
     - target: {fileID: 6077394713352995190, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_Name
-      value: KoreanKey (7)
+      value: '[Button] KoreanKey'
       objectReference: {fileID: 0}
     - target: {fileID: 6077394713352995193, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
@@ -5770,21 +5665,12 @@ PrefabInstance:
     - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_fontSize
-      value: 79.6
+      value: 75.4
       objectReference: {fileID: 0}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -2434294036112554905, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e543cf741c3adf7499834f1424a261c9, type: 3}
 --- !u!224 &336882226626719166 stripped
 RectTransform:
@@ -5797,12 +5683,13 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 5835511537739216172}
     m_Modifications:
     - target: {fileID: 6077394713352995190, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_Name
-      value: KoreanKey (1)
+      value: '[Button] KoreanKey'
       objectReference: {fileID: 0}
     - target: {fileID: 6077394713352995193, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
@@ -5944,21 +5831,12 @@ PrefabInstance:
     - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_fontSize
-      value: 79.6
+      value: 75.4
       objectReference: {fileID: 0}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -2434294036112554905, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e543cf741c3adf7499834f1424a261c9, type: 3}
 --- !u!224 &336882226505169731 stripped
 RectTransform:
@@ -5971,12 +5849,13 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 5835511537506139779}
     m_Modifications:
     - target: {fileID: 6077394713352995190, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_Name
-      value: KoreanKey (3)
+      value: '[Button] KoreanKey'
       objectReference: {fileID: 0}
     - target: {fileID: 6077394713352995193, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
@@ -6118,21 +5997,12 @@ PrefabInstance:
     - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_fontSize
-      value: 79.6
+      value: 75.4
       objectReference: {fileID: 0}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -2434294036112554905, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e543cf741c3adf7499834f1424a261c9, type: 3}
 --- !u!224 &336882226556335689 stripped
 RectTransform:
@@ -6145,12 +6015,13 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 5835511537506139779}
     m_Modifications:
     - target: {fileID: 6077394713352995190, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_Name
-      value: KoreanKey (2)
+      value: '[Button] KoreanKey'
       objectReference: {fileID: 0}
     - target: {fileID: 6077394713352995193, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
@@ -6292,21 +6163,12 @@ PrefabInstance:
     - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
         type: 3}
       propertyPath: m_fontSize
-      value: 79.6
+      value: 75.4
       objectReference: {fileID: 0}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
-    - target: {fileID: 6077394713623873062, guid: e543cf741c3adf7499834f1424a261c9,
-        type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -2434294036112554905, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
-        type: 2}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e543cf741c3adf7499834f1424a261c9, type: 3}
 --- !u!224 &336882226605424825 stripped
 RectTransform:

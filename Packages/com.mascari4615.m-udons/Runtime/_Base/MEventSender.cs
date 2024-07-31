@@ -14,6 +14,8 @@ namespace Mascari4615
 		protected UdonSharpBehaviour[][] targetUdonss = new UdonSharpBehaviour[0][];
 		protected string[][] eventNamess = new string[0][];
 
+		// ---- ---- ---- ----
+
 		protected void SendEvents()
 		{
 			MDebugLog($"{nameof(SendEvents)}");

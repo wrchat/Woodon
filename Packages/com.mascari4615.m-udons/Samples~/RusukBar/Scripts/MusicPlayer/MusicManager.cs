@@ -37,7 +37,8 @@ namespace Mascari4615
 		}
 
 		[SerializeField] private float musicButtonCooltime = 5;
-		public bool Cooling { get; private set; } = true;
+		public bool Cooling { get; private set; } = false;
+		public bool IsPlaying => videoPlayer.IsPlaying;
 		public void MusicCooling()
 		{
 			Cooling = false;
