@@ -5,14 +5,14 @@ using UnityEngine.UI;
 namespace Mascari4615
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class MScoreSlider : MBase
+	public class MValueSlider : MBase
 	{
-		[Header("_" + nameof(MScoreSlider))]
-		[SerializeField] private MScore mScore;
+		[Header("_" + nameof(MValueSlider))]
+		[SerializeField] private MValue mValue;
 		[SerializeField] private Slider slider;
 		[SerializeField] private Slider fakeSlider;
 
-		[Header("_" + nameof(MScoreSlider) + " - Options")]
+		[Header("_" + nameof(MValueSlider) + " - Options")]
 		[SerializeField] private bool logDetail = false;
 		[SerializeField] private CustomBool isSliderPressed;
 		private Animator sliderAnimator;
@@ -23,7 +23,7 @@ namespace Mascari4615
 
 		public void Init()
 		{
-			mScore.RegisterListener(this, nameof(UpdateSlider));
+			mValue.RegisterListener(this, nameof(UpdateSlider));
 			
 			slider.value = 0;
 			fakeSlider.value = 0;
@@ -42,38 +42,38 @@ namespace Mascari4615
 				return;
 			}
 
-			int newValue = (int)(slider.value * mScore.MaxScore);
-			if (mScore.Value != newValue)
+			int newValue = (int)(slider.value * mValue.MaxValue);
+			if (mValue.Value != newValue)
 			{
 				if (logDetail)
 					MDebugLog($"{nameof(OnSliderValueChanged)} = {newValue}");
 				else
 					MDebugLog($"{nameof(OnSliderValueChanged)}");
 
-				mScore.SetValue(newValue);
+				mValue.SetValue(newValue);
 			}
 		}
 
 		public void UpdateSlider()
 		{
-			int curFakeSliderValue = (int)(fakeSlider.value * mScore.MaxScore);
-			if (mScore.Value != curFakeSliderValue)
-				fakeSlider.value = (float)mScore.Value / mScore.MaxScore;
+			int curFakeSliderValue = (int)(fakeSlider.value * mValue.MaxValue);
+			if (mValue.Value != curFakeSliderValue)
+				fakeSlider.value = (float)mValue.Value / mValue.MaxValue;
 
-			if (IsOwner(mScore.gameObject))
+			if (IsOwner(mValue.gameObject))
 				return;
 
-			int curSliderValue = (int)(slider.value * mScore.MaxScore);
-			if (mScore.Value != curSliderValue)
+			int curSliderValue = (int)(slider.value * mValue.MaxValue);
+			if (mValue.Value != curSliderValue)
 			{
 				forceChange = true;
 
 				if (logDetail)
-					MDebugLog($"{nameof(UpdateSlider)} = {mScore.Value}");
+					MDebugLog($"{nameof(UpdateSlider)} = {mValue.Value}");
 				else
 					MDebugLog($"{nameof(UpdateSlider)}");
 
-				slider.value = (float)mScore.Value / mScore.MaxScore;
+				slider.value = (float)mValue.Value / mValue.MaxValue;
 			}
 		}
 

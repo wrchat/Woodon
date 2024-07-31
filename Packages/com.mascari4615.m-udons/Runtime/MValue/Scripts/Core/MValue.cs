@@ -5,19 +5,19 @@ using VRC.SDKBase;
 namespace Mascari4615
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class MScore : MEventSender
+	public class MValue : MEventSender
 	{
-		[field:Header("_" + nameof(MScore))]
-		[field: SerializeField] public int MinScore{ get; private set; } = 0;
-		[field: SerializeField] public int MaxScore { get; private set; } = 1000;
+		[field:Header("_" + nameof(MValue))]
+		[field: SerializeField] public int MinValue{ get; private set; } = 0;
+		[field: SerializeField] public int MaxValue { get; private set; } = 1000;
 		[field: SerializeField] public int IncreaseAmount { get; private set; } = 1;
 		[field: SerializeField] public int DecreaseAmount { get; private set; }= 1;
-		[SerializeField] private int defaultScore = 0;
-		[SerializeField] private MScoreStyle style = MScoreStyle.Clamp;
+		[SerializeField] private int defaultValue = 0;
+		[SerializeField] private MValueStyle style = MValueStyle.Clamp;
 
 		[SerializeField] private bool useSync = true;
-		[SerializeField] private CustomBool isMaxScore;
-		[SerializeField] private CustomBool isMinScore;
+		[SerializeField] private CustomBool isMaxValue;
+		[SerializeField] private CustomBool isMinValue;
 
 		[UdonSynced(), FieldChangeCallback(nameof(SyncedValue))] private int _syncedValue;
 		public int SyncedValue
@@ -55,13 +55,13 @@ namespace Mascari4615
 			{
 				if (Networking.IsMaster)
 				{
-					SyncedValue = defaultScore;
+					SyncedValue = defaultValue;
 					RequestSerialization();
 				}
 			}
 			else
 			{
-				SetValue(defaultScore);
+				SetValue(defaultValue);
 			}
 
 			OnValueChange();
@@ -71,8 +71,8 @@ namespace Mascari4615
 		{
 			MDebugLog($"{nameof(SetMinMaxValue)}");
 
-			MinScore = min;
-			MaxScore = max;
+			MinValue = min;
+			MaxValue = max;
 
 			if (recalcValue)
 				SetValue(Value);
@@ -86,35 +86,35 @@ namespace Mascari4615
 
 			switch (style)
 			{
-				case MScoreStyle.None:
-					if (actualValue > MaxScore)
+				case MValueStyle.None:
+					if (actualValue > MaxValue)
 						return;
-					if (actualValue < MinScore)
+					if (actualValue < MinValue)
 						return;
 					break;
 				// Clamp
-				case MScoreStyle.Clamp:
-					actualValue = Mathf.Clamp(actualValue, MinScore, MaxScore);
+				case MValueStyle.Clamp:
+					actualValue = Mathf.Clamp(actualValue, MinValue, MaxValue);
 					break;
-				// LoopA : 초과/미만 시 반대쪽으로 이동 (이때 MinScore, MaxScore는 포함되지 않음)
+				// LoopA : 초과/미만 시 반대쪽으로 이동 (이때 MinValue, MaxValue는 포함되지 않음)
 				// { ..., Max - 1, Max == Min, Min + 1, ... }
-				// ex) MinScore : 0, MaxScore : 100, Score : 101 -> 1
-				// ex) MinScore : 0, MaxScore : 100, Score : -1 -> 99
-				case MScoreStyle.LoopA:
-					if (actualValue > MaxScore)
-						actualValue = MinScore + (actualValue - MaxScore);
-					else if (actualValue < MinScore)
-						actualValue = MaxScore - (MinScore - actualValue);
+				// ex) MinValue : 0, MaxValue : 100, Value : 101 -> 1
+				// ex) MinValue : 0, MaxValue : 100, Value : -1 -> 99
+				case MValueStyle.LoopA:
+					if (actualValue > MaxValue)
+						actualValue = MinValue + (actualValue - MaxValue);
+					else if (actualValue < MinValue)
+						actualValue = MaxValue - (MinValue - actualValue);
 					break;
-				// LoopB : 초과/미만 시 반대쪽으로 이동 (이때 MinScore, MaxScore는 포함됨)
+				// LoopB : 초과/미만 시 반대쪽으로 이동 (이때 MinValue, MaxValue는 포함됨)
 				// { ..., Max - 1, Max, Min, Min + 1, ... }
-				// ex) MinScore : 0, MaxScore : 100, Score : 101 -> 0
-				// ex) MinScore : 0, MaxScore : 100, Score : -1 -> 100
-				case MScoreStyle.LoopB:
-					if (actualValue > MaxScore)
-						actualValue = MinScore + (actualValue - MaxScore) - 1;
-					else if (actualValue < MinScore)
-						actualValue = MaxScore - (MinScore - actualValue) + 1;
+				// ex) MinValue : 0, MaxValue : 100, Value : 101 -> 0
+				// ex) MinValue : 0, MaxValue : 100, Value : -1 -> 100
+				case MValueStyle.LoopB:
+					if (actualValue > MaxValue)
+						actualValue = MinValue + (actualValue - MaxValue) - 1;
+					else if (actualValue < MinValue)
+						actualValue = MaxValue - (MinValue - actualValue) + 1;
 					break;
 			}
 
@@ -138,19 +138,19 @@ namespace Mascari4615
 		{
 			MDebugLog(nameof(OnValueChange));
 
-			if (isMaxScore != null)
-				isMaxScore.SetValue(Value == MaxScore);
+			if (isMaxValue != null)
+				isMaxValue.SetValue(Value == MaxValue);
 			
-			if (isMinScore != null)
-				isMinScore.SetValue(Value == MinScore);
+			if (isMinValue != null)
+				isMinValue.SetValue(Value == MinValue);
 
 			SendEvents();
 		}
 
-		public void IncreaseScore() => SetValue(Value + IncreaseAmount);
+		public void IncreaseValue() => SetValue(Value + IncreaseAmount);
 		public void AddValue(int amount) => SetValue(Value + amount);
-		public void DecreaseScore() => SetValue(Value - DecreaseAmount);
+		public void DecreaseValue() => SetValue(Value - DecreaseAmount);
 		public void SubValue(int amount) => SetValue(Value - amount);
-		public void ResetScore() => SetValue(defaultScore);
+		public void ResetValue() => SetValue(defaultValue);
 	}
 }

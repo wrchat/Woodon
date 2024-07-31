@@ -21,7 +21,7 @@ namespace Mascari4615
 		[SerializeField] private Transform quizDatasParent;
 		[SerializeField] private Transform quizSeatsParent;
 		[SerializeField] private Image[] stateButtonImages;
-		[SerializeField] protected MScore curQuizIndex_MScore;
+		[SerializeField] protected MValue curQuizIndex_MScore;
 		[SerializeField] private MTextSync seatIndexInputField;
 
 		[SerializeField] protected MSFXManager sfxManager;

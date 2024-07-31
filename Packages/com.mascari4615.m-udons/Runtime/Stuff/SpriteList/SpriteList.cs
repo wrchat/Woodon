@@ -14,7 +14,7 @@ namespace Mascari4615
 		[SerializeField] private SpriteRenderer[] spriteRenderers;
 
 		[Header("_" + nameof(SpriteList) + " - Options")]
-		[SerializeField] private MScore mScore_SpriteIndex;
+		[SerializeField] private MValue mScore_SpriteIndex;
 
 		private void Start()
 		{

@@ -8,7 +8,7 @@ namespace Mascari4615
 	public class UIDrawTeamSetter : MBase
 	{
 		[SerializeField] private DrawManager drawManager;
-		[SerializeField] private MScore mScore;
+		[SerializeField] private MValue mScore;
 		[SerializeField] private TMP_Dropdown dropdown;
 
 		public void SetPlayerTeamByDropdown()

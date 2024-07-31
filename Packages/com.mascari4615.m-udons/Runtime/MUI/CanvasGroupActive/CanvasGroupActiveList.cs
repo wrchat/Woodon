@@ -8,7 +8,7 @@ namespace Mascari4615
 	{
 		[Header("_" + nameof(CanvasGroupActiveList))]
 		[SerializeField] private CanvasGroup[] canvasGroups;
-		[SerializeField] private MScore mScore;
+		[SerializeField] private MValue mScore;
 
 		private void Start()
 		{

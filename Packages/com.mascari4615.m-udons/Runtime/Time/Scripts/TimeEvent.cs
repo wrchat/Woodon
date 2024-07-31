@@ -9,7 +9,7 @@ namespace Mascari4615
 	{
 		[field: Header("_" + nameof(TimeEvent))]
 		[field: SerializeField] public int TimeByDecisecond { get; set; } = 50;
-		[SerializeField] private MScore mScore;
+		[SerializeField] private MValue mScore;
 		[SerializeField] private CustomBool isCounting;
 
 		[SerializeField] private UITimeEvent[] timeEventUIs;

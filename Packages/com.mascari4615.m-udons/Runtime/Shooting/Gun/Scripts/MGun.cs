@@ -9,7 +9,7 @@ namespace Mascari4615
 	public class MGun : MPickup
 	{
 		[Header("_" + nameof(MGun))]
-		[SerializeField] private MScore curAmmo;
+		[SerializeField] private MValue curAmmo;
 
 		[SerializeField] private AudioSource audioSource;
 		[SerializeField] private AudioClip shootSFX;
@@ -102,7 +102,7 @@ namespace Mascari4615
 					}
 
 					SetOwner();
-					curAmmo.DecreaseScore();
+					curAmmo.DecreaseValue();
 					RequestSerialization();
 				}
 

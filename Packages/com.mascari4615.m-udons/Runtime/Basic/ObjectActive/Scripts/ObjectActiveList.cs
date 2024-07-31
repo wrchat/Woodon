@@ -7,7 +7,7 @@ namespace Mascari4615
 	public class ObjectActiveList : MBase
 	{
 		[Header("_" + nameof(ObjectActiveList))]
-		[SerializeField] private MScore mScore;
+		[SerializeField] private MValue mScore;
 		
 		[SerializeField] private GameObject[] objectList;
 		[SerializeField] private CanvasGroup[] canvasGroups;

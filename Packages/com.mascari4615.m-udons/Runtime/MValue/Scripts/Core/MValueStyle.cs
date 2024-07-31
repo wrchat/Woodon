@@ -1,6 +1,6 @@
 namespace Mascari4615
 {
-	public enum MScoreStyle
+	public enum MValueStyle
 	{
 		None = -1,
 		Clamp,

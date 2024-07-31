@@ -13,7 +13,7 @@ namespace Mascari4615
 		public int RemainPoint => Data;
 		public int TryPoint => TurnData;
 		
-		[SerializeField] private MScore tryPointMScore;
+		[SerializeField] private MValue tryPointMScore;
 		[SerializeField] private TimeEvent timeEvent;
 		[SerializeField] private MSFXManager mSFXManager;
 

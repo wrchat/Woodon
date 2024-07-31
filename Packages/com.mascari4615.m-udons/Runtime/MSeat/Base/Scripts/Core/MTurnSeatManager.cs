@@ -29,21 +29,21 @@ namespace Mascari4615
 
 		[field: Header("_" + nameof(MTurnSeatManager) + "_Data")]
 		[field: SerializeField] public int DefaultData { get; private set; } = 0;
-		[field: SerializeField] public string[] DataToString { get; private set; }
+		[field: SerializeField] public string[] DataToString { get; protected set; }
 		[field: SerializeField] public bool ResetDataWhenOwnerChange { get; private set; }
 		[field: SerializeField] public bool UseDataSprites { get; private set; }
 		[field: SerializeField] public bool IsDataState { get; private set; }
-		[field: SerializeField] public Sprite[] DataSprites { get; private set; }
-		[field: SerializeField] public Sprite DataNoneSprite { get; private set; }
+		[field: SerializeField] public Sprite[] DataSprites { get; protected set; }
+		[field: SerializeField] public Sprite DataNoneSprite { get; protected set; }
 
 		[field: Header("_" + nameof(MTurnSeatManager) + "_TurnData")]
 		[field: SerializeField] public int DefaultTurnData { get; private set; } = 0;
-		[field: SerializeField] public string[] TurnDataToString { get; private set; }
+		[field: SerializeField] public string[] TurnDataToString { get; protected set; }
 		[field: SerializeField] public bool ResetTurnDataWhenOwnerChange { get; private set; }
 		[field: SerializeField] public bool UseTurnDataSprites { get; private set; }
 		[field: SerializeField] public bool IsTurnDataState { get; private set; }
-		[field: SerializeField] public Sprite[] TurnDataSprites { get; private set; }
-		[field: SerializeField] public Sprite TurnDataNoneSprite { get; private set; }
+		[field: SerializeField] public Sprite[] TurnDataSprites { get; protected set; }
+		[field: SerializeField] public Sprite TurnDataNoneSprite { get; protected set; }
 
 		public bool IsInited { get; protected set; } = false;
 

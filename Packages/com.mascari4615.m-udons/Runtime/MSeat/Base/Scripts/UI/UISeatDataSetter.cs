@@ -11,7 +11,7 @@ namespace Mascari4615
 	public class UISeatDataSetter : MBase
 	{
 		[SerializeField] private MSeat mSeat;
-		[SerializeField] private MScore mScore;
+		[SerializeField] private MValue mScore;
 
 		public void SetSeatDataByMScore()
 		{

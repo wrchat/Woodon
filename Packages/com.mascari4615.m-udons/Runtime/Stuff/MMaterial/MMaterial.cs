@@ -14,7 +14,7 @@ namespace Mascari4615
 
 		[Header("_Options : 아래 중 하나를 채워 넣으세요.")]
 		[SerializeField] private CustomBool switcher;
-		[SerializeField] private MScore materialIndex;
+		[SerializeField] private MValue materialIndex;
 
 		[ContextMenu(nameof(UpdateMaterial))]
 		public virtual void UpdateMaterial()
