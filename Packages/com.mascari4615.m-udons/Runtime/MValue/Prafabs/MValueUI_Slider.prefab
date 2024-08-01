@@ -430,8 +430,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5599179276778524810}
   - {fileID: 6539902713272112795}
+  - {fileID: 5599179276778524810}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -462,9 +462,11 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 5386580756663061350}
   DEBUG: 1
-  mScore: {fileID: 0}
+  mValue: {fileID: 0}
   slider: {fileID: 8431102059406926859}
   fakeSlider: {fileID: 4205924591594773888}
+  logDetail: 0
+  isSliderPressed: {fileID: 0}
 --- !u!114 &5386580756663061350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -826,7 +828,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7892080399107148607}
   m_Enabled: 1
-  m_Alpha: 0.5
+  m_Alpha: 0.01
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0

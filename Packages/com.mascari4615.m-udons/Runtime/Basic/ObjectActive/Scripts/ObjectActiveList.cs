@@ -7,7 +7,7 @@ namespace Mascari4615
 	public class ObjectActiveList : MBase
 	{
 		[Header("_" + nameof(ObjectActiveList))]
-		[SerializeField] private MValue mScore;
+		[SerializeField] private MValue mValue;
 		
 		[SerializeField] private GameObject[] objectList;
 		[SerializeField] private CanvasGroup[] canvasGroups;
@@ -19,14 +19,14 @@ namespace Mascari4615
 			maxLen = Mathf.Max(maxLen, canvasGroups.Length);
 			maxLen = Mathf.Max(maxLen, pickups.Length);
 
-			mScore.SetMinMaxValue(0, maxLen - 1);
+			mValue.SetMinMaxValue(0, maxLen - 1);
 		}
 
 		[ContextMenu(nameof(UpdateObjectByScore))]
 		public void UpdateObjectByScore()
 		{
-			if (mScore)
-				SetObject(mScore.Value);
+			if (mValue)
+				SetObject(mValue.Value);
 		}
 
 		public void SetObject(int targetIndex)

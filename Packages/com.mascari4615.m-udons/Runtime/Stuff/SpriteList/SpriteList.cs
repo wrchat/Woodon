@@ -14,7 +14,7 @@ namespace Mascari4615
 		[SerializeField] private SpriteRenderer[] spriteRenderers;
 
 		[Header("_" + nameof(SpriteList) + " - Options")]
-		[SerializeField] private MValue mScore_SpriteIndex;
+		[SerializeField] private MValue mValue_SpriteIndex;
 
 		private void Start()
 		{
@@ -23,10 +23,10 @@ namespace Mascari4615
 
 		private void Init()
 		{
-			if (mScore_SpriteIndex)
+			if (mValue_SpriteIndex)
 			{
-				mScore_SpriteIndex.RegisterListener(this, nameof(SetAllByMScore));
-				SetAllByMScore();
+				mValue_SpriteIndex.RegisterListener(this, nameof(SetAllByMValue));
+				SetAllByMValue();
 			}
 			else
 			{
@@ -45,12 +45,12 @@ namespace Mascari4615
 				spriteRenderers[i].sprite = sprites[i];
 		}
 
-		[ContextMenu(nameof(SetAllByMScore))]
-		public void SetAllByMScore()
+		[ContextMenu(nameof(SetAllByMValue))]
+		public void SetAllByMValue()
 		{
-			MDebugLog(nameof(SetAllByMScore));
-			if (mScore_SpriteIndex)
-				SetAll(mScore_SpriteIndex.Value);
+			MDebugLog(nameof(SetAllByMValue));
+			if (mValue_SpriteIndex)
+				SetAll(mValue_SpriteIndex.Value);
 		}
 
 		public void SetAll(int spriteIndex)

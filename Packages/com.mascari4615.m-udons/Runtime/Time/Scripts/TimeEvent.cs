@@ -9,7 +9,7 @@ namespace Mascari4615
 	{
 		[field: Header("_" + nameof(TimeEvent))]
 		[field: SerializeField] public int TimeByDecisecond { get; set; } = 50;
-		[SerializeField] private MValue mScore;
+		[SerializeField] private MValue mValue;
 		[SerializeField] private CustomBool isCounting;
 
 		[SerializeField] private UITimeEvent[] timeEventUIs;
@@ -111,12 +111,12 @@ namespace Mascari4615
 			SetExpireTime(Networking.GetServerTimeInMilliseconds() + (timeByDecisecond * 100));
 		}
 
-		public void SetTimeByMScore()
+		public void SetTimeByMValue()
 		{
-			MDebugLog(nameof(SetTimeByMScore));
+			MDebugLog(nameof(SetTimeByMValue));
 
-			if (mScore != null)
-				SetExpireTime(Networking.GetServerTimeInMilliseconds() + (mScore.Value * 100));
+			if (mValue != null)
+				SetExpireTime(Networking.GetServerTimeInMilliseconds() + (mValue.Value * 100));
 		}
 
 		public void AddTime()
@@ -127,17 +127,17 @@ namespace Mascari4615
 				SetExpireTime(ExpireTime + TimeByDecisecond * 100);
 		}
 
-		public void AddTimeByMScore()
+		public void AddTimeByMValue()
 		{
-			MDebugLog(nameof(AddTimeByMScore));
+			MDebugLog(nameof(AddTimeByMValue));
 
-			if (mScore == null)
+			if (mValue == null)
 				return;
 
 			if (ExpireTime == NONE_INT)
 				return;
 
-			SetExpireTime(ExpireTime + mScore.Value * 100);
+			SetExpireTime(ExpireTime + mValue.Value * 100);
 		}
 
 		public void ToggleTime()

@@ -2,6 +2,7 @@ using TMPro;
 using UdonSharp;
 using UnityEngine;
 using UnityEngine.UI;
+using VRC.SDKBase;
 
 namespace Mascari4615
 {
@@ -22,6 +23,8 @@ namespace Mascari4615
 		}
 
 		[Header("_" + nameof(MTurnSeat))]
+		[SerializeField] private TextMeshProUGUI[] curTurnDataTexts;
+		[SerializeField] private Image[] curTurnDataImages;
 		[SerializeField] private TextMeshProUGUI[] turnDataTexts;
 		[SerializeField] private Image[] turnDataImages;
 
@@ -29,8 +32,8 @@ namespace Mascari4615
 		{
 			base.Init(seatManager, index);
 
-			SetTurnData(seatManager.DefaultTurnData);
-			OnTurnDataChange(DataChangeState.None);
+			if (Networking.IsMaster)
+				SetTurnData(seatManager.DefaultTurnData);
 		}
 
 		public void SetTurnData(int newTurnData)
@@ -49,49 +52,111 @@ namespace Mascari4615
 
 		protected virtual void OnTurnDataChange(DataChangeState changeState)
 		{
-			// MDebugLog($"{nameof(OnTurnDataChange)}, {TurnData}");
+			MDebugLog($"{nameof(OnTurnDataChange)}, {TurnData}");
 
-			if (seatManager.IsTurnDataState)
+			UpdateCurTurnDataUI();
+
+			if (changeState != DataChangeState.None)
+				seatManager.UpdateStuff();
+		}
+
+		private void UpdateCurTurnDataUI()
+		{
+			if (seatManager == null)
+				return;
+
+			if (seatManager.IsTurnDataElement)
 			{
-				foreach (TextMeshProUGUI turnDataText in turnDataTexts)
-					turnDataText.text = (TurnData != NONE_INT) ? seatManager.TurnDataToString[TurnData] : string.Empty;
+				string curTurnDataString = (TurnData == NONE_INT) ? string.Empty :
+										(seatManager.TurnDataToString.Length > TurnData) ? seatManager.TurnDataToString[TurnData] : TurnData.ToString();
+				foreach (TextMeshProUGUI turnDataText in curTurnDataTexts)
+					turnDataText.text = curTurnDataString;
 
 				Sprite[] turnDataSprites = seatManager.TurnDataSprites;
 				Sprite noneSprite = seatManager.TurnDataNoneSprite;
-				foreach (Image turnDataImage in turnDataImages)
+				foreach (Image curTurnDataImage in curTurnDataImages)
 				{
 					if (seatManager.UseTurnDataSprites)
 					{
-						turnDataImage.sprite = (TurnData != NONE_INT) ? turnDataSprites[TurnData] : noneSprite;
+						curTurnDataImage.sprite = (TurnData != NONE_INT) ? turnDataSprites[TurnData] : noneSprite;
 					}
 					else
 					{
-						turnDataImage.sprite = (TurnData != NONE_INT) ? null : noneSprite;
+						curTurnDataImage.sprite = (TurnData != NONE_INT) ? null : noneSprite;
 					}
 				}
 			}
 			else
 			{
-				foreach (TextMeshProUGUI turnDataText in turnDataTexts)
-					turnDataText.text = TurnData.ToString();
+				foreach (TextMeshProUGUI curTurnDataText in curTurnDataTexts)
+					curTurnDataText.text = TurnData.ToString();
+			}
+		}
+
+		private void UpdateTurnDataUI()
+		{
+			if (seatManager == null)
+				return;
+
+			if (seatManager.IsTurnDataElement)
+			{
+				for (int i = 0; i < turnDataTexts.Length; i++)
+				{
+					if (i >= seatManager.TurnDataToString.Length)
+					{
+						turnDataTexts[i].text = i.ToString();
+					}
+					else
+					{
+						turnDataTexts[i].text = seatManager.TurnDataToString[i];
+					}
+				}
+
+				for (int i = 0; i < turnDataImages.Length; i++)
+				{
+					if (i >= seatManager.TurnDataToString.Length)
+					{
+						turnDataImages[i].sprite = seatManager.TurnDataNoneSprite;
+					}
+					else
+					{
+						turnDataImages[i].sprite = seatManager.TurnDataSprites[i];
+					}
+				}
+			}
+			else
+			{
+				for (int i = 0; i < turnDataTexts.Length; i++)
+					turnDataTexts[i].text = i.ToString();
+			}
+		}
+
+		public override void UpdateStuff()
+		{
+			base.UpdateStuff();
+
+			UpdateTurnDataUI();
+			UpdateCurTurnDataUI();
+
+			// SeatManager.UpdateStuff에서 각 Seat.UpdateStuff를 호출
+			// OnTurnDataChange에서는 역으로 SeatManager.UpdateStuff를 호출
+			// 때문에 무한 루프를 방지하기 위해,
+			// TurnData가 변경되어 Setter에서 OnTurnDataChange가 호출된 것인지,
+			// SeatManager.UpdateStuff가 호출되어 OnTurnDataChange가 호출된 것인지 구분시켜줄 필요가 있음.
+			// OnTurnDataChange(DataChangeState.None);
+			
+			// 240801 → OnTurnDataChange에서 UI 갱신 코드를 분리
+		}
+
+		protected override void OnOwnerChange(DataChangeState changeState)
+		{
+			if (changeState != DataChangeState.None)
+			{
+				if (seatManager.ResetTurnDataWhenOwnerChange)
+					ResetTurnData();
 			}
 
-			if (seatManager)
-				seatManager.UpdateStuff();
-		}
-
-		public virtual void UpdateStuff()
-		{
-			// MDebugLog($"{nameof(UpdateStuff)}");
-
-			OnTurnDataChange(DataChangeState.None);
-		}
-
-		protected override void OnOwnerChange()
-		{
-			if (seatManager.ResetTurnDataWhenOwnerChange)
-				ResetTurnData();
-			base.OnOwnerChange();
+			base.OnOwnerChange(changeState);
 		}
 	}
 }

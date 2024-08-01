@@ -8,18 +8,18 @@ namespace Mascari4615
 	{
 		[Header("_" + nameof(CanvasGroupActiveList))]
 		[SerializeField] private CanvasGroup[] canvasGroups;
-		[SerializeField] private MValue mScore;
+		[SerializeField] private MValue mValue;
 
 		private void Start()
 		{
-			mScore.SetMinMaxValue(0, canvasGroups.Length - 1);
+			mValue.SetMinMaxValue(0, canvasGroups.Length - 1);
 		}
 
-		[ContextMenu(nameof(UpdateCanvasGroupByScore))]
-		public void UpdateCanvasGroupByScore()
+		[ContextMenu(nameof(UpdateCanvasGroupByMValue))]
+		public void UpdateCanvasGroupByMValue()
 		{
-			if (mScore)
-				SetCanvasGroup(mScore.Value);
+			if (mValue)
+				SetCanvasGroup(mValue.Value);
 		}
 
 		public void SetCanvasGroup(int targetIndex)

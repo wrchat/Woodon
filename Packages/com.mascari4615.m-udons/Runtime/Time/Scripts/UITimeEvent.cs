@@ -143,9 +143,9 @@ namespace Mascari4615
 
 		public void ResetTime() => timeEvent.ResetTime();
 		public void SetTimer() => timeEvent.SetTimer();
-		public void SetTimeByMScore() => timeEvent.SetTimeByMScore();
+		public void SetTimeByMValue() => timeEvent.SetTimeByMValue();
 		public void AddTime() => timeEvent.AddTime();
-		public void AddTimeByMScore() => timeEvent.AddTimeByMScore();
+		public void AddTimeByMValue() => timeEvent.AddTimeByMValue();
 		public void ToggleTime() => timeEvent.ToggleTime();
 	}
 }

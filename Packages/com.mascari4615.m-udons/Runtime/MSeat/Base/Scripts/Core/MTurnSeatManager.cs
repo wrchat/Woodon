@@ -32,7 +32,7 @@ namespace Mascari4615
 		[field: SerializeField] public string[] DataToString { get; protected set; }
 		[field: SerializeField] public bool ResetDataWhenOwnerChange { get; private set; }
 		[field: SerializeField] public bool UseDataSprites { get; private set; }
-		[field: SerializeField] public bool IsDataState { get; private set; }
+		[field: SerializeField] public bool IsDataElement { get; private set; }
 		[field: SerializeField] public Sprite[] DataSprites { get; protected set; }
 		[field: SerializeField] public Sprite DataNoneSprite { get; protected set; }
 
@@ -41,7 +41,7 @@ namespace Mascari4615
 		[field: SerializeField] public string[] TurnDataToString { get; protected set; }
 		[field: SerializeField] public bool ResetTurnDataWhenOwnerChange { get; private set; }
 		[field: SerializeField] public bool UseTurnDataSprites { get; private set; }
-		[field: SerializeField] public bool IsTurnDataState { get; private set; }
+		[field: SerializeField] public bool IsTurnDataElement { get; private set; }
 		[field: SerializeField] public Sprite[] TurnDataSprites { get; protected set; }
 		[field: SerializeField] public Sprite TurnDataNoneSprite { get; protected set; }
 
@@ -87,6 +87,12 @@ namespace Mascari4615
 		public virtual void UpdateStuff()
 		{
 			// MDebugLog($"{nameof(UpdateStuff)}");
+
+			if (IsInited == false)
+				Init();
+
+			foreach (MTurnSeat turnSeat in TurnSeats)
+				turnSeat.UpdateStuff();
 		}
 
 		public int GetMaxData()

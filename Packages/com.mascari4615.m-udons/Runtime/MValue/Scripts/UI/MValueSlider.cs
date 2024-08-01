@@ -24,7 +24,7 @@ namespace Mascari4615
 		public void Init()
 		{
 			mValue.RegisterListener(this, nameof(UpdateSlider));
-			
+
 			slider.value = 0;
 			fakeSlider.value = 0;
 
@@ -42,7 +42,7 @@ namespace Mascari4615
 				return;
 			}
 
-			int newValue = (int)(slider.value * mValue.MaxValue);
+			int newValue = mValue.MinValue + (int)(slider.value * (mValue.MaxValue - mValue.MinValue));
 			if (mValue.Value != newValue)
 			{
 				if (logDetail)
@@ -56,14 +56,14 @@ namespace Mascari4615
 
 		public void UpdateSlider()
 		{
-			int curFakeSliderValue = (int)(fakeSlider.value * mValue.MaxValue);
+			int curFakeSliderValue = mValue.MinValue + (int)(fakeSlider.value * (mValue.MaxValue - mValue.MinValue));
 			if (mValue.Value != curFakeSliderValue)
-				fakeSlider.value = (float)mValue.Value / mValue.MaxValue;
+				fakeSlider.value = (float)(mValue.Value - mValue.MinValue) / (mValue.MaxValue - mValue.MinValue);
 
 			if (IsOwner(mValue.gameObject))
 				return;
 
-			int curSliderValue = (int)(slider.value * mValue.MaxValue);
+			int curSliderValue = mValue.MinValue + (int)(slider.value * (mValue.MaxValue - mValue.MinValue));
 			if (mValue.Value != curSliderValue)
 			{
 				forceChange = true;
@@ -73,7 +73,7 @@ namespace Mascari4615
 				else
 					MDebugLog($"{nameof(UpdateSlider)}");
 
-				slider.value = (float)mValue.Value / mValue.MaxValue;
+				slider.value = (float)(mValue.Value - mValue.MinValue) / (mValue.MaxValue - mValue.MinValue);
 			}
 		}
 

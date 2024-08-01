@@ -1,9 +1,5 @@
 ﻿using UdonSharp;
 using UnityEngine;
-using VRC.SDKBase;
-using VRC.Udon;
-using Cinemachine;
-using UnityEngine.UI;
 
 namespace Mascari4615
 {
@@ -11,11 +7,11 @@ namespace Mascari4615
 	public class UISeatDataSetter : MBase
 	{
 		[SerializeField] private MSeat mSeat;
-		[SerializeField] private MValue mScore;
+		[SerializeField] private MValue mValue;
 
-		public void SetSeatDataByMScore()
+		public void SetSeatDataByMValue()
 		{
-			mSeat.SetData(mScore.Value);
+			mSeat.SetData(mValue.Value);
 		}
 	}
 }

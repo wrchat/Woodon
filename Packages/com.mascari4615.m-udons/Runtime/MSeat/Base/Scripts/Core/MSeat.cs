@@ -10,40 +10,50 @@ namespace Mascari4615
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class MSeat : MBase
 	{
-		[UdonSynced(), FieldChangeCallback(nameof(OwnerID))]
-		private int _ownerID = NONE_INT;
 		public int OwnerID
 		{
 			get => _ownerID;
 			set
 			{
+				int origin = _ownerID;
 				_ownerID = value;
-				OnOwnerChange();
+				OnOwnerChange(DataChangeStateUtil.GetChangeState(origin, value));
 			}
 		}
+		[UdonSynced(), FieldChangeCallback(nameof(OwnerID))] private int _ownerID = NONE_INT;
 
-		[UdonSynced(), FieldChangeCallback(nameof(Data))]
-		private int _data = NONE_INT;
 		public int Data
 		{
 			get => _data;
 			set
 			{
+				int origin = _data;
 				_data = value;
-				OnDataChange();
+				OnDataChange(DataChangeStateUtil.GetChangeState(origin, value));
 			}
 		}
+		[UdonSynced(), FieldChangeCallback(nameof(Data))] private int _data = NONE_INT;
 
 		public int Index { get; private set; }
 
 		protected MTurnSeatManager seatManager;
 
 		[Header("_" + nameof(MSeat))]
+		[SerializeField] private CustomBool ownerCustomBool;
+		[SerializeField] private TextMeshProUGUI[] ownerNameTexts;
+		[SerializeField] private TextMeshProUGUI[] indexTexts;
+		[SerializeField] private TextMeshProUGUI[] curDataTexts;
+		[SerializeField] private Image[] curDataImages;
 		[SerializeField] private TextMeshProUGUI[] dataTexts;
 		[SerializeField] private Image[] dataImages;
-		[SerializeField] private TextMeshProUGUI[] indexTexts;
-		[SerializeField] private ObjectActive ownerObjectActive;
-		[SerializeField] private TextMeshProUGUI[] ownerNameTexts;
+		
+		public bool IsSeatOwner(VRCPlayerApi targetPlayer = null)
+		{
+			if (targetPlayer == null)
+				targetPlayer = Networking.LocalPlayer;
+
+			return OwnerID == targetPlayer.playerId;
+		}
 
 		public virtual void Init(MTurnSeatManager seatManager, int index)
 		{
@@ -55,15 +65,37 @@ namespace Mascari4615
 
 			SetData(seatManager.DefaultData);
 
-			OnOwnerChange();
-			OnDataChange();
+			UpdateStuff();
 		}
 
-		protected virtual void OnOwnerChange()
+		public virtual void UpdateStuff()
 		{
-			if (ownerObjectActive)
-				ownerObjectActive.SetActive(IsLocalPlayerID(OwnerID));
+			MDebugLog($"{nameof(UpdateStuff)}");
 
+			UpdateOwnerUI();
+			UpdateCurDataUI();
+			UpdateDataUI();
+
+			// OnOwnerChange(DataChangeState.None);
+			// OnDataChange(DataChangeState.None);
+		}
+
+		protected virtual void OnOwnerChange(DataChangeState changeState)
+		{
+			if (seatManager == null)
+				return;
+
+			if (ownerCustomBool)
+				ownerCustomBool.SetValue(IsLocalPlayerID(OwnerID));
+
+			UpdateOwnerUI();
+
+			if (changeState != DataChangeState.None)
+				seatManager.UpdateStuff();
+		}
+
+		private void UpdateOwnerUI()
+		{
 			foreach (TextMeshProUGUI ownerNameText in ownerNameTexts)
 			{
 				string ownerName;
@@ -76,42 +108,86 @@ namespace Mascari4615
 
 				ownerNameText.text = ownerName;
 			}
+		}
 
-			if (seatManager)
+		protected virtual void OnDataChange(DataChangeState changeState)
+		{
+			// MDebugLog($"{nameof(OnDataChange)}, {Data}");
+			
+			if (seatManager == null)
+				return;
+
+			UpdateCurDataUI();
+
+			if (changeState != DataChangeState.None)
 				seatManager.UpdateStuff();
 		}
 
-		protected virtual void OnDataChange()
+		private void UpdateCurDataUI()
 		{
-			// MDebugLog($"{nameof(OnDataChange)}, {Data}");
+			if (seatManager == null)
+				return;
 
-			if (seatManager.IsDataState)
+			if (seatManager.IsDataElement)
 			{
-				foreach (TextMeshProUGUI dataText in dataTexts)
-					dataText.text = (Data != NONE_INT) ? seatManager.DataToString[Data] : string.Empty;
+				foreach (TextMeshProUGUI curDataText in curDataTexts)
+					curDataText.text = (Data != NONE_INT) ? seatManager.DataToString[Data] : string.Empty;
 			
-				Sprite[] dataSprites = seatManager.DataSprites;
-				Sprite noneSprite = seatManager.DataNoneSprite;
-				foreach (Image dataImage in dataImages)
+				foreach (Image curDataImage in curDataImages)
 				{
 					if (seatManager.UseDataSprites)
 					{
-						dataImage.sprite = (Data != NONE_INT) ? dataSprites[Data] : noneSprite;
+						curDataImage.sprite = (Data != NONE_INT) ? seatManager.DataSprites[Data] : seatManager.DataNoneSprite;
 					}
 					else
 					{
-						dataImage.sprite = (Data != NONE_INT) ? null : noneSprite;
+						curDataImage.sprite = (Data != NONE_INT) ? null : seatManager.DataNoneSprite;
 					}
 				}
 			}
 			else
 			{
-				foreach (TextMeshProUGUI dataText in dataTexts)
-					dataText.text = Data.ToString();
+				foreach (TextMeshProUGUI curDataText in curDataTexts)
+					curDataText.text = Data.ToString();
 			}
+		}
 
-			if (seatManager)
-				seatManager.UpdateStuff();
+		private void UpdateDataUI()
+		{
+			if (seatManager == null)
+				return;
+
+			if (seatManager.IsDataElement)
+			{
+				for (int i = 0; i < dataTexts.Length; i++)
+				{
+					if (i >= seatManager.DataToString.Length)
+					{
+						dataTexts[i].text = i.ToString();
+					}
+					else
+					{
+						dataTexts[i].text = seatManager.DataToString[i];
+					}
+				}
+
+				for (int i = 0; i < dataImages.Length; i++)
+				{
+					if (i >= seatManager.DataSprites.Length)
+					{
+						dataImages[i].sprite = seatManager.DataNoneSprite;
+					}
+					else
+					{
+						dataImages[i].sprite = seatManager.DataSprites[i];
+					}
+				}
+			}
+			else
+			{
+				for (int i = 0; i < dataTexts.Length; i++)
+					dataTexts[i].text = i.ToString();
+			}
 		}
 
 		public void SetData(int newData)
