@@ -1,29 +1,19 @@
 {
   "dependencies": {
-    "com.vrchat.base": {
-      "version": "3.6.1"
-    },
-    "com.vrchat.worlds": {
-      "version": "3.6.1"
-    },
     "com.vrchat.core.vpm-resolver": {
       "version": "0.1.29"
     },
     "net.ureishi.qvpen": {
       "version": "3.2.13"
+    },
+    "com.vrchat.worlds": {
+      "version": "3.6.2-beta.1"
+    },
+    "com.vrchat.base": {
+      "version": "3.6.2-constraints.3"
     }
   },
   "locked": {
-    "com.vrchat.base": {
-      "version": "3.6.1",
-      "dependencies": {}
-    },
-    "com.vrchat.worlds": {
-      "version": "3.6.1",
-      "dependencies": {
-        "com.vrchat.base": "3.6.1"
-      }
-    },
     "com.vrchat.core.vpm-resolver": {
       "version": "0.1.29",
       "dependencies": {}
@@ -33,6 +23,16 @@
       "dependencies": {
         "com.vrchat.worlds": "^3.4.0"
       }
+    },
+    "com.vrchat.worlds": {
+      "version": "3.6.2-beta.1",
+      "dependencies": {
+        "com.vrchat.base": "3.6.2-beta.1"
+      }
+    },
+    "com.vrchat.base": {
+      "version": "3.6.2-constraints.3",
+      "dependencies": {}
     }
   }
 }

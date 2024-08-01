@@ -11,6 +11,14 @@ namespace Mascari4615
 
 		private void Start()
 		{
+			SetMirror();
+		}
+
+		[ContextMenu(nameof(SetMirror))]
+		public void SetMirror()
+		{
+			MDebugLog($"{nameof(SetMirror)}");
+
 			if (transforms.Length != mirrors.Length)
 			{
 				Debug.LogError("Transforms and Mirrors length must be equal.");

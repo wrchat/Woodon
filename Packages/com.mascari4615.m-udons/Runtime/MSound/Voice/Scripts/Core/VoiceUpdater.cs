@@ -23,8 +23,10 @@ namespace Mascari4615
 
 		public void SetEnable(bool enable)
 		{
-			if (this.enable)
-				this.enable.SetValue(enable);
+			if (this.enable == null)
+				return;
+
+			this.enable.SetValue(enable);
 		}
 	}
 }

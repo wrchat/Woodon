@@ -25,6 +25,9 @@ namespace Mascari4615
 			if (voiceManager.PlayerApis == null)
 				return;
 
+			if (enable != null && (enable.Value == false))
+				return;
+
 			// 무시 MTarget 대상이라면 return
 			foreach (MTarget ignoreTarget in ignoreTargets)
 			{
