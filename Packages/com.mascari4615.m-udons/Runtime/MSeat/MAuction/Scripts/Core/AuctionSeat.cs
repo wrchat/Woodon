@@ -13,7 +13,7 @@ namespace Mascari4615
 		public int RemainPoint => Data;
 		public int TryPoint => TurnData;
 		
-		[SerializeField] private MValue tryPointMScore;
+		[SerializeField] private MValue tryPoint_MValue;
 		[SerializeField] private TimeEvent timeEvent;
 		[SerializeField] private MSFXManager mSFXManager;
 
@@ -24,11 +24,11 @@ namespace Mascari4615
 
 			AuctionManager auctionManager = (AuctionManager)seatManager;
 
-			if (auctionManager.GetMaxTurnData() >= tryPointMScore.Value)
+			if (auctionManager.GetMaxTurnData() >= tryPoint_MValue.Value)
 				return;
 
 			SetTryTime(Networking.GetServerTimeInMilliseconds());
-			SetTurnData(tryPointMScore.Value);
+			SetTurnData(tryPoint_MValue.Value);
 		}
 
 		public void SetTryTime(int newTryTime)
@@ -38,19 +38,25 @@ namespace Mascari4615
 			RequestSerialization();
 		}
 
-		protected override void OnDataChange()
+		protected override void OnDataChange(DataChangeState changeState)
 		{
-			base.OnDataChange();
+			base.OnDataChange(changeState);
 
-			tryPointMScore.SetMinMaxValue(0, Data, IsOwner());
+			if (changeState != DataChangeState.None)
+			{
+				tryPoint_MValue.SetMinMaxValue(0, Data, IsOwner());
+			}
 		}
 
-		protected override void OnOwnerChange()
+		protected override void OnOwnerChange(DataChangeState changeState)
 		{
-			base.OnOwnerChange();
-
-			if (IsLocalPlayerID(OwnerID))
-				tryPointMScore.SetValue(0);
+			base.OnOwnerChange(changeState);
+			
+			if (changeState != DataChangeState.None)
+			{
+				if (IsLocalPlayerID(OwnerID))
+					tryPoint_MValue.SetValue(0);
+			}
 		}
 
 		protected override void OnTurnDataChange(DataChangeState changeState)
@@ -63,7 +69,7 @@ namespace Mascari4615
 			if (changeState != DataChangeState.Greater)
 				return;
 
-			if (!IsOwner(seatManager.gameObject))
+			if (IsOwner(seatManager.gameObject) == false)
 				return;
 
 			if (timeEvent != null)

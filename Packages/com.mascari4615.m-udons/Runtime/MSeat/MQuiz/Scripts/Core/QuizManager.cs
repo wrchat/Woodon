@@ -21,7 +21,7 @@ namespace Mascari4615
 		[SerializeField] private Transform quizDatasParent;
 		[SerializeField] private Transform quizSeatsParent;
 		[SerializeField] private Image[] stateButtonImages;
-		[SerializeField] protected MValue curQuizIndex_MScore;
+		[SerializeField] protected MValue curQuizIndex_MValue;
 		[SerializeField] private MTextSync seatIndexInputField;
 
 		[SerializeField] protected MSFXManager sfxManager;
@@ -82,7 +82,7 @@ namespace Mascari4615
 
 		protected override void Start()
 		{
-			curQuizIndex_MScore.SetMinMaxValue(0, QuizDatas.Length - 1);
+			curQuizIndex_MValue.SetMinMaxValue(0, QuizDatas.Length - 1);
 			base.Start();
 			UpdateStuff();
 		}
@@ -139,9 +139,9 @@ namespace Mascari4615
 		public void PrevQuiz() => SetQuizIndex(CurQuizIndex - 1);
 		public void UpdateQuizIndex()
 		{
-			// Called By MScore Event
+			// Called By MValue Event
 			if (IsOwner())
-				SetQuizIndex(curQuizIndex_MScore.SyncedValue);
+				SetQuizIndex(curQuizIndex_MValue.SyncedValue);
 		}
 		public virtual void SetQuizIndex(int newIndex)
 		{

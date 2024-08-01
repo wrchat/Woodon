@@ -8,15 +8,15 @@ namespace Mascari4615
 	public class UIDrawTeamSetter : MBase
 	{
 		[SerializeField] private DrawManager drawManager;
-		[SerializeField] private MValue mScore;
+		[SerializeField] private MValue mValue;
 		[SerializeField] private TMP_Dropdown dropdown;
 
 		public void SetPlayerTeamByDropdown()
 		{
-			if ((drawManager.DrawElementDatas.Length <= mScore.Value) || (0 > mScore.Value))
+			if ((drawManager.DrawElementDatas.Length <= mValue.Value) || (0 > mValue.Value))
 				return;
 
-			drawManager.SetElementData(mScore.Value, (TeamType)(dropdown.value - 1), DrawRole.Normal, true);
+			drawManager.SetElementData(mValue.Value, (TeamType)(dropdown.value - 1), DrawRole.Normal, true);
 			drawManager.SyncData();
 		}
 	}

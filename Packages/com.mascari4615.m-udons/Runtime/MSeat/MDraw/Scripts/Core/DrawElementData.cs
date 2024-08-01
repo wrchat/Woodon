@@ -4,23 +4,16 @@ using UnityEngine;
 namespace Mascari4615
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class DrawElementData : MBase
+	public class DrawElementData : MData
 	{
-		[field: SerializeField] public string Name { get; private set; }
-		[field: SerializeField] public Sprite Sprite { get; private set; }
-
 		[field: SerializeField] public TeamType InitTeamType { get; private set; } = TeamType.None;
 		[field: SerializeField] public DrawRole InitRole { get; private set; } = DrawRole.None;
-		[field: SerializeField, TextArea(1, 3)] public string[] StringData { get; private set; }
 
-		public int Index { get; set; } = NONE_INT;
 		public TeamType TeamType { get; set; } = TeamType.None;
 		public DrawRole Role { get; set; } = DrawRole.None;
-		public string SyncData { get; set; } = string.Empty;
-
 		public bool IsShowing { get; set; } = false;
 
-		public string Save()
+		public override string Save()
 		{
 			string data = string.Empty;
 
@@ -32,7 +25,7 @@ namespace Mascari4615
 			return data;
 		}
 
-		public void Load(string data)
+		public override void Load(string data)
 		{
 			string[] datas = data.Split(DATA_SEPARATOR);
 

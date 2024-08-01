@@ -28,12 +28,6 @@ namespace Mascari4615
 			"O", "X", "1", "2", "3", "4", "5", string.Empty
 		};
 
-		private void Start()
-		{
-			OnOwnerChange();
-			OnTurnDataChange(DataChangeState.None);
-		}
-
 		public void SelectAnswer(QuizAnswerType newAnswer)
 		{
 			if (quizManager.CurGameState != (int)QuizGameState.SelectAnswer)
