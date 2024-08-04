@@ -17,7 +17,7 @@ namespace Mascari4615
 		protected override void OnTurnDataChange(DataChangeState changeState)
 		{
 			for (int i = 0; i < selectAnswerDecoImages.Length; i++)
-				selectAnswerDecoImages[i].color = MColorUtil.GetColorByBool(i == (int)ExpectedAnswer, MColor.Green, MColor.WhiteGray);
+				selectAnswerDecoImages[i].color = MColorUtil.GetColorByBool(i == (int)ExpectedAnswer, MColorPreset.Green, MColorPreset.WhiteGray);
 			base.OnTurnDataChange(changeState);
 		}
 
