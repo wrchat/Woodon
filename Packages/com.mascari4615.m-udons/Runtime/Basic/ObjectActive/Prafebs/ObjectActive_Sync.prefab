@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2707485995879226899}
   - component: {fileID: 3485236980753305077}
   m_Layer: 0
-  m_Name: SyncedBool
+  m_Name: '[SyncedBool] ObjectActive'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -102,6 +102,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1679610334603396639, guid: d6bf782f18dc570459285e4a5fefaed6,
+        type: 3}
+      propertyPath: m_Name
+      value: '[Button] ToggleValue'
+      objectReference: {fileID: 0}
     - target: {fileID: 2018356609833719824, guid: d6bf782f18dc570459285e4a5fefaed6,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -145,7 +150,7 @@ PrefabInstance:
     - target: {fileID: 2351236461606263776, guid: d6bf782f18dc570459285e4a5fefaed6,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 219.72
+      value: 216.69
       objectReference: {fileID: 0}
     - target: {fileID: 2351236461606263776, guid: d6bf782f18dc570459285e4a5fefaed6,
         type: 3}
@@ -155,7 +160,7 @@ PrefabInstance:
     - target: {fileID: 2351236461606263776, guid: d6bf782f18dc570459285e4a5fefaed6,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 119.86
+      value: 118.345
       objectReference: {fileID: 0}
     - target: {fileID: 2351236461606263776, guid: d6bf782f18dc570459285e4a5fefaed6,
         type: 3}
@@ -172,7 +177,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 3485236980753305077}
     - target: {fileID: 3432338501392409163, guid: d6bf782f18dc570459285e4a5fefaed6,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
