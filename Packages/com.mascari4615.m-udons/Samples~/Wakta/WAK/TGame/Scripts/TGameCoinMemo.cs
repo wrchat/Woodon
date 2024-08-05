@@ -15,14 +15,14 @@ namespace Mascari4615
 		public bool IsTargetRemainCoinBox { get; private set; }
 		public int TargetCoinBoxIndex { get; private set; }
 
-		public MScore MScore { get; private set; }
+		public MValue MScore { get; private set; }
 		private TGameManager gameManager;
 		private CoinMemoPanel[] uis;
 
 		public void Init(TGameManager gameManager)
 		{
 			this.gameManager = gameManager;
-			MScore = GetComponentInChildren<MScore>(true);
+			MScore = GetComponentInChildren<MValue>(true);
 			uis = transform.root.GetComponentsInChildren<CoinMemoPanel>(true);
 			foreach (CoinMemoPanel ui in uis)
 				ui.Init(gameManager, this);

@@ -208,13 +208,13 @@ namespace Mascari4615
 
 		public void IncreaseScore()
 		{
-			coinMemo.MScore.IncreaseScore();
+			coinMemo.MScore.IncreaseValue();
 			coinMemo.UpdateUI();
 		}
 
 		public void DecreaseScore()
 		{
-			coinMemo.MScore.DecreaseScore();
+			coinMemo.MScore.DecreaseValue();
 			coinMemo.UpdateUI();
 		}
 	}

@@ -128,17 +128,17 @@ namespace Mascari4615
 			if (loopType == 0) // None
 			{
 				SetMusicLoopTypeImage(curMusicLoopTypeText, true, true);
-				musicLoopSwitchButtonImage.color = MColorUtil.GetColor(MColor.White);
+				musicLoopSwitchButtonImage.color = MColorUtil.GetColor(MColorPreset.White);
 			}
 			else if (loopType == 1) // All
 			{
 				SetMusicLoopTypeImage(curMusicLoopTypeText, false, true);
-				musicLoopSwitchButtonImage.color = MColorUtil.GetColor(MColor.White);
+				musicLoopSwitchButtonImage.color = MColorUtil.GetColor(MColorPreset.White);
 			}
 			else // One
 			{
 				SetMusicLoopTypeImage(curMusicLoopTypeText, false, false);
-				musicLoopSwitchButtonImage.color = MColorUtil.GetColor(MColor.Gray);
+				musicLoopSwitchButtonImage.color = MColorUtil.GetColor(MColorPreset.Gray);
 			}
 		}
 

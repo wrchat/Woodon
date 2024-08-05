@@ -8,7 +8,7 @@ namespace Mascari4615
 {
 	public class V2GameManager : UdonSharpBehaviour
 	{
-		[SerializeField] private MScore[] v2GameSeats;
+		[SerializeField] private MValue[] v2GameSeats;
 
 		public void ResetAllSeats()
 		{

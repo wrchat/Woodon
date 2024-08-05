@@ -55,7 +55,7 @@ namespace Mascari4615
 			// timeText.text = t <= 0 ? "-" : Mathf.CeilToInt(t + 1).ToString();
 			timeBlock.SetActive(time > 0);
 			timeText.text = ((int)time).ToString(); // t.ToString("F1");
-			timeText.color = MColorUtil.GetColorByBool(time <= 5, red, MColor.White);
+			timeText.color = MColorUtil.GetColorByBool(time <= 5, red, MColorPreset.White);
 		}
 	}
 }

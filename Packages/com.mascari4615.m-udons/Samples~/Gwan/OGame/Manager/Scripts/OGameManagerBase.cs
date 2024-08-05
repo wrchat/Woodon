@@ -7,7 +7,7 @@ namespace Mascari4615
 {
     public class OGameManagerBase : MBase
     { 
-        [SerializeField] private MScore curGame;
+        [SerializeField] private MValue curGame;
         [SerializeField] private int gameIndex;
         
         public bool IsCurGame => curGame.SyncedValue == gameIndex;

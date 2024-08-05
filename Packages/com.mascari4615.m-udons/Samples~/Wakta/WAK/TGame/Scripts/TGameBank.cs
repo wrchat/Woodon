@@ -15,8 +15,8 @@ namespace Mascari4615
 		[Header("_" + nameof(TGameBank))]
 		[SerializeField] private TGameManager gameManager;
 
-		[SerializeField] private MScore stealCoinAmount;
-		[SerializeField] private MScoreSlider mScoreSlider;
+		[SerializeField] private MValue stealCoinAmount;
+		[SerializeField] private MValueSlider mScoreSlider;
 		[SerializeField] private TextMeshProUGUI remainCoinText;
 		[SerializeField] private GameObject closedUI;
 

@@ -69,11 +69,11 @@ namespace Mascari4615
 			{
 				case QuizAnswerType.O:
 					showAnswerText.text = "O";
-					showAnswerText.color = MColorUtil.GetColor(MColor.Blue);
+					showAnswerText.color = MColorUtil.GetColor(MColorPreset.Blue);
 					break;
 				case QuizAnswerType.X:
 					showAnswerText.text = "X";
-					showAnswerText.color = MColorUtil.GetColor(MColor.Red);
+					showAnswerText.color = MColorUtil.GetColor(MColorPreset.Red);
 					break;
 				case QuizAnswerType.String:
 					showAnswerText.text = CurQuizData.QuizAnswerString;
@@ -100,7 +100,7 @@ namespace Mascari4615
 			if (parse < 0 || parse >= QuizDatas.Length)
 				return;
 
-			curQuizIndex_MScore.SetValue(parse);
+			curQuizIndex_MValue.SetValue(parse);
 		}
 
 		[SerializeField] private MTargetBool wallActiveViichanBool;

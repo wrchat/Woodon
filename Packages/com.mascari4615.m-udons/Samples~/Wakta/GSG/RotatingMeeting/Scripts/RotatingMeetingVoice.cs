@@ -35,7 +35,7 @@ namespace Mascari4615
 			for (int i = 0; i < 3; i++)
 			{
 				bool isFocus = i == curFocusState;
-				Color color = MColorUtil.GetColorByBool(isFocus, MColor.Green, MColor.Gray);
+				Color color = MColorUtil.GetColorByBool(isFocus, MColorPreset.Green, MColorPreset.Gray);
 
 				icons[i * 2 + 0].color = color;
 				icons[i * 2 + 1].color = color;
