@@ -9,7 +9,7 @@ namespace Mascari4615
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class MTurnSeat : MSeat
 	{
-		[UdonSynced(), FieldChangeCallback(nameof(TurnData))]
+		[UdonSynced, FieldChangeCallback(nameof(TurnData))]
 		private int _turnData = NONE_INT;
 		public int TurnData
 		{

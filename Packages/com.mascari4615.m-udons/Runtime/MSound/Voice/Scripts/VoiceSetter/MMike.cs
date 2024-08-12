@@ -9,7 +9,7 @@ namespace Mascari4615
 	public class MMike : MPickup
 	{
 		[Header("_" + nameof(MMike))]
-		[SerializeField] private CustomBool mikeEnable;
+		[SerializeField] private MBool mikeEnable;
 		
 		public bool IsMikeEnabled()
 		{

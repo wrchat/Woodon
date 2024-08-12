@@ -9,7 +9,7 @@ namespace Mascari4615
 	public class AuctionSeat : MTurnSeat
 	{
 		[field: Header("_" + nameof(AuctionSeat))]
-		[field: UdonSynced()] public int TryTime { get; private set; } = NONE_INT;
+		[field: UdonSynced] public int TryTime { get; private set; } = NONE_INT;
 		public int RemainPoint => Data;
 		public int TryPoint => TurnData;
 		

@@ -11,9 +11,9 @@ namespace Mascari4615
 		[SerializeField] private MeshRenderer[] targetMeshRenderers;
 		[SerializeField] private Image[] targetImages;
 
-		[UdonSynced()] public Color OriginColor;
+		[UdonSynced] public Color OriginColor;
 
-		[UdonSynced(), FieldChangeCallback(nameof(Value))] private Color _value;
+		[UdonSynced, FieldChangeCallback(nameof(Value))] private Color _value;
 		public Color Value
 		{
 			get => _value;

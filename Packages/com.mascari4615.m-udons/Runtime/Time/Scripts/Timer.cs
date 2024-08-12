@@ -10,9 +10,9 @@ namespace Mascari4615
 		[field: Header("_" + nameof(Timer))]
 		[field: SerializeField] public int TimeByDecisecond { get; set; } = 50;
 		[SerializeField] private MValue mValue;
-		[SerializeField] private CustomBool isCounting;
+		[SerializeField] private MBool isCounting;
 
-		[UdonSynced(), FieldChangeCallback(nameof(ExpireTime))] private int _expireTime = NONE_INT;
+		[UdonSynced, FieldChangeCallback(nameof(ExpireTime))] private int _expireTime = NONE_INT;
 		public int ExpireTime
 		{
 			get => _expireTime;
@@ -23,7 +23,7 @@ namespace Mascari4615
 			}
 		}
 
-		[UdonSynced(), FieldChangeCallback(nameof(TimeSpeed))] private int _timeSpeed = 1;
+		[UdonSynced, FieldChangeCallback(nameof(TimeSpeed))] private int _timeSpeed = 1;
 		public int TimeSpeed
 		{
 			get => _timeSpeed;

@@ -5,7 +5,7 @@ namespace Mascari4615
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class MCameraPosSync : UdonSharpBehaviour
 	{
-		/*[UdonSynced()]
+		/*[UdonSynced]
 		[FieldChangeCallback(nameof(CurCCPosData))]
 		private int curCCPosData;
 

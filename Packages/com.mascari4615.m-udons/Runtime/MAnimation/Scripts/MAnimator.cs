@@ -11,7 +11,7 @@ namespace Mascari4615
 		[SerializeField] private string boolName;
 		[SerializeField] private string intName;
 		[SerializeField] private bool defaultState;
-		[SerializeField] private CustomBool customBool;
+		[SerializeField] private MBool customBool;
 
 		[SerializeField] private string[] triggerNames;
 

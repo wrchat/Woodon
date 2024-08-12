@@ -14,7 +14,7 @@ namespace Mascari4615
 
 		[Header("_" + nameof(MValueSlider) + " - Options")]
 		[SerializeField] private bool logDetail = false;
-		[SerializeField] private CustomBool isSliderPressed;
+		[SerializeField] private MBool isSliderPressed;
 		private Animator sliderAnimator;
 
 		bool forceChange = false;

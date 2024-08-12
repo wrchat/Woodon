@@ -6,7 +6,7 @@ using VRC.Udon;
 namespace Mascari4615
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class DistanceBool : CustomBool
+	public class DistanceBool : MBool
 	{
 		[Header("_" + nameof(DistanceBool))]
 		[SerializeField] private float distance = 10f;

@@ -50,6 +50,6 @@ namespace Mascari4615
 		#region HorribleEvents
 		public void StopSFX_Global() => sfxManager.StopSFX_Global();
 		public void StopSFX() => sfxManager.StopSFX();
-		#endregion HorribleEvents
+		#endregion
 	}
 }

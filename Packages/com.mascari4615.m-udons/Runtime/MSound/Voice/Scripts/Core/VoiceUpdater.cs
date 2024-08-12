@@ -11,7 +11,7 @@ namespace Mascari4615
 	{
 		protected VoiceManager voiceManager;
 
-		[SerializeField] protected CustomBool enable;
+		[SerializeField] protected MBool enable;
 		[SerializeField] protected bool usePrevData;
 
 		public virtual void Init(VoiceManager voiceManager)

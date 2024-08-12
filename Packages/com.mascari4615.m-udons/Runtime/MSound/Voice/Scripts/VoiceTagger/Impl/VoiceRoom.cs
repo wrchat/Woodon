@@ -11,17 +11,16 @@ namespace Mascari4615
 	{
 		[Header("_" + nameof(VoiceRoom))]
 		[SerializeField] private MTarget[] mTargets;
-		[SerializeField] private SyncedBool[] syncedBools;
-		public SyncedBool[] SyncedBools => syncedBools;
+		[field: SerializeField] public MBool[] IsPlayerInside { get; private set; }
 
-		// [SerializeField] private SyncedBool isLocked;
+		// [SerializeField] private CustomBool isLocked;
 		[SerializeField] private Timer isLocked_Timer;
 
 		public override bool IsPlayerIn(VRCPlayerApi player)
 		{
 			for (int j = 0; j < mTargets.Length; j++)
 			{
-				if (mTargets[j].CurTargetPlayerID == player.playerId && syncedBools[j].Value)
+				if (mTargets[j].CurTargetPlayerID == player.playerId && IsPlayerInside[j].Value)
 				{
 					return true;
 				}
@@ -41,13 +40,13 @@ namespace Mascari4615
 			int inPlayerCount = 0;
 			for (int i = 0; i < mTargets.Length; i++)
 			{
-				if (syncedBools[i].Value)
+				if (IsPlayerInside[i].Value)
 					inPlayerCount++;
 			}
 
-			if (syncedBools[localPlayerNum].Value)
+			if (IsPlayerInside[localPlayerNum].Value)
 			{
-				syncedBools[localPlayerNum].SetValue(false);
+				IsPlayerInside[localPlayerNum].SetValue(false);
 
 				// if ((inPlayerCount == 1) && (isLocked.Value == true))
 				if ((inPlayerCount == 1) && (isLocked_Timer.IsExpired == false))
@@ -62,7 +61,7 @@ namespace Mascari4615
 				if (isLocked_Timer.IsExpired == false)
 					return;
 
-				syncedBools[localPlayerNum].SetValue(true);
+				IsPlayerInside[localPlayerNum].SetValue(true);
 			}
 		}
 
@@ -91,7 +90,7 @@ namespace Mascari4615
 		public void ResetSync()
 		{
 			for (int i = 0; i < mTargets.Length; i++)
-				syncedBools[i].SetValue(false);
+				IsPlayerInside[i].SetValue(false);
 
 			Unlock();
 		}

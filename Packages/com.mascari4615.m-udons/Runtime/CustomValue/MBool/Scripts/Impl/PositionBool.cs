@@ -1,10 +1,12 @@
-﻿using UnityEngine;
+﻿using UdonSharp;
+using UnityEngine;
 using VRC.SDKBase;
 using static Mascari4615.MUtil;
 
 namespace Mascari4615
 {
-	public class PositionBool : CustomBool
+	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
+	public class PositionBool : MBool
 	{
 		[Header("_" + nameof(PositionBool))]
 		// HACK, TODO (x, y, z)

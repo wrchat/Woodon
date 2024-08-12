@@ -62,7 +62,7 @@ namespace Mascari4615
 				OnQuizIndexChange();
 			}
 		}
-		[UdonSynced(), FieldChangeCallback(nameof(CurQuizIndex))]
+		[UdonSynced, FieldChangeCallback(nameof(CurQuizIndex))]
 		private int _curQuizIndex = 0;
 
 		protected override void OnGameStateChange(int origin, int value)

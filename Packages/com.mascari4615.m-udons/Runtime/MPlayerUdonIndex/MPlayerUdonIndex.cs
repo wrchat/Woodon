@@ -10,7 +10,7 @@ namespace Mascari4615
 	{
 		// https://cafe.naver.com/steamindiegame/14065241
 
-		[UdonSynced(), FieldChangeCallback(nameof(PlayerUdonIndexDataPack))] private string _playerUdonIndexDataPack = string.Empty;
+		[UdonSynced, FieldChangeCallback(nameof(PlayerUdonIndexDataPack))] private string _playerUdonIndexDataPack = string.Empty;
 		public string PlayerUdonIndexDataPack
 		{
 			get => _playerUdonIndexDataPack;

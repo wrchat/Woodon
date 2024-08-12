@@ -11,7 +11,7 @@ namespace Mascari4615
 		[field: SerializeField] public DrawManager DrawManager { get; private set; }
 		[field: SerializeField] public AuctionManager AuctionManager { get; private set; }
 		[SerializeField] private UIAuctionDraw[] uis;
-		[UdonSynced(), FieldChangeCallback(nameof(TargetIndex))] private int _targetIndex = NONE_INT;
+		[UdonSynced, FieldChangeCallback(nameof(TargetIndex))] private int _targetIndex = NONE_INT;
 		public int TargetIndex
 		{
 			get => _targetIndex;

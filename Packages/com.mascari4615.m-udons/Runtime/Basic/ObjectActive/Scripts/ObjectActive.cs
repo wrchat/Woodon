@@ -12,18 +12,18 @@ namespace Mascari4615
 		[SerializeField] private Image[] buttonUIImages;
 		[SerializeField] private Sprite[] buttonUISprites;
 		[SerializeField] private bool defaultActive;
-		[SerializeField] private CustomBool customBool;
+		[SerializeField] private MBool customBool;
 
-		private bool active;
 		public bool Active
 		{
-			get => active;
+			get => _active;
 			private set
 			{
-				active = value;
+				_active = value;
 				OnActiveChange();
 			}
 		}
+		private bool _active;
 
 		private void Start()
 		{
@@ -33,7 +33,7 @@ namespace Mascari4615
 			}
 			else
 			{
-
+				customBool.RegisterListener(this, nameof(UpdateValue));
 			}
 
 			OnActiveChange();
@@ -62,7 +62,7 @@ namespace Mascari4615
 				SetActive(customBool.Value);
 		}
 
-		public void SetCustomBool(CustomBool customBool)
+		public void SetCustomBool(MBool customBool)
 		{
 			this.customBool = customBool;
 			UpdateValue();

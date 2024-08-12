@@ -60,7 +60,7 @@ namespace Mascari4615
 		}
 
 
-		#region HorriableEvents
+		#region HorribleEvents
 		public void Play2Times_L() => PlayNTimes(2);
 		public void Play3Times_L() => PlayNTimes(3);
 		public void Play4Times_L() => PlayNTimes(4);

@@ -20,7 +20,7 @@ namespace Mascari4615
 				OnOwnerChange(DataChangeStateUtil.GetChangeState(origin, value));
 			}
 		}
-		[UdonSynced(), FieldChangeCallback(nameof(OwnerID))] private int _ownerID = NONE_INT;
+		[UdonSynced, FieldChangeCallback(nameof(OwnerID))] private int _ownerID = NONE_INT;
 
 		public int Data
 		{
@@ -32,14 +32,14 @@ namespace Mascari4615
 				OnDataChange(DataChangeStateUtil.GetChangeState(origin, value));
 			}
 		}
-		[UdonSynced(), FieldChangeCallback(nameof(Data))] private int _data = NONE_INT;
+		[UdonSynced, FieldChangeCallback(nameof(Data))] private int _data = NONE_INT;
 
 		public int Index { get; private set; }
 
 		protected MTurnSeatManager seatManager;
 
 		[Header("_" + nameof(MSeat))]
-		[SerializeField] private CustomBool ownerCustomBool;
+		[SerializeField] private MBool ownerCustomBool;
 		[SerializeField] private TextMeshProUGUI[] ownerNameTexts;
 		[SerializeField] private TextMeshProUGUI[] indexTexts;
 		[SerializeField] private TextMeshProUGUI[] curDataTexts;

@@ -7,7 +7,7 @@ namespace Mascari4615
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class MTurnSeatManager : MEventSender
 	{
-		[UdonSynced(), FieldChangeCallback(nameof(CurGameState))]
+		[UdonSynced, FieldChangeCallback(nameof(CurGameState))]
 		private int _curGameState = 0;
 		public int CurGameState
 		{

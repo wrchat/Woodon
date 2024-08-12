@@ -5,7 +5,7 @@ namespace Mascari4615
 {
 	public class TestCollision : MBase
 	{
-		[UdonSynced(), FieldChangeCallback(nameof(TestInt))] private int testInt;
+		[UdonSynced, FieldChangeCallback(nameof(TestInt))] private int testInt;
 		public int TestInt
 		{
 			get => testInt;

@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace Mascari4615
 {
-	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class MTargetBool : CustomBool
+	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
+	public class MTargetBool : MBool
 	{
 		[field: Header("_" + nameof(MTargetBool))]
 		[field: SerializeField] public MTarget MTarget { get; private set; }

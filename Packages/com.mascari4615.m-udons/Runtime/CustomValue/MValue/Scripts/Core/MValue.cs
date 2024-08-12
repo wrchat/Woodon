@@ -16,14 +16,13 @@ namespace Mascari4615
 		[SerializeField] private MValueStyle style = MValueStyle.Clamp;
 
 		[SerializeField] private bool useSync = true;
-		[SerializeField] private CustomBool isMaxValue;
-		[SerializeField] private CustomBool isMinValue;
+		[SerializeField] private MBool isMaxValue;
+		[SerializeField] private MBool isMinValue;
 
-		[UdonSynced(), FieldChangeCallback(nameof(SyncedValue))] private int _syncedValue;
 		public int SyncedValue
 		{
 			get => _syncedValue;
-			set
+			private set
 			{
 				_syncedValue = value;
 
@@ -31,16 +30,18 @@ namespace Mascari4615
 					SetValue(_syncedValue, isReciever: true);
 			}
 		}
-		private int _value;
+		[UdonSynced, FieldChangeCallback(nameof(SyncedValue))] private int _syncedValue;
+
 		public int Value
 		{
 			get => _value;
-			set
+			private set
 			{
 				_value = value;
 				OnValueChange();
 			}
 		}
+		private int _value;
 
 		private void Start()
 		{

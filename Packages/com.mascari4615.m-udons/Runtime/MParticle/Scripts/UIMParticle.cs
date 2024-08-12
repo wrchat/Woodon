@@ -9,7 +9,7 @@ namespace Mascari4615
 		[Header("_" + nameof(UIMParticle))]
 		[SerializeField] private MParticle mParticle;
 
-		#region HorriableEvents
+		#region HorribleEvents
 		public void Play() => mParticle.Play();
 		public void Stop() => mParticle.Stop();
 

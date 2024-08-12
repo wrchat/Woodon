@@ -8,7 +8,7 @@ namespace Mascari4615
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public class MCameraController : MBase
 	{
-		[SerializeField] private CustomBool isHolding;
+		[SerializeField] private MBool isHolding;
 		[SerializeField] private VRC_Pickup pickup;
 
 		// private CameraManager cameraManager;

@@ -20,8 +20,8 @@ namespace Mascari4615
 		[field: SerializeField] public Rigidbody Rigidbody { get; private set; }
 		[SerializeField] protected bool useGravityWhenOncePickedUp = false;
 
-		[SerializeField] protected CustomBool isHolding;
-		[SerializeField] protected CustomBool isSomeoneHolding;
+		[SerializeField] protected MBool isHolding;
+		[SerializeField] protected MBool isSomeoneHolding;
 		// [field: SerializeField] public CustomBool CustomBool { get; private set; }
 
 		private bool _enabled = true;

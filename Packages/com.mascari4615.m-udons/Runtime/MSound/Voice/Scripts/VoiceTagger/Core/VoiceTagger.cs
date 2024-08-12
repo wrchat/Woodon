@@ -11,9 +11,9 @@ namespace Mascari4615
 		[field: SerializeField] public VoiceAreaTag Tag { get; private set; }
 		[SerializeField] private float updateTerm = .5f;
 
-		[SerializeField] private CustomBool localPlayerIn;
+		[SerializeField] private MBool localPlayerIn;
 		private bool isLocalPlayerIn;
-		[SerializeField] private CustomBool someoneIn;
+		[SerializeField] private MBool someoneIn;
 		private bool isSomeoneIn;
 
 		protected virtual void Start() => UpdateVoiceLoop();

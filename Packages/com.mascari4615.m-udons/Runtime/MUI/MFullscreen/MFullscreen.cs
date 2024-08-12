@@ -7,7 +7,7 @@ namespace Mascari4615
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class MFullscreen : MBase
 	{
-		[SerializeField] private CustomBool screenActive;
+		[SerializeField] private MBool screenActive;
 		private CanvasGroup canvasGroup;
 
 		private void Start()

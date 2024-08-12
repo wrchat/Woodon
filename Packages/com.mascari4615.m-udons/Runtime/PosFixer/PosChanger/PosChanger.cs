@@ -14,7 +14,7 @@ namespace Mascari4615
 		[SerializeField] private GameObject targetObject;
 		[SerializeField] private Transform posA;
 		[SerializeField] private Transform posB;
-		[SerializeField] private CustomBool customBool; 
+		[SerializeField] private MBool customBool; 
 		
 		private bool isOriginPos;
 		public bool IsOriginPos
