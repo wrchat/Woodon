@@ -34,13 +34,13 @@ namespace Mascari4615
 
 			UpdateLock();
 
-			foreach (var remainCoinBox in remainCoinBoxes)
+			foreach (CoinBox remainCoinBox in remainCoinBoxes)
 			{
 				if (!remainCoinBox.IsLock)
 					remainCoinBox.UpdateCoin(0);
 			}
 
-			foreach (var stealCoinBox in stealCoinBoxes)
+			foreach (CoinBox stealCoinBox in stealCoinBoxes)
 			{
 				if (!stealCoinBox.IsLock)
 					stealCoinBox.UpdateCoin(0);
@@ -84,7 +84,7 @@ namespace Mascari4615
 				for (int i = 0; i < TGameManager.PLAYER_COUNT; i++)
 					playerImages[i].sprite = null;
 
-			var remainCoin = gameManager.Bank.MAX_COIN_BY_ROUND[gameManager.Data.CurRound];
+			int remainCoin = gameManager.Bank.MAX_COIN_BY_ROUND[gameManager.Data.CurRound];
 			remainCoinBoxes[0].UpdateCoin(remainCoin);
 
 			for (int i = 1; i < TGameManager.PLAYER_COUNT + 1; i++)
@@ -111,7 +111,7 @@ namespace Mascari4615
 		}
 		public void A_SetCurCoinBox(bool isRemainCoinBox)
 		{
-			var target = isRemainCoinBox ? remainCoinBoxes[coinMemo.TargetCoinBoxIndex] : stealCoinBoxes[coinMemo.TargetCoinBoxIndex];
+			CoinBox target = isRemainCoinBox ? remainCoinBoxes[coinMemo.TargetCoinBoxIndex] : stealCoinBoxes[coinMemo.TargetCoinBoxIndex];
 			// coinMemo.MScore.SetCanvasActive(!target.IsLock);
 			coinMemo.MScore.SetValue(target.Coin);
 
@@ -172,7 +172,7 @@ namespace Mascari4615
 
 		private int FindLocalPlayerTurn()
 		{
-			var localPlayerIndex = NONE_INT;
+			int localPlayerIndex = NONE_INT;
 			for (int i = 0; i < TGameManager.PLAYER_COUNT; i++)
 			{
 				if (gameManager.IsLocalPlayerNumber(i))

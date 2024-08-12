@@ -14,7 +14,7 @@ namespace Mascari4615
 
         public void BoxUp(int boxIndex)
         {
-            var curSiblingIndex = orderBoxes[boxIndex].transform.GetSiblingIndex();
+			int curSiblingIndex = orderBoxes[boxIndex].transform.GetSiblingIndex();
             MDebugLog(curSiblingIndex.ToString());
 
             if (curSiblingIndex == 0)
@@ -25,7 +25,7 @@ namespace Mascari4615
 
         public void BoxDown(int boxIndex)
         {
-            var curSiblingIndex = orderBoxes[boxIndex].transform.GetSiblingIndex();
+			int curSiblingIndex = orderBoxes[boxIndex].transform.GetSiblingIndex();
             MDebugLog(curSiblingIndex.ToString());
 
             if (curSiblingIndex == orderBoxes.Length - 1)
@@ -36,13 +36,13 @@ namespace Mascari4615
 
         public string GetOrder()
         {
-            var order = string.Empty;
-            var parent = transform.GetChild(0);
+			string order = string.Empty;
+			Transform parent = transform.GetChild(0);
 
             for (int i = 0; i < orderBoxes.Length; i++)
             {
-                var childName = parent.GetChild(i).gameObject.name;
-                foreach (var orderBox in orderBoxes)
+				string childName = parent.GetChild(i).gameObject.name;
+                foreach (OrderBox orderBox in orderBoxes)
                 {
                     if (orderBox.name == childName)
                     {

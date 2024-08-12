@@ -44,7 +44,7 @@ namespace Mascari4615
 			curHourText.text = DateTime.Now.Hour.ToString("D2");
 			curMinuteText.text = DateTime.Now.Minute.ToString("D2");
 
-			foreach (var clwakData in clwakDatas)
+			foreach (ClwakData clwakData in clwakDatas)
 				if (clwakData.Hour == DateTime.Now.Hour % 12 &&
 					clwakData.Minute == DateTime.Now.Minute)
 				{
@@ -70,7 +70,7 @@ namespace Mascari4615
 						image[1].gameObject.SetActive(false);
 					}
 
-					foreach (var meshRenderer in colorChangeMeshrenderers)
+					foreach (MeshRenderer meshRenderer in colorChangeMeshrenderers)
 						meshRenderer.material.SetColor("_Color", clwakData.color);
 					decoration.gameObject.SetActive(true);
 					return;

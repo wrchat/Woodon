@@ -34,7 +34,7 @@ namespace Mascari4615
 			Lock = false;
 			RequestSerialization();
 
-			foreach (var orderBox in orderBoxes)
+			foreach (OrderBox2 orderBox in orderBoxes)
 				orderBox.Init();
 		}
 
@@ -46,7 +46,7 @@ namespace Mascari4615
 			// for (int i = 1; i < orderBoxes.Length; i++)
 			//	orderBoxes[i].UpdateUI(orderBoxes[i - 1].TargetPlayerIndex != NONE_INT);
 
-			foreach (var orderBox in orderBoxes)
+			foreach (OrderBox2 orderBox in orderBoxes)
 			{
 				orderBox.UpdateUI();
 
@@ -66,7 +66,7 @@ namespace Mascari4615
 			for (int i = 0; i < orderBoxes.Length; i++)
 			{
 				string childName = parent.GetChild(i).gameObject.name;
-				foreach (var orderBox in orderBoxes)
+				foreach (OrderBox2 orderBox in orderBoxes)
 				{
 					if (orderBox.name == childName)
 					{
@@ -79,7 +79,7 @@ namespace Mascari4615
 			return order;
 		}
 
-		[UdonSynced(UdonSyncMode.None), FieldChangeCallback(nameof(Lock))] private bool _lock;
+		[UdonSynced, FieldChangeCallback(nameof(Lock))] private bool _lock;
 		public bool Lock
 		{
 			get => _lock;

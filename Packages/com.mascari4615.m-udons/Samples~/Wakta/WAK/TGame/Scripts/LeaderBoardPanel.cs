@@ -57,7 +57,7 @@ namespace Mascari4615
 
 			// UI 정렬 갱신
 			RectTransform[] rectTransforms = transform.GetComponentsInChildren<RectTransform>();
-			foreach (var item in rectTransforms)
+			foreach (RectTransform item in rectTransforms)
 				LayoutRebuilder.ForceRebuildLayoutImmediate(item);
 		}
 	}

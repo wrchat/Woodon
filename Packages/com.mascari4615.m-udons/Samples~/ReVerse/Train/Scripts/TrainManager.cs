@@ -12,7 +12,7 @@ public class TrainManager : UdonSharpBehaviour
 
     [SerializeField] private Image[] killTrainCartButtonImages;
 
-    [UdonSynced()] [FieldChangeCallback(nameof(TrainData))]
+    [UdonSynced] [FieldChangeCallback(nameof(TrainData))]
     private int trainData = int.MaxValue;
 
     private int TrainData
@@ -20,21 +20,21 @@ public class TrainManager : UdonSharpBehaviour
         get => trainData;
         set
         {
-            var oldData = trainData;
-            var newData = value;
+			int oldData = trainData;
+			int newData = value;
 
             trainData = value;
             UpdateKillButtonsColor();
 
             if (trainData == int.MaxValue)
             {
-                for (var i = 0; i < trainCarts.Length; i++)
+                for (int i = 0; i < trainCarts.Length; i++)
                     trainCarts[i].Revival();
                 SortTrain();
                 return;
             }
 
-            for (var i = 0; i < trainCarts.Length; i++)
+            for (int i = 0; i < trainCarts.Length; i++)
                 if ((newData & (1 << i)) != (oldData & (1 << i)))
                     if ((newData & (1 << i)) == 0)
                     {
@@ -130,7 +130,7 @@ public class TrainManager : UdonSharpBehaviour
 
     private void UpdateKillButtonsColor()
     {
-        for (var i = 0; i < killTrainCartButtonImages.Length; i++)
+        for (int i = 0; i < killTrainCartButtonImages.Length; i++)
             killTrainCartButtonImages[i].color = (trainData & (1 << i)) != 0 ? Color.green : Color.red;
     }
 
@@ -143,8 +143,8 @@ public class TrainManager : UdonSharpBehaviour
     {
         trainHead.transform.localPosition = Vector3.zero;
 
-        var remainTrainCount = 1;
-        for (var i = 0; i < trainCarts.Length; i++)
+		int remainTrainCount = 1;
+        for (int i = 0; i < trainCarts.Length; i++)
             if ((trainData & (1 << i)) != 0)
             {
                 // trainCarts[i].transform.localPosition = Vector3.back * trainCartDistance * remainTrainCount;

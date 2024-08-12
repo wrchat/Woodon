@@ -1,51 +1,49 @@
 ﻿using UdonSharp;
 using UnityEngine;
-using VRC.SDKBase;
-using VRC.Udon;
 
-namespace Mascari4615
+namespace Mascari4615.Project.ISD.GSG.RotatingMeeting
 {
-    [UdonBehaviourSyncMode(BehaviourSyncMode.Continuous)]
-    public class WaitingData : MBase
-    {
-        public float CurTime => curTime;
-        [UdonSynced(UdonSyncMode.Smooth)] private float curTime = 0;
-        [UdonSynced] private bool goUp = false;
+	[UdonBehaviourSyncMode(BehaviourSyncMode.Continuous)]
+	public class WaitingData : MBase
+	{
+		[field: Header("_" + nameof(WaitingData))]
+		[field: UdonSynced(UdonSyncMode.Smooth)] public float CurTime { get; private set; } = 0;
+		[UdonSynced] private bool isUploading = false;
 
-        public void SetCurTime(float newTime)
-        {
-            // MDebugLog(nameof(SetCurTime) + newTime);
-            
-            SetOwner();
-            curTime = newTime;
-        }
+		public void SetCurTime(float newTime)
+		{
+			// MDebugLog(nameof(SetCurTime) + newTime);
 
-        public void AddCurTime(float amount)
-        {
-            SetOwner();
+			SetOwner();
+			CurTime = newTime;
+		}
 
-            if (curTime > 13 * RotatingMeetingManager.TimeFromPointToPointByMilli)
-            {
-                if (goUp)
-                {
-                    // MDebugLog(nameof(AddCurTime) + amount);
-                    // MDebugLog(nameof(AddCurTime));
-                    curTime += amount;
-                }
-            }
-            else
-            {
-                // MDebugLog(nameof(AddCurTime) + amount);
-                // MDebugLog(nameof(AddCurTime));
-                curTime += amount;
-            }
-        }
+		public void AddCurTime(float amount)
+		{
+			SetOwner();
 
-        public void SetGoUp(bool value)
-        {
-            // MDebugLog(nameof(SetGoUp) + value);
-            SetOwner();
-            goUp = value;
-        }
-    }
+			if (CurTime > 13 * RotatingMeetingManager.TIME_FROM_POINT_TO_POINT_BY_MILLI)
+			{
+				if (isUploading)
+				{
+					// MDebugLog(nameof(AddCurTime) + amount);
+					// MDebugLog(nameof(AddCurTime));
+					CurTime += amount;
+				}
+			}
+			else
+			{
+				// MDebugLog(nameof(AddCurTime) + amount);
+				// MDebugLog(nameof(AddCurTime));
+				CurTime += amount;
+			}
+		}
+
+		public void SetUpload(bool value)
+		{
+			// MDebugLog(nameof(SetGoUp) + value);
+			SetOwner();
+			isUploading = value;
+		}
+	}
 }

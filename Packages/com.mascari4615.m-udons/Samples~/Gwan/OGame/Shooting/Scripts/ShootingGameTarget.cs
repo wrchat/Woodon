@@ -44,7 +44,7 @@ namespace Mascari4615
         {
             if (Active)
             {
-                /*
+				/*
                 transform.localPosition += Time.deltaTime * moveDirection * moveSpeed;
 
                 if (Mathf.Abs(transform.localPosition.x) >= 10)
@@ -53,11 +53,11 @@ namespace Mascari4615
                 }
                 */
 
-                // https://yoonstone-games.tistory.com/110
+				// https://yoonstone-games.tistory.com/110
 
-                var startPos = originPos;
-                var endPos = targetPos;
-                var center = (startPos + endPos) * 0.5f;
+				Vector3 startPos = originPos;
+				Vector3 endPos = targetPos;
+				Vector3 center = (startPos + endPos) * 0.5f;
 
                 // 포지션이 위로 그려지도록 중앙값 아래로 내리기
                 center.y -= 3;
@@ -66,7 +66,7 @@ namespace Mascari4615
                 startPos = startPos - center;
                 endPos = endPos - center;
 
-                var point = Vector3.Slerp(startPos, endPos, t += Time.deltaTime * .3f * moveSpeed);
+				Vector3 point = Vector3.Slerp(startPos, endPos, t += Time.deltaTime * .3f * moveSpeed);
 
                 // 포물선을 위로 그리기 위해 center를 빼줬으므로 다시 더해서 원상복구
                 transform.localPosition = point + center;

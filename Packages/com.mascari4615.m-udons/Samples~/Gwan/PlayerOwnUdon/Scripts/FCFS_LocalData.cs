@@ -43,7 +43,7 @@ namespace Mascari4615
 			}
 			else
 			{
-				var s = LocalData.Split(new[] { DATA_SEPARATOR }, StringSplitOptions.None);
+				string[] s = LocalData.Split(new[] { DATA_SEPARATOR }, StringSplitOptions.None);
 
 				MyTimeByMilliseconds = int.Parse(s[0]);
 				SubData = s[1];

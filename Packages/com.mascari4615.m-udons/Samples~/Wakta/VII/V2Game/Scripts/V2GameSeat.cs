@@ -21,7 +21,7 @@ namespace Mascari4615
 
 		private void Start()
 		{
-			var g = GameObject.Find(objectName);
+			GameObject g = GameObject.Find(objectName);
 			meshRenderers = new MeshRenderer[2];
 			meshRenderers[0] = g.GetComponent<MeshRenderer>();
 			meshRenderers[1] = localScreen;

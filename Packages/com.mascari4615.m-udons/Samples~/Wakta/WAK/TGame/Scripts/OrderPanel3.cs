@@ -13,7 +13,7 @@ namespace Mascari4615
 		private OrderBox3[] orderBoxes;
 		private CanvasGroup canvasGroup;
 
-		[UdonSynced(UdonSyncMode.None), FieldChangeCallback(nameof(IsShowing))] private bool isShowing;
+		[UdonSynced, FieldChangeCallback(nameof(IsShowing))] private bool isShowing;
 		public bool IsShowing
 		{
 			get => isShowing;

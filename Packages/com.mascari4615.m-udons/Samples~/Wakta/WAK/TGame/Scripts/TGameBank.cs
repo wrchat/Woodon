@@ -1,9 +1,6 @@
 ﻿using TMPro;
 using UdonSharp;
 using UnityEngine;
-using UnityEngine.UI;
-using VRC.SDKBase;
-using VRC.Udon;
 
 namespace Mascari4615
 {
@@ -24,19 +21,19 @@ namespace Mascari4615
 		[SerializeField] private Material originGoldBarMaterial;
 		[SerializeField] private Material selectedGoldBarMaterial;
 
-		[SerializeField] private SyncedBool hasGateOpen;
+		[SerializeField] private MBool hasGateOpen;
 
 		public int RemainCoin
 		{
 			get => _bankCoin;
-			set
+			private set
 			{
 				_bankCoin = value;
 				UpdateUI();
 				mScoreSlider.Init();
 			}
 		}
-		[UdonSynced(UdonSyncMode.None), FieldChangeCallback(nameof(RemainCoin))] private int _bankCoin = 0;
+		[UdonSynced, FieldChangeCallback(nameof(RemainCoin))] private int _bankCoin = 0;
 
 		private void Start()
 		{

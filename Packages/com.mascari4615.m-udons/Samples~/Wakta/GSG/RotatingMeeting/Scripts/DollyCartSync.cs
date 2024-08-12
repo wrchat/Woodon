@@ -1,33 +1,30 @@
-﻿using System;
-using Cinemachine;
+﻿using Cinemachine;
 using TMPro;
-using UdonSharp;
 using UnityEngine;
-using VRC.SDKBase;
-using VRC.Udon;
 
-namespace Mascari4615
+namespace Mascari4615.Project.ISD.GSG.RotatingMeeting
 {
-    // [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-    public class DollyCartSync : MBase
-    {
-        public float Position { get; private set; }
+	// [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
+	public class DollyCartSync : MBase
+	{
+		[Header("_" + nameof(DollyCartSync))]
+		[SerializeField] private CinemachineDollyCart cinemachineDollyCart;
+		[SerializeField] private RotatingMeetingManager rotatingMeetingManager;
+		[SerializeField] private TextMeshPro asd;
 
-        [SerializeField] private CinemachineDollyCart cinemachineDollyCart;
-        [SerializeField] private RotatingMeetingManager rotatingMeetingManager;
-        [SerializeField] private TextMeshPro asd;
-        
-        public void SetPosition(float newPosition)
-        {
-            Position = newPosition;
-            asd.text = Position.ToString();
-            
-            cinemachineDollyCart.m_Position = Position;
-            
-            bool isManager = IsOwner(rotatingMeetingManager.gameObject);
-            cinemachineDollyCart.enabled = isManager;
-            if (isManager)
-                SetOwner();
-        }
-    }
+		public float Position { get; private set; }
+
+		public void SetPosition(float newPosition)
+		{
+			Position = newPosition;
+			asd.text = Position.ToString();
+
+			cinemachineDollyCart.m_Position = Position;
+
+			bool isManager = IsOwner(rotatingMeetingManager.gameObject);
+			cinemachineDollyCart.enabled = isManager;
+			if (isManager)
+				SetOwner();
+		}
+	}
 }

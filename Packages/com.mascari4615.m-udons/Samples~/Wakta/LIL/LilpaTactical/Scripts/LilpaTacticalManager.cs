@@ -11,6 +11,7 @@ namespace Mascari4615
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class LilpaTacticalManager : MBase
 	{
+		[Header("_" + nameof(LilpaTacticalManager))]
 		[SerializeField] private TextMeshProUGUI gameStateText;
 		[SerializeField] private MTeamManager mTeamManager;
 		[SerializeField] private Transform[] teamATpPos;
@@ -22,59 +23,42 @@ namespace Mascari4615
 		[SerializeField] private GameObject[] hits;
 		[SerializeField] private VRC_Pickup[] pickups;
 
-		[SerializeField] private SyncedBool[] hitActives;
+		[SerializeField] private MBool[] hitActives;
 
 		[SerializeField] private Image hitsActiveButtonImage;
 
 		[SerializeField] private Image gameActiveStateUIImage;
 
-		[UdonSynced()]
-		[FieldChangeCallback(nameof(GameState))]
-		private bool gameState = true;
-
-		[UdonSynced()]
-		[FieldChangeCallback(nameof(HitsActive))]
-		private bool hitsActive = true;
-
 		private VRCObjectSync[] objectSyncs;
 
-		private bool HitsActive
-		{
-			get => hitsActive;
-			set
-			{
-				hitsActive = value;
-				OnHitsActiveChange();
-			}
-		}
-
-		private bool GameState
-		{
-			get => gameState;
-			set
-			{
-				gameState = value;
-				OnGameStateChange();
-			}
-		}
+		[SerializeField] private MBool hitsActive;
+		[SerializeField] private MBool gameState;
 
 		private void Start()
 		{
-			objectSyncs = new VRCObjectSync[pickups.Length];
-			for (var i = 0; i < pickups.Length; i++)
-				objectSyncs[i] = pickups[i].GetComponent<VRCObjectSync>();
+			Init();
 
 			OnHitsActiveChange();
 			OnGameStateChange();
 		}
 
-		private void OnHitsActiveChange()
+		private void Init()
+		{
+			objectSyncs = new VRCObjectSync[pickups.Length];
+			for (int i = 0; i < pickups.Length; i++)
+				objectSyncs[i] = pickups[i].GetComponent<VRCObjectSync>();
+
+			hitsActive.RegisterListener(this, nameof(OnHitsActiveChange));
+			gameState.RegisterListener(this, nameof(OnGameStateChange));
+		}
+
+		public void OnHitsActiveChange()
 		{
 			MDebugLog(nameof(OnHitsActiveChange));
 
 			hitsActiveButtonImage.color = MColorUtil.GetGreenOrRed(hitsActive);
 
-			foreach (var hit in hits)
+			foreach (GameObject hit in hits)
 				hit.SetActive(hitsActive);
 		}
 
@@ -82,17 +66,15 @@ namespace Mascari4615
 		{
 			MDebugLog(nameof(ToggleHitsActive));
 
-			SetOwner();
-			HitsActive = !HitsActive;
-			RequestSerialization();
+			hitsActive.ToggleValue();
 		}
 
-		private void OnGameStateChange()
+		public void OnGameStateChange()
 		{
 			MDebugLog(nameof(OnGameStateChange));
 
-			gameActiveStateUIImage.color = MColorUtil.GetGreenOrRed(!GameState);
-			gameStateText.text = GameState ? "RESET" : "START";
+			gameActiveStateUIImage.color = MColorUtil.GetGreenOrRed(!gameState);
+			gameStateText.text = gameState ? "RESET" : "START";
 		}
 
 		public void ToggleGameState()
@@ -101,9 +83,9 @@ namespace Mascari4615
 
 			SetOwner();
 			ResetGame();
-			GameState = !GameState;
+			gameState.ToggleValue();
 
-			if (GameState)
+			if (gameState.Value)
 				SendCustomNetworkEvent(NetworkEventTarget.All, nameof(TryTeleport));
 			else
 				SendCustomNetworkEvent(NetworkEventTarget.All, nameof(TryRespawn));
@@ -115,28 +97,28 @@ namespace Mascari4615
 		{
 			MDebugLog(nameof(ResetGame));
 
-			for (var i = 0; i < pickups.Length; i++)
+			for (int i = 0; i < pickups.Length; i++)
 			{
 				SetOwner(pickups[i].gameObject);
 				pickups[i].Drop();
 				objectSyncs[i].Respawn();
 			}
 
-			for (var i = 0; i < hitActives.Length; i++) hitActives[i].SetValue(false);
+			for (int i = 0; i < hitActives.Length; i++) hitActives[i].SetValue(false);
 		}
 
 		public void TryTeleport()
 		{
 			MDebugLog(nameof(TryTeleport));
 
-			var localTeamType = mTeamManager.GetTargetPlayerTeamType();
+			TeamType localTeamType = mTeamManager.GetTargetPlayerTeamType();
 
 			if (localTeamType == TeamType.None)
 				return;
 
 			if (localTeamType == TeamType.A)
 			{
-				var playerIndex = mTeamManager.MTeams[0].GetTargetPlayerIndex();
+				int playerIndex = mTeamManager.MTeams[0].GetTargetPlayerIndex();
 
 				if (playerIndex == NONE_INT)
 					return;
@@ -145,7 +127,7 @@ namespace Mascari4615
 			}
 			else if (localTeamType == TeamType.B)
 			{
-				var playerIndex = mTeamManager.MTeams[1].GetTargetPlayerIndex();
+				int playerIndex = mTeamManager.MTeams[1].GetTargetPlayerIndex();
 
 				if (playerIndex == NONE_INT)
 					return;
@@ -158,14 +140,14 @@ namespace Mascari4615
 		{
 			MDebugLog(nameof(TryRespawn));
 
-			var localTeamType = mTeamManager.GetTargetPlayerTeamType();
+			TeamType localTeamType = mTeamManager.GetTargetPlayerTeamType();
 
 			if (localTeamType == TeamType.None)
 				return;
 
 			if (localTeamType == TeamType.A)
 			{
-				var playerIndex = mTeamManager.MTeams[0].GetTargetPlayerIndex();
+				int playerIndex = mTeamManager.MTeams[0].GetTargetPlayerIndex();
 
 				if (playerIndex == NONE_INT)
 					return;
@@ -175,7 +157,7 @@ namespace Mascari4615
 			}
 			else if (localTeamType == TeamType.B)
 			{
-				var playerIndex = mTeamManager.MTeams[1].GetTargetPlayerIndex();
+				int playerIndex = mTeamManager.MTeams[1].GetTargetPlayerIndex();
 
 				if (playerIndex == NONE_INT)
 					return;

@@ -22,13 +22,13 @@ namespace Mascari4615
         [SerializeField] private AudioSource audioSource;
         [SerializeField] private float minPower = 5f;
 
-        [UdonSynced()] [FieldChangeCallback(nameof(CurScore))]
+        [UdonSynced] [FieldChangeCallback(nameof(CurScore))]
         private int curScore;
 
-        [UdonSynced()] [FieldChangeCallback(nameof(MaxScore))]
+        [UdonSynced] [FieldChangeCallback(nameof(MaxScore))]
         private int maxScore;
 
-        [UdonSynced()] [FieldChangeCallback(nameof(NextActiveTimeByMilliseconds))]
+        [UdonSynced] [FieldChangeCallback(nameof(NextActiveTimeByMilliseconds))]
         private int nextActiveTimeByMilliseconds;
 
         private int MaxScore
@@ -82,7 +82,7 @@ namespace Mascari4615
             if (Networking.GetServerTimeInMilliseconds() < nextActiveTimeByMilliseconds)
                 return;
 
-            foreach (var ladle in ladles)
+            foreach (Rigidbody ladle in ladles)
                 if (ladle.gameObject == collision.gameObject)
                 {
                     if (DEBUG)
@@ -94,7 +94,7 @@ namespace Mascari4615
 
                     SetOwner();
 
-                    var newScore = Mathf.RoundToInt(collision.relativeVelocity.sqrMagnitude);
+					int newScore = Mathf.RoundToInt(collision.relativeVelocity.sqrMagnitude);
                     // CurScore = ladle.velocity.sqrMagnitude;
                     CurScore = newScore;
                     if (MaxScore < CurScore)

@@ -19,7 +19,7 @@ namespace Mascari4615
 		[SerializeField] private Image[] playerImages;
 		[SerializeField] private Sprite nullPlayerSprite;
 
-		[UdonSynced(UdonSyncMode.None), FieldChangeCallback(nameof(IsShowing))] private bool isShowing;
+		[UdonSynced, FieldChangeCallback(nameof(IsShowing))] private bool isShowing;
 		public bool IsShowing
 		{
 			get => isShowing;

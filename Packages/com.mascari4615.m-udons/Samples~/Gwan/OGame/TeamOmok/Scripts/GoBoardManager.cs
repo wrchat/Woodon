@@ -18,13 +18,13 @@ namespace Mascari4615
         [SerializeField] private Transform stagePos;
 
         [SerializeField] private MTargetTeamManager teamManager;
-        [SerializeField] private TimeEvent timeEvent;
+        [SerializeField] private Timer timeEvent;
 
         [SerializeField] private TextMeshProUGUI curPlayingPlayerNameText;
 
 
         [SerializeField] private TextMeshProUGUI curPlayerIDText;
-        [UdonSynced()] [FieldChangeCallback(nameof(CurPlayingPlayerID))]
+        [UdonSynced] [FieldChangeCallback(nameof(CurPlayingPlayerID))]
         private int curPlayingPlayerID = NONE_INT;
 
         [SerializeField] private GoBoardLine[] goBoardLines;
@@ -41,7 +41,7 @@ namespace Mascari4615
 
         private void Start()
         {
-            for (var i = 0; i < goBoardLines.Length; i++)
+            for (int i = 0; i < goBoardLines.Length; i++)
                 goBoardLines[i].transform.localPosition = Vector3.up * .25f + .5f * i * Vector3.forward;
             screenCamera.enabled = true;
             screenCamera.gameObject.SetActive(true);
@@ -54,37 +54,37 @@ namespace Mascari4615
             MDebugLog(nameof(OnCurPlayingPlayerChange));
 
             curPlayerIDText.text = CurPlayingPlayerID.ToString();
-            var targetPlayer = VRCPlayerApi.GetPlayerById(curPlayingPlayerID);
+			VRCPlayerApi targetPlayer = VRCPlayerApi.GetPlayerById(curPlayingPlayerID);
             curPlayingPlayerNameText.text = targetPlayer == null ? "-" : targetPlayer.displayName;
         }
 
         public void SetBlind()
         {
-            var teamType = teamManager.GetTargetPlayerTeamType();
+			TeamType teamType = teamManager.GetTargetPlayerTeamType();
             MDebugLog($"{nameof(SetBlind)} : teamType = {teamType}");
 
             if (teamType == TeamType.None)
             {
-                for (var i = 0; i < blackBlinds.Length; i++)
+                for (int i = 0; i < blackBlinds.Length; i++)
                     blackBlinds[i].SetActive(false);
 
-                for (var i = 0; i < whiteBlinds.Length; i++)
+                for (int i = 0; i < whiteBlinds.Length; i++)
                     whiteBlinds[i].SetActive(false);
             }
             else if (teamType == TeamType.A)
             {
-                for (var i = 0; i < blackBlinds.Length; i++)
+                for (int i = 0; i < blackBlinds.Length; i++)
                     blackBlinds[i].SetActive(teamManager.MTargetTeams[(int)teamType].GetTargetPlayerIndex() == i);
 
-                for (var i = 0; i < whiteBlinds.Length; i++)
+                for (int i = 0; i < whiteBlinds.Length; i++)
                     whiteBlinds[i].SetActive(false);
             }
             else
             {
-                for (var i = 0; i < blackBlinds.Length; i++)
+                for (int i = 0; i < blackBlinds.Length; i++)
                     blackBlinds[i].SetActive(false);
 
-                for (var i = 0; i < whiteBlinds.Length; i++)
+                for (int i = 0; i < whiteBlinds.Length; i++)
                     whiteBlinds[i].SetActive(teamManager.MTargetTeams[(int)teamType].GetTargetPlayerIndex() == i);
             }
         }
@@ -119,12 +119,12 @@ namespace Mascari4615
             if (curPlayingPlayerID != Networking.LocalPlayer.playerId)
                 return;
 
-            var teamType = teamManager.GetTargetPlayerTeamType();
+			TeamType teamType = teamManager.GetTargetPlayerTeamType();
 
             if (teamType == TeamType.None)
                 return;
 
-            var tpPos = teamType == TeamType.A
+			Transform tpPos = teamType == TeamType.A
                 ? blackRoomPos[teamManager.MTargetTeams[(int)teamType].GetTargetPlayerIndex()]
                 : whiteRoomPos[teamManager.MTargetTeams[(int)teamType].GetTargetPlayerIndex()];
 
@@ -160,14 +160,14 @@ namespace Mascari4615
         {
             MDebugLog(nameof(ReturnCurPlayingPlayer));
 
-            var teamType = teamManager.GetTargetPlayerTeamType();
+			TeamType teamType = teamManager.GetTargetPlayerTeamType();
             if (teamType == TeamType.None)
                 return;
             MDebugLog(teamType.ToString());
             MDebugLog(teamManager.MTargetTeams[(int)teamType].ToString());
             MDebugLog(teamManager.MTargetTeams[(int)teamType].GetTargetPlayerIndex().ToString());
 
-            var tpPos = (teamType == TeamType.A
+			Transform tpPos = (teamType == TeamType.A
                 ? blackRoomPos
                 : whiteRoomPos)[teamManager.MTargetTeams[(int)teamType].GetTargetPlayerIndex()];
 
@@ -236,7 +236,7 @@ namespace Mascari4615
 
         public void ResetBoard()
         {
-            foreach (var goBoardLine in goBoardLines)
+            foreach (GoBoardLine goBoardLine in goBoardLines)
                 goBoardLine.ResetStoneData();
         }
     }

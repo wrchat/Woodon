@@ -24,7 +24,7 @@ namespace Mascari4615
 		private void Update()
 		{
 			for (int i = 0; i < icons.Length; i++)
-				icons[i].gameObject.SetActive(voiceRoom.SyncedBools[i].Value);
+				icons[i].gameObject.SetActive(voiceRoom.IsPlayerInside[i].Value);
 		}
 	}
 }

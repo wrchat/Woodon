@@ -27,7 +27,7 @@ namespace Mascari4615
             if (targetPlayer == null)
                 targetPlayer = Networking.LocalPlayer;
 
-            foreach (var mPlayerSync in mTargets)
+            foreach (MTarget mPlayerSync in mTargets)
                 if (mPlayerSync.CurTargetPlayerID == targetPlayer.playerId)
                     return true;
 
@@ -39,7 +39,7 @@ namespace Mascari4615
             if (targetPlayer == null)
                 targetPlayer = Networking.LocalPlayer;
 
-            for (var i = 0; i < mTargets.Length; i++)
+            for (int i = 0; i < mTargets.Length; i++)
                 if (mTargets[i].CurTargetPlayerID == targetPlayer.playerId)
                     return i;
 

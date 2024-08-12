@@ -7,11 +7,11 @@ namespace Mascari4615
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class PlayerOwnUdon : MBase
 	{
-		[UdonSynced()] public bool isSynced;
+		[UdonSynced] public bool isSynced;
 		private UdonSharpBehaviour[] childUdons;
 		private int index = NONE_INT;
 
-		[UdonSynced()]
+		[UdonSynced]
 		[FieldChangeCallback(nameof(OwnerID))]
 		private int ownerID = NONE_INT;
 
@@ -80,7 +80,7 @@ namespace Mascari4615
 		{
 			// Debug.Log($"{gameObject.name} : {nameof(OnOwnerChanged)}, {nameof(OwnerIndex)} = {OwnerIndex}");
 
-			var playerAPI = VRCPlayerApi.GetPlayerById(ownerID);
+			VRCPlayerApi playerAPI = VRCPlayerApi.GetPlayerById(ownerID);
 			OwnerAPI = playerAPI;
 		}
 
@@ -100,7 +100,7 @@ namespace Mascari4615
 		{
 			Debug.Log($"{gameObject.name} : {nameof(SendEvnetToChildUdons)}, {nameof(eventName)} = {eventName}");
 
-			foreach (var childUdon in childUdons)
+			foreach (UdonSharpBehaviour childUdon in childUdons)
 			{
 				if (childUdon == this)
 					continue;

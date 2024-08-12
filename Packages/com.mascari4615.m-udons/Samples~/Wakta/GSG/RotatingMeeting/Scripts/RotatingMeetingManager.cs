@@ -1,102 +1,47 @@
-﻿using System;
-using Cinemachine;
-using TMPro;
+﻿using TMPro;
 using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon.Common.Interfaces;
 
-namespace Mascari4615
+namespace Mascari4615.Project.ISD.GSG.RotatingMeeting
 {
-	public enum CupPosition
-	{
-		Platform0,
-		Platform1,
-		Platform2,
-		Platform3,
-		Platform4,
-		Platform5,
-		Platform6,
-		Platform7,
-		Meeting0,
-		Meeting1,
-		Meeting2,
-		Down0,
-		Down1,
-		Down2,
-		Down3,
-		None
-	}
-
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Continuous)]
 	public class RotatingMeetingManager : MBase
 	{
-		/// <summary>
-		/// 컵들
-		/// </summary>
-		public Cup[] Cups => cups;
+		[field: Header("_" + nameof(RotatingMeetingManager))]
 
-		[SerializeField] private Cup[] cups;
+		[field: SerializeField] public Cup[] Cups { get; private set; }
+		[field: SerializeField] public CupPicker[] CupPickers{ get; private set; }
 
-		/// <summary>
-		/// 지목자들
-		/// </summary>
-		public CupPicker[] CupPickers => cupPickers;
-
-		[SerializeField] private CupPicker[] cupPickers;
-
-		/// <summary>
-		/// 현재 시간 (컵들 위치 계산용)
-		/// </summary>
+		// 현재 시간 (컵들 위치 계산용)
 		[UdonSynced(UdonSyncMode.Smooth)] private float curTime;
 
 		/// <summary>
 		/// Loop 한 칸 사이 이동하는 데 걸리는 시간
 		/// </summary>
-		public const int TimeFromPointToPointByMilli = 2000;
+		public const int TIME_FROM_POINT_TO_POINT_BY_MILLI = 2000;
 
 		/// <summary>
 		/// Loop 에서 카트를 배치하는 인덱스 배수
 		/// </summary>
-		private const int PointToPointOffset = 2;
+		private const int POINT_TO_POINT_OFFSET = 2;
 		// private readonly int startTimeByMilli = 0;
-
-		/// <summary>
-		/// 위쪽 플랫폼
-		/// </summary>
-		[SerializeField] private DollyCartSync[] cupPlatforms;
-
-		/// <summary>
-		/// 아래쪽 플랫폼
-		/// </summary>
-		[SerializeField] private DollyCartSync[] waitingPlatforms;
-
-		/// <summary>
-		/// 대기 시 사용하는 데이터들 모음
-		/// </summary>
-		[SerializeField] private WaitingData[] waitingDatas;
 
 		/// <summary>
 		/// Pick 할 때 Offset
 		/// </summary>
-		private const float PosRangeOffset = .5f;
+		private const float POS_RANGE_OFFSET = .5f;
 
-		/// <summary>
-		/// 속도 슬라이더
-		/// </summary>
-		[SerializeField] private SyncedSlider curSpeedFactor;
+		[SerializeField] private DollyCartSync[] runningCupPlatforms;
+		[SerializeField] private DollyCartSync[] waitingCupPlatforms;
+		[SerializeField] private WaitingData[] waitingDatas;
+		[SerializeField] private MValue curSpeedFactor;
+		[SerializeField] private MSFXManager sfxManager;
 
-		/// <summary>
-		/// 레일이 멈춰있는가?
-		/// </summary>
-		[SerializeField] private SyncedBool isStop;
+		[field: SerializeField] public MBool IsRailStop { get; private set; }
 
-		public SyncedBool IsStop => isStop;
-
-		/// <summary>
-		/// 테라스 터지는 애니메이터
-		/// </summary>
-		[SerializeField] private Animator boomAnimator;
+		[SerializeField] private Animator flyingCupDestinationAnimator;
 
 		/// <summary>
 		/// 다용도 MTarget
@@ -110,8 +55,6 @@ namespace Mascari4615
 		/// <summary>
 		/// Enum CupPosition 값에 따라 실제 위치 Transform 반환 (컵 위치 Lerp하는 TargetPos 설정용)
 		/// </summary>
-		/// <param name="cupPosition"></param>
-		/// <returns></returns>
 		public Transform GetTargetPosTransform(CupPosition cupPosition)
 		{
 			// MDebugLog(nameof(GetTargetPosTransform) + cupPosition);
@@ -120,85 +63,80 @@ namespace Mascari4615
 				return null;
 
 			if ((int)cupPosition <= (int)CupPosition.Platform7)
-				return cupPlatforms[(int)cupPosition].transform;
+				return runningCupPlatforms[(int)cupPosition].transform;
 			else if ((int)cupPosition <= (int)CupPosition.Meeting2)
-				return cupPickers[(int)cupPosition - (int)CupPosition.Meeting0].MeetingPos;
+				return CupPickers[(int)cupPosition - (int)CupPosition.Meeting0].MeetingPos;
 			else
-				return waitingPlatforms[(int)cupPosition - (int)CupPosition.Down0].transform;
+				return waitingCupPlatforms[(int)cupPosition - (int)CupPosition.Down0].transform;
 		}
 
 		/// <summary>
 		/// Enum CupPosition 값에 따라 실제 위치 DollyCartSync 반환 (컵 위치에 따른 Turn 체크용)
 		/// </summary>
-		/// <param name="cupPosition"></param>
-		/// <returns></returns>
 		public DollyCartSync GetDollyCart(CupPosition cupPosition)
 		{
 			// MDebugLog(nameof(GetDollyCart) + cupPosition);
 
 			if ((cupPosition != CupPosition.None) && ((int)cupPosition <= (int)CupPosition.Platform7))
-				return cupPlatforms[(int)cupPosition];
+				return runningCupPlatforms[(int)cupPosition];
 			else return null;
 		}
 
 		private void Start()
 		{
-			if (!Networking.IsMaster)
+			if (Networking.IsMaster == false)
 				return;
 
 			// for (var i = 0; i < Cups.Length; i++)
-			//     Cups[i].SetTargetPos((CupPosition)(i * 2));         
+			//     Cups[i].SetTargetPos((CupPosition)(i * 2));
 
-			for (var i = 0; i < Cups.Length; i++)
+			for (int i = 0; i < Cups.Length; i++)
 			{
 				Cups[i].SetTargetPos((CupPosition)((int)CupPosition.Down0 + i));
-				waitingDatas[i].SetGoUp(false);
+				waitingDatas[i].SetUpload(false);
 				waitingDatas[i].SetCurTime(13 * 2000);
 			}
 		}
 
 		private void Update()
 		{
-			UpdateMainCupPos();
-			UpdateDownCupPos();
+			UpdateRunningCupPos();
+			UpdateWaitungCupPos();
 
 			string voteTargetName = string.Empty;
 
-			if (voiceAmplification.MTargets[0].CurTargetPlayerID != NONE_INT)
+			if (voiceAmplification.TargetPlayers[0].CurTargetPlayerID != NONE_INT)
 			{
 				VRCPlayerApi voteTarget =
-					VRCPlayerApi.GetPlayerById(voiceAmplification.MTargets[0].CurTargetPlayerID);
+					VRCPlayerApi.GetPlayerById(voiceAmplification.TargetPlayers[0].CurTargetPlayerID);
 
 				if (voteTarget != null)
 					voteTargetName = voteTarget.displayName;
 			}
 
-			foreach (var cupPicker in cupPickers)
-				cupPicker.voteTargetNameText.text = voteTargetName;
+			foreach (CupPicker cupPicker in CupPickers)
+				cupPicker.VoteTargetNameText.text = voteTargetName;
 
 			VRCPlayerApi curOwner = Networking.GetOwner(gameObject);
 			curOwnerText.text = curOwner.playerId + curOwner.displayName;
 		}
 
-		/// <summary>
-		/// 위쪽 컵 위치 갱신
-		/// </summary>
-		private void UpdateMainCupPos()
+		private void UpdateRunningCupPos()
 		{
-			if (IsOwner() && (isStop.Value == false))
-				curTime += curSpeedFactor.CalcValue * Time.deltaTime * 1000;
+			if (IsOwner() && (IsRailStop.Value == false))
+				curTime += curSpeedFactor.Value * Time.deltaTime * 1000;
 
 			// var curTimeByMilli = Networking.GetServerTimeInMilliseconds();
 			// var timeDiffByMilli = (curTimeByMilli - startTimeByMilli) % (timeFromPointToPointByMilli * 16);
-			var timeDiffByMilli = curTime % (TimeFromPointToPointByMilli * 16);
+			float timeDiffByMilli = curTime % (TIME_FROM_POINT_TO_POINT_BY_MILLI * 16);
 			// (timeFromPointToPointByMilli * SushiCarts.Length * 2);
-			var posByTime = (float)timeDiffByMilli / TimeFromPointToPointByMilli;
+			float posByTime = (float)timeDiffByMilli / TIME_FROM_POINT_TO_POINT_BY_MILLI;
 
 			// MDebugLog(posByTime.ToString());
 			// debugText.text = posByTime.ToString();
 
-			for (var i = 0; i < cupPlatforms.Length; i++)
-				cupPlatforms[i].SetPosition((PointToPointOffset * i + posByTime) % 16);
+			for (int i = 0; i < runningCupPlatforms.Length; i++)
+				runningCupPlatforms[i].SetPosition((POINT_TO_POINT_OFFSET * i + posByTime) % 16);
 		}
 
 		/// <summary>
@@ -211,12 +149,12 @@ namespace Mascari4615
 			CupPosition targetPos = CupPosition.None;
 
 			// 루프 수
-			for (int i = 0; i < cups.Length; i++)
+			for (int i = 0; i < Cups.Length; i++)
 			{
 				// 먼저 선점된 루프가 있는 지 확인
 				bool already = false;
 
-				foreach (var cup in Cups)
+				foreach (Cup cup in Cups)
 				{
 					if ((int)cup.TargetPos == (int)CupPosition.Down0 + i)
 					{
@@ -239,31 +177,28 @@ namespace Mascari4615
 
 			targetCup.SetTargetPos(targetPos);
 			waitingDatas[(int)targetPos - (int)CupPosition.Down0].SetCurTime(0);
-			waitingDatas[(int)targetPos - (int)CupPosition.Down0].SetGoUp(false);
+			waitingDatas[(int)targetPos - (int)CupPosition.Down0].SetUpload(false);
 		}
 
-		/// <summary>
-		/// 아래쪽 컵 위치 갱신
-		/// </summary>
-		private void UpdateDownCupPos()
+		private void UpdateWaitungCupPos()
 		{
-			if (IsOwner() && (isStop.Value == false))
+			if (IsOwner() && (IsRailStop.Value == false))
 			{
-				foreach (var cup in Cups)
+				foreach (Cup cup in Cups)
 				{
 					if (cup.TargetPos == CupPosition.None)
 						continue;
 
-					if ((int)cup.TargetPos >= (int)(CupPosition.Down0))
+					if ((int)cup.TargetPos >= (int)CupPosition.Down0)
 						waitingDatas[(int)cup.TargetPos - (int)CupPosition.Down0]
-							.AddCurTime(curSpeedFactor.CalcValue * Time.deltaTime * 1000);
+							.AddCurTime(curSpeedFactor.Value * Time.deltaTime * 1000);
 				}
 
-				for (int i = 0; i < waitingPlatforms.Length; i++)
+				for (int i = 0; i < waitingCupPlatforms.Length; i++)
 				{
-					float pos = Mathf.Clamp((float)waitingDatas[i].CurTime, 0, (TimeFromPointToPointByMilli * 26)) /
-								TimeFromPointToPointByMilli;
-					waitingPlatforms[i].SetPosition(pos);
+					float pos = Mathf.Clamp((float)waitingDatas[i].CurTime, 0, (TIME_FROM_POINT_TO_POINT_BY_MILLI * 26)) /
+								TIME_FROM_POINT_TO_POINT_BY_MILLI;
+					waitingCupPlatforms[i].SetPosition(pos);
 				}
 			}
 		}
@@ -271,19 +206,21 @@ namespace Mascari4615
 		public bool CanDownload(CupPosition cupPosition)
 		{
 			int index = (int)cupPosition - (int)CupPosition.Down0;
-			return waitingPlatforms[index].Position >= 25.5f;
+			return waitingCupPlatforms[index].Position >= 25.5f;
 		}
 
-		private void GoUp(int index)
+		private void UploadCup(int index)
 		{
 			if (IsOwner())
-				waitingDatas[index].SetGoUp(true);
+				waitingDatas[index].SetUpload(true);
 		}
 
-		public void GoUp0() => GoUp(0);
-		public void GoUp1() => GoUp(1);
-		public void GoUp2() => GoUp(2);
-		public void GoUp3() => GoUp(3);
+		#region HorribleEvents
+		public void UploadCup0() => UploadCup(0);
+		public void UploadCup1() => UploadCup(1);
+		public void UploadCup2() => UploadCup(2);
+		public void UploadCup3() => UploadCup(3);
+		#endregion
 
 		public bool TryGetNearestPlatform_Download(out CupPosition platformPos)
 		{
@@ -296,16 +233,16 @@ namespace Mascari4615
 
 		public bool TryGetNearestPlatform_Meeting(out CupPosition platformPos, int sushiPickerIndex)
 		{
-			float posRangeMin = 1 + sushiPickerIndex * 4 + PosRangeOffset;
-			float posRangeMax = 3 + sushiPickerIndex * 4 - PosRangeOffset;
+			float posRangeMin = 1 + sushiPickerIndex * 4 + POS_RANGE_OFFSET;
+			float posRangeMax = 3 + sushiPickerIndex * 4 - POS_RANGE_OFFSET;
 
 			return TryGetNearestPlatform(out platformPos, posRangeMin, posRangeMax);
 		}
 
 		private bool TryGetNearestPlatform(out CupPosition platformPos, float min, float max)
 		{
-			for (var index = 0; index < cupPlatforms.Length; index++)
-				if (IsInRange(cupPlatforms[index], min, max))
+			for (int index = 0; index < runningCupPlatforms.Length; index++)
+				if (IsInRange(runningCupPlatforms[index], min, max))
 				{
 					platformPos = (CupPosition)index;
 					return true;
@@ -323,23 +260,22 @@ namespace Mascari4615
 			return isInRange;
 		}
 
-		public void TriggerBoomAnimation() => boomAnimator.SetTrigger("BOOM");
+		public void TriggerBoomAnimation() => flyingCupDestinationAnimator.SetTrigger("BOOM");
 
-		public void SetOwnerCurMTarget_Global() =>
+		public void SetOwnerCurMTarget_G() =>
 			SendCustomNetworkEvent(NetworkEventTarget.All, nameof(SetOwnerCurMTarget));
-
 		public void SetOwnerCurMTarget()
 		{
 			if (mTarget.IsTargetPlayer())
 			{
 				SetOwner();
 
-				foreach (var waitingData in waitingDatas)
+				foreach (WaitingData waitingData in waitingDatas)
 					SetOwner(waitingData.gameObject);
 			}
 		}
 
-		public bool CanSetAmplification() => voiceAmplification.MTargets[0].CurTargetPlayerID == NONE_INT;
+		public bool CanSetAmplification() => voiceAmplification.TargetPlayers[0].CurTargetPlayerID == NONE_INT;
 
 		public void SetVoiceAmplification()
 		{
@@ -368,22 +304,20 @@ namespace Mascari4615
 			voteTargetCupIndex = index;
 			voteCurCount = 0;
 			voteTotalCount = 0;
-			foreach (var cupPicker in cupPickers)
+			foreach (CupPicker cupPicker in CupPickers)
 				if (cupPicker.OwnerID != NONE_INT)
 					voteTotalCount++;
 
-			foreach (var cupPicker in cupPickers)
+			foreach (CupPicker cupPicker in CupPickers)
 				cupPicker.OpenVote();
 		}
 
 		public void CloseVote()
 		{
 			MDebugLog(nameof(CloseVote));
-			foreach (var cupPicker in cupPickers)
+			foreach (CupPicker cupPicker in CupPickers)
 				cupPicker.CloseVote();
 		}
-
-		[SerializeField] private MSFXManager sfxManager;
 
 		public void Vote(bool yes)
 		{
@@ -394,7 +328,7 @@ namespace Mascari4615
 			voteCurCount++;
 			voteScore += yes ? 1 : 0;
 
-			if (!IsOwner())
+			if (IsOwner() == false)
 				return;
 
 			if (voteCurCount >= voteTotalCount)
@@ -402,7 +336,7 @@ namespace Mascari4615
 				if (voteScore > 0)
 				{
 					sfxManager.PlaySFX_G(5);
-					ResetUlt();
+					ResetAppealTime();
 					MDebugLog("Success");
 				}
 				else
@@ -410,17 +344,17 @@ namespace Mascari4615
 					Cups[voteTargetCupIndex].SetTurn(100);
 
 					sfxManager.PlaySFX_G(4);
-					ResetUlt();
+					ResetAppealTime();
 					MDebugLog("Fail");
 				}
 			}
 		}
 
-		public void ResetUlt()
+		public void ResetAppealTime()
 		{
 			voiceAmplification.SetPlayer(NONE_INT);
 			voiceAmplification.SetEnable(false);
-			IsStop.SetValue(false);
+			IsRailStop.SetValue(false);
 			SendCustomNetworkEvent(NetworkEventTarget.All, nameof(CloseVote));
 		}
 	}

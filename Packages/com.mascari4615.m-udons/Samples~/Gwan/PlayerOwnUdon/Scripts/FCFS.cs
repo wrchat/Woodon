@@ -17,7 +17,7 @@ namespace Mascari4615
             fcfsDatas = GameObject.Find(nameof(PlayerOwnUdonManager)).GetComponentsInChildren<FCFS_LocalData>();
 
             sortedFCFS_Datas = new int[fcfsDatas.Length][];
-            for (var i = 0; i < fcfsDatas.Length; i++)
+            for (int i = 0; i < fcfsDatas.Length; i++)
                 sortedFCFS_Datas[i] = new int[2];
 
             textFormat += "\n";
@@ -33,7 +33,7 @@ namespace Mascari4615
 
         private void UpdateText()
         {
-            for (var i = 0; i < fcfsDatas.Length; i++)
+            for (int i = 0; i < fcfsDatas.Length; i++)
             {
                 sortedFCFS_Datas[i][0] = i;
                 sortedFCFS_Datas[i][1] = fcfsDatas[i].MyTimeByMilliseconds;
@@ -42,10 +42,10 @@ namespace Mascari4615
             // FCFS_LocalData[] sortedFCFS_Datas = fcfsDatas;
             QuickSort(ref sortedFCFS_Datas, 0, fcfsDatas.Length - 1);
 
-            var newText = string.Empty;
+			string newText = string.Empty;
             // newText += Networking.GetServerTimeInMilliseconds() + "\n";
 
-            for (var i = 0; i < fcfsDatas.Length; i++)
+            for (int i = 0; i < fcfsDatas.Length; i++)
             {
                 if (fcfsDatas[sortedFCFS_Datas[i][0]].MyTimeByMilliseconds == NONE_INT)
                     continue;
@@ -64,10 +64,10 @@ namespace Mascari4615
             if (start >= end)
                 return;
 
-            // 피봇은 첫 번째 원소
-            var pivot = start;
-            var i = start + 1;
-            var j = end;
+			// 피봇은 첫 번째 원소
+			int pivot = start;
+			int i = start + 1;
+			int j = end;
 
             // 엇갈릴 때까지 반복
             while (i <= j)
@@ -82,13 +82,13 @@ namespace Mascari4615
 
                 if (i > j)
                 {
-                    var temp = list[j];
+					int[] temp = list[j];
                     list[j] = list[pivot];
                     list[pivot] = temp;
                 }
                 else
                 {
-                    var temp = list[i];
+					int[] temp = list[i];
                     list[i] = list[j];
                     list[j] = temp;
                 }

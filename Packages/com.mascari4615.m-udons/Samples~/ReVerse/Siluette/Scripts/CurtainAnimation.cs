@@ -11,7 +11,7 @@ namespace Mascari4615
         [SerializeField] private Image uiImage;
         [SerializeField] private Animator animator;
 
-        [UdonSynced()] [FieldChangeCallback(nameof(CurtainActive))]
+        [UdonSynced] [FieldChangeCallback(nameof(CurtainActive))]
         private bool curtainActive = true;
 
         private bool CurtainActive

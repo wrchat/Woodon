@@ -58,10 +58,10 @@ namespace Mascari4615.Project.ISD.JRR.DateWithJRR
 
 				bool noKakao = (CurKakaotalkIndex.Value == 5);
 
-				foreach (var kakaotalkBackground in kakaotalkBackgrounds)
+				foreach (Image kakaotalkBackground in kakaotalkBackgrounds)
 					kakaotalkBackground.gameObject.SetActive(!noKakao);
 				if (!noKakao)
-					foreach (var kakaotalkText in kakaotalkTexts)
+					foreach (TextMeshProUGUI kakaotalkText in kakaotalkTexts)
 						kakaotalkText.text = kakaotalkTextSyncs[CurKakaotalkIndex.Value].SyncText;
 			}
 

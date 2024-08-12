@@ -13,7 +13,7 @@ namespace Mascari4615
 		[SerializeField] private MSFXManager sfxManager;
 		[SerializeField] private Animator lockAnimator;
 
-		[SerializeField] private CustomBool IsLock;
+		[SerializeField] private MBool IsLock;
 
 		public void EnterDoor()
 		{

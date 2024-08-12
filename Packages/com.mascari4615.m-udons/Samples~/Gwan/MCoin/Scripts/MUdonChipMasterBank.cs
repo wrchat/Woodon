@@ -46,11 +46,11 @@ namespace Mascari4615
 			if (targetCoinUI.text.Length <= 0)
 				return;
 
-			var targetCoinString = targetCoinUI.text.TrimEnd('\n', ' ', (char)8203);
+			string targetCoinString = targetCoinUI.text.TrimEnd('\n', ' ', (char)8203);
 			if (targetCoinString.Length == '0')
 				return;
 
-			foreach (var item in targetCoinString)
+			foreach (char item in targetCoinString)
 				if (!char.IsDigit(item))
 					return;
 
@@ -58,7 +58,7 @@ namespace Mascari4615
             if (targetPlayer == null)
                 return;*/
 
-			var targetCoin = int.Parse(targetCoinString);
+			int targetCoin = int.Parse(targetCoinString);
 			// MUdonChip.SetCoin(targetPlayer.displayName, targetCoin);
 			MUdonChip.SetCoin(targetCoin);
 		}

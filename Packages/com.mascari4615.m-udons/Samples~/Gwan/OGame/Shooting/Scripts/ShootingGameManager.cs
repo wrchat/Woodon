@@ -38,7 +38,7 @@ namespace Mascari4615
 				isGaming = value;
 				gameStateMeshRenderer.material.color = IsGaming ? Color.green : Color.red;
 
-				foreach (var teamData in teamDatas)
+				foreach (TeamData teamData in teamDatas)
 					if (Networking.IsOwner(teamData.gameObject))
 						teamData.ResetScore();
 			}
@@ -91,21 +91,21 @@ namespace Mascari4615
 
 		public void Ahoy(GameObject shootingTargetObject)
 		{
-			foreach (var teamData in teamDatas)
+			foreach (TeamData teamData in teamDatas)
 				if (Networking.IsOwner(teamData.gameObject))
 					teamData.Ahoy(shootingTargetObject);
 		}
 
 		private string GetRandomSpawnData()
 		{
-			var newSpawnData = "";
+			string newSpawnData = "";
 
-			var startTimeByMilsec = Networking.GetServerTimeInMilliseconds() + 10 * 1000;
-			var nextSpawnTimeByMilsec = startTimeByMilsec;
+			int startTimeByMilsec = Networking.GetServerTimeInMilliseconds() + 10 * 1000;
+			int nextSpawnTimeByMilsec = startTimeByMilsec;
 
 			for (float gameTimeBySec = 0; gameTimeBySec < 30;)
 			{
-				var spawnLatencyBySec = Random.Range(4, 15);
+				int spawnLatencyBySec = Random.Range(4, 15);
 				nextSpawnTimeByMilsec += spawnLatencyBySec * 100;
 
 				newSpawnData += $"{nextSpawnTimeByMilsec}";
@@ -136,14 +136,14 @@ namespace Mascari4615
 
 		private void SpawnFandom()
 		{
-			var s = spawnDatas[nextSpawnIndex].Split(new[] { DATA_SEPARATOR }, StringSplitOptions.None);
+			string[] s = spawnDatas[nextSpawnIndex].Split(new[] { DATA_SEPARATOR }, StringSplitOptions.None);
 
 			nextSpawnTime = int.Parse(s[0]);
 
-			var nextFandomIndex = int.Parse(s[1]);
-			var nextLine = int.Parse(s[2]);
-			var nextDirection = s[3] == "L" ? Vector3.left : Vector3.right;
-			var nextSpeed = float.Parse(s[4]);
+			int nextFandomIndex = int.Parse(s[1]);
+			int nextLine = int.Parse(s[2]);
+			Vector3 nextDirection = s[3] == "L" ? Vector3.left : Vector3.right;
+			float nextSpeed = float.Parse(s[4]);
 
 			shootingTargets[nextSpawnIndex].Init(nextFandomIndex, nextLine, nextDirection, nextSpeed);
 		}

@@ -42,7 +42,7 @@ namespace Mascari4615
                 return;
             }
 
-            var localPlayerTeamType = teamManager.GetTargetPlayerTeamType();                                    
+			TeamType localPlayerTeamType = teamManager.GetTargetPlayerTeamType();                                    
             MDebugLog($"{localPlayerTeamType}");
             if (localPlayerTeamType == teamType || localPlayerTeamType == TeamType.None)
             {
@@ -50,7 +50,7 @@ namespace Mascari4615
                 return;
             }
 
-            var localPlayerTeamIndex = teamManager.MTargetTeams[(int)localPlayerTeamType].GetTargetPlayerIndex();
+			int localPlayerTeamIndex = teamManager.MTargetTeams[(int)localPlayerTeamType].GetTargetPlayerIndex();
 
             // 필터링
             {
@@ -64,8 +64,8 @@ namespace Mascari4615
                     // 수호모사는 안죽음 ㄷㄷ (여왕 공에만 쥬금)
                     if (hitPlayerIndex == GUARD)
                     {
-                        var normalCount = 0;
-                        for (var i = 2; i < teamManager.MTargetTeams[(int)teamType].mTargets.Length; i++)
+						int normalCount = 0;
+                        for (int i = 2; i < teamManager.MTargetTeams[(int)teamType].mTargets.Length; i++)
                             if (teamManager.MTargetTeams[(int)teamType].mTargets[hitPlayerIndex].CurTargetPlayerID !=
                                 NONE_INT)
                                 normalCount++;
@@ -87,8 +87,8 @@ namespace Mascari4615
 
             if (!IsLocalPlayerOwner)
                 return;
-            
-            var localPlayerTeamType = teamManager.GetTargetPlayerTeamType();
+
+			TeamType localPlayerTeamType = teamManager.GetTargetPlayerTeamType();
 
             Transform respawnPos = localPlayerTeamType == TeamType.A
                 ? queenDodgeballManager.aRespawn

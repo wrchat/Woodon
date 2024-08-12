@@ -20,10 +20,10 @@ namespace Mascari4615
 
 		public void Popup(int infoIndex)
 		{
-			foreach (var image in images)
+			foreach (Image image in images)
 				image.sprite = sprites[infoIndex];
 
-			foreach (var text in infoTmps)
+			foreach (TextMeshProUGUI text in infoTmps)
 				text.text = infoTexts[infoIndex];
 
 			infoAnimator.SetTrigger("POP");

@@ -104,8 +104,8 @@ namespace Mascari4615
 		}
 
 		[SerializeField] private MTargetBool wallActiveViichanBool;
-		[SerializeField] private CustomBool trueBool;
-		[SerializeField] private SyncedBool wallActiveBool;
+		[SerializeField] private MBool trueBool;
+		[SerializeField] private MBool wallActiveBool;
 		[SerializeField] private ObjectActive wallActive;
 		public void UpdateWall()
 		{

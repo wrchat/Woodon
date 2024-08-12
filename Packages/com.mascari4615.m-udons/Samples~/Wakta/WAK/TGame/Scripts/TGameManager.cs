@@ -15,9 +15,9 @@ namespace Mascari4615
 	public class TGameManager : MBase
 	{
 		public const int PLAYER_COUNT = 7;
-		private readonly int[] SeatIndexByRanking = new int[] { 0, 1, 5, 6, 4, 2, 3 };
+		private const float POINTING_TIME_BY_SEC = 180;
 
-		private float pointingTime = 180;
+		private readonly int[] SeatIndexByRanking = new int[] { 0, 1, 5, 6, 4, 2, 3 };
 
 		[field: Header("_" + nameof(TGameManager))]
 		[field: SerializeField] public TGameData Data { get; private set; }
@@ -65,7 +65,7 @@ namespace Mascari4615
 		private int shootCount = 0;
 		private float t = 0;
 		[SerializeField] private GameObject pointingTimeSFX;
-		[SerializeField] private SyncedBool videoScreen;
+		[SerializeField] private MBool videoScreenActive;
 		[SerializeField] private VRCUnityVideoPlayer unityVideoPlayer;
 		[SerializeField] private VRCUrl endingVideoURL;
 
@@ -117,7 +117,7 @@ namespace Mascari4615
 					MDebugLog($"{nameof(OnRoundChange)}, Popup");
 
 					//HACK
-					videoScreen.SetValue(false);
+					videoScreenActive.SetValue(false);
 					bgmAudiosource.SetActive(false);
 					curOverlayUI.InfoPopupModule.Popup(0);
 					SFXManager.PlaySFX_L(5);
@@ -819,7 +819,7 @@ namespace Mascari4615
 			MDebugLog(nameof(Ending));
 
 			InitGunPos();
-			videoScreen.SetValue(true);
+			videoScreenActive.SetValue(true);
 			unityVideoPlayer.Play();
 			bgmAudiosource.SetActive(false);
 			gun.CanInteract = IsStaff(Networking.LocalPlayer);
@@ -875,7 +875,7 @@ namespace Mascari4615
 			// HACK
 			pointingTimeSFX.SetActive(false);
 			pointingTimeSFX.SetActive(true);
-			t = pointingTime;
+			t = POINTING_TIME_BY_SEC;
 		}
 
 		public void Test()

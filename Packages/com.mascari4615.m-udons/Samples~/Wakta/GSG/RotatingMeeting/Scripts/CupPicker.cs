@@ -5,33 +5,37 @@ using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon.Common.Interfaces;
 
-namespace Mascari4615
+namespace Mascari4615.Project.ISD.GSG.RotatingMeeting
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class CupPicker : MBase
 	{
 		[Header("_" + nameof(CupPicker))]
-		[SerializeField]
-		private int index;
-
-		[UdonSynced, FieldChangeCallback(nameof(OwnerID))]
-		private int _ownerID = NONE_INT;
+		[SerializeField] private int index;
+		[UdonSynced] private int targetCupIndex = NONE_INT;
 
 		public int OwnerID
 		{
 			get => _ownerID;
-			set
+			private set
 			{
 				_ownerID = value;
 				voteUI.SetActive(false);
-				canvas.SetActive(_ownerID == Networking.LocalPlayer.playerId);
+				pickerUI.SetActive(_ownerID == Networking.LocalPlayer.playerId);
 			}
 		}
+		[UdonSynced, FieldChangeCallback(nameof(OwnerID))] private int _ownerID = NONE_INT;
 
-		[UdonSynced] private int targetCupIndex = NONE_INT;
-
-		[UdonSynced, FieldChangeCallback(nameof(MeetingStartTime))]
-		private int _meetingMeetingStartTime = NONE_INT;
+		private int MeetingStartTime
+		{
+			get => _meetingStartTime;
+			set
+			{
+				_meetingStartTime = value;
+				OnStartTimeChange();
+			}
+		}
+		[UdonSynced, FieldChangeCallback(nameof(MeetingStartTime))] private int _meetingStartTime = NONE_INT;
 
 		[SerializeField] private RotatingMeetingManager manager;
 		[SerializeField] private TextMeshProUGUI totalTimeText;
@@ -40,13 +44,15 @@ namespace Mascari4615
 		[SerializeField] private GameObject returnButton;
 		[SerializeField] private Transform meetingPos;
 		[SerializeField] private VRCStation pickerStation;
-		[SerializeField] private SyncedStation tempStation;
+		[SerializeField] private SyncedStation targetStation;
 		[SerializeField] private Animator tableAnimator;
 		[SerializeField] private MSFXManager sfxManager;
 		[SerializeField] private TextMeshProUGUI[] buttonTexts;
-		[SerializeField] private GameObject canvas;
+		[SerializeField] private GameObject pickerUI;
 		[SerializeField] private GameObject voteUI;
-		public TextMeshProUGUI voteTargetNameText;
+		[SerializeField] private GameObject yesButtonHider;
+		[SerializeField] private GameObject noButtonHIder;
+		[field: SerializeField] public TextMeshProUGUI VoteTargetNameText { get; private set; }
 		private bool isCooltime = false;
 		private bool voted;
 
@@ -54,16 +60,6 @@ namespace Mascari4615
 		public bool CupHaveToReturn => MeetingStartTime == NONE_INT;
 		public int TargetCupIndex => targetCupIndex;
 		public Cup TargetCup => manager.Cups[targetCupIndex];
-
-		private int MeetingStartTime
-		{
-			get => _meetingMeetingStartTime;
-			set
-			{
-				_meetingMeetingStartTime = value;
-				OnStartTimeChange();
-			}
-		}
 
 		private void OnStartTimeChange()
 		{
@@ -82,7 +78,7 @@ namespace Mascari4615
 
 		private void Start()
 		{
-			canvas.SetActive(OwnerID == Networking.LocalPlayer.playerId);
+			pickerUI.SetActive(OwnerID == Networking.LocalPlayer.playerId);
 			OnStartTimeChange();
 		}
 
@@ -110,14 +106,14 @@ namespace Mascari4615
 
 		public void PickNearestCup()
 		{
-			if (manager.IsStop.Value)
+			if (manager.IsRailStop.Value)
 				return;
 
 			if (MeetingStartTime != NONE_INT)
 				return;
 
 			// 아직 레일로 돌아가지 못한 컵이 있다면 Return
-			foreach (var cup in manager.Cups)
+			foreach (Cup cup in manager.Cups)
 			{
 				int cupPos = (int)cup.TargetPos;
 				if (cupPos == (int)CupPosition.Meeting0 + index)
@@ -125,7 +121,7 @@ namespace Mascari4615
 			}
 
 			// 범위 내 플랫폼이 없다면 Return
-			if (!manager.TryGetNearestPlatform_Meeting(out var platformPos, index))
+			if (!manager.TryGetNearestPlatform_Meeting(out CupPosition platformPos, index))
 			{
 				// DEBUG_Text.text = "_No Platform";
 				MDebugLog(nameof(PickNearestCup) + "_No Platform");
@@ -171,7 +167,7 @@ namespace Mascari4615
 
 		private void Success()
 		{
-			foreach (var cup in manager.Cups)
+			foreach (Cup cup in manager.Cups)
 			{
 				if ((int)cup.TargetPos == (int)CupPosition.Meeting0 + index)
 					if (cup.OwnerID == Networking.LocalPlayer.playerId)
@@ -183,7 +179,7 @@ namespace Mascari4615
 
 						cup.ExitCup();
 						// TODO : 조금의 딜레이?
-						tempStation.UseStation();
+						targetStation.UseStation();
 
 						SetOwner();
 						targetCupIndex = NONE_INT;
@@ -212,8 +208,8 @@ namespace Mascari4615
 			if (OwnerID == Networking.LocalPlayer.playerId)
 				ExitCup();
 
-			if (tempStation.OwnerID == Networking.LocalPlayer.playerId)
-				tempStation.ExitStation();
+			if (targetStation.OwnerID == Networking.LocalPlayer.playerId)
+				targetStation.ExitStation();
 		}
 
 		public void SitCup()
@@ -269,7 +265,7 @@ namespace Mascari4615
 		private void StartCoolTime()
 		{
 			isCooltime = true;
-			foreach (var buttonText in buttonTexts)
+			foreach (TextMeshProUGUI buttonText in buttonTexts)
 				buttonText.color = Color.gray;
 
 			SendCustomEventDelayedSeconds(nameof(EndCoolTime), 2f);
@@ -284,7 +280,7 @@ namespace Mascari4615
 			// }
 
 			isCooltime = false;
-			foreach (var buttonText in buttonTexts)
+			foreach (TextMeshProUGUI buttonText in buttonTexts)
 				buttonText.color = Color.white;
 		}
 
@@ -301,22 +297,23 @@ namespace Mascari4615
 			}
 		}
 
-		[SerializeField] private GameObject[] hiders;
 
 		public void OpenVote()
 		{
 			voted = false;
+
 			voteUI.SetActive(true);
-			hiders[0].SetActive(false);
-			hiders[1].SetActive(false);
+			yesButtonHider.SetActive(false);
+			noButtonHIder.SetActive(false);
 		}
 
 		public void CloseVote()
 		{
 			voted = false;
+
 			voteUI.SetActive(false);
-			hiders[0].SetActive(false);
-			hiders[1].SetActive(false);
+			yesButtonHider.SetActive(false);
+			noButtonHIder.SetActive(false);
 		}
 
 		public void VoteYes_Global()
@@ -331,7 +328,7 @@ namespace Mascari4615
 		public void VoteYes()
 		{
 			voted = true;
-			hiders[0].SetActive(true);
+			noButtonHIder.SetActive(true);
 			manager.Vote(true);
 		}
 
@@ -348,7 +345,7 @@ namespace Mascari4615
 		{
 			voted = true;
 			manager.Vote(false);
-			hiders[1].SetActive(true);
+			yesButtonHider.SetActive(true);
 		}
 	}
 }

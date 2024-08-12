@@ -24,8 +24,8 @@ namespace Mascari4615
 		[SerializeField] private Button rightSelectButton;
 		[SerializeField] private MAnimator leftAnimator;
 		[SerializeField] private MAnimator rightAnimator;
-		[SerializeField] private SyncedBool leftAnimatorStateSyncedBool;
-		[SerializeField] private SyncedBool rightAnimatorStateSyncedBool;
+		[SerializeField] private MBool leftAnimatorStateCustomBool;
+		[SerializeField] private MBool rightAnimatorStateCustomBool;
 
 		// 어떤 거 선택했는지
 		[SerializeField] private TextMeshProUGUI totalSelectCountText;
@@ -149,13 +149,13 @@ namespace Mascari4615
 			{
 				totalSelectIconsParent.gameObject.SetActive(!showingResult);
 
-				foreach (var resultObject in resultObjects)
+				foreach (GameObject resultObject in resultObjects)
 					resultObject.SetActive(showingResult);
 
 				// UpdateAnim();
 
-				bool allOpened = leftAnimatorStateSyncedBool.SyncValue && rightAnimatorStateSyncedBool.SyncValue;
-				// MDebugLog($"allOpened : {allOpened}, {leftAnimatorStateSyncedBool.SyncValue}, {rightAnimatorStateSyncedBool.SyncValue} = {leftAnimatorStateSyncedBool.Value}, {rightAnimatorStateSyncedBool.Value}");
+				bool allOpened = leftAnimatorStateCustomBool.SyncedValue && rightAnimatorStateCustomBool.SyncedValue;
+				// MDebugLog($"allOpened : {allOpened}, {leftAnimatorStateCustomBool.SyncValue}, {rightAnimatorStateCustomBool.SyncValue} = {leftAnimatorStateCustomBool.Value}, {rightAnimatorStateCustomBool.Value}");
 
 				leftSelectButton.interactable = allOpened;
 				rightSelectButton.interactable = allOpened;
@@ -230,12 +230,12 @@ namespace Mascari4615
 			if (0 <= newIndex && newIndex <= QuizDatas.Length - 1)
 			{
 				if (IsOwner())
-					foreach (var quizSeat in TurnSeats)
+					foreach (MTurnSeat quizSeat in TurnSeats)
 						quizSeat.ResetData();
 
 				SetOwner();
-				leftAnimatorStateSyncedBool.SetValue(false);
-				rightAnimatorStateSyncedBool.SetValue(false);
+				leftAnimatorStateCustomBool.SetValue(false);
+				rightAnimatorStateCustomBool.SetValue(false);
 				CurGameState = (int)QuizGameState.SelectAnswer;
 				CurQuizIndex = newIndex;
 				RequestSerialization();

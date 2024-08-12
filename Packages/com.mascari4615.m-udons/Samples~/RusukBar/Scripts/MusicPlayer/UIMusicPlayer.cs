@@ -106,7 +106,7 @@ namespace Mascari4615
 
 		private void SetMusicLoopTypeImage(TextMeshProUGUI text, bool isAll, bool isOn)
 		{
-			var s = isAll ? "ALL" : "1";
+			string s = isAll ? "ALL" : "1";
 			text.text = s;
 			text.gameObject.SetActive(isOn);
 		}

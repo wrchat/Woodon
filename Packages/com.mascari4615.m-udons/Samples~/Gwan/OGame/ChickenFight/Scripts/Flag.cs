@@ -15,8 +15,8 @@ namespace Mascari4615
 		private ChickenFightManager chickenFightManager;
 
 		[SerializeField] private MTargetTeamManager teamManager;
-		[SerializeField] private TimeEvent shieldDuration;
-		[SerializeField] private TimeEvent shieldCoolTime;
+		[SerializeField] private Timer shieldDuration;
+		[SerializeField] private Timer shieldCoolTime;
 		[SerializeField] private MeshRenderer shieldMesh;
 
 		[SerializeField] private GameObject uiObject;
@@ -61,7 +61,7 @@ namespace Mascari4615
 					curStateText.text = "방어 모드 !";
 					timeBar.color = Color.blue;
 
-					var targetAmount =
+					float targetAmount =
 						(float)((shieldDuration.ExpireTime - Networking.GetServerTimeInMilliseconds()) / 100) /
 						shieldDuration.TimeByDecisecond;
 					timeBar.fillAmount = Mathf.Lerp(timeBar.fillAmount, targetAmount, Time.deltaTime * lerpValue);
@@ -70,7 +70,7 @@ namespace Mascari4615
 				{
 					curStateText.text = "쿨타임...";
 					timeBar.color = Color.yellow;
-					var targetAmount =
+					float targetAmount =
 						(float)((shieldCoolTime.ExpireTime - Networking.GetServerTimeInMilliseconds()) / 100) /
 						(shieldCoolTime.TimeByDecisecond - shieldDuration.TimeByDecisecond);
 					timeBar.fillAmount = Mathf.Lerp(timeBar.fillAmount, targetAmount, Time.deltaTime * lerpValue);
@@ -118,9 +118,9 @@ namespace Mascari4615
 			if (mTarget.CurTargetPlayerID == NONE_INT)
 				return;
 
-			var localPlayerTeamType = teamManager.GetTargetPlayerTeamType();
+			TeamType localPlayerTeamType = teamManager.GetTargetPlayerTeamType();
 			// var ownerPlayerTeamType = teamManager.GetTargetPlayerTeamType(mPlayerSync.playerAPI);
-			var ownerPlayerTeamType = teamManager.GetTargetPlayerTeamType();
+			TeamType ownerPlayerTeamType = teamManager.GetTargetPlayerTeamType();
 
 			if (localPlayerTeamType == TeamType.None)
 				return;

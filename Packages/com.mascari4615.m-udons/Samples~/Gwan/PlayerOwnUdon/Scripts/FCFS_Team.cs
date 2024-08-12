@@ -43,7 +43,7 @@ namespace Mascari4615
             if (DEBUG)
                 Debug.Log(nameof(InitTeamTimes));
 
-            for (var i = 0; i < teamTimes.Length; i++)
+            for (int i = 0; i < teamTimes.Length; i++)
                 teamTimes[i] = NONE_INT;
         }
 
@@ -102,7 +102,7 @@ namespace Mascari4615
             if (DEBUG)
                 Debug.Log($"{nameof(RecordTime)} : {nameof(teamIndex)} = {teamIndex}");
 
-            var localUdon = playerOwnUdonManager.LocalUdon;
+			PlayerOwnUdon localUdon = playerOwnUdonManager.LocalUdon;
 
             if (localUdon == null)
             {
@@ -119,7 +119,7 @@ namespace Mascari4615
             if (DEBUG)
                 Debug.Log($"{nameof(RecordTime_)}");
 
-            var localUdon = playerOwnUdonManager.LocalUdon;
+			PlayerOwnUdon localUdon = playerOwnUdonManager.LocalUdon;
 
             if (localUdon == null)
             {
@@ -144,7 +144,7 @@ namespace Mascari4615
                 Debug.Log(nameof(ClearTime));
             SendCustomNetworkEvent(NetworkEventTarget.All, nameof(ClearTime_Global));
 
-            var localUdon = playerOwnUdonManager.LocalUdon;
+			PlayerOwnUdon localUdon = playerOwnUdonManager.LocalUdon;
 
             if (localUdon == null)
             {
@@ -155,15 +155,15 @@ namespace Mascari4615
 
             localUdon.SendEvnetToChildUdons(nameof(FCFS_LocalData.ClearTime));
 
-            foreach (var i in fcfsDatas)
+            foreach (FCFS_LocalData i in fcfsDatas)
                 i.ForceClearTime();
         }
 
         private void CalcTime()
         {
-            for (var i = 0; i < fcfsDatas.Length; i++)
+            for (int i = 0; i < fcfsDatas.Length; i++)
             {
-                var time = fcfsDatas[i].MyTimeByMilliseconds;
+				int time = fcfsDatas[i].MyTimeByMilliseconds;
 
                 if (time == NONE_INT)
                     //if (debug)
@@ -175,14 +175,14 @@ namespace Mascari4615
                     //	Debug.Log("B");
                     continue;
 
-                var playerID = fcfsDatas[i].PlayerOwnUdon.OwnerID;
+				int playerID = fcfsDatas[i].PlayerOwnUdon.OwnerID;
 
                 if (playerID == NONE_INT)
                     //if (debug)
                     //	Debug.Log("C");
                     continue;
 
-                var targetPlayer = VRCPlayerApi.GetPlayerById(playerID);
+				VRCPlayerApi targetPlayer = VRCPlayerApi.GetPlayerById(playerID);
 
                 if (targetPlayer == null)
                     //if (debug)
@@ -191,7 +191,7 @@ namespace Mascari4615
 
                 if (teamManager != null)
                 {
-                    var teamType = teamManager.GetTargetPlayerTeamType(targetPlayer);
+					TeamType teamType = teamManager.GetTargetPlayerTeamType(targetPlayer);
 
                     if (teamType == TeamType.None)
                         //if (debug)
@@ -207,9 +207,9 @@ namespace Mascari4615
                 }
             }
 
-            var minTime = int.MaxValue;
+			int minTime = int.MaxValue;
 
-            for (var i = 0; i < teamTimes.Length; i++)
+            for (int i = 0; i < teamTimes.Length; i++)
             {
                 if (teamTimes[i] == NONE_INT)
                     continue;
@@ -220,7 +220,7 @@ namespace Mascari4615
 
             // Debug.Log($"{nameof(Update)} : {nameof(minTime)} = {minTime}");
 
-            for (var i = 0; i < teamTimeTexts.Length; i++)
+            for (int i = 0; i < teamTimeTexts.Length; i++)
             {
                 teamTimeTexts[i].text =
                     teamTimes[i] == NONE_INT ? noneComment :

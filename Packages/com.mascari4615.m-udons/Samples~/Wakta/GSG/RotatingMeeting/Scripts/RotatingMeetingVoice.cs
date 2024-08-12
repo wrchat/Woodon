@@ -1,17 +1,15 @@
-﻿using System;
-using UdonSharp;
+﻿using UdonSharp;
 using UnityEngine;
 using UnityEngine.UI;
 using VRC.SDKBase;
-using VRC.Udon;
 
-namespace Mascari4615
+namespace Mascari4615.Project.ISD.GSG.RotatingMeeting
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public class RotatingMeetingVoice : VoiceUpdater
 	{
+		[Header("_" + nameof(RotatingMeetingVoice))]
 		[SerializeField] private CupPicker[] cupPickers;
-
 		[SerializeField] private Image[] icons;
 
 		private int curFocusState = NONE_INT;

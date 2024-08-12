@@ -20,7 +20,7 @@ namespace Mascari4615
 			ForceClearRepeat();
 
 			if (Networking.IsMaster)
-				foreach (var playerOwnUdon in playerOwnUdons)
+				foreach (PlayerOwnUdon playerOwnUdon in playerOwnUdons)
 					playerOwnUdon.Init();
 		}
 
@@ -29,7 +29,7 @@ namespace Mascari4615
 			if (AllSynced)
 				return;
 
-			for (var i = 0; i < playerOwnUdons.Length; i++)
+			for (int i = 0; i < playerOwnUdons.Length; i++)
 				if (playerOwnUdons[i].isSynced == false)
 					return;
 
@@ -42,7 +42,7 @@ namespace Mascari4615
 			if (!AllSynced)
 				return null;
 
-			foreach (var playerOwnUdon in playerOwnUdons)
+			foreach (PlayerOwnUdon playerOwnUdon in playerOwnUdons)
 				if (playerOwnUdon.OwnerID == NONE_INT)
 				{
 					playerOwnUdon.SetStatus(Networking.LocalPlayer.playerId, NONE_STRING);

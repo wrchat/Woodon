@@ -1,39 +1,38 @@
 ﻿using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
-using VRC.Udon;
 
-namespace Mascari4615
+namespace Mascari4615.Project.ISD.GSG.RotatingMeeting
 {
-    [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-    public class SyncedStation : MBase
-    {
-        public int OwnerID => ownerID;
-        [UdonSynced] private int ownerID = NONE_INT;
-        [SerializeField] private VRCStation station;
+	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
+	public class SyncedStation : MBase
+	{
+		[Header("_" + nameof(SyncedStation))]
+		[SerializeField] private VRCStation targetStation;
+		[field: UdonSynced] public int OwnerID { get; private set; } = NONE_INT;
 
-        public void UseStation()
-        {
-            if (ownerID != NONE_INT)
-                return;
+		public void UseStation()
+		{
+			if (OwnerID != NONE_INT)
+				return;
 
-            SetOwner();
-            ownerID = Networking.LocalPlayer.playerId;
-            RequestSerialization();
-            
-            station.UseStation(Networking.LocalPlayer);
-        }
+			SetOwner();
+			OwnerID = Networking.LocalPlayer.playerId;
+			RequestSerialization();
 
-        public void ExitStation()
-        {
-            if (ownerID == NONE_INT)
-                return;
+			targetStation.UseStation(Networking.LocalPlayer);
+		}
 
-            SetOwner();
-            ownerID = NONE_INT;
-            RequestSerialization();
-            
-            station.ExitStation(Networking.LocalPlayer);
-        }
-    }
+		public void ExitStation()
+		{
+			if (OwnerID == NONE_INT)
+				return;
+
+			SetOwner();
+			OwnerID = NONE_INT;
+			RequestSerialization();
+
+			targetStation.ExitStation(Networking.LocalPlayer);
+		}
+	}
 }

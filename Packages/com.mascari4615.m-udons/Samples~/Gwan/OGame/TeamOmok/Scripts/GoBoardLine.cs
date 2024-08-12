@@ -9,7 +9,7 @@ namespace Mascari4615
     {
         [SerializeField] private GoBoardButton[] goBoardButtons;
 
-        [UdonSynced(), FieldChangeCallback(nameof(StoneDataPack))] private string stoneDataPack = "0000000000000000000";
+        [UdonSynced, FieldChangeCallback(nameof(StoneDataPack))] private string stoneDataPack = "0000000000000000000";
         private string StoneDataPack
         {
             get => stoneDataPack;
@@ -29,7 +29,7 @@ namespace Mascari4615
         {
             MDebugLog($"{nameof(goBoardButtons)} {goBoardButtons.Length}");
 
-            for (var i = 0; i < goBoardButtons.Length; i++)
+            for (int i = 0; i < goBoardButtons.Length; i++)
                 goBoardButtons[i].transform.localPosition = Vector3.right * i * .5f;
 
             if (Networking.IsMaster)
@@ -47,7 +47,7 @@ namespace Mascari4615
             if (goBoardButtons.Length != stoneData.Length)
                 return;
 
-            for (var i = 0; i < goBoardButtons.Length; i++)
+            for (int i = 0; i < goBoardButtons.Length; i++)
                 goBoardButtons[i].SetState(stoneData[i]);
         }
 

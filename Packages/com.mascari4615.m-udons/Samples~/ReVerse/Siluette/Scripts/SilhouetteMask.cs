@@ -12,7 +12,7 @@ namespace Mascari4615
         [SerializeField] private Image[] silhouetteMaskImages;
         [SerializeField] private Sprite[] silhouetteMaskSprites;
 
-        [UdonSynced()] [FieldChangeCallback(nameof(SilhouetteMaskData))]
+        [UdonSynced] [FieldChangeCallback(nameof(SilhouetteMaskData))]
         private int silhouetteMaskData;
 
         private int SilhouetteMaskData
@@ -32,9 +32,9 @@ namespace Mascari4615
 
         private void OnSilhouetteMaskDataChange()
         {
-            for (var bitNum = 0; bitNum < SILHOUETTE_COUNT; bitNum++)
+            for (int bitNum = 0; bitNum < SILHOUETTE_COUNT; bitNum++)
             {
-                var silhouetteOn = (SilhouetteMaskData & (1 << bitNum)) == 1 << bitNum;
+				bool silhouetteOn = (SilhouetteMaskData & (1 << bitNum)) == 1 << bitNum;
 
                 toggleButtonUIImages[bitNum].color = silhouetteOn ? Color.green : Color.red;
                 silhouetteMaskImages[bitNum].sprite = silhouetteOn ? null : silhouetteMaskSprites[bitNum];

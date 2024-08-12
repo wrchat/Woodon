@@ -12,10 +12,10 @@ namespace Mascari4615
         [SerializeField] private SpriteRenderer selectedFandomImage;
         private ShootingGameManager shootingGameManager;
 
-        [UdonSynced()] [FieldChangeCallback(nameof(TeamFandomIndex))]
+        [UdonSynced] [FieldChangeCallback(nameof(TeamFandomIndex))]
         private int teamFandomIndex;
 
-        [UdonSynced()] [FieldChangeCallback(nameof(TeamScore))]
+        [UdonSynced] [FieldChangeCallback(nameof(TeamScore))]
         private int teamScore;
 
         private int TeamFandomIndex
@@ -78,7 +78,7 @@ namespace Mascari4615
 
             SetOwner();
 
-            var stIndex = int.Parse(shootingTargetObject.name.Split('_')[1]);
+			int stIndex = int.Parse(shootingTargetObject.name.Split('_')[1]);
 
             if (shootingGameManager.GetShootingTarget(stIndex).FandomIndex == 0)
                 TeamScore -= 1;

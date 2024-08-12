@@ -32,8 +32,8 @@ namespace Mascari4615
             }
 
             if (onlyOneTeam)
-                foreach (var mTeam in mTargetTeams)
-                    for (var i = 0; i < mTeam.mTargets.Length; i++)
+                foreach (MTargetTeam mTeam in mTargetTeams)
+                    for (int i = 0; i < mTeam.mTargets.Length; i++)
                     {
                         if (mTeam.TeamType == teamType && i == playerIndex)
                             continue;
@@ -50,7 +50,7 @@ namespace Mascari4615
             if (targetPlayer == null)
                 targetPlayer = Networking.LocalPlayer;
 
-            foreach (var mTeam in mTargetTeams)
+            foreach (MTargetTeam mTeam in mTargetTeams)
                 if (mTeam.IsTargetPlayerTeam(targetPlayer))
                     return mTeam.TeamType;
 

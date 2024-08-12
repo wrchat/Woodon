@@ -39,7 +39,7 @@ namespace Mascari4615
 			{
 				Debug.Log($"Data Changed : {localData} => {value}");
 
-				var globalData = GlobalData;
+				string globalData = GlobalData;
 				SetOwner();
 				string totalResult;
 				if (!globalData.Contains(Networking.LocalPlayer.displayName))
@@ -51,17 +51,17 @@ namespace Mascari4615
 				}
 				else
 				{
-					var result = string.Empty;
-					var dataSets = globalData.Split(DATA_PAIR_SEPARATER);
+					string result = string.Empty;
+					string[] dataSets = globalData.Split(DATA_PAIR_SEPARATER);
 					if (dataSets.Length == 1)
 						result = string.Concat(
 							Networking.LocalPlayer.displayName,
 							DATA_SEPARATER,
 							value);
 					else
-						foreach (var dataSet in dataSets)
+						foreach (string dataSet in dataSets)
 						{
-							var data = dataSet.Split(DATA_SEPARATER);
+							string[] data = dataSet.Split(DATA_SEPARATER);
 							result += string.Concat(
 								data[0],
 								DATA_SEPARATER,
@@ -85,32 +85,32 @@ namespace Mascari4615
 			{
 				nofi.text = "동기화 완료";
 
-				foreach (var mKeyValueUpdateListener in mKeyValueUpdateListeners)
+				foreach (UdonSharpBehaviour mKeyValueUpdateListener in mKeyValueUpdateListeners)
 					// mKeyValueUpdateListener.BeforeUpdate();
 					mKeyValueUpdateListener.SendCustomEvent("BeforeUpdate");
 
 				Debug.Log($"GlobalData Changed : {globalData} => {value}");
 				globalData = value;
 
-				foreach (var item in debugTexts)
+				foreach (TextMeshProUGUI item in debugTexts)
 					item.text = "";
-				var textIndex = 0;
+				int textIndex = 0;
 
-				var dataPairs = globalData.Split(DATA_PAIR_SEPARATER);
-				foreach (var dataPair in dataPairs)
+				string[] dataPairs = globalData.Split(DATA_PAIR_SEPARATER);
+				foreach (string dataPair in dataPairs)
 				{
 					string _key;
 					string _value;
 
 					{
-						var temp = dataPair.Split(DATA_SEPARATER);
+						string[] temp = dataPair.Split(DATA_SEPARATER);
 						_key = temp[0];
 						_value = temp[1];
 					}
 
 					Networking.LocalPlayer.SetPlayerTag(_key, _value);
 
-					var debug = string.Concat(_key, '\n', _value);
+					string debug = string.Concat(_key, '\n', _value);
 
 					if (_key == Networking.LocalPlayer.displayName)
 						localData = _value;
@@ -120,7 +120,7 @@ namespace Mascari4615
 
 				Debug.Log("GlobalData Changed End");
 
-				foreach (var mKeyValueUpdateListener in mKeyValueUpdateListeners)
+				foreach (UdonSharpBehaviour mKeyValueUpdateListener in mKeyValueUpdateListeners)
 					// mKeyValueUpdateListener.OnUpdate();
 					mKeyValueUpdateListener.SendCustomEvent("OnUpdate");
 			}
@@ -148,13 +148,13 @@ namespace Mascari4615
 			{
 				SetOwner();
 
-				var globalMoneyData = GlobalData;
-				var result = string.Empty;
-				var dataPairs = globalMoneyData.Split(DATA_PAIR_SEPARATER);
-				var contains = false;
-				foreach (var dataPair in dataPairs)
+				string globalMoneyData = GlobalData;
+				string result = string.Empty;
+				string[] dataPairs = globalMoneyData.Split(DATA_PAIR_SEPARATER);
+				bool contains = false;
+				foreach (string dataPair in dataPairs)
 				{
-					var data = dataPair.Split(DATA_SEPARATER);
+					string[] data = dataPair.Split(DATA_SEPARATER);
 					if (data[0] == key)
 					{
 						contains = true;
@@ -178,13 +178,13 @@ namespace Mascari4615
 			if (GlobalData == null || GlobalData == string.Empty)
 				return;
 
-			var globalMoneyData = GlobalData;
-			var result = string.Empty;
-			var dataPairs = globalMoneyData.Split(DATA_PAIR_SEPARATER);
-			var contains = false;
-			foreach (var dataPair in dataPairs)
+			string globalMoneyData = GlobalData;
+			string result = string.Empty;
+			string[] dataPairs = globalMoneyData.Split(DATA_PAIR_SEPARATER);
+			bool contains = false;
+			foreach (string dataPair in dataPairs)
 			{
-				var data = dataPair.Split(DATA_SEPARATER);
+				string[] data = dataPair.Split(DATA_SEPARATER);
 				if (data[0] == key)
 				{
 					contains = true;
@@ -208,21 +208,21 @@ namespace Mascari4615
 			if (GlobalData == null || GlobalData == string.Empty)
 				return;
 
-			var globalMoneyData = GlobalData;
-			var result = string.Empty;
-			var dataPairs = globalMoneyData.Split(DATA_PAIR_SEPARATER);
-			foreach (var dataPair in dataPairs)
+			string globalMoneyData = GlobalData;
+			string result = string.Empty;
+			string[] dataPairs = globalMoneyData.Split(DATA_PAIR_SEPARATER);
+			foreach (string dataPair in dataPairs)
 			{
-				var data = dataPair.Split(DATA_SEPARATER);
+				string[] data = dataPair.Split(DATA_SEPARATER);
 				// if (data[0] == key)
 				{
-					var values =
+					string[] values =
 						data[1].Contains(VALUE_SEPARATER.ToString())
 							? data[1].Split(VALUE_SEPARATER)
 							: new[] { data[1] };
 
 					data[1] = "";
-					for (var i = 0; i < values.Length; i++)
+					for (int i = 0; i < values.Length; i++)
 					{
 						if (values[i] == _value)
 							continue;

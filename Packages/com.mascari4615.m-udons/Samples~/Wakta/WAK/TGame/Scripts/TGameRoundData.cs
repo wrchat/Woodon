@@ -100,7 +100,7 @@ namespace Mascari4615
 			// #
 			// 0             - 라운드 종료 여부 (같은 코인 제거 이후)
 
-			var s = string.Empty;
+			string s = string.Empty;
 
 			// 0 ~ 6
 			for (int i = 0; i < TGameManager.PLAYER_COUNT; i++)
