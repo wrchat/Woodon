@@ -15,7 +15,7 @@ namespace Mascari4615
 		public SyncedBool[] SyncedBools => syncedBools;
 
 		// [SerializeField] private SyncedBool isLocked;
-		[SerializeField] private TimeEvent isLocked_TimeEvent;
+		[SerializeField] private Timer isLocked_Timer;
 
 		public override bool IsPlayerIn(VRCPlayerApi player)
 		{
@@ -50,16 +50,16 @@ namespace Mascari4615
 				syncedBools[localPlayerNum].SetValue(false);
 
 				// if ((inPlayerCount == 1) && (isLocked.Value == true))
-				if ((inPlayerCount == 1) && (isLocked_TimeEvent.IsExpired == false))
+				if ((inPlayerCount == 1) && (isLocked_Timer.IsExpired == false))
 				{
 					// isLocked.SetValue(false);
-					isLocked_TimeEvent.ResetTime();
+					isLocked_Timer.ResetTime();
 				}
 			}
 			else
 			{
 				// if (isLocked.Value)
-				if (isLocked_TimeEvent.IsExpired == false)
+				if (isLocked_Timer.IsExpired == false)
 					return;
 
 				syncedBools[localPlayerNum].SetValue(true);
@@ -80,12 +80,12 @@ namespace Mascari4615
 		public void Lock()
 		{
 			// isLocked.SetValue(true);
-			isLocked_TimeEvent.SetTimer();
+			isLocked_Timer.SetTimer();
 		}
 		public void Unlock()
 		{
 			// isLocked.SetValue(false);
-			isLocked_TimeEvent.ResetTime();
+			isLocked_Timer.ResetTime();
 		}
 
 		public void ResetSync()

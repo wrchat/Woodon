@@ -29,8 +29,8 @@ namespace Mascari4615
 
 		[SerializeField] private bool sendEventWhenLocalPlayerIsGunOwner;
 		[SerializeField] private bool pcCanReloadByKeyR;
-		// TimeEvent가 동작 중일 때는 아무런 조작도 할 수 없도록
-		[SerializeField] private TimeEvent reloadCooltime;
+		// Timer가 동작 중일 때는 아무런 조작도 할 수 없도록
+		[SerializeField] private Timer reloadCooltime;
 
 		private ShootingManager shootingManager;
 

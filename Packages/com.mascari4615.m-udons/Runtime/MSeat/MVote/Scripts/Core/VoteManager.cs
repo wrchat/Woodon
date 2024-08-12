@@ -9,7 +9,7 @@ namespace Mascari4615
 	{
 		[Header("_" + nameof(VoteManager))]
 		[SerializeField] protected TextMeshProUGUI debugText;
-		[SerializeField] protected TimeEvent timeEvent;
+		[SerializeField] protected Timer timer;
 		[SerializeField] protected MSFXManager mSFXManager;
 
 		public int[] MaxVoteIndexes { get; protected set; } = new int[0];
@@ -84,8 +84,8 @@ namespace Mascari4615
 			if (IsOwner() == false)
 				return;
 			
-			if (timeEvent != null)
-				timeEvent.SetTimer();
+			if (timer != null)
+				timer.SetTimer();
 		}
 
 		protected virtual void OnWaitForResult()
@@ -97,8 +97,8 @@ namespace Mascari4615
 			if (IsOwner() == false)
 				return;
 
-			if (timeEvent != null)
-				timeEvent.ResetTime();
+			if (timer != null)
+				timer.ResetTime();
 		}
 
 		protected virtual void OnCheckResult()

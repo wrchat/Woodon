@@ -21,7 +21,7 @@ namespace Mascari4615
 		[SerializeField] private TextMeshProUGUI rText;
 		[SerializeField] private TextMeshProUGUI gText;
 		[SerializeField] private TextMeshProUGUI bText;
-		
+
 		private void Start()
 		{
 			Init();
@@ -49,6 +49,10 @@ namespace Mascari4615
 		public void UpdatePreviewColorUI()
 		{
 			previewColorImage.color = new Color(rSlider.value, gSlider.value, bSlider.value);
+
+			rText.text = (previewColorImage.color.r * 255f).ToString();
+			gText.text = (previewColorImage.color.g * 255f).ToString();
+			bText.text = (previewColorImage.color.b * 255f).ToString();
 		}
 
 		public void SetColor()

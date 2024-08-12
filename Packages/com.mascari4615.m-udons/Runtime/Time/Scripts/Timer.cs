@@ -5,15 +5,12 @@ using VRC.SDKBase;
 namespace Mascari4615
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class TimeEvent : MEventSender
+	public class Timer : MEventSender
 	{
-		[field: Header("_" + nameof(TimeEvent))]
+		[field: Header("_" + nameof(Timer))]
 		[field: SerializeField] public int TimeByDecisecond { get; set; } = 50;
 		[SerializeField] private MValue mValue;
 		[SerializeField] private CustomBool isCounting;
-
-		[SerializeField] private UITimeEvent[] timeEventUIs;
-		[SerializeField] private UITimeEventBar[] timeEventBarUIs;
 
 		[UdonSynced(), FieldChangeCallback(nameof(ExpireTime))] private int _expireTime = NONE_INT;
 		public int ExpireTime
@@ -39,20 +36,6 @@ namespace Mascari4615
 
 		public bool IsExpired => ExpireTime == NONE_INT;
 
-		private void Start()
-		{
-			Init();
-		}
-
-		private void Init()
-		{
-			foreach (UITimeEvent uiTimeEvent in timeEventUIs)
-				uiTimeEvent.Init(this);
-
-			foreach (UITimeEventBar timeEventBarUI in timeEventBarUIs)
-				timeEventBarUI.Init(this);
-		}
-
 		private void Update()
 		{
 			// UpdateUI();
@@ -67,17 +50,8 @@ namespace Mascari4615
 			{
 				MDebugLog("Expired!");
 				ResetTime();
-				SendEvents();
+				SendEvents((int)TimerEvent.TimeExpired);
 			}
-		}
-
-		private void UpdateUI()
-		{
-			foreach (UITimeEvent uiTimeEvent in timeEventUIs)
-				uiTimeEvent.UpdateUI();
-
-			foreach (UITimeEventBar timeEventBarUI in timeEventBarUIs)
-				timeEventBarUI.UpdateUI();
 		}
 
 		private void OnExpireTimeChange()
@@ -87,7 +61,7 @@ namespace Mascari4615
 			if (isCounting)
 				isCounting.SetValue(ExpireTime != NONE_INT);
 
-			UpdateUI();
+			SendEvents((int)TimerEvent.ExpireTimeChanged);
 		}
 
 		public void SetExpireTime(int newExpireTime)

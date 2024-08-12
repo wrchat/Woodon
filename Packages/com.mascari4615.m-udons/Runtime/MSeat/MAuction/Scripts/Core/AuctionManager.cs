@@ -9,7 +9,7 @@ namespace Mascari4615
 	{
 		[Header("_" + nameof(AuctionManager))]
 		[SerializeField] private TextMeshProUGUI debugText;
-		[SerializeField] private TimeEvent timeEvent;
+		[SerializeField] private Timer timer;
 		[SerializeField] private TextMeshProUGUI[] maxTryPointTexts;
 		[SerializeField] private MSFXManager mSFXManager;
 
@@ -91,8 +91,8 @@ namespace Mascari4615
 			if (IsOwner() == false)
 				return;
 			
-			if (timeEvent != null)
-				timeEvent.SetTimer();
+			if (timer != null)
+				timer.SetTimer();
 		}
 
 		protected virtual void OnWaitForResult()
@@ -104,8 +104,8 @@ namespace Mascari4615
 			if (IsOwner() == false)
 				return;
 
-			if (timeEvent != null)
-				timeEvent.ResetTime();
+			if (timer != null)
+				timer.ResetTime();
 		}
 
 		protected virtual void OnCheckResult()

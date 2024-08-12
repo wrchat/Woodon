@@ -7,9 +7,10 @@ using VRC.SDKBase;
 namespace Mascari4615
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class UITimeEvent : MBase
+	public class UITimer : MBase
 	{
-		[field: Header("_" + nameof(UITimeEvent))]
+		[Header("_" + nameof(UITimer))]
+		[SerializeField] private Timer timer;
 		[SerializeField] private TextMeshProUGUI[] remainTimeTexts;
 		[SerializeField] private string format = "{0:mm\\:ss.ff}";
 		[SerializeField] private float[] remainTimeFlags;
@@ -25,19 +26,26 @@ namespace Mascari4615
 		private int lastExpireTime = NONE_INT;
 		private int changedTimeDiff = 0;
 
-		private TimeEvent timeEvent;
-
 		public bool IsLerping =>
-		(timeEvent != null) &&
+		(timer != null) &&
 		(lerp == true) &&
 		(lastExpireTime != NONE_INT) &&
-		(timeEvent.ExpireTime != NONE_INT) &&
+		(timer.ExpireTime != NONE_INT) &&
 		(curLerpTime > 0);
 
-		public void Init(TimeEvent timeEvent)
+		private void Start()
 		{
-			this.timeEvent = timeEvent;
+			if (timer == null)
+			{
+				MDebugLog($"{nameof(timer)} is null!");
+				return;
+			}
 
+			Init();
+		}
+
+		private void Init()
+		{
 			defaultColors = new Color[remainTimeTexts.Length];
 			for (int i = 0; i < remainTimeTexts.Length; i++)
 				defaultColors[i] = remainTimeTexts[i].color;
@@ -45,7 +53,7 @@ namespace Mascari4615
 
 		private void Update()
 		{
-			if (timeEvent == null)
+			if (timer == null)
 				return;
 
 			CalcTime();
@@ -67,7 +75,7 @@ namespace Mascari4615
 
 			Color color = default;
 
-			if (timeEvent.ExpireTime == NONE_INT)
+			if (timer.ExpireTime == NONE_INT)
 			{
 				color = default;
 			}
@@ -96,7 +104,7 @@ namespace Mascari4615
 			curLerpTime = Mathf.Max(curLerpTime - Time.deltaTime, 0);
 
 			// 타이머가 멈춰있거나,
-			if (timeEvent.ExpireTime == NONE_INT)
+			if (timer.ExpireTime == NONE_INT)
 			{
 				lastExpireTime = NONE_INT;
 				changedTimeDiff = 0;
@@ -107,13 +115,13 @@ namespace Mascari4615
 			// Lerp 하지 않는 경우
 			if (lerp == false)
 			{
-				lastExpireTime = timeEvent.ExpireTime;
+				lastExpireTime = timer.ExpireTime;
 				changedTimeDiff = 0;
 				curLerpTime = 0;
 				return;
 			}
 
-			if (lastExpireTime == timeEvent.ExpireTime)
+			if (lastExpireTime == timer.ExpireTime)
 				return;
 
 			// 1. Lerp
@@ -121,31 +129,31 @@ namespace Mascari4615
 			// 1-1. Init
 			if (lastExpireTime == NONE_INT)
 			{
-				lastExpireTime = timeEvent.ExpireTime;
+				lastExpireTime = timer.ExpireTime;
 				changedTimeDiff = 0;
 				curLerpTime = 0;
 				return;
 			}
 
 			// 1-2. Lerp
-			if (lastExpireTime != timeEvent.ExpireTime)
+			if (lastExpireTime != timer.ExpireTime)
 			{
-				int Max = Mathf.Max(lastExpireTime, timeEvent.ExpireTime);
-				int Min = Mathf.Min(lastExpireTime, timeEvent.ExpireTime);
+				int Max = Mathf.Max(lastExpireTime, timer.ExpireTime);
+				int Min = Mathf.Min(lastExpireTime, timer.ExpireTime);
 
 				changedTimeDiff = Max - Min;
 				MDebugLog($"remainChangeTime: {changedTimeDiff} = {Max} - {Min}");
-				lastExpireTime = timeEvent.ExpireTime;
+				lastExpireTime = timer.ExpireTime;
 
 				curLerpTime = lerpTime;
 			}
 		}
 
-		public void ResetTime() => timeEvent.ResetTime();
-		public void SetTimer() => timeEvent.SetTimer();
-		public void SetTimeByMValue() => timeEvent.SetTimeByMValue();
-		public void AddTime() => timeEvent.AddTime();
-		public void AddTimeByMValue() => timeEvent.AddTimeByMValue();
-		public void ToggleTime() => timeEvent.ToggleTime();
+		public void ResetTime() => timer.ResetTime();
+		public void SetTimer() => timer.SetTimer();
+		public void SetTimeByMValue() => timer.SetTimeByMValue();
+		public void AddTime() => timer.AddTime();
+		public void AddTimeByMValue() => timer.AddTimeByMValue();
+		public void ToggleTime() => timer.ToggleTime();
 	}
 }

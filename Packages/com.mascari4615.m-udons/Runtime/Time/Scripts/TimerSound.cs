@@ -6,9 +6,9 @@ using VRC.SDKBase;
 namespace Mascari4615
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class TimeEventSound : MBase
+	public class TimerSound : MBase
 	{
-		[SerializeField] private TimeEvent timeEvent;
+		[SerializeField] private Timer timer;
 
 		[SerializeField] private AudioSource loopAudioSource;
 		[SerializeField] private AudioSource endingSFXSource;
@@ -22,7 +22,7 @@ namespace Mascari4615
 
 		// HACK:
 		[SerializeField] private AudioClip lerpSFX;
-		[SerializeField] private UITimeEvent timeEventUI;
+		[SerializeField] private UITimer timerUI;
 
 		private void Start()
 		{
@@ -31,7 +31,7 @@ namespace Mascari4615
 
 		private void Init()
 		{
-			timeEvent.RegisterListener(this, nameof(OnEnding));
+			timer.RegisterListener(this, nameof(OnEnding));
 
 			lerpSFXSource.clip = lerpSFX;
 			lerpSFXSource.volume = 0;
@@ -57,12 +57,12 @@ namespace Mascari4615
 
 		private void UpdateSound()
 		{
-			if (timeEvent == null)
+			if (timer == null)
 				return;
 
-			lerpSFXSource.volume = timeEventUI.IsLerping ? 1 : 0;
+			lerpSFXSource.volume = timerUI.IsLerping ? 1 : 0;
 		
-			int expireTime = timeEvent.ExpireTime;
+			int expireTime = timer.ExpireTime;
 
 			if (expireTime == NONE_INT)
 			{

@@ -14,7 +14,7 @@ namespace Mascari4615
 		public int TryPoint => TurnData;
 		
 		[SerializeField] private MValue tryPoint_MValue;
-		[SerializeField] private TimeEvent timeEvent;
+		[SerializeField] private Timer timer;
 		[SerializeField] private MSFXManager mSFXManager;
 
 		public void UpdateTryPoint()
@@ -72,9 +72,9 @@ namespace Mascari4615
 			if (IsOwner(seatManager.gameObject) == false)
 				return;
 
-			if (timeEvent != null)
+			if (timer != null)
 			{
-				timeEvent.SetTimer();
+				timer.SetTimer();
 				mSFXManager.PlaySFX_G(1);
 			}
 		}

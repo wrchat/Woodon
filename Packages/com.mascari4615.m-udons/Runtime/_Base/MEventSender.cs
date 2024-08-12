@@ -9,7 +9,7 @@ namespace Mascari4615
 		[Header("_" + nameof(MEventSender))]
 		[SerializeField] protected UdonSharpBehaviour[] targetUdons = new UdonSharpBehaviour[0];
 		[SerializeField] protected string[] eventNames = new string[0];
-		[SerializeField] protected bool sendGlobal;
+		[SerializeField] protected bool sendEventGlobal;
 
 		protected UdonSharpBehaviour[][] targetUdonss = new UdonSharpBehaviour[0][];
 		protected string[][] eventNamess = new string[0][];
@@ -25,7 +25,7 @@ namespace Mascari4615
 
 			for (int i = 0; i < targetUdons.Length; i++)
 			{
-				if (sendGlobal)
+				if (sendEventGlobal)
 					targetUdons[i].SendCustomNetworkEvent(NetworkEventTarget.All, eventNames[i]);
 				else
 					targetUdons[i].SendCustomEvent(eventNames[i]);
@@ -55,11 +55,13 @@ namespace Mascari4615
 
 			for (int i = 0; i < targetUdons.Length; i++)
 			{
-				if (sendGlobal)
+				if (sendEventGlobal)
 					targetUdons[i].SendCustomNetworkEvent(NetworkEventTarget.All, eventNames[i]);
 				else
 					targetUdons[i].SendCustomEvent(eventNames[i]);
 			}
+
+			SendEvents();
 		}
 
 		private bool IsEventValid()
