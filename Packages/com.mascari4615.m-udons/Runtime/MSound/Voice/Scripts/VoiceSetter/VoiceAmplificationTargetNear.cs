@@ -1,7 +1,5 @@
-﻿using System;
-using UdonSharp;
+﻿using UdonSharp;
 using UnityEngine;
-using UnityEngine.UI;
 using VRC.SDKBase;
 
 namespace Mascari4615
@@ -9,14 +7,13 @@ namespace Mascari4615
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public class VoiceAmplificationTargetNear : VoiceAmplification
 	{
-		public MTarget MTarget => targetPlayer;
-		[SerializeField] private MTarget targetPlayer;
-
+		[field: Header("_" + nameof(VoiceAmplificationTargetNear))]
+		[field: SerializeField] public MTarget TargetPlayer { get; private set; }
 		[SerializeField] private float amplificationDistance = 10;
 
 		protected override bool IsAmplification(VRCPlayerApi playerApi)
 		{
-			VRCPlayerApi targetPlayerAPI = targetPlayer.GetTargetPlayerAPI();
+			VRCPlayerApi targetPlayerAPI = TargetPlayer.GetTargetPlayerAPI();
 
 			if (targetPlayerAPI == null)
 				return false;

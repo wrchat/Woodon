@@ -1,21 +1,18 @@
-﻿
-using UdonSharp;
+﻿using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
-using VRC.Udon;
 
 namespace Mascari4615
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public class VoiceAmplification_MTarget : VoiceAmplification
 	{
-		[Header("_" + nameof(VoiceAmplification_MTarget))]
-		[SerializeField] private MTarget[] targetPlayers;
-		public MTarget[] MTargets => targetPlayers;
+		[field: Header("_" + nameof(VoiceAmplification_MTarget))]
+		[field: SerializeField] public MTarget[] TargetPlayers { get; private set; }
 
 		protected override bool IsAmplification(VRCPlayerApi playerAPI)
 		{
-			foreach (var targetPlayer in targetPlayers)
+			foreach (MTarget targetPlayer in TargetPlayers)
 			{
 				if (playerAPI.playerId == targetPlayer.CurTargetPlayerID)
 					return true;
@@ -26,7 +23,7 @@ namespace Mascari4615
 
 		public void SetPlayer(int id, int index = 0)
 		{
-			targetPlayers[index].SetPlayerID(id);
+			TargetPlayers[index].SetPlayerID(id);
 		}
 	}
 }

@@ -1,10 +1,10 @@
-﻿using System;
-using UdonSharp;
+﻿using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
 
 namespace Mascari4615
 {
+	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public class TeleportTo : MBase
 	{
 		[Header("_" + nameof(TeleportTo))]
