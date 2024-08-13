@@ -49,16 +49,16 @@ namespace Mascari4615
 				IsPlayerInside[localPlayerNum].SetValue(false);
 
 				// if ((inPlayerCount == 1) && (isLocked.Value == true))
-				if ((inPlayerCount == 1) && (isLocked_Timer.IsExpired == false))
+				if ((inPlayerCount == 1) && (isLocked_Timer.IsExpiredOrStoped == false))
 				{
 					// isLocked.SetValue(false);
-					isLocked_Timer.ResetTime();
+					isLocked_Timer.ResetTimer();
 				}
 			}
 			else
 			{
 				// if (isLocked.Value)
-				if (isLocked_Timer.IsExpired == false)
+				if (isLocked_Timer.IsExpiredOrStoped == false)
 					return;
 
 				IsPlayerInside[localPlayerNum].SetValue(true);
@@ -84,7 +84,7 @@ namespace Mascari4615
 		public void Unlock()
 		{
 			// isLocked.SetValue(false);
-			isLocked_Timer.ResetTime();
+			isLocked_Timer.ResetTimer();
 		}
 
 		public void ResetSync()

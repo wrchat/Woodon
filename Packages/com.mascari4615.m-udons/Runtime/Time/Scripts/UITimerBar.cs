@@ -1,7 +1,6 @@
 ﻿using UdonSharp;
 using UnityEngine;
 using UnityEngine.UI;
-using VRC.SDKBase;
 
 namespace Mascari4615
 {
@@ -32,10 +31,10 @@ namespace Mascari4615
 
 		public void UpdateUI()
 		{
-			float fillAmount = ((timer.TimeByDecisecond * 100f) - (timer.ExpireTime - Networking.GetServerTimeInMilliseconds())) / (timer.TimeByDecisecond * 100f);
+			float fillAmount = ((timer.TimeByDecisecond * 100f) - (timer.ExpireTime - timer.CalcedCurTime)) / (timer.TimeByDecisecond * 100f);
 			bar.fillAmount = fillAmount;
 
-			if (timer.IsExpired)
+			if (timer.IsExpiredOrStoped)
 				canvasGroup.alpha = 0;
 			else
 				canvasGroup.alpha = 1;

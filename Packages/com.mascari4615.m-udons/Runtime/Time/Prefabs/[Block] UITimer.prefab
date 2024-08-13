@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 10:10.10
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 56cc580d002b37c4a8ddcb842c2f8d56, type: 2}
-  m_sharedMaterial: {fileID: -2434294036112554905, guid: 56cc580d002b37c4a8ddcb842c2f8d56,
+  m_fontAsset: {fileID: 11400000, guid: 099e905781af5a54092659ce4fd3b049, type: 2}
+  m_sharedMaterial: {fileID: -3840619290954953387, guid: 099e905781af5a54092659ce4fd3b049,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -197,12 +197,14 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 2609624310217218436}
   DEBUG: 1
-  remainTimeTexts: []
+  timer: {fileID: 0}
+  remainTimeTexts:
+  - {fileID: 7288669593463964581}
   format: '{0:mm\:ss}<size=100>.{0:ff}</size>'
   remainTimeFlags: []
   remainTimeColors: []
   lerpColor: {r: 0, g: 0, b: 0, a: 0}
-  lerp: 0
+  useLerp: 0
   lerpTime: 2
 --- !u!114 &2609624310217218436
 MonoBehaviour:
@@ -241,7 +243,7 @@ PrefabInstance:
     - target: {fileID: 613757047644303135, guid: e002ba941fe96334da2a46058c114815,
         type: 3}
       propertyPath: m_text
-      value: "\uC7A0\uAE08"
+      value: "\uD1A0\uAE00"
       objectReference: {fileID: 0}
     - target: {fileID: 1510242249456524852, guid: e002ba941fe96334da2a46058c114815,
         type: 3}
@@ -261,7 +263,7 @@ PrefabInstance:
     - target: {fileID: 1510242249456524852, guid: e002ba941fe96334da2a46058c114815,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: ToggleTime
+      value: ToggleTimer
       objectReference: {fileID: 0}
     - target: {fileID: 2014848354449385375, guid: e002ba941fe96334da2a46058c114815,
         type: 3}
@@ -276,7 +278,7 @@ PrefabInstance:
     - target: {fileID: 2014848354449385375, guid: e002ba941fe96334da2a46058c114815,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 69.94
+      value: 69.16
       objectReference: {fileID: 0}
     - target: {fileID: 2014848354449385375, guid: e002ba941fe96334da2a46058c114815,
         type: 3}
@@ -286,7 +288,7 @@ PrefabInstance:
     - target: {fileID: 2014848354449385375, guid: e002ba941fe96334da2a46058c114815,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 44.97
+      value: 44.58
       objectReference: {fileID: 0}
     - target: {fileID: 2014848354449385375, guid: e002ba941fe96334da2a46058c114815,
         type: 3}
@@ -326,7 +328,7 @@ PrefabInstance:
     - target: {fileID: 3177364642345056864, guid: e002ba941fe96334da2a46058c114815,
         type: 3}
       propertyPath: m_Name
-      value: '[Button] ToggleTIme'
+      value: '[Button] ToggleTImer'
       objectReference: {fileID: 0}
     - target: {fileID: 7473182815853782158, guid: e002ba941fe96334da2a46058c114815,
         type: 3}

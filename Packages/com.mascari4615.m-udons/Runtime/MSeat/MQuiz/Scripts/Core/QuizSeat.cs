@@ -1,7 +1,6 @@
 ﻿using UdonSharp;
 using UnityEngine;
 using UnityEngine.UI;
-using static Mascari4615.MUtil;
 
 namespace Mascari4615
 {
@@ -10,9 +9,10 @@ namespace Mascari4615
 	{
 		public int Score => Data;
 		public QuizAnswerType ExpectedAnswer => (QuizAnswerType)TurnData;
+		protected QuizManager QuizManager => (QuizManager)seatManager;
 
 		public bool HasSelectedAnswer => ExpectedAnswer != QuizAnswerType.None;
-		public bool IsAnswerCorrect => ExpectedAnswer == quizManager.CurQuizData.QuizAnswer;
+		public bool IsAnswerCorrect => ExpectedAnswer == QuizManager.CurQuizData.QuizAnswer;
 
 		protected override void OnTurnDataChange(DataChangeState changeState)
 		{
@@ -22,35 +22,24 @@ namespace Mascari4615
 		}
 
 		[SerializeField] private Image[] selectAnswerDecoImages;
-		protected QuizManager quizManager;
-		private string[] answerToString =
+		private readonly string[] answerToString =
 		{
 			"O", "X", "1", "2", "3", "4", "5", string.Empty
 		};
 
-		public void SelectAnswer(QuizAnswerType newAnswer)
+		public void SelectAnswer(QuizAnswerType newAnswer, bool force = false)
 		{
-			if (quizManager.CurGameState != (int)QuizGameState.SelectAnswer)
-				return;
+			if (force == false)
+			{
+				if (QuizManager.CurGameState != (int)QuizGameState.SelectAnswer)
+					return;
 
-			if (!quizManager.CanSelectAnsewr)
-				return;
+				if (QuizManager.CanSelectAnsewr == false)
+					return;
+			}
 
 			SetTurnData((int)newAnswer);
 		}
-
-		public void SelectAnswerForce(QuizAnswerType newAnswer)
-		{
-			SetTurnData((int)newAnswer);
-		}
-
-		public void SelectAnswerO() => SelectAnswer(QuizAnswerType.O);
-		public void SelectAnswerX() => SelectAnswer(QuizAnswerType.X);
-		public void SelectAnswer1() => SelectAnswer(QuizAnswerType.One);
-		public void SelectAnswer2() => SelectAnswer(QuizAnswerType.Two);
-		public void SelectAnswer3() => SelectAnswer(QuizAnswerType.Three);
-		public void SelectAnswer4() => SelectAnswer(QuizAnswerType.Four);
-		public void SelectAnswer5() => SelectAnswer(QuizAnswerType.Five);
 
 		public virtual void OnWait()
 		{
@@ -76,32 +65,42 @@ namespace Mascari4615
 		{
 			MDebugLog($"{nameof(OnScoring)}");
 
-			if (IsLocalPlayerID(OwnerID) == false)
+			if (IsSeatOwner() == false)
 				return;
 
 			if (IsAnswerCorrect)
 			{
-				if (quizManager.GameRule_ADD_SCORE_WHEN_CORRECT_ANSWER)
+				if (QuizManager.GameRule_ADD_SCORE_WHEN_CORRECT_ANSWER)
 					SetData(Score + 1);
 			}
 			else
 			{
-				if (quizManager.GameRule_DROP_PLAYER_WHEN_WRONG_ANSWER)
+				if (QuizManager.GameRule_DROP_PLAYER_WHEN_WRONG_ANSWER)
 				{
 					ResetSeat();
-					quizManager.TP_WrongPos();
+					QuizManager.TP_WrongPos();
 				}
-				else if (quizManager.GameRule_SUB_SCORE_WHEN_WRONG_ANSWER)
+				else if (QuizManager.GameRule_SUB_SCORE_WHEN_WRONG_ANSWER)
 				{
 					SetData(Score - 1);
 
-					if (quizManager.GameRule_DROP_PLAYER_WHEN_ZERO_SCORE && (Score <= 0))
+					if (QuizManager.GameRule_DROP_PLAYER_WHEN_ZERO_SCORE && (Score <= 0))
 					{
 						ResetSeat();
-						quizManager.TP_WrongPos();
+						QuizManager.TP_WrongPos();
 					}
 				}
 			}
 		}
+
+		#region HorribleEvents
+		public void SelectAnswerO() => SelectAnswer(QuizAnswerType.O);
+		public void SelectAnswerX() => SelectAnswer(QuizAnswerType.X);
+		public void SelectAnswer1() => SelectAnswer(QuizAnswerType.One);
+		public void SelectAnswer2() => SelectAnswer(QuizAnswerType.Two);
+		public void SelectAnswer3() => SelectAnswer(QuizAnswerType.Three);
+		public void SelectAnswer4() => SelectAnswer(QuizAnswerType.Four);
+		public void SelectAnswer5() => SelectAnswer(QuizAnswerType.Five);
+		#endregion
 	}
 }

@@ -98,7 +98,7 @@ namespace Mascari4615
 				return;
 
 			if (timer != null)
-				timer.ResetTime();
+				timer.ResetTimer();
 		}
 
 		protected virtual void OnCheckResult()

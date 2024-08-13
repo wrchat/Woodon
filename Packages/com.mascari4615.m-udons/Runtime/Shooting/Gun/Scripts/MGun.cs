@@ -65,7 +65,7 @@ namespace Mascari4615
 		{
 			base.Update();
 		
-			if (reloadCooltime.IsExpired == false)
+			if (reloadCooltime.IsExpiredOrStoped == false)
 				return;
 
 			if (pcCanReloadByKeyR)
@@ -90,7 +90,7 @@ namespace Mascari4615
 		{
 			if (IsHolding())
 			{
-				if (reloadCooltime.IsExpired == false)
+				if (reloadCooltime.IsExpiredOrStoped == false)
 					return;
 
 				if (maxAmmo != 0)
@@ -117,7 +117,7 @@ namespace Mascari4615
 			if (maxAmmo == 0)
 				return;
 
-			if (reloadCooltime.IsExpired == false)
+			if (reloadCooltime.IsExpiredOrStoped == false)
 				return;
 
 			// if (LocalPlayerHolding())

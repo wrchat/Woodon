@@ -102,9 +102,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1633481362170969978}
   - component: {fileID: 1358787152617867623}
-  - component: {fileID: 1807516908441385850}
+  - component: {fileID: 9080609807834414396}
   m_Layer: 0
-  m_Name: '[SyncedBool]'
+  m_Name: '[MBool]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -134,7 +134,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3718382787698426202}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 867dc7d6cf2c16647a2795ba8162bd4e, type: 3}
+  m_Script: {fileID: 11500000, guid: dc56eaabc337b704b91d32edbdab1883, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   serializationData:
@@ -146,17 +146,14 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  _udonSharpBackingUdonBehaviour: {fileID: 1807516908441385850}
+  _udonSharpBackingUdonBehaviour: {fileID: 9080609807834414396}
   DEBUG: 1
-  targetUdons:
-  - {fileID: 2853981575527858641}
-  eventNames:
-  - UpdateValue
-  sendGlobal: 0
-  defaultValue: 1
-  buttonUIImages: []
-  buttonUISprites: []
---- !u!114 &1807516908441385850
+  targetUdons: []
+  eventNames: []
+  sendEventGlobal: 0
+  defaultValue: 0
+  useSync: 1
+--- !u!114 &9080609807834414396
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -176,9 +173,9 @@ MonoBehaviour:
   AllowCollisionOwnershipTransfer: 0
   Reliable: 0
   _syncMethod: 3
-  serializedProgramAsset: {fileID: 11400000, guid: 45cf084aba01dcb45a77745c5de4fa15,
+  serializedProgramAsset: {fileID: 11400000, guid: 7c80722cc20400644ab8280fc0b6fc74,
     type: 2}
-  programSource: {fileID: 11400000, guid: 230dc8bb4a4428946a3a011fc9fa543f, type: 2}
+  programSource: {fileID: 11400000, guid: 9688693f1e4867b44b8341c54ca5771c, type: 2}
   serializedPublicVariablesBytesString: Ai8AAAAAATIAAABWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgAuAFUAZABvAG4AVgBhAHIAaQBhAGIAbABlAFQAYQBiAGwAZQAsACAAVgBSAEMALgBVAGQAbwBuAC4AQwBvAG0AbQBvAG4AAAAAAAYBAAAAAAAAACcBBAAAAHQAeQBwAGUAAWgAAABTAHkAcwB0AGUAbQAuAEMAbwBsAGwAZQBjAHQAaQBvAG4AcwAuAEcAZQBuAGUAcgBpAGMALgBMAGkAcwB0AGAAMQBbAFsAVgBSAEMALgBVAGQAbwBuAC4AQwBvAG0AbQBvAG4ALgBJAG4AdABlAHIAZgBhAGMAZQBzAC4ASQBVAGQAbwBuAFYAYQByAGkAYQBiAGwAZQAsACAAVgBSAEMALgBVAGQAbwBuAC4AQwBvAG0AbQBvAG4AXQBdACwAIABtAHMAYwBvAHIAbABpAGIAAQEJAAAAVgBhAHIAaQBhAGIAbABlAHMALwEAAAABaAAAAFMAeQBzAHQAZQBtAC4AQwBvAGwAbABlAGMAdABpAG8AbgBzAC4ARwBlAG4AZQByAGkAYwAuAEwAaQBzAHQAYAAxAFsAWwBWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgAuAEkAbgB0AGUAcgBmAGEAYwBlAHMALgBJAFUAZABvAG4AVgBhAHIAaQBhAGIAbABlACwAIABWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgBdAF0ALAAgAG0AcwBjAG8AcgBsAGkAYgABAAAABgEAAAAAAAAAAi8CAAAAAUkAAABWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgAuAFUAZABvAG4AVgBhAHIAaQBhAGIAbABlAGAAMQBbAFsAUwB5AHMAdABlAG0ALgBJAG4AdAAzADIALAAgAG0AcwBjAG8AcgBsAGkAYgBdAF0ALAAgAFYAUgBDAC4AVQBkAG8AbgAuAEMAbwBtAG0AbwBuAAIAAAAGAgAAAAAAAAAnAQQAAAB0AHkAcABlAAEXAAAAUwB5AHMAdABlAG0ALgBTAHQAcgBpAG4AZwAsACAAbQBzAGMAbwByAGwAaQBiACcBCgAAAFMAeQBtAGIAbwBsAE4AYQBtAGUAAR8AAABfAF8AXwBVAGQAbwBuAFMAaABhAHIAcABCAGUAaABhAHYAaQBvAHUAcgBWAGUAcgBzAGkAbwBuAF8AXwBfACcBBAAAAHQAeQBwAGUAARYAAABTAHkAcwB0AGUAbQAuAEkAbgB0ADMAMgAsACAAbQBzAGMAbwByAGwAaQBiABcBBQAAAFYAYQBsAHUAZQACAAAABwUHBQcF
   publicVariablesUnityEngineObjects: []
   publicVariablesSerializationDataFormat: 0
@@ -278,7 +275,7 @@ MonoBehaviour:
   - {fileID: 1358787152617867623}
   eventNames:
   - ToggleValue
-  sendGlobal: 0
+  sendEventGlobal: 0
   keyCode: 282
   whenGetKeyDown: 1
   whenGetKeyUp: 0

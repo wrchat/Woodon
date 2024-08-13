@@ -58,10 +58,9 @@ MonoBehaviour:
   DEBUG: 0
   targetUdons: []
   eventNames: []
-  sendGlobal: 0
+  sendEventGlobal: 0
   defaultValue: 0
-  buttonUIImages: []
-  buttonUISprites: []
+  useSync: 0
 --- !u!114 &7596361895876876672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,7 +80,7 @@ MonoBehaviour:
   SynchronizePosition: 0
   AllowCollisionOwnershipTransfer: 0
   Reliable: 0
-  _syncMethod: 1
+  _syncMethod: 3
   serializedProgramAsset: {fileID: 11400000, guid: 6bdce6b69410e4a44a91fe2f72967643,
     type: 2}
   programSource: {fileID: 11400000, guid: 9688693f1e4867b44b8341c54ca5771c, type: 2}
@@ -148,13 +147,10 @@ MonoBehaviour:
   DEBUG: 0
   targetUdons: []
   eventNames: []
-  sendGlobal: 0
+  sendEventGlobal: 0
   <TimeByDecisecond>k__BackingField: 50
   mValue: {fileID: 0}
   isCounting: {fileID: 5464413414936535886}
-  timeEventUIs:
-  - {fileID: 3790433208424839528}
-  timeEventBarUIs: []
 --- !u!114 &4108119218738426486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,7 +188,7 @@ PrefabInstance:
     - target: {fileID: 6318350859022185536, guid: 4f57e62219b6d8647ae6d1ad7f67b079,
         type: 3}
       propertyPath: m_Name
-      value: '[Canvas] TimeEvent'
+      value: '[Canvas] Timer'
       objectReference: {fileID: 0}
     - target: {fileID: 6907570752410614896, guid: 4f57e62219b6d8647ae6d1ad7f67b079,
         type: 3}
@@ -330,7 +326,7 @@ PrefabInstance:
     - target: {fileID: 5192995359313949093, guid: 108ebbbd2ca4daa4ba301924b5f4a9b9,
         type: 3}
       propertyPath: m_Name
-      value: '[Block] UITimeEvent'
+      value: '[Block] UITimer'
       objectReference: {fileID: 0}
     - target: {fileID: 6188755723466939083, guid: 108ebbbd2ca4daa4ba301924b5f4a9b9,
         type: 3}
@@ -364,22 +360,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6637296115187980090, guid: 108ebbbd2ca4daa4ba301924b5f4a9b9,
         type: 3}
+      propertyPath: timer
+      value: 
+      objectReference: {fileID: 7811374963451356790}
+    - target: {fileID: 6637296115187980090, guid: 108ebbbd2ca4daa4ba301924b5f4a9b9,
+        type: 3}
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 6637296115187980090, guid: 108ebbbd2ca4daa4ba301924b5f4a9b9,
         type: 3}
-    - target: {fileID: 7288669593463964581, guid: 108ebbbd2ca4daa4ba301924b5f4a9b9,
-        type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 099e905781af5a54092659ce4fd3b049,
-        type: 2}
-    - target: {fileID: 7288669593463964581, guid: 108ebbbd2ca4daa4ba301924b5f4a9b9,
-        type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -3840619290954953387, guid: 099e905781af5a54092659ce4fd3b049,
-        type: 2}
     - target: {fileID: 7584344573156399419, guid: 108ebbbd2ca4daa4ba301924b5f4a9b9,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -521,15 +510,3 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 7531772629726637650}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3790433208424839528 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6637296115187980090, guid: 108ebbbd2ca4daa4ba301924b5f4a9b9,
-    type: 3}
-  m_PrefabInstance: {fileID: 7531772629726637650}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b16fff7d943a46843a4d66cc457368ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
