@@ -8,11 +8,11 @@ namespace Mascari4615
 	public class VoiceAmplification_Area : VoiceAmplification
 	{
 		[Header("_" + nameof(VoiceAmplification_Area))]
-		[SerializeField] private VoiceArea voiceSeparator;
+		[SerializeField] private VoiceArea voiceArea;
 
 		protected override bool IsAmplification(VRCPlayerApi playerAPI)
 		{
-			bool isTarget = voiceSeparator.IsPlayerIn(playerAPI);
+			bool isTarget = voiceArea.IsPlayerIn(playerAPI);
 			MDebugLog(nameof(IsAmplification) + isTarget);
 			return isTarget;
 		}

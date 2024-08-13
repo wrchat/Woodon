@@ -29,7 +29,7 @@ namespace Mascari4615
 		{
 			string[] datas = data.Split(DATA_SEPARATOR);
 
-			SyncData = datas[3];
+			SyncData = datas[0];
 		}
 	}
 }

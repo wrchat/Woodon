@@ -1,5 +1,4 @@
-﻿using System.Runtime.Remoting.Contexts;
-using UdonSharp;
+﻿using UdonSharp;
 using UnityEngine;
 
 namespace Mascari4615
@@ -15,6 +14,17 @@ namespace Mascari4615
 		[Header("_Options : 아래 중 하나를 채워 넣으세요.")]
 		[SerializeField] private MBool switcher;
 		[SerializeField] private MValue materialIndex;
+
+		protected virtual void Start()
+		{
+			Init();
+		}
+
+		protected virtual void Init()
+		{
+			if (switcher != null)
+				switcher.RegisterListener(this, nameof(UpdateMaterial));
+		}
 
 		[ContextMenu(nameof(UpdateMaterial))]
 		public virtual void UpdateMaterial()
