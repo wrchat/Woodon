@@ -7,7 +7,7 @@ namespace Mascari4615
 	public class CameraActive : MBase
 	{
 		[SerializeField] private Camera[] cameras;
-		[SerializeField] private MBool customBool;
+		[SerializeField] private MBool mBool;
 
 		private void Start()
 		{
@@ -17,7 +17,7 @@ namespace Mascari4615
 
 		private void Init()
 		{
-			customBool.RegisterListener(this, nameof(UpdateValue));
+			mBool.RegisterListener(this, nameof(UpdateValue));
 		}
 
 		[ContextMenu(nameof(UpdateValue))]
@@ -26,7 +26,7 @@ namespace Mascari4615
 			MDebugLog($"{nameof(UpdateValue)}");
 
 			foreach (Camera camera in cameras)
-				camera.enabled = customBool.Value;
+				camera.enabled = mBool.Value;
 		}
 	}
 }

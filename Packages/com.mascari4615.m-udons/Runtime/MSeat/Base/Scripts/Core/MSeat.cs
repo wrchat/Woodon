@@ -39,7 +39,7 @@ namespace Mascari4615
 		protected MTurnSeatManager seatManager;
 
 		[Header("_" + nameof(MSeat))]
-		[SerializeField] private MBool ownerCustomBool;
+		[SerializeField] private MBool ownerMBool;
 		[SerializeField] private TextMeshProUGUI[] ownerNameTexts;
 		[SerializeField] private TextMeshProUGUI[] indexTexts;
 		[SerializeField] private TextMeshProUGUI[] curDataTexts;
@@ -85,8 +85,8 @@ namespace Mascari4615
 			if (seatManager == null)
 				return;
 
-			if (ownerCustomBool)
-				ownerCustomBool.SetValue(IsLocalPlayerID(OwnerID));
+			if (ownerMBool)
+				ownerMBool.SetValue(IsLocalPlayerID(OwnerID));
 
 			UpdateOwnerUI();
 

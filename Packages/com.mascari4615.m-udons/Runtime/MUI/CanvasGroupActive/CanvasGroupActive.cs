@@ -73,7 +73,7 @@ namespace Mascari4615
 				SetActive(mBool.Value);
 		}
 
-		public void SetCustomBool(MBool mBool)
+		public void SetMBool(MBool mBool)
 		{
 			this.mBool = mBool;
 			UpdateValue();

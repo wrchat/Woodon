@@ -1,8 +1,5 @@
-﻿using System;
-using UdonSharp;
+﻿using UdonSharp;
 using UnityEngine;
-using VRC.SDKBase;
-using VRC.Udon;
 
 namespace Mascari4615
 {
@@ -14,15 +11,15 @@ namespace Mascari4615
 		[SerializeField] private GameObject targetObject;
 		[SerializeField] private Transform posA;
 		[SerializeField] private Transform posB;
-		[SerializeField] private MBool customBool; 
+		[SerializeField] private MBool mBool;
 		
-		private bool isOriginPos;
+		private bool _isOriginPos;
 		public bool IsOriginPos
 		{
-			get => isOriginPos;
+			get => _isOriginPos;
 			set
 			{
-				isOriginPos = value;
+				_isOriginPos = value;
 				UpdatePos();
 			}
 		}
@@ -53,8 +50,8 @@ namespace Mascari4615
 
 		public void UpdateValue()
 		{
-			if (customBool)
-				IsOriginPos = customBool.Value;
+			if (mBool)
+				IsOriginPos = mBool.Value;
 		}
 	}
 }

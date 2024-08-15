@@ -22,7 +22,7 @@ namespace Mascari4615
 
 		[SerializeField] protected MBool isHolding;
 		[SerializeField] protected MBool isSomeoneHolding;
-		// [field: SerializeField] public CustomBool CustomBool { get; private set; }
+		// [field: SerializeField] public MBool MBool { get; private set; }
 
 		private bool _enabled = true;
 		public bool Enabled

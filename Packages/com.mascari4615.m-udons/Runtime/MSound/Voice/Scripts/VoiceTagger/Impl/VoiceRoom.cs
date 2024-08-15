@@ -11,7 +11,7 @@ namespace Mascari4615
 		[SerializeField] private MTarget[] mTargets;
 		[field: SerializeField] public MBool[] IsPlayerInside { get; private set; }
 
-		// [SerializeField] private CustomBool isLocked;
+		// [SerializeField] private MBool isLocked;
 		[SerializeField] private Timer isLocked_Timer;
 
 		public override bool IsPlayerIn(VRCPlayerApi player)

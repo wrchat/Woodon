@@ -10,7 +10,10 @@ namespace Mascari4615
 		[field: Header("_" + nameof(MSFXManager))]
 		[field: SerializeField] public AudioClip[] AudioClips { get; private set; }
 		[SerializeField] private AudioSource audioSource;
-		[SerializeField] private bool onlyOne = true;
+
+		[Header("_" + nameof(MSFXManager) + " - Options")]
+		[SerializeField] private bool stopWhenEvent = true;
+		[SerializeField] private bool playOneShot = true;
 
 		public void PlaySFX_G(int index)
 		{
@@ -30,15 +33,7 @@ namespace Mascari4615
 			if (isInvalidIndex || isElementNull)
 				return;
 
-			if (onlyOne)
-			{
-				audioSource.Stop();
-				audioSource.PlayOneShot(AudioClips[index]);
-			}
-			else
-			{
-				audioSource.PlayOneShot(AudioClips[index]);
-			}
+			PlaySFX(AudioClips[index]);
 		}
 
 		public void StopSFX_Global()
@@ -56,14 +51,19 @@ namespace Mascari4615
 			if (audioClip == null)
 				return;
 
-			if (onlyOne)
+			if (stopWhenEvent)
+			{
+				audioSource.Stop();
+			}
+
+			if (playOneShot)
 			{
 				audioSource.PlayOneShot(audioClip);
 			}
 			else
 			{
-				audioSource.Stop();
-				audioSource.PlayOneShot(audioClip);
+				audioSource.clip = audioClip;
+				audioSource.Play();
 			}
 		}
 
