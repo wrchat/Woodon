@@ -30,13 +30,13 @@ namespace Mascari4615
 	
 		private void Init()
 		{
-			mTarget.RegisterListener(this, nameof(UpdateUI));
-
 			playerSelectButtons = transform.GetComponentsInChildren<UIMTargetPlayerSelectButton>(true);
 			for (int i = 0; i < playerSelectButtons.Length; i++)
 				playerSelectButtons[i].Init(this, i);
 
 			localPlayerUI.text = $"LocalPlayer ID : {Networking.LocalPlayer.playerId}";
+
+			mTarget.RegisterListener(this, nameof(UpdateUI));
 		}
 
 		public void UpdateUI()

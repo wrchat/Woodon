@@ -102,14 +102,14 @@ namespace Mascari4615
 
 				if (lastSavedExpireTime != NONE_INT)
 				{
-					int diff = lastSavedExpireTime - timer.CalcedCurTime + (int)(changedTimeDiff * (curLerpTime / lerpTime));
+					int diff = (int)(lastSavedExpireTime - timer.CalcedCurTime + (int)(changedTimeDiff * (curLerpTime / lerpTime)));
 					timeSpan = TimeSpan.FromMilliseconds(diff);
 					MDebugLog($"curLerpTime: {curLerpTime}, ||| ((curLerpTime / lerpTime) : {curLerpTime / lerpTime}");
 				}
 			}
 			else
 			{
-				int diff = timer.ExpireTime - timer.CalcedCurTime;
+				int diff = (int)(timer.ExpireTime - timer.CalcedCurTime);
 				diff = Mathf.Max(diff, 0);
 				timeSpan = TimeSpan.FromMilliseconds(diff);
 			}
@@ -134,7 +134,7 @@ namespace Mascari4615
 				// If : First Time (Init)
 				if (lastSavedExpireTime == NONE_INT)
 				{
-					lastSavedExpireTime = timer.ExpireTime;
+					lastSavedExpireTime = (int)timer.ExpireTime;
 					changedTimeDiff = 0;
 					curLerpTime = 0;
 					return;
@@ -142,10 +142,10 @@ namespace Mascari4615
 				// If : Remain Time Changed (Reset Lerp)
 				else
 				{
-					changedTimeDiff = Mathf.Abs(lastSavedExpireTime - timer.ExpireTime);
+					changedTimeDiff = (int)Mathf.Abs(lastSavedExpireTime - timer.ExpireTime);
 					MDebugLog($"remainChangeTime: {changedTimeDiff} = {lastSavedExpireTime} - {timer.ExpireTime}");
 
-					lastSavedExpireTime = timer.ExpireTime;
+					lastSavedExpireTime = (int)timer.ExpireTime;
 					curLerpTime = lerpTime;
 				}
 			}
@@ -153,8 +153,8 @@ namespace Mascari4615
 
 		#region HorribleEvents
 		public void ResetTimer() => timer.ResetTimer();
-		public void SetTimer() => timer.SetTimer();
-		public void SetTimeByMValue() => timer.SetTimeByMValue();
+		public void SetTimer() => timer.StartTimer();
+		public void SetTimeByMValue() => timer.StartTimerByMValue();
 		public void AddTime() => timer.AddTime();
 		public void AddTimeByMValue() => timer.AddTimeByMValue();
 		public void ToggleTimer() => timer.ToggleTimer();

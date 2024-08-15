@@ -60,8 +60,6 @@ namespace Mascari4615
 			bool isCurStateWaiting = CurGameState == (int)QuizGameState.Wait;
 			foreach (GameObject waitTimeObject in waitTimeObjects)
 				waitTimeObject.SetActive(isCurStateWaiting);
-
-			SendEvents();
 		}
 
 		protected override void OnGameStateChange(int origin, int value)
@@ -69,17 +67,21 @@ namespace Mascari4615
 			if (value != origin)
 			{
 				if (value == (int)QuizGameState.Wait) OnWait();
-				else if (value == (int)QuizGameState.QuizTime) OnQuizTime();
+				else if (value == (int)QuizGameState.ShowQuiz) OnQuizTime();
 				else if (value == (int)QuizGameState.SelectAnswer) OnSelectAnswer();
 				else if (value == (int)QuizGameState.ShowPlayerAnswer) OnShowPlayerAnswer();
 				else if (value == (int)QuizGameState.CheckAnswer) OnCheckAnswer();
+				else if (value == (int)QuizGameState.Explaining) OnExplaining();
 				else if (value == (int)QuizGameState.Scoring) OnScoring();
 			}
+
+			base.OnGameStateChange(origin, value);
 		}
 
 		public virtual void OnQuizIndexChange()
 		{
 			UpdateStuff();
+			SendEvents();
 		}
 
 		public void TeleportToSeat()
@@ -128,6 +130,11 @@ namespace Mascari4615
 		public virtual void OnCheckAnswer()
 		{
 			MDebugLog($"{nameof(OnCheckAnswer)}");
+		}
+
+		public virtual void OnExplaining()
+		{
+			MDebugLog($"{nameof(OnExplaining)}");
 		}
 
 		public virtual void OnScoring()

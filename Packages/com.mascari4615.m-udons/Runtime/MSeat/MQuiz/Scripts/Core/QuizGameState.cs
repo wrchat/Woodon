@@ -3,10 +3,11 @@ namespace Mascari4615
 	public enum QuizGameState
 	{
 		Wait,
-		QuizTime,
+		ShowQuiz,
 		SelectAnswer,
 		ShowPlayerAnswer,
 		CheckAnswer,
+		Explaining,
 		Scoring
 	}
 }

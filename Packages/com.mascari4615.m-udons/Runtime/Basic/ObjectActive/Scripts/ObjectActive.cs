@@ -1,19 +1,19 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
 namespace Mascari4615
 {
 	// [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class ObjectActive : MEventSender
+	public class ObjectActive : MBase
 	{
 		[Header("_" + nameof(ObjectActive))]
 		[SerializeField] private GameObject[] activeObjects;
 		[SerializeField] private GameObject[] disableObjects;
-		[SerializeField] private Image[] buttonUIImages;
-		[SerializeField] private Sprite[] buttonUISprites;
 		[SerializeField] private bool defaultActive;
-		[SerializeField] private MBool customBool;
 
+		[Header("_" + nameof(ObjectActive) + " - Options")]
+		[SerializeField] private MBool mBool;
+
+		private bool _active;
 		public bool Active
 		{
 			get => _active;
@@ -23,26 +23,36 @@ namespace Mascari4615
 				OnActiveChange();
 			}
 		}
-		private bool _active;
 
 		private void Start()
 		{
-			if (customBool == null)
-			{
-				Active = defaultActive;
-			}
-			else
-			{
-				customBool.RegisterListener(this, nameof(UpdateValue));
-			}
+			Init();
+		}
+
+		private void Init()
+		{
+			SetActive(defaultActive);
+	
+			if (mBool != null)
+				mBool.RegisterListener(this, nameof(UpdateValue));
 
 			OnActiveChange();
+		}
+
+		private void OnActiveChange()
+		{
+			MDebugLog($"{nameof(OnActiveChange)}");
+
+			foreach (GameObject o in activeObjects)
+				o.SetActive(Active);
+
+			foreach (GameObject o in disableObjects)
+				o.SetActive(!Active);
 		}
 
 		public void SetActive(bool targetActive)
 		{
 			MDebugLog($"{nameof(SetActive)}({targetActive})");
-
 			Active = targetActive;
 		}
 
@@ -58,43 +68,14 @@ namespace Mascari4615
 		[ContextMenu(nameof(UpdateValue))]
 		public void UpdateValue()
 		{
-			if (customBool)
-				SetActive(customBool.Value);
+			if (mBool)
+				SetActive(mBool.Value);
 		}
 
-		public void SetCustomBool(MBool customBool)
+		public void SetMBool(MBool mBool)
 		{
-			this.customBool = customBool;
+			this.mBool = mBool;
 			UpdateValue();
-		}
-
-		private void OnActiveChange()
-		{
-			MDebugLog($"{nameof(OnActiveChange)}");
-
-			foreach (Image i in buttonUIImages)
-			{
-				if (buttonUISprites != null && buttonUISprites.Length > 0)
-					i.sprite = buttonUISprites[Active ? 0 : 1];
-				else
-					i.color = MColorUtil.GetGreenOrRed(Active);
-			}
-
-			foreach (GameObject o in activeObjects)
-				if (o)
-				{
-					// MDebugLog(o.name);
-					o.SetActive(Active);
-				}
-
-			foreach (GameObject o in disableObjects)
-				if (o)
-				{
-					// MDebugLog(o.name);
-					o.SetActive(!Active);
-				}
-
-			SendEvents();
 		}
 	}
 }

@@ -77,7 +77,7 @@ namespace Mascari4615
 		public void Lock()
 		{
 			// isLocked.SetValue(true);
-			isLocked_Timer.SetTimer();
+			isLocked_Timer.StartTimer();
 		}
 		public void Unlock()
 		{

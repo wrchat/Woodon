@@ -129,7 +129,7 @@ namespace Mascari4615
 
 				SendCustomNetworkEvent(NetworkEventTarget.All, nameof(ReloadSFX));
 
-				reloadCooltime.SetTimer();
+				reloadCooltime.StartTimer();
 			}
 		}
 

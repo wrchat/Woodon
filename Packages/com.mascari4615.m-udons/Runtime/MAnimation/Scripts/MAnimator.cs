@@ -7,15 +7,21 @@ namespace Mascari4615
 	{
 		[field: Header("_" + nameof(MAnimator))]
 		[field: SerializeField] public Animator[] Animators { get; private set; }
-
 		[SerializeField] private string boolName;
 		[SerializeField] private string intName;
-		[SerializeField] private bool defaultState;
-		[SerializeField] private MBool customBool;
-
 		[SerializeField] private string[] triggerNames;
 
+		[Header("_" + nameof(MAnimator) + " - Options")]
+		[SerializeField] private bool defaultState;
+		[SerializeField] private MBool mBool;
+		[SerializeField] private MValue mValue;
+
 		private void Start()
+		{
+			Init();
+		}
+
+		private void Init()
 		{
 			foreach (Animator animator in Animators)
 				animator.keepAnimatorStateOnDisable = true;
@@ -25,13 +31,22 @@ namespace Mascari4615
 			// Can't Use keepAnimatorStateOnDisable on Unity 2019''
 
 			SetBool(defaultState);
+
+			if (mBool)
+				mBool.RegisterListener(this, nameof(UpdateValue));
+
+			if (mValue)
+				mValue.RegisterListener(this, nameof(UpdateValue));
 		}
 
 		[ContextMenu(nameof(UpdateValue))]
 		public void UpdateValue()
 		{
-			if (customBool)
-				SetBool(customBool.Value);
+			if (mBool)
+				SetBool(mBool.Value);
+
+			if (mValue)
+				SetInt_L(mValue.Value);
 		}
 
 		public void SetBool(string boolName, bool value)

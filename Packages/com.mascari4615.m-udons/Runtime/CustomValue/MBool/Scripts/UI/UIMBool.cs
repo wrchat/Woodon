@@ -10,6 +10,7 @@ namespace Mascari4615
 		[Header("_" + nameof(UIMBool))]
 		[SerializeField] private MBool mBool;
 		[SerializeField] private Image[] images;
+
 		[SerializeField] private Sprite trueSprite;
 		[SerializeField] private Sprite falseSprite;
 
@@ -24,7 +25,7 @@ namespace Mascari4615
 			UpdateUI();
 		}
 
-		protected void UpdateUI()
+		public void UpdateUI()
 		{
 			// Update Sprite
 			if (trueSprite != null && falseSprite != null)

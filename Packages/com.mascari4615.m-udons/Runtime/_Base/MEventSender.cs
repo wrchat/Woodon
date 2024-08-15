@@ -45,11 +45,26 @@ namespace Mascari4615
 		// 		targetUdons[index].SendCustomEvent(eventNames[index]);
 		// }
 
+		private bool IsEventValid()
+		{
+			if (targetUdons == null || targetUdons.Length == 0)
+				return false;
+
+			if (eventNames == null || eventNames.Length == 0)
+			{
+				MDebugLog($"{nameof(SendEvents)} : No Events");
+				return false;
+			}
+
+			return true;
+		}
+
 		protected void SendEvents(int index)
 		{
-			if (IsEventValid() == false)
+			if (IsEventValid(index) == false)
 				return;
 
+			MDebugLog($"{nameof(SendEvents)}, {nameof(index)} = {index}");
 			UdonSharpBehaviour[] targetUdons = targetUdonss[index];
 			string[] eventNames = eventNamess[index];
 
@@ -64,19 +79,34 @@ namespace Mascari4615
 			SendEvents();
 		}
 
-		private bool IsEventValid()
+		private bool IsEventValid(int index)
 		{
-			if (targetUdons == null || targetUdons.Length == 0)
-				return false;
-
-			if (eventNames == null || eventNames.Length == 0)
+			if (targetUdonss == null || targetUdonss.Length == 0)
 			{
 				MDebugLog($"{nameof(SendEvents)} : No Events");
 				return false;
 			}
 
+			if (eventNamess == null || eventNamess.Length == 0)
+			{
+				MDebugLog($"{nameof(SendEvents)} : No Events");
+				return false;
+			}
+			
+			for (int i = 0; i < targetUdonss.Length; i++)
+			{
+				if (targetUdonss[i] == null || targetUdonss[i].Length == 0)
+					return false;
+
+				if (eventNamess[i] == null || eventNamess[i].Length == 0)
+				{
+					MDebugLog($"{nameof(SendEvents)} : No Events");
+					return false;
+				}
+			}
+
 			return true;
-		}
+		}	
 
 		/// <summary>
 		/// 호출하는 이벤트의 접근제한자는 public 이여야 함.

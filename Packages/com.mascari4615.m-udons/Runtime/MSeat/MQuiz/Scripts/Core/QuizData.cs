@@ -13,5 +13,20 @@ namespace Mascari4615
 		[field: SerializeField] public QuizAnswerType QuizAnswer { get; set; } = QuizAnswerType.None;
 		[field: TextArea(3, 10), SerializeField] public string QuizAnswerString { get; set; } = NONE_STRING;
 		[field: TextArea(3, 10), SerializeField] public string NoteData { get; set; } = NONE_STRING;
+
+		public bool Used { get; set; }
+
+		public override string Save()
+		{
+			string data = string.Empty;
+			data += $"{Used}{DATA_SEPARATOR}";
+			return data;
+		}
+
+		public override void Load(string data)
+		{
+			string[] datas = data.Split(DATA_SEPARATOR);
+			Used = bool.Parse(datas[0]);
+		}
 	}
 }

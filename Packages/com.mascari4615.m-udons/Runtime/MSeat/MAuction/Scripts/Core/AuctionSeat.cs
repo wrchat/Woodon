@@ -74,7 +74,7 @@ namespace Mascari4615
 
 			if (timer != null)
 			{
-				timer.SetTimer();
+				timer.StartTimer();
 				mSFXManager.PlaySFX_G(1);
 			}
 		}

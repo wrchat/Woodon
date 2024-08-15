@@ -13,8 +13,7 @@ namespace Mascari4615
 
 		// If You Use UdonGraph, Don't Change The '_curTargetPlayerID' Variable's Access Modifier To Private.
 		// If You Don't, You Can Just Change It If You Want.
-		[UdonSynced, FieldChangeCallback(nameof(CurTargetPlayerID))]
-		private int _curTargetPlayerID = NONE_INT;
+		[UdonSynced, FieldChangeCallback(nameof(CurTargetPlayerID))] private int _curTargetPlayerID = NONE_INT;
 		public int CurTargetPlayerID
 		{
 			get => _curTargetPlayerID;
@@ -71,7 +70,7 @@ namespace Mascari4615
 
 		private void Init()
 		{
-			if (Networking.LocalPlayer.isMaster)
+			if (Networking.IsMaster)
 			{
 				SetOwner();
 				CurTargetPlayerID = UseNone ? NONE_INT : Networking.LocalPlayer.playerId;

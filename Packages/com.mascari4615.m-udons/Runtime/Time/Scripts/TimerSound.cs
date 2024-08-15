@@ -62,7 +62,7 @@ namespace Mascari4615
 
 			lerpSFXSource.volume = timerUI.IsLerping ? 1 : 0;
 		
-			int expireTime = timer.ExpireTime;
+			int expireTime = (int)timer.ExpireTime;
 
 			if (expireTime == NONE_INT)
 			{

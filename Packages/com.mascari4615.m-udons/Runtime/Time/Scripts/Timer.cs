@@ -8,11 +8,13 @@ namespace Mascari4615
 	public class Timer : MEventSender
 	{
 		[field: Header("_" + nameof(Timer))]
-		[field: SerializeField] public int TimeByDecisecond { get; set; } = 50;
-		[SerializeField] private MValue mValue;
+		[field: SerializeField] public int TimeByDecisecond { get; private set; } = 50;
+		[SerializeField] private MValue mValueForSetTime;
+		[SerializeField] private MValue mValueForAddTime;
 		[SerializeField] private MBool isCounting;
 
-		public int ExpireTime
+		[UdonSynced, FieldChangeCallback(nameof(ExpireTime))] private long _expireTime = NONE_INT;
+		public long ExpireTime
 		{
 			get => _expireTime;
 			private set
@@ -21,12 +23,11 @@ namespace Mascari4615
 				OnExpireTimeChange();
 			}
 		}
-		[UdonSynced, FieldChangeCallback(nameof(ExpireTime))] private int _expireTime = NONE_INT;
 
 		// Idea By 'Listing'
-		// 서버 시간이 음수가 되는 경우를 방지하기 위해 (최초값 -10억), 서버 시간에 15억을 더함
-		public const int TIME_ADJUSTMENT = 1_500_000_000;
-		public int CalcedCurTime => Networking.GetServerTimeInMilliseconds() + TIME_ADJUSTMENT;
+		// 서버 시간이 음수가 되는 경우를 방지하기 위해 (관측된 최솟값 -17억), 서버 시간에 20억을 더함
+		public const long TIME_ADJUSTMENT = 2_000_000_000;
+		public long CalcedCurTime => Networking.GetServerTimeInMilliseconds() + TIME_ADJUSTMENT;
 		public bool IsExpiredOrStoped => ExpireTime == NONE_INT;
 
 		private void Start()
@@ -36,8 +37,8 @@ namespace Mascari4615
 
 		private void Init()
 		{
-			if (mValue != null)
-				mValue.RegisterListener(this, nameof(SetTimeByMValue));
+			if (mValueForSetTime != null)
+				mValueForSetTime.RegisterListener(this, nameof(SetTimerByMValue));
 		}
 
 		private void Update()
@@ -68,7 +69,7 @@ namespace Mascari4615
 			SendEvents((int)TimerEvent.ExpireTimeChanged);
 		}
 
-		public void SetExpireTime(int newExpireTime)
+		public void SetExpireTime(long newExpireTime)
 		{
 			SetOwner();
 			ExpireTime = newExpireTime;
@@ -81,20 +82,31 @@ namespace Mascari4615
 			SetExpireTime(NONE_INT);
 		}
 
-		public void SetTimer() => SetTimer(TimeByDecisecond);
-
 		public void SetTimer(int timeByDecisecond)
 		{
 			MDebugLog($"{nameof(SetTimer)} : {timeByDecisecond}");
-			SetExpireTime(CalcedCurTime + (timeByDecisecond * 100));
+			TimeByDecisecond = timeByDecisecond;
+		}
+		public void SetTimerByMValue()
+		{
+			MDebugLog(nameof(SetTimerByMValue));
+
+			if (mValueForSetTime != null)
+				SetTimer(mValueForSetTime.Value * 100);
 		}
 
-		public void SetTimeByMValue()
+		public void StartTimer() => StartTimer(TimeByDecisecond);
+		public void StartTimer(long timeByDecisecond)
 		{
-			MDebugLog(nameof(SetTimeByMValue));
+			MDebugLog($"{nameof(StartTimer)} : {timeByDecisecond}");
+			SetExpireTime(CalcedCurTime + (timeByDecisecond * 100));
+		}
+		public void StartTimerByMValue()
+		{
+			MDebugLog(nameof(StartTimerByMValue));
 
-			if (mValue != null)
-				SetExpireTime(CalcedCurTime + (mValue.Value * 100));
+			if (mValueForSetTime != null)
+				SetExpireTime(CalcedCurTime + (mValueForSetTime.Value * 100));
 		}
 
 		public void AddTime()
@@ -109,13 +121,13 @@ namespace Mascari4615
 		{
 			MDebugLog(nameof(AddTimeByMValue));
 
-			if (mValue == null)
+			if (mValueForAddTime == null)
 				return;
 
 			if (ExpireTime == NONE_INT)
 				return;
 
-			SetExpireTime(ExpireTime + mValue.Value * 100);
+			SetExpireTime(ExpireTime + mValueForAddTime.Value * 100);
 		}
 
 		public void ToggleTimer()
@@ -123,7 +135,7 @@ namespace Mascari4615
 			MDebugLog(nameof(ToggleTimer));
 
 			if (ExpireTime == NONE_INT)
-				SetTimer();
+				StartTimer();
 			else
 				ResetTimer();
 		}
