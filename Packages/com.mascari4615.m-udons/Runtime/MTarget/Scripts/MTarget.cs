@@ -59,7 +59,7 @@ namespace Mascari4615
 				SetLocalPlayer();
 		}
 
-		public void SelectPlayer(int index) => SetPlayerID(PlayerIDBuffer[index - 1]);
+		public void SelectPlayer(int index) => SetPlayerID(PlayerIDBuffer[index]);
 
 		// ---- ---- ---- ----
 

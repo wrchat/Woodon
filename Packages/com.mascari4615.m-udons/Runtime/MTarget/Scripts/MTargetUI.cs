@@ -101,6 +101,7 @@ namespace Mascari4615
 
 		public void SelectPlayer(int index)
 		{
+			MDebugLog($"{nameof(SelectPlayer)} : {index}");
 			mTarget.SelectPlayer(index);
 		}
 	}
