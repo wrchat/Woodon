@@ -1,48 +1,59 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
+using static Mascari4615.MUtil;
 
 namespace Mascari4615
 {
 	// [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class CanvasGroupActive : MEventSender
+	public class CanvasGroupActive : MBase
 	{
-		[Header("_" + nameof(ObjectActive))]
+		[Header("_" + nameof(CanvasGroupActive))]
 		[SerializeField] private CanvasGroup[] activeCanvasGroups;
 		[SerializeField] private CanvasGroup[] disableCanvasGroups;
-		[SerializeField] private Image[] buttonUIImages;
-		[SerializeField] private Sprite[] buttonUISprites;
 		[SerializeField] private bool defaultActive;
-		[SerializeField] private MBool customBool;
 
-		private bool active;
+		[Header("_" + nameof(CanvasGroupActive) + " - Options")]
+		[SerializeField] private MBool mBool;
+
+		private bool _active;
 		public bool Active
 		{
-			get => active;
+			get => _active;
 			private set
 			{
-				active = value;
+				_active = value;
 				OnActiveChange();
 			}
 		}
 
 		private void Start()
 		{
-			if (customBool == null)
-			{
-				Active = defaultActive;
-			}
-			else
-			{
+			Init();
+		}
 
-			}
+		private void Init()
+		{
+			SetActive(defaultActive);
+	
+			if (mBool != null)
+				mBool.RegisterListener(this, nameof(UpdateValue));
 
 			OnActiveChange();
+		}
+
+		private void OnActiveChange()
+		{
+			MDebugLog($"{nameof(OnActiveChange)}");
+
+			foreach (CanvasGroup c in activeCanvasGroups)
+				SetCanvasGroupActive(c, Active);
+
+			foreach (CanvasGroup c in disableCanvasGroups)
+				SetCanvasGroupActive(c, !Active);
 		}
 
 		public void SetActive(bool targetActive)
 		{
 			MDebugLog($"{nameof(SetActive)}({targetActive})");
-
 			Active = targetActive;
 		}
 
@@ -58,43 +69,14 @@ namespace Mascari4615
 		[ContextMenu(nameof(UpdateValue))]
 		public void UpdateValue()
 		{
-			if (customBool)
-				SetActive(customBool.Value);
+			if (mBool)
+				SetActive(mBool.Value);
 		}
 
-		public void SetCustomBool(MBool customBool)
+		public void SetCustomBool(MBool mBool)
 		{
-			this.customBool = customBool;
+			this.mBool = mBool;
 			UpdateValue();
-		}
-
-		private void OnActiveChange()
-		{
-			MDebugLog($"{nameof(OnActiveChange)}");
-
-			foreach (Image i in buttonUIImages)
-			{
-				if (buttonUISprites != null && buttonUISprites.Length > 0)
-					i.sprite = buttonUISprites[Active ? 0 : 1];
-				else
-					i.color = MColorUtil.GetGreenOrRed(Active);
-			}
-
-			foreach (CanvasGroup c in activeCanvasGroups)
-				SetCanvasGroup(c, Active);
-
-			foreach (CanvasGroup c in disableCanvasGroups)
-				SetCanvasGroup(c, !Active);
-
-
-			SendEvents();
-		}
-
-		private void SetCanvasGroup(CanvasGroup canvasGroup, bool enabled)
-		{
-			canvasGroup.alpha = enabled ? 1 : 0;
-			canvasGroup.blocksRaycasts = enabled;
-			canvasGroup.interactable = enabled;
 		}
 	}
 }
