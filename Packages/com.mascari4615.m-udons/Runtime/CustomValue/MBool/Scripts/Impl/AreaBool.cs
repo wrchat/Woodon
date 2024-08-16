@@ -28,6 +28,9 @@ namespace Mascari4615
 		public void UpdateValue()
 		{
 			SendCustomEventDelayedSeconds(nameof(UpdateValue), updateDelay);
+
+			if (Networking.LocalPlayer == null)
+				return;
 		
 			bool isPlayerIn = IsPlayerIn(Networking.LocalPlayer);
 
@@ -37,6 +40,9 @@ namespace Mascari4615
 
 		public bool IsPlayerIn(VRCPlayerApi player)
 		{
+			if (player == null)
+				return false;
+
 			Vector3 playerPos = player.GetPosition();
 			foreach (Bounds bounds in boundsArray)
 			{

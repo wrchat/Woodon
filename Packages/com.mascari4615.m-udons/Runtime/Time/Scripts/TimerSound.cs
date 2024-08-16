@@ -1,11 +1,11 @@
 ﻿using System;
 using UdonSharp;
 using UnityEngine;
-using VRC.SDKBase;
+using VRC.Udon.Common.Interfaces;
 
 namespace Mascari4615
 {
-	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
+	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class TimerSound : MBase
 	{
 		[SerializeField] private Timer timer;
@@ -31,7 +31,7 @@ namespace Mascari4615
 
 		private void Init()
 		{
-			timer.RegisterListener(this, nameof(OnEnding), (int)TimerEvent.TimeExpired);
+			timer.RegisterListener(this, nameof(OnEnding_G), (int)TimerEvent.TimeExpired);
 
 			lerpSFXSource.clip = lerpSFX;
 			lerpSFXSource.mute = true;
@@ -42,6 +42,11 @@ namespace Mascari4615
 			loopAudioSource.mute = true;
 			loopAudioSource.loop = true;
 			loopAudioSource.Play();
+		}
+
+		public void OnEnding_G()
+		{
+			SendCustomNetworkEvent(NetworkEventTarget.All, nameof(OnEnding));
 		}
 
 		public void OnEnding()
