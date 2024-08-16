@@ -13,8 +13,8 @@ namespace Mascari4615
 		[SerializeField] private MValue mValueForAddTime;
 		[SerializeField] private MBool isCounting;
 
-		[UdonSynced, FieldChangeCallback(nameof(ExpireTime))] private long _expireTime = NONE_INT;
-		public long ExpireTime
+		[UdonSynced, FieldChangeCallback(nameof(ExpireTime))] private int _expireTime = NONE_INT;
+		public int ExpireTime
 		{
 			get => _expireTime;
 			private set
@@ -26,8 +26,9 @@ namespace Mascari4615
 
 		// Idea By 'Listing'
 		// 서버 시간이 음수가 되는 경우를 방지하기 위해 (관측된 최솟값 -17억), 서버 시간에 20억을 더함
-		public const long TIME_ADJUSTMENT = 2_000_000_000;
-		public long CalcedCurTime => Networking.GetServerTimeInMilliseconds() + TIME_ADJUSTMENT;
+		public const int TIME_ADJUSTMENT = 2_000_000_000;
+		public int CalcedCurTime =>
+			Networking.GetServerTimeInMilliseconds() + (Networking.GetServerTimeInMilliseconds() < 0 ? TIME_ADJUSTMENT : 0);
 		public bool IsExpiredOrStoped => ExpireTime == NONE_INT;
 
 		private void Start()
@@ -69,7 +70,7 @@ namespace Mascari4615
 			SendEvents((int)TimerEvent.ExpireTimeChanged);
 		}
 
-		public void SetExpireTime(long newExpireTime)
+		public void SetExpireTime(int newExpireTime)
 		{
 			SetOwner();
 			ExpireTime = newExpireTime;
@@ -96,7 +97,7 @@ namespace Mascari4615
 		}
 
 		public void StartTimer() => StartTimer(TimeByDecisecond);
-		public void StartTimer(long timeByDecisecond)
+		public void StartTimer(int timeByDecisecond)
 		{
 			MDebugLog($"{nameof(StartTimer)} : {timeByDecisecond}");
 			SetExpireTime(CalcedCurTime + (timeByDecisecond * 100));

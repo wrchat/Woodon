@@ -31,15 +31,15 @@ namespace Mascari4615
 
 		private void Init()
 		{
-			timer.RegisterListener(this, nameof(OnEnding));
+			timer.RegisterListener(this, nameof(OnEnding), (int)TimerEvent.TimeExpired);
 
 			lerpSFXSource.clip = lerpSFX;
-			lerpSFXSource.volume = 0;
+			lerpSFXSource.mute = true;
 			lerpSFXSource.loop = true;
 			lerpSFXSource.Play();
 
 			loopAudioSource.clip = defaultSFX;
-			loopAudioSource.volume = 0;
+			loopAudioSource.mute = true;
 			loopAudioSource.loop = true;
 			loopAudioSource.Play();
 		}
@@ -62,16 +62,16 @@ namespace Mascari4615
 
 			lerpSFXSource.volume = timerUI.IsLerping ? 1 : 0;
 		
-			int expireTime = (int)timer.ExpireTime;
+			int expireTime = timer.ExpireTime;
 
 			if (expireTime == NONE_INT)
 			{
-				loopAudioSource.volume = 0;
+				loopAudioSource.mute = true;
 				return;
 			}
-			loopAudioSource.volume = 1;
+			loopAudioSource.mute = false;
 
-			int diff = expireTime - Networking.GetServerTimeInMilliseconds();
+			int diff = expireTime - timer.CalcedCurTime;
 			TimeSpan timeSpan = TimeSpan.FromMilliseconds(diff);
 
 			bool isInFlag = false;

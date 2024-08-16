@@ -13,6 +13,7 @@ namespace Mascari4615
 		[SerializeField] protected GameObject[] waitTimeHiders;
 		[SerializeField] protected CanvasGroup[] answerCanvasGroups;
 		[SerializeField] protected CanvasGroup[] explainCanvasGroups;
+		[SerializeField] protected Animator animator;
 
 		protected QuizManager quizManager;
 
@@ -37,6 +38,8 @@ namespace Mascari4615
 				waitTimeHider.SetActive(nowWaiting);
 
 			UpdateUI(quizManager.CurQuizData);
+
+			animator.SetInteger("STATE", quizManager.CurGameState);
 		}
 
 		public override void UpdateUI(MData mData)

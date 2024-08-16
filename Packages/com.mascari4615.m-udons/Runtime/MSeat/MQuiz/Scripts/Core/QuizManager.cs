@@ -12,7 +12,8 @@ namespace Mascari4615
 		[SerializeField] protected MValue curQuizIndex;
 		[SerializeField] private GameObject[] waitTimeObjects;
 		[SerializeField] private Transform wrongPos;
-		[SerializeField] private Transform quizDatasParent;
+		[SerializeField] private Transform[] quizDataParents;
+		[SerializeField] protected MValue quizDataParentsIndex;
 		[SerializeField] private MTextSync seatIndexInputField;
 
 		[field: Header("_" + nameof(QuizManager) + "_GameRule")]
@@ -38,12 +39,15 @@ namespace Mascari4615
 
 		protected override void Init()
 		{
-			QuizDatas = quizDatasParent.GetComponentsInChildren<QuizData>();
-			
+			QuizDatas = quizDataParents[0].GetComponentsInChildren<QuizData>();
+
 			base.Init();
 
-			curQuizIndex.SetMinMaxValue(0, QuizDatas.Length - 1);
 			curQuizIndex.RegisterListener(this, nameof(OnQuizIndexChange));
+			quizDataParentsIndex.RegisterListener(this, nameof(OnQuizDataParentChange));
+
+			curQuizIndex.SetMinMaxValue(0, QuizDatas.Length - 1);
+			quizDataParentsIndex.SetMinMaxValue(0, quizDataParents.Length - 1);
 		}
 
 		public override void UpdateStuff()
@@ -82,6 +86,13 @@ namespace Mascari4615
 		{
 			UpdateStuff();
 			SendEvents();
+		}
+
+		public virtual void OnQuizDataParentChange()
+		{
+			QuizDatas = quizDataParents[quizDataParentsIndex.Value].GetComponentsInChildren<QuizData>();
+			curQuizIndex.SetMinMaxValue(0, QuizDatas.Length - 1);
+			curQuizIndex.SetValue(0);
 		}
 
 		public void TeleportToSeat()

@@ -11,6 +11,7 @@ namespace Mascari4615
 		[SerializeField] protected bool defaultValue;
 		[SerializeField] private bool useSync = true;
 
+		[UdonSynced, FieldChangeCallback(nameof(SyncedValue))] private bool _syncedValue;
 		public bool SyncedValue
 		{
 			get => _syncedValue;
@@ -22,8 +23,8 @@ namespace Mascari4615
 					SetValue(_syncedValue, isReciever: true);
 			}
 		}
-		[UdonSynced, FieldChangeCallback(nameof(SyncedValue))] private bool _syncedValue;
 
+		private bool _value;
 		public bool Value
 		{
 			get => _value;
@@ -33,7 +34,6 @@ namespace Mascari4615
 				OnValueChange();
 			}
 		}
-		private bool _value;
 
 		protected virtual void Start()
 		{

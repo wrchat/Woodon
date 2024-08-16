@@ -17,13 +17,17 @@ namespace Mascari4615
 		private Color[] originColors;
 
 		// Lerp
-		[Header("_ Lerp")]
+		[Header("_" + nameof(UITimer) + " - Lerp")]
 		[SerializeField] private Color lerpColor = Color.red;
-		[SerializeField] private bool useLerp;
 		[SerializeField] private float lerpTime = 2;
 		private float curLerpTime = 0;
 		private int lastSavedExpireTime = NONE_INT;
 		private int changedTimeDiff = 0;
+
+		// Options
+		[Header("_" + nameof(UITimer) + " - Options")]
+		[SerializeField] private bool useLerp;
+		[SerializeField] private bool useFlagColorOnDefault;
 
 		// Fields
 		private TimeSpan timeSpan = TimeSpan.FromMilliseconds(0);
@@ -70,7 +74,10 @@ namespace Mascari4615
 			Color color = default;
 			if (timer.IsExpiredOrStoped)
 			{
-				color = default;
+				if (useFlagColorOnDefault && remainTimeFlags.Length > 0)
+					color = remainTimeColors[0];
+				else
+					color = default;
 			}
 			else if (IsLerping)
 			{
@@ -102,14 +109,14 @@ namespace Mascari4615
 
 				if (lastSavedExpireTime != NONE_INT)
 				{
-					int diff = (int)(lastSavedExpireTime - timer.CalcedCurTime + (int)(changedTimeDiff * (curLerpTime / lerpTime)));
+					int diff = lastSavedExpireTime - timer.CalcedCurTime + (int)(changedTimeDiff * (curLerpTime / lerpTime));
 					timeSpan = TimeSpan.FromMilliseconds(diff);
 					MDebugLog($"curLerpTime: {curLerpTime}, ||| ((curLerpTime / lerpTime) : {curLerpTime / lerpTime}");
 				}
 			}
 			else
 			{
-				int diff = (int)(timer.ExpireTime - timer.CalcedCurTime);
+				int diff = timer.ExpireTime - timer.CalcedCurTime;
 				diff = Mathf.Max(diff, 0);
 				timeSpan = TimeSpan.FromMilliseconds(diff);
 			}
@@ -134,7 +141,7 @@ namespace Mascari4615
 				// If : First Time (Init)
 				if (lastSavedExpireTime == NONE_INT)
 				{
-					lastSavedExpireTime = (int)timer.ExpireTime;
+					lastSavedExpireTime = timer.ExpireTime;
 					changedTimeDiff = 0;
 					curLerpTime = 0;
 					return;
@@ -142,10 +149,10 @@ namespace Mascari4615
 				// If : Remain Time Changed (Reset Lerp)
 				else
 				{
-					changedTimeDiff = (int)Mathf.Abs(lastSavedExpireTime - timer.ExpireTime);
+					changedTimeDiff = Mathf.Abs(lastSavedExpireTime - timer.ExpireTime);
 					MDebugLog($"remainChangeTime: {changedTimeDiff} = {lastSavedExpireTime} - {timer.ExpireTime}");
 
-					lastSavedExpireTime = (int)timer.ExpireTime;
+					lastSavedExpireTime = timer.ExpireTime;
 					curLerpTime = lerpTime;
 				}
 			}

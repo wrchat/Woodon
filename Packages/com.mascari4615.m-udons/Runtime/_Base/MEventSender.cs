@@ -64,7 +64,7 @@ namespace Mascari4615
 			if (IsEventValid(index) == false)
 				return;
 
-			MDebugLog($"{nameof(SendEvents)}, {nameof(index)} = {index}");
+			MDebugLog($"{nameof(SendEvents)}, {nameof(index)} = {index}, {nameof(targetUdonss.Length)} = {targetUdonss.Length}, {nameof(eventNamess.Length)} = {eventNamess.Length}");
 			UdonSharpBehaviour[] targetUdons = targetUdonss[index];
 			string[] eventNames = eventNamess[index];
 
@@ -81,28 +81,16 @@ namespace Mascari4615
 
 		private bool IsEventValid(int index)
 		{
-			if (targetUdonss == null || targetUdonss.Length == 0)
+			if (targetUdonss == null || targetUdonss.Length == 0 || targetUdonss.Length <= index)
 			{
 				MDebugLog($"{nameof(SendEvents)} : No Events");
 				return false;
 			}
 
-			if (eventNamess == null || eventNamess.Length == 0)
+			if (eventNamess == null || eventNamess.Length == 0 || eventNamess.Length <= index)
 			{
 				MDebugLog($"{nameof(SendEvents)} : No Events");
 				return false;
-			}
-			
-			for (int i = 0; i < targetUdonss.Length; i++)
-			{
-				if (targetUdonss[i] == null || targetUdonss[i].Length == 0)
-					return false;
-
-				if (eventNamess[i] == null || eventNamess[i].Length == 0)
-				{
-					MDebugLog($"{nameof(SendEvents)} : No Events");
-					return false;
-				}
 			}
 
 			return true;

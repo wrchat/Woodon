@@ -15,11 +15,17 @@ namespace Mascari4615
 
 		private void Start()
 		{
+			Init();
+		}
+
+		private void Init()
+		{
 			int maxLen = objectList.Length;
 			maxLen = Mathf.Max(maxLen, canvasGroups.Length);
 			maxLen = Mathf.Max(maxLen, pickups.Length);
 
 			mValue.SetMinMaxValue(0, maxLen - 1);
+			mValue.RegisterListener(this, nameof(UpdateObjectByScore));
 		}
 
 		[ContextMenu(nameof(UpdateObjectByScore))]
