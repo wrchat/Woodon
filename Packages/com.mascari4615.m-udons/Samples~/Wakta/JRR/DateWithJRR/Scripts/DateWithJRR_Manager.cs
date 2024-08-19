@@ -17,7 +17,8 @@ namespace Mascari4615.Project.ISD.JRR.DateWithJRR
 		[SerializeField] private Image[] kakaotalkButtonImages;
 		[SerializeField] private MTextSync[] kakaotalkTextSyncs;
 
-		[SerializeField] private MValue CurDetailAnswerIndex;
+		[SerializeField] private MValue curDetailAnswerIndex;
+		public int CurDetailAnswerIndex => curDetailAnswerIndex.Value;
 
 		protected override void Init()
 		{
@@ -27,7 +28,7 @@ namespace Mascari4615.Project.ISD.JRR.DateWithJRR
 			base.Init();
 			IsInited = true;
 
-			CurDetailAnswerIndex.RegisterListener(this, nameof(UpdateStuff));
+			curDetailAnswerIndex.RegisterListener(this, nameof(UpdateStuff));
 		}
 
 		public override void UpdateStuff()
@@ -36,20 +37,18 @@ namespace Mascari4615.Project.ISD.JRR.DateWithJRR
 
 			{
 				for (int i = 0; i < detailAnswerButtonImages.Length; i++)
-					detailAnswerButtonImages[i].color = MColorUtil.GetBlackOrGray(i != CurDetailAnswerIndex.Value);
+					detailAnswerButtonImages[i].color = MColorUtil.GetBlackOrGray(i != curDetailAnswerIndex.Value);
 
 				string[] qasArr = CurQuizData.QuizAnswerString.Split(DATA_SEPARATOR);
 
-				bool noImage = (CurDetailAnswerIndex.Value == 6) || (CurDetailAnswerIndex.Value >= qasArr.Length);
+				bool noImage = (curDetailAnswerIndex.Value == 6) || (curDetailAnswerIndex.Value >= qasArr.Length);
 
 				answerImage.gameObject.SetActive(!noImage);
 				if (!noImage)
 				{
-					answerImage.sprite = answerSprites[CurDetailAnswerIndex.Value];
-					answerText.text = qasArr[CurDetailAnswerIndex.Value].Split('_')[0];
+					answerImage.sprite = answerSprites[curDetailAnswerIndex.Value];
+					answerText.text = qasArr[curDetailAnswerIndex.Value].Split('_')[0];
 				}
-
-				curQuizImages[0].gameObject.SetActive(CurDetailAnswerIndex.Value == 5);
 			}
 
 			{
@@ -70,15 +69,6 @@ namespace Mascari4615.Project.ISD.JRR.DateWithJRR
 
 		public void ResetAnswers()
 		{
-			if (IsOwner())
-				foreach (MTurnSeat turnSeat in TurnSeats)
-					turnSeat.ResetData();
-		}
-
-		public override void OnQuizIndexChange()
-		{
-			base.OnQuizIndexChange();
-
 			if (IsOwner())
 				foreach (MTurnSeat turnSeat in TurnSeats)
 					turnSeat.ResetData();

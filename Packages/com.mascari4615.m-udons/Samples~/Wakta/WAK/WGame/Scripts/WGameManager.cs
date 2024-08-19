@@ -49,6 +49,7 @@ namespace Mascari4615
 
 		// 사운드
 		[SerializeField] private AudioClip clickSFX;
+		[SerializeField] private MSFXManager sfxManager;
 
 		protected override void Start()
 		{
@@ -173,6 +174,7 @@ namespace Mascari4615
 				seatDebugText.text = debugSeatString;
 			}
 		}
+		
 		public override void OnQuizIndexChange()
 		{
 			leftAnimator.SetBool(false);
@@ -193,10 +195,10 @@ namespace Mascari4615
 			{
 				if (CurGameState == (int)QuizGameState.ShowPlayerAnswer)
 					return;
-				localPlayerSeat.SelectAnswerForce(QuizAnswerType.None);
+				localPlayerSeat.SelectAnswer(QuizAnswerType.None, force: true);
 			}
 			else
-				localPlayerSeat.SelectAnswerForce(answerType);
+				localPlayerSeat.SelectAnswer(answerType, force: true);
 
 			sfxManager.PlaySFX(clickSFX);
 		}
@@ -225,32 +227,27 @@ namespace Mascari4615
 			return localplayerQuizSeat;
 		}
 
-		public override void SetQuizIndex(int newIndex)
+		public override void OnWait()
 		{
-			if (0 <= newIndex && newIndex <= QuizDatas.Length - 1)
-			{
-				if (IsOwner())
-					foreach (MTurnSeat quizSeat in TurnSeats)
-						quizSeat.ResetData();
+			base.OnWait();
 
-				SetOwner();
-				leftAnimatorStateCustomBool.SetValue(false);
-				rightAnimatorStateCustomBool.SetValue(false);
-				CurGameState = (int)QuizGameState.SelectAnswer;
-				CurQuizIndex = newIndex;
-				RequestSerialization();
-			}
+			if (IsOwner() == false)
+				return;
+
+			leftAnimatorStateCustomBool.SetValue(false);
+			rightAnimatorStateCustomBool.SetValue(false);
+			SetGameState((int)QuizGameState.SelectAnswer);
 		}
 
 		public void ToggleShowAnswer()
 		{
 			if (CurGameState == (int)QuizGameState.SelectAnswer)
 			{
-				SetCurGameState(QuizGameState.ShowPlayerAnswer);
+				SetGameState((int)QuizGameState.ShowPlayerAnswer);
 				sfxManager.PlaySFX_G(1);
 			}
 			else if (CurGameState == (int)QuizGameState.ShowPlayerAnswer)
-				SetCurGameState(QuizGameState.SelectAnswer);
+				SetGameState((int)QuizGameState.SelectAnswer);
 		}
 	}
 }

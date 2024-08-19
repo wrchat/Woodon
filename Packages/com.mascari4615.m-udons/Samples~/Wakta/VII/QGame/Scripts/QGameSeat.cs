@@ -1,9 +1,5 @@
-﻿
-using TMPro;
-using UdonSharp;
+﻿using TMPro;
 using UnityEngine;
-using VRC.SDKBase;
-using VRC.Udon;
 
 namespace Mascari4615
 {
@@ -33,10 +29,10 @@ namespace Mascari4615
 				return;
 
 			// 상황에 따라 타일 Material 바꾸기
-			switch (quizManager.CurGameState)
+			switch (QuizManager.CurGameState)
 			{
 				case (int)QuizGameState.Wait:
-				case (int)QuizGameState.QuizTime:
+				case (int)QuizGameState.ShowQuiz:
 				case (int)QuizGameState.SelectAnswer:
 					tile.material =
 						HasSelectedAnswer ?

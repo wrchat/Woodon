@@ -20,27 +20,18 @@ namespace Mascari4615
 		{
 			base.UpdateStuff();
 
-			bool isSelectTime = (CurGameState == (int)QuizGameState.QuizTime || CurGameState == (int)QuizGameState.SelectAnswer);
+			bool isSelectTime = (CurGameState == (int)QuizGameState.ShowQuiz || CurGameState == (int)QuizGameState.SelectAnswer);
 
 			if (!isSelectTime)
 				CanSelectAnsewr = false;
 
-			bool quizTextBackgourndActive = (CurGameState == (int)QuizGameState.QuizTime) || ((CurGameState == (int)QuizGameState.SelectAnswer) && CanSelectAnsewr);
+			bool quizTextBackgourndActive = (CurGameState == (int)QuizGameState.ShowQuiz) || ((CurGameState == (int)QuizGameState.SelectAnswer) && CanSelectAnsewr);
 			quizTextBackground.gameObject.SetActive(quizTextBackgourndActive);
 
 			oxCountText.text =
 				((int)CurGameState >= (int)QuizGameState.ShowPlayerAnswer) ?
 				$"<color=#4C82C7>{answerCount[(int)QuizAnswerType.O]}</color> : <color=#B35153>{answerCount[(int)QuizAnswerType.X]}</color>" :
 				string.Empty;
-		}
-
-		public override void OnQuizIndexChange()
-		{
-			base.OnQuizIndexChange();
-
-			if (IsOwner())
-				foreach (MTurnSeat turnSeat in TurnSeats)
-					turnSeat.ResetData();
 		}
 
 		[SerializeField] private QGameSeat[] qGameSeats;
@@ -100,7 +91,7 @@ namespace Mascari4615
 			if (parse < 0 || parse >= QuizDatas.Length)
 				return;
 
-			curQuizIndex_MValue.SetValue(parse);
+			curQuizIndex.SetValue(parse);
 		}
 
 		[SerializeField] private MTargetBool wallActiveViichanBool;
@@ -109,7 +100,7 @@ namespace Mascari4615
 		[SerializeField] private ObjectActive wallActive;
 		public void UpdateWall()
 		{
-			wallActive.SetCustomBool(wallActiveBool.Value ? wallActiveViichanBool : trueBool);
+			wallActive.SetMBool(wallActiveBool.Value ? wallActiveViichanBool : trueBool);
 		}
 	}
 }

@@ -104,7 +104,7 @@ namespace Mascari4615
             SetOwner();
 
             CurPlayingPlayerID = targetPlayerID;
-            timeEvent.SetTimer();
+            timeEvent.StartTimer();
 
             targetPlayer.TeleportTo(stagePos.position, stagePos.rotation);
             //targetPlayer.TeleportTo(stagePos.position, stagePos.rotation);
@@ -130,7 +130,7 @@ namespace Mascari4615
 
             SetOwner();
             if (timeEvent.ExpireTime != NONE_INT)
-                timeEvent.ResetTime();
+                timeEvent.ResetTimer();
             CurPlayingPlayerID = NONE_INT;
             RequestSerialization();
             
@@ -149,7 +149,7 @@ namespace Mascari4615
             
             SetOwner();
             if (timeEvent.ExpireTime != NONE_INT)
-                timeEvent.ResetTime();
+                timeEvent.ResetTimer();
             CurPlayingPlayerID = NONE_INT;
             RequestSerialization();
 
