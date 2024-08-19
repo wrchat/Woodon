@@ -7,63 +7,70 @@ namespace Mascari4615
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Continuous)]
 	public class MCameraFovSync : MBase
 	{
-		private MCameraController mCameraController;
-
+		[Header("_" + nameof(MCameraFovSync))]
+		[SerializeField] private bool useSync = true;
 		[SerializeField] private float fovDefault = 60;
 		[SerializeField] private float fovSpeed = 1;
 		[SerializeField] private float fovMin = 20;
 		[SerializeField] private float fovMax = 60;
 
-		private bool isInited = false;
-
-		[UdonSynced(UdonSyncMode.Smooth), FieldChangeCallback(nameof(FovValue))] private float fovValue;
-		public float FovValue
+		public float Value { get; private set; }
+		
+		[UdonSynced(UdonSyncMode.Smooth), FieldChangeCallback(nameof(SyncedValue))] private float _syncedValue;
+		public float SyncedValue
 		{
-			get => fovValue;
+			get => _syncedValue;
 			set
 			{
-				MDebugLog($"{nameof(FovValue)} : {value}");
-
-				fovValue = value;
-
-				if (mCameraController != null)
-					mCameraController.FovValue = fovValue;
+				_syncedValue = value;
+				Value = value;
 			}
 		}
 
+		private MCameraController mCameraController;
+
 		public void Init(MCameraController cameraController)
 		{
-			if (isInited)
-				return;
-			isInited = true;
-
 			mCameraController = cameraController;
-			FovValue = fovDefault;
+			SetValue(fovDefault);
+		}
+
+		public void SetValue(float value)
+		{
+			if (useSync)
+			{
+				SetOwner();
+				SyncedValue = value;
+			}
+			else
+			{
+				Value = value;
+			}
 		}
 
 		private void Update()
 		{
-			if (isInited == false)
-				return;
-
 			UpdateFov();
 		}
 
 		private void UpdateFov()
 		{
-			if (mCameraController.IsPlayerHoldingThis(Networking.LocalPlayer) == false)
+			if (mCameraController == null)
 				return;
-			SetOwner();
+
+			if (mCameraController.IsHolding() == false)
+				return;
 
 			// float scroll = Input.GetAxis("Mouse ScrollWheel");
 			float scroll = 0;
 			scroll += Input.GetKey(KeyCode.UpArrow) ? 1 : 0;
 			scroll -= Input.GetKey(KeyCode.DownArrow) ? 1 : 0;
-			
-			fovValue += scroll * fovSpeed;
-			MDebugLog($"{nameof(UpdateFov)} : +{scroll}");
-		
-			FovValue = Mathf.Clamp(fovValue, fovMin, fovMax);
+
+			float newValue = SyncedValue + scroll * fovSpeed;
+			newValue = Mathf.Clamp(newValue, fovMin, fovMax);
+
+			SetValue(newValue);
+			MDebugLog($"{nameof(UpdateFov)} : +{scroll} = {newValue}");
 		}
 	}
 }

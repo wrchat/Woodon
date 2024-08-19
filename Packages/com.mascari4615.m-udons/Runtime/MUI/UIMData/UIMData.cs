@@ -27,25 +27,51 @@ namespace Mascari4615
 			MDebugLog($"{nameof(UpdateUI)}");
 
 			if (mData == null)
-				return;
+			{
+				foreach (TextMeshProUGUI nameText in nameTexts)
+					nameText.text = string.Empty;
 
-			foreach (TextMeshProUGUI nameText in nameTexts)
-				nameText.text = mData.Name;
+				foreach (TextMeshProUGUI valueText in valueTexts)
+					valueText.text = string.Empty;
 
-			foreach (TextMeshProUGUI valueText in valueTexts)
-				valueText.text = mData.Value;
+				foreach (Image image in images)
+					image.enabled = false;
 
-			foreach (Image image in images)
-				image.sprite = mData.Sprite;
-			
-			for (int i = 0; i < dataTexts.Length; i++)
-				dataTexts[i].text = mData.StringData[i].ToString();
+				foreach (TextMeshProUGUI dataText in dataTexts)
+					dataText.text = string.Empty;
 
-			for (int i = 0; i < dataImages.Length; i++)
-				dataImages[i].sprite = mData.Sprites[i];
+				foreach (Image dataImage in dataImages)
+					dataImage.enabled = false;
 
-			for (int i = 0; i < syncedDataTexts.Length; i++)
-				syncedDataTexts[i].text = mData.SyncData;
+				foreach (TextMeshProUGUI syncedDataText in syncedDataTexts)
+					syncedDataText.text = string.Empty;
+			}
+			else
+			{
+				foreach (TextMeshProUGUI nameText in nameTexts)
+					nameText.text = mData.Name;
+
+				foreach (TextMeshProUGUI valueText in valueTexts)
+					valueText.text = mData.Value;
+
+				foreach (Image image in images)
+				{
+					image.enabled = true;
+					image.sprite = mData.Sprite;
+				}
+
+				for (int i = 0; i < dataTexts.Length; i++)
+					dataTexts[i].text = mData.StringData[i].ToString();
+
+				for (int i = 0; i < dataImages.Length; i++)
+				{
+					dataImages[i].enabled = true;
+					dataImages[i].sprite = mData.Sprites[i];
+				}
+
+				foreach (TextMeshProUGUI syncedDataText in syncedDataTexts)
+					syncedDataText.text = mData.SyncData;
+			}
 		}
 	}
 }

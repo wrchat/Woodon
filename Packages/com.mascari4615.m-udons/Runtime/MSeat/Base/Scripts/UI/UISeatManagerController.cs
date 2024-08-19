@@ -11,11 +11,15 @@ namespace Mascari4615
 		[SerializeField] private MTurnSeatManager turnSeatManager;
 		[SerializeField] private TextMeshProUGUI curStateText;
 
-		private void Start() => Init();
+		private void Start()
+		{
+			Init();
+		}
 
 		public void Init()
 		{
 			turnSeatManager.RegisterListener(this, nameof(UpdateUI));
+			UpdateUI();
 		}
 
 		public void PrevState()

@@ -3,21 +3,26 @@ using UnityEngine;
 
 namespace Mascari4615
 {
+	// TODO: Camera -> Component
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class CameraActive : MBase
 	{
+		[Header("_" + nameof(CameraActive))]
 		[SerializeField] private Camera[] cameras;
 		[SerializeField] private MBool mBool;
 
 		private void Start()
 		{
 			Init();
-			UpdateValue();
 		}
 
 		private void Init()
 		{
-			mBool.RegisterListener(this, nameof(UpdateValue));
+			if (mBool != null)
+			{
+				mBool.RegisterListener(this, nameof(UpdateValue));
+				UpdateValue();
+			}
 		}
 
 		[ContextMenu(nameof(UpdateValue))]

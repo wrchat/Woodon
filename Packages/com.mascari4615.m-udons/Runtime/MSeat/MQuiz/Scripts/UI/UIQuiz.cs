@@ -17,10 +17,11 @@ namespace Mascari4615
 		
 		protected virtual void Init()
 		{
-			quizManager.RegisterListener(this, nameof(UpdateUI));
-
 			foreach (UIQuizData quizDataUI in quizDataUIs)
 				quizDataUI.Init(quizManager);
+
+			quizManager.RegisterListener(this, nameof(UpdateUI));
+			UpdateUI();
 		}
 
 		public virtual void UpdateUI()

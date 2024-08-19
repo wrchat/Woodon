@@ -6,28 +6,20 @@ using static Mascari4615.MUtil;
 namespace Mascari4615
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class MCameraController : MBase
+	public class MCameraController : MPickup
 	{
-		[SerializeField] private MBool isHolding;
-		[SerializeField] private VRC_Pickup pickup;
+		[Header("_" + nameof(MCameraController))]
+		[SerializeField] private MCameraFovSync mCameraFovSync;
+		[SerializeField] private MCameraPosSync mCameraPosSync;
+		[SerializeField] private Camera targetCamera;
 
 		// private CameraManager cameraManager;
-
-		public bool IsPlayerHoldingThis(VRCPlayerApi playerApi)
-		{
-			return IsPlayerHolding(playerApi, pickup);
-		}
 
 		private int curCCPosData;
 
 		private readonly float[] fovData = new float[108];
 
-		private float fovValue = 40;
-		private bool isLocal;
 		// private readonly bool isLookingAt = false;
-		[SerializeField] private MCameraFovSync mCameraFovSync;
-		[SerializeField] private MCameraPosSync mCameraPosSync;
-		[SerializeField] private Camera targetCamera;
 
 		public int CurCCPosData
 		{
@@ -48,8 +40,6 @@ namespace Mascari4615
 				// targetCamera.transform.localPosition = Vector3.zero;
 				// targetCamera.transform.localRotation = Quaternion.identity;
 
-				FovValue = fovData[curCCPosData];
-
 				// isLookingAt = !(
 				//     (ccPosIndex == 0 && ccPosNum == 1) ||
 				//     (ccPosIndex == 1 && ccPosNum == 1) ||
@@ -62,17 +52,10 @@ namespace Mascari4615
 			}
 		}
 
-		public float FovValue
+		public void UpdateFov()
 		{
-			get => fovValue;
-			set
-			{
-				MDebugLog("FovValue: " + value);
-
-				fovValue = value;
-				targetCamera.fieldOfView = fovValue;
-				fovData[curCCPosData] = fovValue;
-			}
+			targetCamera.fieldOfView = mCameraFovSync.SyncedValue;
+			fovData[curCCPosData] = mCameraFovSync.SyncedValue;
 		}
 
 		private void Start()
@@ -91,45 +74,23 @@ namespace Mascari4615
 			// mCameraPosSync = transform.GetComponent<MCameraPosSync>();
 			// mCameraFovSync = transform.GetComponent<MCameraFovSync>();
 
-			isLocal = (mCameraPosSync || mCameraFovSync) == false;
-
 			for (var i = 0; i < fovData.Length; i++)
 				fovData[i] = 40f;
 
 			mCameraFovSync.Init(this);
 		}
 
-		private void Update()
-		{
-			if (isHolding != null)
-				isHolding.SetValue(IsPlayerHolding(Networking.LocalPlayer, pickup));
-		}
-
 		private void LateUpdate()
 		{
 			// if (isLookingAt)
 			// 	targetCamera.transform.LookAt(cameraManager.LookAt);
-		}
 
-		public void AddFov(float amount)
-		{
-			if (isLocal)
-				FovValue += amount;
-			else if (IsOwner())
-				mCameraFovSync.FovValue = FovValue + amount;
-		}
-
-		public void SetFOV(float newFov)
-		{
-			if (isLocal)
-				FovValue = newFov;
-			else if (IsOwner())
-				mCameraFovSync.FovValue = newFov;
+			UpdateFov();
 		}
 
 		public void SetCCPosData(int newCCPosData)
 		{
-			if (isLocal)
+			// if (isLocal)
 				CurCCPosData = newCCPosData;
 			// else if (IsOwner())
 			// 	mCameraPosSync.SetCCPosData(newCCPosData);
@@ -143,14 +104,13 @@ namespace Mascari4615
 		// 	return targetCamera.targetTexture;
 		// }
 
-		public void TakeOwner()
+		public override void OnPickup()
 		{
-			if (!isLocal)
-			{
-				SetOwner();
-				SetOwner(mCameraPosSync.gameObject);
-				SetOwner(mCameraFovSync.gameObject);
-			}
+			base.OnPickup();
+
+			SetOwner();
+			SetOwner(mCameraFovSync.gameObject);
+			// SetOwner(mCameraPosSync.gameObject);
 		}
 	}
 }

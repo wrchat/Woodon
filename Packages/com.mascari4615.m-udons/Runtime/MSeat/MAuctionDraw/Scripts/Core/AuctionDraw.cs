@@ -60,6 +60,9 @@ namespace Mascari4615
 			DrawManager.RegisterListener(this, nameof(UpdateUI));
 			DrawManager.RegisterListener(AuctionManager, nameof(AuctionManager.UpdateStuff));
 
+			UpdateUI();
+			AuctionManager.UpdateStuff();
+			
 			if (Networking.IsMaster)
 				OnWait();
 		}

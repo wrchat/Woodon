@@ -23,7 +23,10 @@ namespace Mascari4615
 		protected virtual void Init()
 		{
 			if (switcher != null)
+			{
 				switcher.RegisterListener(this, nameof(UpdateMaterial));
+				UpdateMaterial();
+			}
 		}
 
 		[ContextMenu(nameof(UpdateMaterial))]

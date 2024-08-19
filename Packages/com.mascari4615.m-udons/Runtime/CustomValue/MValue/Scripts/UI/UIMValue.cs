@@ -34,8 +34,8 @@ namespace Mascari4615
 			string finalString = string.Format(format, valueString);
 			finalString = finalString.Replace("MAX", mValue.MaxValue.ToString());
 
-			foreach (TextMeshProUGUI scoreText in valueTexts)
-				scoreText.text = finalString;
+			foreach (TextMeshProUGUI valueText in valueTexts)
+				valueText.text = finalString;
 
 			for (int i = 0; i < hardButtons.Length; i++)
 				hardButtons[i].SetActive(mValue.MinValue <= i && i <= mValue.MaxValue);

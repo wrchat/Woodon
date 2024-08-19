@@ -17,19 +17,23 @@ namespace Mascari4615
 		[SerializeField] private MBool isSliderPressed;
 		private Animator sliderAnimator;
 
-		bool forceChange = false;
+		private bool forceChange = false;
 
-		private void Start() => Init();
+		private void Start()
+		{
+			Init();
+		}
 
 		public void Init()
 		{
-			mValue.RegisterListener(this, nameof(UpdateSlider));
-
 			slider.value = 0;
 			fakeSlider.value = 0;
 
 			if (isSliderPressed != null)
 				sliderAnimator = slider.GetComponent<Animator>();
+
+			mValue.RegisterListener(this, nameof(UpdateSlider));
+			UpdateSlider();
 		}
 
 		public void OnSliderValueChanged()

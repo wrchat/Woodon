@@ -20,6 +20,7 @@ namespace Mascari4615
 		private void Init()
 		{
 			mBool.RegisterListener(this, nameof(UpdateTag));
+			UpdateTag();
 		}
 
 		public void UpdateTag()

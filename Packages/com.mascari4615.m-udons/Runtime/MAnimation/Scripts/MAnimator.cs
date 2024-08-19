@@ -33,10 +33,16 @@ namespace Mascari4615
 			SetBool(defaultState);
 
 			if (mBool)
+			{
 				mBool.RegisterListener(this, nameof(UpdateValue));
+				UpdateValue();
+			}
 
 			if (mValue)
+			{
 				mValue.RegisterListener(this, nameof(UpdateValue));
+				UpdateValue();
+			}
 		}
 
 		[ContextMenu(nameof(UpdateValue))]

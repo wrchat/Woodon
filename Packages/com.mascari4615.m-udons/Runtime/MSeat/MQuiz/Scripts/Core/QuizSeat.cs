@@ -7,6 +7,13 @@ namespace Mascari4615
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class QuizSeat : MTurnSeat
 	{
+		[Header("_" + nameof(QuizSeat))]
+		[SerializeField] private Image[] selectAnswerDecoImages;
+		private readonly string[] answerToString =
+		{
+			"O", "X", "1", "2", "3", "4", "5", string.Empty
+		};
+
 		public int Score => Data;
 		public QuizAnswerType ExpectedAnswer => (QuizAnswerType)TurnData;
 		protected QuizManager QuizManager => (QuizManager)seatManager;
@@ -20,12 +27,6 @@ namespace Mascari4615
 				selectAnswerDecoImages[i].color = MColorUtil.GetColorByBool(i == (int)ExpectedAnswer, MColorPreset.Green, MColorPreset.WhiteGray);
 			base.OnTurnDataChange(changeState);
 		}
-
-		[SerializeField] private Image[] selectAnswerDecoImages;
-		private readonly string[] answerToString =
-		{
-			"O", "X", "1", "2", "3", "4", "5", string.Empty
-		};
 
 		public void SelectAnswer(QuizAnswerType newAnswer, bool force = false)
 		{

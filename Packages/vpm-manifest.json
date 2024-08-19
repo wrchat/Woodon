@@ -4,13 +4,13 @@
       "version": "0.1.29"
     },
     "net.ureishi.qvpen": {
-      "version": "3.2.13"
+      "version": "3.2.14"
+    },
+    "com.mmmaellon.lightsync": {
+      "version": "1.6.2-beta"
     },
     "com.vrchat.worlds": {
-      "version": "3.6.2-beta.1"
-    },
-    "com.vrchat.base": {
-      "version": "3.6.2-constraints.4"
+      "version": "3.7.0"
     }
   },
   "locked": {
@@ -19,19 +19,25 @@
       "dependencies": {}
     },
     "net.ureishi.qvpen": {
-      "version": "3.2.13",
+      "version": "3.2.14",
       "dependencies": {
         "com.vrchat.worlds": "^3.4.0"
       }
     },
-    "com.vrchat.worlds": {
-      "version": "3.6.2-beta.1",
+    "com.mmmaellon.lightsync": {
+      "version": "1.6.2-beta",
       "dependencies": {
-        "com.vrchat.base": "3.6.2-beta.1"
+        "com.vrchat.worlds": "^3.5.2"
+      }
+    },
+    "com.vrchat.worlds": {
+      "version": "3.7.0",
+      "dependencies": {
+        "com.vrchat.base": "3.7.0"
       }
     },
     "com.vrchat.base": {
-      "version": "3.6.2-constraints.4",
+      "version": "3.7.0",
       "dependencies": {}
     }
   }

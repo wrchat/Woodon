@@ -32,9 +32,12 @@ namespace Mascari4615
 		private void Init()
 		{
 			SetActive(defaultActive);
-	
+
 			if (mBool != null)
+			{
 				mBool.RegisterListener(this, nameof(UpdateValue));
+				UpdateValue();
+			}
 
 			OnActiveChange();
 		}

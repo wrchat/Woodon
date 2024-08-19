@@ -48,6 +48,9 @@ namespace Mascari4615
 
 			curQuizIndex.SetMinMaxValue(0, QuizDatas.Length - 1);
 			quizDataParentsIndex.SetMinMaxValue(0, quizDataParents.Length - 1);
+
+			OnQuizIndexChange();
+			OnQuizDataParentChange();
 		}
 
 		public override void UpdateStuff()

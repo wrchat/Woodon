@@ -25,6 +25,7 @@ namespace Mascari4615
 			if (mColor != null)
 			{
 				mColor.RegisterListener(this, nameof(UpdateColorByMColor));
+				UpdateColorByMColor();
 			}
 		}
 

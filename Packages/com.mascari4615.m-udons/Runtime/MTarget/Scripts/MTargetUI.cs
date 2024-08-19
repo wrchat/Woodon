@@ -37,6 +37,7 @@ namespace Mascari4615
 			localPlayerUI.text = $"LocalPlayer ID : {Networking.LocalPlayer.playerId}";
 
 			mTarget.RegisterListener(this, nameof(UpdateUI));
+			UpdateUI();
 		}
 
 		public void UpdateUI()

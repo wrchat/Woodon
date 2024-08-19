@@ -28,7 +28,7 @@ namespace Mascari4615
 			MDebugLog($"{nameof(PlaySFX_L)} : {nameof(index)} = {index}");
 
 			bool isInvalidIndex = index >= AudioClips.Length;
-			bool isElementNull = isInvalidIndex && AudioClips[index] == null;
+			bool isElementNull = isInvalidIndex || AudioClips[index] == null;
 			
 			if (isInvalidIndex || isElementNull)
 				return;
@@ -46,10 +46,10 @@ namespace Mascari4615
 
 		public void PlaySFX(AudioClip audioClip)
 		{
-			MDebugLog($"{nameof(PlaySFX)} : {nameof(audioClip)} = {audioClip.name}");
-
 			if (audioClip == null)
 				return;
+
+			MDebugLog($"{nameof(PlaySFX)} : {nameof(audioClip)} = {audioClip.name}");
 
 			if (stopWhenEvent)
 			{
@@ -70,7 +70,6 @@ namespace Mascari4615
 		public void StopSFX()
 		{
 			MDebugLog(nameof(StopSFX));
-
 			audioSource.Stop();
 		}
 

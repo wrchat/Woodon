@@ -30,6 +30,7 @@ namespace Mascari4615
 		private void Init()
 		{
 			mColor.RegisterListener(this, nameof(UpdateSyncedColorUI));
+			UpdateSyncedColorUI();
 		}
 
 		public void UpdateSyncedColorUI()

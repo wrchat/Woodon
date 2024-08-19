@@ -39,7 +39,10 @@ namespace Mascari4615
 		private void Init()
 		{
 			if (mValueForSetTime != null)
+			{
 				mValueForSetTime.RegisterListener(this, nameof(SetTimerByMValue));
+				SetTimerByMValue();
+			}
 		}
 
 		private void Update()
