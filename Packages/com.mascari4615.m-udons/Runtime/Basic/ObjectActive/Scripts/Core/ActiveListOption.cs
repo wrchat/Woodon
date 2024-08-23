@@ -1,6 +1,6 @@
 namespace Mascari4615
 {
-	public enum ObjectActiveListOption
+	public enum ActiveListOption
 	{
 		UseMValueAsListIndex,
 		UseMValueAsTargetIndex
