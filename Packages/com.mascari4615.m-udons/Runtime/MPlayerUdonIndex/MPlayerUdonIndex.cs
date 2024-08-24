@@ -9,6 +9,10 @@ namespace Mascari4615
 	public class MPlayerUdonIndex : MBase
 	{
 		// https://cafe.naver.com/steamindiegame/14065241
+		private const char NICK_SEPARATER = '#';
+
+		[Header("_" + nameof(MPlayerUdonIndex))]
+		[SerializeField] private TextMeshProUGUI debugText;
 
 		[UdonSynced, FieldChangeCallback(nameof(PlayerUdonIndexDataPack))] private string _playerUdonIndexDataPack = string.Empty;
 		public string PlayerUdonIndexDataPack
@@ -33,6 +37,15 @@ namespace Mascari4615
 			}
 		}
 
+		public VRCPlayerApi[] PlayerApis { get; private set; }
+		public bool CanUpdateNow =>
+			(PlayerApis != null) &&
+			(PlayerApis.Length == VRCPlayerApi.GetPlayerCount()) &&
+			(enableUdonCount == VRCPlayerApi.GetPlayerCount());
+
+		private string[] playerNameByUdonIndex = new string[80];
+		private int enableUdonCount = 0;
+
 		public int GetUdonIndex(VRCPlayerApi targetPlayer = null)
 		{
 			MDebugLog($"{nameof(GetUdonIndex)} : {targetPlayer}");
@@ -42,7 +55,7 @@ namespace Mascari4615
 
 			for (int i = 0; i < playerNameByUdonIndex.Length; i++)
 			{
-				if (playerNameByUdonIndex[i] == (targetPlayer.displayName + nickSeparater + targetPlayer.playerId))
+				if (playerNameByUdonIndex[i] == (targetPlayer.displayName + NICK_SEPARATER + targetPlayer.playerId))
 					return i;
 			}
 
@@ -56,23 +69,11 @@ namespace Mascari4615
 			UpdatePlayerList();
 		}
 
-		public VRCPlayerApi[] PlayerApis { get; private set; }
-		public bool CanUpdateNow =>
-			(PlayerApis != null) &&
-			(PlayerApis.Length == VRCPlayerApi.GetPlayerCount()) &&
-			(enableUdonCount == VRCPlayerApi.GetPlayerCount());
-
-		private string[] playerNameByUdonIndex = new string[80];
-		private int enableUdonCount = 0;
-		[SerializeField] private TextMeshProUGUI debugText;
-
 		private void Update()
 		{
-			if (!CanUpdateNow)
+			if (CanUpdateNow == false)
 				UpdatePlayerList();
 		}
-
-		private char nickSeparater = '#';
 
 		private void UpdatePlayerList()
 		{
@@ -95,7 +96,7 @@ namespace Mascari4615
 				if (string.IsNullOrEmpty(playerNameByUdonIndex[i]))
 					continue;
 
-				VRCPlayerApi targetPlayerAPI = VRCPlayerApi.GetPlayerById(int.Parse(playerNameByUdonIndex[i].Split(nickSeparater)[1]));
+				VRCPlayerApi targetPlayerAPI = VRCPlayerApi.GetPlayerById(int.Parse(playerNameByUdonIndex[i].Split(NICK_SEPARATER)[1]));
 
 				if (targetPlayerAPI == null)
 				{
@@ -115,7 +116,7 @@ namespace Mascari4615
 					if (string.IsNullOrEmpty(playerNameByUdonIndex[i]))
 						continue;
 
-					if (playerNameByUdonIndex[i] == player.displayName + nickSeparater + player.playerId)
+					if (playerNameByUdonIndex[i] == player.displayName + NICK_SEPARATER + player.playerId)
 					{
 						hasUdon = true;
 						enableUdonCount++;
@@ -131,7 +132,7 @@ namespace Mascari4615
 				{
 					if (string.IsNullOrEmpty(playerNameByUdonIndex[i]))
 					{
-						playerNameByUdonIndex[i] = player.displayName + nickSeparater + player.playerId;
+						playerNameByUdonIndex[i] = player.displayName + NICK_SEPARATER + player.playerId;
 						enableUdonCount++;
 						break;
 					}
