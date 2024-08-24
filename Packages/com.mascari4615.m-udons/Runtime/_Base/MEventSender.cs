@@ -4,172 +4,128 @@ using VRC.Udon.Common.Interfaces;
 
 namespace Mascari4615
 {
-	public class MEventSender : MBase
+	public abstract class MEventSender : MBase
 	{
+		// TODO: 특정 클래스의 특정 사건을 뜻하는 Event와, 우동의 함수를 뜻하는 Event간의 표현이 모호함
+		public const int DEFAULT_EVENT = -1;
+
 		[Header("_" + nameof(MEventSender))]
+		// 기본 이벤트
 		[SerializeField] protected UdonSharpBehaviour[] targetUdons = new UdonSharpBehaviour[0];
+
+		// TODO: actionNames로 변경
 		[SerializeField] protected string[] eventNames = new string[0];
+
+		[Header("_" + nameof(MEventSender) + " - Options")]
 		[SerializeField] protected bool sendEventGlobal;
 
-		protected UdonSharpBehaviour[][] targetUdonss = new UdonSharpBehaviour[0][];
-		protected string[][] eventNamess = new string[0][];
+		// 추가 정의 이벤트
+		protected UdonSharpBehaviour[][] specificEventTargetUdons = new UdonSharpBehaviour[0][];
+		protected string[][] specificEventActionNames = new string[0][];
 
 		// ---- ---- ---- ----
 
-		protected void SendEvents()
+		protected void SendEvents(int eventType = DEFAULT_EVENT)
 		{
 			MDebugLog($"{nameof(SendEvents)}");
 
-			if (IsEventValid() == false)
+			if (IsEventValid(eventType) == false)
 				return;
+
+			UdonSharpBehaviour[] targetUdons = GetTargetUdons(eventType);
+			string[] eventNames = GetEventNames(eventType);
 
 			for (int i = 0; i < targetUdons.Length; i++)
 			{
-				if (sendEventGlobal)
-					targetUdons[i].SendCustomNetworkEvent(NetworkEventTarget.All, eventNames[i]);
-				else
-					targetUdons[i].SendCustomEvent(eventNames[i]);
-			}
-		}
+				if (targetUdons[i] == null)
+				{
+					MDebugLog($"{nameof(SendEvents)} : {nameof(targetUdons)}[{i}] is null, Skip {nameof(eventNames)}[{i}] = {eventNames[i]}", LogType.Error);
+					continue;
+				}
 
-		// protected void SendEvent(int index)
-		// {
-		// 	MDebugLog($"{nameof(SendEvent)}, {nameof(index)} = {index}");
-
-		// 	if (IsEventValid() == false)
-		// 		return;
-
-		// 	if (sendGlobal)
-		// 		targetUdons[index].SendCustomNetworkEvent(NetworkEventTarget.All, eventNames[index]);
-		// 	else
-		// 		targetUdons[index].SendCustomEvent(eventNames[index]);
-		// }
-
-		private bool IsEventValid()
-		{
-			if (targetUdons == null || targetUdons.Length == 0)
-				return false;
-
-			if (eventNames == null || eventNames.Length == 0)
-			{
-				MDebugLog($"{nameof(SendEvents)} : No Events");
-				return false;
-			}
-
-			return true;
-		}
-
-		protected void SendEvents(int index)
-		{
-			if (IsEventValid(index) == false)
-				return;
-
-			MDebugLog($"{nameof(SendEvents)}, {nameof(index)} = {index}, {nameof(targetUdonss.Length)} = {targetUdonss.Length}, {nameof(eventNamess.Length)} = {eventNamess.Length}");
-			UdonSharpBehaviour[] targetUdons = targetUdonss[index];
-			string[] eventNames = eventNamess[index];
-
-			for (int i = 0; i < targetUdons.Length; i++)
-			{
 				if (sendEventGlobal)
 					targetUdons[i].SendCustomNetworkEvent(NetworkEventTarget.All, eventNames[i]);
 				else
 					targetUdons[i].SendCustomEvent(eventNames[i]);
 			}
 
-			SendEvents();
+			if (eventType != DEFAULT_EVENT)
+			{
+				// 추가 정의된 이벤트가 일어났다면, 기본 이벤트도 한 번 호출해줍니다.
+				SendEvents();
+			}
 		}
-
-		private bool IsEventValid(int index)
-		{
-			if (targetUdonss == null || targetUdonss.Length == 0 || targetUdonss.Length <= index)
-			{
-				MDebugLog($"{nameof(SendEvents)} : No Events");
-				return false;
-			}
-
-			if (eventNamess == null || eventNamess.Length == 0 || eventNamess.Length <= index)
-			{
-				MDebugLog($"{nameof(SendEvents)} : No Events");
-				return false;
-			}
-
-			return true;
-		}	
 
 		/// <summary>
-		/// 호출하는 이벤트의 접근제한자는 public 이여야 함.
+		/// 호출하는 함수의 접근제한자는 public 이여야 함.
 		/// </summary>
-		/// <param name="newUdon"></param>
-		/// <param name="eventName"></param>
-		public void RegisterListener(UdonSharpBehaviour newUdon, string eventName, int index = NONE_INT)
+		/// <param name="targetUdon"></param>
+		/// <param name="actionName"></param>
+		public void RegisterListener(UdonSharpBehaviour targetUdon, string actionName, int eventType = DEFAULT_EVENT)
 		{
-			if (index == NONE_INT)
-				RegisterListener_(ref targetUdons, ref eventNames, newUdon, eventName);
-			else
+			MDebugLog($"{nameof(RegisterListener)}({targetUdon}, {actionName}, {eventType})");
+
+			if (eventType != DEFAULT_EVENT)
 			{
-				if (targetUdonss == null)
-					targetUdonss = new UdonSharpBehaviour[0][];
+				if (specificEventTargetUdons.Length <= eventType)
+				{
+					MDataUtil.ResizeArr(ref specificEventTargetUdons, eventType + 1);
+					specificEventTargetUdons[eventType] = new UdonSharpBehaviour[0];
+				}
 
-				if (eventNamess == null)
-					eventNamess = new string[0][];
-
-				if (targetUdonss.Length <= index)
-					MDataUtil.ResizeArr(ref targetUdonss, index + 1);
-
-				if (eventNamess.Length <= index)
-					MDataUtil.ResizeArr(ref eventNamess, index + 1);
-
-				RegisterListener_(ref targetUdonss[index], ref eventNamess[index], newUdon, eventName);
+				if (specificEventActionNames.Length <= eventType)
+				{
+					MDataUtil.ResizeArr(ref specificEventActionNames, eventType + 1);
+					specificEventActionNames[eventType] = new string[0];
+				}
 			}
-		}
-		
-		private void RegisterListener_(ref UdonSharpBehaviour[] targetUdons, ref string[] eventNames, UdonSharpBehaviour newUdon, string eventName)
-		{
-			if (targetUdons == null)
-				targetUdons = new UdonSharpBehaviour[0];
 
-			if (eventNames == null)
-				eventNames = new string[0];
+			UdonSharpBehaviour[] _targetUdons = GetTargetUdons(eventType);
+			string[] _eventNames = GetEventNames(eventType);
 
-			MDebugLog($"{nameof(RegisterListener_)} : {newUdon.name}, {eventName}");
+			// 구독자 우동과 이벤트를 추가할 공간
+			MDataUtil.ResizeArr(ref _targetUdons, _targetUdons.Length + 1);
+			MDataUtil.ResizeArr(ref _eventNames, _eventNames.Length + 1);
 
-			MDataUtil.ResizeArr(ref targetUdons, targetUdons.Length + 1);
-			targetUdons[targetUdons.Length - 1] = newUdon;
+			// 새로운 우동과 이벤트를 추가
+			_targetUdons[_targetUdons.Length - 1] = targetUdon;
+			_eventNames[_eventNames.Length - 1] = actionName;
 
-			MDataUtil.ResizeArr(ref eventNames, eventNames.Length + 1);
-			eventNames[eventNames.Length - 1] = eventName;
-		}
+			// TODO: 중복 등록 처리
 
-		public void RemoveListener(UdonSharpBehaviour targetUdon, string targetEventName, int index = NONE_INT)
-		{
-			if (index == NONE_INT)
-				RemoveListener_(ref targetUdons, ref eventNames, targetUdon, targetEventName);
+			// 원본 배열에 수정된 배열을 대입
+			if (eventType != DEFAULT_EVENT)
+			{
+				specificEventTargetUdons[eventType] = _targetUdons;
+				specificEventActionNames[eventType] = _eventNames;
+			}
 			else
 			{
-				if (targetUdonss == null || targetUdonss.Length <= index)
-					return;
-
-				if (eventNamess == null || eventNamess.Length <= index)
-					return;
-
-				RemoveListener_(ref targetUdonss[index], ref eventNamess[index], targetUdon, targetEventName);
+				targetUdons = _targetUdons;
+				eventNames = _eventNames;
 			}
 		}
 
-		private void RemoveListener_(ref UdonSharpBehaviour[] targetUdons, ref string[] eventNames, UdonSharpBehaviour targetUdon, string targetEventName)
+		public void RemoveListener(UdonSharpBehaviour targetUdon, string actionName, int eventType = DEFAULT_EVENT)
 		{
-			if (targetUdons == null || targetUdons.Length == 0)
-				return;
+			MDebugLog($"{nameof(RemoveListener)}({targetUdon}, {actionName}, {eventType})");
 
-			if (eventNames == null || eventNames.Length == 0)
-				return;
+			if (eventType != DEFAULT_EVENT)
+			{
+				if (specificEventTargetUdons.Length <= eventType)
+					return;
 
-			MDebugLog($"{nameof(RemoveListener_)} : {targetUdon.name}");
+				if (specificEventActionNames.Length <= eventType)
+					return;
+			}
+
+			UdonSharpBehaviour[] targetUdons = GetTargetUdons(eventType);
+			string[] eventNames = GetEventNames(eventType);
 
 			int targetIndex = 0;
 			for (int i = 0; i < targetUdons.Length; i++)
 			{
-				if (targetUdons[i] == targetUdon && eventNames[i] == targetEventName)
+				if (targetUdons[i] == targetUdon && eventNames[i] == actionName)
 				{
 					targetIndex = i;
 					break;
@@ -179,5 +135,57 @@ namespace Mascari4615
 			MDataUtil.RemoveAt(ref targetUdons, targetIndex);
 			MDataUtil.RemoveAt(ref eventNames, targetIndex);
 		}
+
+		#region
+		private bool IsEventValid(int eventType = DEFAULT_EVENT)
+		{
+			if (eventType == DEFAULT_EVENT)
+			{
+				if (targetUdons == null || eventNames == null)
+				{
+					MDebugLog($"{nameof(IsEventValid)} : {nameof(targetUdons)} or {nameof(eventNames)} is null", LogType.Error);
+					return false;
+				}
+
+				if (targetUdons.Length == 0 || eventNames.Length == 0)
+				{
+					MDebugLog($"{nameof(IsEventValid)} : {nameof(targetUdons)} or {nameof(eventNames)} is empty", LogType.Warning);
+					return false;
+				}
+			}
+			else
+			{
+				if (specificEventTargetUdons == null || specificEventActionNames == null)
+				{
+					MDebugLog($"{nameof(IsEventValid)} : {nameof(specificEventTargetUdons)} or {nameof(specificEventActionNames)} is null", LogType.Error);
+					return false;
+				}
+
+				if (specificEventTargetUdons.Length == 0 || specificEventTargetUdons.Length <= eventType || specificEventActionNames.Length == 0 || specificEventActionNames.Length <= eventType)
+				{
+					MDebugLog($"{nameof(IsEventValid)} : {nameof(specificEventTargetUdons)} or {nameof(specificEventActionNames)} is empty", LogType.Warning);
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		private UdonSharpBehaviour[] GetTargetUdons(int eventType = DEFAULT_EVENT)
+		{
+			if (eventType == DEFAULT_EVENT)
+				return targetUdons;
+			else
+				return specificEventTargetUdons[eventType];
+		}
+
+		private string[] GetEventNames(int eventType = DEFAULT_EVENT)
+		{
+			if (eventType == DEFAULT_EVENT)
+				return eventNames;
+			else
+				return specificEventActionNames[eventType];
+		}
+		#endregion
 	}
 }

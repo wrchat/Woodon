@@ -5,6 +5,8 @@ namespace Mascari4615
 {
 	public class MDataUtil
 	{
+		// TODO: 참조 타입 default 값은 어떻게 처리할지, 대신 Add 함수를 구현할까?
+
 		public static void ResizeArr<T>(ref T[] originArr, int size)
 		{
 			T[] newArr = new T[size];
@@ -15,7 +17,7 @@ namespace Mascari4615
 
 			// 나머지 요소 초기화
 			for (int i = originArr.Length; i < size; i++)
-				newArr[i] = default(T);
+				newArr[i] = default;
 
 			originArr = newArr;
 		}
