@@ -5,7 +5,7 @@ using static Mascari4615.MUtil;
 namespace Mascari4615
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class QuizManager : MTurnSeatManager
+	public class QuizManager : MTurnBaseManager
 	{
 		[Header("_" + nameof(QuizManager))]
 		[SerializeField] protected int playerCount = 10;
@@ -69,20 +69,20 @@ namespace Mascari4615
 				waitTimeObject.SetActive(isCurStateWaiting);
 		}
 
-		protected override void OnGameStateChange(int origin, int value)
+		protected override void OnGameStateChange(DataChangeState changeState)
 		{
-			if (value != origin)
+			if (changeState != DataChangeState.Less)
 			{
-				if (value == (int)QuizGameState.Wait) OnWait();
-				else if (value == (int)QuizGameState.ShowQuiz) OnQuizTime();
-				else if (value == (int)QuizGameState.SelectAnswer) OnSelectAnswer();
-				else if (value == (int)QuizGameState.ShowPlayerAnswer) OnShowPlayerAnswer();
-				else if (value == (int)QuizGameState.CheckAnswer) OnCheckAnswer();
-				else if (value == (int)QuizGameState.Explaining) OnExplaining();
-				else if (value == (int)QuizGameState.Scoring) OnScoring();
+				if (CurGameState == (int)QuizGameState.Wait) OnWait();
+				else if (CurGameState == (int)QuizGameState.ShowQuiz) OnQuizTime();
+				else if (CurGameState == (int)QuizGameState.SelectAnswer) OnSelectAnswer();
+				else if (CurGameState == (int)QuizGameState.ShowPlayerAnswer) OnShowPlayerAnswer();
+				else if (CurGameState == (int)QuizGameState.CheckAnswer) OnCheckAnswer();
+				else if (CurGameState == (int)QuizGameState.Explaining) OnExplaining();
+				else if (CurGameState == (int)QuizGameState.Scoring) OnScoring();
 			}
 
-			base.OnGameStateChange(origin, value);
+			base.OnGameStateChange(changeState);
 		}
 
 		public virtual void OnQuizIndexChange()

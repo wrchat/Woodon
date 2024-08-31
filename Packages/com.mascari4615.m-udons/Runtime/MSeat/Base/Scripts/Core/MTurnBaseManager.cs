@@ -5,28 +5,28 @@ using static Mascari4615.MUtil;
 namespace Mascari4615
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class MTurnSeatManager : MEventSender
+	public abstract class MTurnBaseManager : MEventSender
 	{
 		[UdonSynced, FieldChangeCallback(nameof(CurGameState))] private int _curGameState = 0;
 		public int CurGameState
 		{
 			get => _curGameState;
-			set
+			private set
 			{
 				// MDebugLog($"{nameof(CurGameState)} Changed, {CurGameState} to {value}");
 
 				int origin = _curGameState;
 				_curGameState = value;
-				OnGameStateChange(origin, value);
+				OnGameStateChange(DataChangeStateUtil.GetChangeState(origin, value));
 			}
 		}
 
 		public MTurnSeat[] TurnSeats { get; private set; }
 
-		[field: Header("_" + nameof(MTurnSeatManager))]
+		[field: Header("_" + nameof(MTurnBaseManager))]
 		[field: SerializeField] public string[] StateToString { get; private set; }
 
-		[field: Header("_" + nameof(MTurnSeatManager) + "_Data")]
+		[field: Header("_" + nameof(MTurnBaseManager) + "_Data")]
 		[field: SerializeField] public int DefaultData { get; private set; } = 0;
 		[field: SerializeField] public string[] DataToString { get; protected set; }
 		[field: SerializeField] public bool ResetDataWhenOwnerChange { get; private set; }
@@ -35,7 +35,7 @@ namespace Mascari4615
 		[field: SerializeField] public Sprite[] DataSprites { get; protected set; }
 		[field: SerializeField] public Sprite DataNoneSprite { get; protected set; }
 
-		[field: Header("_" + nameof(MTurnSeatManager) + "_TurnData")]
+		[field: Header("_" + nameof(MTurnBaseManager) + "_TurnData")]
 		[field: SerializeField] public int DefaultTurnData { get; private set; } = 0;
 		[field: SerializeField] public string[] TurnDataToString { get; protected set; }
 		[field: SerializeField] public bool ResetTurnDataWhenOwnerChange { get; private set; }
@@ -53,12 +53,14 @@ namespace Mascari4615
 			RequestSerialization();
 		}
 
+		public bool IsCurGameState(int gameState) => CurGameState == gameState;
+
 		public void NextGameState() => SetGameState(CurGameState + 1);
 		public void PrevGameState() => SetGameState(CurGameState - 1);
 
-		protected virtual void OnGameStateChange(int origin, int value)
+		protected virtual void OnGameStateChange(DataChangeState changeState)
 		{
-			// MDebugLog($"{nameof(OnGameStateChange)}, {origin} to {value}");
+			// MDebugLog($"{nameof(OnGameStateChange)}, {changeState}");
 
 			UpdateStuff();
 			SendEvents();

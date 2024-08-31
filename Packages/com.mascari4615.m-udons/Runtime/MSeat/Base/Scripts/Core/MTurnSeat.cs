@@ -28,7 +28,7 @@ namespace Mascari4615
 		[SerializeField] private TextMeshProUGUI[] turnDataTexts;
 		[SerializeField] private Image[] turnDataImages;
 
-		public override void Init(MTurnSeatManager seatManager, int index)
+		public override void Init(MTurnBaseManager seatManager, int index)
 		{
 			base.Init(seatManager, index);
 

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Mascari4615
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class VoteManager : MTurnSeatManager
+	public class VoteManager : MTurnBaseManager
 	{
 		[Header("_" + nameof(VoteManager))]
 		[SerializeField] protected TextMeshProUGUI debugText;
@@ -14,17 +14,14 @@ namespace Mascari4615
 
 		public int[] MaxVoteIndexes { get; protected set; } = new int[0];
 
-		protected override void OnGameStateChange(int origin, int value)
+		protected override void OnGameStateChange(DataChangeState changeState)
 		{
-			VoteState originState = (VoteState)origin;
-			VoteState newState = (VoteState)value;
-
-			if (originState == newState)
+			if (changeState == DataChangeState.Equal)
 				return;
 
 			MaxVoteIndexes = GetMaxVoteIndex();
 
-			switch (newState)
+			switch ((VoteState)CurGameState)
 			{
 				case VoteState.Wait:
 					// 투표 대기
@@ -52,7 +49,7 @@ namespace Mascari4615
 					break;
 			}
 
-			base.OnGameStateChange(origin, value);
+			base.OnGameStateChange(changeState);
 		}
 
 		protected virtual void OnWait()

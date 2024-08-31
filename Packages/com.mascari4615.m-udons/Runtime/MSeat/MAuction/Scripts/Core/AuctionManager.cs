@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Mascari4615
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class AuctionManager : MTurnSeatManager
+	public class AuctionManager : MTurnBaseManager
 	{
 		[Header("_" + nameof(AuctionManager))]
 		[SerializeField] private TextMeshProUGUI debugText;
@@ -16,17 +16,14 @@ namespace Mascari4615
 		public int WinnerIndex { get; private set; } = NONE_INT;
 		public AuctionSeat MaxTryPointSeat { get; private set; } = null;
 
-		protected override void OnGameStateChange(int origin, int value)
+		protected override void OnGameStateChange(DataChangeState changeState)
 		{
-			AuctionState originState = (AuctionState)origin;
-			AuctionState newState = (AuctionState)value;
-
-			if (originState == newState)
+			if (changeState == DataChangeState.Equal)
 				return;
 
 			MaxTryPointSeat = GetMaxTryPointSeat();
 
-			switch (newState)
+			switch ((AuctionState)CurGameState)
 			{
 				case AuctionState.Wait:
 					// 경매 대기
@@ -55,7 +52,7 @@ namespace Mascari4615
 					break;
 			}
 
-			base.OnGameStateChange(origin, value);
+			base.OnGameStateChange(changeState);
 		}
 
 		protected virtual void OnWait()

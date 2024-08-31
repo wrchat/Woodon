@@ -36,7 +36,7 @@ namespace Mascari4615
 
 		public int Index { get; private set; }
 
-		protected MTurnSeatManager seatManager;
+		protected MTurnBaseManager seatManager;
 
 		[Header("_" + nameof(MSeat))]
 		[SerializeField] private MBool ownerMBool;
@@ -55,7 +55,7 @@ namespace Mascari4615
 			return OwnerID == targetPlayer.playerId;
 		}
 
-		public virtual void Init(MTurnSeatManager seatManager, int index)
+		public virtual void Init(MTurnBaseManager seatManager, int index)
 		{
 			this.seatManager = seatManager;
 		

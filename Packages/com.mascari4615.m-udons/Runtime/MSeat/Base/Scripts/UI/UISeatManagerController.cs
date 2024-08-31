@@ -8,7 +8,7 @@ namespace Mascari4615
 	public class UISeatManagerController : MBase
 	{
 		[Header("_" + nameof(UISeatManagerController))]
-		[SerializeField] private MTurnSeatManager turnSeatManager;
+		[SerializeField] private MTurnBaseManager turnSeatManager;
 		[SerializeField] private TextMeshProUGUI curStateText;
 
 		private void Start()
