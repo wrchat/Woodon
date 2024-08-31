@@ -76,8 +76,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 2150773298
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 0.5}
+    rgba: 2164260863
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0.5}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -231,8 +231,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -331,7 +331,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 327.1, y: 47}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4614368192202918061
 CanvasRenderer:
@@ -354,14 +354,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: d4f46d126c2634a4885955a834c90ec4, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -370,7 +370,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 5
 --- !u!114 &8461637895795781749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -462,7 +462,7 @@ MonoBehaviour:
   m_CaretWidth: 1
   m_ReadOnly: 0
   m_RichText: 1
-  m_GlobalFontAsset: {fileID: 11400000, guid: 56cc580d002b37c4a8ddcb842c2f8d56, type: 2}
+  m_GlobalFontAsset: {fileID: 11400000, guid: 099e905781af5a54092659ce4fd3b049, type: 2}
   m_OnFocusSelectAll: 1
   m_ResetOnDeActivation: 1
   m_RestoreOriginalTextOnEscape: 1
@@ -901,7 +901,7 @@ MonoBehaviour:
   DEBUG: 1
   targetUdons: []
   eventNames: []
-  sendGlobal: 0
+  sendEventGlobal: 0
   inputField: {fileID: 8461637895795781749}
   texts:
   - {fileID: 252386923823882106}
@@ -983,7 +983,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7659334661234403494}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
   m_Name: 
@@ -1072,9 +1072,9 @@ RectTransform:
   - {fileID: 8104495016301933050}
   m_Father: {fileID: 7659334661234403493}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 45.045, y: -50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &7659334661263712798
@@ -1128,7 +1128,7 @@ PrefabInstance:
     - target: {fileID: 2014848354449385375, guid: e002ba941fe96334da2a46058c114815,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 60
+      value: 44.58
       objectReference: {fileID: 0}
     - target: {fileID: 2014848354449385375, guid: e002ba941fe96334da2a46058c114815,
         type: 3}
@@ -1193,7 +1193,7 @@ PrefabInstance:
     - target: {fileID: 7473182815853782158, guid: e002ba941fe96334da2a46058c114815,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7473182815853782158, guid: e002ba941fe96334da2a46058c114815,
         type: 3}
@@ -1203,7 +1203,7 @@ PrefabInstance:
     - target: {fileID: 7473182815853782158, guid: e002ba941fe96334da2a46058c114815,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7473182815853782158, guid: e002ba941fe96334da2a46058c114815,
         type: 3}
@@ -1253,12 +1253,12 @@ PrefabInstance:
     - target: {fileID: 7473182815853782158, guid: e002ba941fe96334da2a46058c114815,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 410
+      value: 423.55
       objectReference: {fileID: 0}
     - target: {fileID: 7473182815853782158, guid: e002ba941fe96334da2a46058c114815,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -50
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7473182815853782158, guid: e002ba941fe96334da2a46058c114815,
         type: 3}

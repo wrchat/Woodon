@@ -5,7 +5,7 @@ using static Mascari4615.MUtil;
 
 namespace Mascari4615
 {
-	public class MBase : UdonSharpBehaviour
+	public abstract class MBase : UdonSharpBehaviour
 	{
 		public const string DEBUG_PREFIX = "DEBUG";
 

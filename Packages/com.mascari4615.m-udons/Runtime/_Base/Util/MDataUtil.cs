@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Mascari4615
 {
-	public class MDataUtil
+	public static class MDataUtil
 	{
 		// TODO: 참조 타입 default 값은 어떻게 처리할지, 대신 Add 함수를 구현할까?
 

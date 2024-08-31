@@ -42,6 +42,8 @@ namespace Mascari4615
 		{
 			foreach (ParticleSystem particleSystem in particleSystems)
 			{
+				if (particleSystem.isPlaying)
+					particleSystem.Stop(true, stopBehavior);
 				particleSystem.Play();
 			}
 		}
