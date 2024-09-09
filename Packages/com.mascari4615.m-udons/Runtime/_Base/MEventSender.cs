@@ -70,13 +70,24 @@ namespace Mascari4615
 				if (specificEventTargetUdons.Length <= eventType)
 				{
 					MDataUtil.ResizeArr(ref specificEventTargetUdons, eventType + 1);
-					specificEventTargetUdons[eventType] = new UdonSharpBehaviour[0];
+
+					for (int i = 0; i < specificEventTargetUdons.Length; i++)
+					{
+						if (specificEventTargetUdons[i] == null)
+							specificEventTargetUdons[i] = new UdonSharpBehaviour[0];
+					}
 				}
 
 				if (specificEventActionNames.Length <= eventType)
 				{
 					MDataUtil.ResizeArr(ref specificEventActionNames, eventType + 1);
 					specificEventActionNames[eventType] = new string[0];
+
+					for (int i = 0; i < specificEventActionNames.Length; i++)
+					{
+						if (specificEventActionNames[i] == null)
+							specificEventActionNames[i] = new string[0];
+					}
 				}
 			}
 
