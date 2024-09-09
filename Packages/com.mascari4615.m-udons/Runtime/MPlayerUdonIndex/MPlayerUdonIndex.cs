@@ -2,6 +2,7 @@
 using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
+using static Mascari4615.MUtil;
 
 namespace Mascari4615
 {
@@ -49,6 +50,9 @@ namespace Mascari4615
 		public int GetUdonIndex(VRCPlayerApi targetPlayer = null)
 		{
 			MDebugLog($"{nameof(GetUdonIndex)} : {targetPlayer}");
+
+			if (IsNotOnline())
+				return NONE_INT;
 
 			if (targetPlayer == null)
 				targetPlayer = Networking.LocalPlayer;

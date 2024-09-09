@@ -1,8 +1,5 @@
-﻿using UdonSharp;
-using UnityEngine;
+﻿using UnityEngine;
 using VRC.SDKBase;
-using VRC.Udon;
-using VRC.Udon.Common.Interfaces;
 
 namespace Mascari4615
 {
@@ -14,7 +11,11 @@ namespace Mascari4615
 
 		public override void OnPlayerTriggerEnter(VRCPlayerApi player)
 		{
-			if (onlyIfLocalPlayer && (player != Networking.LocalPlayer))
+			MDebugLog($"{nameof(OnPlayerTriggerEnter)} : {player.displayName} | {player.playerId}");
+
+			bool isLocalPlayer = player == Networking.LocalPlayer;
+
+			if (onlyIfLocalPlayer && (isLocalPlayer == false))
 				return;
 
 			SendEvents();

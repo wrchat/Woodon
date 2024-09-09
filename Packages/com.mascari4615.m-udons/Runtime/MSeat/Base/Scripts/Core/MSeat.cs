@@ -60,7 +60,7 @@ namespace Mascari4615
 			this.seatManager = seatManager;
 		
 			Index = index;
-			foreach (var seatIndexText in indexTexts)
+			foreach (TextMeshProUGUI seatIndexText in indexTexts)
 				seatIndexText.text = index.ToString();
 
 			SetData(seatManager.DefaultData);

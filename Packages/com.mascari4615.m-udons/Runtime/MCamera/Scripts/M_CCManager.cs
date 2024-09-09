@@ -12,6 +12,9 @@ namespace Mascari4615
 	{
 		[Header("_" + nameof(M_CCManager))]
 		[SerializeField] private Camera cameraBrain;
+		
+		[Header("_" + nameof(M_CCManager) + " - Options")]
+		[SerializeField] private bool canTurnOffCamera = true;
 
 		private M_CCData[] cameraDatas;
 		private int lastCameraIndex = NONE_INT;
@@ -50,7 +53,8 @@ namespace Mascari4615
 			if (Input.GetKeyDown(camOffKeyCode) || Input.GetKeyDown(KeyCode.Escape))
 			{
 				// useOmakaseCam = false;
-				TurnOffCamera();
+				if (canTurnOffCamera)
+					TurnOffCamera();
 			}
 			/*else if (Input.GetKeyDown(omakaseCamKeyCode) && !IsOwner())
 			{
@@ -86,7 +90,10 @@ namespace Mascari4615
 		public void SetCamera(int cameraIndex, bool alwaysOn = false)
 		{
 			if (cameraIndex >= cameraDatas.Length)
+			{
+				MDebugLog($"cameraIndex({cameraIndex}) >= cameraDatas.Length({cameraDatas.Length})");
 				return;
+			}
 			
 			if (!alwaysOn && cameraIndex == lastCameraIndex)
 			{
