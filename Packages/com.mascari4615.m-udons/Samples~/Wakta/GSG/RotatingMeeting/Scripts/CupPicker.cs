@@ -44,7 +44,7 @@ namespace Mascari4615.Project.ISD.GSG.RotatingMeeting
 		[SerializeField] private GameObject returnButton;
 		[SerializeField] private Transform meetingPos;
 		[SerializeField] private VRCStation pickerStation;
-		[SerializeField] private SyncedStation targetStation;
+		[SerializeField] private MStation targetStation;
 		[SerializeField] private Animator tableAnimator;
 		[SerializeField] private MSFXManager sfxManager;
 		[SerializeField] private TextMeshProUGUI[] buttonTexts;
