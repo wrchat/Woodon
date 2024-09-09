@@ -2,7 +2,7 @@
 using UnityEngine;
 using VRC.SDKBase;
 
-namespace Mascari4615
+namespace Mascari4615.Project.Wakta.Wak.SearchHistoryGame
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class SHG_Manager : MBase

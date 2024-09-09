@@ -3,7 +3,7 @@ using UdonSharp;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Mascari4615
+namespace Mascari4615.Project.Wakta.Wak.SearchHistoryGame
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public class UIMemberButton : UdonSharpBehaviour

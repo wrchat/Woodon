@@ -1,5 +1,231 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1521255042874718194
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 803722689254846367}
+  - component: {fileID: 7585672225775016149}
+  - component: {fileID: 5368833213652604986}
+  m_Layer: 0
+  m_Name: '[MBool] Page'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &803722689254846367
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1521255042874718194}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7834174099598589509}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7585672225775016149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1521255042874718194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc56eaabc337b704b91d32edbdab1883, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  _udonSharpBackingUdonBehaviour: {fileID: 5368833213652604986}
+  DEBUG: 1
+  targetUdons: []
+  eventNames: []
+  sendEventGlobal: 0
+  defaultValue: 0
+  useSync: 1
+--- !u!114 &5368833213652604986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1521255042874718194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45115577ef41a5b4ca741ed302693907, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactTextPlacement: {fileID: 0}
+  interactText: Use
+  interactTextGO: {fileID: 0}
+  proximity: 2
+  SynchronizePosition: 0
+  AllowCollisionOwnershipTransfer: 0
+  Reliable: 0
+  _syncMethod: 3
+  serializedProgramAsset: {fileID: 11400000, guid: 7c80722cc20400644ab8280fc0b6fc74,
+    type: 2}
+  programSource: {fileID: 11400000, guid: 9688693f1e4867b44b8341c54ca5771c, type: 2}
+  serializedPublicVariablesBytesString: Ai8AAAAAATIAAABWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgAuAFUAZABvAG4AVgBhAHIAaQBhAGIAbABlAFQAYQBiAGwAZQAsACAAVgBSAEMALgBVAGQAbwBuAC4AQwBvAG0AbQBvAG4AAAAAAAYBAAAAAAAAACcBBAAAAHQAeQBwAGUAAWgAAABTAHkAcwB0AGUAbQAuAEMAbwBsAGwAZQBjAHQAaQBvAG4AcwAuAEcAZQBuAGUAcgBpAGMALgBMAGkAcwB0AGAAMQBbAFsAVgBSAEMALgBVAGQAbwBuAC4AQwBvAG0AbQBvAG4ALgBJAG4AdABlAHIAZgBhAGMAZQBzAC4ASQBVAGQAbwBuAFYAYQByAGkAYQBiAGwAZQAsACAAVgBSAEMALgBVAGQAbwBuAC4AQwBvAG0AbQBvAG4AXQBdACwAIABtAHMAYwBvAHIAbABpAGIAAQEJAAAAVgBhAHIAaQBhAGIAbABlAHMALwEAAAABaAAAAFMAeQBzAHQAZQBtAC4AQwBvAGwAbABlAGMAdABpAG8AbgBzAC4ARwBlAG4AZQByAGkAYwAuAEwAaQBzAHQAYAAxAFsAWwBWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgAuAEkAbgB0AGUAcgBmAGEAYwBlAHMALgBJAFUAZABvAG4AVgBhAHIAaQBhAGIAbABlACwAIABWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgBdAF0ALAAgAG0AcwBjAG8AcgBsAGkAYgABAAAABgcAAAAAAAAAAi8CAAAAAUsAAABWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgAuAFUAZABvAG4AVgBhAHIAaQBhAGIAbABlAGAAMQBbAFsAUwB5AHMAdABlAG0ALgBCAG8AbwBsAGUAYQBuACwAIABtAHMAYwBvAHIAbABpAGIAXQBdACwAIABWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgACAAAABgIAAAAAAAAAJwEEAAAAdAB5AHAAZQABFwAAAFMAeQBzAHQAZQBtAC4AUwB0AHIAaQBuAGcALAAgAG0AcwBjAG8AcgBsAGkAYgAnAQoAAABTAHkAbQBiAG8AbABOAGEAbQBlAAEFAAAARABFAEIAVQBHACcBBAAAAHQAeQBwAGUAARgAAABTAHkAcwB0AGUAbQAuAEIAbwBvAGwAZQBhAG4ALAAgAG0AcwBjAG8AcgBsAGkAYgArAQUAAABWAGEAbAB1AGUAAQcFAi8DAAAAAWIAAABWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgAuAFUAZABvAG4AVgBhAHIAaQBhAGIAbABlAGAAMQBbAFsAVQBuAGkAdAB5AEUAbgBnAGkAbgBlAC4AQwBvAG0AcABvAG4AZQBuAHQAWwBdACwAIABVAG4AaQB0AHkARQBuAGcAaQBuAGUALgBDAG8AcgBlAE0AbwBkAHUAbABlAF0AXQAsACAAVgBSAEMALgBVAGQAbwBuAC4AQwBvAG0AbQBvAG4AAwAAAAYCAAAAAAAAACcBBAAAAHQAeQBwAGUAARcAAABTAHkAcwB0AGUAbQAuAFMAdAByAGkAbgBnACwAIABtAHMAYwBvAHIAbABpAGIAJwEKAAAAUwB5AG0AYgBvAGwATgBhAG0AZQABCwAAAHQAYQByAGcAZQB0AFUAZABvAG4AcwAnAQQAAAB0AHkAcABlAAEvAAAAVQBuAGkAdAB5AEUAbgBnAGkAbgBlAC4AQwBvAG0AcABvAG4AZQBuAHQAWwBdACwAIABVAG4AaQB0AHkARQBuAGcAaQBuAGUALgBDAG8AcgBlAE0AbwBkAHUAbABlAAEBBQAAAFYAYQBsAHUAZQAvBAAAAAEvAAAAVQBuAGkAdAB5AEUAbgBnAGkAbgBlAC4AQwBvAG0AcABvAG4AZQBuAHQAWwBdACwAIABVAG4AaQB0AHkARQBuAGcAaQBuAGUALgBDAG8AcgBlAE0AbwBkAHUAbABlAAQAAAAGAAAAAAAAAAAHBQcFAi8FAAAAAUwAAABWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgAuAFUAZABvAG4AVgBhAHIAaQBhAGIAbABlAGAAMQBbAFsAUwB5AHMAdABlAG0ALgBTAHQAcgBpAG4AZwBbAF0ALAAgAG0AcwBjAG8AcgBsAGkAYgBdAF0ALAAgAFYAUgBDAC4AVQBkAG8AbgAuAEMAbwBtAG0AbwBuAAUAAAAGAgAAAAAAAAAnAQQAAAB0AHkAcABlAAEXAAAAUwB5AHMAdABlAG0ALgBTAHQAcgBpAG4AZwAsACAAbQBzAGMAbwByAGwAaQBiACcBCgAAAFMAeQBtAGIAbwBsAE4AYQBtAGUAAQoAAABlAHYAZQBuAHQATgBhAG0AZQBzACcBBAAAAHQAeQBwAGUAARkAAABTAHkAcwB0AGUAbQAuAFMAdAByAGkAbgBnAFsAXQAsACAAbQBzAGMAbwByAGwAaQBiAAEBBQAAAFYAYQBsAHUAZQAvBgAAAAEZAAAAUwB5AHMAdABlAG0ALgBTAHQAcgBpAG4AZwBbAF0ALAAgAG0AcwBjAG8AcgBsAGkAYgAGAAAABgAAAAAAAAAABwUHBQIwAgAAAAcAAAAGAgAAAAAAAAAnAQQAAAB0AHkAcABlAAEXAAAAUwB5AHMAdABlAG0ALgBTAHQAcgBpAG4AZwAsACAAbQBzAGMAbwByAGwAaQBiACcBCgAAAFMAeQBtAGIAbwBsAE4AYQBtAGUAAQ8AAABzAGUAbgBkAEUAdgBlAG4AdABHAGwAbwBiAGEAbAAnAQQAAAB0AHkAcABlAAEYAAAAUwB5AHMAdABlAG0ALgBCAG8AbwBsAGUAYQBuACwAIABtAHMAYwBvAHIAbABpAGIAKwEFAAAAVgBhAGwAdQBlAAAHBQIwAgAAAAgAAAAGAgAAAAAAAAAnAQQAAAB0AHkAcABlAAEXAAAAUwB5AHMAdABlAG0ALgBTAHQAcgBpAG4AZwAsACAAbQBzAGMAbwByAGwAaQBiACcBCgAAAFMAeQBtAGIAbwBsAE4AYQBtAGUAAQwAAABkAGUAZgBhAHUAbAB0AFYAYQBsAHUAZQAnAQQAAAB0AHkAcABlAAEYAAAAUwB5AHMAdABlAG0ALgBCAG8AbwBsAGUAYQBuACwAIABtAHMAYwBvAHIAbABpAGIAKwEFAAAAVgBhAGwAdQBlAAAHBQIwAgAAAAkAAAAGAgAAAAAAAAAnAQQAAAB0AHkAcABlAAEXAAAAUwB5AHMAdABlAG0ALgBTAHQAcgBpAG4AZwAsACAAbQBzAGMAbwByAGwAaQBiACcBCgAAAFMAeQBtAGIAbwBsAE4AYQBtAGUAAQcAAAB1AHMAZQBTAHkAbgBjACcBBAAAAHQAeQBwAGUAARgAAABTAHkAcwB0AGUAbQAuAEIAbwBvAGwAZQBhAG4ALAAgAG0AcwBjAG8AcgBsAGkAYgArAQUAAABWAGEAbAB1AGUAAQcFAi8HAAAAAUkAAABWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgAuAFUAZABvAG4AVgBhAHIAaQBhAGIAbABlAGAAMQBbAFsAUwB5AHMAdABlAG0ALgBJAG4AdAAzADIALAAgAG0AcwBjAG8AcgBsAGkAYgBdAF0ALAAgAFYAUgBDAC4AVQBkAG8AbgAuAEMAbwBtAG0AbwBuAAoAAAAGAgAAAAAAAAAnAQQAAAB0AHkAcABlAAEXAAAAUwB5AHMAdABlAG0ALgBTAHQAcgBpAG4AZwAsACAAbQBzAGMAbwByAGwAaQBiACcBCgAAAFMAeQBtAGIAbwBsAE4AYQBtAGUAAR8AAABfAF8AXwBVAGQAbwBuAFMAaABhAHIAcABCAGUAaABhAHYAaQBvAHUAcgBWAGUAcgBzAGkAbwBuAF8AXwBfACcBBAAAAHQAeQBwAGUAARYAAABTAHkAcwB0AGUAbQAuAEkAbgB0ADMAMgAsACAAbQBzAGMAbwByAGwAaQBiABcBBQAAAFYAYQBsAHUAZQACAAAABwUHBQcF
+  publicVariablesUnityEngineObjects: []
+  publicVariablesSerializationDataFormat: 0
+--- !u!1 &1532184961066593460
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 818768472059155908}
+  - component: {fileID: 6088223655675299167}
+  - component: {fileID: 1789602602216921854}
+  m_Layer: 0
+  m_Name: '[Text] >'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &818768472059155908
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532184961066593460}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3689772473292677621}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &6088223655675299167
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532184961066593460}
+  m_CullTransparentMesh: 1
+--- !u!114 &1789602602216921854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532184961066593460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: '>'
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 099e905781af5a54092659ce4fd3b049, type: 2}
+  m_sharedMaterial: {fileID: -3840619290954953387, guid: 099e905781af5a54092659ce4fd3b049,
+    type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 72
+  m_fontSizeBase: 36
+  m_fontWeight: 400
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &4611297992957444838
 GameObject:
   m_ObjectHideFlags: 0
@@ -106,12 +332,13 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 818768472059155908}
   m_Father: {fileID: 4614324203594827695}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 905, y: 0}
+  m_AnchoredPosition: {x: 905, y: -68}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7746527406720069803
@@ -196,7 +423,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6202853392411446504}
+      - m_Target: {fileID: 5368833213652604986}
         m_TargetAssemblyTypeName: 
         m_MethodName: SendCustomEvent
         m_Mode: 5
@@ -300,7 +527,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6158794076996397558}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -365,7 +592,7 @@ MonoBehaviour:
   SynchronizePosition: 0
   AllowCollisionOwnershipTransfer: 0
   Reliable: 0
-  _syncMethod: 0
+  _syncMethod: 1
   serializedProgramAsset: {fileID: 11400000, guid: 9602ee5a8e9f5bb49a53ba881628e92f,
     type: 2}
   programSource: {fileID: 11400000, guid: 3038916e6d0dd404c925d5343c9b97aa, type: 2}
@@ -395,7 +622,7 @@ GameObject:
   - component: {fileID: 8703549122992640434}
   - component: {fileID: 6486484623531272581}
   m_Layer: 0
-  m_Name: '[Block] MemberGrid (1)'
+  m_Name: '[Block] MemberGrid [Page1]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -433,10 +660,10 @@ RectTransform:
   - {fileID: 5050647442219318172}
   m_Father: {fileID: 452720428098929329}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1920, y: 950}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6486484623531272581
 MonoBehaviour:
@@ -451,16 +678,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 50
-    m_Right: 50
-    m_Top: 50
-    m_Bottom: 50
+    m_Left: 0
+    m_Right: 0
+    m_Top: 220
+    m_Bottom: 60
   m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 250, y: 250}
-  m_Spacing: {x: 60, y: 50}
-  m_Constraint: 0
+  m_CellSize: {x: 270, y: 270}
+  m_Spacing: {x: 23.8, y: 24.3}
+  m_Constraint: 1
   m_ConstraintCount: 6
 --- !u!1 &7648226232513895980
 GameObject:
@@ -473,7 +700,7 @@ GameObject:
   - component: {fileID: 633280354893669765}
   - component: {fileID: 6773873975639667831}
   m_Layer: 0
-  m_Name: '[Block] MemberGrid'
+  m_Name: '[Block] MemberGrid [Page0]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -511,10 +738,10 @@ RectTransform:
   - {fileID: 9191686213700172980}
   m_Father: {fileID: 452720428098929329}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1920, y: 950}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6773873975639667831
 MonoBehaviour:
@@ -529,17 +756,112 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 50
-    m_Right: 50
-    m_Top: 50
-    m_Bottom: 50
+    m_Left: 0
+    m_Right: 0
+    m_Top: 220
+    m_Bottom: 60
   m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 250, y: 250}
-  m_Spacing: {x: 60, y: 50}
-  m_Constraint: 0
+  m_CellSize: {x: 270, y: 270}
+  m_Spacing: {x: 23.8, y: 24.3}
+  m_Constraint: 1
   m_ConstraintCount: 6
+--- !u!1 &8251548033880614440
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7834174099598589509}
+  - component: {fileID: 7862519370116895955}
+  - component: {fileID: 1743385294307570734}
+  m_Layer: 0
+  m_Name: '[ObjectActive] Page'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &7834174099598589509
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8251548033880614440}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 803722689254846367}
+  m_Father: {fileID: 3718980604116288691}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7862519370116895955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8251548033880614440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d205751d4af505d4fb57e9caebd36b96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  _udonSharpBackingUdonBehaviour: {fileID: 1743385294307570734}
+  DEBUG: 0
+  defaultActive: 0
+  mBool: {fileID: 7585672225775016149}
+  activeObjects:
+  - {fileID: 7648226232513895980}
+  - {fileID: 5168185247619899103}
+  disableObjects:
+  - {fileID: 6965792009966759020}
+  - {fileID: 8810803368471407387}
+--- !u!114 &1743385294307570734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8251548033880614440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45115577ef41a5b4ca741ed302693907, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactTextPlacement: {fileID: 0}
+  interactText: Use
+  interactTextGO: {fileID: 0}
+  proximity: 2
+  SynchronizePosition: 0
+  AllowCollisionOwnershipTransfer: 0
+  Reliable: 0
+  _syncMethod: 3
+  serializedProgramAsset: {fileID: 11400000, guid: 7b79c937d1e065f4bb09096183038f3e,
+    type: 2}
+  programSource: {fileID: 11400000, guid: f392dd762664cfd4fbd0b2c227ef2251, type: 2}
+  serializedPublicVariablesBytesString: Ai8AAAAAATIAAABWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgAuAFUAZABvAG4AVgBhAHIAaQBhAGIAbABlAFQAYQBiAGwAZQAsACAAVgBSAEMALgBVAGQAbwBuAC4AQwBvAG0AbQBvAG4AAAAAAAYBAAAAAAAAACcBBAAAAHQAeQBwAGUAAWgAAABTAHkAcwB0AGUAbQAuAEMAbwBsAGwAZQBjAHQAaQBvAG4AcwAuAEcAZQBuAGUAcgBpAGMALgBMAGkAcwB0AGAAMQBbAFsAVgBSAEMALgBVAGQAbwBuAC4AQwBvAG0AbQBvAG4ALgBJAG4AdABlAHIAZgBhAGMAZQBzAC4ASQBVAGQAbwBuAFYAYQByAGkAYQBiAGwAZQAsACAAVgBSAEMALgBVAGQAbwBuAC4AQwBvAG0AbQBvAG4AXQBdACwAIABtAHMAYwBvAHIAbABpAGIAAQEJAAAAVgBhAHIAaQBhAGIAbABlAHMALwEAAAABaAAAAFMAeQBzAHQAZQBtAC4AQwBvAGwAbABlAGMAdABpAG8AbgBzAC4ARwBlAG4AZQByAGkAYwAuAEwAaQBzAHQAYAAxAFsAWwBWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgAuAEkAbgB0AGUAcgBmAGEAYwBlAHMALgBJAFUAZABvAG4AVgBhAHIAaQBhAGIAbABlACwAIABWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgBdAF0ALAAgAG0AcwBjAG8AcgBsAGkAYgABAAAABgEAAAAAAAAAAi8CAAAAAUkAAABWAFIAQwAuAFUAZABvAG4ALgBDAG8AbQBtAG8AbgAuAFUAZABvAG4AVgBhAHIAaQBhAGIAbABlAGAAMQBbAFsAUwB5AHMAdABlAG0ALgBJAG4AdAAzADIALAAgAG0AcwBjAG8AcgBsAGkAYgBdAF0ALAAgAFYAUgBDAC4AVQBkAG8AbgAuAEMAbwBtAG0AbwBuAAIAAAAGAgAAAAAAAAAnAQQAAAB0AHkAcABlAAEXAAAAUwB5AHMAdABlAG0ALgBTAHQAcgBpAG4AZwAsACAAbQBzAGMAbwByAGwAaQBiACcBCgAAAFMAeQBtAGIAbwBsAE4AYQBtAGUAAR8AAABfAF8AXwBVAGQAbwBuAFMAaABhAHIAcABCAGUAaABhAHYAaQBvAHUAcgBWAGUAcgBzAGkAbwBuAF8AXwBfACcBBAAAAHQAeQBwAGUAARYAAABTAHkAcwB0AGUAbQAuAEkAbgB0ADMAMgAsACAAbQBzAGMAbwByAGwAaQBiABcBBQAAAFYAYQBsAHUAZQACAAAABwUHBQcF
+  publicVariablesUnityEngineObjects: []
+  publicVariablesSerializationDataFormat: 0
 --- !u!1 &8810803368471407387
 GameObject:
   m_ObjectHideFlags: 0
@@ -572,12 +894,13 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 8789152023064159257}
   m_Father: {fileID: 4614324203594827695}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -900, y: 0}
+  m_AnchoredPosition: {x: -900, y: -68.000015}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1469449043456244986
@@ -662,7 +985,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6202853392411446504}
+      - m_Target: {fileID: 5368833213652604986}
         m_TargetAssemblyTypeName: 
         m_MethodName: SendCustomEvent
         m_Mode: 5
@@ -708,6 +1031,141 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &8880026893626851756
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8789152023064159257}
+  - component: {fileID: 2992919567213944513}
+  - component: {fileID: 1074634726577710783}
+  m_Layer: 0
+  m_Name: '[Text] <'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8789152023064159257
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8880026893626851756}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8631534317488396528}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &2992919567213944513
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8880026893626851756}
+  m_CullTransparentMesh: 1
+--- !u!114 &1074634726577710783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8880026893626851756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: <
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 099e905781af5a54092659ce4fd3b049, type: 2}
+  m_sharedMaterial: {fileID: -3840619290954953387, guid: 099e905781af5a54092659ce4fd3b049,
+    type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 72
+  m_fontSizeBase: 36
+  m_fontWeight: 400
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1001 &113478849246358292
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -721,6 +1179,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] SelectMember (1)'
       objectReference: {fileID: 0}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3840619290954953387, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
     - target: {fileID: 5610673526757389002, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -732,6 +1202,12 @@ PrefabInstance:
       propertyPath: serializationData.SerializedFormat
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6407377487314657962, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 09cdacc05caf1334989559f1634036bc,
+        type: 3}
     - target: {fileID: 8495190412898635728, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: m_Pivot.x
@@ -856,6 +1332,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] SelectMember (13)'
       objectReference: {fileID: 0}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3840619290954953387, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
     - target: {fileID: 5610673526757389002, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -867,6 +1355,12 @@ PrefabInstance:
       propertyPath: serializationData.SerializedFormat
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6407377487314657962, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 09cdacc05caf1334989559f1634036bc,
+        type: 3}
     - target: {fileID: 8495190412898635728, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: m_Pivot.x
@@ -991,6 +1485,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] SelectMember (2)'
       objectReference: {fileID: 0}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3840619290954953387, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
     - target: {fileID: 5610673526757389002, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -1002,6 +1508,12 @@ PrefabInstance:
       propertyPath: serializationData.SerializedFormat
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6407377487314657962, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 09cdacc05caf1334989559f1634036bc,
+        type: 3}
     - target: {fileID: 8495190412898635728, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1126,6 +1638,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] SelectMember (15)'
       objectReference: {fileID: 0}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3840619290954953387, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
     - target: {fileID: 5610673526757389002, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -1137,6 +1661,12 @@ PrefabInstance:
       propertyPath: serializationData.SerializedFormat
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6407377487314657962, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 09cdacc05caf1334989559f1634036bc,
+        type: 3}
     - target: {fileID: 8495190412898635728, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1261,6 +1791,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] SelectMember (17)'
       objectReference: {fileID: 0}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3840619290954953387, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
     - target: {fileID: 5610673526757389002, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -1272,6 +1814,12 @@ PrefabInstance:
       propertyPath: serializationData.SerializedFormat
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6407377487314657962, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 09cdacc05caf1334989559f1634036bc,
+        type: 3}
     - target: {fileID: 8495190412898635728, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1396,6 +1944,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] SelectMember'
       objectReference: {fileID: 0}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3840619290954953387, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
     - target: {fileID: 5610673526757389002, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -1407,6 +1967,12 @@ PrefabInstance:
       propertyPath: serializationData.SerializedFormat
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6407377487314657962, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 09cdacc05caf1334989559f1634036bc,
+        type: 3}
     - target: {fileID: 8495190412898635728, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1531,6 +2097,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] SelectMember (9)'
       objectReference: {fileID: 0}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3840619290954953387, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
     - target: {fileID: 5610673526757389002, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -1542,6 +2120,12 @@ PrefabInstance:
       propertyPath: serializationData.SerializedFormat
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6407377487314657962, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 09cdacc05caf1334989559f1634036bc,
+        type: 3}
     - target: {fileID: 8495190412898635728, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1666,6 +2250,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] SelectMember (10)'
       objectReference: {fileID: 0}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3840619290954953387, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
     - target: {fileID: 5610673526757389002, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -1677,6 +2273,12 @@ PrefabInstance:
       propertyPath: serializationData.SerializedFormat
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6407377487314657962, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 09cdacc05caf1334989559f1634036bc,
+        type: 3}
     - target: {fileID: 8495190412898635728, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1801,6 +2403,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] SelectMember (3)'
       objectReference: {fileID: 0}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3840619290954953387, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
     - target: {fileID: 5610673526757389002, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -1812,6 +2426,12 @@ PrefabInstance:
       propertyPath: serializationData.SerializedFormat
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6407377487314657962, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 09cdacc05caf1334989559f1634036bc,
+        type: 3}
     - target: {fileID: 8495190412898635728, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1936,6 +2556,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] SelectMember (6)'
       objectReference: {fileID: 0}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3840619290954953387, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
     - target: {fileID: 5610673526757389002, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -1947,6 +2579,12 @@ PrefabInstance:
       propertyPath: serializationData.SerializedFormat
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6407377487314657962, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 09cdacc05caf1334989559f1634036bc,
+        type: 3}
     - target: {fileID: 8495190412898635728, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: m_Pivot.x
@@ -2071,6 +2709,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] SelectMember (8)'
       objectReference: {fileID: 0}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3840619290954953387, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
     - target: {fileID: 5610673526757389002, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -2082,6 +2732,12 @@ PrefabInstance:
       propertyPath: serializationData.SerializedFormat
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6407377487314657962, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 09cdacc05caf1334989559f1634036bc,
+        type: 3}
     - target: {fileID: 8495190412898635728, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: m_Pivot.x
@@ -2206,6 +2862,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] SelectMember (12)'
       objectReference: {fileID: 0}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3840619290954953387, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
     - target: {fileID: 5610673526757389002, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -2217,6 +2885,12 @@ PrefabInstance:
       propertyPath: serializationData.SerializedFormat
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6407377487314657962, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 09cdacc05caf1334989559f1634036bc,
+        type: 3}
     - target: {fileID: 8495190412898635728, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: m_Pivot.x
@@ -2341,6 +3015,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] SelectMember (11)'
       objectReference: {fileID: 0}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3840619290954953387, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
     - target: {fileID: 5610673526757389002, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -2352,6 +3038,12 @@ PrefabInstance:
       propertyPath: serializationData.SerializedFormat
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6407377487314657962, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 09cdacc05caf1334989559f1634036bc,
+        type: 3}
     - target: {fileID: 8495190412898635728, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: m_Pivot.x
@@ -2476,6 +3168,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] SelectMember (16)'
       objectReference: {fileID: 0}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3840619290954953387, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
     - target: {fileID: 5610673526757389002, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -2487,6 +3191,12 @@ PrefabInstance:
       propertyPath: serializationData.SerializedFormat
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6407377487314657962, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 09cdacc05caf1334989559f1634036bc,
+        type: 3}
     - target: {fileID: 8495190412898635728, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: m_Pivot.x
@@ -2611,6 +3321,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] SelectMember (11)'
       objectReference: {fileID: 0}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3840619290954953387, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
     - target: {fileID: 5610673526757389002, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -2622,6 +3344,12 @@ PrefabInstance:
       propertyPath: serializationData.SerializedFormat
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6407377487314657962, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 09cdacc05caf1334989559f1634036bc,
+        type: 3}
     - target: {fileID: 8495190412898635728, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: m_Pivot.x
@@ -2746,6 +3474,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] SelectMember (14)'
       objectReference: {fileID: 0}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3840619290954953387, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
     - target: {fileID: 5610673526757389002, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -2757,6 +3497,12 @@ PrefabInstance:
       propertyPath: serializationData.SerializedFormat
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6407377487314657962, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 09cdacc05caf1334989559f1634036bc,
+        type: 3}
     - target: {fileID: 8495190412898635728, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: m_Pivot.x
@@ -2881,6 +3627,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] SelectMember (1)'
       objectReference: {fileID: 0}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3840619290954953387, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
     - target: {fileID: 5610673526757389002, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -2892,6 +3650,12 @@ PrefabInstance:
       propertyPath: serializationData.SerializedFormat
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6407377487314657962, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 09cdacc05caf1334989559f1634036bc,
+        type: 3}
     - target: {fileID: 8495190412898635728, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: m_Pivot.x
@@ -3016,6 +3780,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] SelectMember (12)'
       objectReference: {fileID: 0}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3840619290954953387, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
     - target: {fileID: 5610673526757389002, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -3027,6 +3803,12 @@ PrefabInstance:
       propertyPath: serializationData.SerializedFormat
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6407377487314657962, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 09cdacc05caf1334989559f1634036bc,
+        type: 3}
     - target: {fileID: 8495190412898635728, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: m_Pivot.x
@@ -3151,6 +3933,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] SelectMember (17)'
       objectReference: {fileID: 0}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3840619290954953387, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
     - target: {fileID: 5610673526757389002, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -3162,6 +3956,12 @@ PrefabInstance:
       propertyPath: serializationData.SerializedFormat
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6407377487314657962, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 09cdacc05caf1334989559f1634036bc,
+        type: 3}
     - target: {fileID: 8495190412898635728, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: m_Pivot.x
@@ -3286,6 +4086,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] SelectMember (7)'
       objectReference: {fileID: 0}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3840619290954953387, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
     - target: {fileID: 5610673526757389002, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -3297,6 +4109,12 @@ PrefabInstance:
       propertyPath: serializationData.SerializedFormat
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6407377487314657962, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 09cdacc05caf1334989559f1634036bc,
+        type: 3}
     - target: {fileID: 8495190412898635728, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: m_Pivot.x
@@ -3421,6 +4239,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] SelectMember (15)'
       objectReference: {fileID: 0}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3840619290954953387, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
     - target: {fileID: 5610673526757389002, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -3432,6 +4262,12 @@ PrefabInstance:
       propertyPath: serializationData.SerializedFormat
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6407377487314657962, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 09cdacc05caf1334989559f1634036bc,
+        type: 3}
     - target: {fileID: 8495190412898635728, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: m_Pivot.x
@@ -3556,6 +4392,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] SelectMember (7)'
       objectReference: {fileID: 0}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3840619290954953387, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
     - target: {fileID: 5610673526757389002, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -3567,6 +4415,12 @@ PrefabInstance:
       propertyPath: serializationData.SerializedFormat
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6407377487314657962, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 09cdacc05caf1334989559f1634036bc,
+        type: 3}
     - target: {fileID: 8495190412898635728, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: m_Pivot.x
@@ -3691,6 +4545,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] SelectMember (10)'
       objectReference: {fileID: 0}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3840619290954953387, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
     - target: {fileID: 5610673526757389002, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -3702,6 +4568,12 @@ PrefabInstance:
       propertyPath: serializationData.SerializedFormat
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6407377487314657962, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 09cdacc05caf1334989559f1634036bc,
+        type: 3}
     - target: {fileID: 8495190412898635728, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: m_Pivot.x
@@ -3826,6 +4698,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] SelectMember (2)'
       objectReference: {fileID: 0}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3840619290954953387, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
     - target: {fileID: 5610673526757389002, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -3837,6 +4721,12 @@ PrefabInstance:
       propertyPath: serializationData.SerializedFormat
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6407377487314657962, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 09cdacc05caf1334989559f1634036bc,
+        type: 3}
     - target: {fileID: 8495190412898635728, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: m_Pivot.x
@@ -3961,6 +4851,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] SelectMember (8)'
       objectReference: {fileID: 0}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3840619290954953387, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
     - target: {fileID: 5610673526757389002, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -3972,6 +4874,12 @@ PrefabInstance:
       propertyPath: serializationData.SerializedFormat
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6407377487314657962, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 09cdacc05caf1334989559f1634036bc,
+        type: 3}
     - target: {fileID: 8495190412898635728, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: m_Pivot.x
@@ -4096,6 +5004,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] SelectMember (16)'
       objectReference: {fileID: 0}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3840619290954953387, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
     - target: {fileID: 5610673526757389002, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -4107,6 +5027,12 @@ PrefabInstance:
       propertyPath: serializationData.SerializedFormat
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6407377487314657962, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 09cdacc05caf1334989559f1634036bc,
+        type: 3}
     - target: {fileID: 8495190412898635728, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: m_Pivot.x
@@ -4231,6 +5157,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] SelectMember (4)'
       objectReference: {fileID: 0}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3840619290954953387, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
     - target: {fileID: 5610673526757389002, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -4242,6 +5180,12 @@ PrefabInstance:
       propertyPath: serializationData.SerializedFormat
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6407377487314657962, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 09cdacc05caf1334989559f1634036bc,
+        type: 3}
     - target: {fileID: 8495190412898635728, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: m_Pivot.x
@@ -4366,6 +5310,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] SelectMember (9)'
       objectReference: {fileID: 0}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3840619290954953387, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
     - target: {fileID: 5610673526757389002, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -4377,6 +5333,12 @@ PrefabInstance:
       propertyPath: serializationData.SerializedFormat
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6407377487314657962, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 09cdacc05caf1334989559f1634036bc,
+        type: 3}
     - target: {fileID: 8495190412898635728, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: m_Pivot.x
@@ -4501,6 +5463,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] SelectMember (13)'
       objectReference: {fileID: 0}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3840619290954953387, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
     - target: {fileID: 5610673526757389002, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -4512,6 +5486,12 @@ PrefabInstance:
       propertyPath: serializationData.SerializedFormat
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6407377487314657962, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 09cdacc05caf1334989559f1634036bc,
+        type: 3}
     - target: {fileID: 8495190412898635728, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: m_Pivot.x
@@ -4636,6 +5616,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] SelectMember (6)'
       objectReference: {fileID: 0}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3840619290954953387, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
     - target: {fileID: 5610673526757389002, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -4647,6 +5639,12 @@ PrefabInstance:
       propertyPath: serializationData.SerializedFormat
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6407377487314657962, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 09cdacc05caf1334989559f1634036bc,
+        type: 3}
     - target: {fileID: 8495190412898635728, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: m_Pivot.x
@@ -4758,275 +5756,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 7329179235184354561}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &7370979555887661341
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 3718980604116288691}
-    m_Modifications:
-    - target: {fileID: 788808386085551960, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-      propertyPath: m_Pivot.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 788808386085551960, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-      propertyPath: m_Pivot.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 788808386085551960, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 788808386085551960, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 788808386085551960, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 788808386085551960, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 788808386085551960, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 788808386085551960, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 788808386085551960, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 788808386085551960, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 788808386085551960, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 788808386085551960, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 788808386085551960, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 788808386085551960, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 788808386085551960, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 788808386085551960, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 788808386085551960, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 788808386085551960, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 788808386085551960, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 788808386085551960, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 808411158223609045, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 239.72
-      objectReference: {fileID: 0}
-    - target: {fileID: 808411158223609045, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 817330145926567374, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-      propertyPath: activeObjects.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 817330145926567374, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-      propertyPath: serializationData.Prefab
-      value: 
-      objectReference: {fileID: 817330145926567374, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-    - target: {fileID: 817330145926567374, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-      propertyPath: disableObjects.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 817330145926567374, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-      propertyPath: activeObjects.Array.data[0]
-      value: 
-      objectReference: {fileID: 7648226232513895980}
-    - target: {fileID: 817330145926567374, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-      propertyPath: activeObjects.Array.data[1]
-      value: 
-      objectReference: {fileID: 5168185247619899103}
-    - target: {fileID: 817330145926567374, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-      propertyPath: disableObjects.Array.data[0]
-      value: 
-      objectReference: {fileID: 6965792009966759020}
-    - target: {fileID: 817330145926567374, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-      propertyPath: disableObjects.Array.data[1]
-      value: 
-      objectReference: {fileID: 8810803368471407387}
-    - target: {fileID: 817330145926567374, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-      propertyPath: serializationData.SerializedFormat
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1497897596509693749, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-      propertyPath: m_Name
-      value: ObjectActive_Sync
-      objectReference: {fileID: 0}
-    - target: {fileID: 2707485995879226899, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-      propertyPath: serializationData.Prefab
-      value: 
-      objectReference: {fileID: 2707485995879226899, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-    - target: {fileID: 2707485995879226899, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-      propertyPath: serializationData.SerializedFormat
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4654010385659658811, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5466197724184845364, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5466197724184845364, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5466197724184845364, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 239.72
-      objectReference: {fileID: 0}
-    - target: {fileID: 5466197724184845364, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 5466197724184845364, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 119.86
-      objectReference: {fileID: 0}
-    - target: {fileID: 5466197724184845364, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -40
-      objectReference: {fileID: 0}
-    - target: {fileID: 8608688276214751172, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8608688276214751172, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8608688276214751172, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 219.72
-      objectReference: {fileID: 0}
-    - target: {fileID: 8608688276214751172, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 45.21
-      objectReference: {fileID: 0}
-    - target: {fileID: 8608688276214751172, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 119.86
-      objectReference: {fileID: 0}
-    - target: {fileID: 8608688276214751172, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -40
-      objectReference: {fileID: 0}
-    - target: {fileID: 9113954594338010419, guid: 557909989d982e84da1a343a02680c4e,
-        type: 3}
-      propertyPath: serializedProgramAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 7b79c937d1e065f4bb09096183038f3e,
-        type: 2}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 557909989d982e84da1a343a02680c4e, type: 3}
---- !u!114 &6202853392411446504 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3485236980753305077, guid: 557909989d982e84da1a343a02680c4e,
-    type: 3}
-  m_PrefabInstance: {fileID: 7370979555887661341}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45115577ef41a5b4ca741ed302693907, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!224 &7834174099598589509 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 788808386085551960, guid: 557909989d982e84da1a343a02680c4e,
-    type: 3}
-  m_PrefabInstance: {fileID: 7370979555887661341}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7427730476636344822
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5040,6 +5769,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] SelectMember (5)'
       objectReference: {fileID: 0}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3840619290954953387, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
     - target: {fileID: 5610673526757389002, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -5051,6 +5792,12 @@ PrefabInstance:
       propertyPath: serializationData.SerializedFormat
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6407377487314657962, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 09cdacc05caf1334989559f1634036bc,
+        type: 3}
     - target: {fileID: 8495190412898635728, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: m_Pivot.x
@@ -5175,6 +5922,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] SelectMember'
       objectReference: {fileID: 0}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3840619290954953387, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
     - target: {fileID: 5610673526757389002, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -5310,6 +6069,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] SelectMember (4)'
       objectReference: {fileID: 0}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3840619290954953387, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
     - target: {fileID: 5610673526757389002, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -5321,6 +6092,12 @@ PrefabInstance:
       propertyPath: serializationData.SerializedFormat
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6407377487314657962, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 09cdacc05caf1334989559f1634036bc,
+        type: 3}
     - target: {fileID: 8495190412898635728, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: m_Pivot.x
@@ -5445,6 +6222,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] SelectMember (5)'
       objectReference: {fileID: 0}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3840619290954953387, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
     - target: {fileID: 5610673526757389002, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -5456,6 +6245,12 @@ PrefabInstance:
       propertyPath: serializationData.SerializedFormat
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6407377487314657962, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 09cdacc05caf1334989559f1634036bc,
+        type: 3}
     - target: {fileID: 8495190412898635728, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: m_Pivot.x
@@ -5580,6 +6375,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] SelectMember (3)'
       objectReference: {fileID: 0}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3840619290954953387, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
     - target: {fileID: 5610673526757389002, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -5591,6 +6398,12 @@ PrefabInstance:
       propertyPath: serializationData.SerializedFormat
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6407377487314657962, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 09cdacc05caf1334989559f1634036bc,
+        type: 3}
     - target: {fileID: 8495190412898635728, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: m_Pivot.x
@@ -5715,6 +6528,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Button] SelectMember (14)'
       objectReference: {fileID: 0}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
+    - target: {fileID: 5332485666166314426, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3840619290954953387, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
     - target: {fileID: 5610673526757389002, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -5726,6 +6551,12 @@ PrefabInstance:
       propertyPath: serializationData.SerializedFormat
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6407377487314657962, guid: 94ed9b0c578239449af911178314a688,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 09cdacc05caf1334989559f1634036bc,
+        type: 3}
     - target: {fileID: 8495190412898635728, guid: 94ed9b0c578239449af911178314a688,
         type: 3}
       propertyPath: m_Pivot.x
