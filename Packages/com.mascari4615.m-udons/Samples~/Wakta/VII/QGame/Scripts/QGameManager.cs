@@ -13,7 +13,7 @@ namespace Mascari4615
 		[SerializeField] private Animator showAnswerAnimator;
 		[SerializeField] private TextMeshProUGUI showAnswerText;
 		[SerializeField] private Image quizTextBackground;
-		[SerializeField] private MTextSync curQuizIndexInputField;
+		[SerializeField] private MString curQuizIndexInputField;
 		[SerializeField] private TextMeshProUGUI oxCountText;
 
 		public override void UpdateStuff()

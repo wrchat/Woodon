@@ -15,7 +15,7 @@ namespace Mascari4615.Project.ISD.JRR.DateWithJRR
 		[SerializeField] private Image[] kakaotalkBackgrounds;
 		[SerializeField] private TextMeshProUGUI[] kakaotalkTexts;
 		[SerializeField] private Image[] kakaotalkButtonImages;
-		[SerializeField] private MTextSync[] kakaotalkTextSyncs;
+		[SerializeField] private MString[] kakaotalkTextSyncs;
 
 		[SerializeField] private MValue curDetailAnswerIndex;
 		public int CurDetailAnswerIndex => curDetailAnswerIndex.Value;

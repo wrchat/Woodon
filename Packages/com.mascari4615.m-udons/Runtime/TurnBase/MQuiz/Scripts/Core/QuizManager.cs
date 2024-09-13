@@ -14,7 +14,7 @@ namespace Mascari4615
 		[SerializeField] private Transform wrongPos;
 		[SerializeField] private Transform[] quizDataParents;
 		[SerializeField] protected MValue quizDataParentsIndex;
-		[SerializeField] private MTextSync seatIndexInputField;
+		[SerializeField] private MString seatIndexInputField;
 
 		[field: Header("_" + nameof(QuizManager) + "_GameRule")]
 		[field: SerializeField] public bool GameRule_ADD_SCORE_WHEN_CORRECT_ANSWER { get; private set; } = false;

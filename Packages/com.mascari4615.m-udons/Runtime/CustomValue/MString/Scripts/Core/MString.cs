@@ -7,13 +7,13 @@ using static Mascari4615.MUtil;
 namespace Mascari4615
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class MTextSync : MEventSender
+	public class MString : MEventSender
 	{
-		[Header("_" + nameof(MTextSync))]
+		[Header("_" + nameof(MString))]
 		[SerializeField] private TMP_InputField inputField;
 		[SerializeField] private TextMeshProUGUI[] texts;
 
-		[Header("_" + nameof(MTextSync) + " - Options")]
+		[Header("_" + nameof(MString) + " - Options")]
 		[SerializeField] private string defaultString = string.Empty;
 		[SerializeField] private bool useDefaultWhenEmpty = true;
 		[SerializeField] private bool sync;
