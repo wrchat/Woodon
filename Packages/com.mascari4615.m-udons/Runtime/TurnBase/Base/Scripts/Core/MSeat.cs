@@ -36,7 +36,7 @@ namespace Mascari4615
 
 		public int Index { get; private set; }
 
-		protected MTurnBaseManager seatManager;
+		protected MTurnBaseManager turnBaseManager;
 
 		[Header("_" + nameof(MSeat))]
 		[SerializeField] private MBool ownerMBool;
@@ -55,15 +55,15 @@ namespace Mascari4615
 			return OwnerID == targetPlayer.playerId;
 		}
 
-		public virtual void Init(MTurnBaseManager seatManager, int index)
+		public virtual void Init(MTurnBaseManager turnBaseManager, int index)
 		{
-			this.seatManager = seatManager;
+			this.turnBaseManager = turnBaseManager;
 		
 			Index = index;
 			foreach (TextMeshProUGUI seatIndexText in indexTexts)
 				seatIndexText.text = index.ToString();
 
-			SetData(seatManager.DefaultData);
+			SetData(turnBaseManager.DefaultData);
 
 			UpdateStuff();
 		}
@@ -82,7 +82,7 @@ namespace Mascari4615
 
 		protected virtual void OnOwnerChange(DataChangeState changeState)
 		{
-			if (seatManager == null)
+			if (turnBaseManager == null)
 				return;
 
 			if (ownerMBool)
@@ -91,7 +91,7 @@ namespace Mascari4615
 			UpdateOwnerUI();
 
 			if (changeState != DataChangeState.None)
-				seatManager.UpdateStuff();
+				turnBaseManager.UpdateStuff();
 		}
 
 		private void UpdateOwnerUI()
@@ -114,34 +114,34 @@ namespace Mascari4615
 		{
 			// MDebugLog($"{nameof(OnDataChange)}, {Data}");
 			
-			if (seatManager == null)
+			if (turnBaseManager == null)
 				return;
 
 			UpdateCurDataUI();
 
 			if (changeState != DataChangeState.None)
-				seatManager.UpdateStuff();
+				turnBaseManager.UpdateStuff();
 		}
 
 		private void UpdateCurDataUI()
 		{
-			if (seatManager == null)
+			if (turnBaseManager == null)
 				return;
 
-			if (seatManager.IsDataElement)
+			if (turnBaseManager.IsDataElement)
 			{
 				foreach (TextMeshProUGUI curDataText in curDataTexts)
-					curDataText.text = (Data != NONE_INT) ? seatManager.DataToString[Data] : string.Empty;
+					curDataText.text = (Data != NONE_INT) ? turnBaseManager.DataToString[Data] : string.Empty;
 			
 				foreach (Image curDataImage in curDataImages)
 				{
-					if (seatManager.UseDataSprites)
+					if (turnBaseManager.UseDataSprites)
 					{
-						curDataImage.sprite = (Data != NONE_INT) ? seatManager.DataSprites[Data] : seatManager.DataNoneSprite;
+						curDataImage.sprite = (Data != NONE_INT) ? turnBaseManager.DataSprites[Data] : turnBaseManager.DataNoneSprite;
 					}
 					else
 					{
-						curDataImage.sprite = (Data != NONE_INT) ? null : seatManager.DataNoneSprite;
+						curDataImage.sprite = (Data != NONE_INT) ? null : turnBaseManager.DataNoneSprite;
 					}
 				}
 			}
@@ -154,32 +154,32 @@ namespace Mascari4615
 
 		private void UpdateDataUI()
 		{
-			if (seatManager == null)
+			if (turnBaseManager == null)
 				return;
 
-			if (seatManager.IsDataElement)
+			if (turnBaseManager.IsDataElement)
 			{
 				for (int i = 0; i < dataTexts.Length; i++)
 				{
-					if (i >= seatManager.DataToString.Length)
+					if (i >= turnBaseManager.DataToString.Length)
 					{
 						dataTexts[i].text = i.ToString();
 					}
 					else
 					{
-						dataTexts[i].text = seatManager.DataToString[i];
+						dataTexts[i].text = turnBaseManager.DataToString[i];
 					}
 				}
 
 				for (int i = 0; i < dataImages.Length; i++)
 				{
-					if (i >= seatManager.DataSprites.Length)
+					if (i >= turnBaseManager.DataSprites.Length)
 					{
-						dataImages[i].sprite = seatManager.DataNoneSprite;
+						dataImages[i].sprite = turnBaseManager.DataNoneSprite;
 					}
 					else
 					{
-						dataImages[i].sprite = seatManager.DataSprites[i];
+						dataImages[i].sprite = turnBaseManager.DataSprites[i];
 					}
 				}
 			}
@@ -199,16 +199,16 @@ namespace Mascari4615
 
 		public void ResetData()
 		{
-			SetData(seatManager.DefaultData);
+			SetData(turnBaseManager.DefaultData);
 		}
 
 		public void UseSeat()
 		{
-			if (seatManager.ResetDataWhenOwnerChange)
+			if (turnBaseManager.ResetDataWhenOwnerChange)
 				ResetData();
 			
 			SetOwner();
-			foreach (MSeat seat in seatManager.TurnSeats)
+			foreach (MSeat seat in turnBaseManager.TurnSeats)
 			{
 				if (Networking.LocalPlayer.playerId == seat.OwnerID)
 					seat.ResetSeat();
@@ -219,7 +219,7 @@ namespace Mascari4615
 
 		public void ResetSeat()
 		{
-			if (seatManager.ResetDataWhenOwnerChange)
+			if (turnBaseManager.ResetDataWhenOwnerChange)
 				ResetData();
 
 			SetOwner();

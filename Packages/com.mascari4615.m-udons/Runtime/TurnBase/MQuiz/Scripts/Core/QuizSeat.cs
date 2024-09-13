@@ -16,7 +16,7 @@ namespace Mascari4615
 
 		public int Score => Data;
 		public QuizAnswerType ExpectedAnswer => (QuizAnswerType)TurnData;
-		protected QuizManager QuizManager => (QuizManager)seatManager;
+		protected QuizManager QuizManager => (QuizManager)turnBaseManager;
 
 		public bool HasSelectedAnswer => ExpectedAnswer != QuizAnswerType.None;
 		public bool IsAnswerCorrect => ExpectedAnswer == QuizManager.CurQuizData.QuizAnswer;

@@ -28,12 +28,12 @@ namespace Mascari4615
 		[SerializeField] private TextMeshProUGUI[] turnDataTexts;
 		[SerializeField] private Image[] turnDataImages;
 
-		public override void Init(MTurnBaseManager seatManager, int index)
+		public override void Init(MTurnBaseManager turnBaseManager, int index)
 		{
-			base.Init(seatManager, index);
+			base.Init(turnBaseManager, index);
 
 			if (Networking.IsMaster)
-				SetTurnData(seatManager.DefaultTurnData);
+				SetTurnData(turnBaseManager.DefaultTurnData);
 		}
 
 		public void SetTurnData(int newTurnData)
@@ -47,7 +47,7 @@ namespace Mascari4615
 
 		public void ResetTurnData()
 		{
-			SetTurnData(seatManager.DefaultTurnData);
+			SetTurnData(turnBaseManager.DefaultTurnData);
 		}
 
 		protected virtual void OnTurnDataChange(DataChangeState changeState)
@@ -57,26 +57,26 @@ namespace Mascari4615
 			UpdateCurTurnDataUI();
 
 			if (changeState != DataChangeState.None)
-				seatManager.UpdateStuff();
+				turnBaseManager.UpdateStuff();
 		}
 
 		private void UpdateCurTurnDataUI()
 		{
-			if (seatManager == null)
+			if (turnBaseManager == null)
 				return;
 
-			if (seatManager.IsTurnDataElement)
+			if (turnBaseManager.IsTurnDataElement)
 			{
 				string curTurnDataString = (TurnData == NONE_INT) ? string.Empty :
-										(seatManager.TurnDataToString.Length > TurnData) ? seatManager.TurnDataToString[TurnData] : TurnData.ToString();
+										(turnBaseManager.TurnDataToString.Length > TurnData) ? turnBaseManager.TurnDataToString[TurnData] : TurnData.ToString();
 				foreach (TextMeshProUGUI turnDataText in curTurnDataTexts)
 					turnDataText.text = curTurnDataString;
 
-				Sprite[] turnDataSprites = seatManager.TurnDataSprites;
-				Sprite noneSprite = seatManager.TurnDataNoneSprite;
+				Sprite[] turnDataSprites = turnBaseManager.TurnDataSprites;
+				Sprite noneSprite = turnBaseManager.TurnDataNoneSprite;
 				foreach (Image curTurnDataImage in curTurnDataImages)
 				{
-					if (seatManager.UseTurnDataSprites)
+					if (turnBaseManager.UseTurnDataSprites)
 					{
 						curTurnDataImage.sprite = (TurnData != NONE_INT) ? turnDataSprites[TurnData] : noneSprite;
 					}
@@ -95,32 +95,32 @@ namespace Mascari4615
 
 		private void UpdateTurnDataUI()
 		{
-			if (seatManager == null)
+			if (turnBaseManager == null)
 				return;
 
-			if (seatManager.IsTurnDataElement)
+			if (turnBaseManager.IsTurnDataElement)
 			{
 				for (int i = 0; i < turnDataTexts.Length; i++)
 				{
-					if (i >= seatManager.TurnDataToString.Length)
+					if (i >= turnBaseManager.TurnDataToString.Length)
 					{
 						turnDataTexts[i].text = i.ToString();
 					}
 					else
 					{
-						turnDataTexts[i].text = seatManager.TurnDataToString[i];
+						turnDataTexts[i].text = turnBaseManager.TurnDataToString[i];
 					}
 				}
 
 				for (int i = 0; i < turnDataImages.Length; i++)
 				{
-					if (i >= seatManager.TurnDataToString.Length)
+					if (i >= turnBaseManager.TurnDataToString.Length)
 					{
-						turnDataImages[i].sprite = seatManager.TurnDataNoneSprite;
+						turnDataImages[i].sprite = turnBaseManager.TurnDataNoneSprite;
 					}
 					else
 					{
-						turnDataImages[i].sprite = seatManager.TurnDataSprites[i];
+						turnDataImages[i].sprite = turnBaseManager.TurnDataSprites[i];
 					}
 				}
 			}
@@ -138,11 +138,11 @@ namespace Mascari4615
 			UpdateTurnDataUI();
 			UpdateCurTurnDataUI();
 
-			// SeatManager.UpdateStuff에서 각 Seat.UpdateStuff를 호출
-			// OnTurnDataChange에서는 역으로 SeatManager.UpdateStuff를 호출
+			// TurnBaseManager.UpdateStuff에서 각 Seat.UpdateStuff를 호출
+			// OnTurnDataChange에서는 역으로 TurnBaseManager.UpdateStuff를 호출
 			// 때문에 무한 루프를 방지하기 위해,
 			// TurnData가 변경되어 Setter에서 OnTurnDataChange가 호출된 것인지,
-			// SeatManager.UpdateStuff가 호출되어 OnTurnDataChange가 호출된 것인지 구분시켜줄 필요가 있음.
+			// TurnBaseManager.UpdateStuff가 호출되어 OnTurnDataChange가 호출된 것인지 구분시켜줄 필요가 있음.
 			// OnTurnDataChange(DataChangeState.None);
 			
 			// 240801 → OnTurnDataChange에서 UI 갱신 코드를 분리
@@ -152,7 +152,7 @@ namespace Mascari4615
 		{
 			if (changeState != DataChangeState.None)
 			{
-				if (seatManager.ResetTurnDataWhenOwnerChange)
+				if (turnBaseManager.ResetTurnDataWhenOwnerChange)
 					ResetTurnData();
 			}
 

@@ -13,7 +13,7 @@ namespace Mascari4615
 
 		protected void TryVote(int newTurnData)
 		{
-			if (seatManager.CurGameState != (int)VoteState.VoteTime)
+			if (turnBaseManager.CurGameState != (int)VoteState.VoteTime)
 				return;
 
 			SetTurnData(newTurnData);

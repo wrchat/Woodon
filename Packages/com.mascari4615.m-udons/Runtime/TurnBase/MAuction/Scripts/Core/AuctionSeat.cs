@@ -19,10 +19,10 @@ namespace Mascari4615
 
 		public void UpdateTryPoint()
 		{
-			if (seatManager.CurGameState != (int)AuctionState.AuctionTime)
+			if (turnBaseManager.CurGameState != (int)AuctionState.AuctionTime)
 				return;
 
-			AuctionManager auctionManager = (AuctionManager)seatManager;
+			AuctionManager auctionManager = (AuctionManager)turnBaseManager;
 
 			if (auctionManager.GetMaxTurnData() >= tryPoint_MValue.Value)
 				return;
@@ -63,13 +63,13 @@ namespace Mascari4615
 		{
 			base.OnTurnDataChange(changeState);
 
-			if (seatManager.CurGameState != (int)AuctionState.AuctionTime)
+			if (turnBaseManager.CurGameState != (int)AuctionState.AuctionTime)
 				return;
 
 			if (changeState != DataChangeState.Greater)
 				return;
 
-			if (IsOwner(seatManager.gameObject) == false)
+			if (IsOwner(turnBaseManager.gameObject) == false)
 				return;
 
 			if (timer != null)
