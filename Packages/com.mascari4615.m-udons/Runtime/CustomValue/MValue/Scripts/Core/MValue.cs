@@ -137,7 +137,7 @@ namespace Mascari4615
 
 		private void OnValueChange()
 		{
-			MDebugLog(nameof(OnValueChange));
+			MDebugLog($"{nameof(OnValueChange)} : {Value}");
 
 			if (isMaxValue != null)
 				isMaxValue.SetValue(Value == MaxValue);

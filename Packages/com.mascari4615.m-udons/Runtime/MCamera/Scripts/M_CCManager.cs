@@ -11,13 +11,14 @@ namespace Mascari4615
 	public class M_CCManager : MBase
 	{
 		[Header("_" + nameof(M_CCManager))]
+		[SerializeField] private M_CCData[] cameraDatas;
 		[SerializeField] private Camera cameraBrain;
-		
+
 		[Header("_" + nameof(M_CCManager) + " - Options")]
 		[SerializeField] private bool canTurnOffCamera = true;
-
-		private M_CCData[] cameraDatas;
+		[SerializeField] private MValue cameraIndex;
 		private int lastCameraIndex = NONE_INT;
+
 		// private bool useOmakaseCam = false;
 
 		/*public int OmakaseCamIndex
@@ -44,18 +45,38 @@ namespace Mascari4615
 
 		private void Init()
 		{
-			cameraDatas = transform.GetComponentsInChildren<M_CCData>();
+			if (cameraDatas.Length == 0)
+				cameraDatas = transform.GetComponentsInChildren<M_CCData>();
+
+			// cameraIndex_MValue.SetMinMaxValue(NONE_INT, cameraDatas.Length - 1);
+			cameraIndex.RegisterListener(this, nameof(UpdateCameraIndexByMValue));
+
 			TurnOffCamera();
+		}
+
+		public void UpdateCameraIndexByMValue()
+		{
+			MDebugLog($"{nameof(UpdateCameraIndexByMValue)} : {cameraIndex.Value}");
+			if (cameraIndex.Value < 0 || cameraIndex.Value >= cameraDatas.Length)
+				TurnOffCamera();
+			else
+				SetCamera(cameraIndex.Value, isReciever: true);
 		}
 
 		private void Update()
 		{
-			if (Input.GetKeyDown(camOffKeyCode) || Input.GetKeyDown(KeyCode.Escape))
+			if (canTurnOffCamera)
 			{
 				// useOmakaseCam = false;
-				if (canTurnOffCamera)
+				if (Input.GetKeyDown(camOffKeyCode) ||
+					Input.GetKeyDown(KeyCode.Backspace) ||
+					Input.GetKeyDown(KeyCode.Escape))
+				{
+					cameraIndex.SetValue(NONE_INT);
 					TurnOffCamera();
+				}
 			}
+
 			/*else if (Input.GetKeyDown(omakaseCamKeyCode) && !IsOwner())
 			{
 				useOmakaseCam = !useOmakaseCam;
@@ -69,12 +90,13 @@ namespace Mascari4615
 			}*/
 			else
 			{
-				if (Input.GetKeyDown(KeyCode.Backspace))
-					TurnOffCamera();
-				else // if (!useOmakaseCam)
+				// if (!useOmakaseCam)
 				{
 					for (int i = 0; i < cameraDatas.Length; i++)
 					{
+						if (cameraDatas[i].KeyCode == KeyCode.None)
+							continue;
+
 						if (Input.GetKeyDown(cameraDatas[i].KeyCode))
 						{
 							SetCamera(i);
@@ -87,26 +109,37 @@ namespace Mascari4615
 			// curOwnerText.text = Networking.GetOwner(gameObject).displayName;
 		}
 
-		public void SetCamera(int cameraIndex, bool alwaysOn = false)
+		public void SetCamera(int newCameraIndex, bool alwaysOn = false, bool isReciever = false)
 		{
-			if (cameraIndex >= cameraDatas.Length)
+			MDebugLog($"{nameof(SetCamera)}({newCameraIndex}) : {alwaysOn}, {isReciever}");
+
+			// None | Invalid index
+			if (newCameraIndex < 0 || newCameraIndex >= cameraDatas.Length)
 			{
-				MDebugLog($"cameraIndex({cameraIndex}) >= cameraDatas.Length({cameraDatas.Length})");
-				return;
-			}
-			
-			if (!alwaysOn && cameraIndex == lastCameraIndex)
-			{
+				MDebugLog($"{nameof(SetCamera)} : Invalid index");
 				TurnOffCamera();
 				return;
 			}
 
+			// Toggle if same index
+			if (newCameraIndex == lastCameraIndex && alwaysOn == false)
+			{
+				MDebugLog($"{nameof(SetCamera)} : Same index");
+				TurnOffCamera();
+				return;
+			}
+			lastCameraIndex = cameraIndex.Value;
+
+			if (isReciever == false)
+				if (cameraIndex)
+					cameraIndex.SetValue(newCameraIndex);
+
 			cameraBrain.enabled = true;
 			for (int i = 0; i < cameraDatas.Length; i++)
-				cameraDatas[i].Camera.Priority = (cameraIndex == i) ? 4444 : NONE_INT;
+				cameraDatas[i].Camera.Priority = (newCameraIndex == i) ? 4444 : NONE_INT;
 
 			// if (!useOmakaseCam)
-				lastCameraIndex = cameraIndex;
+			// cameraIndex.SetValue(newCameraIndex);
 
 			/*if (IsOwner())
 			{
@@ -117,6 +150,8 @@ namespace Mascari4615
 
 		public void TurnOffCamera()
 		{
+			MDebugLog($"{nameof(TurnOffCamera)}");
+
 			// useOmakaseCam = false;
 			cameraBrain.enabled = false;
 			lastCameraIndex = NONE_INT;

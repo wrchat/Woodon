@@ -37,6 +37,8 @@ namespace Mascari4615
 
 			for (int i = 0; i < targetUdons.Length; i++)
 			{
+				// MDebugLog($"{nameof(SendEvents)} : {nameof(targetUdons)}[{i}] = {targetUdons[i]}, {nameof(eventNames)}[{i}] = {eventNames[i]}");
+
 				if (targetUdons[i] == null)
 				{
 					MDebugLog($"{nameof(SendEvents)} : {nameof(targetUdons)}[{i}] is null, Skip {nameof(eventNames)}[{i}] = {eventNames[i]}", LogType.Error);
