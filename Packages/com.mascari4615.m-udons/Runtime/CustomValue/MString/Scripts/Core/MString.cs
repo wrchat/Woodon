@@ -13,7 +13,7 @@ namespace Mascari4615
 		[Header("_" + nameof(MString) + " - Options")]
 		[SerializeField] private string defaultString = string.Empty;
 		[SerializeField] private bool useDefaultWhenEmpty = true;
-		[SerializeField] private bool sync;
+		[SerializeField] private bool useSync;
 		[SerializeField] private bool onlyDigit;
 		[SerializeField] private int lengthLimit = 5000;
 		[UdonSynced, FieldChangeCallback(nameof(SyncedValue))] private string _syncedValue;
@@ -24,7 +24,7 @@ namespace Mascari4615
 			{
 				_syncedValue = value;
 
-				if (sync)
+				if (useSync)
 					SetValue(_syncedValue, isReciever: true);
 			}
 		}
@@ -67,22 +67,19 @@ namespace Mascari4615
 
 		public void SetValue(string newValue, bool isReciever = false)
 		{
-			if (sync)
+			if (isReciever == false)
 			{
-				if (SyncedValue != newValue)
+				if (useSync && SyncedValue != newValue)
 				{
-					if (isReciever == false)
-					{
-						SetOwner();
-						SyncedValue = newValue;
-						RequestSerialization();
-					}
+					SetOwner();
+					SyncedValue = newValue;
+					RequestSerialization();
+
+					return;
 				}
 			}
-			else
-			{
-				Value = newValue;
-			}
+
+			Value = newValue;
 		}
 
 		public string GetFormatString()

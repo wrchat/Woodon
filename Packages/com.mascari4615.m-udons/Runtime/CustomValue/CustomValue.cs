@@ -1,18 +1,22 @@
-﻿using UdonSharp;
+using System;
+using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
 
 namespace Mascari4615
 {
+	// 직접 상속 받아 쓸 수 없음
+	// Template으로만 볼 것
+
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class MBool : MEventSender
+	public abstract class CustomValue<T> : MEventSender where T : IComparable
 	{
 		[Header("_" + nameof(MBool))]
-		[SerializeField] protected bool defaultValue;
+		[SerializeField] protected T defaultValue;
 		[SerializeField] private bool useSync = true;
 
-		[UdonSynced, FieldChangeCallback(nameof(SyncedValue))] private bool _syncedValue;
-		public bool SyncedValue
+		[UdonSynced, FieldChangeCallback(nameof(SyncedValue))] private T _syncedValue;
+		public T SyncedValue
 		{
 			get => _syncedValue;
 			private set
@@ -24,8 +28,8 @@ namespace Mascari4615
 			}
 		}
 
-		private bool _value;
-		public bool Value
+		private T _value;
+		public T Value
 		{
 			get => _value;
 			private set
@@ -57,33 +61,23 @@ namespace Mascari4615
 			SendEvents();
 		}
 
-		public virtual void SetValue(bool newValue, bool isReciever = false)
+		public virtual void SetValue(T newValue, bool isReciever = false)
 		{
 			MDebugLog($"{nameof(SetValue)}({newValue})");
 
 			if (isReciever == false)
 			{
-				if (useSync && SyncedValue != newValue)
+				if (useSync && SyncedValue.Equals(newValue) == false)
 				{
 					SetOwner();
 					SyncedValue = newValue;
 					RequestSerialization();
-			
+
 					return;
 				}
 			}
 
 			Value = newValue;
 		}
-
-		// Called By Other Udons
-		[ContextMenu(nameof(ToggleValue))]
-		public virtual void ToggleValue() => SetValue(!Value);
-		
-		[ContextMenu(nameof(SetValueTrue))]
-		public void SetValueTrue() => SetValue(true);
-		
-		[ContextMenu(nameof(SetValueFalse))]
-		public void SetValueFalse() => SetValue(false);
 	}
 }

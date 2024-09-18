@@ -119,16 +119,15 @@ namespace Mascari4615
 					break;
 			}
 
-			if (useSync)
+			if (isReciever == false)
 			{
-				if (SyncedValue != actualValue)
+				if (useSync && SyncedValue != newValue)
 				{
-					if (isReciever == false)
-					{
-						SetOwner();
-						SyncedValue = actualValue;
-						RequestSerialization();
-					}
+					SetOwner();
+					SyncedValue = actualValue;
+					RequestSerialization();
+			
+					return;
 				}
 			}
 

@@ -1,6 +1,7 @@
 ﻿using UdonSharp;
 using UnityEngine;
 using UnityEngine.UI;
+using VRC.SDKBase;
 
 namespace Mascari4615
 {
@@ -10,35 +11,81 @@ namespace Mascari4615
 		[Header("_" + nameof(MColor))]
 		[SerializeField] private MeshRenderer[] targetMeshRenderers;
 		[SerializeField] private Image[] targetImages;
+		[field: SerializeField] public Color DefaultColor { get; private set; }
 
-		[UdonSynced] public Color OriginColor;
+		[Header("_" + nameof(MColor) + " - Options")]
+		[SerializeField] private bool useSync;
 
-		[UdonSynced, FieldChangeCallback(nameof(Value))] private Color _value;
-		public Color Value
+		[UdonSynced, FieldChangeCallback(nameof(SyncedValue))] private Color _syncedValue;
+		public Color SyncedValue
 		{
-			get => _value;
-			set
+			get => _syncedValue;
+			private set
 			{
-				_value = value;
-				OnValueChanged();
-				SendEvents();
+				_syncedValue = value;
+
+				if (useSync)
+					SetValue(_syncedValue, isReciever: true);
 			}
 		}
 
-		public void SetColor(Color color)
+		private Color _value;
+		public Color Value
 		{
-			SetOwner();
-			Value = color;
-			RequestSerialization();
+			get => _value;
+			private set
+			{
+				_value = value;
+				OnValueChange();
+			}
 		}
 
-		private void OnValueChanged()
+		private void OnValueChange()
 		{
+			MDebugLog(nameof(OnValueChange));
+
 			foreach (MeshRenderer target in targetMeshRenderers)
 				target.material.color = _value;
 
 			foreach (Image target in targetImages)
 				target.color = _value;
+
+			SendEvents();
+		}
+
+		private void Start()
+		{
+			Init();
+		}
+		
+		private void Init()
+		{
+			if (Networking.IsMaster)
+			{
+				Value = DefaultColor;
+				RequestSerialization();
+			}
+			else
+			{
+				OnValueChange();
+			}
+		}
+
+		public void SetValue(Color newValue, bool isReciever = false)
+		{
+			if (isReciever == false)
+			{
+				if (useSync && SyncedValue != newValue)
+				{
+					SetOwner();
+					SyncedValue = newValue;
+					RequestSerialization();
+
+					return;
+				}
+			}
+
+			Value = newValue;
 		}
 	}
 }

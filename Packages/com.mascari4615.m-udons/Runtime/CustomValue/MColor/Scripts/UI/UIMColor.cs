@@ -58,12 +58,12 @@ namespace Mascari4615
 
 		public void SetColor()
 		{
-			mColor.SetColor(new Color(rSlider.value, gSlider.value, bSlider.value));
+			mColor.SetValue(new Color(rSlider.value, gSlider.value, bSlider.value));
 		}
 
 		public void SetColorOrigin()
 		{
-			mColor.SetColor(mColor.OriginColor);
+			mColor.SetValue(mColor.DefaultColor);
 		}
 	}
 }
