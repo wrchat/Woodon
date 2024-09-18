@@ -1,5 +1,4 @@
-﻿using TMPro;
-using UdonSharp;
+﻿using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
 using static Mascari4615.MUtil;
@@ -10,41 +9,40 @@ namespace Mascari4615
 	public class MString : MEventSender
 	{
 		[Header("_" + nameof(MString))]
-		[SerializeField] private TMP_InputField inputField;
-		[SerializeField] private TextMeshProUGUI[] texts;
 
 		[Header("_" + nameof(MString) + " - Options")]
 		[SerializeField] private string defaultString = string.Empty;
 		[SerializeField] private bool useDefaultWhenEmpty = true;
 		[SerializeField] private bool sync;
 		[SerializeField] private bool onlyDigit;
-		// [SerializeField] private int lengthLimit = 5000;
-
-		[UdonSynced, FieldChangeCallback(nameof(SyncText))] private string syncText;
-		public string SyncText
+		[SerializeField] private int lengthLimit = 5000;
+		[UdonSynced, FieldChangeCallback(nameof(SyncedValue))] private string _syncedValue;
+		public string SyncedValue
 		{
-			get => syncText;
-			set
+			get => _syncedValue;
+			private set
 			{
-				syncText = value;
-				OnSyncTextChange();
+				_syncedValue = value;
+
+				if (sync)
+					SetValue(_syncedValue, isReciever: true);
 			}
 		}
 
-		private void OnSyncTextChange()
+		private string _value;
+		public string Value
 		{
-			MDebugLog(nameof(OnSyncTextChange));
+			get => _value;
+			private set
+			{
+				_value = value;
+				OnValueChange();
+			}
+		}
 
-			string newText = SyncText;
-
-			if (newText == string.Empty || newText.Length == 0)
-				if (useDefaultWhenEmpty)
-					newText = defaultString;
-
-			inputField.text = newText;
-
-			foreach (TextMeshProUGUI child in texts)
-				child.text = newText;
+		private void OnValueChange()
+		{
+			MDebugLog(nameof(OnValueChange));
 
 			SendEvents();
 		}
@@ -58,52 +56,53 @@ namespace Mascari4615
 		{
 			if (Networking.IsMaster)
 			{
-				SyncText = defaultString;
+				Value = defaultString;
 				RequestSerialization();
 			}
 			else
 			{
-				OnSyncTextChange();
+				OnValueChange();
 			}
 		}
 
-		public void SyncInputFieldText()
-		{
-			string newText = inputField.text;
-			newText = newText.TrimStart('\n', ' ');
-			newText = newText.TrimEnd('\n', ' ');
-
-			if (IsVaildText(newText))
-				SetSyncText(newText);
-		}
-
-		public void SetSyncText(string newText)
+		public void SetValue(string newValue, bool isReciever = false)
 		{
 			if (sync)
 			{
-				SetOwner();
-				SyncText = newText;
-				RequestSerialization();
+				if (SyncedValue != newValue)
+				{
+					if (isReciever == false)
+					{
+						SetOwner();
+						SyncedValue = newValue;
+						RequestSerialization();
+					}
+				}
 			}
 			else
 			{
-				SyncText = newText;
+				Value = newValue;
 			}
+		}
+
+		public string GetFormatString()
+		{
+			string formatString = Value;
+
+			if (formatString == string.Empty || formatString.Length == 0)
+				if (useDefaultWhenEmpty)
+					formatString = defaultString;
+
+			return formatString;
 		}
 
 		public bool IsVaildText(string targetText)
 		{
 			if (onlyDigit && (IsDigit(targetText) == false))
-			{
-				inputField.text = "숫자가 아닙니다";
 				return false;
-			}
 
-			/*if (inputField.text.Length > lengthLimit)
-			{
-				inputField.text = $"글자 제한이 있습니다. ({lengthLimit})";
+			if (targetText.Length > lengthLimit)
 				return false;
-			}*/
 
 			return true;
 		}

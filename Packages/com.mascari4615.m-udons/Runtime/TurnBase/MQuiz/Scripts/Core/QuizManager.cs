@@ -100,10 +100,10 @@ namespace Mascari4615
 
 		public void TeleportToSeat()
 		{
-			if (!IsDigit(seatIndexInputField.SyncText))
+			if (!IsDigit(seatIndexInputField.Value))
 				return;
 
-			int seatIndex = int.Parse(seatIndexInputField.SyncText);
+			int seatIndex = int.Parse(seatIndexInputField.Value);
 
 			if (0 < seatIndex && seatIndex <= playerCount)
 				TP(TurnSeats[seatIndex - 1].transform);
