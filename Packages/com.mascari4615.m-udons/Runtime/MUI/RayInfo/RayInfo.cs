@@ -40,7 +40,16 @@ namespace Mascari4615
 
 			if (Physics.Raycast(ray.origin, ray.direction, out raycastHit, distance, layerMask))
 			{
-				string newString = GetString(raycastHit.collider.gameObject);
+				GameObject targetObject = raycastHit.collider.gameObject;
+
+				if (IsTarget(targetObject) == false)
+				{
+					ui.text = string.Empty;
+					rayOnObject.SetActive(false);
+					return;
+				}
+
+				string newString = GetString(targetObject);
 				bool stringChanged = ui.text != newString;
 
 				ui.text = newString;
@@ -48,7 +57,7 @@ namespace Mascari4615
 				if (lastFrameStringChanged)
 				{
 					lastFrameStringChanged = false;
-					
+
 					rayOnObject.SetActive(false);
 				}
 
@@ -67,6 +76,11 @@ namespace Mascari4615
 				ui.text = string.Empty;
 				rayOnObject.SetActive(false);
 			}
+		}
+
+		protected virtual bool IsTarget(GameObject obj)
+		{
+			return true;
 		}
 
 		protected virtual string GetString(GameObject obj)
