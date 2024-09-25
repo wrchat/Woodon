@@ -1,19 +1,19 @@
-﻿using System;
-using TMPro;
+﻿using TMPro;
 using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
-using VRC.Udon;
 
 namespace Mascari4615
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public class RayInfo : MBase
 	{
+		[Header("_" + nameof(RayInfo))]
 		[SerializeField] private Transform rayObject;
 		[SerializeField] private float distance;
 		private RaycastHit raycastHit;
 		private Ray ray;
+		private bool lastFrameStringChanged = false;
 
 		[SerializeField] private LayerMask layerMask;
 		[SerializeField] private TextMeshProUGUI ui;
@@ -40,8 +40,27 @@ namespace Mascari4615
 
 			if (Physics.Raycast(ray.origin, ray.direction, out raycastHit, distance, layerMask))
 			{
-				ui.text = GetString(raycastHit.collider.gameObject);
+				string newString = GetString(raycastHit.collider.gameObject);
+				bool stringChanged = ui.text != newString;
+
+				ui.text = newString;
+
+				if (lastFrameStringChanged)
+				{
+					lastFrameStringChanged = false;
+					
+					rayOnObject.SetActive(false);
+				}
+
 				rayOnObject.SetActive(true);
+
+				if (stringChanged)
+				{
+					lastFrameStringChanged = true;
+
+					rayOnObject.SetActive(false);
+					rayOnObject.SetActive(true);
+				}
 			}
 			else
 			{
