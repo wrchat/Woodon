@@ -70,6 +70,9 @@ namespace Mascari4615
 
 		private void Update()
 		{
+			if (MUtil.IsNotOnline())
+				return;
+
 			transform.SetPositionAndRotation(Networking.LocalPlayer.GetPosition(),
 				Networking.LocalPlayer.GetRotation());
 

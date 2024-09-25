@@ -57,8 +57,6 @@ namespace Mascari4615.Project.RusukBar
 			uis[0].gameObject.SetActive(false);
 			// mainUI.GetComponent<Animator>().keepAnimatorControllerStateOnDisable = true;
 
-			toggleObjects[(int)ToggleType.Mike].transform.localScale = new Vector3(0.9f, 0.9f, 0.9f);
-
 			isVR = Networking.LocalPlayer.IsUserInVR();
 			if (isVR)
 				ToggleObject(ToggleType.Collider);

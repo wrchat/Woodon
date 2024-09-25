@@ -77,6 +77,9 @@ namespace Mascari4615.Project.RusukBar
 
 		private void Update()
 		{
+			if (MUtil.IsNotOnline())
+				return;
+
 			UpdateUIPos();
 		}
 

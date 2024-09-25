@@ -13,7 +13,8 @@ namespace Mascari4615
 		[SerializeField] private Animator showAnswerAnimator;
 		[SerializeField] private TextMeshProUGUI showAnswerText;
 		[SerializeField] private Image quizTextBackground;
-		[SerializeField] private MString curQuizIndexInputField;
+		[SerializeField] private MString curQuizIndexMString;
+		[SerializeField] private UIMString curQuizIndexStringUI;
 		[SerializeField] private TextMeshProUGUI oxCountText;
 
 		public override void UpdateStuff()
@@ -80,8 +81,8 @@ namespace Mascari4615
 
 		public void UpdateQuizIndexByInputField()
 		{
-			curQuizIndexInputField.SyncInputFieldText();
-			string syncedText = curQuizIndexInputField.SyncText;
+			curQuizIndexStringUI.SubmitInputField();
+			string syncedText = curQuizIndexMString.Value;
 
 			if (!IsDigit(syncedText))
 				return;

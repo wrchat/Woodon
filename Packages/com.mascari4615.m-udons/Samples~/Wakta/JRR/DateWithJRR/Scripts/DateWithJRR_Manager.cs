@@ -61,7 +61,7 @@ namespace Mascari4615.Project.ISD.JRR.DateWithJRR
 					kakaotalkBackground.gameObject.SetActive(!noKakao);
 				if (!noKakao)
 					foreach (TextMeshProUGUI kakaotalkText in kakaotalkTexts)
-						kakaotalkText.text = kakaotalkTextSyncs[CurKakaotalkIndex.Value].SyncText;
+						kakaotalkText.text = kakaotalkTextSyncs[CurKakaotalkIndex.Value].Value;
 			}
 
 			CanSelectAnsewr = CurGameState == (int)QuizGameState.SelectAnswer;
