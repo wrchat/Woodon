@@ -1,6 +1,6 @@
 namespace Mascari4615
 {
-public enum WaktaMember
+	public enum WaktaMember
 	{
 		None = -1,
 		우왁굳,
