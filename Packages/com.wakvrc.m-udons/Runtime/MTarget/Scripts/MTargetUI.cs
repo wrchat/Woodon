@@ -2,7 +2,6 @@
 using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
-using static Mascari4615.MUtil;
 
 namespace Mascari4615
 {
@@ -11,7 +10,6 @@ namespace Mascari4615
 	{
 		[Header("_" + nameof(MTargetUI))]
 		[SerializeField] private MTarget mTarget;
-		[SerializeField] private RectTransform background;
 		[SerializeField] private GameObject noneButton;
 		[SerializeField] private TextMeshProUGUI[] targetPlayerTexts;
 		[SerializeField] private TextMeshProUGUI localPlayerUI;
@@ -44,13 +42,14 @@ namespace Mascari4615
 		{
 			SetNoneButton(mTarget.UseNone);
 			UpdateTargetPlayerUI(mTarget.CurTargetPlayerID);
-			UpdatePlayerList(GetPlayers());
+			UpdatePlayerList(MUtil.GetPlayers());
 		}
 
 		private void SetNoneButton(bool active)
 		{
 			noneButton.SetActive(active);
-			background.sizeDelta = new Vector2(background.sizeDelta.x, 400 + (active ? 40 : 0));
+			RectTransform rectTransform = GetComponent<RectTransform>();
+			rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, 400 + (active ? 40 : 0));
 		}
 
 		private void UpdateTargetPlayerUI(int curTargetPlayerID)

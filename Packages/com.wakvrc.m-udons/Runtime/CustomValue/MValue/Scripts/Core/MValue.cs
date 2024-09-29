@@ -7,11 +7,11 @@ namespace Mascari4615
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class MValue : MEventSender
 	{
-		[field:Header("_" + nameof(MValue))]
-		[field: SerializeField] public int MinValue{ get; private set; } = 0;
-		[field: SerializeField] public int MaxValue { get; private set; } = 1000;
+		[field: Header("_" + nameof(MValue))]
+		[field: SerializeField] public int MinValue { get; private set; } = 0;
+		[field: SerializeField] public int MaxValue { get; private set; } = int.MaxValue;
 		[field: SerializeField] public int IncreaseAmount { get; private set; } = 1;
-		[field: SerializeField] public int DecreaseAmount { get; private set; }= 1;
+		[field: SerializeField] public int DecreaseAmount { get; private set; } = 1;
 		[SerializeField] private int defaultValue = 0;
 		[SerializeField] private MValueStyle style = MValueStyle.Clamp;
 
@@ -126,7 +126,7 @@ namespace Mascari4615
 					SetOwner();
 					SyncedValue = actualValue;
 					RequestSerialization();
-			
+
 					return;
 				}
 			}
@@ -140,7 +140,7 @@ namespace Mascari4615
 
 			if (isMaxValue != null)
 				isMaxValue.SetValue(Value == MaxValue);
-			
+
 			if (isMinValue != null)
 				isMinValue.SetValue(Value == MinValue);
 
