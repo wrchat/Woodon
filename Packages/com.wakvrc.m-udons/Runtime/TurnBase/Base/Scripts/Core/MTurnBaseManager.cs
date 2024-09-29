@@ -159,7 +159,7 @@ namespace Mascari4615
 		public MTurnSeat GetLocalPlayerSeat()
 		{
 			foreach (MTurnSeat turnSeat in TurnSeats)
-				if (IsLocalPlayerID(turnSeat.OwnerID))
+				if (turnSeat.IsTargetPlayer())
 					return turnSeat;
 
 			return null;

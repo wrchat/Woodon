@@ -66,7 +66,7 @@ namespace Mascari4615
 		{
 			MDebugLog($"{nameof(OnScoring)}");
 
-			if (IsSeatOwner() == false)
+			if (IsTargetPlayer() == false)
 				return;
 
 			if (IsAnswerCorrect)

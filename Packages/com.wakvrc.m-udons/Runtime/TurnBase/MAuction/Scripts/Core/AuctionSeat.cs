@@ -48,13 +48,13 @@ namespace Mascari4615
 			}
 		}
 
-		protected override void OnOwnerChange(DataChangeState changeState)
+		protected override void OnTargetChange(DataChangeState changeState)
 		{
-			base.OnOwnerChange(changeState);
+			base.OnTargetChange(changeState);
 			
 			if (changeState != DataChangeState.None)
 			{
-				if (IsLocalPlayerID(OwnerID))
+				if (IsTargetPlayer())
 					tryPoint_MValue.SetValue(0);
 			}
 		}

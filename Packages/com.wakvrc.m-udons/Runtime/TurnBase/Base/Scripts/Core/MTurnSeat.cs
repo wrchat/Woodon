@@ -148,7 +148,7 @@ namespace Mascari4615
 			// 240801 → OnTurnDataChange에서 UI 갱신 코드를 분리
 		}
 
-		protected override void OnOwnerChange(DataChangeState changeState)
+		protected override void OnTargetChange(DataChangeState changeState)
 		{
 			if (changeState != DataChangeState.None)
 			{
@@ -156,7 +156,7 @@ namespace Mascari4615
 					ResetTurnData();
 			}
 
-			base.OnOwnerChange(changeState);
+			base.OnTargetChange(changeState);
 		}
 	}
 }

@@ -3,25 +3,12 @@ using UdonSharp;
 using UnityEngine;
 using UnityEngine.UI;
 using VRC.SDKBase;
-using static Mascari4615.MUtil;
 
 namespace Mascari4615
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class MSeat : MBase
+	public class MSeat : MTarget
 	{
-		public int OwnerID
-		{
-			get => _ownerID;
-			set
-			{
-				int origin = _ownerID;
-				_ownerID = value;
-				OnOwnerChange(DataChangeStateUtil.GetChangeState(origin, value));
-			}
-		}
-		[UdonSynced, FieldChangeCallback(nameof(OwnerID))] private int _ownerID = NONE_INT;
-
 		public int Data
 		{
 			get => _data;
@@ -47,14 +34,6 @@ namespace Mascari4615
 		[SerializeField] private TextMeshProUGUI[] dataTexts;
 		[SerializeField] private Image[] dataImages;
 		
-		public bool IsSeatOwner(VRCPlayerApi targetPlayer = null)
-		{
-			if (targetPlayer == null)
-				targetPlayer = Networking.LocalPlayer;
-
-			return OwnerID == targetPlayer.playerId;
-		}
-
 		public virtual void Init(MTurnBaseManager turnBaseManager, int index)
 		{
 			this.turnBaseManager = turnBaseManager;
@@ -76,17 +55,19 @@ namespace Mascari4615
 			UpdateCurDataUI();
 			UpdateDataUI();
 
-			// OnOwnerChange(DataChangeState.None);
+			// OnTargetChange(DataChangeState.None);
 			// OnDataChange(DataChangeState.None);
 		}
 
-		protected virtual void OnOwnerChange(DataChangeState changeState)
+		protected override void OnTargetChange(DataChangeState changeState)
 		{
 			if (turnBaseManager == null)
 				return;
 
+			base.OnTargetChange(changeState);
+		
 			if (ownerMBool)
-				ownerMBool.SetValue(IsLocalPlayerID(OwnerID));
+				ownerMBool.SetValue(IsTargetPlayer());
 
 			UpdateOwnerUI();
 
@@ -99,7 +80,7 @@ namespace Mascari4615
 			foreach (TextMeshProUGUI ownerNameText in ownerNameTexts)
 			{
 				string ownerName;
-				VRCPlayerApi ownerPlayerAPI = VRCPlayerApi.GetPlayerById(OwnerID);
+				VRCPlayerApi ownerPlayerAPI = GetTargetPlayerAPI();
 
 				if (ownerPlayerAPI == null)
 					ownerName = "-";
@@ -207,32 +188,26 @@ namespace Mascari4615
 			if (turnBaseManager.ResetDataWhenOwnerChange)
 				ResetData();
 			
-			SetOwner();
 			foreach (MSeat seat in turnBaseManager.TurnSeats)
 			{
-				if (Networking.LocalPlayer.playerId == seat.OwnerID)
+				if (seat.IsTargetPlayer(Networking.LocalPlayer))
 					seat.ResetSeat();
 			}
-			OwnerID = Networking.LocalPlayer.playerId;
-			RequestSerialization();
+			SetTargetLocalPlayer();
 		}
 
 		public void ResetSeat()
 		{
+			ResetPlayer();
 			if (turnBaseManager.ResetDataWhenOwnerChange)
 				ResetData();
-
-			SetOwner();
-			OwnerID = NONE_INT;
-			RequestSerialization();
 		}
 
 		public override void OnPlayerLeft(VRCPlayerApi player)
 		{
-			if (player.playerId == OwnerID)
+			if (IsOwner() && (player.playerId == TargetPlayerID))
 			{
-				if (Networking.IsMaster)
-					ResetSeat();
+				ResetSeat();
 			}
 		}
 	}

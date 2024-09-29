@@ -123,7 +123,7 @@ namespace Mascari4615
 			}
 
 			WinnerIndex = MaxTryPointSeat.Index;
-			debugText.text = $"{MaxTryPointSeat.OwnerID} is Winner. ({MaxTryPointSeat.TryPoint})";
+			debugText.text = $"{MaxTryPointSeat.TargetPlayerID} is Winner. ({MaxTryPointSeat.TryPoint})";
 
 			if (IsOwner() == false)
 				return;
@@ -146,7 +146,7 @@ namespace Mascari4615
 			}
 
 			MaxTryPointSeat.SetData(MaxTryPointSeat.RemainPoint - MaxTryPointSeat.TryPoint);
-			debugText.text = $"{MaxTryPointSeat.OwnerID} Gets @ by {MaxTryPointSeat.TryPoint} Point";
+			debugText.text = $"{MaxTryPointSeat.TargetPlayerID} Gets @ by {MaxTryPointSeat.TryPoint} Point";
 
 			// foreach (AuctionSeat auctionSeat in TurnSeats)
 			// {
