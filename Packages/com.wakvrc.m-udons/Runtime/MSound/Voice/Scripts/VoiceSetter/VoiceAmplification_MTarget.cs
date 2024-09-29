@@ -14,7 +14,7 @@ namespace Mascari4615
 		{
 			foreach (MTarget targetPlayer in TargetPlayers)
 			{
-				if (playerAPI.playerId == targetPlayer.CurTargetPlayerID)
+				if (playerAPI.playerId == targetPlayer.TargetPlayerID)
 					return true;
 			}
 
@@ -23,7 +23,7 @@ namespace Mascari4615
 
 		public void SetPlayer(int id, int index = 0)
 		{
-			TargetPlayers[index].SetPlayerID(id);
+			TargetPlayers[index].SetTarget(id);
 		}
 	}
 }

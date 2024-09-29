@@ -17,6 +17,7 @@ namespace Mascari4615
 		[Header("_" + nameof(MTargetUI) + " - Options")]
 		[SerializeField] private bool printPlayerID = true;
 
+		private readonly int[] playerIDBuffer = new int[80];
 		private UIMTargetPlayerSelectButton[] playerSelectButtons;
 
 		// ---- ---- ---- ----
@@ -36,13 +37,13 @@ namespace Mascari4615
 
 			mTarget.RegisterListener(this, nameof(UpdateUI));
 			UpdateUI();
+			UpdatePlayerIDBuffer();
 		}
 
 		public void UpdateUI()
 		{
 			SetNoneButton(mTarget.UseNone);
-			UpdateTargetPlayerUI(mTarget.CurTargetPlayerID);
-			UpdatePlayerList(MUtil.GetPlayers());
+			UpdateTargetPlayerUI(mTarget.TargetPlayerID);
 		}
 
 		private void SetNoneButton(bool active)
@@ -73,36 +74,54 @@ namespace Mascari4615
 				targetPlayerText.text = s;
 		}
 
-		private void UpdatePlayerList(VRCPlayerApi[] players)
+		public void UpdatePlayerIDBuffer()
 		{
+			VRCPlayerApi[] players = MUtil.GetPlayers();
+
+			if (players.Length != VRCPlayerApi.GetPlayerCount())
+			{
+				SendCustomEventDelayedSeconds(nameof(UpdatePlayerIDBuffer), .3f);
+				return;
+			}
+
 			for (int i = 0; i < playerSelectButtons.Length; i++)
 			{
 				if (i >= players.Length)
 				{
 					playerSelectButtons[i].UpdateUI(NONE_STRING);
 					playerSelectButtons[i].gameObject.SetActive(false);
-					mTarget.PlayerIDBuffer[i] = -1;
+					playerIDBuffer[i] = -1;
 				}
 				else
 				{
 					playerSelectButtons[i].UpdateUI($"{players[i].playerId}\n{players[i].displayName}");
 					playerSelectButtons[i].gameObject.SetActive(true);
-					mTarget.PlayerIDBuffer[i] = players[i].playerId;
+					playerIDBuffer[i] = players[i].playerId;
 				}
 			}
+		}
+
+		public override void OnPlayerJoined(VRCPlayerApi player)
+		{
+			UpdatePlayerIDBuffer();
+		}
+
+		public override void OnPlayerLeft(VRCPlayerApi player)
+		{
+			UpdatePlayerIDBuffer();
 		}
 
 		// ---- ---- ---- ----
 
 		public void SetNone()
 		{
-			mTarget.SetNone();
+			mTarget.SetTargetNone();
 		}
 
 		public void SelectPlayer(int index)
 		{
 			MDebugLog($"{nameof(SelectPlayer)} : {index}");
-			mTarget.SelectPlayer(index);
+			mTarget.SetTarget(playerIDBuffer[index]);
 		}
 	}
 }

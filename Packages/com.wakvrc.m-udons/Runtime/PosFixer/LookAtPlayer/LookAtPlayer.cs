@@ -20,7 +20,7 @@ namespace Mascari4615
 
 			if (mTarget != null)
 			{
-				targetPlayer = VRCPlayerApi.GetPlayerById(mTarget.CurTargetPlayerID);
+				targetPlayer = VRCPlayerApi.GetPlayerById(mTarget.TargetPlayerID);
 				if (targetPlayer == null)
 					targetPlayer = Networking.LocalPlayer;
 			}

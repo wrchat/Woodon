@@ -18,7 +18,7 @@ namespace Mascari4615
 		{
 			for (int j = 0; j < mTargets.Length; j++)
 			{
-				if (mTargets[j].CurTargetPlayerID == player.playerId && IsPlayerInside[j].Value)
+				if (mTargets[j].TargetPlayerID == player.playerId && IsPlayerInside[j].Value)
 				{
 					return true;
 				}

@@ -41,8 +41,8 @@ namespace Mascari4615
 
 			if (mTarget)
 			{
-				targetPlayer = (mTarget != null) && (mTarget.CurTargetPlayerID != NONE_INT)
-					? VRCPlayerApi.GetPlayerById(mTarget.CurTargetPlayerID)
+				targetPlayer = (mTarget != null) && (mTarget.TargetPlayerID != NONE_INT)
+					? VRCPlayerApi.GetPlayerById(mTarget.TargetPlayerID)
 					: null;
 			}
 			else

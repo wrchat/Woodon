@@ -28,8 +28,8 @@ namespace Mascari4615
 			MDebugLog(
 				$"{nameof(PlayerChanged)} : {nameof(TeamType)} = {teamType}, {nameof(UIMTeamButton)} = {targetTeamButton}");
 
-			if (targetTeamButton.MTarget.CurTargetPlayerID == NONE_INT ||
-				targetTeamButton.MTarget.CurTargetPlayerID == Networking.LocalPlayer.playerId)
+			if (targetTeamButton.MTarget.TargetPlayerID == NONE_INT ||
+				targetTeamButton.MTarget.TargetPlayerID == Networking.LocalPlayer.playerId)
 			{
 				MDebugLog($"Invalid ID");
 				return;
@@ -43,7 +43,7 @@ namespace Mascari4615
 
 					foreach (UIMTeamButton teamButton in mTeam.TeamButtons)
 						if (teamButton.IsPlayer())
-							teamButton.MTarget.SetNone();
+							teamButton.MTarget.SetTargetNone();
 				}
 
 			SendEvents();

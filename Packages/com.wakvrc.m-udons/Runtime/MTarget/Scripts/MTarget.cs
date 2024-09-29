@@ -1,7 +1,6 @@
 ﻿using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
-using static Mascari4615.MUtil;
 
 namespace Mascari4615
 {
@@ -11,55 +10,57 @@ namespace Mascari4615
 		[Header("_" + nameof(MTarget))]
 		[SerializeField] private string autoTargetName = "-";
 
-		// If You Use UdonGraph, Don't Change The '_curTargetPlayerID' Variable's Access Modifier To Private.
-		// If You Don't, You Can Just Change It If You Want.
-		[UdonSynced, FieldChangeCallback(nameof(CurTargetPlayerID))] private int _curTargetPlayerID = NONE_INT;
-		public int CurTargetPlayerID
+		[UdonSynced, FieldChangeCallback(nameof(TargetPlayerID))] private int _targetPlayerID = NONE_INT;
+		public int TargetPlayerID
 		{
-			get => _curTargetPlayerID;
+			get => _targetPlayerID;
 			set
 			{
-				_curTargetPlayerID = value;
-				SendEvents();
+				int origin = _targetPlayerID;
+				_targetPlayerID = value;
+				OnTargetChange(DataChangeStateUtil.GetChangeState(origin, value));
 			}
 		}
 
-		public int[] PlayerIDBuffer { get; private set; } = new int[80];
+		protected virtual void OnTargetChange(DataChangeState changeState)
+		{
+			SendEvents();
+		}
 
 		[field: Header("_" + nameof(MTarget) + " - Options")]
 		[field: SerializeField] public bool UseNone { get; private set; } = true;
 
 		// ---- ---- ---- ----
-		
+	
 		public bool IsTargetPlayer(VRCPlayerApi targetPlayer = null)
 		{
 			if (targetPlayer == null)
 				targetPlayer = Networking.LocalPlayer;
 			
-			return targetPlayer.playerId == CurTargetPlayerID;
+			return targetPlayer.playerId == TargetPlayerID;
 		}
 
-		public VRCPlayerApi GetTargetPlayerAPI() => VRCPlayerApi.GetPlayerById(CurTargetPlayerID);
+		public VRCPlayerApi GetTargetPlayerAPI() => VRCPlayerApi.GetPlayerById(TargetPlayerID);
 
-		public void SetPlayerID(int id)
+		public void SetTarget(int id)
 		{
 			SetOwner();
-			CurTargetPlayerID = id;
+			TargetPlayerID = id;
 			RequestSerialization();
 		}
 
-		public void SetLocalPlayer() => SetPlayerID(Networking.LocalPlayer.playerId);
-		public void SetNone() => SetPlayerID(NONE_INT);
+		public void SetTargetLocalPlayer() => SetTarget(Networking.LocalPlayer.playerId);
+		public void SetTargetNone() => SetTarget(NONE_INT);
 
 		public void ToggleLocalPlayer()
 		{
 			if (IsTargetPlayer(Networking.LocalPlayer))
-				SetNone();
+				SetTargetNone();
 			else
-				SetLocalPlayer();
+				SetTargetLocalPlayer();
 		}
 
-		public void SelectPlayer(int index) => SetPlayerID(PlayerIDBuffer[index]);
+		public virtual void ResetPlayer() => SetTarget(UseNone ? NONE_INT : Networking.LocalPlayer.playerId);
 
 		// ---- ---- ---- ----
 
@@ -71,62 +72,23 @@ namespace Mascari4615
 		private void Init()
 		{
 			if (Networking.IsMaster)
-			{
-				SetOwner();
-				CurTargetPlayerID = UseNone ? NONE_INT : Networking.LocalPlayer.playerId;
-				RequestSerialization();
-			}
+				ResetPlayer();
 		}
 
 		public override void OnPlayerJoined(VRCPlayerApi player)
 		{
 			if (IsOwner() && (Networking.LocalPlayer.displayName == autoTargetName))
 			{
-				CurTargetPlayerID = Networking.LocalPlayer.playerId;
-				RequestSerialization();
-			}
-			else
-			{
-				UpdatePlayerIDBuffer();
+				SetTarget(Networking.LocalPlayer.playerId);
 			}
 		}
 
 		public override void OnPlayerLeft(VRCPlayerApi player)
 		{
-			if (IsOwner() && (player.playerId == CurTargetPlayerID))
+			if (IsOwner() && (player.playerId == TargetPlayerID))
 			{
-				CurTargetPlayerID = UseNone ? NONE_INT : Networking.LocalPlayer.playerId;
-				RequestSerialization();
+				ResetPlayer();
 			}
-			else
-			{
-				UpdatePlayerIDBuffer();
-			}
-		}
-
-		public void UpdatePlayerIDBuffer()
-		{
-			VRCPlayerApi[] players = GetPlayers();
-
-			if (players.Length != VRCPlayerApi.GetPlayerCount())
-			{
-				SendCustomEventDelayedSeconds(nameof(UpdatePlayerIDBuffer), .3f);
-				return;
-			}
-
-			for (int i = 0; i < PlayerIDBuffer.Length; i++)
-			{
-				if (i >= players.Length)
-				{
-					PlayerIDBuffer[i] = -1;
-				}
-				else
-				{
-					PlayerIDBuffer[i] = players[i].playerId;
-				}
-			}
-
-			SendEvents();
 		}
 	}
 }
