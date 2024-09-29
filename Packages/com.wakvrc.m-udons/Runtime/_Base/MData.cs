@@ -14,13 +14,13 @@ namespace Mascari4615
 		[field: SerializeField] public Sprite[] Sprites { get; protected set; }
 
 		public int Index { get; set; } = NONE_INT;
-		public string SyncData { get; set; } = string.Empty;
+		public string RuntimeData { get; set; } = string.Empty;
 
 		public virtual string Save()
 		{
 			string data = string.Empty;
 
-			data += $"{SyncData}{DATA_SEPARATOR}";
+			data += $"{RuntimeData}{DATA_SEPARATOR}";
 
 			return data;
 		}
@@ -29,7 +29,7 @@ namespace Mascari4615
 		{
 			string[] datas = data.Split(DATA_SEPARATOR);
 
-			SyncData = datas[0];
+			RuntimeData = datas[0];
 		}
 	}
 }

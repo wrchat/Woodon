@@ -35,10 +35,10 @@ namespace Mascari4615
 			hasTeamImage.gameObject.SetActive(drawElementData.TeamType != TeamType.None);
 			foreach (TextMeshProUGUI pointText in pointTexts)
 			{
-				if (drawElementData.SyncData == NONE_STRING)
+				if (drawElementData.RuntimeData == NONE_STRING)
 					pointText.text = string.Empty;
 				else
-					pointText.text = drawElementData.SyncData;
+					pointText.text = drawElementData.RuntimeData;
 			}
 		}
 

@@ -70,7 +70,7 @@ namespace Mascari4615
 				}
 
 				foreach (TextMeshProUGUI syncedDataText in syncedDataTexts)
-					syncedDataText.text = mData.SyncData;
+					syncedDataText.text = mData.RuntimeData;
 			}
 		}
 	}

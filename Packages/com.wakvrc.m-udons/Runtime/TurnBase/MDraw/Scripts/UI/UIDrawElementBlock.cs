@@ -20,10 +20,10 @@ namespace Mascari4615
 			spriteImage.sprite = drawElementData.Sprite;
 			foreach (TextMeshProUGUI syncDataText in syncDataTexts)
 			{
-				if (drawElementData.SyncData == NONE_STRING)
+				if (drawElementData.RuntimeData == NONE_STRING)
 					syncDataText.text = string.Empty;
 				else
-					syncDataText.text = drawElementData.SyncData;
+					syncDataText.text = drawElementData.RuntimeData;
 			}
 			hider.gameObject.SetActive(drawElementData.IsShowing == false);
 		}

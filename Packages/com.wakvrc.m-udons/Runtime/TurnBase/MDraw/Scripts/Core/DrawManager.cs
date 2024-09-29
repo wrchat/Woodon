@@ -169,7 +169,7 @@ namespace Mascari4615
 			DrawElementDatas[index].TeamType = teamType;
 			DrawElementDatas[index].Role = role;
 			DrawElementDatas[index].IsShowing = isShowing;
-			DrawElementDatas[index].SyncData = syncData;
+			DrawElementDatas[index].RuntimeData = syncData;
 		}
 
 		public void ShowTeam(TeamType teamType)

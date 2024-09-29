@@ -20,7 +20,7 @@ namespace Mascari4615
 			data += $"{(int)TeamType}{DATA_SEPARATOR}";
 			data += $"{(int)Role}{DATA_SEPARATOR}";
 			data += $"{IsShowing}{DATA_SEPARATOR}";
-			data += $"{SyncData}{DATA_SEPARATOR}";
+			data += $"{RuntimeData}{DATA_SEPARATOR}";
 
 			return data;
 		}
@@ -32,7 +32,7 @@ namespace Mascari4615
 			TeamType = (TeamType)int.Parse(datas[0]);
 			Role = (DrawRole)int.Parse(datas[1]);
 			IsShowing = bool.Parse(datas[2]);
-			SyncData = datas[3];
+			RuntimeData = datas[3];
 
 			// MDebugLog($"{nameof(ParseDataPack)}, Index : {Index}, TeamType : {TeamType}, Role : {Role}");
 		}
