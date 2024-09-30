@@ -19,7 +19,7 @@ namespace Mascari4615
             MDebugLog($"{nameof(PlayerChanged)} : Index = {index}");
 
             SendEvents();
-            mTargetTeamManager.PlayerChanged(TeamType, index, mTargets[index].CurTargetPlayerID);
+            mTargetTeamManager.PlayerChanged(TeamType, index, mTargets[index].TargetPlayerID);
         }
 
         public bool IsTargetPlayerTeam(VRCPlayerApi targetPlayer = null)
@@ -28,7 +28,7 @@ namespace Mascari4615
                 targetPlayer = Networking.LocalPlayer;
 
             foreach (MTarget mPlayerSync in mTargets)
-                if (mPlayerSync.CurTargetPlayerID == targetPlayer.playerId)
+                if (mPlayerSync.TargetPlayerID == targetPlayer.playerId)
                     return true;
 
             return false;
@@ -40,7 +40,7 @@ namespace Mascari4615
                 targetPlayer = Networking.LocalPlayer;
 
             for (int i = 0; i < mTargets.Length; i++)
-                if (mTargets[i].CurTargetPlayerID == targetPlayer.playerId)
+                if (mTargets[i].TargetPlayerID == targetPlayer.playerId)
                     return i;
 
             return NONE_INT;

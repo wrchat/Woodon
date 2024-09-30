@@ -91,7 +91,7 @@ namespace Mascari4615
 
         public void PlayerToStage(TeamType teamType, int index)
         {
-            int targetPlayerID = teamManager.MTargetTeams[(int)teamType].mTargets[index].CurTargetPlayerID;
+            int targetPlayerID = teamManager.MTargetTeams[(int)teamType].mTargets[index].TargetPlayerID;
             VRCPlayerApi targetPlayer = VRCPlayerApi.GetPlayerById(targetPlayerID);
 
             if (targetPlayer == null)

@@ -35,7 +35,7 @@ namespace Mascari4615
 		private bool IsLocalPlayerOwner =>
 			(chickenFightManager.IsCurGame) &&
 			// (useMTarget ?
-			(mTarget.CurTargetPlayerID == Networking.LocalPlayer.playerId);
+			(mTarget.TargetPlayerID == Networking.LocalPlayer.playerId);
 		// : (mPlayerSync.PlayerID == Networking.LocalPlayer.playerId));
 
 		private void Update()
@@ -115,7 +115,7 @@ namespace Mascari4615
 			if (IsLocalPlayerOwner)
 				return;
 
-			if (mTarget.CurTargetPlayerID == NONE_INT)
+			if (mTarget.TargetPlayerID == NONE_INT)
 				return;
 
 			TeamType localPlayerTeamType = teamManager.GetTargetPlayerTeamType();
@@ -139,7 +139,7 @@ namespace Mascari4615
 		{
 			MDebugLog(nameof(Out));
 
-			if (IsLocalPlayerOwner || (mTargetHorse.CurTargetPlayerID == Networking.LocalPlayer.playerId))
+			if (IsLocalPlayerOwner || (mTargetHorse.TargetPlayerID == Networking.LocalPlayer.playerId))
 			{
 				Networking.LocalPlayer.TeleportTo(chickenFightManager.respawnPos.position,
 					chickenFightManager.respawnPos.rotation);

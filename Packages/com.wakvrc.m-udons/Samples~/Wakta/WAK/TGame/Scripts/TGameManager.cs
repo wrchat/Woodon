@@ -148,17 +148,17 @@ namespace Mascari4615
 			}
 		}
 
-		public bool IsLocalPlayerOrder(int order) => mTargets[CurRoundData.NumberByOrder[order]].CurTargetPlayerID == Networking.LocalPlayer.playerId;
-		public bool IsLocalPlayerNumber(int number) => IsLocalPlayerID(mTargets[number].CurTargetPlayerID);
+		public bool IsLocalPlayerOrder(int order) => mTargets[CurRoundData.NumberByOrder[order]].TargetPlayerID == Networking.LocalPlayer.playerId;
+		public bool IsLocalPlayerNumber(int number) => IsLocalPlayerID(mTargets[number].TargetPlayerID);
 		public bool IsLastPlayer => IsLocalPlayerNumber(CurRoundData.NumberByOrder[PLAYER_COUNT - 1]);
-		public bool IsStaffA => IsLocalPlayerID(staffAMTarget.CurTargetPlayerID);
-		public bool IsStaffB => IsLocalPlayerID(staffBMTarget.CurTargetPlayerID);
-		public bool IsStaffC => IsLocalPlayerID(staffCMTarget.CurTargetPlayerID);
+		public bool IsStaffA => IsLocalPlayerID(staffAMTarget.TargetPlayerID);
+		public bool IsStaffB => IsLocalPlayerID(staffBMTarget.TargetPlayerID);
+		public bool IsStaffC => IsLocalPlayerID(staffCMTarget.TargetPlayerID);
 		public bool IsStaff(VRCPlayerApi player)
 		{
 			foreach (MTarget target in mTargets)
 			{
-				if (target.CurTargetPlayerID == player.playerId)
+				if (target.TargetPlayerID == player.playerId)
 					return false;
 			}
 			return true;
@@ -171,7 +171,7 @@ namespace Mascari4615
 
 		public string GetPlayerVRCNickname(int playerNumber)
 		{
-			VRCPlayerApi targetPlayer = VRCPlayerApi.GetPlayerById(mTargets[playerNumber].CurTargetPlayerID);
+			VRCPlayerApi targetPlayer = VRCPlayerApi.GetPlayerById(mTargets[playerNumber].TargetPlayerID);
 			string targetName = targetPlayer == null ? "None" : targetPlayer.displayName;
 			return targetName;
 		}

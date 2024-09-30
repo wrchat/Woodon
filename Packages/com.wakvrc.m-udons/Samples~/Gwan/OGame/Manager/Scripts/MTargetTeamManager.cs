@@ -38,8 +38,8 @@ namespace Mascari4615
                         if (mTeam.TeamType == teamType && i == playerIndex)
                             continue;
 
-                        if (mTeam.mTargets[i].CurTargetPlayerID == playerID)
-                            mTeam.mTargets[i].SetNone();
+                        if (mTeam.mTargets[i].TargetPlayerID == playerID)
+                            mTeam.mTargets[i].SetTargetNone();
                     }
 
             SendEvents();

@@ -27,7 +27,7 @@ namespace Mascari4615
         private bool IsLocalPlayerOwner =>
             (queenDodgeballManager.IsCurGame) &&
             // (useMTarget ?
-            (mTarget.CurTargetPlayerID == Networking.LocalPlayer.playerId);
+            (mTarget.TargetPlayerID == Networking.LocalPlayer.playerId);
              //   : (mPlayerSync.PlayerID == Networking.LocalPlayer.playerId));
 
         private bool IsLocalPlayerBallOwner => IsOwner(ball);
@@ -66,7 +66,7 @@ namespace Mascari4615
                     {
 						int normalCount = 0;
                         for (int i = 2; i < teamManager.MTargetTeams[(int)teamType].mTargets.Length; i++)
-                            if (teamManager.MTargetTeams[(int)teamType].mTargets[hitPlayerIndex].CurTargetPlayerID !=
+                            if (teamManager.MTargetTeams[(int)teamType].mTargets[hitPlayerIndex].TargetPlayerID !=
                                 NONE_INT)
                                 normalCount++;
 

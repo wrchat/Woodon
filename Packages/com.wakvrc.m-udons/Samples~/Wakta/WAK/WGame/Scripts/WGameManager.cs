@@ -84,7 +84,7 @@ namespace Mascari4615
 				bool active = onWhenSame ? (TurnSeats[i - 1].TurnData == (int)targetAnswerType) : (TurnSeats[i - 1].TurnData != (int)targetAnswerType);
 
 				iconImages[i].gameObject.SetActive(active);
-				VRCPlayerApi playerApi = VRCPlayerApi.GetPlayerById(TurnSeats[i - 1].OwnerID);
+				VRCPlayerApi playerApi = VRCPlayerApi.GetPlayerById(TurnSeats[i - 1].TargetPlayerID);
 				// iconImages[i].color = (playerApi == null) ? Color.white : GetColorByNickname(playerApi.displayName);
 
 				Sprite sprite = nullIcon;
@@ -135,7 +135,7 @@ namespace Mascari4615
 
 				QuizSeat localplayerQuizSeat = null;
 				foreach (QuizSeat quizSeat in TurnSeats)
-					if (IsLocalPlayerID(quizSeat.OwnerID))
+					if (IsLocalPlayerID(quizSeat.TargetPlayerID))
 					{
 						localplayerQuizSeat = quizSeat;
 						break;
@@ -170,7 +170,7 @@ namespace Mascari4615
 			{
 				string debugSeatString = string.Empty;
 				for (int i = 0; i < TurnSeats.Length; i++)
-					debugSeatString += $"{i} :: {TurnSeats[i].OwnerID}\n";
+					debugSeatString += $"{i} :: {TurnSeats[i].TargetPlayerID}\n";
 				seatDebugText.text = debugSeatString;
 			}
 		}
@@ -217,7 +217,7 @@ namespace Mascari4615
 			QuizSeat localplayerQuizSeat = (QuizSeat)TurnSeats[localPlayerUdonIndex];
 			MDebugLog(localplayerQuizSeat.ToString());
 
-			if (TurnSeats[localPlayerUdonIndex].OwnerID != Networking.LocalPlayer.playerId)
+			if (TurnSeats[localPlayerUdonIndex].TargetPlayerID != Networking.LocalPlayer.playerId)
 			{
 				MDebugLog("!!! : B");
 				debugText2.text = "B";

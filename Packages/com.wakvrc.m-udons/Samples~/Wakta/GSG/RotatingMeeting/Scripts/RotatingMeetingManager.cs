@@ -105,10 +105,10 @@ namespace Mascari4615.Project.ISD.GSG.RotatingMeeting
 
 			string voteTargetName = string.Empty;
 
-			if (voiceAmplification.TargetPlayers[0].CurTargetPlayerID != NONE_INT)
+			if (voiceAmplification.TargetPlayers[0].TargetPlayerID != NONE_INT)
 			{
 				VRCPlayerApi voteTarget =
-					VRCPlayerApi.GetPlayerById(voiceAmplification.TargetPlayers[0].CurTargetPlayerID);
+					VRCPlayerApi.GetPlayerById(voiceAmplification.TargetPlayers[0].TargetPlayerID);
 
 				if (voteTarget != null)
 					voteTargetName = voteTarget.displayName;
@@ -275,7 +275,7 @@ namespace Mascari4615.Project.ISD.GSG.RotatingMeeting
 			}
 		}
 
-		public bool CanSetAmplification() => voiceAmplification.TargetPlayers[0].CurTargetPlayerID == NONE_INT;
+		public bool CanSetAmplification() => voiceAmplification.TargetPlayers[0].TargetPlayerID == NONE_INT;
 
 		public void SetVoiceAmplification()
 		{

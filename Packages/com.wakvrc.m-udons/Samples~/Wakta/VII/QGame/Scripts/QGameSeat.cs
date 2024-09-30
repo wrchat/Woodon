@@ -25,7 +25,7 @@ namespace Mascari4615
 			tile.material = tileDefaultMaterial;
 
 			// 빈자리라면 그대로
-			if (OwnerID == NONE_INT)
+			if (TargetPlayerID == NONE_INT)
 				return;
 
 			// 상황에 따라 타일 Material 바꾸기
