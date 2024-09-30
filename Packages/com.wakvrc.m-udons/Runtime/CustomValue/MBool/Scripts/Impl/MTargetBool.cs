@@ -11,10 +11,15 @@ namespace Mascari4615
 
 		protected override void Start()
 		{
-			OnValueChange();
+			Init();
 		}
 
-		// Should Called By MTarget Change Event
+		private void Init()
+		{
+			MTarget.RegisterListener(this, nameof(UpdateValue));
+			UpdateValue();
+		}
+
 		public void UpdateValue()
 		{
 			SetValue(MTarget.IsTargetPlayer());

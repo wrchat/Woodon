@@ -49,5 +49,12 @@ namespace Mascari4615
 		public void SetValueTrue() => mBool.SetValue(true);
 		public void SetValueFalse() => mBool.SetValue(false);
 		#endregion
+
+		#region EditorTime
+		public void SetMBool(MBool mBool)
+		{
+			this.mBool = mBool;
+		}
+		#endregion
 	}
 }

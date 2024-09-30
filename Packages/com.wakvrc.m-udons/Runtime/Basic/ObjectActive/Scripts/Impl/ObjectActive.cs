@@ -19,5 +19,12 @@ namespace Mascari4615
 			foreach (GameObject o in disableObjects)
 				o.SetActive(!Active);
 		}
+
+		#region EditorTime
+		public void SetActiveObjects(GameObject[] activeObjects)
+		{
+			this.activeObjects = activeObjects;
+		}
+		#endregion
 	}
 }
