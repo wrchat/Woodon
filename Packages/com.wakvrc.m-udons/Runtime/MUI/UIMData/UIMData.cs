@@ -61,7 +61,7 @@ namespace Mascari4615
 				}
 
 				for (int i = 0; i < dataTexts.Length; i++)
-					dataTexts[i].text = mData.StringData[i].ToString();
+					dataTexts[i].text = mData.StringData[i];
 
 				for (int i = 0; i < dataImages.Length; i++)
 				{

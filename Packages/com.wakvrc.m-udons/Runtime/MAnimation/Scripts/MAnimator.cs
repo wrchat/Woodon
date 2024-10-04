@@ -5,6 +5,8 @@ namespace Mascari4615
 {
 	public class MAnimator : MBase
 	{
+		public const string STATE_STRING = "STATE";
+
 		[field: Header("_" + nameof(MAnimator))]
 		[field: SerializeField] public Animator[] Animators { get; private set; }
 		[SerializeField] private string boolName;

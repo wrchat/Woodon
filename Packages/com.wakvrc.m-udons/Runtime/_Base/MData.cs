@@ -7,11 +7,11 @@ namespace Mascari4615
 	public class MData : MBase
 	{
 		[field: Header("_" + nameof(MData))]
-		[field: SerializeField] public string Name { get; protected set; }
+		[field: SerializeField] public string Name { get; set; }
 		[field: SerializeField, TextArea(3, 10)] public string Value { get; set; } = NONE_STRING;
-		[field: SerializeField] public Sprite Sprite { get; protected set; }
-		[field: SerializeField, TextArea(3, 10)] public string[] StringData { get; protected set; }
-		[field: SerializeField] public Sprite[] Sprites { get; protected set; }
+		[field: SerializeField] public Sprite Sprite { get; set; }
+		[field: SerializeField, TextArea(3, 10)] public string[] StringData { get; set; }
+		[field: SerializeField] public Sprite[] Sprites { get; set; }
 
 		public int Index { get; set; } = NONE_INT;
 		public string RuntimeData { get; set; } = string.Empty;

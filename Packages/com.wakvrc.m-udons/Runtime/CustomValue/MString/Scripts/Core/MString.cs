@@ -11,7 +11,7 @@ namespace Mascari4615
 		[Header("_" + nameof(MString))]
 
 		[Header("_" + nameof(MString) + " - Options")]
-		[SerializeField] private string defaultString = string.Empty;
+		[SerializeField, TextArea(3, 10)] private string defaultString = string.Empty;
 		[SerializeField] private bool useDefaultWhenEmpty = true;
 		[SerializeField] private bool useSync;
 		[SerializeField] private bool onlyDigit;
