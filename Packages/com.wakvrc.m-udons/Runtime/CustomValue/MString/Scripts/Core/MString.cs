@@ -25,7 +25,7 @@ namespace Mascari4615
 				_syncedValue = value;
 
 				if (useSync)
-					SetValue(_syncedValue, isReciever: true);
+					SetValue(_syncedValue, isReceiver: true);
 			}
 		}
 
@@ -65,9 +65,9 @@ namespace Mascari4615
 			}
 		}
 
-		public void SetValue(string newValue, bool isReciever = false)
+		public void SetValue(string newValue, bool isReceiver = false)
 		{
-			if (isReciever == false)
+			if (isReceiver == false)
 			{
 				if (useSync && SyncedValue != newValue)
 				{
@@ -93,7 +93,7 @@ namespace Mascari4615
 			return formatString;
 		}
 
-		public bool IsVaildText(string targetText)
+		public bool IsValidText(string targetText)
 		{
 			if (onlyDigit && (IsDigit(targetText) == false))
 				return false;

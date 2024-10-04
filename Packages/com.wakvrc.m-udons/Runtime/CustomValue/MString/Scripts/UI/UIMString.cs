@@ -39,9 +39,9 @@ namespace Mascari4615
 			newText = newText.TrimStart('\n', ' ');
 			newText = newText.TrimEnd('\n', ' ');
 
-			bool IsVaildText = mString.IsVaildText(newText);
+			bool IsValidText = mString.IsValidText(newText);
 
-			if (IsVaildText)
+			if (IsValidText)
 				mString.SetValue(newText);
 			else
 			{
