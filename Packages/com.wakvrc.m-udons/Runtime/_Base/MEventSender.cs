@@ -135,7 +135,7 @@ namespace Mascari4615
 			UdonSharpBehaviour[] targetUdons = GetTargetUdons(eventType);
 			string[] eventNames = GetEventNames(eventType);
 
-			int targetIndex = 0;
+			int targetIndex = NONE_INT;
 			for (int i = 0; i < targetUdons.Length; i++)
 			{
 				if (targetUdons[i] == targetUdon && eventNames[i] == actionName)
@@ -143,6 +143,12 @@ namespace Mascari4615
 					targetIndex = i;
 					break;
 				}
+			}
+
+			if (targetIndex == NONE_INT)
+			{
+				MDebugLog($"{nameof(RemoveListener)} : {nameof(targetUdon)} or {nameof(actionName)} is not found", LogType.Warning);
+				return;
 			}
 
 			MDataUtil.RemoveAt(ref targetUdons, targetIndex);
