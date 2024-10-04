@@ -6,8 +6,10 @@ namespace Mascari4615
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public class UIMSFXManager : MBase
 	{
+		[Header("_" + nameof(UIMSFXManager))]
 		[SerializeField] private MSFXManager sfxManager;
 		[SerializeField] private bool global = false;
+		
 		private UIMSFXManagerButton[] buttons;
 
 		private void Start()

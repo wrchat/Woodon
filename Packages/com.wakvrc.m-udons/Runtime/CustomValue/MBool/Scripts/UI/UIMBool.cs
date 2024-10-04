@@ -44,17 +44,19 @@ namespace Mascari4615
 			}
 		}
 
+		public void SetMBool(MBool mBool)
+		{
+			if (this.mBool != null)
+				this.mBool.RemoveListener(this, nameof(UpdateUI));
+
+			this.mBool = mBool;
+			Init();
+		}
+
 		#region HorribleEvents
 		public void ToggleValue() => mBool.SetValue(!mBool.Value);
 		public void SetValueTrue() => mBool.SetValue(true);
 		public void SetValueFalse() => mBool.SetValue(false);
-		#endregion
-
-		#region EditorTime
-		public void SetMBool(MBool mBool)
-		{
-			this.mBool = mBool;
-		}
 		#endregion
 	}
 }
