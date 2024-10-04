@@ -1,6 +1,6 @@
 ﻿using UdonSharp;
 
-namespace Mascari4615
+namespace WakVRC
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class MCameraPosSync : UdonSharpBehaviour

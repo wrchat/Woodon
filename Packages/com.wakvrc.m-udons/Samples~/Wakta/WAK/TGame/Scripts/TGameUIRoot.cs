@@ -2,8 +2,9 @@
 using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon;
+using WakVRC;
 
-namespace Mascari4615
+namespace Mascari4615.Project.Wakta.WAK.TGame
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public class TGameUIRoot : MBase

@@ -2,7 +2,7 @@
 using VRC.Udon;
 using VRC.Udon.Common.Interfaces;
 
-namespace Mascari4615
+namespace WakVRC
 {
 	// [UdonBehaviourSyncMode(BehaviourSyncMode.Continuous)]
 	public class SendEventOnPickupUse : MEventSender

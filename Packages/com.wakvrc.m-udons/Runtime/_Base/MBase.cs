@@ -1,9 +1,9 @@
 ﻿using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
-using static Mascari4615.MUtil;
+using static WakVRC.MUtil;
 
-namespace Mascari4615
+namespace WakVRC
 {
 	public abstract class MBase : UdonSharpBehaviour
 	{

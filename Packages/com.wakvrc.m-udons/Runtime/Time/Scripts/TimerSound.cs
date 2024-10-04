@@ -3,7 +3,7 @@ using UdonSharp;
 using UnityEngine;
 using VRC.Udon.Common.Interfaces;
 
-namespace Mascari4615
+namespace WakVRC
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class TimerSound : MBase

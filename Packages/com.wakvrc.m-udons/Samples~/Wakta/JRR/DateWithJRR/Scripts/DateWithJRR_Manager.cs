@@ -1,6 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using WakVRC;
 
 namespace Mascari4615.Project.ISD.JRR.DateWithJRR
 {

@@ -3,7 +3,7 @@ using UdonSharp;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Mascari4615
+namespace WakVRC
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public class UIAuctionDrawTargetElement : MBase

@@ -2,7 +2,7 @@
 using UnityEngine;
 using VRC.SDKBase;
 
-namespace Mascari4615
+namespace WakVRC
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Continuous)]
 	public class MCameraFovSync : MBase

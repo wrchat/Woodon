@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Mascari4615
+namespace WakVRC
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class QuizSeat : MTurnSeat

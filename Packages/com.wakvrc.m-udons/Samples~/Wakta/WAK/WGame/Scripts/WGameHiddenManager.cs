@@ -1,9 +1,10 @@
-﻿
-using UdonSharp;
+﻿using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon;
-namespace Mascari4615
+using WakVRC;
+
+namespace Mascari4615.Project.Wakta.WAK.WGame
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class WGameHiddenManager : MBase

@@ -1,7 +1,8 @@
 ﻿using TMPro;
 using UnityEngine;
+using WakVRC;
 
-namespace Mascari4615
+namespace Mascari4615.Project.Wakta.VII.QGame
 {
 	public class QGameSeat : QuizSeat
 	{

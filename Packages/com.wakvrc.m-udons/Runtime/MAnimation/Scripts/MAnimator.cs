@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using VRC.Udon.Common.Interfaces;
 
-namespace Mascari4615
+namespace WakVRC
 {
 	public class MAnimator : MBase
 	{

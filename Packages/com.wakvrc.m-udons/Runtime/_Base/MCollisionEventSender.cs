@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Mascari4615
+namespace WakVRC
 {
 	public class MCollisionEventSender : MEventSender
 	{

@@ -4,7 +4,7 @@ using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon;
 
-namespace Mascari4615
+namespace WakVRC
 {
 	public class MAnimatorSpeed : MBase
 	{

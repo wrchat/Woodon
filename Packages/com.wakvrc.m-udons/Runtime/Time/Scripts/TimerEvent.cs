@@ -1,4 +1,4 @@
-namespace Mascari4615
+namespace WakVRC
 {
 	public enum TimerEvent
 	{

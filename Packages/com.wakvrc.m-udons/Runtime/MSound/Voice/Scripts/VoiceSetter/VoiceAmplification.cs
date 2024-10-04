@@ -1,7 +1,7 @@
 ﻿using UdonSharp;
 using VRC.SDKBase;
 
-namespace Mascari4615
+namespace WakVRC
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public abstract class VoiceAmplification : VoiceUpdater

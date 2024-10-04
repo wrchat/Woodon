@@ -1,6 +1,7 @@
 ﻿using TMPro;
 using UdonSharp;
 using UnityEngine;
+using WakVRC;
 
 namespace Mascari4615
 {

@@ -1,6 +1,6 @@
 ﻿using UdonSharp;
 
-namespace Mascari4615
+namespace WakVRC
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public class UIAuctionDrawTargetPanel : MBase

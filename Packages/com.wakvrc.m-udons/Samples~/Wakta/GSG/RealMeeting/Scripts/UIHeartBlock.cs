@@ -1,9 +1,9 @@
-﻿
-using UdonSharp;
+﻿using UdonSharp;
 using UnityEngine;
 using UnityEngine.UI;
 using VRC.SDKBase;
 using VRC.Udon;
+using WakVRC;
 
 namespace Mascari4615.Project.ISD.GSG.RealMeeting
 {

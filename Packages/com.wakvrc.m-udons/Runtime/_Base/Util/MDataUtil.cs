@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Mascari4615
+namespace WakVRC
 {
 	public static class MDataUtil
 	{

@@ -3,8 +3,9 @@ using UnityEngine;
 using VRC.SDK3.Components.Video;
 using VRC.SDK3.Video.Components.Base;
 using VRC.SDKBase;
+using WakVRC;
 
-namespace Mascari4615
+namespace Mascari4615.Project.RusukBar
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class MusicManager : MBase

@@ -1,8 +1,9 @@
 ﻿using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
+using WakVRC;
 
-namespace Mascari4615
+namespace Mascari4615.Project.RusukBar
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public class MusicData : MBase

@@ -1,12 +1,12 @@
-﻿
-using System;
+﻿using System;
 using UdonSharp;
 using UnityEngine;
 using UnityEngine.UI;
 using VRC.SDKBase;
 using VRC.Udon;
+using WakVRC;
 
-namespace Mascari4615
+namespace Mascari4615.Project.Wakta.WAK.TGame
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public class TGameVoiceRoomUI : MBase

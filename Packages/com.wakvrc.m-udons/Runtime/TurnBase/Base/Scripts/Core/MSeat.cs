@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using VRC.SDKBase;
 
-namespace Mascari4615
+namespace WakVRC
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class MSeat : MTarget

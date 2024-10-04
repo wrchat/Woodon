@@ -5,9 +5,9 @@
 // refactor by Mascari4615
 
 using VRC.SDKBase;
-using static Mascari4615.MUtil;
+using static WakVRC.MUtil;
 
-namespace Mascari4615
+namespace WakVRC
 {
 	public class Waktaverse : MBase
 	{

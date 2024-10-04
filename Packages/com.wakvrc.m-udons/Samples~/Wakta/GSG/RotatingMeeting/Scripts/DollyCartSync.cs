@@ -1,6 +1,7 @@
 ﻿using Cinemachine;
 using TMPro;
 using UnityEngine;
+using WakVRC;
 
 namespace Mascari4615.Project.ISD.GSG.RotatingMeeting
 {

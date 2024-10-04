@@ -2,9 +2,10 @@
 using UdonSharp;
 using UnityEngine;
 using UnityEngine.UI;
-using static Mascari4615.MUtil;
+using WakVRC;
+using static WakVRC.MUtil;
 
-namespace Mascari4615
+namespace Mascari4615.Project.Wakta.VII.QGame
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class QGameManager : QuizManager
