@@ -37,6 +37,13 @@ namespace WakVRC
 
 		protected virtual void Start()
 		{
+			Init();
+		}
+
+		protected virtual void Init()
+		{
+			MDebugLog($"{nameof(Init)}");
+		
 			if (useSync)
 			{
 				if (Networking.IsMaster)

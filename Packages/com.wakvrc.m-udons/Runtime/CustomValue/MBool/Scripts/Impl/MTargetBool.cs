@@ -9,12 +9,7 @@ namespace WakVRC
 		[field: Header("_" + nameof(MTargetBool))]
 		[field: SerializeField] public MTarget MTarget { get; private set; }
 
-		protected override void Start()
-		{
-			Init();
-		}
-
-		private void Init()
+		protected override void Init()
 		{
 			MTarget.RegisterListener(this, nameof(UpdateValue));
 			UpdateValue();

@@ -54,15 +54,19 @@ namespace WakVRC
 		
 		private void Init()
 		{
-			if (Networking.IsMaster)
+			MDebugLog($"{nameof(Init)}");
+			
+			if (useSync)
 			{
-				Value = defaultString;
-				RequestSerialization();
+				if (Networking.IsMaster)
+					SetValue(defaultString);
 			}
 			else
 			{
-				OnValueChange();
+				SetValue(defaultString);
 			}
+
+			OnValueChange();
 		}
 
 		public void SetValue(string newValue, bool isReceiver = false)
