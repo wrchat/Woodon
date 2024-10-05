@@ -1,9 +1,5 @@
-﻿using Cinemachine;
-using TMPro;
-using UdonSharp;
+﻿using UdonSharp;
 using UnityEngine;
-using UnityEngine.UI;
-using VRC.SDKBase;
 
 namespace WakVRC
 {
@@ -13,10 +9,10 @@ namespace WakVRC
 		[Header("_" + nameof(M_CCManager))]
 		[SerializeField] private M_CCData[] cameraDatas;
 		[SerializeField] private Camera cameraBrain;
+		[SerializeField] private MValue cameraIndex;
 
 		[Header("_" + nameof(M_CCManager) + " - Options")]
 		[SerializeField] private bool canTurnOffCamera = true;
-		[SerializeField] private MValue cameraIndex;
 		private int lastCameraIndex = NONE_INT;
 
 		// private bool useOmakaseCam = false;
@@ -88,7 +84,7 @@ namespace WakVRC
 				}
 				else TurnOffCamera();
 			}*/
-			else
+			// else
 			{
 				// if (!useOmakaseCam)
 				{
