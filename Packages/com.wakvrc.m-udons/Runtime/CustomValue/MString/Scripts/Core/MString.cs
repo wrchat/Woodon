@@ -82,6 +82,11 @@ namespace WakVRC
 			Value = newValue;
 		}
 
+		public void ResetValue()
+		{
+			SetValue(defaultString);
+		}
+		
 		public string GetFormatString()
 		{
 			string formatString = Value;
