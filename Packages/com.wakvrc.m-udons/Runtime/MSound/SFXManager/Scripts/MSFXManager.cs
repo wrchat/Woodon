@@ -14,6 +14,27 @@ namespace WakVRC
 		[Header("_" + nameof(MSFXManager) + " - Options")]
 		[SerializeField] private bool stopWhenEvent = true;
 		[SerializeField] private bool playOneShot = true;
+		[SerializeField] private bool stopWhenStart = true;
+
+		private void Start()
+		{
+			Init();
+		}
+
+		private void Init()
+		{
+			if (stopWhenEvent)
+			{
+				audioSource.mute = true;
+				SendCustomEventDelayedSeconds(nameof(StopSFX), 1f);
+				SendCustomEventDelayedSeconds(nameof(UnmuteAudioSource), 2f);
+			}
+		}
+
+		public void UnmuteAudioSource()
+		{
+			audioSource.mute = false;
+		}
 
 		public void PlaySFX_G(int index)
 		{
