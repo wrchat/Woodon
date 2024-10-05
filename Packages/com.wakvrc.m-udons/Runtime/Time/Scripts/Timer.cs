@@ -25,8 +25,8 @@ namespace WakVRC
 		}
 
 		// Idea By 'Listing'
-		// 서버 시간이 음수가 되는 경우를 방지하기 위해 (관측된 최솟값 -17억), 서버 시간에 20억을 더함
-		public const int TIME_ADJUSTMENT = 2_000_000_000;
+		// 서버 시간이 음수가 되는 경우를 방지하기 위해 (관측된 최솟값 -20.4억), 서버 시간에 int.MaxValue(2147483647)을 더함
+		public const int TIME_ADJUSTMENT = int.MaxValue;
 		public int CalcedCurTime =>
 			Networking.GetServerTimeInMilliseconds() + (Networking.GetServerTimeInMilliseconds() < 0 ? TIME_ADJUSTMENT : 0);
 		public bool IsExpiredOrStoped => ExpireTime == NONE_INT;
