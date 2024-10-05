@@ -1,8 +1,9 @@
 ﻿using UdonSharp;
 using UnityEngine;
-using static Mascari4615.MUtil;
+using WakVRC;
+using static WakVRC.MUtil;
 
-namespace Mascari4615
+namespace Mascari4615.Project.Wakta.WAK.TGame
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public class MDoor : MEventSender

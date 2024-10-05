@@ -5,6 +5,7 @@ using VRC.SDK3.Data;
 using VRC.SDK3.StringLoading;
 using VRC.SDKBase;
 using VRC.Udon.Common.Interfaces;
+using WakVRC;
 
 namespace Mascari4615
 {

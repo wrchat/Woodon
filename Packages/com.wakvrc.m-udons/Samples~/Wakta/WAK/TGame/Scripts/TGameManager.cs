@@ -7,9 +7,10 @@ using VRC.SDK3.Video.Components;
 using VRC.SDKBase;
 using VRC.Udon.Common.Enums;
 using VRC.Udon.Common.Interfaces;
-using static Mascari4615.MUtil;
+using WakVRC;
+using static WakVRC.MUtil;
 
-namespace Mascari4615
+namespace Mascari4615.Project.Wakta.WAK.TGame
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class TGameManager : MBase

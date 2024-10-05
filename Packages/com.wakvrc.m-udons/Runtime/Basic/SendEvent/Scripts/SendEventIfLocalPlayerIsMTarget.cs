@@ -2,7 +2,7 @@
 using VRC.SDKBase;
 using VRC.Udon.Common.Interfaces;
 
-namespace Mascari4615
+namespace WakVRC
 {
 	public class SendEventIfLocalPlayerIsMTarget : MEventSender
 	{

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Mascari4615
+namespace WakVRC
 {
 	// [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public class CanvasGroupActive : ActiveToggle

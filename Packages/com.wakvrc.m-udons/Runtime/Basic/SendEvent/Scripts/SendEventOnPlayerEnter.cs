@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using VRC.SDKBase;
 
-namespace Mascari4615
+namespace WakVRC
 {
 	// [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class SendEventOnPlayerEnter : MEventSender

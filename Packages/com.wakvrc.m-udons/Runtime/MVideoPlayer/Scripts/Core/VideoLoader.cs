@@ -5,7 +5,7 @@ using VRC.Udon;
 using VRC.Udon.Common.Interfaces;
 using VRC.SDK3.Video.Components;
 
-namespace Mascari4615
+namespace WakVRC
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class VideoLoader : MBase

@@ -2,7 +2,8 @@
 using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
-using static Mascari4615.MUtil;
+using WakVRC;
+using static WakVRC.MUtil;
 
 namespace Mascari4615
 {

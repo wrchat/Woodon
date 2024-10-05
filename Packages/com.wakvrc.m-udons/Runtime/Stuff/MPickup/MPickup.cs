@@ -4,9 +4,9 @@ using VRC.SDK3.Components;
 using VRC.SDKBase;
 using VRC.Udon.Common.Interfaces;
 using static VRC.SDKBase.VRC_Pickup;
-using static Mascari4615.MUtil;
+using static WakVRC.MUtil;
 
-namespace Mascari4615
+namespace WakVRC
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Continuous)]
 	public class MPickup : MBase

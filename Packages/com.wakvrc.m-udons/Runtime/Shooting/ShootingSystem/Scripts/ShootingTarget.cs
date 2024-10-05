@@ -2,7 +2,7 @@
 using UnityEngine;
 using VRC.Udon;
 
-namespace Mascari4615
+namespace WakVRC
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class ShootingTarget : MBase

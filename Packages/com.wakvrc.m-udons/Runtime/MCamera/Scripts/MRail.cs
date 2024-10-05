@@ -3,7 +3,7 @@ using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
 
-namespace Mascari4615
+namespace WakVRC
 {
 	public enum RailCameraSpeed
 	{

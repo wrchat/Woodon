@@ -1,7 +1,8 @@
 ﻿using UdonSharp;
 using UnityEngine;
+using WakVRC;
 
-namespace Mascari4615
+namespace Mascari4615.Project.Wakta.VII.V2Game
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public class V2GameSeat : MMaterial

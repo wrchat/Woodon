@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using VRC.SDKBase;
 
-namespace Mascari4615
+namespace WakVRC
 {
     public class PosFixer : MBase
     {

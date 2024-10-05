@@ -1,8 +1,9 @@
 ﻿using UdonSharp;
 using UnityEngine;
 using UnityEngine.UI;
+using WakVRC;
 
-namespace Mascari4615
+namespace Mascari4615.Project.ReVerse
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
     public class SilhouetteMask : MBase

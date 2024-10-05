@@ -1,11 +1,7 @@
-﻿using Cinemachine;
-using TMPro;
-using UdonSharp;
+﻿using UdonSharp;
 using UnityEngine;
-using UnityEngine.UI;
-using VRC.SDKBase;
 
-namespace Mascari4615
+namespace WakVRC
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class M_CCManager : MBase
@@ -13,10 +9,10 @@ namespace Mascari4615
 		[Header("_" + nameof(M_CCManager))]
 		[SerializeField] private M_CCData[] cameraDatas;
 		[SerializeField] private Camera cameraBrain;
+		[SerializeField] private MValue cameraIndex;
 
 		[Header("_" + nameof(M_CCManager) + " - Options")]
 		[SerializeField] private bool canTurnOffCamera = true;
-		[SerializeField] private MValue cameraIndex;
 		private int lastCameraIndex = NONE_INT;
 
 		// private bool useOmakaseCam = false;
@@ -88,7 +84,7 @@ namespace Mascari4615
 				}
 				else TurnOffCamera();
 			}*/
-			else
+			// else
 			{
 				// if (!useOmakaseCam)
 				{

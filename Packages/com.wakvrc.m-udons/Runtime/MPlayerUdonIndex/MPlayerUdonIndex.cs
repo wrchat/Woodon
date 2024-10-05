@@ -2,9 +2,9 @@
 using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
-using static Mascari4615.MUtil;
+using static WakVRC.MUtil;
 
-namespace Mascari4615
+namespace WakVRC
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class MPlayerUdonIndex : MBase

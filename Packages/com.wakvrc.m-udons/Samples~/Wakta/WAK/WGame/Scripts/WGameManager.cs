@@ -3,9 +3,10 @@ using UdonSharp;
 using UnityEngine;
 using UnityEngine.UI;
 using VRC.SDKBase;
-using static Mascari4615.MUtil;
+using WakVRC;
+using static WakVRC.MUtil;
 
-namespace Mascari4615
+namespace Mascari4615.Project.Wakta.WAK.WGame
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class WGameManager : QuizManager

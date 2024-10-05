@@ -1,7 +1,7 @@
 using UnityEngine;
 using VRC.SDKBase;
 
-namespace Mascari4615
+namespace WakVRC
 {
 	// Util & Helper
 	public static class MUtil

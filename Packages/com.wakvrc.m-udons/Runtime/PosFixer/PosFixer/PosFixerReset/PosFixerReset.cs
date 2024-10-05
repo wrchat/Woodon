@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Mascari4615
+namespace WakVRC
 {
     public class PosFixerReset : MBase
     {

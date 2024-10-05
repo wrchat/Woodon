@@ -2,8 +2,9 @@
 using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon.Common.Interfaces;
+using WakVRC;
 
-namespace Mascari4615
+namespace Mascari4615.Project.Wakta.LIL.LilpaTactical
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class DropPickup : MBase

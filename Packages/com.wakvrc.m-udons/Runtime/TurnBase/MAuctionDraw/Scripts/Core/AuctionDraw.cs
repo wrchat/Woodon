@@ -2,7 +2,7 @@
 using UnityEngine;
 using VRC.SDKBase;
 
-namespace Mascari4615
+namespace WakVRC
 {
 	// [DefaultExecutionOrder(100)]
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]

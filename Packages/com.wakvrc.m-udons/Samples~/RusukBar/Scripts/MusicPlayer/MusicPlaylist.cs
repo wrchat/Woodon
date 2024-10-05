@@ -1,7 +1,8 @@
 ﻿using UdonSharp;
 using UnityEngine;
+using WakVRC;
 
-namespace Mascari4615
+namespace Mascari4615.Project.RusukBar
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public class MusicPlaylist : MBase

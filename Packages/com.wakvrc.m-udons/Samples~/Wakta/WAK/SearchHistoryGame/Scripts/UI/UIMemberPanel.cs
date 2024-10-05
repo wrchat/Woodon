@@ -2,6 +2,7 @@
 using UdonSharp;
 using UnityEngine;
 using UnityEngine.UI;
+using WakVRC;
 
 namespace Mascari4615.Project.Wakta.Wak.SearchHistoryGame
 {

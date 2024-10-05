@@ -2,6 +2,7 @@
 using UnityEngine;
 using VRC.SDK3.Components;
 using VRC.SDKBase;
+using WakVRC;
 
 namespace Mascari4615
 {

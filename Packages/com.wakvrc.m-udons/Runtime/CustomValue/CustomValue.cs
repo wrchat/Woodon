@@ -3,7 +3,7 @@ using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
 
-namespace Mascari4615
+namespace WakVRC
 {
 	// 직접 상속 받아 쓸 수 없음
 	// Template으로만 볼 것

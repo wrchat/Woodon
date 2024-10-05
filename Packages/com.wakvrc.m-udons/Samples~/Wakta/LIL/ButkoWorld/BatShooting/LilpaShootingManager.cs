@@ -4,8 +4,9 @@ using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
 using Random = UnityEngine.Random;
+using WakVRC;
 
-namespace Mascari4615
+namespace Mascari4615.Project.Wakta.LIL.ButkoWorld
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class LilpaShootingManager : MBase

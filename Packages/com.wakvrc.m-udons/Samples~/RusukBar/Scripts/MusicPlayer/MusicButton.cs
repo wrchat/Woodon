@@ -1,8 +1,9 @@
 ﻿using TMPro;
 using UdonSharp;
 using UnityEngine.UI;
+using WakVRC;
 
-namespace Mascari4615
+namespace Mascari4615.Project.RusukBar
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public class MusicButton : MBase
