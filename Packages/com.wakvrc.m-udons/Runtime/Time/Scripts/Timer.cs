@@ -19,8 +19,9 @@ namespace WakVRC
 			get => _expireTime;
 			private set
 			{
+				int origin = _expireTime;
 				_expireTime = value;
-				OnExpireTimeChange();
+				OnExpireTimeChange(origin);
 			}
 		}
 
@@ -59,18 +60,23 @@ namespace WakVRC
 			{
 				MDebugLog("Expired!");
 				ResetTimer();
-				SendEvents((int)TimerEvent.TimeExpired);
 			}
 		}
 
-		private void OnExpireTimeChange()
+		private void OnExpireTimeChange(int origin)
 		{
 			MDebugLog($"{nameof(OnExpireTimeChange)} : ChangeTo = {ExpireTime}");
 
+			SendEvents((int)TimerEvent.ExpireTimeChanged);
+
+			if (origin == NONE_INT && ExpireTime != NONE_INT)
+				SendEvents((int)TimerEvent.TimerStarted);
+
+			if (origin != NONE_INT && ExpireTime == NONE_INT)
+				SendEvents((int)TimerEvent.TimeExpired);
+
 			if (isCounting)
 				isCounting.SetValue(ExpireTime != NONE_INT);
-
-			SendEvents((int)TimerEvent.ExpireTimeChanged);
 		}
 
 		public void SetExpireTime(int newExpireTime)

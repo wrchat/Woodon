@@ -1,28 +1,30 @@
 ﻿using System;
 using UdonSharp;
 using UnityEngine;
-using VRC.Udon.Common.Interfaces;
 
 namespace WakVRC
 {
-	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
+	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public class TimerSound : MBase
 	{
+		[Header("_" + nameof(Timer))]
 		[SerializeField] private Timer timer;
+		[SerializeField] private UITimer timerUI;
 
 		[SerializeField] private AudioSource loopAudioSource;
-		[SerializeField] private AudioSource endingSFXSource;
-		[SerializeField] private AudioSource lerpSFXSource;
+		[SerializeField] private AudioClip defaultSFX;
 
 		[SerializeField] private float[] timeFlags;
 		[SerializeField] private AudioClip[] timeSFXs;
+		[SerializeField] private bool[] useLoops;
 
-		[SerializeField] private AudioClip defaultSFX;
-		[SerializeField] private AudioClip endingSFX;
+		[SerializeField] private AudioSource sfxSource;
+		[SerializeField] private AudioClip startSFX;
+		[SerializeField] private AudioClip endSFX;
 
-		// HACK:
+		[SerializeField] private AudioSource lerpSFXSource;
 		[SerializeField] private AudioClip lerpSFX;
-		[SerializeField] private UITimer timerUI;
+
 
 		private void Start()
 		{
@@ -31,7 +33,8 @@ namespace WakVRC
 
 		private void Init()
 		{
-			timer.RegisterListener(this, nameof(OnEnding_G), (int)TimerEvent.TimeExpired);
+			timer.RegisterListener(this, nameof(PlayStartSFX), (int)TimerEvent.TimerStarted);
+			timer.RegisterListener(this, nameof(PlayEndSFX), (int)TimerEvent.TimeExpired);
 
 			lerpSFXSource.clip = lerpSFX;
 			lerpSFXSource.mute = true;
@@ -44,15 +47,14 @@ namespace WakVRC
 			loopAudioSource.Play();
 		}
 
-		public void OnEnding_G()
+		public void PlayStartSFX()
 		{
-			SendCustomNetworkEvent(NetworkEventTarget.All, nameof(OnEnding));
+			sfxSource.PlayOneShot(startSFX);
 		}
 
-		public void OnEnding()
+		public void PlayEndSFX()
 		{
-			endingSFXSource.clip = endingSFX;
-			endingSFXSource.PlayOneShot(endingSFX);
+			sfxSource.PlayOneShot(endSFX);
 		}
 
 		private void Update()
@@ -85,6 +87,7 @@ namespace WakVRC
 				if (timeSpan.TotalSeconds <= timeFlags[i])
 				{
 					isInFlag = true;
+					loopAudioSource.loop = useLoops[i];
 					if (loopAudioSource.clip != timeSFXs[i])
 					{
 						loopAudioSource.clip = timeSFXs[i];
@@ -96,6 +99,7 @@ namespace WakVRC
 
 			if (isInFlag == false)
 			{
+				loopAudioSource.loop = true;
 				if (loopAudioSource.clip != defaultSFX)
 				{
 					loopAudioSource.clip = defaultSFX;

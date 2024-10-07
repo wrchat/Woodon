@@ -4,5 +4,6 @@ namespace WakVRC
 	{
 		TimeExpired = 0,
 		ExpireTimeChanged,
+		TimerStarted,
 	}
 }
