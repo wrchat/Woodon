@@ -93,7 +93,7 @@ MonoBehaviour:
   - {fileID: 988435852573942150}
   eventNames:
   - ToggleActive
-  sendGlobal: 0
+  sendEventGlobal: 0
   keyCode: 8
   whenGetKeyDown: 1
   whenGetKeyUp: 0
@@ -131,12 +131,27 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2264458551339434695}
     m_Modifications:
+    - target: {fileID: 125780019, guid: e141a8b13da9e5d4aa061ac22bd90f35, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
+    - target: {fileID: 125780019, guid: e141a8b13da9e5d4aa061ac22bd90f35, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3840619290954953387, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
     - target: {fileID: 2854498385768017350, guid: e141a8b13da9e5d4aa061ac22bd90f35,
         type: 3}
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 2854498385768017350, guid: e141a8b13da9e5d4aa061ac22bd90f35,
         type: 3}
+    - target: {fileID: 5785471184090565495, guid: e141a8b13da9e5d4aa061ac22bd90f35,
+        type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8084662309016689034, guid: e141a8b13da9e5d4aa061ac22bd90f35,
         type: 3}
       propertyPath: m_Name
@@ -242,6 +257,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8775175451346948475, guid: e141a8b13da9e5d4aa061ac22bd90f35,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
+    - target: {fileID: 8775175451346948475, guid: e141a8b13da9e5d4aa061ac22bd90f35,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -3840619290954953387, guid: 099e905781af5a54092659ce4fd3b049,
+        type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

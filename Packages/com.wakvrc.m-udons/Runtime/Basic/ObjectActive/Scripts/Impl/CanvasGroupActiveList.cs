@@ -23,6 +23,9 @@ namespace WakVRC
 				case ActiveListOption.UseMValueAsListIndex:
 					for (int i = 0; i < canvasGroups.Length; i++)
 					{
+						if (canvasGroups[i] == null)
+							continue;
+
 						canvasGroups[i].alpha = i == Value ? 1 : 0;
 						canvasGroups[i].blocksRaycasts = i == Value;
 						canvasGroups[i].interactable = i == Value;
@@ -33,6 +36,9 @@ namespace WakVRC
 					bool isTargetIndex = Value == targetIndex;
 					foreach (CanvasGroup canvasGroup in canvasGroups)
 					{
+						if (canvasGroup == null)
+							continue;
+
 						canvasGroup.alpha = isTargetIndex ? 1 : 0;
 						canvasGroup.blocksRaycasts = isTargetIndex;
 						canvasGroup.interactable = isTargetIndex;

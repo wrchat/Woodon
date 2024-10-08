@@ -73,7 +73,8 @@ namespace WakVRC
 
 			if (expireTime == NONE_INT)
 			{
-				loopAudioSource.mute = true;
+				if (loopAudioSource.loop == true)
+					loopAudioSource.mute = true;
 				return;
 			}
 			loopAudioSource.mute = false;

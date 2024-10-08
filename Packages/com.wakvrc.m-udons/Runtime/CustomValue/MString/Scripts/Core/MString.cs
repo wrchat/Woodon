@@ -16,7 +16,7 @@ namespace WakVRC
 		[SerializeField] private bool useSync;
 		[SerializeField] private bool onlyDigit;
 		[SerializeField] private int lengthLimit = 5000;
-		[UdonSynced, FieldChangeCallback(nameof(SyncedValue))] private string _syncedValue;
+		[UdonSynced, FieldChangeCallback(nameof(SyncedValue))] private string _syncedValue = string.Empty;
 		public string SyncedValue
 		{
 			get => _syncedValue;
@@ -29,7 +29,7 @@ namespace WakVRC
 			}
 		}
 
-		private string _value;
+		private string _value = string.Empty;
 		public string Value
 		{
 			get => _value;
