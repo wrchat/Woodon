@@ -124,11 +124,13 @@ namespace WakVRC
 				TurnOffCamera();
 				return;
 			}
-			lastCameraIndex = cameraIndex.Value;
 
 			if (isReciever == false)
-				if (cameraIndex)
+				if (cameraIndex != null)
+				{
+					lastCameraIndex = cameraIndex.Value;
 					cameraIndex.SetValue(newCameraIndex);
+				}
 
 			cameraBrain.enabled = true;
 			for (int i = 0; i < cameraDatas.Length; i++)

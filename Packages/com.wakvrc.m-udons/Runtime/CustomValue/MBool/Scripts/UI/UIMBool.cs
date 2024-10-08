@@ -5,10 +5,9 @@ using UnityEngine.UI;
 namespace WakVRC
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class UIMBool : MBase
+	public class UIMBool : MBoolFollower
 	{
 		[Header("_" + nameof(UIMBool))]
-		[SerializeField] private MBool mBool;
 		[SerializeField] private Image[] images;
 
 		[SerializeField] private Sprite trueSprite;
@@ -21,12 +20,19 @@ namespace WakVRC
 
 		private void Init()
 		{
+			MDebugLog($"{nameof(Init)}");
+
+			if (mBool == null)
+				return;
+
 			mBool.RegisterListener(this, nameof(UpdateUI));
 			UpdateUI();
 		}
 
 		public void UpdateUI()
 		{
+			MDebugLog($"{nameof(UpdateUI)} : {mBool.Value}");
+
 			// Update Sprite
 			if (trueSprite != null && falseSprite != null)
 			{
@@ -44,8 +50,10 @@ namespace WakVRC
 			}
 		}
 
-		public void SetMBool(MBool mBool)
+		public override void SetMBool(MBool mBool)
 		{
+			MDebugLog($"{nameof(SetMBool)} : {mBool}");
+
 			if (this.mBool != null)
 				this.mBool.RemoveListener(this, nameof(UpdateUI));
 

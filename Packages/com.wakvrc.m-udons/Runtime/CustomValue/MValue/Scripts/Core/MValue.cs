@@ -55,10 +55,7 @@ namespace WakVRC
 			if (useSync)
 			{
 				if (Networking.IsMaster)
-				{
-					SyncedValue = defaultValue;
-					RequestSerialization();
-				}
+					SetValue(defaultValue);
 			}
 			else
 			{
