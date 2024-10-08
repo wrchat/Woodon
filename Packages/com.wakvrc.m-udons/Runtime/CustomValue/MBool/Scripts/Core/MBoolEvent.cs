@@ -2,7 +2,7 @@ namespace WakVRC
 {
 	public enum MBoolEvent
 	{
-		OnTrue = 0,
-		OnFalse
+		OnFalse = 0,
+		OnTrue = 1,
 	}
 }

@@ -62,6 +62,11 @@ namespace WakVRC
 			MDebugLog($"{nameof(OnValueChange)}");
 
 			SendEvents();
+
+			if (Value == true)
+				SendEvents((int)MBoolEvent.OnTrue);
+			else
+				SendEvents((int)MBoolEvent.OnFalse);
 		}
 
 		public virtual void SetValue(bool newValue, bool isReciever = false)
