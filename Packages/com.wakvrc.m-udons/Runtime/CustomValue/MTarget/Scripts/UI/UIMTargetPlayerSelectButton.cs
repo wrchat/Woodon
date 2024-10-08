@@ -9,10 +9,10 @@ namespace WakVRC
 	{
 		[Header("_" + nameof(UIMTargetPlayerSelectButton))]
 		[SerializeField] private TextMeshProUGUI playerNameText;
-		private MTargetUI mTargetUI;
+		private UIMTarget mTargetUI;
 		private int index;
 
-		public void Init(MTargetUI mTargetUI, int index)
+		public void Init(UIMTarget mTargetUI, int index)
 		{
 			this.mTargetUI = mTargetUI;
 			this.index = index;

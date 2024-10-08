@@ -6,15 +6,15 @@ using VRC.SDKBase;
 namespace WakVRC
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class MTargetUI : MBase
+	public class UIMTarget : MBase
 	{
-		[Header("_" + nameof(MTargetUI))]
+		[Header("_" + nameof(UIMTarget))]
 		[SerializeField] private MTarget mTarget;
 		[SerializeField] private GameObject noneButton;
 		[SerializeField] private TextMeshProUGUI[] targetPlayerTexts;
 		[SerializeField] private TextMeshProUGUI localPlayerUI;
 
-		[Header("_" + nameof(MTargetUI) + " - Options")]
+		[Header("_" + nameof(UIMTarget) + " - Options")]
 		[SerializeField] private bool printPlayerID = true;
 
 		private readonly int[] playerIDBuffer = new int[80];
@@ -122,6 +122,15 @@ namespace WakVRC
 		{
 			MDebugLog($"{nameof(SelectPlayer)} : {index}");
 			mTarget.SetTarget(playerIDBuffer[index]);
+		}
+
+		public void SetMTarget(MTarget mTarget)
+		{
+			if (this.mTarget != null)
+				this.mTarget.RemoveListener(this, nameof(UpdateUI));
+
+			this.mTarget = mTarget;
+			Init();
 		}
 	}
 }
