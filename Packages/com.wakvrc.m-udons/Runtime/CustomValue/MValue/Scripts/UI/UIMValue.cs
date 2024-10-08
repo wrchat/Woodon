@@ -41,6 +41,15 @@ namespace WakVRC
 				hardButtons[i].SetActive(mValue.MinValue <= i && i <= mValue.MaxValue);
 		}
 
+		public void SetMValue(MValue mValue)
+		{
+			if (this.mValue != null)
+				this.mValue.RemoveListener(this, nameof(UpdateUI));
+
+			this.mValue = mValue;
+			Init();
+		}
+
 		#region HorribleEvents
 		public void IncreaseValue() => mValue.IncreaseValue();
 		public void AddValue10() => mValue.AddValue(mValue.IncreaseAmount * 10);
