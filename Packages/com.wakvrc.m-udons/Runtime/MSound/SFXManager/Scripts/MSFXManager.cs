@@ -23,7 +23,7 @@ namespace WakVRC
 
 		private void Init()
 		{
-			if (stopWhenEvent)
+			if (stopWhenStart)
 			{
 				audioSource.mute = true;
 				SendCustomEventDelayedSeconds(nameof(StopSFX), 1f);
