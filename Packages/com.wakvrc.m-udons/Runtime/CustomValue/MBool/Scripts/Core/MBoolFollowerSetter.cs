@@ -4,10 +4,10 @@ using UnityEngine;
 namespace WakVRC
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class UIMBoolSetter : MBase
+	public class MBoolFollowerSetter : MBase
 	{
-		[Header("_" + nameof(UIMBoolSetter))]
-		[SerializeField] private UIMBool[] mBoolUIs;
+		[Header("_" + nameof(MBoolFollowerSetter))]
+		[SerializeField] private MBoolFollower[] mBoolFollowers;
 		[SerializeField] private MBool[] mBools;
 		[SerializeField] private MValue mBoolIndex;
 
@@ -18,6 +18,8 @@ namespace WakVRC
 
 		private void Init()
 		{
+			MDebugLog($"{nameof(Init)}");
+
 			mBoolIndex.SetMinMaxValue(0, mBools.Length - 1);
 			mBoolIndex.RegisterListener(this, nameof(UpdateUI));
 			UpdateUI();
@@ -25,13 +27,13 @@ namespace WakVRC
 
 		public void UpdateUI()
 		{
-			MDebugLog($"{nameof(UpdateUI)} - {mBoolIndex.Value}");
+			MDebugLog($"{nameof(UpdateUI)} : {mBoolIndex.Value}");
 
 			int index = mBoolIndex.Value;
 			MBool mBool = mBools[index];
 
-			foreach (UIMBool mBoolUI in mBoolUIs)
-				mBoolUI.SetMBool(mBool);
+			foreach (MBoolFollower mBoolFollower in mBoolFollowers)
+				mBoolFollower.SetMBool(mBool);
 		}
 	}
 }
