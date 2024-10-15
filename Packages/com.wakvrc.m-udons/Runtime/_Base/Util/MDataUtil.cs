@@ -5,8 +5,6 @@ namespace WakVRC
 {
 	public static class MDataUtil
 	{
-		// TODO: 참조 타입 default 값은 어떻게 처리할지, 대신 Add 함수를 구현할까?
-
 		public static void ResizeArr<T>(ref T[] originArr, int size)
 		{
 			T[] newArr = new T[size];
@@ -20,6 +18,12 @@ namespace WakVRC
 				newArr[i] = default;
 
 			originArr = newArr;
+		}
+
+		public static void Add<T>(ref T[] originArr, T element)
+		{
+			ResizeArr(ref originArr, originArr.Length + 1);
+			originArr[originArr.Length - 1] = element;
 		}
 
 		public static void RemoveAt<T>(ref T[] originArr, int index)
