@@ -6,7 +6,7 @@ namespace WakVRC
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public class UIMValueSetter : MBase
 	{
-		[Header("_" + nameof(UIMTargetSetter))]
+		[Header("_" + nameof(UIMValueSetter))]
 		[SerializeField] private UIMValue[] mValueUIs;
 		[SerializeField] private MValue[] mValues;
 		[SerializeField] private MValue mValueIndex;

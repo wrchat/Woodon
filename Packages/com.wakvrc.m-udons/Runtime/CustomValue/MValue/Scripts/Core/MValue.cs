@@ -144,10 +144,15 @@ namespace WakVRC
 			SendEvents();
 		}
 
+		[ContextMenu(nameof(IncreaseValue))]
 		public void IncreaseValue() => SetValue(Value + IncreaseAmount);
 		public void AddValue(int amount) => SetValue(Value + amount);
+
+		[ContextMenu(nameof(DecreaseValue))]
 		public void DecreaseValue() => SetValue(Value - DecreaseAmount);
 		public void SubValue(int amount) => SetValue(Value - amount);
+
+		[ContextMenu(nameof(ResetValue))]
 		public void ResetValue() => SetValue(defaultValue);
 	}
 }

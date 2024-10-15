@@ -43,7 +43,7 @@ namespace WakVRC
 		protected virtual void Init()
 		{
 			MDebugLog($"{nameof(Init)}");
-		
+
 			if (useSync)
 			{
 				if (Networking.IsMaster)
@@ -80,7 +80,7 @@ namespace WakVRC
 					SetOwner();
 					SyncedValue = newValue;
 					RequestSerialization();
-			
+
 					return;
 				}
 			}
@@ -88,14 +88,16 @@ namespace WakVRC
 			Value = newValue;
 		}
 
-		// Called By Other Udons
 		[ContextMenu(nameof(ToggleValue))]
 		public virtual void ToggleValue() => SetValue(!Value);
-		
+
 		[ContextMenu(nameof(SetValueTrue))]
 		public void SetValueTrue() => SetValue(true);
-		
+
 		[ContextMenu(nameof(SetValueFalse))]
 		public void SetValueFalse() => SetValue(false);
+
+		[ContextMenu(nameof(ResetValue))]
+		public void ResetValue() => SetValue(defaultValue);
 	}
 }

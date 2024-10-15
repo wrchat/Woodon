@@ -12,6 +12,7 @@ namespace WakVRC
 
 		[Header("_" + nameof(MString) + " - Options")]
 		[SerializeField, TextArea(3, 10)] private string defaultString = string.Empty;
+		public string DefaultString => defaultString;
 		[SerializeField] private bool useDefaultWhenEmpty = true;
 		[SerializeField] private bool useSync;
 		[SerializeField] private bool onlyDigit;

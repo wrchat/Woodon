@@ -5,16 +5,16 @@ using UnityEngine;
 namespace WakVRC
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class KoreanKey : UdonSharpBehaviour
+	public class UIKoreanKey : UdonSharpBehaviour
 	{
-		[SerializeField] private KoreanKeyboard _koreanKeyboard;
-
+		[Header("_" + nameof(UIKoreanKey))]
 		[SerializeField] private char targetChar;
 		[SerializeField] private string shiftChar;
+
+		private UIKoreanKeyboard _koreanKeyboardUI;
 		private TextMeshProUGUI _charText;
 
 		private char _curChar;
-
 		public char CurChar
 		{
 			get => _curChar;
@@ -25,10 +25,10 @@ namespace WakVRC
 			}
 		}
 
-		private void Start()
+		public void Init(UIKoreanKeyboard koreanKeyboardUI)
 		{
-			// _koreanKeyboard = GameObject.Find(nameof(KoreanKeyboard)).GetComponent<KoreanKeyboard>();
-			_charText = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+			_koreanKeyboardUI = koreanKeyboardUI;
+			_charText = GetComponentInChildren<TextMeshProUGUI>();
 		}
 
 		public void UpdateShift(bool shifting)
@@ -41,7 +41,7 @@ namespace WakVRC
 
 		public void Click()
 		{
-			_koreanKeyboard.Input(_curChar);
+			_koreanKeyboardUI.Input(_curChar);
 		}
 	}
 }

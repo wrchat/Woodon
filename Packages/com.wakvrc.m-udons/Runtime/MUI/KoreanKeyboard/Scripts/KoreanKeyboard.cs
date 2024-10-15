@@ -1,7 +1,6 @@
 ﻿using TMPro;
 using UdonSharp;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace WakVRC
 {
@@ -19,25 +18,27 @@ namespace WakVRC
 		private const string JongCombo = "ㄳㄵㄶㄺㄻㄼㄽㄾㄿㅀㅄ";
 		private const string JungCombo = "ㅘㅙㅚㅝㅞㅟㅢ";
 
-		/// <summary>
-		/// 문자열을 동기화시킬 TMP들
-		/// </summary>
-		[SerializeField] private TextMeshProUGUI[] curStringTMPs;
 
 		/// <summary>
 		/// 키보드 입력과 함께 사용되는 InputField
 		/// </summary>
 		[SerializeField] private TMP_InputField syncInputField;
 
-		[SerializeField] private TextMeshProUGUI shiftButtonText;
-		[SerializeField] private Image shiftButtonImage;
-
 		private readonly string[] JongComboSpreads =
 			{ "ㄱㅅ", "ㄴㅈ", "ㄴㅎ", "ㄹㄱ", "ㄹㅁ", "ㄹㅂ", "ㄹㅅ", "ㄹㅌ", "ㄹㅍ", "ㄹㅎ", "ㅂㅅ" };
 
 		private readonly string[] JungComboSpreads = { "ㅗㅏ", "ㅗㅐ", "ㅗㅣ", "ㅜㅓ", "ㅜㅔ", "ㅜㅣ", "ㅡㅣ" };
 
-		private KoreanKey[] _koreanKeys;
+		private UIKoreanKeyboard[] uis = new UIKoreanKeyboard[0];
+
+		public void RegisterUI(UIKoreanKeyboard ui)
+		{
+			// 기존 배열에 추가
+			MDataUtil.Add(ref uis, ui);
+
+			// 새로 추가된 UI에 현재 정보 전달
+			ui.UpdateShift(IsShifting);
+		}
 
 		private bool isShifting;
 
@@ -45,24 +46,9 @@ namespace WakVRC
 		/// 현재 입력된 문자(열)
 		/// 다른 스크립트에서 꺼내 쓰시면 됩니다.
 		/// </summary>
-		public string CurString
-		{
-			get => _curString;
-			set
-			{
-				_curString = value;
+		[SerializeField] private MString curMString;
 
-				// InputField의 텍스트를 현재 문자열과 동기화시킵니다.
-				if (syncInputField)
-					syncInputField.text = _curString;
-
-				// curStringTMPs의 텍스트를 현재 문자열과 동기화시킵니다.
-				foreach (var curStringTMP in curStringTMPs)
-					curStringTMP.text = _curString;
-			}
-		}
-
-		private string _curString = string.Empty;
+		public string CurString => curMString.Value;
 
 		/// <summary>
 		/// Shift가 눌린 상태인가?
@@ -76,26 +62,32 @@ namespace WakVRC
 			{
 				isShifting = value;
 
-				shiftButtonImage.color = GetWhiteOrBlack(isShifting);
-				shiftButtonText.color = GetWhiteOrBlack(!isShifting);
-
-				// 키 버튼에 현재 정보를 전달합니다.
-				foreach (var koreanKey in _koreanKeys)
-					koreanKey.UpdateShift(IsShifting);
+				// UI에 현재 정보를 전달합니다.
+				foreach (UIKoreanKeyboard ui in uis)
+					ui.UpdateShift(IsShifting);
 			}
-		}
-
-		private Color GetWhiteOrBlack(bool boolVar)
-		{
-			Color WHITE = Color.white;
-			Color BLACK = new Color(38f / 255f, 43f / 255f, 68f / 255f);
-			return boolVar ? WHITE : BLACK;
 		}
 
 		private void Start()
 		{
-			_koreanKeys = GetComponentsInChildren<KoreanKey>();
+			Init();
+		}
+
+		private void Init()
+		{
+			curMString.RegisterListener(this, nameof(OnStringChanged));
 			IsShifting = false;
+		}
+
+		public void OnStringChanged()
+		{
+			// InputField의 텍스트를 현재 문자열과 동기화시킵니다.
+			if (syncInputField)
+				syncInputField.text = CurString;
+
+			// UI에 현재 정보를 전달합니다.
+			foreach (UIKoreanKeyboard ui in uis)
+				ui.UpdateText(CurString);
 		}
 
 		public void ToggleShift()
@@ -130,7 +122,7 @@ namespace WakVRC
 
 		private int GetIndexOf(string[] strs, string str)
 		{
-			for (var index = 0; index < strs.Length; index++)
+			for (int index = 0; index < strs.Length; index++)
 				if (strs[index] == str)
 					return index;
 
@@ -139,7 +131,7 @@ namespace WakVRC
 
 		private int GetIndexOf(string str, char c)
 		{
-			for (var index = 0; index < str.Length; index++)
+			for (int index = 0; index < str.Length; index++)
 				if (str[index] == c)
 					return index;
 
@@ -150,19 +142,19 @@ namespace WakVRC
 		{
 			if (CurString == string.Empty)
 			{
-				CurString = input.ToString();
+				SetString(input.ToString());
 				return;
 			}
 
 			if (IsShifting)
 				IsShifting = false;
 
-			var isInputJa = 'ㄱ' <= input && input <= 'ㅎ';
-			var isInputMo = 'ㅏ' <= input && input <= 'ㅣ';
+			bool isInputJa = 'ㄱ' <= input && input <= 'ㅎ';
+			bool isInputMo = 'ㅏ' <= input && input <= 'ㅣ';
 
-			var lastChr = CurString.Substring(CurString.Length - 1)[0];
-			var isLastCharJa = 'ㄱ' <= lastChr && lastChr <= 'ㅎ';
-			var isLastCharMo = 'ㅏ' <= lastChr && lastChr <= 'ㅣ';
+			char lastChr = CurString.Substring(CurString.Length - 1)[0];
+			bool isLastCharJa = 'ㄱ' <= lastChr && lastChr <= 'ㅎ';
+			bool isLastCharMo = 'ㅏ' <= lastChr && lastChr <= 'ㅣ';
 
 			if (isLastCharJa || isLastCharMo)
 			{
@@ -171,11 +163,11 @@ namespace WakVRC
 				{
 					if (isInputMo)
 					{
-						var i = GetIndexOf(ChoK, lastChr);
-						var m = GetIndexOf(JungK, input);
-						var t = 0;
-						var c = Encoding(i, m, t);
-						CurString = CurString.Substring(0, CurString.Length - 1) + c;
+						int i = GetIndexOf(ChoK, lastChr);
+						int m = GetIndexOf(JungK, input);
+						int t = 0;
+						char c = Encoding(i, m, t);
+						SetString(CurString.Substring(0, CurString.Length - 1) + c);
 						return;
 					}
 				}
@@ -186,9 +178,9 @@ namespace WakVRC
 			else if (lastChr >= BASE_CODE && lastChr <= BASE_CODE + 0x2BA4)
 			{
 				// 한글
-				var cho = ChoIndex(lastChr);
-				var jung = JungIndex(lastChr);
-				var jong = JongIndex(lastChr);
+				int cho = ChoIndex(lastChr);
+				int jung = JungIndex(lastChr);
+				int jong = JongIndex(lastChr);
 
 				if (jong == 0)
 				{
@@ -199,22 +191,22 @@ namespace WakVRC
 						if (jong != -1)
 						{
 							// 없는 종성문자인경우 제외
-							var c = Encoding(cho, jung, jong);
-							CurString = CurString.Substring(0, CurString.Length - 1) + c;
+							char c = Encoding(cho, jung, jong);
+							SetString(CurString.Substring(0, CurString.Length - 1) + c);
 							return;
 						}
 					}
 					else if (isInputMo)
 					{
 						// 모음조합문자
-						var chkChr = JungK[jung] + input.ToString();
-						var combIndex = GetIndexOf(JungComboSpreads, chkChr);
+						string chkChr = JungK[jung] + input.ToString();
+						int combIndex = GetIndexOf(JungComboSpreads, chkChr);
 						if (combIndex != -1)
 						{
-							var combChr = JungCombo[combIndex];
+							char combChr = JungCombo[combIndex];
 							jung = GetIndexOf(JungK, combChr);
-							var c = Encoding(cho, jung, jong);
-							CurString = CurString.Substring(0, CurString.Length - 1) + c;
+							char c = Encoding(cho, jung, jong);
+							SetString(CurString.Substring(0, CurString.Length - 1) + c);
 							return;
 						}
 					}
@@ -224,12 +216,12 @@ namespace WakVRC
 					// 종성이 있는경우
 					if (isInputMo)
 					{
-						var tChr = JongK[jong];
+						char tChr = JongK[jong];
 						// 조합문자일경우 다시 쪼갠다
-						var combIndex = GetIndexOf(JongCombo, tChr);
+						int combIndex = GetIndexOf(JongCombo, tChr);
 						if (combIndex != -1)
 						{
-							var partChr = JongComboSpreads[combIndex];
+							string partChr = JongComboSpreads[combIndex];
 							jong = GetIndexOf(JongK, partChr[0]);
 							tChr = partChr[1];
 						}
@@ -238,27 +230,27 @@ namespace WakVRC
 							jong = 0;
 						}
 
-						var c1 = Encoding(cho, jung, jong);
+						char c1 = Encoding(cho, jung, jong);
 						cho = GetIndexOf(ChoK, tChr);
 						if (cho != -1)
 						{
 							jung = GetIndexOf(JungK, input);
-							var c2 = Encoding(cho, jung, 0);
-							CurString = CurString.Substring(0, CurString.Length - 1) + c1 + c2;
+							char c2 = Encoding(cho, jung, 0);
+							SetString(CurString.Substring(0, CurString.Length - 1) + c1 + c2);
 							return;
 						}
 					}
 					else if (isInputJa)
 					{
 						// 자음조합문자
-						var chkChr = JongK[jong] + input.ToString();
-						var combIndex = GetIndexOf(JongComboSpreads, chkChr);
+						string chkChr = JongK[jong] + input.ToString();
+						int combIndex = GetIndexOf(JongComboSpreads, chkChr);
 						if (combIndex != -1)
 						{
-							var combChr = JongCombo[combIndex];
+							char combChr = JongCombo[combIndex];
 							jong = GetIndexOf(JongK, combChr);
-							var c = Encoding(cho, jung, jong);
-							CurString = CurString.Substring(0, CurString.Length - 1) + c;
+							char c = Encoding(cho, jung, jong);
+							SetString(CurString.Substring(0, CurString.Length - 1) + c);
 							return;
 						}
 					}
@@ -266,7 +258,7 @@ namespace WakVRC
 			}
 
 			// 없는 문자
-			CurString += input;
+			SetString(CurString + input);
 		}
 
 		public void InputBackspace()
@@ -275,43 +267,43 @@ namespace WakVRC
 
 			if (CurString == string.Empty) return;
 
-			var lastChr = CurString[CurString.Length - 1];
-			var isLastCharJa = 'ㄱ' <= lastChr && lastChr <= 'ㅎ';
-			var isLastCharMo = 'ㅏ' <= lastChr && lastChr <= 'ㅣ';
+			char lastChr = CurString[CurString.Length - 1];
+			bool isLastCharJa = 'ㄱ' <= lastChr && lastChr <= 'ㅎ';
+			bool isLastCharMo = 'ㅏ' <= lastChr && lastChr <= 'ㅣ';
 
 			if (isLastCharJa || isLastCharMo)
 			{
-				CurString = CurString.Substring(0, CurString.Length - 1);
+				SetString(CurString.Substring(0, CurString.Length - 1));
 				return;
 			}
 
 			if (lastChr >= BASE_CODE && lastChr <= BASE_CODE + 0x2BA4)
 			{
 				// 한글
-				var cho = ChoIndex(lastChr);
-				var jung = JungIndex(lastChr);
-				var jong = JongIndex(lastChr);
+				int cho = ChoIndex(lastChr);
+				int jung = JungIndex(lastChr);
+				int jong = JongIndex(lastChr);
 
 				if (jong == 0)
 				{
 					// 받침 X
 
 					// 모음이 조합모음인지 판단
-					var combIndex = GetIndexOf(JungCombo, JungK[jung]);
+					int combIndex = GetIndexOf(JungCombo, JungK[jung]);
 					if (combIndex != -1)
 					{
 						// 조합모음이면 앞쪽만 남기기
-						var combChr = JungComboSpreads[combIndex];
+						string combChr = JungComboSpreads[combIndex];
 						jung = GetIndexOf(JungK, combChr[0]);
 
-						var c = Encoding(cho, jung, jong);
-						CurString = CurString.Substring(0, CurString.Length - 1) + c;
+						char c = Encoding(cho, jung, jong);
+						SetString(CurString.Substring(0, CurString.Length - 1) + c);
 						return;
 					}
 					else
 					{
-						var c = ChoK[cho];
-						CurString = CurString.Substring(0, CurString.Length - 1) + c;
+						char c = ChoK[cho];
+						SetString(CurString.Substring(0, CurString.Length - 1) + c);
 						return;
 					}
 				}
@@ -320,11 +312,11 @@ namespace WakVRC
 					// 받침 O
 
 					// 모음이 조합자음인지 판단
-					var combIndex = GetIndexOf(JongCombo, JongK[jong]);
+					int combIndex = GetIndexOf(JongCombo, JongK[jong]);
 					if (combIndex != -1)
 					{
 						// 조합자음이면 앞쪽만 남기기
-						var combChr = JongComboSpreads[combIndex];
+						string combChr = JongComboSpreads[combIndex];
 						jong = GetIndexOf(JongK, combChr[0]);
 					}
 					else
@@ -334,14 +326,14 @@ namespace WakVRC
 
 					// MDebugLog($"{cho}, {jung}, {jong} = {Encoding(cho, jung, jong)}");
 
-					var c = Encoding(cho, jung, jong);
-					CurString = CurString.Substring(0, CurString.Length - 1) + c;
+					char c = Encoding(cho, jung, jong);
+					SetString(CurString.Substring(0, CurString.Length - 1) + c);
 					return;
 				}
 			}
 
 			// 없는 문자
-			CurString = CurString.Substring(0, CurString.Length - 1);
+			SetString(CurString.Substring(0, CurString.Length - 1));
 
 			if (IsShifting)
 				IsShifting = false;
@@ -349,7 +341,20 @@ namespace WakVRC
 
 		public void UpdateCurStringByInputField()
 		{
-			CurString = syncInputField.text;
+			if (syncInputField == null)
+				return;
+
+			SetString(syncInputField.text);
+		}
+
+		private void SetString(string newString)
+		{
+			curMString.SetValue(newString);
+		}
+
+		public void Clear()
+		{
+			SetString(string.Empty);
 		}
 	}
 }
