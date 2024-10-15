@@ -22,12 +22,22 @@ namespace WakVRC
 
 		public void Init()
 		{
+			MDebugLog($"{nameof(Init)}");
+
+			if (mValue == null)
+				return;
+
 			mValue.RegisterListener(this, nameof(UpdateUI));
 			UpdateUI();
 		}
 
 		public void UpdateUI()
 		{
+			if (mValue == null)
+				return;
+
+			MDebugLog($"{nameof(UpdateUI)} : {mValue.Value}");
+
 			int value = mValue.Value;
 
 			string valueString = ((int)(value * printMultiply) + printPlus).ToString();
@@ -43,6 +53,8 @@ namespace WakVRC
 
 		public void SetMValue(MValue mValue)
 		{
+			MDebugLog($"{nameof(SetMValue)} : {mValue}");
+
 			if (this.mValue != null)
 				this.mValue.RemoveListener(this, nameof(UpdateUI));
 

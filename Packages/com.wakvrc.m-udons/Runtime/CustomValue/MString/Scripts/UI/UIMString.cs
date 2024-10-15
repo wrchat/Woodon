@@ -27,7 +27,8 @@ namespace WakVRC
 		{
 			string newText = mString.GetFormatString();
 
-			inputField.text = newText;
+			if (inputField != null)
+				inputField.text = newText;
 
 			foreach (TextMeshProUGUI child in texts)
 				child.text = newText;
@@ -35,6 +36,9 @@ namespace WakVRC
 
 		public void SubmitInputField()
 		{
+			if (inputField == null)
+				return;
+
 			string newText = inputField.text;
 			newText = newText.TrimStart('\n', ' ');
 			newText = newText.TrimEnd('\n', ' ');
