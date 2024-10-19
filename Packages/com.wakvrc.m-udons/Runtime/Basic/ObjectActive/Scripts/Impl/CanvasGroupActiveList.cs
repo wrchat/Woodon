@@ -20,7 +20,7 @@ namespace WakVRC
 
 			switch (option)
 			{
-				case ActiveListOption.UseMValueAsListIndex:
+				case ActiveListOption.UseValueAsListIndex:
 					for (int i = 0; i < canvasGroups.Length; i++)
 					{
 						if (canvasGroups[i] == null)
@@ -32,7 +32,7 @@ namespace WakVRC
 					}
 
 					break;
-				case ActiveListOption.UseMValueAsTargetIndex:
+				case ActiveListOption.UseValueAsTargetIndex:
 					bool isTargetIndex = Value == targetIndex;
 					foreach (CanvasGroup canvasGroup in canvasGroups)
 					{
