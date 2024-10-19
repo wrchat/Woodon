@@ -9,31 +9,18 @@ namespace WakVRC
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class MSeat : MTarget
 	{
-		public int Data
-		{
-			get => _data;
-			set
-			{
-				int origin = _data;
-				_data = value;
-				OnDataChange(DataChangeStateUtil.GetChangeState(origin, value));
-			}
-		}
-		[UdonSynced, FieldChangeCallback(nameof(Data))] private int _data = NONE_INT;
-
-		public int Index { get; private set; }
-
-		protected MTurnBaseManager turnBaseManager;
-
 		[Header("_" + nameof(MSeat))]
-		[SerializeField] private MBool ownerMBool;
-		[SerializeField] private TextMeshProUGUI[] ownerNameTexts;
+		[SerializeField] private MValue dataMValue;
+		public int Data => dataMValue.Value;
+		public int Index { get; private set; }
+		protected MTurnBaseManager turnBaseManager;
+	
 		[SerializeField] private TextMeshProUGUI[] indexTexts;
 		[SerializeField] private TextMeshProUGUI[] curDataTexts;
 		[SerializeField] private Image[] curDataImages;
 		[SerializeField] private TextMeshProUGUI[] dataTexts;
 		[SerializeField] private Image[] dataImages;
-		
+
 		public virtual void Init(MTurnBaseManager turnBaseManager, int index)
 		{
 			this.turnBaseManager = turnBaseManager;
@@ -43,6 +30,8 @@ namespace WakVRC
 				seatIndexText.text = index.ToString();
 
 			SetData(turnBaseManager.DefaultData);
+			dataMValue.RegisterListener(this, nameof(OnDataChange_Greater), (int)MValueEvent.OnValueIncreased);
+			dataMValue.RegisterListener(this, nameof(OnDataChange_Less), (int)MValueEvent.OnValueDecreased);
 
 			UpdateStuff();
 		}
@@ -51,7 +40,6 @@ namespace WakVRC
 		{
 			MDebugLog($"{nameof(UpdateStuff)}");
 
-			UpdateOwnerUI();
 			UpdateCurDataUI();
 			UpdateDataUI();
 
@@ -66,31 +54,12 @@ namespace WakVRC
 
 			base.OnTargetChange(changeState);
 		
-			if (ownerMBool)
-				ownerMBool.SetValue(IsTargetPlayer());
-
-			UpdateOwnerUI();
-
 			if (changeState != DataChangeState.None)
 				turnBaseManager.UpdateStuff();
 		}
 
-		private void UpdateOwnerUI()
-		{
-			foreach (TextMeshProUGUI ownerNameText in ownerNameTexts)
-			{
-				string ownerName;
-				VRCPlayerApi ownerPlayerAPI = GetTargetPlayerAPI();
-
-				if (ownerPlayerAPI == null)
-					ownerName = "-";
-				else
-					ownerName = ownerPlayerAPI.displayName;
-
-				ownerNameText.text = ownerName;
-			}
-		}
-
+		public void OnDataChange_Greater() => OnDataChange(DataChangeState.Greater);
+		public void OnDataChange_Less() => OnDataChange(DataChangeState.Less);
 		protected virtual void OnDataChange(DataChangeState changeState)
 		{
 			// MDebugLog($"{nameof(OnDataChange)}, {Data}");
@@ -173,9 +142,7 @@ namespace WakVRC
 
 		public void SetData(int newData)
 		{
-			SetOwner();
-			Data = newData;
-			RequestSerialization();
+			dataMValue.SetValue(newData);
 		}
 
 		public void ResetData()

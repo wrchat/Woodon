@@ -9,8 +9,8 @@ namespace WakVRC
 	public class UIMTarget : MTargetFollower
 	{
 		[Header("_" + nameof(UIMTarget))]
-		[SerializeField] private GameObject noneButton;
 		[SerializeField] private TextMeshProUGUI[] targetPlayerTexts;
+		[SerializeField] private GameObject noneButton;
 		[SerializeField] private TextMeshProUGUI localPlayerUI;
 
 		[Header("_" + nameof(UIMTarget) + " - Options")]

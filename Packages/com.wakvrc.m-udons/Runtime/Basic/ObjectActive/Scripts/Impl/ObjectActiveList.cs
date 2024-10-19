@@ -12,8 +12,8 @@ namespace WakVRC
 
 		protected override void InitMValueMinMax()
 		{
-			int maxLen = Mathf.Max(objectList.Length);
-			mValue.SetMinMaxValue(0, maxLen);
+			int maxLen = Mathf.Max(mValue.MaxValue, objectList.Length - 1);
+			mValue.SetMinMaxValue(mValue.MinValue, maxLen);
 		}
 
 		protected override void UpdateActive()
@@ -22,9 +22,9 @@ namespace WakVRC
 
 			switch (option)
 			{
-				// MValue를 리스트의 인덱스로 사용할 때
-				// 예를 들어, MValue가 0일 때 리스트의 0번째 오브젝트만 활성화, 나머지는 비활성화
-				case ActiveListOption.UseMValueAsListIndex:
+				// Value를 리스트의 인덱스로 사용할 때
+				// 예를 들어, Value가 0일 때 리스트의 0번째 오브젝트만 활성화, 나머지는 비활성화
+				case ActiveListOption.UseValueAsListIndex:
 					for (int i = 0; i < objectList.Length; i++)
 					{
 						if (objectList[i])
@@ -32,9 +32,9 @@ namespace WakVRC
 					}
 					break;
 
-				// MValue를 타겟 인덱스로 사용할 때
-				// 예를 들어, MValue가 0일 때 타겟 인덱스가 0이면 리스트의 모든 오브젝트 활성화, 아니면 비활성화
-				case ActiveListOption.UseMValueAsTargetIndex:
+				// Value를 타겟 인덱스로 사용할 때
+				// 예를 들어, Value가 0일 때 타겟 인덱스가 0이면 리스트의 모든 오브젝트 활성화, 아니면 비활성화
+				case ActiveListOption.UseValueAsTargetIndex:
 					bool isTargetIndex = Value == targetIndex;
 
 					foreach (GameObject obj in objectList)
