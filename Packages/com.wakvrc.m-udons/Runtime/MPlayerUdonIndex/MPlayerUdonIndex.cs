@@ -19,7 +19,7 @@ namespace WakVRC
 		public string PlayerUdonIndexDataPack
 		{
 			get => _playerUdonIndexDataPack;
-			set
+			private set
 			{
 				_playerUdonIndexDataPack = value;
 				MDebugLog($"{nameof(_playerUdonIndexDataPack)}, = {_playerUdonIndexDataPack}");
@@ -30,9 +30,11 @@ namespace WakVRC
 						$"LOCAL = {Networking.LocalPlayer.displayName} - {Networking.LocalPlayer.playerId}, {Networking.IsMaster}\n" +
 						$"PlayerCount = {VRCPlayerApi.GetPlayerCount()},\n" +
 						$"{nameof(enableUdonCount)} = {enableUdonCount}, {CanUpdateNow}\n";
+					
 					string[] datas = _playerUdonIndexDataPack.Split(DATA_SEPARATOR);
 					for (int i = 0; i < datas.Length; i++)
 						debugS += datas[i] + '\n';
+						
 					debugText.text = debugS;
 				}
 			}
@@ -65,6 +67,27 @@ namespace WakVRC
 
 			SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.Owner, nameof(ReqUpdatePlayerList));
 			return NONE_INT;
+		}
+
+		public VRCPlayerApi GetPlayerApi(int udonIndex)
+		{
+			MDebugLog($"{nameof(GetPlayerApi)} : {udonIndex}");
+
+			if (IsNotOnline())
+				return null;
+
+			if (udonIndex < 0 || udonIndex >= playerNameByUdonIndex.Length)
+				return null;
+
+			if (string.IsNullOrEmpty(playerNameByUdonIndex[udonIndex]))
+				return null;
+
+			string[] datas = playerNameByUdonIndex[udonIndex].Split(NICK_SEPARATER);
+			if (datas == null || datas.Length != 2)
+				return null;
+
+			int playerId = int.Parse(datas[1]);
+			return VRCPlayerApi.GetPlayerById(playerId);
 		}
 
 		public void ReqUpdatePlayerList()

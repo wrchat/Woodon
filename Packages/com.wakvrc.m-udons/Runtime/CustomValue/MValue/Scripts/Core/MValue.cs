@@ -12,10 +12,9 @@ namespace WakVRC
 		[field: SerializeField] public int MaxValue { get; private set; } = int.MaxValue;
 		[field: SerializeField] public int IncreaseAmount { get; private set; } = 1;
 		[field: SerializeField] public int DecreaseAmount { get; private set; } = 1;
-		[SerializeField] private int defaultValue = 0;
-		[SerializeField] private MValueStyle style = MValueStyle.Clamp;
-
-		[SerializeField] private bool useSync = true;
+		[field: SerializeField] public int DefaultValue { get; private set; } = 0;
+		[field: SerializeField] public MValueStyle Style { get; private set; } = MValueStyle.Clamp;
+		[field: SerializeField] public bool UseSync { get; private set; } = true;
 		[SerializeField] private MBool isMaxValue;
 		[SerializeField] private MBool isMinValue;
 
@@ -26,7 +25,7 @@ namespace WakVRC
 			{
 				_syncedValue = value;
 
-				if (useSync)
+				if (UseSync)
 					SetValue(_syncedValue, isReciever: true);
 			}
 		}
@@ -37,8 +36,9 @@ namespace WakVRC
 			get => _value;
 			private set
 			{
+				int origin = _value;
 				_value = value;
-				OnValueChange();
+				OnValueChange(DataChangeStateUtil.GetChangeState(origin, _value));
 			}
 		}
 		private int _value;
@@ -52,17 +52,17 @@ namespace WakVRC
 		{
 			MDebugLog($"{nameof(Init)}");
 
-			if (useSync)
+			if (UseSync)
 			{
 				if (Networking.IsMaster)
-					SetValue(defaultValue);
+					SetValue(DefaultValue);
 			}
 			else
 			{
-				SetValue(defaultValue);
+				SetValue(DefaultValue);
 			}
 
-			OnValueChange();
+			OnValueChange(DataChangeState.None);
 		}
 
 		public void SetMinMaxValue(int min, int max, bool recalcValue = true)
@@ -82,7 +82,7 @@ namespace WakVRC
 
 			int actualValue = newValue;
 
-			switch (style)
+			switch (Style)
 			{
 				case MValueStyle.None:
 					if (actualValue > MaxValue)
@@ -118,7 +118,7 @@ namespace WakVRC
 
 			if (isReciever == false)
 			{
-				if (useSync && SyncedValue != newValue)
+				if (UseSync && SyncedValue != newValue)
 				{
 					SetOwner();
 					SyncedValue = actualValue;
@@ -131,7 +131,7 @@ namespace WakVRC
 			Value = actualValue;
 		}
 
-		private void OnValueChange()
+		private void OnValueChange(DataChangeState dataChangeState)
 		{
 			MDebugLog($"{nameof(OnValueChange)} : {Value}");
 
@@ -142,12 +142,22 @@ namespace WakVRC
 				isMinValue.SetValue(Value == MinValue);
 
 			SendEvents();
+
+			if (dataChangeState == DataChangeState.Greater)
+				SendEvents((int)MValueEvent.OnValueIncreased);
+			else if (dataChangeState == DataChangeState.Less)
+				SendEvents((int)MValueEvent.OnValueDecreased);
 		}
 
+		[ContextMenu(nameof(IncreaseValue))]
 		public void IncreaseValue() => SetValue(Value + IncreaseAmount);
 		public void AddValue(int amount) => SetValue(Value + amount);
+
+		[ContextMenu(nameof(DecreaseValue))]
 		public void DecreaseValue() => SetValue(Value - DecreaseAmount);
 		public void SubValue(int amount) => SetValue(Value - amount);
-		public void ResetValue() => SetValue(defaultValue);
+
+		[ContextMenu(nameof(ResetValue))]
+		public void ResetValue() => SetValue(DefaultValue);
 	}
 }
