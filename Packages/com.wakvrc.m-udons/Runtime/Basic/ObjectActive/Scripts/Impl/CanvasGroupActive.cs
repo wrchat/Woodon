@@ -9,8 +9,34 @@ namespace WakVRC
 		[SerializeField] private CanvasGroup[] activeCanvasGroups;
 		[SerializeField] private CanvasGroup[] disableCanvasGroups;
 
+		private Collider[] activeColliders = new Collider[0];
+		private Collider[] disableColliders = new Collider[0];
+
 		[Header("_" + nameof(CanvasGroupActive) + " - Options")]
 		[SerializeField] private bool toggleOnlyInteractable;
+
+		protected override void Init()
+		{
+			for (int i = 0; i < activeCanvasGroups.Length; i++)
+			{
+				if (activeCanvasGroups[i] == null)
+					continue;
+
+				Collider[] colliders = activeCanvasGroups[i].GetComponentsInChildren<Collider>(true);
+				MDataUtil.AddRange(ref activeColliders, colliders);
+			}
+
+			for (int i = 0; i < disableCanvasGroups.Length; i++)
+			{
+				if (disableCanvasGroups[i] == null)
+					continue;
+
+				Collider[] colliders = disableCanvasGroups[i].GetComponentsInChildren<Collider>(true);
+				MDataUtil.AddRange(ref disableColliders, colliders);
+			}
+
+			base.Init();
+		}
 
 		protected override void UpdateActive()
 		{
@@ -32,6 +58,12 @@ namespace WakVRC
 				foreach (CanvasGroup c in disableCanvasGroups)
 					MUtil.SetCanvasGroupActive(c, !Active);
 			}
+
+			foreach (Collider c in activeColliders)
+					c.enabled = Active;
+
+			foreach (Collider c in disableColliders)
+					c.enabled = !Active;
 		}
 
 		public void RegisterActiveCanvasGroup(CanvasGroup canvasGroup)

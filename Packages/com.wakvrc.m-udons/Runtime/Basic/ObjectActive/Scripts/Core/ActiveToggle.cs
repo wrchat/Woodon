@@ -28,7 +28,7 @@ namespace WakVRC
 			Init();
 		}
 
-		private void Init()
+		protected virtual void Init()
 		{
 			SetActive(defaultActive);
 
