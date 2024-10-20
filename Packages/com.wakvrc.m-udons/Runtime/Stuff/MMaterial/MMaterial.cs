@@ -15,6 +15,8 @@ namespace WakVRC
 		[SerializeField] private MBool switcher;
 		[SerializeField] private MValue materialIndex;
 
+		private Material[] originalMaterials;
+
 		protected virtual void Start()
 		{
 			Init();
@@ -22,11 +24,17 @@ namespace WakVRC
 
 		protected virtual void Init()
 		{
+			originalMaterials = new Material[meshRenderers.Length];
+			for (int i = 0; i < meshRenderers.Length; i++)
+				originalMaterials[i] = meshRenderers[i].material;
+
 			if (switcher != null)
-			{
 				switcher.RegisterListener(this, nameof(UpdateMaterial));
-				UpdateMaterial();
-			}
+
+			if (materialIndex != null)
+				materialIndex.RegisterListener(this, nameof(UpdateMaterial));
+
+			UpdateMaterial();
 		}
 
 		[ContextMenu(nameof(UpdateMaterial))]
@@ -43,19 +51,22 @@ namespace WakVRC
 			if (materials == null || materials.Length == 0)
 				return;
 
-			Material newMaterial = materials[0];
-
-			if (switcher)
-				newMaterial = materials[switcher.Value ? 1 : 0];
-
-			if (materialIndex)
-				newMaterial = materials[materialIndex.Value];
-
 			for (int i = 0; i < meshRenderers.Length; i++)
 			{
-				Material[] materials = meshRenderers[i].materials;
-				materials[rendererMaterialIndexes[i]] = newMaterial;
-				meshRenderers[i].materials = materials;
+				Material newMaterial = originalMaterials[i];
+
+				if (switcher)
+					newMaterial = materials[switcher.Value ? 1 : 0];
+
+				if (materialIndex)
+				{
+					if (materialIndex.Value >= 0 && materialIndex.Value < materials.Length)
+						newMaterial = materials[materialIndex.Value];
+				}
+
+				Material[] curMaterials = meshRenderers[i].materials;
+				curMaterials[rendererMaterialIndexes[i]] = newMaterial;
+				meshRenderers[i].materials = curMaterials;
 			}
 		}
 	}

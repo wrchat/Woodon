@@ -26,6 +26,12 @@ namespace WakVRC
 			originArr[originArr.Length - 1] = element;
 		}
 
+		public static void AddRange<T>(ref T[] originArr, T[] elements)
+		{
+			ResizeArr(ref originArr, originArr.Length + elements.Length);
+			Array.Copy(elements, 0, originArr, originArr.Length - elements.Length, elements.Length);
+		}
+
 		public static void RemoveAt<T>(ref T[] originArr, int index)
 		{
 			if (index < 0 || index >= originArr.Length)
