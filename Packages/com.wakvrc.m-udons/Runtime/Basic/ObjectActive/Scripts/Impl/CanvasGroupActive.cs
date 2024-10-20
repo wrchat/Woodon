@@ -13,7 +13,8 @@ namespace WakVRC
 		private Collider[] disableColliders = new Collider[0];
 
 		[Header("_" + nameof(CanvasGroupActive) + " - Options")]
-		[SerializeField] private bool toggleOnlyInteractable;
+		[SerializeField] private bool toggleOnlyInteractable = false;
+		[SerializeField] private bool toggleColliders = false;
 
 		protected override void Init()
 		{
@@ -59,11 +60,14 @@ namespace WakVRC
 					MUtil.SetCanvasGroupActive(c, !Active);
 			}
 
-			foreach (Collider c in activeColliders)
+			if (toggleColliders)
+			{
+				foreach (Collider c in activeColliders)
 					c.enabled = Active;
 
-			foreach (Collider c in disableColliders)
+				foreach (Collider c in disableColliders)
 					c.enabled = !Active;
+			}
 		}
 
 		public void RegisterActiveCanvasGroup(CanvasGroup canvasGroup)
@@ -77,3 +81,5 @@ namespace WakVRC
 		}
 	}
 }
+
+// 밥
