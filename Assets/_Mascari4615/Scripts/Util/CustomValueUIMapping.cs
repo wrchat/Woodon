@@ -30,6 +30,27 @@ namespace Mascari4615
 
 			AssetDatabase.SaveAssets();
 		}
+
+		[SerializeField] private Transform mValuesParent;
+		[SerializeField] private Transform uimValuesParent;
+
+		[ContextMenu(nameof(MappingMValue2UI))]
+		public void MappingMValue2UI()
+		{
+			MValue[] mValues = mValuesParent.GetComponentsInChildren<MValue>(true);
+			UIMValue[] uiMValues = uimValuesParent.GetComponentsInChildren<UIMValue>(true);
+
+			for (int i = 0; i < mValues.Length; i++)
+			{
+				MValue mValue = mValues[i];
+				UIMValue uiMValue = uiMValues[i];
+
+				uiMValue.SetMValue(mValue);
+				EditorUtility.SetDirty(uiMValue);
+			}
+
+			AssetDatabase.SaveAssets();
+		}
 	}
 #endif
 }

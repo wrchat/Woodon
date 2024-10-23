@@ -5,10 +5,9 @@ using UnityEngine;
 namespace WakVRC
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class UIMValue : MBase
+	public class UIMValue : MValueFollower
 	{
 		[Header("_" + nameof(UIMValue))]
-		[SerializeField] private MValue mValue;
 		[SerializeField] private TextMeshProUGUI[] valueTexts;
 		[SerializeField] private string format = "{0}";
 		[SerializeField] private GameObject[] hardButtons;
@@ -51,7 +50,7 @@ namespace WakVRC
 				hardButtons[i].SetActive(mValue.MinValue <= i && i <= mValue.MaxValue);
 		}
 
-		public void SetMValue(MValue mValue)
+		public override void SetMValue(MValue mValue)
 		{
 			MDebugLog($"{nameof(SetMValue)} : {mValue}");
 

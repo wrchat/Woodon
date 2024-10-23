@@ -50,7 +50,10 @@ namespace WakVRC
 		protected override void OnTargetChange(DataChangeState changeState)
 		{
 			if (turnBaseManager == null)
+			{
+				MDebugLog($"{nameof(OnTargetChange)} : {nameof(turnBaseManager)} is null", LogType.Warning);
 				return;
+			}
 
 			base.OnTargetChange(changeState);
 		
@@ -65,7 +68,10 @@ namespace WakVRC
 			// MDebugLog($"{nameof(OnDataChange)}, {Data}");
 			
 			if (turnBaseManager == null)
+			{
+				MDebugLog($"{nameof(OnDataChange)} : {nameof(turnBaseManager)} is null", LogType.Warning);
 				return;
+			}
 
 			UpdateCurDataUI();
 
@@ -76,7 +82,10 @@ namespace WakVRC
 		private void UpdateCurDataUI()
 		{
 			if (turnBaseManager == null)
+			{
+				MDebugLog($"{nameof(UpdateCurDataUI)} : {nameof(turnBaseManager)} is null", LogType.Warning);
 				return;
+			}
 
 			if (turnBaseManager.IsDataElement)
 			{
@@ -105,7 +114,10 @@ namespace WakVRC
 		private void UpdateDataUI()
 		{
 			if (turnBaseManager == null)
+			{
+				MDebugLog($"{nameof(UpdateDataUI)} : {nameof(turnBaseManager)} is null", LogType.Warning);
 				return;
+			}
 
 			if (turnBaseManager.IsDataElement)
 			{

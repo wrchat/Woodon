@@ -32,7 +32,8 @@ namespace WakVRC
 			for (int i = 0; i < playerSelectButtons.Length; i++)
 				playerSelectButtons[i].Init(this, i);
 
-			localPlayerUI.text = $"LocalPlayer ID : {Networking.LocalPlayer.playerId}";
+			if (localPlayerUI != null)
+				localPlayerUI.text = $"LocalPlayer ID : {Networking.LocalPlayer.playerId}";
 
 			mTarget.RegisterListener(this, nameof(UpdateUI));
 			UpdateUI();
@@ -47,9 +48,10 @@ namespace WakVRC
 
 		private void SetNoneButton(bool active)
 		{
-			noneButton.SetActive(active);
-			RectTransform rectTransform = GetComponent<RectTransform>();
-			rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, 400 + (active ? 40 : 0));
+			if (noneButton != null)
+				noneButton.SetActive(active);
+			// RectTransform rectTransform = GetComponent<RectTransform>();
+			// rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, 400 + (active ? 40 : 0));
 		}
 
 		private void UpdateTargetPlayerUI(int curTargetPlayerID)

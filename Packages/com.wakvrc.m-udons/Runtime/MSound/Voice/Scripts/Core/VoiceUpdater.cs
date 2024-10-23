@@ -7,7 +7,7 @@ namespace WakVRC
 {
 	// 베이스가 되는 추상 클래스
 	// 이 클래스를 상속받아서 UpdateVoice()를 구현해야 함
-	public class VoiceUpdater : MBase
+	public abstract class VoiceUpdater : MBase
 	{
 		protected VoiceManager voiceManager;
 
@@ -19,7 +19,7 @@ namespace WakVRC
 			this.voiceManager = voiceManager;
 		}
 
-		public virtual void UpdateVoice() { }
+		public abstract void UpdateVoice();
 
 		public void SetEnable(bool enable)
 		{

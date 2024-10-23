@@ -4,10 +4,10 @@ using UnityEngine;
 namespace WakVRC
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class UIMValueSetter : MBase
+	public class MValueFollowerSetter : MBase
 	{
-		[Header("_" + nameof(UIMValueSetter))]
-		[SerializeField] private UIMValue[] mValueUIs;
+		[Header("_" + nameof(MValueFollowerSetter))]
+		[SerializeField] private MValueFollower[] mValueFollowers;
 		[SerializeField] private MValue[] mValues;
 		[SerializeField] private MValue mValueIndex;
 
@@ -30,8 +30,8 @@ namespace WakVRC
 			int index = mValueIndex.Value;
 			MValue mValue = mValues[index];
 
-			foreach (UIMValue mValueUI in mValueUIs)
-				mValueUI.SetMValue(mValue);
+			foreach (MValueFollower mValueFollower in mValueFollowers)
+				mValueFollower.SetMValue(mValue);
 		}
 	}
 }
