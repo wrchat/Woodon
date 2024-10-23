@@ -44,6 +44,8 @@ namespace WakVRC
 
 		public void SetTarget(int id)
 		{
+			MDebugLog($"{nameof(SetTarget)} : {id}");
+
 			SetOwner();
 			TargetPlayerID = id;
 			RequestSerialization();
