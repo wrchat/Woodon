@@ -1,5 +1,6 @@
 ﻿using UdonSharp;
 using UnityEngine;
+using UnityEngine.UI;
 using VRC.Udon.Common.Interfaces;
 
 namespace WakVRC
@@ -7,54 +8,65 @@ namespace WakVRC
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class QvPenSketchbook : MBase
 	{
-		[SerializeField] private GameObject[] sketchbooks;
+		[field: Header("_" + nameof(QvPenSketchbook))]
+		[field: SerializeField] public RenderTexture SketchbookRenderTexture { get; private set; }
 		[SerializeField] private UdonSharpBehaviour[] qvPenManagers;
+		[SerializeField] private RawImage[] sketchbookRawImages;
+		[SerializeField] private Camera sketchbookCamera;
 
-		private Camera[] sketchbookCameras;
+		[Header("_" + nameof(QvPenSketchbook) + " - Options")]
 		[SerializeField] private float screenShotDelay = .3f;
+		[SerializeField] private bool defaultCameraActive = false;
 
 		private void Start()
 		{
-			sketchbookCameras = new Camera[sketchbooks.Length];
-			for (int i = 0; i < sketchbooks.Length; i++)
-				sketchbookCameras[i] = sketchbooks[i].GetComponentInChildren<Camera>();
-			SetCameraActive(false);
+			Init();
 		}
 
-
-		public void ScreenShot_G()
+		private void Init()
 		{
-			MDebugLog($"{nameof(ScreenShot_G)}");
-			SendCustomNetworkEvent(NetworkEventTarget.All, nameof(ScreenShot));
+			sketchbookCamera.targetTexture = SketchbookRenderTexture;
+			foreach (RawImage sketchbookRawImage in sketchbookRawImages)
+				sketchbookRawImage.texture = SketchbookRenderTexture;
+
+			SetCameraActive(defaultCameraActive);
 		}
 
+		public void ScreenShot_G() => SendCustomNetworkEvent(NetworkEventTarget.All, nameof(ScreenShot));
 		public void ScreenShot()
 		{
 			MDebugLog($"{nameof(ScreenShot)}");
 			SetCameraActive(true);
-			SendCustomEventDelayedSeconds(nameof(TurnOffCameras), screenShotDelay);
+			SendCustomEventDelayedSeconds(nameof(TurnOffCamera), screenShotDelay);
 		}
 
-		public void TurnOnCameras() => SetCameraActive(true);
-		public void TurnOffCameras() => SetCameraActive(false);
-
+		public void TurnOffCamera() => SetCameraActive(false);
 		public void SetCameraActive(bool active)
 		{
-			foreach (Camera sketchbookCamera in sketchbookCameras)
-				sketchbookCamera.gameObject.SetActive(active);
+			sketchbookCamera.gameObject.SetActive(active);
 		}
 
-		public void ResetQVPen_G()
+		public void ResetQvPen_G() => SendCustomNetworkEvent(NetworkEventTarget.All, nameof(ResetQvPen));
+		public void ResetQvPen()
 		{
-			MDebugLog($"{nameof(ResetQVPen_G)}");
-			SendCustomNetworkEvent(NetworkEventTarget.All, nameof(ResetQVPen));
+			MDebugLog($"{nameof(ResetQvPen)}");
+			ClearQvPen();
+			RespawnQvPen();
 		}
 
-		public void ResetQVPen()
+		public void ClearQvPen_G() => SendCustomNetworkEvent(NetworkEventTarget.All, nameof(ClearQvPen));
+		public void ClearQvPen()
 		{
-			MDebugLog($"{nameof(ResetQVPen)}");
+			MDebugLog($"{nameof(ClearQvPen)}");
 			foreach (UdonSharpBehaviour qvPenManager in qvPenManagers)
 				qvPenManager.SendCustomEvent("Clear");
+		}
+
+		public void RespawnQvPen()
+		{
+			MDebugLog($"{nameof(RespawnQvPen)}");
+			foreach (UdonSharpBehaviour qvPenManager in qvPenManagers)
+				qvPenManager.SendCustomEvent("Respawn");
 		}
 	}
 }
