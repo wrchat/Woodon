@@ -5,10 +5,9 @@ using UnityEngine.UI;
 namespace WakVRC
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class MValueSlider : MBase
+	public class MValueSlider : MValueFollower
 	{
 		[Header("_" + nameof(MValueSlider))]
-		[SerializeField] private MValue mValue;
 		[SerializeField] private Slider slider;
 		[SerializeField] private Slider fakeSlider;
 
@@ -85,6 +84,17 @@ namespace WakVRC
 		{
 			if (isSliderPressed != null)
 				isSliderPressed.SetValue(sliderAnimator.GetCurrentAnimatorStateInfo(0).IsName("Pressed"));
+		}
+
+		public override void SetMValue(MValue mValue)
+		{
+			MDebugLog($"{nameof(SetMValue)} : {mValue}");
+
+			if (this.mValue != null)
+				this.mValue.RemoveListener(this, nameof(UpdateSlider));
+
+			this.mValue = mValue;
+			Init();
 		}
 	}
 }
