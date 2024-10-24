@@ -3,7 +3,7 @@ using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon.Common.Interfaces;
 
-namespace WakVRC
+namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Continuous)]
 	public class MGun : MPickup

@@ -1,7 +1,7 @@
 ﻿using Cinemachine;
 using TMPro;
 using UnityEngine;
-using WakVRC;
+using WRC.Woodon;
 
 namespace Mascari4615.Project.ISD.GSG.RotatingMeeting
 {

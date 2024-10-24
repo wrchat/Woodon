@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using VRC.Udon.Common.Interfaces;
 
-namespace WakVRC
+namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class QvPenSketchbook : MBase

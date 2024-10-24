@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using VRC.SDKBase;
 
-namespace WakVRC
+namespace WRC.Woodon
 {
     public class PosFixer : MBase
     {

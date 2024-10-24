@@ -5,9 +5,9 @@
 // refactor by Mascari4615
 
 using VRC.SDKBase;
-using static WakVRC.MUtil;
+using static WRC.Woodon.MUtil;
 
-namespace WakVRC
+namespace WRC.Woodon
 {
 	public class Waktaverse : MBase
 	{

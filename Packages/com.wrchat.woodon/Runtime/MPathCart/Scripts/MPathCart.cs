@@ -1,7 +1,7 @@
 ﻿using Cinemachine;
 using UnityEngine;
 
-namespace WakVRC
+namespace WRC.Woodon
 {
 	public class MPathCart : MEventSender
 	{

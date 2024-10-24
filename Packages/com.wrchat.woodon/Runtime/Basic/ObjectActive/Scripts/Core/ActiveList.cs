@@ -1,7 +1,7 @@
 using UdonSharp;
 using UnityEngine;
 
-namespace WakVRC
+namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public abstract class ActiveList : MBase

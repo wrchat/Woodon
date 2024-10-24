@@ -1,4 +1,4 @@
-namespace WakVRC
+namespace WRC.Woodon
 {
 	public enum MPathCartMovementType
 	{

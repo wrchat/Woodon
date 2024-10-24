@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using VRC.SDK3.Components;
 using VRC.SDKBase;
 using VRC.Udon;
-using WakVRC;
+using WRC.Woodon;
 
 namespace Mascari4615.Project.Wakta.WAK.TGame
 {

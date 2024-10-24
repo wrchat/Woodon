@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using WakVRC;
+using WRC.Woodon;
 
 namespace Mascari4615
 {

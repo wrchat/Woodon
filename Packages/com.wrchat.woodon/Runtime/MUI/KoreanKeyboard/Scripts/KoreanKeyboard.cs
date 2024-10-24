@@ -2,7 +2,7 @@
 using UdonSharp;
 using UnityEngine;
 
-namespace WakVRC
+namespace WRC.Woodon
 {
 	[DefaultExecutionOrder(1000)]
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]

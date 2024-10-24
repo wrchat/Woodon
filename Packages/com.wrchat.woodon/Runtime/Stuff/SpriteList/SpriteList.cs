@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace WakVRC
+namespace WRC.Woodon
 {
 	// [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class SpriteList : MBase

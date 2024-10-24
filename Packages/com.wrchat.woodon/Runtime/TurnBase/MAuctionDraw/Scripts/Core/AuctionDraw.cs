@@ -2,7 +2,7 @@
 using UnityEngine;
 using VRC.SDKBase;
 
-namespace WakVRC
+namespace WRC.Woodon
 {
 	// [DefaultExecutionOrder(100)]
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]

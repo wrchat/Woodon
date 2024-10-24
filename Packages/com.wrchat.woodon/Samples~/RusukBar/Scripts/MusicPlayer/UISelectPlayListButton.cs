@@ -2,7 +2,7 @@
 using UdonSharp;
 using UnityEngine;
 using UnityEngine.UI;
-using WakVRC;
+using WRC.Woodon;
 
 namespace Mascari4615.Project.RusukBar
 {

@@ -8,7 +8,7 @@ using VRC.SDK3.Video.Components.Base;
 using VRC.SDKBase;
 using VRC.Udon;
 
-namespace WakVRC
+namespace WRC.Woodon
 {
 	// https://github.com/MerlinVR/USharpVideo
 

@@ -2,7 +2,7 @@
 using UnityEngine;
 using VRC.Udon.Common.Interfaces;
 
-namespace WakVRC
+namespace WRC.Woodon
 {
 	public abstract class MEventSender : MBase
 	{

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace WakVRC
+namespace WRC.Woodon
 {
 	public static class MDataUtil
 	{

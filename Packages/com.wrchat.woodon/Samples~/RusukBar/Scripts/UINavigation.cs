@@ -1,7 +1,7 @@
 ﻿using UdonSharp;
 using UnityEngine;
 using VRC.Udon;
-using WakVRC;
+using WRC.Woodon;
 
 [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 public class UINavigation : UdonSharpBehaviour

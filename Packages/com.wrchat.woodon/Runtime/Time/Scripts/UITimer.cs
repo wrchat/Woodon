@@ -3,7 +3,7 @@ using TMPro;
 using UdonSharp;
 using UnityEngine;
 
-namespace WakVRC
+namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public class UITimer : MBase

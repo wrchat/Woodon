@@ -3,7 +3,7 @@ using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon;
 
-namespace WakVRC
+namespace WRC.Woodon
 {
 	// 베이스가 되는 추상 클래스
 	// 이 클래스를 상속받아서 UpdateVoice()를 구현해야 함

@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using VRC.SDKBase;
 using UdonSharp;
-using WakVRC;
-using static WakVRC.MUtil;
+using WRC.Woodon;
+using static WRC.Woodon.MUtil;
 
 namespace Mascari4615.Project.VTuber.HYANG.YejolGyosil
 {

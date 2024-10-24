@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using VRC.SDKBase;
 using VRC.Udon;
-using WakVRC;
+using WRC.Woodon;
 
 namespace Mascari4615.Project.ISD.GSG.RealMeeting
 {

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using VRC.Udon.Common.Interfaces;
 
-namespace WakVRC
+namespace WRC.Woodon
 {
 	public class MAnimator : MBase
 	{

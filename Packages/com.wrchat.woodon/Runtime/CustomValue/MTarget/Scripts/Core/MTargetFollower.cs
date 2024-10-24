@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace WakVRC
+namespace WRC.Woodon
 {
 	public abstract class MTargetFollower : MBase
 	{

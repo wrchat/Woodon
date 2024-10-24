@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UdonSharp;
 using UnityEngine;
-using WakVRC;
+using WRC.Woodon;
 
 namespace Mascari4615
 {

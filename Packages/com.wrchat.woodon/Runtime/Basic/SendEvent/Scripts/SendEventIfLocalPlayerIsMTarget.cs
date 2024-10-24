@@ -2,7 +2,7 @@
 using VRC.SDKBase;
 using VRC.Udon.Common.Interfaces;
 
-namespace WakVRC
+namespace WRC.Woodon
 {
 	public class SendEventIfLocalPlayerIsMTarget : MEventSender
 	{

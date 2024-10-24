@@ -2,7 +2,7 @@
 using UnityEngine;
 using VRC.SDKBase;
 
-namespace WakVRC
+namespace WRC.Woodon
 {
 	[RequireComponent(typeof(VRC_Pickup))]
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Continuous)]

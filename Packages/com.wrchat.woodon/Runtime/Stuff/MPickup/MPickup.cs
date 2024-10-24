@@ -4,9 +4,9 @@ using VRC.SDK3.Components;
 using VRC.SDKBase;
 using VRC.Udon.Common.Interfaces;
 using static VRC.SDKBase.VRC_Pickup;
-using static WakVRC.MUtil;
+using static WRC.Woodon.MUtil;
 
-namespace WakVRC
+namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Continuous)]
 	public class MPickup : MBase

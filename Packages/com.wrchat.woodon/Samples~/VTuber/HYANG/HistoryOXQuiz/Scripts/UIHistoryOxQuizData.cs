@@ -1,5 +1,5 @@
 ﻿using UdonSharp;
-using WakVRC;
+using WRC.Woodon;
 
 namespace Mascari4615.Project.VTuber.HYANG.HistoryOXQuiz
 {

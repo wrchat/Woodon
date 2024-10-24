@@ -2,7 +2,7 @@
 using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon.Common.Interfaces;
-using WakVRC;
+using WRC.Woodon;
 
 namespace Mascari4615.Project.RusukBar
 {

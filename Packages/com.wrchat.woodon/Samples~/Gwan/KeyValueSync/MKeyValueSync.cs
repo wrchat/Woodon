@@ -3,7 +3,7 @@ using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon;
-using WakVRC;
+using WRC.Woodon;
 
 namespace Mascari4615
 {

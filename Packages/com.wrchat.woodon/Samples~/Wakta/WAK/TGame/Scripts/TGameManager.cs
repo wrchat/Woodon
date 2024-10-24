@@ -7,8 +7,8 @@ using VRC.SDK3.Video.Components;
 using VRC.SDKBase;
 using VRC.Udon.Common.Enums;
 using VRC.Udon.Common.Interfaces;
-using WakVRC;
-using static WakVRC.MUtil;
+using WRC.Woodon;
+using static WRC.Woodon.MUtil;
 
 namespace Mascari4615.Project.Wakta.WAK.TGame
 {

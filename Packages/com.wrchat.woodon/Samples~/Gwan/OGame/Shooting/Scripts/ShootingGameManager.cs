@@ -4,7 +4,7 @@ using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
 using Random = UnityEngine.Random;
-using WakVRC;
+using WRC.Woodon;
 
 namespace Mascari4615
 {

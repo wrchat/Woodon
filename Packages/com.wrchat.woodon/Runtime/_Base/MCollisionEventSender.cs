@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace WakVRC
+namespace WRC.Woodon
 {
 	public class MCollisionEventSender : MEventSender
 	{

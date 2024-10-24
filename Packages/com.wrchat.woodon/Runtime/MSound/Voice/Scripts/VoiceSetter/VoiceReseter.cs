@@ -1,9 +1,9 @@
 ﻿using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
-using static WakVRC.MUtil;
+using static WRC.Woodon.MUtil;
 
-namespace WakVRC
+namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public class VoiceReseter : VoiceUpdater

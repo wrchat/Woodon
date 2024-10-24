@@ -1,7 +1,7 @@
 ﻿using UdonSharp;
 using UnityEngine.UI;
 
-namespace WakVRC
+namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public class UIDrawTeamBlock : MBase

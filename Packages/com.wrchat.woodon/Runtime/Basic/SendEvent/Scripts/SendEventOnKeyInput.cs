@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace WakVRC
+namespace WRC.Woodon
 {
 	// [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class SendEventOnKeyInput : MEventSender

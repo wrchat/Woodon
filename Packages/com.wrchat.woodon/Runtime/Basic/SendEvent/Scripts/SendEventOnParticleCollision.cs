@@ -2,7 +2,7 @@
 using VRC.Udon;
 using VRC.Udon.Common.Interfaces;
 
-namespace WakVRC
+namespace WRC.Woodon
 {
 	public class SendEventOnParticleCollision : MCollisionEventSender
 	{
