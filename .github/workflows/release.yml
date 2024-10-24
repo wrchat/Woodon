@@ -84,4 +84,4 @@ jobs:
             ${{ env.zipFile }}
             ${{ env.unityPackage }}
             ${{ env.packagePath }}/package.json
-          tag_name: ${{ env.version }}
+          tag_name: "v${{ env.version }}"
