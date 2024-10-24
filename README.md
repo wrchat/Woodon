@@ -1,6 +1,6 @@
 ![Banner](/Website/banner.png)
 
-# MUdons
+# Woodon
 
 - VRChat 컨텐츠 맵에 사용하고 있는 우동/프리팹들을 모은 유니티 패키지입니다.
 
@@ -8,14 +8,14 @@
 
 ### 설치
 
-- <vcc://vpm/addRepo?url=https://WakVRC.github.io/MUdons/index.json>
-- 위 주소에 접속하여 간편하게 `MUdons`를 `VCC (VRChat Creator Conpanion)`에 등록하세요!
-- `VCC`에서, `MUdons`를 사용하고자 하는 프로젝트의 `Manage Project` 페이지를 열고, 해당 프로젝트에 `MUdons` 패키지를 추가하세요.
+- <vcc://vpm/addRepo?url=https://wrchat.github.io/Woodon/index.json>
+- 위 주소에 접속하여 간편하게 `Woodon`을 `VCC (VRChat Creator Conpanion)`에 등록하세요!
+- `VCC`에서, `Woodon`를 사용하고자 하는 프로젝트의 `Manage Project` 페이지를 열고, 해당 프로젝트에 `Woodon` 패키지를 추가하세요.
 
 ### 사용
 
-- 유니티 에디터의 `Project` 창에서, `Package/MUdons` 폴더를 찾고, `Runtime` 폴더에서 우동/프리팹을 찾아보세요.
-- 유니티 에디터의 `Package Manager` 창에서, `MUdons` 패키지를 찾고, `Samples` 페이지에서 샘플들을 찾아보세요.
+- 유니티 에디터의 `Project` 창에서, `Package/Woodon` 폴더를 찾고, `Runtime` 폴더에서 우동/프리팹을 찾아보세요.
+- 유니티 에디터의 `Package Manager` 창에서, `Woodon` 패키지를 찾고, `Samples` 페이지에서 샘플들을 찾아보세요.
 
 ## Require
 
