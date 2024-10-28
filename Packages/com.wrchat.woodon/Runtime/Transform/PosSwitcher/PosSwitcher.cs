@@ -34,7 +34,10 @@ namespace WRC.Woodon
 		private void Init()
 		{
 			if (isPosA != null)
+			{
 				isPosA.RegisterListener(this, nameof(UpdateValue));
+				UpdateValue();
+			}
 		}
 
 		public void UpdateValue()
