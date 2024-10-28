@@ -7,6 +7,10 @@ namespace WRC.Woodon
 		[Header("_" + nameof(MTargetFollower))]
 		[SerializeField] protected MTarget mTarget;
 
-		public abstract void SetMTarget(MTarget mTarget);
+		public virtual void SetMTarget(MTarget mTarget)
+		{
+			MDebugLog($"{nameof(SetMTarget)} - {mTarget}");
+			this.mTarget = mTarget;
+		}
 	}
 }
