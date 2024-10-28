@@ -13,6 +13,7 @@ namespace WRC.Woodon
 		
 		public bool IsLocalPlayerOwner => OwnerID == Networking.LocalPlayer.playerId;
 
+		[ContextMenu(nameof(UseStation))]
 		public void UseStation()
 		{
 			if (OwnerID != NONE_INT)
@@ -28,6 +29,7 @@ namespace WRC.Woodon
 			station.UseStation(Networking.LocalPlayer);
 		}
 
+		[ContextMenu(nameof(ExitStation))]
 		public void ExitStation()
 		{
 			if (OwnerID == NONE_INT)
@@ -41,6 +43,15 @@ namespace WRC.Woodon
 			RequestSerialization();
 
 			station.ExitStation(Networking.LocalPlayer);
+		}
+
+		[ContextMenu(nameof(ToggleStation))]
+		public void ToggleStation()
+		{
+			if (OwnerID == NONE_INT)
+				UseStation();
+			else
+				ExitStation();
 		}
 	}
 }

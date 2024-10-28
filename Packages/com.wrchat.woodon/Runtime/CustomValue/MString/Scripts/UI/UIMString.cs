@@ -19,12 +19,18 @@ namespace WRC.Woodon
 
 		private void Init()
 		{
+			if (mString == null)
+				return;
+
 			mString.RegisterListener(this, nameof(UpdateUI));
 			UpdateUI();
 		}
 
 		public void UpdateUI()
 		{
+			if (mString == null)
+				return;
+
 			string newText = mString.GetFormatString();
 
 			if (inputField != null)

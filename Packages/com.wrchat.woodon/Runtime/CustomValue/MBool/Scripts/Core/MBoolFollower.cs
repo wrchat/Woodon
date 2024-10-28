@@ -7,6 +7,10 @@ namespace WRC.Woodon
 		[Header("_" + nameof(MBoolFollower))]
 		[SerializeField] protected MBool mBool;
 
-		public abstract void SetMBool(MBool mBool);
+		public virtual void SetMBool(MBool mBool)
+		{
+			MDebugLog($"{nameof(SetMBool)} - {mBool}");
+			this.mBool = mBool;
+		}
 	}
 }
