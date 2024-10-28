@@ -96,7 +96,7 @@ namespace WRC.Woodon
 		{
 			string formatString = Value;
 
-			if (formatString == string.Empty || formatString.Length == 0)
+			if ((formatString == string.Empty) || (formatString.Length == 0))
 				if (useDefaultWhenEmpty)
 					formatString = defaultString;
 
