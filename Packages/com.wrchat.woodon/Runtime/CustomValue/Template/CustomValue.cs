@@ -8,18 +8,17 @@ namespace WRC.Woodon
 	// 직접 상속 받아 쓸 수 없음
 	// Template으로만 볼 것
 
-	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public abstract class CustomValue<T> : MEventSender where T : IComparable
+	public abstract class CustomValue<T> : MEventSender
 	{
-		[Header("_" + nameof(MBool))]
-		[SerializeField] protected T defaultValue;
-		[SerializeField] private bool useSync = true;
+		[field: Header("_" + nameof(MBool))]
+		[field: SerializeField] public T DefaultValue { get; protected set; }
+		[SerializeField] protected bool useSync = true;
 
-		[UdonSynced, FieldChangeCallback(nameof(SyncedValue))] private T _syncedValue;
+		[UdonSynced, FieldChangeCallback(nameof(SyncedValue))] protected T _syncedValue;
 		public T SyncedValue
 		{
 			get => _syncedValue;
-			private set
+			protected set
 			{
 				_syncedValue = value;
 
@@ -28,11 +27,11 @@ namespace WRC.Woodon
 			}
 		}
 
-		private T _value;
+		protected T _value;
 		public T Value
 		{
 			get => _value;
-			private set
+			protected set
 			{
 				_value = value;
 				OnValueChange();
@@ -41,14 +40,19 @@ namespace WRC.Woodon
 
 		protected virtual void Start()
 		{
+			Init();
+		}
+
+		protected virtual void Init()
+		{
 			if (useSync)
 			{
 				if (Networking.IsMaster)
-					SetValue(defaultValue);
+					SetValue(DefaultValue);
 			}
 			else
 			{
-				SetValue(defaultValue);
+				SetValue(DefaultValue);
 			}
 
 			OnValueChange();
@@ -63,11 +67,11 @@ namespace WRC.Woodon
 
 		public virtual void SetValue(T newValue, bool isReciever = false)
 		{
-			MDebugLog($"{nameof(SetValue)}({newValue})");
+			// MDebugLog($"{nameof(SetValue)}({newValue})");
 
 			if (isReciever == false)
 			{
-				if (useSync && SyncedValue.Equals(newValue) == false)
+				if (useSync && IsEqual(Value, newValue) == false)
 				{
 					SetOwner();
 					SyncedValue = newValue;
@@ -79,5 +83,7 @@ namespace WRC.Woodon
 
 			Value = newValue;
 		}
+
+		protected abstract bool IsEqual(T a, T b);
 	}
 }

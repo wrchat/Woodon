@@ -5,13 +5,13 @@ using UnityEngine.UI;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class MValueSlider : MValueFollower
+	public class UIMValueSlider : MValueFollower
 	{
-		[Header("_" + nameof(MValueSlider))]
+		[Header("_" + nameof(UIMValueSlider))]
 		[SerializeField] private Slider slider;
 		[SerializeField] private Slider fakeSlider;
 
-		[Header("_" + nameof(MValueSlider) + " - Options")]
+		[Header("_" + nameof(UIMValueSlider) + " - Options")]
 		[SerializeField] private bool logDetail = false;
 		[SerializeField] private MBool isSliderPressed;
 		private Animator sliderAnimator;
