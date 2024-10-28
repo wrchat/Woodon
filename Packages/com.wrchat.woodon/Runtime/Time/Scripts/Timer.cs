@@ -101,8 +101,14 @@ namespace WRC.Woodon
 		{
 			MDebugLog(nameof(SetTimerByMValue));
 
-			if (mValueForSetTime != null)
-				SetTimer(mValueForSetTime.Value * 100);
+			if (mValueForSetTime == null)
+				return;
+
+			if (IsOwner(mValueForSetTime.gameObject) == false)
+				return;
+
+			// mValueForSetTime은 초 단위로 받을 것
+			SetTimer(mValueForSetTime.Value * 10);
 		}
 
 		public void StartTimer() => StartTimer(TimeByDecisecond);
