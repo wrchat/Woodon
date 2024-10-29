@@ -23,8 +23,9 @@ namespace WRC.Woodon
 
 		private void Init()
 		{
-			if (mValue_SpriteIndex)
+			if (mValue_SpriteIndex != null)
 			{
+				mValue_SpriteIndex.SetMinMaxValue(0, sprites.Length - 1);
 				mValue_SpriteIndex.RegisterListener(this, nameof(SetAllByMValue));
 				SetAllByMValue();
 			}
