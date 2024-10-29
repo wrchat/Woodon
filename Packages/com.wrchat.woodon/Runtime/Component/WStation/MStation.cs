@@ -5,53 +5,46 @@ using VRC.SDKBase;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class MStation : MBase
+	public class MStation : MTarget
 	{
 		[Header("_" + nameof(MStation))]
 		[SerializeField] private VRCStation station;
-		[field: UdonSynced] public int OwnerID { get; private set; } = NONE_INT;
-		
-		public bool IsLocalPlayerOwner => OwnerID == Networking.LocalPlayer.playerId;
+
+		protected override void OnTargetChange(DataChangeState changeState)
+		{
+			base.OnTargetChange(changeState);
+
+			if (IsTargetPlayer())
+				UseStation();
+			else if (IsTargetPlayer() == false)
+				ExitStation();
+		}
 
 		[ContextMenu(nameof(UseStation))]
 		public void UseStation()
 		{
-			if (OwnerID != NONE_INT)
-				return;
-
-			if (IsLocalPlayerOwner == true)
-				return;
-
-			SetOwner();
-			OwnerID = Networking.LocalPlayer.playerId;
-			RequestSerialization();
-
 			station.UseStation(Networking.LocalPlayer);
 		}
 
 		[ContextMenu(nameof(ExitStation))]
 		public void ExitStation()
 		{
-			if (OwnerID == NONE_INT)
-				return;
-
-			if (IsLocalPlayerOwner == false)
-				return;
-
-			SetOwner();
-			OwnerID = NONE_INT;
-			RequestSerialization();
-
 			station.ExitStation(Networking.LocalPlayer);
 		}
 
 		[ContextMenu(nameof(ToggleStation))]
 		public void ToggleStation()
 		{
-			if (OwnerID == NONE_INT)
+			if (TargetPlayerID == NONE_INT)
 				UseStation();
-			else
+			else if (IsTargetPlayer())
 				ExitStation();
+		}
+
+		public override void OnPlayerRespawn(VRCPlayerApi player)
+		{
+			if (IsTargetPlayer(player))
+				ResetPlayer();
 		}
 	}
 }
