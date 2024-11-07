@@ -19,6 +19,7 @@ namespace WRC.Woodon
 		public void UpdateScreen()
 		{
 			foreach (RawImage rawImage in rawImages)
+			{
 				if (mVideoPlayer.IsPlaying)
 				{
 					rawImage.texture = mVideoPlayer.GetVideoTexture();
@@ -27,8 +28,14 @@ namespace WRC.Woodon
 				else if (hideVideoWhenIsNotPlaying)
 				{
 					rawImage.texture = null;
-					rawImage.color = Color.white * 0;
+					rawImage.color = Color.clear;
 				}
+				else
+				{
+					rawImage.texture = null;
+					rawImage.color = Color.black;
+				}
+			}
 		}
 	}
 }
