@@ -7,7 +7,7 @@ namespace WRC.Woodon
 {
 	public abstract class MBase : UdonSharpBehaviour
 	{
-		public const string DEBUG_PREFIX = "DEBUG";
+		public const string DEBUG_PREFIX = "WRChat";
 
 		public const char DATA_PACK_SEPARATOR = '_';
 		public const char DATA_SEPARATOR = '@';
@@ -18,7 +18,7 @@ namespace WRC.Woodon
 		public const string FALSE_STRING = "FALSE";
 
 		[Header("_" + nameof(MBase))]
-		[SerializeField] protected bool DEBUG = true;
+		[SerializeField] protected bool DEBUG = false;
 
 		// 아래 메서드들은 확장 메서드들로 만들까 했는데, 일반 메서드와 크게 성능상 차이가 없다고 함.
 		// this.MDebugLog(); 같이 쓰기 번거로워지기만 할 것 같아서 그냥 일반 메서드로 둠.
@@ -42,12 +42,17 @@ namespace WRC.Woodon
 			if (DEBUG == false)
 				return;
 
+			string formattedLog = $@"" +
+				$@"[<color=#3a9e00>{DEBUG_PREFIX}</color>] " +
+				$@"[<color=#fc6203>{Networking.LocalPlayer.playerId}</color>] " +
+				$@"<color=#00a6ff>{gameObject.name}</color> {log}";
+
 			if (logType == LogType.Log)
-				Debug.Log($"{DEBUG_PREFIX}, {Networking.LocalPlayer.playerId}, {gameObject.name} : {log}");
+				Debug.Log(formattedLog);
 			else if (logType == LogType.Warning)
-				Debug.LogWarning($"{DEBUG_PREFIX}, {Networking.LocalPlayer.playerId}, {gameObject.name} : {log}");
+				Debug.LogWarning(formattedLog);
 			else if (logType == LogType.Error)
-				Debug.LogError($"{DEBUG_PREFIX}, {Networking.LocalPlayer.playerId}, {gameObject.name} : {log}");
+				Debug.LogError(formattedLog);
 		}
 
 		protected void SetOwner(GameObject targetObject = null)
