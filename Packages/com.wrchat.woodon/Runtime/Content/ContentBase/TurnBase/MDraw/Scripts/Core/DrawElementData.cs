@@ -4,7 +4,7 @@ using UnityEngine;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class DrawElementData : MData
+	public class DrawElementData : MDataContainer
 	{
 		[field: SerializeField] public TeamType InitTeamType { get; private set; } = TeamType.None;
 		[field: SerializeField] public DrawRole InitRole { get; private set; } = DrawRole.None;

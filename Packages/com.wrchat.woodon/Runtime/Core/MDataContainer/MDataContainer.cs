@@ -4,9 +4,9 @@ using UnityEngine;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class MData : MBase
+	public class MDataContainer : MBase
 	{
-		[field: Header("_" + nameof(MData))]
+		[field: Header("_" + nameof(MDataContainer))]
 		[field: SerializeField] public string Name { get; set; }
 		[field: SerializeField, TextArea(3, 10)] public string Value { get; set; } = NONE_STRING;
 		[field: SerializeField] public Sprite Sprite { get; set; }
