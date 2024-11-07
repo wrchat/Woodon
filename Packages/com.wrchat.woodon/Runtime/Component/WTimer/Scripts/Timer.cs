@@ -8,6 +8,7 @@ namespace WRC.Woodon
 	public class Timer : MEventSender
 	{
 		[field: Header("_" + nameof(Timer))]
+		// 서버 시간은 밀리초 단위지만, 계산은 데시초 단위로 할 것
 		[field: SerializeField] public int TimeByDecisecond { get; private set; } = 50;
 		[SerializeField] private MValue mValueForSetTime;
 		[SerializeField] private MValue mValueForAddTime;
@@ -44,6 +45,9 @@ namespace WRC.Woodon
 				mValueForSetTime.RegisterListener(this, nameof(SetTimerByMValue));
 				SetTimerByMValue();
 			}
+	
+			SendEvents();
+			SendEvents((int)TimerEvent.ExpireTimeChanged);
 		}
 
 		private void Update()
@@ -67,6 +71,7 @@ namespace WRC.Woodon
 		{
 			MDebugLog($"{nameof(OnExpireTimeChange)} : ChangeTo = {ExpireTime}");
 
+			SendEvents();
 			SendEvents((int)TimerEvent.ExpireTimeChanged);
 
 			if (origin == NONE_INT && ExpireTime != NONE_INT)
@@ -94,27 +99,25 @@ namespace WRC.Woodon
 
 		public void SetTimer(int timeByDecisecond)
 		{
-			MDebugLog($"{nameof(SetTimer)} : {timeByDecisecond}");
+			MDebugLog($"{nameof(SetTimer)} : {timeByDecisecond} Decisecond");
 			TimeByDecisecond = timeByDecisecond;
 		}
 		public void SetTimerByMValue()
 		{
 			MDebugLog(nameof(SetTimerByMValue));
-
-			if (mValueForSetTime == null)
-				return;
-
-			if (IsOwner(mValueForSetTime.gameObject) == false)
-				return;
-
-			// mValueForSetTime은 초 단위로 받을 것
-			SetTimer(mValueForSetTime.Value * 10);
+			SetTimer(mValueForSetTime.Value);
 		}
 
-		public void StartTimer() => StartTimer(TimeByDecisecond);
+		public void StartTimer()
+		{
+			if (mValueForSetTime != null)
+				StartTimer(mValueForSetTime.Value);
+			else
+				StartTimer(TimeByDecisecond);
+		}
 		public void StartTimer(int timeByDecisecond)
 		{
-			MDebugLog($"{nameof(StartTimer)} : {timeByDecisecond}");
+			MDebugLog($"{nameof(StartTimer)} : {timeByDecisecond} Decisecond");
 			SetExpireTime(CalcedCurTime + (timeByDecisecond * 100));
 		}
 		public void StartTimerByMValue()
