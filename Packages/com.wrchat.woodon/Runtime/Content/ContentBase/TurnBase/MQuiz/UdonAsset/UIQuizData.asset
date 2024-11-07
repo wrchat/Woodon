@@ -44,7 +44,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 14
+      Data: 15
     - Name: 
       Entry: 7
       Data: 
@@ -131,7 +131,7 @@ MonoBehaviour:
       Data: 8|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: WRC.Woodon.MData, Woodon
+      Data: WRC.Woodon.MDataContainer, Woodon
     - Name: 
       Entry: 8
       Data: 
@@ -767,25 +767,31 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 1
-      Data: animator
+      Data: mAnimatorsByGameState
     - Name: $v
       Entry: 7
       Data: 48|UdonSharp.Compiler.FieldDefinition, UdonSharp.Editor
     - Name: <Name>k__BackingField
       Entry: 1
-      Data: animator
+      Data: mAnimatorsByGameState
     - Name: <UserType>k__BackingField
       Entry: 7
       Data: 49|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: UnityEngine.Animator, UnityEngine.AnimationModule
+      Data: WRC.Woodon.MAnimator[], Woodon
     - Name: 
       Entry: 8
       Data: 
     - Name: <SystemType>k__BackingField
-      Entry: 9
-      Data: 49
+      Entry: 7
+      Data: 50|System.RuntimeType, mscorlib
+    - Name: 
+      Entry: 1
+      Data: UnityEngine.Component[], UnityEngine.CoreModule
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: <SyncMode>k__BackingField
       Entry: 7
       Data: System.Nullable`1[[UdonSharp.UdonSyncMode, UdonSharp.Runtime]], mscorlib
@@ -800,13 +806,67 @@ MonoBehaviour:
       Data: true
     - Name: _fieldAttributes
       Entry: 7
-      Data: 50|System.Collections.Generic.List`1[[System.Attribute, mscorlib]], mscorlib
+      Data: 51|System.Collections.Generic.List`1[[System.Attribute, mscorlib]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 51|UnityEngine.SerializeField, UnityEngine.CoreModule
+      Data: 52|UnityEngine.SerializeField, UnityEngine.CoreModule
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: mAnimatorsByCurQuizAnswer
+    - Name: $v
+      Entry: 7
+      Data: 53|UdonSharp.Compiler.FieldDefinition, UdonSharp.Editor
+    - Name: <Name>k__BackingField
+      Entry: 1
+      Data: mAnimatorsByCurQuizAnswer
+    - Name: <UserType>k__BackingField
+      Entry: 9
+      Data: 49
+    - Name: <SystemType>k__BackingField
+      Entry: 9
+      Data: 50
+    - Name: <SyncMode>k__BackingField
+      Entry: 7
+      Data: System.Nullable`1[[UdonSharp.UdonSyncMode, UdonSharp.Runtime]], mscorlib
+    - Name: 
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: <IsSerialized>k__BackingField
+      Entry: 5
+      Data: true
+    - Name: _fieldAttributes
+      Entry: 7
+      Data: 54|System.Collections.Generic.List`1[[System.Attribute, mscorlib]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 55|UnityEngine.SerializeField, UnityEngine.CoreModule
     - Name: 
       Entry: 8
       Data: 
@@ -830,13 +890,13 @@ MonoBehaviour:
       Data: quizManager
     - Name: $v
       Entry: 7
-      Data: 52|UdonSharp.Compiler.FieldDefinition, UdonSharp.Editor
+      Data: 56|UdonSharp.Compiler.FieldDefinition, UdonSharp.Editor
     - Name: <Name>k__BackingField
       Entry: 1
       Data: quizManager
     - Name: <UserType>k__BackingField
       Entry: 7
-      Data: 53|System.RuntimeType, mscorlib
+      Data: 57|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
       Data: WRC.Woodon.QuizManager, Woodon
@@ -860,7 +920,7 @@ MonoBehaviour:
       Data: false
     - Name: _fieldAttributes
       Entry: 7
-      Data: 54|System.Collections.Generic.List`1[[System.Attribute, mscorlib]], mscorlib
+      Data: 58|System.Collections.Generic.List`1[[System.Attribute, mscorlib]], mscorlib
     - Name: 
       Entry: 12
       Data: 0
