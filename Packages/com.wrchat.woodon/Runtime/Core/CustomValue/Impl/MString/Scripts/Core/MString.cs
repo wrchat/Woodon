@@ -16,7 +16,7 @@ namespace WRC.Woodon
 		[SerializeField] private bool useDefaultWhenEmpty = true;
 		[SerializeField] private bool useSync;
 		[SerializeField] private bool onlyDigit;
-		[SerializeField] private int lengthLimit = 5000;
+		[SerializeField] private int lengthLimit = 2147483647;
 		[UdonSynced, FieldChangeCallback(nameof(SyncedValue))] private string _syncedValue = string.Empty;
 		public string SyncedValue
 		{
