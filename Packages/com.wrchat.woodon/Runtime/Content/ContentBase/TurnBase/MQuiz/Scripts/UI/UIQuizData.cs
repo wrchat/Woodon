@@ -13,7 +13,8 @@ namespace WRC.Woodon
 		[SerializeField] protected GameObject[] waitTimeHiders;
 		[SerializeField] protected CanvasGroup[] answerCanvasGroups;
 		[SerializeField] protected CanvasGroup[] explainCanvasGroups;
-		[SerializeField] protected Animator animator;
+		[SerializeField] protected MAnimator[] mAnimatorsByGameState;
+		[SerializeField] protected MAnimator[] mAnimatorsByCurQuizAnswer;
 
 		protected QuizManager quizManager;
 
@@ -39,10 +40,14 @@ namespace WRC.Woodon
 
 			UpdateUI(quizManager.CurQuizData);
 
-			animator.SetInteger("STATE", quizManager.CurGameState);
+			foreach (MAnimator mAnimator in mAnimatorsByGameState)
+				mAnimator.SetInt_L(quizManager.CurGameState);
+
+			foreach (MAnimator mAnimator in mAnimatorsByCurQuizAnswer)
+				mAnimator.SetInt_L((int)quizManager.CurQuizData.QuizAnswer);
 		}
 
-		public override void UpdateUI(MData mData)
+		public override void UpdateUI(MDataContainer mData)
 		{
 			base.UpdateUI(mData);
 

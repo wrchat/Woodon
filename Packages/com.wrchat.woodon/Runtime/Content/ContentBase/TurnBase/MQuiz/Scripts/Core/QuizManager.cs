@@ -29,7 +29,7 @@ namespace WRC.Woodon
 		public int CurQuizIndex => curQuizIndex.Value;
 
 		public QuizData CurQuizData => QuizDatas[CurQuizIndex];
-		public bool CanSelectAnsewr { get; protected set; } = true;
+		public bool CanSelectAnswer { get; protected set; } = true;
 
 		protected override void Start()
 		{
@@ -62,7 +62,12 @@ namespace WRC.Woodon
 
 			answerCount = new int[(int)QuizAnswerType.None + 1];
 			foreach (QuizSeat quizSeat in TurnSeats)
+			{
+				if ((int)quizSeat.ExpectedAnswer < 0 || (int)quizSeat.ExpectedAnswer >= answerCount.Length)
+					continue;
+
 				answerCount[(int)quizSeat.ExpectedAnswer]++;
+			}
 
 			bool isCurStateWaiting = CurGameState == (int)QuizGameState.Wait;
 			foreach (GameObject waitTimeObject in waitTimeObjects)
