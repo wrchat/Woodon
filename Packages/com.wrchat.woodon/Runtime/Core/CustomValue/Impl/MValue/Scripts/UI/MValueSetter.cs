@@ -19,5 +19,23 @@ namespace WRC.Woodon
 
 			mValue.SetValue(value);
 		}
+
+		[ContextMenu(nameof(AddValue))]
+		public void AddValue()
+		{
+			if (mValue == null)
+				return;
+
+			mValue.AddValue(value);
+		}
+
+		[ContextMenu(nameof(SubValue))]
+		public void SubValue()
+		{
+			if (mValue == null)
+				return;
+
+			mValue.SubValue(value);
+		}
 	}
 }
