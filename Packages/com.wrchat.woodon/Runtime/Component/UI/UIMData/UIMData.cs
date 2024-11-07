@@ -9,7 +9,7 @@ namespace WRC.Woodon
 	public class UIMData : MBase
 	{
 		[Header("_" + nameof(UIMData))]
-		[SerializeField] protected MData mData;
+		[SerializeField] protected MDataContainer mData;
 
 		[SerializeField] protected TextMeshProUGUI[] nameTexts;
 		[SerializeField] protected TextMeshProUGUI[] valueTexts;
@@ -20,7 +20,7 @@ namespace WRC.Woodon
 
 		[SerializeField] protected TextMeshProUGUI[] syncedDataTexts;
 
-		public virtual void UpdateUI(MData mData)
+		public virtual void UpdateUI(MDataContainer mData)
 		{
 			this.mData = mData;
 

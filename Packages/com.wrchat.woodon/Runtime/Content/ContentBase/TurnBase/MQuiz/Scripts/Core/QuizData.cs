@@ -4,7 +4,7 @@ using UnityEngine;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class QuizData : MData
+	public class QuizData : MDataContainer
 	{
 		public string Quiz => Value;
 		public Sprite[] AnswerSprites => Sprites;
