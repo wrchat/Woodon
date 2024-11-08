@@ -6,9 +6,9 @@ using UnityEngine.UI;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class UIMData : MBase
+	public class UIMDataContainer : MBase
 	{
-		[Header("_" + nameof(UIMData))]
+		[Header("_" + nameof(UIMDataContainer))]
 		[SerializeField] protected MDataContainer mData;
 
 		[SerializeField] protected TextMeshProUGUI[] nameTexts;
@@ -56,7 +56,7 @@ namespace WRC.Woodon
 
 				foreach (Image image in images)
 				{
-					image.enabled = true;
+					image.enabled = mData.Sprite != null;
 					image.sprite = mData.Sprite;
 				}
 
@@ -65,7 +65,7 @@ namespace WRC.Woodon
 
 				for (int i = 0; i < dataImages.Length; i++)
 				{
-					dataImages[i].enabled = true;
+					dataImages[i].enabled = mData.Sprites[i] != null;
 					dataImages[i].sprite = mData.Sprites[i];
 				}
 
