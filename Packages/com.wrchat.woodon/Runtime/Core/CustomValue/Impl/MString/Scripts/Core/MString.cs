@@ -53,7 +53,7 @@ namespace WRC.Woodon
 			Init();
 		}
 		
-		private void Init()
+		protected virtual void Init()
 		{
 			MDebugLog($"{nameof(Init)}");
 			
