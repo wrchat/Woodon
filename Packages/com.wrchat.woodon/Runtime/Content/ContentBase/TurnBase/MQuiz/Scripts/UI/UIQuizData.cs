@@ -6,7 +6,7 @@ using static WRC.Woodon.MUtil;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class UIQuizData : UIMData
+	public class UIQuizData : UIMDataContainer
 	{
 		[Header("_" + nameof(UIQuizData))]
 		[SerializeField] protected TextMeshProUGUI[] curQuizIndexTexts;
