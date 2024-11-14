@@ -33,8 +33,8 @@ namespace WRC.Woodon
 
 		private void Init()
 		{
-			timer.RegisterListener(this, nameof(PlayStartSFX), (int)TimerEvent.TimerStarted);
-			timer.RegisterListener(this, nameof(PlayEndSFX), (int)TimerEvent.TimeExpired);
+			timer.RegisterListener(this, nameof(PlayStartSFX), TimerEvent.TimerStarted);
+			timer.RegisterListener(this, nameof(PlayEndSFX), TimerEvent.TimeExpired);
 
 			lerpSFXSource.clip = lerpSFX;
 			lerpSFXSource.mute = true;

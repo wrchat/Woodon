@@ -144,9 +144,9 @@ namespace WRC.Woodon
 			SendEvents();
 
 			if (dataChangeState == DataChangeState.Greater)
-				SendEvents((int)MValueEvent.OnValueIncreased);
+				SendEvents(MValueEvent.OnValueIncreased);
 			else if (dataChangeState == DataChangeState.Less)
-				SendEvents((int)MValueEvent.OnValueDecreased);
+				SendEvents(MValueEvent.OnValueDecreased);
 		}
 
 		[ContextMenu(nameof(IncreaseValue))]

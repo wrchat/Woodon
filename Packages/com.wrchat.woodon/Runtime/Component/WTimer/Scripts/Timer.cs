@@ -47,7 +47,7 @@ namespace WRC.Woodon
 			}
 	
 			SendEvents();
-			SendEvents((int)TimerEvent.ExpireTimeChanged);
+			SendEvents(TimerEvent.ExpireTimeChanged);
 		}
 
 		private void Update()
@@ -72,13 +72,13 @@ namespace WRC.Woodon
 			MDebugLog($"{nameof(OnExpireTimeChange)} : ChangeTo = {ExpireTime}");
 
 			SendEvents();
-			SendEvents((int)TimerEvent.ExpireTimeChanged);
+			SendEvents(TimerEvent.ExpireTimeChanged);
 
 			if (origin == NONE_INT && ExpireTime != NONE_INT)
-				SendEvents((int)TimerEvent.TimerStarted);
+				SendEvents(TimerEvent.TimerStarted);
 
 			if (origin != NONE_INT && ExpireTime == NONE_INT)
-				SendEvents((int)TimerEvent.TimeExpired);
+				SendEvents(TimerEvent.TimeExpired);
 
 			if (isCounting)
 				isCounting.SetValue(ExpireTime != NONE_INT);

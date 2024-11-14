@@ -26,10 +26,10 @@ namespace WRC.Woodon
 				return;
 
 			for (int i = 0; i < trueEventUdons.Length; i++)
-				mBool.RegisterListener(trueEventUdons[i], trueEventMethodNames[i], (int)MBoolEvent.OnTrue);
+				mBool.RegisterListener(trueEventUdons[i], trueEventMethodNames[i], MBoolEvent.OnTrue);
 
 			for (int i = 0; i < falseEventUdons.Length; i++)
-				mBool.RegisterListener(falseEventUdons[i], falseEventMethodNames[i], (int)MBoolEvent.OnFalse);
+				mBool.RegisterListener(falseEventUdons[i], falseEventMethodNames[i], MBoolEvent.OnFalse);
 		}
 
 		public override void SetMBool(MBool mBool)
