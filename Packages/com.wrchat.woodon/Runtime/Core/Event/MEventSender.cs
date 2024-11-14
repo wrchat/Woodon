@@ -1,4 +1,5 @@
-﻿using UdonSharp;
+﻿using System;
+using UdonSharp;
 using UnityEngine;
 using VRC.Udon.Common.Interfaces;
 
@@ -25,15 +26,17 @@ namespace WRC.Woodon
 
 		// ---- ---- ---- ----
 
-		protected void SendEvents(int eventType = DEFAULT_EVENT)
+		protected void SendEvents(Enum eventType = null)
 		{
-			MDebugLog($"{nameof(SendEvents)}");
+			MDebugLog($"{nameof(SendEvents)} : {eventType}");
 
-			if (IsEventValid(eventType) == false)
+			int eventTypeInt = eventType == null ? DEFAULT_EVENT : Convert.ToInt32(eventType);
+
+			if (IsEventValid(eventTypeInt) == false)
 				return;
 
-			UdonSharpBehaviour[] targetUdons = GetTargetUdons(eventType);
-			string[] eventNames = GetEventNames(eventType);
+			UdonSharpBehaviour[] targetUdons = GetTargetUdons(eventTypeInt);
+			string[] eventNames = GetEventNames(eventTypeInt);
 
 			for (int i = 0; i < targetUdons.Length; i++)
 			{
@@ -51,11 +54,11 @@ namespace WRC.Woodon
 					targetUdons[i].SendCustomEvent(eventNames[i]);
 			}
 
-			if (eventType != DEFAULT_EVENT)
-			{
-				// 추가 정의된 이벤트가 일어났다면, 기본 이벤트도 한 번 호출해줍니다.
-				SendEvents();
-			}
+			// if (eventTypeInt != DEFAULT_EVENT)
+			// {
+			// 	// 추가 정의된 이벤트가 일어났다면, 기본 이벤트도 한 번 호출해줍니다.
+			// 	SendEvents();
+			// }
 		}
 
 		/// <summary>
@@ -63,15 +66,17 @@ namespace WRC.Woodon
 		/// </summary>
 		/// <param name="targetUdon"></param>
 		/// <param name="actionName"></param>
-		public void RegisterListener(UdonSharpBehaviour targetUdon, string actionName, int eventType = DEFAULT_EVENT)
+		public void RegisterListener(UdonSharpBehaviour targetUdon, string actionName, Enum eventType = null)
 		{
 			MDebugLog($"{nameof(RegisterListener)}({targetUdon}, {actionName}, {eventType})");
 
-			if (eventType != DEFAULT_EVENT)
+			int eventTypeInt = eventType == null ? DEFAULT_EVENT : Convert.ToInt32(eventType);
+
+			if (eventTypeInt != DEFAULT_EVENT)
 			{
-				if (specificEventTargetUdons.Length <= eventType)
+				if (specificEventTargetUdons.Length <= eventTypeInt)
 				{
-					MDataUtil.ResizeArr(ref specificEventTargetUdons, eventType + 1);
+					MDataUtil.ResizeArr(ref specificEventTargetUdons, eventTypeInt + 1);
 
 					for (int i = 0; i < specificEventTargetUdons.Length; i++)
 					{
@@ -80,10 +85,10 @@ namespace WRC.Woodon
 					}
 				}
 
-				if (specificEventActionNames.Length <= eventType)
+				if (specificEventActionNames.Length <= eventTypeInt)
 				{
-					MDataUtil.ResizeArr(ref specificEventActionNames, eventType + 1);
-					specificEventActionNames[eventType] = new string[0];
+					MDataUtil.ResizeArr(ref specificEventActionNames, eventTypeInt + 1);
+					specificEventActionNames[eventTypeInt] = new string[0];
 
 					for (int i = 0; i < specificEventActionNames.Length; i++)
 					{
@@ -93,8 +98,8 @@ namespace WRC.Woodon
 				}
 			}
 
-			UdonSharpBehaviour[] _targetUdons = GetTargetUdons(eventType);
-			string[] _eventNames = GetEventNames(eventType);
+			UdonSharpBehaviour[] _targetUdons = GetTargetUdons(eventTypeInt);
+			string[] _eventNames = GetEventNames(eventTypeInt);
 
 			// 구독자 우동과 이벤트를 추가할 공간
 			MDataUtil.ResizeArr(ref _targetUdons, _targetUdons.Length + 1);
@@ -107,10 +112,10 @@ namespace WRC.Woodon
 			// TODO: 중복 등록 처리
 
 			// 원본 배열에 수정된 배열을 대입
-			if (eventType != DEFAULT_EVENT)
+			if (eventTypeInt != DEFAULT_EVENT)
 			{
-				specificEventTargetUdons[eventType] = _targetUdons;
-				specificEventActionNames[eventType] = _eventNames;
+				specificEventTargetUdons[eventTypeInt] = _targetUdons;
+				specificEventActionNames[eventTypeInt] = _eventNames;
 			}
 			else
 			{
@@ -168,7 +173,7 @@ namespace WRC.Woodon
 
 				if (targetUdons.Length == 0 || eventNames.Length == 0)
 				{
-					MDebugLog($"{nameof(IsEventValid)} : {nameof(targetUdons)} or {nameof(eventNames)} is empty", LogType.Warning);
+					// MDebugLog($"{nameof(IsEventValid)} : {nameof(targetUdons)} or {nameof(eventNames)} is empty", LogType.Warning);
 					return false;
 				}
 			}
@@ -182,7 +187,7 @@ namespace WRC.Woodon
 
 				if (specificEventTargetUdons.Length == 0 || specificEventTargetUdons.Length <= eventType || specificEventActionNames.Length == 0 || specificEventActionNames.Length <= eventType)
 				{
-					MDebugLog($"{nameof(IsEventValid)} : {nameof(specificEventTargetUdons)} or {nameof(specificEventActionNames)} is empty", LogType.Warning);
+					// MDebugLog($"{nameof(IsEventValid)} : {nameof(specificEventTargetUdons)} or {nameof(specificEventActionNames)} is empty", LogType.Warning);
 					return false;
 				}
 			}
