@@ -9,7 +9,7 @@ namespace WRC.Woodon
 	public class UIMDataContainer : MBase
 	{
 		[Header("_" + nameof(UIMDataContainer))]
-		[SerializeField] protected MDataContainer mData;
+		[SerializeField] protected MDataContainer targetMDataContainer;
 
 		[SerializeField] protected TextMeshProUGUI[] nameTexts;
 		[SerializeField] protected TextMeshProUGUI[] valueTexts;
@@ -20,9 +20,49 @@ namespace WRC.Woodon
 
 		[SerializeField] protected TextMeshProUGUI[] syncedDataTexts;
 
+		[Header("_" + nameof(UIMDataContainer) + " - Options")]
+		[SerializeField] protected Transform mDataContainerParent;
+		[SerializeField] protected MDataContainer[] mDataContainers;
+		[SerializeField] protected MValue mDataContainerIndex;
+
+		protected virtual void Start()
+		{
+			Init();
+		}
+
+		protected virtual void Init()
+		{
+			MDebugLog($"{nameof(Init)}");
+
+			if (mDataContainers == null || mDataContainers.Length == 0)
+			{
+				if (mDataContainerParent != null)
+				{
+					mDataContainers = mDataContainerParent.GetComponentsInChildren<MDataContainer>();
+				}
+			}
+
+			if (mDataContainerIndex != null)
+				mDataContainerIndex.RegisterListener(this, nameof(UpdateUIByMValueIndex));
+		}
+
+		public void UpdateUIByMValueIndex()
+		{
+			if (mDataContainers == null || mDataContainers.Length == 0)
+				return;
+
+			if (mDataContainerIndex == null)
+				return;
+
+			if (mDataContainerIndex.Value < 0 || mDataContainerIndex.Value >= mDataContainers.Length)
+				return;
+
+			UpdateUI(mDataContainers[mDataContainerIndex.Value]);
+		}
+
 		public virtual void UpdateUI(MDataContainer mData)
 		{
-			this.mData = mData;
+			this.targetMDataContainer = mData;
 
 			MDebugLog($"{nameof(UpdateUI)}");
 
