@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace WRC.Woodon
 {
-	public class MPathCart : MEventSender
+	public class MPathCart : WEventPublisher
 	{
 		[Header("_" + nameof(MPathCart))]
 		[SerializeField] private CinemachineDollyCart cart;
@@ -76,8 +76,8 @@ namespace WRC.Woodon
 
 			station.UseStation();
 
-			SendEvents((int)MPathCartEvent.StartPath);
-			SendEvents((int)MPathCartEvent.StartPath + (int)movementType);
+			SendEvents(MPathCartEvent.StartPath);
+			SendEvents((MPathCartEvent)((int)MPathCartEvent.StartPath + (int)movementType));
 		}
 
 		private void Update()
@@ -135,8 +135,8 @@ namespace WRC.Woodon
 
 			station.ExitStation();
 
-			SendEvents((int)MPathCartEvent.EndPath);
-			SendEvents((int)MPathCartEvent.EndPath + (int)curMovementType);
+			SendEvents(MPathCartEvent.EndPath);
+			SendEvents((MPathCartEvent)((int)MPathCartEvent.EndPath + (int)curMovementType));
 
 			if (isOneWay)
 			{

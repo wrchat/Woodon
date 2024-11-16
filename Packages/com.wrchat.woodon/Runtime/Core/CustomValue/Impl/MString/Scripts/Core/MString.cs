@@ -6,7 +6,7 @@ using static WRC.Woodon.MUtil;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class MString : MEventSender
+	public class MString : WEventPublisher
 	{
 		[Header("_" + nameof(MString))]
 
@@ -16,7 +16,7 @@ namespace WRC.Woodon
 		[SerializeField] private bool useDefaultWhenEmpty = true;
 		[SerializeField] private bool useSync;
 		[SerializeField] private bool onlyDigit;
-		[SerializeField] private int lengthLimit = 5000;
+		[SerializeField] private int lengthLimit = 2147483647;
 		[UdonSynced, FieldChangeCallback(nameof(SyncedValue))] private string _syncedValue = string.Empty;
 		public string SyncedValue
 		{
@@ -53,7 +53,7 @@ namespace WRC.Woodon
 			Init();
 		}
 		
-		private void Init()
+		protected virtual void Init()
 		{
 			MDebugLog($"{nameof(Init)}");
 			

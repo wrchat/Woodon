@@ -1,4 +1,4 @@
-namespace Mascari4615
+namespace WRC
 {
 	public enum ComparisonOperatorType
 	{

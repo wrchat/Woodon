@@ -5,7 +5,7 @@ using VRC.Udon.Common.Interfaces;
 namespace WRC.Woodon
 {
 	// [UdonBehaviourSyncMode(BehaviourSyncMode.Continuous)]
-	public class SendEventOnPickupUse : MEventSender
+	public class SendEventOnPickupUse : WEventPublisher
 	{
 		public override void OnPickupUseDown()
 		{

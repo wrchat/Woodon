@@ -5,7 +5,7 @@ using VRC.SDKBase;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class MTarget : MEventSender
+	public class MTarget : WEventPublisher
 	{
 		[Header("_" + nameof(MTarget))]
 		[SerializeField] private string autoTargetName = "-";
@@ -18,13 +18,14 @@ namespace WRC.Woodon
 			{
 				int origin = _targetPlayerID;
 				_targetPlayerID = value;
-				OnTargetChange(DataChangeStateUtil.GetChangeState(origin, value));
+				OnTargetChanged(DataChangeStateUtil.GetChangeState(origin, value));
 			}
 		}
 
-		protected virtual void OnTargetChange(DataChangeState changeState)
+		protected virtual void OnTargetChanged(DataChangeState changeState)
 		{
-			SendEvents();
+			if (DataChangeStateUtil.IsDataChanged(changeState))
+				SendEvents();
 		}
 
 		[field: Header("_" + nameof(MTarget) + " - Options")]
@@ -66,12 +67,12 @@ namespace WRC.Woodon
 
 		// ---- ---- ---- ----
 
-		private void Start()
+		protected virtual void Start()
 		{
 			Init();
 		}
 
-		private void Init()
+		protected virtual void Init()
 		{
 			if (Networking.IsMaster)
 				ResetPlayer();

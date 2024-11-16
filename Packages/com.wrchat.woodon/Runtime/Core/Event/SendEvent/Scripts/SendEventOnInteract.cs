@@ -6,7 +6,7 @@ using VRC.Udon.Common.Interfaces;
 namespace WRC.Woodon
 {
 	// [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class SendEventOnInteract : MEventSender
+	public class SendEventOnInteract : WEventPublisher
 	{
 		public override void Interact()
 		{

@@ -5,7 +5,7 @@ using VRC.SDKBase;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class MBool : MEventSender
+	public class MBool : WEventPublisher
 	{
 		[Header("_" + nameof(MBool))]
 		[SerializeField] protected bool defaultValue;
@@ -64,9 +64,9 @@ namespace WRC.Woodon
 			SendEvents();
 
 			if (Value == true)
-				SendEvents((int)MBoolEvent.OnTrue);
+				SendEvents(MBoolEvent.OnTrue);
 			else
-				SendEvents((int)MBoolEvent.OnFalse);
+				SendEvents(MBoolEvent.OnFalse);
 		}
 
 		public virtual void SetValue(bool newValue, bool isReciever = false)

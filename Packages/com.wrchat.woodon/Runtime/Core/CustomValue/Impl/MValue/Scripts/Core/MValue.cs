@@ -5,7 +5,7 @@ using VRC.SDKBase;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class MValue : MEventSender
+	public class MValue : WEventPublisher
 	{
 		[field: Header("_" + nameof(MValue))]
 		[field: SerializeField] public int MinValue { get; private set; } = 0;
@@ -144,9 +144,9 @@ namespace WRC.Woodon
 			SendEvents();
 
 			if (dataChangeState == DataChangeState.Greater)
-				SendEvents((int)MValueEvent.OnValueIncreased);
+				SendEvents(MValueEvent.OnValueIncreased);
 			else if (dataChangeState == DataChangeState.Less)
-				SendEvents((int)MValueEvent.OnValueDecreased);
+				SendEvents(MValueEvent.OnValueDecreased);
 		}
 
 		[ContextMenu(nameof(IncreaseValue))]

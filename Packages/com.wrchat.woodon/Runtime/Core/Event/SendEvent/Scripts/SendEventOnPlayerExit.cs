@@ -6,7 +6,7 @@ using VRC.Udon.Common.Interfaces;
 namespace WRC.Woodon
 {
 	// [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class SendEventOnPlayerExit : MEventSender
+	public class SendEventOnPlayerExit : WEventPublisher
 	{
 		[Header("_" + nameof(SendEventOnPlayerExit))]
 		[SerializeField] private bool onlyIfLocalPlayer = true;

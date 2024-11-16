@@ -27,7 +27,7 @@ namespace WRC.Woodon
 		[field: SerializeField] public int VoiceAmplificationGainBoost { get; private set; }
 
 		[SerializeField] private VoiceUpdater[] voiceUpdaters;
-		[SerializeField] private float updateTerm = .5f;
+		[SerializeField] private float updateTerm = .1f;
 		[SerializeField] private bool useLerp = false;
 		[SerializeField] private float lerpSpeed = 2f;
 

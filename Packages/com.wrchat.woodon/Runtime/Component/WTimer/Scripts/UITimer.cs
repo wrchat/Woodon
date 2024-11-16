@@ -54,6 +54,9 @@ namespace WRC.Woodon
 			originColors = new Color[remainTimeTexts.Length];
 			for (int i = 0; i < remainTimeTexts.Length; i++)
 				originColors[i] = remainTimeTexts[i].color;
+
+			CalcTimeSpan();
+			UpdateUI();
 		}
 
 		private void Update()

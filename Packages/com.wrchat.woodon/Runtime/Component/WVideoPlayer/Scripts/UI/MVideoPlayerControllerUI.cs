@@ -17,7 +17,7 @@ namespace WRC.Woodon
 			for (int i = 0; i < videoPlayerControllerButtons.Length; i++)
 			{
 				if (i < videoPlayerController.VideoDatas.Length)
-					videoPlayerControllerButtons[i].Init(this, i, videoPlayerController.VideoDatas[i].VideoName);
+					videoPlayerControllerButtons[i].Init(this, i, videoPlayerController.VideoDatas[i].Name);
 				else
 					videoPlayerControllerButtons[i].gameObject.SetActive(false);
 			}

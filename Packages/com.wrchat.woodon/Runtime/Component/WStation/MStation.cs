@@ -10,9 +10,9 @@ namespace WRC.Woodon
 		[Header("_" + nameof(MStation))]
 		[SerializeField] private VRCStation station;
 
-		protected override void OnTargetChange(DataChangeState changeState)
+		protected override void OnTargetChanged(DataChangeState changeState)
 		{
-			base.OnTargetChange(changeState);
+			base.OnTargetChanged(changeState);
 
 			if (IsTargetPlayer())
 				UseStation();

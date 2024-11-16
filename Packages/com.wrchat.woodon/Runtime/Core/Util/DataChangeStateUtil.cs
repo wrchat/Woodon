@@ -23,5 +23,9 @@ namespace WRC.Woodon
 
 			return DataChangeState.None;
 		}
+
+		public static bool IsDataChanged(DataChangeState changeState) =>
+			changeState != DataChangeState.None &&
+			changeState != DataChangeState.Equal;
 	}
 }

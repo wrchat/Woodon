@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5464413414936535886}
   - component: {fileID: 7596361895876876672}
   m_Layer: 0
-  m_Name: '[CustomBool] IsCounting'
+  m_Name: '[MBool] IsCounting'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56,8 +56,8 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 7596361895876876672}
   DEBUG: 0
-  targetUdons: []
-  eventNames: []
+  listeners: []
+  actions: []
   sendEventGlobal: 0
   defaultValue: 0
   useSync: 0
@@ -145,11 +145,12 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 4108119218738426486}
   DEBUG: 0
-  targetUdons: []
-  eventNames: []
+  listeners: []
+  actions: []
   sendEventGlobal: 0
   <TimeByDecisecond>k__BackingField: 50
-  mValue: {fileID: 0}
+  mValueForSetTime: {fileID: 0}
+  mValueForAddTime: {fileID: 0}
   isCounting: {fileID: 5464413414936535886}
 --- !u!114 &4108119218738426486
 MonoBehaviour:

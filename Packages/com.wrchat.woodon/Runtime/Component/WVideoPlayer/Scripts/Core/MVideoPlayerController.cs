@@ -33,7 +33,7 @@ namespace WRC.Woodon
 				ui.Init(this);
 		}
 
-		public void PlayVideo(int index) => mVideoPlayer.PlayURL(VideoDatas[index].VRCUrl);
+		public virtual void PlayVideo(int index) => mVideoPlayer.PlayURL(VideoDatas[index].VRCUrl);
 
 		#region HorribleEvents
 		[ContextMenu(nameof(PlayVideo0))]
@@ -42,10 +42,10 @@ namespace WRC.Woodon
 		public void PlayVideo2() => PlayVideo(2);
 
 		[ContextMenu(nameof(StopVideo))]
-		public void StopVideo() => mVideoPlayer.Stop();
+		public virtual void StopVideo() => mVideoPlayer.Stop();
 
 		[ContextMenu(nameof(PauseResumeVideo))]
-		public void PauseResumeVideo() => mVideoPlayer.PauseResume();
+		public virtual void PauseResumeVideo() => mVideoPlayer.PauseResume();
 		#endregion
 	}
 }

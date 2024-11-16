@@ -1,6 +1,7 @@
 ﻿using TMPro;
 using UdonSharp;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace WRC.Woodon
 {
@@ -10,7 +11,7 @@ namespace WRC.Woodon
 		[Header("_" + nameof(UIMValue))]
 		[SerializeField] private TextMeshProUGUI[] valueTexts;
 		[SerializeField] private string format = "{0}";
-		[SerializeField] private GameObject[] hardButtons;
+		[SerializeField] private Image[] hardButtons;
 		[SerializeField] private float printMultiply = 1;
 		[SerializeField] private int printPlus = 0;
 
@@ -47,7 +48,12 @@ namespace WRC.Woodon
 				valueText.text = finalString;
 
 			for (int i = 0; i < hardButtons.Length; i++)
-				hardButtons[i].SetActive(mValue.MinValue <= i && i <= mValue.MaxValue);
+			{
+				hardButtons[i].color = MColorUtil.GetBlackOrGray(i != value);
+
+				// AutosizeButton
+				hardButtons[i].transform.parent.gameObject.SetActive(mValue.MinValue <= i && i <= mValue.MaxValue);
+			}
 		}
 
 		public override void SetMValue(MValue mValue)
@@ -55,7 +61,7 @@ namespace WRC.Woodon
 			MDebugLog($"{nameof(SetMValue)} : {mValue}");
 
 			if (this.mValue != null)
-				this.mValue.RemoveListener(this, nameof(UpdateUI));
+				this.mValue.UnregisterListener(this, nameof(UpdateUI));
 
 			this.mValue = mValue;
 			Init();

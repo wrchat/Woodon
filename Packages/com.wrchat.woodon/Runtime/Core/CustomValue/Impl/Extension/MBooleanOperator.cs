@@ -4,7 +4,7 @@ using VRC.SDKBase;
 using VRC.Udon;
 using WRC.Woodon;
 
-namespace Mascari4615
+namespace WRC
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class MBooleanOperator : MBase
