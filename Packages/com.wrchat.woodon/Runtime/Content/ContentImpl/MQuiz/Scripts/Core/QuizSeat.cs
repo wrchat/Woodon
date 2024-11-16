@@ -5,7 +5,7 @@ using UnityEngine.UI;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class QuizSeat : MTurnSeat
+	public class QuizSeat : MSeat
 	{
 		[Header("_" + nameof(QuizSeat))]
 		[SerializeField] private Image[] selectAnswerDecoImages;
@@ -39,7 +39,8 @@ namespace WRC.Woodon
 					return;
 			}
 
-			SetTurnData((int)newAnswer);
+			TurnData = (int)newAnswer;
+			SerializeData();
 		}
 
 		public virtual void OnWait()

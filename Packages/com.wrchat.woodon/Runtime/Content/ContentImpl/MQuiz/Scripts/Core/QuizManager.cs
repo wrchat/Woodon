@@ -5,7 +5,7 @@ using static WRC.Woodon.MUtil;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class QuizManager : MTurnBaseManager
+	public class QuizManager : ContentManager
 	{
 		[Header("_" + nameof(QuizManager))]
 		[SerializeField] protected int playerCount = 10;
@@ -132,7 +132,7 @@ namespace WRC.Woodon
 			if (IsOwner() == false)
 				return;
 
-			foreach (MTurnSeat turnSeat in MSeats)
+			foreach (MSeat turnSeat in MSeats)
 				turnSeat.ResetData();
 		}
 

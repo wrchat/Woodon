@@ -1,12 +1,11 @@
 ﻿using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
-using static WRC.Woodon.MUtil;
 
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class AuctionSeat : MTurnSeat
+	public class AuctionSeat : MSeat
 	{
 		[field: Header("_" + nameof(AuctionSeat))]
 		[field: UdonSynced] public int TryTime { get; private set; } = NONE_INT;
@@ -28,7 +27,8 @@ namespace WRC.Woodon
 				return;
 
 			SetTryTime(Networking.GetServerTimeInMilliseconds());
-			SetTurnData(tryPoint_MValue.Value);
+			TurnData = tryPoint_MValue.Value;
+			SerializeData();
 		}
 
 		public void SetTryTime(int newTryTime)

@@ -4,7 +4,7 @@ using UnityEngine;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class VoteSeat : MTurnSeat
+	public class VoteSeat : MSeat
 	{
 		// [Header("_" + nameof(VoteSeat))]
 		public int VoteIndex => TurnData;
@@ -14,7 +14,8 @@ namespace WRC.Woodon
 			if (contentManager.IsCurGameState((int)VoteState.VoteTime) == false)
 				return;
 
-			SetTurnData(newTurnData);
+			TurnData = newTurnData;
+			SerializeData();
 		}
 
 		#region HorribleEvents

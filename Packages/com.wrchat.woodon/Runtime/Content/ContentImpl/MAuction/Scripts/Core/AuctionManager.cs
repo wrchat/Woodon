@@ -5,7 +5,7 @@ using UnityEngine;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class AuctionManager : MTurnBaseManager
+	public class AuctionManager : ContentManager
 	{
 		[Header("_" + nameof(AuctionManager))]
 		[SerializeField] private TextMeshProUGUI debugText;
@@ -65,7 +65,8 @@ namespace WRC.Woodon
 			foreach (AuctionSeat auctionSeat in MSeats)
 			{
 				auctionSeat.SetTryTime(NONE_INT);
-				auctionSeat.SetTurnData(0);
+				auctionSeat.TurnData = 0;
+				auctionSeat.SerializeData();
 			}
 		}
 
@@ -177,7 +178,7 @@ namespace WRC.Woodon
 
 		private AuctionSeat GetMaxTryPointSeat()
 		{
-			MTurnSeat[] maxTryPointSeats = GetMaxTurnDataSeats();
+			MSeat[] maxTryPointSeats = GetMaxTurnDataSeats();
 			
 			if (maxTryPointSeats.Length == 0)
 			{
