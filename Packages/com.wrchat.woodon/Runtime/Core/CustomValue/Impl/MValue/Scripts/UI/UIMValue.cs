@@ -61,7 +61,7 @@ namespace WRC.Woodon
 			MDebugLog($"{nameof(SetMValue)} : {mValue}");
 
 			if (this.mValue != null)
-				this.mValue.RemoveListener(this, nameof(UpdateUI));
+				this.mValue.UnregisterListener(this, nameof(UpdateUI));
 
 			this.mValue = mValue;
 			Init();

@@ -55,7 +55,7 @@ namespace WRC.Woodon
 			MDebugLog($"{nameof(SetMBool)} : {mBool}");
 
 			if (this.mBool != null)
-				this.mBool.RemoveListener(this, nameof(UpdateUI));
+				this.mBool.UnregisterListener(this, nameof(UpdateUI));
 
 			this.mBool = mBool;
 			Init();
