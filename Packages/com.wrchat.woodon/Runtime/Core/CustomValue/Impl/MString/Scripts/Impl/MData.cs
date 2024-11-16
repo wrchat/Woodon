@@ -6,6 +6,7 @@ using VRC.Udon;
 
 namespace WRC.Woodon
 {
+	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class MData : MString
 	{
 		public DataDictionary DataDictionary { get; protected set; } = new DataDictionary();
@@ -13,9 +14,19 @@ namespace WRC.Woodon
 		public void SetData(string key, int value)
 		{
 			MDebugLog($"{nameof(SetData)}({key}, {value})");
-
 			DataDictionary.SetValue(key, value);
-			SerializeData();
+		}
+
+		public void SetData(string key, string value)
+		{
+			MDebugLog($"{nameof(SetData)}({key}, {value})");
+			DataDictionary.SetValue(key, value);
+		}
+
+		public void SetData(string key, bool value)
+		{
+			MDebugLog($"{nameof(SetData)}({key}, {value})");
+			DataDictionary.SetValue(key, value);
 		}
 
 		[ContextMenu(nameof(SerializeData))]
