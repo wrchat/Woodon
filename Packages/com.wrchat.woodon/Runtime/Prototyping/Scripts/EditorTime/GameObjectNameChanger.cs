@@ -1,14 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using WRC.Woodon;
 
-namespace Mascari4615
+namespace WRC
 {
 #if UNITY_EDITOR
 	public class GameObjectNameChanger : MonoBehaviour
 	{
-		[SerializeField] private string[] someStrings;
+		[SerializeField] private string newName = string.Empty;
+		[SerializeField] private int startIndex = 0;
 
 		[ContextMenu(nameof(ChangeChildsName))]
 		public void ChangeChildsName()
@@ -16,7 +14,7 @@ namespace Mascari4615
 			for (int i = 0; i < transform.childCount; i++)
 			{
 				string originalName = transform.GetChild(i).name;
-				string newName = $"{someStrings[0]} [{i}]";
+				string newName = $"{this.newName} [{startIndex + i}]";
 
 				transform.GetChild(i).name = newName;
 			}
