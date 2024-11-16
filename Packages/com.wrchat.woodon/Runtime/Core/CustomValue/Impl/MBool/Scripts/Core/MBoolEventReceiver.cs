@@ -39,10 +39,10 @@ namespace WRC.Woodon
 			if (this.mBool != null)
 			{
 				for (int i = 0; i < trueEventUdons.Length; i++)
-					this.mBool.RemoveListener(trueEventUdons[i], trueEventMethodNames[i], (int)MBoolEvent.OnTrue);
+					this.mBool.UnregisterListener(trueEventUdons[i], trueEventMethodNames[i], MBoolEvent.OnTrue);
 
 				for (int i = 0; i < falseEventUdons.Length; i++)
-					this.mBool.RemoveListener(falseEventUdons[i], falseEventMethodNames[i], (int)MBoolEvent.OnFalse);
+					this.mBool.UnregisterListener(falseEventUdons[i], falseEventMethodNames[i], MBoolEvent.OnFalse);
 			}
 
 			this.mBool = mBool;

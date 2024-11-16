@@ -128,7 +128,7 @@ namespace WRC.Woodon
 		public override void SetMTarget(MTarget mTarget)
 		{
 			if (this.mTarget != null)
-				this.mTarget.RemoveListener(this, nameof(UpdateUI));
+				this.mTarget.UnregisterListener(this, nameof(UpdateUI));
 
 			this.mTarget = mTarget;
 			Init();

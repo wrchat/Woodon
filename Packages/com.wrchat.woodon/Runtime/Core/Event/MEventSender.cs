@@ -7,143 +7,142 @@ namespace WRC.Woodon
 {
 	public abstract class MEventSender : MBase
 	{
-		// TODO: 특정 클래스의 특정 사건을 뜻하는 Event와, 우동의 함수를 뜻하는 Event간의 표현이 모호함
 		public const int DEFAULT_EVENT = -1;
 
 		[Header("_" + nameof(MEventSender))]
+		
 		// 기본 이벤트
-		[SerializeField] protected UdonSharpBehaviour[] targetUdons = new UdonSharpBehaviour[0];
-
-		// TODO: actionNames로 변경
-		[SerializeField] protected string[] eventNames = new string[0];
+		[SerializeField] protected UdonSharpBehaviour[] listeners = new UdonSharpBehaviour[0];
+		[SerializeField] protected string[] actions = new string[0];
 
 		[Header("_" + nameof(MEventSender) + " - Options")]
 		[SerializeField] protected bool sendEventGlobal;
 
 		// 추가 정의 이벤트
-		protected UdonSharpBehaviour[][] specificEventTargetUdons = new UdonSharpBehaviour[0][];
-		protected string[][] specificEventActionNames = new string[0][];
+		protected UdonSharpBehaviour[][] specificEventListeners = new UdonSharpBehaviour[0][];
+		protected string[][] specificEventActions = new string[0][];
+
+		// TODO: DataDictionary
 
 		// ---- ---- ---- ----
 
 		protected void SendEvents(Enum eventType = null)
 		{
-			MDebugLog($"{nameof(SendEvents)} : {eventType}");
-
-			int eventTypeInt = eventType == null ? DEFAULT_EVENT : Convert.ToInt32(eventType);
-
+			int eventTypeInt = (eventType == null) ? DEFAULT_EVENT : Convert.ToInt32(eventType);
 			if (IsEventValid(eventTypeInt) == false)
 				return;
 
-			UdonSharpBehaviour[] targetUdons = GetTargetUdons(eventTypeInt);
-			string[] eventNames = GetEventNames(eventTypeInt);
+			UdonSharpBehaviour[] _listeners = GetListeners(eventTypeInt);
+			string[] _actions = GetActions(eventTypeInt);
 
-			for (int i = 0; i < targetUdons.Length; i++)
+			for (int i = 0; i < _listeners.Length; i++)
 			{
-				// MDebugLog($"{nameof(SendEvents)} : {nameof(targetUdons)}[{i}] = {targetUdons[i]}, {nameof(eventNames)}[{i}] = {eventNames[i]}");
+				MDebugLog($"{nameof(SendEvents)}({eventTypeInt})[{i}] : {_listeners[i]}.{_actions[i]}()");
 
-				if (targetUdons[i] == null)
+				if (_listeners[i] == null)
 				{
-					MDebugLog($"{nameof(SendEvents)} : {nameof(targetUdons)}[{i}] is null, Skip {nameof(eventNames)}[{i}] = {eventNames[i]}", LogType.Error);
+					MDebugLog($"{nameof(SendEvents)} : {nameof(_listeners)}[{i}] is null, Skip {_actions[i]}()", LogType.Error);
 					continue;
 				}
 
 				if (sendEventGlobal)
-					targetUdons[i].SendCustomNetworkEvent(NetworkEventTarget.All, eventNames[i]);
+					_listeners[i].SendCustomNetworkEvent(NetworkEventTarget.All, _actions[i]);
 				else
-					targetUdons[i].SendCustomEvent(eventNames[i]);
+					_listeners[i].SendCustomEvent(_actions[i]);
 			}
-
-			// if (eventTypeInt != DEFAULT_EVENT)
-			// {
-			// 	// 추가 정의된 이벤트가 일어났다면, 기본 이벤트도 한 번 호출해줍니다.
-			// 	SendEvents();
-			// }
 		}
 
 		/// <summary>
 		/// 호출하는 함수의 접근제한자는 public 이여야 함.
 		/// </summary>
-		/// <param name="targetUdon"></param>
-		/// <param name="actionName"></param>
-		public void RegisterListener(UdonSharpBehaviour targetUdon, string actionName, Enum eventType = null)
+		/// <param name="listener"></param>
+		/// <param name="action"></param>
+		public void RegisterListener(UdonSharpBehaviour listener, string action, Enum eventType = null)
 		{
-			MDebugLog($"{nameof(RegisterListener)}({targetUdon}, {actionName}, {eventType})");
-
-			int eventTypeInt = eventType == null ? DEFAULT_EVENT : Convert.ToInt32(eventType);
+			int eventTypeInt = (eventType == null) ? DEFAULT_EVENT : Convert.ToInt32(eventType);
+			MDebugLog($"{nameof(RegisterListener)}({listener}, {action}, {eventTypeInt})");
 
 			if (eventTypeInt != DEFAULT_EVENT)
 			{
-				if (specificEventTargetUdons.Length <= eventTypeInt)
+				if (specificEventListeners.Length <= eventTypeInt)
 				{
-					MDataUtil.ResizeArr(ref specificEventTargetUdons, eventTypeInt + 1);
+					MDataUtil.ResizeArr(ref specificEventListeners, eventTypeInt + 1);
 
-					for (int i = 0; i < specificEventTargetUdons.Length; i++)
+					for (int i = 0; i < specificEventListeners.Length; i++)
 					{
-						if (specificEventTargetUdons[i] == null)
-							specificEventTargetUdons[i] = new UdonSharpBehaviour[0];
+						if (specificEventListeners[i] == null)
+							specificEventListeners[i] = new UdonSharpBehaviour[0];
 					}
 				}
 
-				if (specificEventActionNames.Length <= eventTypeInt)
+				if (specificEventActions.Length <= eventTypeInt)
 				{
-					MDataUtil.ResizeArr(ref specificEventActionNames, eventTypeInt + 1);
-					specificEventActionNames[eventTypeInt] = new string[0];
+					MDataUtil.ResizeArr(ref specificEventActions, eventTypeInt + 1);
+					specificEventActions[eventTypeInt] = new string[0];
 
-					for (int i = 0; i < specificEventActionNames.Length; i++)
+					for (int i = 0; i < specificEventActions.Length; i++)
 					{
-						if (specificEventActionNames[i] == null)
-							specificEventActionNames[i] = new string[0];
+						if (specificEventActions[i] == null)
+							specificEventActions[i] = new string[0];
 					}
 				}
 			}
 
-			UdonSharpBehaviour[] _targetUdons = GetTargetUdons(eventTypeInt);
-			string[] _eventNames = GetEventNames(eventTypeInt);
+			UdonSharpBehaviour[] _listeners = GetListeners(eventTypeInt);
+			string[] _actions = GetActions(eventTypeInt);
 
-			// 구독자 우동과 이벤트를 추가할 공간
-			MDataUtil.ResizeArr(ref _targetUdons, _targetUdons.Length + 1);
-			MDataUtil.ResizeArr(ref _eventNames, _eventNames.Length + 1);
+			// 중복 등록 처리
+			for (int i = 0; i < _listeners.Length; i++)
+			{
+				bool isSameTarget = _listeners[i] == listener;
+				bool isSameAction = _actions[i] == action;
+
+				if (isSameTarget && isSameAction)
+				{
+					MDebugLog($"{nameof(RegisterListener)} : {nameof(listener)}.{nameof(action)} is already registered", LogType.Warning);
+					return;
+				}
+			}
 
 			// 새로운 우동과 이벤트를 추가
-			_targetUdons[_targetUdons.Length - 1] = targetUdon;
-			_eventNames[_eventNames.Length - 1] = actionName;
-
-			// TODO: 중복 등록 처리
+			MDataUtil.Add(ref _listeners, listener);
+			MDataUtil.Add(ref _actions, action);
 
 			// 원본 배열에 수정된 배열을 대입
 			if (eventTypeInt != DEFAULT_EVENT)
 			{
-				specificEventTargetUdons[eventTypeInt] = _targetUdons;
-				specificEventActionNames[eventTypeInt] = _eventNames;
+				specificEventListeners[eventTypeInt] = _listeners;
+				specificEventActions[eventTypeInt] = _actions;
 			}
 			else
 			{
-				targetUdons = _targetUdons;
-				eventNames = _eventNames;
+				listeners = _listeners;
+				actions = _actions;
 			}
 		}
 
-		public void RemoveListener(UdonSharpBehaviour targetUdon, string actionName, int eventType = DEFAULT_EVENT)
+		public void UnregisterListener(UdonSharpBehaviour listener, string action, Enum eventType = null)
 		{
-			MDebugLog($"{nameof(RemoveListener)}({targetUdon}, {actionName}, {eventType})");
+			MDebugLog($"{nameof(UnregisterListener)}({listener}, {action}, {eventType})");
 
-			if (eventType != DEFAULT_EVENT)
+			int eventTypeInt = (eventType == null) ? DEFAULT_EVENT : Convert.ToInt32(eventType);
+
+			if (eventTypeInt != DEFAULT_EVENT)
 			{
-				if (specificEventTargetUdons.Length <= eventType)
+				if (specificEventListeners.Length <= eventTypeInt)
 					return;
 
-				if (specificEventActionNames.Length <= eventType)
+				if (specificEventActions.Length <= eventTypeInt)
 					return;
 			}
 
-			UdonSharpBehaviour[] targetUdons = GetTargetUdons(eventType);
-			string[] eventNames = GetEventNames(eventType);
+			UdonSharpBehaviour[] listeners = GetListeners(eventTypeInt);
+			string[] actions = GetActions(eventTypeInt);
 
 			int targetIndex = NONE_INT;
-			for (int i = 0; i < targetUdons.Length; i++)
+			for (int i = 0; i < listeners.Length; i++)
 			{
-				if (targetUdons[i] == targetUdon && eventNames[i] == actionName)
+				if (listeners[i] == listener && actions[i] == action)
 				{
 					targetIndex = i;
 					break;
@@ -152,12 +151,12 @@ namespace WRC.Woodon
 
 			if (targetIndex == NONE_INT)
 			{
-				MDebugLog($"{nameof(RemoveListener)} : {nameof(targetUdon)} or {nameof(actionName)} is not found", LogType.Warning);
+				MDebugLog($"{nameof(UnregisterListener)} : {nameof(listener)}.{nameof(action)} is not found", LogType.Warning);
 				return;
 			}
 
-			MDataUtil.RemoveAt(ref targetUdons, targetIndex);
-			MDataUtil.RemoveAt(ref eventNames, targetIndex);
+			MDataUtil.RemoveAt(ref listeners, targetIndex);
+			MDataUtil.RemoveAt(ref actions, targetIndex);
 		}
 
 		#region
@@ -165,13 +164,13 @@ namespace WRC.Woodon
 		{
 			if (eventType == DEFAULT_EVENT)
 			{
-				if (targetUdons == null || eventNames == null)
+				if (listeners == null || actions == null)
 				{
-					MDebugLog($"{nameof(IsEventValid)} : {nameof(targetUdons)} or {nameof(eventNames)} is null", LogType.Error);
+					MDebugLog($"{nameof(IsEventValid)} : {nameof(listeners)} or {nameof(actions)} is null", LogType.Error);
 					return false;
 				}
 
-				if (targetUdons.Length == 0 || eventNames.Length == 0)
+				if (listeners.Length == 0 || actions.Length == 0)
 				{
 					// MDebugLog($"{nameof(IsEventValid)} : {nameof(targetUdons)} or {nameof(eventNames)} is empty", LogType.Warning);
 					return false;
@@ -179,13 +178,13 @@ namespace WRC.Woodon
 			}
 			else
 			{
-				if (specificEventTargetUdons == null || specificEventActionNames == null)
+				if (specificEventListeners == null || specificEventActions == null)
 				{
-					MDebugLog($"{nameof(IsEventValid)} : {nameof(specificEventTargetUdons)} or {nameof(specificEventActionNames)} is null", LogType.Error);
+					MDebugLog($"{nameof(IsEventValid)} : {nameof(specificEventListeners)} or {nameof(specificEventActions)} is null", LogType.Error);
 					return false;
 				}
 
-				if (specificEventTargetUdons.Length == 0 || specificEventTargetUdons.Length <= eventType || specificEventActionNames.Length == 0 || specificEventActionNames.Length <= eventType)
+				if (specificEventListeners.Length == 0 || specificEventListeners.Length <= eventType || specificEventActions.Length == 0 || specificEventActions.Length <= eventType)
 				{
 					// MDebugLog($"{nameof(IsEventValid)} : {nameof(specificEventTargetUdons)} or {nameof(specificEventActionNames)} is empty", LogType.Warning);
 					return false;
@@ -195,20 +194,38 @@ namespace WRC.Woodon
 			return true;
 		}
 
-		private UdonSharpBehaviour[] GetTargetUdons(int eventType = DEFAULT_EVENT)
+		private UdonSharpBehaviour[] GetListeners(int eventType = DEFAULT_EVENT)
 		{
 			if (eventType == DEFAULT_EVENT)
-				return targetUdons;
+				return listeners;
 			else
-				return specificEventTargetUdons[eventType];
+				return specificEventListeners[eventType];
 		}
 
-		private string[] GetEventNames(int eventType = DEFAULT_EVENT)
+		private string[] GetActions(int eventType = DEFAULT_EVENT)
 		{
 			if (eventType == DEFAULT_EVENT)
-				return eventNames;
+				return actions;
 			else
-				return specificEventActionNames[eventType];
+				return specificEventActions[eventType];
+		}
+
+		public void DebugAll()
+		{
+			MDebugLog($"{nameof(listeners)} : {listeners.Length}");
+			MDebugLog($"{nameof(actions)} : {actions.Length}");
+
+			for (int i = 0; i < listeners.Length; i++)
+				MDebugLog($"{nameof(listeners)}[{i}] : {listeners[i]}, {nameof(actions)}[{i}] : {actions[i]}");
+
+			for (int i = 0; i < specificEventListeners.Length; i++)
+			{
+				MDebugLog($"{nameof(specificEventListeners)}[{i}] : {specificEventListeners[i].Length}");
+				MDebugLog($"{nameof(specificEventActions)}[{i}] : {specificEventActions[i].Length}");
+
+				for (int j = 0; j < specificEventListeners[i].Length; j++)
+					MDebugLog($"{nameof(specificEventListeners)}[{i}][{j}] : {specificEventListeners[i][j]}, {nameof(specificEventActions)}[{i}][{j}] : {specificEventActions[i][j]}");
+			}
 		}
 		#endregion
 	}
