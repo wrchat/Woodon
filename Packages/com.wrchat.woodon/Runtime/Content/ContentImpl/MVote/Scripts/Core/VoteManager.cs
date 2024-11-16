@@ -5,7 +5,7 @@ using UnityEngine;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class VoteManager : MTurnBaseManager
+	public class VoteManager : ContentManager
 	{
 		[Header("_" + nameof(VoteManager))]
 		[SerializeField] protected TextMeshProUGUI debugText;
@@ -62,7 +62,10 @@ namespace WRC.Woodon
 				return;
 
 			foreach (VoteSeat voteSeat in MSeats)
-				voteSeat.SetTurnData(NONE_INT);
+			{
+				voteSeat.TurnData = NONE_INT;
+				voteSeat.SerializeData();
+			}
 		}
 
 		protected virtual void OnShowTarget()
