@@ -18,7 +18,8 @@ namespace WRC.Woodon
 		[SerializeField] protected TextMeshProUGUI[] dataTexts;
 		[SerializeField] protected Image[] dataImages;
 
-		[SerializeField] protected TextMeshProUGUI[] syncedDataTexts;
+		[SerializeField] protected TextMeshProUGUI[] runtimeStringTexts;
+		[SerializeField] protected TextMeshProUGUI[] runtimeIntTexts;
 
 		[Header("_" + nameof(UIMDataContainer) + " - Options")]
 		[SerializeField] protected Transform mDataContainerParent;
@@ -83,8 +84,11 @@ namespace WRC.Woodon
 				foreach (Image dataImage in dataImages)
 					dataImage.enabled = false;
 
-				foreach (TextMeshProUGUI syncedDataText in syncedDataTexts)
-					syncedDataText.text = string.Empty;
+				foreach (TextMeshProUGUI runtimeIntText in runtimeIntTexts)
+					runtimeIntText.text = string.Empty;
+
+				foreach (TextMeshProUGUI runtimeStringText in runtimeStringTexts)
+					runtimeStringText.text = string.Empty;
 			}
 			else
 			{
@@ -109,8 +113,11 @@ namespace WRC.Woodon
 					dataImages[i].sprite = mData.Sprites[i];
 				}
 
-				foreach (TextMeshProUGUI syncedDataText in syncedDataTexts)
-					syncedDataText.text = mData.RuntimeData;
+				foreach (TextMeshProUGUI runtimeIntText in runtimeIntTexts)
+					runtimeIntText.text = mData.RuntimeInt.ToString();
+
+				foreach (TextMeshProUGUI runtimeStringText in runtimeStringTexts)
+					runtimeStringText.text = mData.RuntimeString;
 			}
 		}
 	}

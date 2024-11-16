@@ -1,10 +1,11 @@
 using UdonSharp;
 using UnityEngine;
+using VRC.SDK3.Data;
 
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class MDataContainer : MBase
+	public class MDataContainer : MEventSender
 	{
 		[field: Header("_" + nameof(MDataContainer))]
 		[field: SerializeField] public string Name { get; set; }
@@ -13,23 +14,49 @@ namespace WRC.Woodon
 		[field: SerializeField, TextArea(3, 10)] public string[] StringData { get; set; }
 		[field: SerializeField] public Sprite[] Sprites { get; set; }
 
+		[SerializeField] protected MData mData;
+
+		public int RuntimeInt { get; set; } = NONE_INT;
+		public bool RuntimeBool { get; set; } = false;
+		public string RuntimeString { get; set; } = NONE_STRING;
+
 		public int Index { get; set; } = NONE_INT;
-		public string RuntimeData { get; set; } = string.Empty;
 
-		public virtual string Save()
+		private void Start()
 		{
-			string data = string.Empty;
-
-			data += $"{RuntimeData}{DATA_SEPARATOR}";
-
-			return data;
+			Init();
 		}
 
-		public virtual void Load(string data)
+		public virtual void Init()
 		{
-			string[] datas = data.Split(DATA_SEPARATOR);
+			if (mData == null)
+				return;
 
-			RuntimeData = datas[0];
+			mData.RegisterListener(this, nameof(ParseData), MDataEvent.OnDeserialization);
+		}
+
+		public virtual void SerializeData()
+		{
+			if (mData == null)
+				return;
+
+			mData.SetData("RuntimeInt", RuntimeInt);
+			mData.SetData("RuntimeBool", RuntimeBool);
+			mData.SetData("RuntimeString", RuntimeString);
+
+			mData.SerializeData();
+		}
+
+		public virtual void ParseData()
+		{
+			if (mData == null)
+				return;
+
+			RuntimeInt = (int)mData.DataDictionary["RuntimeInt"].Double;
+			RuntimeBool = mData.DataDictionary["RuntimeBool"].Boolean;
+			RuntimeString = mData.DataDictionary["RuntimeString"].String;
+
+			SendEvents();
 		}
 	}
 }
