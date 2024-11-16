@@ -5,7 +5,7 @@ using VRC.SDKBase;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class MTarget : MEventSender
+	public class MTarget : WEventPublisher
 	{
 		[Header("_" + nameof(MTarget))]
 		[SerializeField] private string autoTargetName = "-";

@@ -4,7 +4,7 @@ using VRC.SDKBase;
 namespace WRC.Woodon
 {
 	// [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class SendEventOnPlayerEnter : MEventSender
+	public class SendEventOnPlayerEnter : WEventPublisher
 	{
 		[Header("_" + nameof(SendEventOnPlayerExit))]
 		[SerializeField] private bool onlyIfLocalPlayer = true;

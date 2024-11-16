@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace WRC.Woodon
 {
-	public class MPathCart : MEventSender
+	public class MPathCart : WEventPublisher
 	{
 		[Header("_" + nameof(MPathCart))]
 		[SerializeField] private CinemachineDollyCart cart;

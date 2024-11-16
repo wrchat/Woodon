@@ -4,7 +4,7 @@ using UnityEngine;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class DrawManager : MEventSender
+	public class DrawManager : WEventPublisher
 	{
 		[SerializeField] private int teamCount = 2; // 팀 수
 		[SerializeField] private int teamPlayerCount = 2; // 팀당 인원 수

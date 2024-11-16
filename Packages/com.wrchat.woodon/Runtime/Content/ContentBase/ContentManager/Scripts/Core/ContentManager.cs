@@ -8,7 +8,7 @@ using VRC.Udon;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class ContentManager : MEventSender
+	public class ContentManager : WEventPublisher
 	{
 		public MSeat[] MSeats { get; private set; }
 

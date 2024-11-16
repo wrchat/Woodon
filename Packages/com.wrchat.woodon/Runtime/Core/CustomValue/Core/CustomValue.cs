@@ -8,7 +8,7 @@ namespace WRC.Woodon
 	// 직접 상속 받아 쓸 수 없음
 	// Template으로만 볼 것
 
-	public abstract class CustomValue<T> : MEventSender
+	public abstract class CustomValue<T> : WEventPublisher
 	{
 		[field: Header("_" + nameof(MBool))]
 		[field: SerializeField] public T DefaultValue { get; protected set; }

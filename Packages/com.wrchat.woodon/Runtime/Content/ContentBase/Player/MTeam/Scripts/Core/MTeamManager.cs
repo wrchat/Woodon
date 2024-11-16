@@ -5,7 +5,7 @@ using VRC.SDKBase;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class MTeamManager : MEventSender
+	public class MTeamManager : WEventPublisher
 	{
 		[field: Header("_" + nameof(MTeamManager))]
 		[field: SerializeField] public MTeam[] MTeams { get; private set; }
