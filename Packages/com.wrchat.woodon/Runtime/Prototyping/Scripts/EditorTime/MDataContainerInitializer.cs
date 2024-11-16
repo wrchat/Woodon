@@ -2,13 +2,29 @@ using UnityEditor;
 using UnityEngine;
 using WRC.Woodon;
 
-namespace Mascari4615
+namespace WRC
 {
 #if UNITY_EDITOR
 	public class MDataContainerInitializer : MonoBehaviour
 	{
 		[SerializeField] private string prefix;
 		[SerializeField] private string[] someStrings;
+
+		[ContextMenu(nameof(InitName))]
+		public void InitName()
+		{
+			MDataContainer[] mDatas = GetComponentsInChildren<MDataContainer>(true);
+
+			for (int i = 0; i < transform.childCount; i++)
+			{
+				MDataContainer mData = mDatas[i];
+				mData.Name = $"{prefix}{someStrings[0]}{i}";
+
+				EditorUtility.SetDirty(mData);
+			}
+
+			AssetDatabase.SaveAssets();
+		}
 
 		[ContextMenu(nameof(InitValue))]
 		public void InitValue()
@@ -18,7 +34,7 @@ namespace Mascari4615
 			for (int i = 0; i < transform.childCount; i++)
 			{
 				MDataContainer mData = mDatas[i];
-				mData.Value = $"{prefix} {someStrings[0]}{i}";
+				mData.Value = $"{prefix}{someStrings[0]}{i}";
 
 				EditorUtility.SetDirty(mData);
 			}
@@ -34,7 +50,7 @@ namespace Mascari4615
 			for (int i = 0; i < transform.childCount; i++)
 			{
 				MDataContainer mData = mDatas[i];
-				mData.StringData = new string[] { $"{prefix} {i}" };
+				mData.StringData = new string[] { $"{prefix}{someStrings[0]}{i}" };
 
 				EditorUtility.SetDirty(mData);
 			}
