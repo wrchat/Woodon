@@ -24,7 +24,7 @@ namespace WRC.Woodon
 		// this.MDebugLog(); 같이 쓰기 번거로워지기만 할 것 같아서 그냥 일반 메서드로 둠.
 
 		// 정적 메소드로 만들더라도 마찬가지로 MBase.MDebugLog(); 같이 써야 하거나,
-		// 대신 위에 using static Mascari4615.MBase; 를 써주면 되는데,
+		// 대신 위에 using static WRC.MBase; 를 써주면 되는데,
 		// 클래스 이름 : MBase 로 상속 받는 것이 더 빠르고 편하기도 하고, 상속 받을 때만의 이점이 있어서 (아래 참고) 패스
 
 		// MBase를 직접 상속받게 한다면,
