@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using WRC.Woodon;
 
-namespace Mascari4615
+namespace WRC
 {
 #if UNITY_EDITOR
 	public class CustomValueUIMapping : MonoBehaviour

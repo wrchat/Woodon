@@ -91,7 +91,7 @@ namespace WRC.Woodon
 			MDebugLog($"{nameof(SetMValue)} : {mValue}");
 
 			if (this.mValue != null)
-				this.mValue.RemoveListener(this, nameof(UpdateSlider));
+				this.mValue.UnregisterListener(this, nameof(UpdateSlider));
 
 			this.mValue = mValue;
 			Init();

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace WRC.Woodon
 {
-	public class MCollisionEventSender : MEventSender
+	public class MCollisionEventSender : WEventPublisher
 	{
 		[Header("_" + nameof(MCollisionEventSender))]
 		[SerializeField] private GameObject ownerObject;

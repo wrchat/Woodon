@@ -4,7 +4,7 @@ using VRC.Udon.Common.Interfaces;
 
 namespace WRC.Woodon
 {
-	public class SendEventIfLocalPlayerIsMTarget : MEventSender
+	public class SendEventIfLocalPlayerIsMTarget : WEventPublisher
 	{
 		[SerializeField] private MTarget mTarget;
 

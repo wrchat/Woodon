@@ -6,7 +6,7 @@ using VRC.SDKBase;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class MColor : MEventSender
+	public class MColor : WEventPublisher
 	{
 		[Header("_" + nameof(MColor))]
 		[SerializeField] private MeshRenderer[] targetMeshRenderers;

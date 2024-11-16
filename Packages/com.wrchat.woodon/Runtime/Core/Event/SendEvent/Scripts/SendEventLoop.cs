@@ -7,7 +7,7 @@ using VRC.Udon;
 namespace WRC.Woodon
 {
 	// [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class SendEventLoop : MEventSender
+	public class SendEventLoop : WEventPublisher
 	{
 		[Header("_" + nameof(SendEventLoop))]
 		[SerializeField] private float minDelay = .5f;

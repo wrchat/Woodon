@@ -3,7 +3,7 @@
 namespace WRC.Woodon
 {
 	// [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class SendEventOnKeyInput : MEventSender
+	public class SendEventOnKeyInput : WEventPublisher
 	{
 		[Header("_" + nameof(SendEventOnKeyInput))]
 		[SerializeField] private KeyCode keyCode;
