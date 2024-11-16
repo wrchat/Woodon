@@ -4,7 +4,7 @@ using UnityEngine;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class WaktaManager : MEventSender
+	public class WaktaManager : WEventPublisher
 	{
 		[field: Header("_" + nameof(WaktaManager))]
 		[field: SerializeField] public WaktaMemberData[] Datas { get; set; }

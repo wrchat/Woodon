@@ -5,7 +5,7 @@ using VRC.SDKBase;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class MValue : MEventSender
+	public class MValue : WEventPublisher
 	{
 		[field: Header("_" + nameof(MValue))]
 		[field: SerializeField] public int MinValue { get; private set; } = 0;

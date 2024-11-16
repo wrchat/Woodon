@@ -61,13 +61,13 @@ namespace WRC.Woodon
 			UpdateUI(mDataContainers[mDataContainerIndex.Value]);
 		}
 
-		public virtual void UpdateUI(MDataContainer mData)
+		public virtual void UpdateUI(MDataContainer mDataContainer)
 		{
-			this.targetMDataContainer = mData;
+			this.targetMDataContainer = mDataContainer;
 
 			MDebugLog($"{nameof(UpdateUI)}");
 
-			if (mData == null)
+			if (mDataContainer == null)
 			{
 				foreach (TextMeshProUGUI nameText in nameTexts)
 					nameText.text = string.Empty;
@@ -93,31 +93,31 @@ namespace WRC.Woodon
 			else
 			{
 				foreach (TextMeshProUGUI nameText in nameTexts)
-					nameText.text = mData.Name;
+					nameText.text = mDataContainer.Name;
 
 				foreach (TextMeshProUGUI valueText in valueTexts)
-					valueText.text = mData.Value;
+					valueText.text = mDataContainer.Value;
 
 				foreach (Image image in images)
 				{
-					image.enabled = mData.Sprite != null;
-					image.sprite = mData.Sprite;
+					image.enabled = mDataContainer.Sprite != null;
+					image.sprite = mDataContainer.Sprite;
 				}
 
 				for (int i = 0; i < dataTexts.Length; i++)
-					dataTexts[i].text = mData.StringData[i];
+					dataTexts[i].text = mDataContainer.StringData[i];
 
 				for (int i = 0; i < dataImages.Length; i++)
 				{
-					dataImages[i].enabled = mData.Sprites[i] != null;
-					dataImages[i].sprite = mData.Sprites[i];
+					dataImages[i].enabled = mDataContainer.Sprites[i] != null;
+					dataImages[i].sprite = mDataContainer.Sprites[i];
 				}
 
 				foreach (TextMeshProUGUI runtimeIntText in runtimeIntTexts)
-					runtimeIntText.text = mData.RuntimeInt.ToString();
+					runtimeIntText.text = mDataContainer.RuntimeInt.ToString();
 
 				foreach (TextMeshProUGUI runtimeStringText in runtimeStringTexts)
-					runtimeStringText.text = mData.RuntimeString;
+					runtimeStringText.text = mDataContainer.RuntimeString;
 			}
 		}
 	}

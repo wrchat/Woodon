@@ -5,7 +5,7 @@ using VRC.SDK3.Data;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class MDataContainer : MEventSender
+	public class MDataContainer : WEventPublisher
 	{
 		[field: Header("_" + nameof(MDataContainer))]
 		[field: SerializeField] public string Name { get; set; }

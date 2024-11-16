@@ -6,7 +6,7 @@ using static WRC.Woodon.MUtil;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class MString : MEventSender
+	public class MString : WEventPublisher
 	{
 		[Header("_" + nameof(MString))]
 
