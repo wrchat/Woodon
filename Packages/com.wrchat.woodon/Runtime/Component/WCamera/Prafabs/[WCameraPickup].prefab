@@ -734,7 +734,7 @@ GameObject:
   - component: {fileID: 9173460701794662922}
   - component: {fileID: 2173574461715471929}
   m_Layer: 13
-  m_Name: '[MCameraPickup]'
+  m_Name: '[WCameraPickup]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -794,7 +794,6 @@ MonoBehaviour:
   isHolding: {fileID: 2067317721535103682}
   isSomeoneHolding: {fileID: 0}
   mCameraFovSync: {fileID: 3949298231987454594}
-  mCameraPosSync: {fileID: 0}
   targetCamera: {fileID: 6255854293384609983}
 --- !u!65 &7951682225081727189
 BoxCollider:
@@ -1047,8 +1046,8 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 1150290828330955093}
   DEBUG: 0
-  targetUdons: []
-  eventNames: []
+  listeners: []
+  actions: []
   sendEventGlobal: 0
   defaultValue: 0
   useSync: 0
@@ -1209,11 +1208,13 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 5891773835987420021}
   DEBUG: 1
+  defaultActive: 0
+  mBool: {fileID: 2067317721535103682}
   activeCanvasGroups:
   - {fileID: 8305199275040038003}
   disableCanvasGroups: []
-  defaultActive: 0
-  mBool: {fileID: 2067317721535103682}
+  toggleOnlyInteractable: 0
+  toggleColliders: 0
 --- !u!114 &5891773835987420021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1491,7 +1492,7 @@ PrefabInstance:
     - target: {fileID: 6138876235768855406, guid: 1ea13a4890a7a7948afd88f8feb19e02,
         type: 3}
       propertyPath: m_Name
-      value: '[M_CCData]'
+      value: '[WCameraData]'
       objectReference: {fileID: 0}
     - target: {fileID: 8222964597108987701, guid: 1ea13a4890a7a7948afd88f8feb19e02,
         type: 3}

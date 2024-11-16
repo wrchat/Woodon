@@ -8,9 +8,9 @@ using VRC.Udon;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class M_CCData : MBase
+	public class WCameraData : MBase
 	{
-		[field: Header("_" + nameof(M_CCData))]
+		[field: Header("_" + nameof(WCameraData))]
 		[field: SerializeField] public KeyCode KeyCode { get; set; } = KeyCode.None;
 
 		public CinemachineVirtualCamera Camera

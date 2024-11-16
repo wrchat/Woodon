@@ -27,9 +27,9 @@ namespace WRC.Woodon
 			}
 		}
 
-		private MCameraController mCameraController;
+		private WCameraController mCameraController;
 
-		public void Init(MCameraController cameraController)
+		public void Init(WCameraController cameraController)
 		{
 			mCameraController = cameraController;
 			SetValue(fovDefault);
