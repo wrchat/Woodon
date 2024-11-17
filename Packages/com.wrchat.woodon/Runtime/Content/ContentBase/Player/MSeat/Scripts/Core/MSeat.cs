@@ -14,14 +14,14 @@ namespace WRC.Woodon
 
 		public int IntData
 		{
-			get => DataDict.TryGetValue("INT_DATA", out DataToken dataToken) ? (int)dataToken.Double : default;
-			set => DataDict["INT_DATA"] = value;
+			get => DataDict.TryGetValue("IntData", out DataToken dataToken) ? (int)dataToken.Double : default;
+			set => DataDict["IntData"] = value;
 		}
 
 		public int TurnData
 		{
-			get => DataDict.TryGetValue("Turn_DATA", out DataToken dataToken) ? (int)dataToken.Double : default;
-			set => DataDict["Turn_DATA"] = value;
+			get => DataDict.TryGetValue("TurnData", out DataToken dataToken) ? (int)dataToken.Double : default;
+			set => DataDict["TurnData"] = value;
 		}
 
 		protected ContentManager contentManager;
@@ -64,11 +64,11 @@ namespace WRC.Woodon
 				DataToken origin = block["origin"];
 				DataToken cur = block["cur"];
 
-				if (key.String == "INT_DATA")
+				if (key.String == "IntData")
 				{
 					OnDataChanged(DataChangeStateUtil.GetChangeState((int)origin.Double, (int)cur.Double));
 				}
-				else if (key.String == "Turn_DATA")
+				else if (key.String == "TurnData")
 				{
 					OnTurnDataChange(DataChangeStateUtil.GetChangeState((int)origin.Double, (int)cur.Double));
 				}
@@ -124,7 +124,7 @@ namespace WRC.Woodon
 			if (DataChangeStateUtil.IsDataChanged(changeState))
 			{
 				if (contentManager != null)
-					contentManager.UpdateStuff();
+					contentManager.UpdateContent();
 			}
 		}
 
@@ -135,7 +135,7 @@ namespace WRC.Woodon
 			// UpdateCurTurnDataUI();
 
 			if (DataChangeStateUtil.IsDataChanged(changeState))
-				contentManager.UpdateStuff();
+				contentManager.UpdateContent();
 		}
 
 		public virtual void UseSeat()
