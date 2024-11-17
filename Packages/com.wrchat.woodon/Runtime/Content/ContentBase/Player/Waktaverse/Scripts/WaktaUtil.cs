@@ -16,9 +16,6 @@ namespace WRC.Woodon
 		// 고정 멤버 (기수 - 가나다 순)
 		// 고정 멤버 아카데미 (기수 - 가나다 순)
 
-		// 풍신님 아이디가 2개라서, 실제 멤버 수는 45.
-		public const int WAKTA_NICKNAME_COUNT = 46;
-
 		public const WaktaMember FIRST_MEMBER = WaktaMember.우왁굳;
 		public const WaktaMember LAST_MEMBER = WaktaMember.메카_맹기산;
 
@@ -124,7 +121,6 @@ namespace WRC.Woodon
 				"비즈니스킴",
 				"왁파고",
 				"캘리칼리 데이비슨",
-				"풍신",
 				"풍신",
 				"해루석",
 				"히키킹",
