@@ -36,15 +36,15 @@ namespace WRC.Woodon
 			get => _value;
 			private set
 			{
+				string origin = _value;
 				_value = value;
-				OnValueChange();
+				OnValueChange(origin, _value);
 			}
 		}
 
-		private void OnValueChange()
+		protected virtual void OnValueChange(string origin, string cur)
 		{
-			MDebugLog(nameof(OnValueChange));
-
+			MDebugLog($"{nameof(OnValueChange)} : {origin} -> {cur}");
 			SendEvents();
 		}
 
@@ -67,7 +67,7 @@ namespace WRC.Woodon
 				SetValue(defaultString);
 			}
 
-			OnValueChange();
+			OnValueChange(string.Empty, Value);
 		}
 
 		public void SetValue(string newValue, bool isReceiver = false)
