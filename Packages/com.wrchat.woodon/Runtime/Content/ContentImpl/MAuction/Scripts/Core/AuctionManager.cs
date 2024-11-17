@@ -158,10 +158,10 @@ namespace WRC.Woodon
 			// }
 		}
 
-		public override void UpdateStuff()
+		public override void UpdateContent()
 		{
-			MDebugLog(nameof(UpdateStuff));
-			base.UpdateStuff();
+			MDebugLog(nameof(UpdateContent));
+			base.UpdateContent();
 
 			int maxPoint = GetMaxTurnData();
 			foreach (TextMeshProUGUI maxTryPointText in maxTryPointTexts)

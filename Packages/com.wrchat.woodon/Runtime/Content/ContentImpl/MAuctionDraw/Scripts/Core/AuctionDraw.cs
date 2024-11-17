@@ -58,10 +58,10 @@ namespace WRC.Woodon
 				ui.Init(this);
 
 			DrawManager.RegisterListener(this, nameof(UpdateUI));
-			DrawManager.RegisterListener(AuctionManager, nameof(AuctionManager.UpdateStuff));
+			DrawManager.RegisterListener(AuctionManager, nameof(AuctionManager.UpdateContent));
 
 			UpdateUI();
-			AuctionManager.UpdateStuff();
+			AuctionManager.UpdateContent();
 			
 			if (Networking.IsMaster)
 				OnWait();

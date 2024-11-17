@@ -33,7 +33,7 @@ namespace WRC.Woodon
 		{
 			// MDebugLog($"{nameof(OnGameStateChange)}, {changeState}");
 
-			UpdateStuff();
+			UpdateContent();
 			SendEvents();
 		}
 
@@ -55,6 +55,7 @@ namespace WRC.Woodon
 		protected virtual void Start()
 		{
 			Init();
+			UpdateContent();
 		}
 
 		protected virtual void Init()
@@ -71,7 +72,7 @@ namespace WRC.Woodon
 				MSeats[i].Init(this, i);
 		}
 
-		public virtual void UpdateStuff()
+		public virtual void UpdateContent()
 		{
 			// MDebugLog($"{nameof(UpdateStuff)}");
 
@@ -82,16 +83,18 @@ namespace WRC.Woodon
 				seat.UpdateSeat();
 		}
 
-		public void OnSeatTargetChanged(MSeat changedSeat)
+		public virtual void OnSeatTargetChanged(MSeat changedSeat)
 		{
 			// 중복 제거 (한 플레이어가 한 번에 하나의 자리에만 등록 가능하도록)
-			foreach (MSeat seat in MSeats)
 			{
-				if (seat == changedSeat)
-					continue;
+				foreach (MSeat seat in MSeats)
+				{
+					if (seat == changedSeat)
+						continue;
 
-				if (seat.IsTargetPlayer() && seat.TargetPlayerID == changedSeat.TargetPlayerID)
-					seat.SetTargetNone();
+					if (seat.IsTargetPlayer() && seat.TargetPlayerID == changedSeat.TargetPlayerID)
+						seat.SetTargetNone();
+				}
 			}
 		}
 		
