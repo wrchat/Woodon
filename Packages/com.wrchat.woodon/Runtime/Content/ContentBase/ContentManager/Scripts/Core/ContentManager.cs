@@ -43,6 +43,7 @@ namespace WRC.Woodon
 			CurGameState = (newGameState + stateMax) % stateMax;
 			RequestSerialization();
 		}
+		public void SetGameState(Enum newGameState) => SetGameState(Convert.ToInt32(newGameState));
 
 		public bool IsCurGameState(int gameState) => CurGameState == gameState;
 		public bool IsCurGameState(Enum gameState) => CurGameState == Convert.ToInt32(gameState);

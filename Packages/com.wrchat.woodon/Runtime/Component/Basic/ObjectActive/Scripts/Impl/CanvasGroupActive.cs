@@ -18,22 +18,25 @@ namespace WRC.Woodon
 
 		protected override void Init()
 		{
-			for (int i = 0; i < activeCanvasGroups.Length; i++)
+			if (toggleColliders)
 			{
-				if (activeCanvasGroups[i] == null)
-					continue;
+				for (int i = 0; i < activeCanvasGroups.Length; i++)
+				{
+					if (activeCanvasGroups[i] == null)
+						continue;
 
-				Collider[] colliders = activeCanvasGroups[i].GetComponentsInChildren<Collider>(true);
-				MDataUtil.AddRange(ref activeColliders, colliders);
-			}
+					Collider[] colliders = activeCanvasGroups[i].GetComponentsInChildren<Collider>(true);
+					MDataUtil.AddRange(ref activeColliders, colliders);
+				}
 
-			for (int i = 0; i < disableCanvasGroups.Length; i++)
-			{
-				if (disableCanvasGroups[i] == null)
-					continue;
+				for (int i = 0; i < disableCanvasGroups.Length; i++)
+				{
+					if (disableCanvasGroups[i] == null)
+						continue;
 
-				Collider[] colliders = disableCanvasGroups[i].GetComponentsInChildren<Collider>(true);
-				MDataUtil.AddRange(ref disableColliders, colliders);
+					Collider[] colliders = disableCanvasGroups[i].GetComponentsInChildren<Collider>(true);
+					MDataUtil.AddRange(ref disableColliders, colliders);
+				}
 			}
 
 			base.Init();
