@@ -58,7 +58,6 @@ namespace WRC.Woodon
 			for (int i = 0; i < keys.Count; i++)
 			{
 				DataToken key = keys[i];
-				MDebugLog($"{key}");
 
 				DataDictionary block = change[key].DataDictionary;
 				DataToken origin = block["origin"];
