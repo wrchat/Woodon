@@ -35,13 +35,18 @@ namespace WRC.Woodon
 			if (localPlayerUI != null)
 				localPlayerUI.text = $"LocalPlayer ID : {Networking.LocalPlayer.playerId}";
 
-			mTarget.RegisterListener(this, nameof(UpdateUI));
+			if (mTarget != null)
+				mTarget.RegisterListener(this, nameof(UpdateUI));
+
 			UpdateUI();
 			UpdatePlayerIDBuffer();
 		}
 
 		public void UpdateUI()
 		{
+			if (mTarget == null)
+				return;
+			
 			SetNoneButton(mTarget.UseNone);
 			UpdateTargetPlayerUI(mTarget.TargetPlayerID);
 		}

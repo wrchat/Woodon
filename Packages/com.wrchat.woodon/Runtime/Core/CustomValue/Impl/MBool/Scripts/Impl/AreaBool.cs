@@ -1,6 +1,7 @@
 ﻿using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
+using static WRC.Woodon.MUtil;
 
 namespace WRC.Woodon
 {
@@ -9,7 +10,8 @@ namespace WRC.Woodon
 	{
 		[Header("_" + nameof(AreaBool))]
 		[SerializeField] private BoxCollider[] areaColliders;
-		[SerializeField] private float updateDelay = 0.5f;
+		[SerializeField] private float updateDelay = 0.1f;
+		[SerializeField] private bool checkOnlyLocalPlayer = true;
 		private Bounds[] boundsArray;
 
 		protected override void Start()
@@ -29,13 +31,35 @@ namespace WRC.Woodon
 		{
 			SendCustomEventDelayedSeconds(nameof(UpdateValue), updateDelay);
 
-			if (Networking.LocalPlayer == null)
+			if (IsNotOnline())
 				return;
-		
-			bool isPlayerIn = IsPlayerIn(Networking.LocalPlayer);
 
-			if (isPlayerIn != Value)
-				SetValue(isPlayerIn);
+			if (checkOnlyLocalPlayer)
+			{
+				bool isPlayerIn = IsPlayerIn(Networking.LocalPlayer);
+
+				if (isPlayerIn != Value)
+					SetValue(isPlayerIn);
+			}
+			else
+			{
+				VRCPlayerApi[] players = new VRCPlayerApi[VRCPlayerApi.GetPlayerCount()];
+				VRCPlayerApi.GetPlayers(players);
+
+				bool isPlayerIn = false;
+
+				foreach (VRCPlayerApi playerApi in players)
+				{
+					if (IsPlayerIn(playerApi))
+					{
+						isPlayerIn = true;
+						break;
+					}
+				}
+
+				if (isPlayerIn != Value)
+					SetValue(isPlayerIn);
+			}
 		}
 
 		public bool IsPlayerIn(VRCPlayerApi player)

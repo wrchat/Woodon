@@ -1,8 +1,6 @@
 ﻿using UdonSharp;
 using UnityEngine;
 using VRC.SDK3.Data;
-using VRC.SDKBase;
-using VRC.Udon;
 
 namespace WRC.Woodon
 {
@@ -10,20 +8,9 @@ namespace WRC.Woodon
 	public class MData : MString
 	{
 		public DataDictionary DataDictionary { get; protected set; } = new DataDictionary();
+		public DataDictionary ChangedData { get; protected set; } = new DataDictionary();
 
-		public void SetData(string key, int value)
-		{
-			MDebugLog($"{nameof(SetData)}({key}, {value})");
-			DataDictionary.SetValue(key, value);
-		}
-
-		public void SetData(string key, string value)
-		{
-			MDebugLog($"{nameof(SetData)}({key}, {value})");
-			DataDictionary.SetValue(key, value);
-		}
-
-		public void SetData(string key, bool value)
+		public void SetData(DataToken key, DataToken value)
 		{
 			MDebugLog($"{nameof(SetData)}({key}, {value})");
 			DataDictionary.SetValue(key, value);
@@ -34,13 +21,8 @@ namespace WRC.Woodon
 		{
 			MDebugLog($"{nameof(SerializeData)} (Try) {DataDictionary}");
 
-			// DataDictionary.Clear();
-			// jsonData.Clear();
-
-			// AddData(jsonData);
-
 			SendEvents(MDataEvent.OnSerialization);
-			
+
 			if (VRCJson.TrySerializeToJson(DataDictionary, JsonExportType.Beautify, out DataToken result))
 			{
 				MDebugLog($"{nameof(SerializeData)} (Success) {result}");
@@ -56,18 +38,15 @@ namespace WRC.Woodon
 		public void Deserialization()
 		{
 			MDebugLog($"{nameof(Deserialization)} (Try) {Value}");
-		
+
 			if (Value == string.Empty)
 				return;
 
 			if (VRCJson.TryDeserializeFromJson(Value, out DataToken result))
 			{
-				DataDictionary = result.DataDictionary;
 				MDebugLog($"{nameof(Deserialization)} (Success) {result}");
 
-				// ParseData(Data);
-				// UpdateStuff();
-
+				DataDictionary = result.DataDictionary;
 				SendEvents(MDataEvent.OnDeserialization);
 			}
 			else
@@ -76,10 +55,43 @@ namespace WRC.Woodon
 			}
 		}
 
-		protected override void Init()
+		protected override void OnValueChange(string origin, string cur)
 		{
-			RegisterListener(this, nameof(Deserialization));
-			base.Init();
+			base.OnValueChange(origin, cur);
+
+			if (VRCJson.TryDeserializeFromJson(cur, out DataToken result))
+				if (VRCJson.TryDeserializeFromJson(origin, out DataToken originResult))
+					ChangedData = GetDifference(originResult.DataDictionary, result.DataDictionary);
+
+			Deserialization();
+		}
+
+		private DataDictionary GetDifference(DataDictionary origin, DataDictionary cur)
+		{
+			DataDictionary diff = new DataDictionary();
+
+			DataList keys = cur.GetKeys();
+			for (int i = 0; i < keys.Count; i++)
+			{
+				DataToken key = keys[i];
+
+				if (origin.TryGetValue(key, out DataToken originToken))
+				{
+					DataToken curToken = cur[key];
+					if (originToken.CompareTo(curToken) != 0)
+					{
+						DataDictionary diffBlock = new DataDictionary();
+						diffBlock.SetValue("origin", originToken);
+						diffBlock.SetValue("cur", curToken);
+
+						MDebugLog($"{key} {originToken} -> {curToken}");
+
+						diff.SetValue(key, diffBlock);
+					}
+				}
+			}
+
+			return diff;
 		}
 	}
 }

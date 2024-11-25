@@ -34,7 +34,7 @@ namespace WRC.Woodon
 		protected override void Start()
 		{
 			base.Start();
-			UpdateStuff();
+			UpdateContent();
 		}
 
 		protected override void Init()
@@ -53,12 +53,12 @@ namespace WRC.Woodon
 			OnQuizDataParentChange();
 		}
 
-		public override void UpdateStuff()
+		public override void UpdateContent()
 		{
 			CalcAnswerCount();
 			SetWaitObjectActive(IsCurGameState((int)QuizGameState.Wait));
 		
-			base.UpdateStuff();
+			base.UpdateContent();
 		}
 
 		private void CalcAnswerCount()
@@ -97,7 +97,7 @@ namespace WRC.Woodon
 
 		public virtual void OnQuizIndexChange()
 		{
-			UpdateStuff();
+			UpdateContent();
 			SendEvents();
 		}
 

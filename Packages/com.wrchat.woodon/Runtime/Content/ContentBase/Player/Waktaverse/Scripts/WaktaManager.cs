@@ -23,6 +23,11 @@ namespace WRC.Woodon
 			return null;
 		}
 
+		public WaktaMemberData GetData(int index)
+		{
+			return Datas[index];
+		}
+
 		public WaktaMember[] GetEnabledMembersByType(WaktaMemberType type)
 		{
 			WaktaMember[] members = WaktaUtil.GetMembersByType(type);
@@ -40,6 +45,26 @@ namespace WRC.Woodon
 					enabledMembers[enabledMemberIndex++] = member;
 
 			return enabledMembers;
+		}
+
+		public int GetMemberIndex(string name)
+		{
+			WaktaMember member = WaktaUtil.GetWaktaMember(name);
+
+			if (member != WaktaMember.None)
+				return (int)member;
+
+
+			for (int i = 0; i < Datas.Length; i++)
+			{
+				WaktaMemberData data = Datas[i];
+
+				if ((name == data.Nickname) ||
+					(name == data.DisplayName))
+					return i;
+			}
+
+			return NONE_INT;
 		}
 	}
 }

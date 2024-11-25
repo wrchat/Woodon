@@ -39,7 +39,8 @@ namespace WRC.Woodon
 			if (IsNotOnline())
 				return;
 
-			if (DEBUG == false)
+			// DEBUG 옵션 유무와 별개로, 에러 로그는 무조건 출력합니다.
+			if (DEBUG == false && (logType != LogType.Error))
 				return;
 
 			string formattedLog = $@"" +

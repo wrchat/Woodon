@@ -16,9 +16,6 @@ namespace WRC.Woodon
 		// 고정 멤버 (기수 - 가나다 순)
 		// 고정 멤버 아카데미 (기수 - 가나다 순)
 
-		// 풍신님 아이디가 2개라서, 실제 멤버 수는 45.
-		public const int WAKTA_NICKNAME_COUNT = 46;
-
 		public const WaktaMember FIRST_MEMBER = WaktaMember.우왁굳;
 		public const WaktaMember LAST_MEMBER = WaktaMember.메카_맹기산;
 
@@ -125,7 +122,6 @@ namespace WRC.Woodon
 				"왁파고",
 				"캘리칼리 데이비슨",
 				"풍신",
-				"풍신",
 				"해루석",
 				"히키킹",
 				"독고혜지", // 2기
@@ -212,7 +208,8 @@ namespace WRC.Woodon
 			};
 		}
 
-		public static WaktaMember GetMember(string name)
+		// TODO: TryGet
+		public static WaktaMember GetWaktaMember(string name)
 		{
 			string[] displayNames = GetDisplayNames();
 			string[] nicknames = GetNicknames();
@@ -220,8 +217,8 @@ namespace WRC.Woodon
 			int memberCount = displayNames.Length;
 			for (int i = 0; i < memberCount; i++)
 			{
-				if (name == displayNames[i] ||
-					name == nicknames[i])
+				if ((name == displayNames[i]) ||
+					(name == nicknames[i]))
 					return (WaktaMember)i;
 			}
 
@@ -230,7 +227,7 @@ namespace WRC.Woodon
 
 		public static string GetNickname(string displayName)
 		{
-			WaktaMember member = GetMember(displayName);
+			WaktaMember member = GetWaktaMember(displayName);
 			return (member == WaktaMember.None) ? string.Empty : GetNickname(member);
 		}
 
@@ -241,19 +238,19 @@ namespace WRC.Woodon
 
 		public static string GetDisplayName(string nickname)
 		{
-			WaktaMember member = GetMember(nickname);
+			WaktaMember member = GetWaktaMember(nickname);
 			return (member == WaktaMember.None) ? string.Empty : GetDisplayName(member);
 		}
 
 		public static string GetNicknameByDisplayName(string displayName)
 		{
-			WaktaMember member = GetMember(displayName);
+			WaktaMember member = GetWaktaMember(displayName);
 			return (member == WaktaMember.None) ? string.Empty : GetNickname(member);
 		}
 
 		public static string GetDisplayNameByNickname(string nickname)
 		{
-			WaktaMember member = GetMember(nickname);
+			WaktaMember member = GetWaktaMember(nickname);
 			return (member == WaktaMember.None) ? string.Empty : GetDisplayName(member);
 		}
 	}
