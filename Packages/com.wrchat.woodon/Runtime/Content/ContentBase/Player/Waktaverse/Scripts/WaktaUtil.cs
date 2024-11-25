@@ -208,7 +208,8 @@ namespace WRC.Woodon
 			};
 		}
 
-		public static WaktaMember GetMember(string name)
+		// TODO: TryGet
+		public static WaktaMember GetWaktaMember(string name)
 		{
 			string[] displayNames = GetDisplayNames();
 			string[] nicknames = GetNicknames();
@@ -216,8 +217,8 @@ namespace WRC.Woodon
 			int memberCount = displayNames.Length;
 			for (int i = 0; i < memberCount; i++)
 			{
-				if (name == displayNames[i] ||
-					name == nicknames[i])
+				if ((name == displayNames[i]) ||
+					(name == nicknames[i]))
 					return (WaktaMember)i;
 			}
 
@@ -226,7 +227,7 @@ namespace WRC.Woodon
 
 		public static string GetNickname(string displayName)
 		{
-			WaktaMember member = GetMember(displayName);
+			WaktaMember member = GetWaktaMember(displayName);
 			return (member == WaktaMember.None) ? string.Empty : GetNickname(member);
 		}
 
@@ -237,19 +238,19 @@ namespace WRC.Woodon
 
 		public static string GetDisplayName(string nickname)
 		{
-			WaktaMember member = GetMember(nickname);
+			WaktaMember member = GetWaktaMember(nickname);
 			return (member == WaktaMember.None) ? string.Empty : GetDisplayName(member);
 		}
 
 		public static string GetNicknameByDisplayName(string displayName)
 		{
-			WaktaMember member = GetMember(displayName);
+			WaktaMember member = GetWaktaMember(displayName);
 			return (member == WaktaMember.None) ? string.Empty : GetNickname(member);
 		}
 
 		public static string GetDisplayNameByNickname(string nickname)
 		{
-			WaktaMember member = GetMember(nickname);
+			WaktaMember member = GetWaktaMember(nickname);
 			return (member == WaktaMember.None) ? string.Empty : GetDisplayName(member);
 		}
 	}
