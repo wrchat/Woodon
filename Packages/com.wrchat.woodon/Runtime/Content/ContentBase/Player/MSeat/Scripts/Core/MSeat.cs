@@ -1,7 +1,5 @@
-using TMPro;
 using UdonSharp;
 using UnityEngine;
-using UnityEngine.UI;
 using VRC.SDK3.Data;
 using VRC.SDKBase;
 
@@ -11,32 +9,33 @@ namespace WRC.Woodon
 	public class MSeat : MTarget
 	{
 		[Header("_" + nameof(MSeat))]
-		[SerializeField] private TextMeshProUGUI[] indexTexts;
 		[SerializeField] protected MData mData;
+		protected DataDictionary DataDict => mData.DataDictionary;
 
-		public const string INT_DATA = "IntData";
-		private int _intData = NONE_INT;
 		public int IntData
 		{
-			get => _intData;
-			set
-			{
-				int origin = _intData;
-				_intData = value;
-				OnDataChanged(DataChangeStateUtil.GetChangeState(origin, value));
-			}
+			get => DataDict.TryGetValue("IntData", out DataToken dataToken) ? (int)dataToken.Double : default;
+			set => DataDict["IntData"] = value;
 		}
 
-		public int Index { get; private set; }
+		public int TurnData
+		{
+			get => DataDict.TryGetValue("TurnData", out DataToken dataToken) ? (int)dataToken.Double : default;
+			set => DataDict["TurnData"] = value;
+		}
 
 		protected ContentManager contentManager;
+		public int Index { get; private set; }
+
+		[SerializeField] private UIMSeat[] uis;
 
 		public virtual void Init(ContentManager contentManager, int index)
 		{
 			this.contentManager = contentManager;
 			Index = index;
-			foreach (TextMeshProUGUI seatIndexText in indexTexts)
-				seatIndexText.text = index.ToString();
+
+			foreach (UIMSeat ui in uis)
+				ui.Init(contentManager, this);
 
 			if (mData != null)
 				mData.RegisterListener(this, nameof(OnDataDeserialization), MDataEvent.OnDeserialization);
@@ -47,33 +46,36 @@ namespace WRC.Woodon
 				SerializeData();
 			}
 
-			UpdateStuff_();
+			UpdateSeat_();
 		}
 
 		public virtual void OnDataDeserialization()
 		{
-			MDebugLog($"{nameof(ParseData)}");
+			MDebugLog($"{nameof(OnDataDeserialization)}");
 
-			ParseData(mData.DataDictionary);
-			UpdateStuff_();
+			DataDictionary change = mData.ChangedData;
+			DataList keys = change.GetKeys();
+			for (int i = 0; i < keys.Count; i++)
+			{
+				DataToken key = keys[i];
+
+				DataDictionary block = change[key].DataDictionary;
+				DataToken origin = block["origin"];
+				DataToken cur = block["cur"];
+
+				if (key.String == "IntData")
+				{
+					OnDataChanged(DataChangeStateUtil.GetChangeState((int)origin.Double, (int)cur.Double));
+				}
+				else if (key.String == "TurnData")
+				{
+					OnTurnDataChange(DataChangeStateUtil.GetChangeState((int)origin.Double, (int)cur.Double));
+				}
+			}
 		}
 
-		protected virtual void ParseData(DataDictionary dataDict)
+		public void SerializeData()
 		{
-			if (mData == null)
-				return;
-
-			IntData = dataDict.TryGetValue(INT_DATA, out DataToken dataToken) ? (int)dataToken.Double : NONE_INT;
-			TurnData = dataDict.TryGetValue(TURN_DATA, out DataToken turnDataToken) ? (int)turnDataToken.Double : NONE_INT;
-		}
-
-		public virtual void SerializeData()
-		{
-			if (mData == null)
-				return;
-
-			mData.SetData(INT_DATA, IntData);
-			mData.SetData(TURN_DATA, TurnData);
 			mData.SerializeData();
 		}
 
@@ -81,31 +83,16 @@ namespace WRC.Woodon
 		{
 			MDebugLog($"{nameof(UpdateSeat)}");
 
-			OnDataChanged(DataChangeState.None);
-
-			UpdateDataUI();
-			UpdateCurDataUI();
-
-			UpdateTurnDataUI();
-			UpdateCurTurnDataUI();
-
 			if (contentManager != null)
-				UpdateStuff_();
-
-			// TurnBaseManager.UpdateStuff에서 각 Seat.UpdateStuff를 호출
-			// OnTurnDataChange에서는 역으로 TurnBaseManager.UpdateStuff를 호출
-			// 때문에 무한 루프를 방지하기 위해,
-			// TurnData가 변경되어 Setter에서 OnTurnDataChange가 호출된 것인지,
-			// TurnBaseManager.UpdateStuff가 호출되어 OnTurnDataChange가 호출된 것인지 구분시켜줄 필요가 있음.
-			// OnTurnDataChange(DataChangeState.None);
-
-			// 240801 → OnTurnDataChange에서 UI 갱신 코드를 분리
+				UpdateSeat_();
 		}
 
-		protected virtual void UpdateStuff_()
+		protected virtual void UpdateSeat_()
 		{
-			MDebugLog($"{nameof(UpdateStuff_)}");
+			MDebugLog($"{nameof(UpdateSeat_)}");
 
+			foreach (UIMSeat ui in uis)
+				ui.UpdateUI();
 		}
 
 		protected override void OnTargetChanged(DataChangeState changeState)
@@ -123,29 +110,31 @@ namespace WRC.Woodon
 					if (contentManager.ResetTurnDataWhenOwnerChange)
 						ResetTurnData();
 				}
-				UpdateStuff_();
+				UpdateSeat_();
 			}
 		}
 
 		protected virtual void OnDataChanged(DataChangeState changeState)
 		{
-			MDebugLog($"{nameof(OnDataChanged)} : {IntData} {changeState}");
-			
+			MDebugLog($"{nameof(OnDataChanged)} : {IntData} ({changeState})");
+
 			// UpdateCurDataUI();
 
 			if (DataChangeStateUtil.IsDataChanged(changeState))
 			{
 				if (contentManager != null)
-					contentManager.UpdateStuff();
+					contentManager.UpdateContent();
 			}
 		}
 
-		public virtual void ResetData()
+		protected virtual void OnTurnDataChange(DataChangeState changeState)
 		{
-			if (mData == null)
-				return;
+			MDebugLog($"{nameof(OnTurnDataChange)}, {TurnData}");
 
-			mData.SetData(INT_DATA, contentManager.DefaultData);
+			// UpdateCurTurnDataUI();
+
+			if (DataChangeStateUtil.IsDataChanged(changeState))
+				contentManager.UpdateContent();
 		}
 
 		public virtual void UseSeat()
@@ -160,44 +149,17 @@ namespace WRC.Woodon
 
 		public virtual void ResetSeat()
 		{
+			MDebugLog($"{nameof(ResetSeat)}");
 			ResetPlayer();
-			
 			ResetData();
 			ResetTurnData();
 		}
 
-		public override void OnPlayerLeft(VRCPlayerApi player)
+		public virtual void ResetData()
 		{
-			if (IsOwner() && (player.playerId == TargetPlayerID))
-			{
-				ResetSeat();
-			}
+			MDebugLog($"{nameof(ResetData)}");
+			IntData = contentManager.DefaultData;
 		}
-
-		// ==================================
-
-		public const string TURN_DATA = "TurnData";
-		private int _turnData = NONE_INT;
-		public int TurnData
-		{
-			get => _turnData;
-			set
-			{
-				int origin = _turnData;
-				_turnData = value;
-				OnTurnDataChange(DataChangeStateUtil.GetChangeState(origin, value));
-			}
-		}
-
-		[SerializeField] private TextMeshProUGUI[] curDataTexts;
-		[SerializeField] private Image[] curDataImages;
-		[SerializeField] private TextMeshProUGUI[] dataTexts;
-		[SerializeField] private Image[] dataImages;
-
-		[SerializeField] private TextMeshProUGUI[] curTurnDataTexts;
-		[SerializeField] private Image[] curTurnDataImages;
-		[SerializeField] private TextMeshProUGUI[] turnDataTexts;
-		[SerializeField] private Image[] turnDataImages;
 
 		public void ResetTurnData()
 		{
@@ -205,155 +167,11 @@ namespace WRC.Woodon
 			TurnData = contentManager.DefaultTurnData;
 		}
 
-		protected virtual void OnTurnDataChange(DataChangeState changeState)
-		{	
-			MDebugLog($"{nameof(OnTurnDataChange)}, {TurnData}");
-
-			// UpdateCurTurnDataUI();
-
-			if (DataChangeStateUtil.IsDataChanged(changeState))
-				contentManager.UpdateStuff();
-		}
-
-		private void UpdateCurDataUI()
+		public override void OnPlayerLeft(VRCPlayerApi player)
 		{
-			if (contentManager == null)
-				return;
-
-			if (contentManager.IsDataElement)
+			if (IsOwner() && (player.playerId == TargetPlayerID))
 			{
-				string curDataString = (IntData == NONE_INT) ? string.Empty :
-										(contentManager.DataToString.Length > IntData) ? contentManager.DataToString[IntData] : IntData.ToString();
-				foreach (TextMeshProUGUI curDataText in curDataTexts)
-					curDataText.text = curDataString;
-
-				Sprite[] dataSprites = contentManager.DataSprites;
-				Sprite noneSprite = contentManager.DataNoneSprite;
-				foreach (Image curDataImage in curDataImages)
-				{
-					if (contentManager.UseDataSprites)
-					{
-						curDataImage.sprite = (IntData != NONE_INT) ? dataSprites[IntData] : noneSprite;
-					}
-					else
-					{
-						curDataImage.sprite = (IntData != NONE_INT) ? null : noneSprite;
-					}
-				}
-			}
-			else
-			{
-				foreach (TextMeshProUGUI curDataText in curDataTexts)
-					curDataText.text = IntData.ToString();
-			}
-		}
-
-		private void UpdateCurTurnDataUI()
-		{
-			if (contentManager == null)
-				return;
-
-			if (contentManager.IsTurnDataElement)
-			{
-				string curTurnDataString = (TurnData == NONE_INT) ? string.Empty :
-										(contentManager.TurnDataToString.Length > TurnData) ? contentManager.TurnDataToString[TurnData] : TurnData.ToString();
-				foreach (TextMeshProUGUI turnDataText in curTurnDataTexts)
-					turnDataText.text = curTurnDataString;
-
-				Sprite[] turnDataSprites = contentManager.TurnDataSprites;
-				Sprite noneSprite = contentManager.TurnDataNoneSprite;
-				foreach (Image curTurnDataImage in curTurnDataImages)
-				{
-					if (contentManager.UseTurnDataSprites)
-					{
-						curTurnDataImage.sprite = (TurnData != NONE_INT) ? turnDataSprites[TurnData] : noneSprite;
-					}
-					else
-					{
-						curTurnDataImage.sprite = (TurnData != NONE_INT) ? null : noneSprite;
-					}
-				}
-			}
-			else
-			{
-				foreach (TextMeshProUGUI curTurnDataText in curTurnDataTexts)
-					curTurnDataText.text = TurnData.ToString();
-			}
-		}
-
-		private void UpdateDataUI()
-		{
-			if (contentManager == null)
-				return;
-
-			if (contentManager.IsDataElement)
-			{
-				for (int i = 0; i < dataTexts.Length; i++)
-				{
-					if (i >= contentManager.DataToString.Length)
-					{
-						dataTexts[i].text = i.ToString();
-					}
-					else
-					{
-						dataTexts[i].text = contentManager.DataToString[i];
-					}
-				}
-
-				for (int i = 0; i < dataImages.Length; i++)
-				{
-					if (i >= contentManager.DataToString.Length)
-					{
-						dataImages[i].sprite = contentManager.DataNoneSprite;
-					}
-					else
-					{
-						dataImages[i].sprite = contentManager.DataSprites[i];
-					}
-				}
-			}
-			else
-			{
-				for (int i = 0; i < dataTexts.Length; i++)
-					dataTexts[i].text = i.ToString();
-			}
-		}
-
-		private void UpdateTurnDataUI()
-		{
-			if (contentManager == null)
-				return;
-
-			if (contentManager.IsTurnDataElement)
-			{
-				for (int i = 0; i < turnDataTexts.Length; i++)
-				{
-					if (i >= contentManager.TurnDataToString.Length)
-					{
-						turnDataTexts[i].text = i.ToString();
-					}
-					else
-					{
-						turnDataTexts[i].text = contentManager.TurnDataToString[i];
-					}
-				}
-
-				for (int i = 0; i < turnDataImages.Length; i++)
-				{
-					if (i >= contentManager.TurnDataToString.Length)
-					{
-						turnDataImages[i].sprite = contentManager.TurnDataNoneSprite;
-					}
-					else
-					{
-						turnDataImages[i].sprite = contentManager.TurnDataSprites[i];
-					}
-				}
-			}
-			else
-			{
-				for (int i = 0; i < turnDataTexts.Length; i++)
-					turnDataTexts[i].text = i.ToString();
+				ResetSeat();
 			}
 		}
 	}

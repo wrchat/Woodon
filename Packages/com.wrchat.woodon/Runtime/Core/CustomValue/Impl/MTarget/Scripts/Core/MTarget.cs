@@ -72,10 +72,12 @@ namespace WRC.Woodon
 			Init();
 		}
 
-		protected virtual void Init()
+		private void Init()
 		{
 			if (Networking.IsMaster)
+			{
 				ResetPlayer();
+			}
 		}
 
 		public override void OnPlayerJoined(VRCPlayerApi player)
