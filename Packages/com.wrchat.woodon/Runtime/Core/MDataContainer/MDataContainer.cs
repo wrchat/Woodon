@@ -58,5 +58,14 @@ namespace WRC.Woodon
 
 			SendEvents();
 		}
+
+		public void Clear()
+		{
+			Name = string.Empty;
+			Value = string.Empty;
+			Sprite = null;
+			StringData = null;
+			Sprites = null;
+		}
 	}
 }
