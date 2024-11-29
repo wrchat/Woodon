@@ -120,11 +120,13 @@ namespace WRC.Woodon
 
 			// UpdateCurDataUI();
 
-			if (DataChangeStateUtil.IsDataChanged(changeState))
-			{
-				if (contentManager != null)
-					contentManager.UpdateContent();
-			}
+			// 직접 구현하도록
+			
+			// if (DataChangeStateUtil.IsDataChanged(changeState))
+			// {
+			// 	if (contentManager != null)
+			// 		contentManager.UpdateContent();
+			// }
 		}
 
 		protected virtual void OnTurnDataChange(DataChangeState changeState)
@@ -133,8 +135,10 @@ namespace WRC.Woodon
 
 			// UpdateCurTurnDataUI();
 
-			if (DataChangeStateUtil.IsDataChanged(changeState))
-				contentManager.UpdateContent();
+			// 직접 구현하도록
+			
+			// if (DataChangeStateUtil.IsDataChanged(changeState))
+			// 	contentManager.UpdateContent();
 		}
 
 		public virtual void UseSeat()

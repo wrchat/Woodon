@@ -8,8 +8,8 @@
 
 ### 설치
 
-- <vcc://vpm/addRepo?url=https://wrchat.github.io/Woodon/index.json>
-- 위 주소에 접속하여 간편하게 `Woodon`을 `VCC (VRChat Creator Conpanion)`에 등록하세요!
+- <https://wrchat.github.io/Woodon/>
+- 위 주소에 접속하고 **Add to VCC** 버튼을 눌러 `Woodon`을 `VCC (VRChat Creator Conpanion)`에 등록하세요!
 - `VCC`에서, `Woodon`를 사용하고자 하는 프로젝트의 `Manage Project` 페이지를 열고, 해당 프로젝트에 `Woodon` 패키지를 추가하세요.
 
 ### 사용
