@@ -10,12 +10,12 @@ namespace WRC.Woodon
 	{
 		[SerializeField] private VoiceTagger[] voiceTaggers;
 
-		public override void UpdateVoice()
+		public override void UpdateVoice(VRCPlayerApi[] playerApis, VoiceState[] voiceStates)
 		{
 			if (IsNotOnline())
 				return;
 
-			if (voiceManager.PlayerApis == null)
+			if (playerApis == null)
 				return;
 
 			string localTags = string.Empty;
@@ -31,9 +31,9 @@ namespace WRC.Woodon
 				localTags += tag;
 			}
 
-			for (int i = 0; i < voiceManager.PlayerApis.Length; i++)
+			for (int i = 0; i < playerApis.Length; i++)
 			{
-				VRCPlayerApi player = voiceManager.PlayerApis[i];
+				VRCPlayerApi player = playerApis[i];
 
 				if (player == Networking.LocalPlayer)
 					continue;
@@ -52,7 +52,7 @@ namespace WRC.Woodon
 				bool equal = localTags == targetTags;
 
 				// MDebugLog($"{Networking.LocalPlayer.playerId + localTags}, {player.playerId + targetTags}, == {equal}");
-				voiceManager.VoiceStates[i] = ((voiceManager.VoiceStates[i] != VoiceState.Mute) && equal)
+				voiceStates[i] = ((voiceStates[i] != VoiceState.Mute) && equal)
 					? VoiceState.Default
 					: VoiceState.Mute;
 			}

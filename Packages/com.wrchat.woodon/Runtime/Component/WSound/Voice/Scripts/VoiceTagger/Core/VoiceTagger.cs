@@ -6,8 +6,7 @@ namespace WRC.Woodon
 {
 	public class VoiceTagger : MBase
 	{
-		[Header("_" + nameof(VoiceTagger))]
-		[SerializeField] protected VoiceManager voiceManager;
+		[field: Header("_" + nameof(VoiceTagger))]
 		[field: SerializeField] public VoiceAreaTag Tag { get; private set; }
 		[SerializeField] private float updateTerm = .5f;
 
@@ -31,21 +30,24 @@ namespace WRC.Woodon
 			isLocalPlayerIn = false;
 			isSomeoneIn = false;
 
-			if (voiceManager.PlayerApis != null &&
-				voiceManager.PlayerApis.Length == VRCPlayerApi.GetPlayerCount())
-			{
-				for (int i = 0; i < voiceManager.PlayerApis.Length; i++)
-				{
-					bool isIn = IsPlayerIn(voiceManager.PlayerApis[i]);
+			VRCPlayerApi[] playerApis = new VRCPlayerApi[VRCPlayerApi.GetPlayerCount()];
+			VRCPlayerApi.GetPlayers(playerApis);
 
-					UpdatePlayerTag(voiceManager.PlayerApis[i], isIn);
+			if (playerApis != null &&
+				playerApis.Length == VRCPlayerApi.GetPlayerCount())
+			{
+				for (int i = 0; i < playerApis.Length; i++)
+				{
+					bool isIn = IsPlayerIn(playerApis[i]);
+
+					UpdatePlayerTag(playerApis[i], isIn);
 
 					isSomeoneIn = isSomeoneIn || isIn;
-					if (voiceManager.PlayerApis[i].isLocal)
+					if (playerApis[i].isLocal)
 						isLocalPlayerIn = isIn;
 				}
 			}
-			
+
 			if (localPlayerIn)
 				localPlayerIn.SetValue(isLocalPlayerIn);
 			if (someoneIn)

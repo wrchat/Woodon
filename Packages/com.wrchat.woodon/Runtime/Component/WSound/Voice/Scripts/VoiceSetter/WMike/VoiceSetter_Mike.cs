@@ -5,10 +5,10 @@ using VRC.SDKBase;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class VoiceSetter_Mike : VoiceAmplification
+	public class VoiceSetter_Mike : VoiceSetter
 	{
 		[Header("_" + nameof(VoiceSetter_Mike))]
-		[SerializeField] private MMike[] mikes;
+		[SerializeField] private WMike[] mikes;
 		[SerializeField] private Transform mikesParent;
 		
 		public override void Init(VoiceManager voiceManager)
@@ -18,14 +18,14 @@ namespace WRC.Woodon
 			if (mikesParent == null)
 				return;
 			
-			mikes = mikesParent.GetComponentsInChildren<MMike>(true);
+			mikes = mikesParent.GetComponentsInChildren<WMike>(true);
 		}
 
-		protected override bool IsAmplification(VRCPlayerApi playerAPI)
+		protected override bool IsCondition(VRCPlayerApi playerAPI)
 		{
 			bool isTarget = false;
 
-			foreach (MMike mike in mikes)
+			foreach (WMike mike in mikes)
 			{
 				if (mike.IsPlayerHoldingAndEnabled(playerAPI))
 				{
@@ -34,7 +34,7 @@ namespace WRC.Woodon
 				}
 			}
 			
-			MDebugLog(nameof(IsAmplification) + isTarget);
+			MDebugLog(nameof(IsCondition) + isTarget);
 			return isTarget;
 		}
 	}

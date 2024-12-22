@@ -17,8 +17,8 @@ namespace WRC.Woodon
 		protected const int VOICE_AMPLIFICATION_FAR = 300;
 
 		[field: Header("_" + nameof(VoiceManager))]
-		public VRCPlayerApi[] PlayerApis { get; private set; }
-		public VoiceState[] VoiceStates { get; private set; }
+		private VRCPlayerApi[] playerApis;
+		private VoiceState[] voiceStates;
 		public float[] CurVoiceFar { get; private set; }
 		public float[] CurVoiceGain { get; private set; }
 		[field: SerializeField] public int VoiceDefaultFarBoost { get; private set; }
@@ -31,7 +31,7 @@ namespace WRC.Woodon
 		[SerializeField] private bool useLerp = false;
 		[SerializeField] private float lerpSpeed = 2f;
 
-		public bool CanUpdateNow => (PlayerApis != null) && (PlayerApis.Length == VRCPlayerApi.GetPlayerCount()) && (VoiceStates != null);
+		public bool CanUpdateNow => (playerApis != null) && (playerApis.Length == VRCPlayerApi.GetPlayerCount()) && (voiceStates != null);
 
 		private bool isInited = false;
 
@@ -42,9 +42,6 @@ namespace WRC.Woodon
 			if (isInited)
 				return;
 			isInited = true;
-
-			foreach (VoiceUpdater voiceUpdater in voiceUpdaters)
-				voiceUpdater.Init(this);
 
 			UpdateVoiceLoop();
 		}
@@ -77,23 +74,23 @@ namespace WRC.Woodon
 			}
 
 			// Default로 초기화
-			for (int i = 0; i < PlayerApis.Length; i++)
-				VoiceStates[i] = VoiceState.Default;
+			for (int i = 0; i < playerApis.Length; i++)
+				voiceStates[i] = VoiceState.Default;
 
 			// 플레이어 별 VoiceState 종합 계산
 			foreach (VoiceUpdater voiceUpdater in voiceUpdaters)
-				voiceUpdater.UpdateVoice();
+				voiceUpdater.UpdateVoice(playerApis, voiceStates);
 
 			// 플레이어 별 VoiceState 적용
 			if (useLerp)
 			{
-				for (int i = 0; i < PlayerApis.Length; i++)
+				for (int i = 0; i < playerApis.Length; i++)
 					SetVoiceLerp(i);
 			}
 			else
 			{
-				for (int i = 0; i < PlayerApis.Length; i++)
-					SetVoice(PlayerApis[i], VoiceStates[i]);
+				for (int i = 0; i < playerApis.Length; i++)
+					SetVoice(playerApis[i], voiceStates[i]);
 			}
 		}
 
@@ -104,11 +101,11 @@ namespace WRC.Woodon
 		{
 			MDebugLog($"{nameof(UpdatePlayerList)}, PlayerCount = {VRCPlayerApi.GetPlayerCount()}");
 
-			PlayerApis = new VRCPlayerApi[VRCPlayerApi.GetPlayerCount()];
-			VoiceStates = new VoiceState[PlayerApis.Length];
-			CurVoiceFar = new float[PlayerApis.Length];
-			CurVoiceGain = new float[PlayerApis.Length];
-			VRCPlayerApi.GetPlayers(PlayerApis);
+			playerApis = new VRCPlayerApi[VRCPlayerApi.GetPlayerCount()];
+			voiceStates = new VoiceState[playerApis.Length];
+			CurVoiceFar = new float[playerApis.Length];
+			CurVoiceGain = new float[playerApis.Length];
+			VRCPlayerApi.GetPlayers(playerApis);
 		}
 
 		protected void SetVoice(VRCPlayerApi player, VoiceState voiceState)
@@ -141,8 +138,8 @@ namespace WRC.Woodon
 		{
 			MDebugLog(nameof(SetVoiceLerp));
 
-			VRCPlayerApi player = PlayerApis[index];
-			VoiceState voiceState = VoiceStates[index];
+			VRCPlayerApi player = playerApis[index];
+			VoiceState voiceState = voiceStates[index];
 
 			player.SetVoiceDistanceNear(0);
 
