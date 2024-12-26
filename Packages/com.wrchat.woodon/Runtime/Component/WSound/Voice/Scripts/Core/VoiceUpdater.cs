@@ -15,7 +15,7 @@ namespace WRC.Woodon
 	
 		public virtual void Init(VoiceManager voiceManager) {}
 	
-		public bool Enable => (enable != null) && enable.Value;
+		public bool Enable => (enable == null) || enable.Value;
 		public void SetEnable(bool enable)
 		{
 			if (this.enable != null)
