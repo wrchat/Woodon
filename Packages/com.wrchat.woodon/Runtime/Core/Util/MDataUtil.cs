@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using VRC.SDK3.Data;
 
 namespace WRC.Woodon
 {
@@ -48,6 +49,16 @@ namespace WRC.Woodon
 				Array.Copy(originArr, index + 1, newArr, index, originArr.Length - index - 1);
 
 			originArr = newArr;
+		}
+
+		public static bool ContainsInt(this DataList dataList, int intValue)
+		{
+			for (int i = 0; i < dataList.Count; i++)
+			{
+				if ((int)dataList[i].Double == intValue)
+					return true;
+			}
+			return false;
 		}
 	}
 }
