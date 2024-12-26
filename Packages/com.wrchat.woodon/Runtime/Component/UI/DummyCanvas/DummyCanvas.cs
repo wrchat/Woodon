@@ -42,7 +42,7 @@ namespace WRC.Woodon
 				if (Input.GetKeyDown(keyCode))
 				{
 					UpdatePos();
-					dummyCanvas.SetActive(!dummyCanvas.gameObject.activeSelf);
+					// dummyCanvas.SetActive(!dummyCanvas.gameObject.activeSelf);
 				}
 			}
 		}

@@ -145,7 +145,7 @@ namespace WRC.Woodon
 				}
 			}
 
-			mSFXManager.PlaySFX_L(0);
+			mSFXManager.PlaySFX_L((int)chatRoom);
 			ProcessChat(chatRoom);
 
 			// if (udonIndex == mPlayerUdonIndex.GetUdonIndex())
