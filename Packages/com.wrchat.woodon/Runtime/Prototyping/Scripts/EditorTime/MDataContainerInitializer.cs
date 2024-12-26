@@ -1,4 +1,6 @@
+using System;
 using UnityEditor;
+using UnityEditor.EditorTools;
 using UnityEngine;
 using WRC.Woodon;
 
@@ -7,69 +9,90 @@ namespace WRC
 #if UNITY_EDITOR
 	public class MDataContainerInitializer : MonoBehaviour
 	{
-		[SerializeField] private string prefix;
-		[SerializeField] private string[] someStrings;
+		[SerializeField] private string stringPrefix;
+		[SerializeField] private string[] strings;
+		[SerializeField] private Sprite[] sprites;
 
 		[ContextMenu(nameof(InitName))]
 		public void InitName()
 		{
-			MDataContainer[] mDatas = GetComponentsInChildren<MDataContainer>(true);
-
-			for (int i = 0; i < transform.childCount; i++)
+			ForEachMDataContainer((mDataContainer, index) =>
 			{
-				MDataContainer mData = mDatas[i];
-				mData.Name = $"{prefix}{someStrings[0]}{i}";
-
-				EditorUtility.SetDirty(mData);
-			}
-
-			AssetDatabase.SaveAssets();
+				mDataContainer.Name = $"{stringPrefix}{strings[0]}{index}";
+			});
 		}
 
 		[ContextMenu(nameof(InitValue))]
 		public void InitValue()
 		{
-			MDataContainer[] mDatas = GetComponentsInChildren<MDataContainer>(true);
-
-			for (int i = 0; i < transform.childCount; i++)
+			ForEachMDataContainer((mDataContainer, index) =>
 			{
-				MDataContainer mData = mDatas[i];
-				mData.Value = $"{prefix}{someStrings[0]}{i}";
-
-				EditorUtility.SetDirty(mData);
-			}
-
-			AssetDatabase.SaveAssets();
+				mDataContainer.Value = $"{stringPrefix}{strings[0]}{index}";
+			});
 		}
 
 		[ContextMenu(nameof(InitStringData))]
 		public void InitStringData()
 		{
-			MDataContainer[] mDatas = GetComponentsInChildren<MDataContainer>(true);
-
-			for (int i = 0; i < transform.childCount; i++)
+			ForEachMDataContainer((mDataContainer, index) =>
 			{
-				MDataContainer mData = mDatas[i];
-				mData.StringData = new string[] { $"{prefix}{someStrings[0]}{i}" };
-
-				EditorUtility.SetDirty(mData);
-			}
-
-			AssetDatabase.SaveAssets();
+				mDataContainer.StringData = new string[] { $"{stringPrefix}{strings[0]}{index}" };
+			});
 		}
 
-		[SerializeField] private Sprite[] sprite;
-		[ContextMenu(nameof(InitSprites))]
-		public void InitSprites()
+		[ContextMenu(nameof(InitMainSprite))]
+		public void InitMainSprite()
 		{
-			MDataContainer[] mDatas = GetComponentsInChildren<MDataContainer>(true);
+			if (sprites == null || sprites.Length == 0)
+				return;
 
-			for (int i = 0; i < transform.childCount; i++)
+			ForEachMDataContainer((mDataContainer, index) =>
 			{
-				MDataContainer mData = mDatas[i];
-				mData.Sprite = sprite[i];
+				if (sprites.Length <= index)
+					return;
 
-				EditorUtility.SetDirty(mData);
+				mDataContainer.Sprite = sprites[index];
+			});
+		}
+
+		[ContextMenu(nameof(InitSprites_A))]
+		public void InitSprites_A()
+		{
+			if (sprites == null || sprites.Length == 0)
+				return;
+
+			ForEachMDataContainer((mDataContainer, index) =>
+			{
+				if (sprites.Length <= index)
+					return;
+
+				mDataContainer.Sprites = sprites;
+			});
+		}
+
+		[ContextMenu(nameof(InitSprites_B))]
+		public void InitSprites_B()
+		{
+			if (sprites == null || sprites.Length == 0)
+				return;
+
+			ForEachMDataContainer((mDataContainer, index) =>
+			{
+				if (sprites.Length <= index)
+					return;
+
+				mDataContainer.Sprites = new Sprite[] { sprites[index] };
+			});
+		}
+
+		private void ForEachMDataContainer(Action<MDataContainer, int> action)
+		{
+			MDataContainer[] mDataContainer = GetComponentsInChildren<MDataContainer>(true);
+
+			for (int i = 0; i < mDataContainer.Length; i++)
+			{
+				action(mDataContainer[i], i);
+				EditorUtility.SetDirty(mDataContainer[i]);
 			}
 
 			AssetDatabase.SaveAssets();
