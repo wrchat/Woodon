@@ -1,10 +1,12 @@
+using System;
 using UnityEngine;
 using VRC.SDKBase;
+using VRC.SDK3.Data;
 
 namespace WRC.Woodon
 {
 	// Util & Helper
-	public static class MUtil
+	public static class WUtil
 	{
 		public static bool IsNotOnline() => Networking.LocalPlayer == null;
 
@@ -17,8 +19,8 @@ namespace WRC.Woodon
 			if (string.IsNullOrEmpty(s))
 				return false;
 
-			foreach (var c in s)
-				if (!char.IsDigit(c))
+			foreach (char c in s)
+				if (char.IsDigit(c) == false)
 					return false;
 
 			return true;

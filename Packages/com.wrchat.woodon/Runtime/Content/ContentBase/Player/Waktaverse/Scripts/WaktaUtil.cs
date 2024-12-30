@@ -5,7 +5,7 @@
 // refactor by Mascari4615
 
 using VRC.SDKBase;
-using static WRC.Woodon.MUtil;
+using static WRC.Woodon.WUtil;
 
 namespace WRC.Woodon
 {

@@ -1,6 +1,6 @@
 namespace WRC.Woodon
 {
-	public enum MDataEvent
+	public enum WJsonEvent
 	{
 		OnSerialization,
 		OnDeserialization,

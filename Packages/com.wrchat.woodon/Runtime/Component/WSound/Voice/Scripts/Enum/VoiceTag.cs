@@ -1,6 +1,6 @@
 namespace WRC.Woodon
 {
-	public enum VoiceAreaTag
+	public enum VoiceTag
 	{
 		AREA_1,
 		AREA_2,

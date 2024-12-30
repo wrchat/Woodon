@@ -41,10 +41,10 @@ namespace Mascari4615.Project.ISD.GSG.RotatingMeeting
 			}
 		}
 
-		public override void UpdateVoice()
+		public override void UpdateVoice(VRCPlayerApi[] playerApis, VoiceState[] voiceStates)
 		{
-			for (int index = 0; index < voiceManager.VoiceStates.Length; index++)
-				voiceManager.VoiceStates[index] = VoiceState.Default;
+			for (int index = 0; index < voiceStates.Length; index++)
+				voiceStates[index] = VoiceState.Default;
 
 			for (int cupPickerIndex = 0; cupPickerIndex < cupPickers.Length; cupPickerIndex++)
 			{
@@ -64,14 +64,14 @@ namespace Mascari4615.Project.ISD.GSG.RotatingMeeting
 				if (!isLocalPlayerTarget)
 					continue;
 
-				for (int vi = 0; vi < voiceManager.VoiceStates.Length; vi++)
+				for (int vi = 0; vi < voiceStates.Length; vi++)
 				{
-					VRCPlayerApi targetPlayer = voiceManager.PlayerApis[vi];
+					VRCPlayerApi targetPlayer = playerApis[vi];
 
 					bool targetPlayerState = (pickerOwnerId == targetPlayer.playerId) ||
 											 (cupOwnerId == targetPlayer.playerId);
 
-					voiceManager.VoiceStates[vi] = (targetPlayerState ? VoiceState.Default : VoiceState.Quiet);
+					voiceStates[vi] = (targetPlayerState ? VoiceState.Default : VoiceState.Quiet);
 				}
 
 				break;

@@ -11,7 +11,7 @@ namespace WRC.Woodon
 
 		protected override void InitMValueMinMax()
 		{
-			mValue.SetMinMaxValue(0, canvasGroups.Length - 1);
+			// mValue.SetMinMaxValue(0, canvasGroups.Length - 1);
 		}
 
 		protected override void UpdateActive()

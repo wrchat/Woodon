@@ -22,7 +22,7 @@ namespace WRC.Woodon
 			base.Start();
 		}
 
-		public override bool IsPlayerIn(VRCPlayerApi player)
+		public override bool IsCondition(VRCPlayerApi player)
 		{
 			Vector3 playerPos = player.GetPosition();
 			foreach (Bounds bounds in boundsArray)

@@ -1,7 +1,7 @@
 ﻿using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
-using static WRC.Woodon.MUtil;
+using static WRC.Woodon.WUtil;
 
 namespace WRC.Woodon
 {
@@ -12,20 +12,20 @@ namespace WRC.Woodon
 		[SerializeField] private MTarget[] ignoreTargets;
 
 		[SerializeField] private bool useIngnoreTargetTag;
-		[SerializeField] private VoiceAreaTag IgnoreTargetTag;
+		[SerializeField] private VoiceTag IgnoreTargetTag;
 
 		[SerializeField] private bool useTargetTag;
-		[SerializeField] private VoiceAreaTag targetTag;
+		[SerializeField] private VoiceTag targetTag;
 
-		public override void UpdateVoice()
+		public override void UpdateVoice(VRCPlayerApi[] playerApis, VoiceState[] voiceStates)
 		{
 			if (IsNotOnline())
 				return;
 
-			if (voiceManager.PlayerApis == null)
+			if (playerApis == null)
 				return;
 
-			if (enable != null && (enable.Value == false))
+			if (Enable == false)
 				return;
 
 			// 무시 MTarget 대상이라면 return
@@ -56,8 +56,8 @@ namespace WRC.Woodon
 			}
 
 			// 보이스 상태 초기화
-			for (int i = 0; i < voiceManager.PlayerApis.Length; i++)
-				voiceManager.VoiceStates[i] = VoiceState.Default;
+			for (int i = 0; i < playerApis.Length; i++)
+				voiceStates[i] = VoiceState.Default;
 		}
 	}
 }

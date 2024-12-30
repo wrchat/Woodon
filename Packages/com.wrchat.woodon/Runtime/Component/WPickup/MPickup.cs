@@ -4,7 +4,7 @@ using VRC.SDK3.Components;
 using VRC.SDKBase;
 using VRC.Udon.Common.Interfaces;
 using static VRC.SDKBase.VRC_Pickup;
-using static WRC.Woodon.MUtil;
+using static WRC.Woodon.WUtil;
 
 namespace WRC.Woodon
 {
