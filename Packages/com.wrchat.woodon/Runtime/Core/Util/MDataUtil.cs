@@ -60,5 +60,7 @@ namespace WRC.Woodon
 			}
 			return false;
 		}
+
+		public static int Int(this DataToken dataToken) => (int)dataToken.Double;
 	}
 }
