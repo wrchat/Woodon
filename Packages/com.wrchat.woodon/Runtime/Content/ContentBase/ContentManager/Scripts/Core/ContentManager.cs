@@ -15,7 +15,7 @@ namespace WRC.Woodon
 		[field: Header("_" + nameof(ContentManager))]
 		[SerializeField] private int stateMax = 1;
 
-		[SerializeField] protected MData contentData;
+		[SerializeField] protected WJson contentData;
 
 		public int CurGameState
 		{
@@ -60,7 +60,7 @@ namespace WRC.Woodon
 			
 			{
 				MSeats = GetComponentsInChildren<MSeat>();
-				contentData.RegisterListener(this, nameof(OnContentDataChanged), MDataEvent.OnDeserialization);
+				contentData.RegisterListener(this, nameof(OnContentDataChanged), WJsonEvent.OnDeserialization);
 			
 				for (int i = 0; i < MSeats.Length; i++)
 					MSeats[i].Init(this, i);

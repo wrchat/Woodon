@@ -13,7 +13,7 @@ namespace WRC.Woodon
 	{
 		[Header("_" + nameof(ChatManager))]
 		[SerializeField] private MPlayerUdonIndex mPlayerUdonIndex;
-		[SerializeField] private MData[] chatDatas;
+		[SerializeField] private WJson[] chatDatas;
 
 		[SerializeField] private MSFXManager mSFXManager;
 
@@ -45,7 +45,7 @@ namespace WRC.Woodon
 			// curChattingRoomValue.RegisterListener(this, nameof(ProcessChat));
 
 			for (int i = 0; i < chatDatas.Length; i++)
-				chatDatas[i].RegisterListener(this, nameof(ReceieveChat) + i, MDataEvent.OnDeserialization);
+				chatDatas[i].RegisterListener(this, nameof(ReceieveChat) + i, WJsonEvent.OnDeserialization);
 		}
 
 		#region SendChat
@@ -70,14 +70,14 @@ namespace WRC.Woodon
 				return;
 			}
 
-			MData mData = chatDatas[udonIndex];
-			mData.SetData("Name", name);
-			mData.SetData("Time", Networking.GetServerTimeInMilliseconds());
-			mData.SetData("Message", formattedMessage);
-			mData.SetData("UdonIndex", udonIndex);
-			mData.SetData("ChatRoom", curChattingRoom);
-			mData.SetData("AdditionalData", additionalData);
-			mData.SerializeData();
+			WJson wJson = chatDatas[udonIndex];
+			wJson.SetData("Name", name);
+			wJson.SetData("Time", Networking.GetServerTimeInMilliseconds());
+			wJson.SetData("Message", formattedMessage);
+			wJson.SetData("UdonIndex", udonIndex);
+			wJson.SetData("ChatRoom", curChattingRoom);
+			wJson.SetData("AdditionalData", additionalData);
+			wJson.SerializeData();
 		}
 		#endregion
 
@@ -86,16 +86,16 @@ namespace WRC.Woodon
 		{
 			MDebugLog($"{nameof(ReceieveChat)} : {udonIndex}");
 
-			MData mData = chatDatas[udonIndex];
+			WJson wJson = chatDatas[udonIndex];
 
-			if (mData.Value == string.Empty)
+			if (wJson.Value == string.Empty)
 			{
 				MDebugLog("Value is Empty.");
 				return;
 			}
 
-			DataDictionary chatData = mData.DataDictionary.DeepClone();
-			MDebugLog($"ChatData : {mData.Value} || {chatData}");
+			DataDictionary chatData = wJson.DataDictionary.DeepClone();
+			MDebugLog($"ChatData : {wJson.Value} || {chatData}");
 			TeamType chatRoom = chatData.GetChatRoom();
 			string chatRoomString = chatRoom.ToString();
 

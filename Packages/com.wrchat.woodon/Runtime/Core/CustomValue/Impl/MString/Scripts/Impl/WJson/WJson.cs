@@ -5,7 +5,7 @@ using VRC.SDK3.Data;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class MData : MString
+	public class WJson : MString
 	{
 		public DataDictionary DataDictionary { get; protected set; } = new DataDictionary();
 		public DataDictionary ChangedData { get; protected set; } = new DataDictionary();
@@ -89,7 +89,7 @@ namespace WRC.Woodon
 		{
 			MDebugLog($"{nameof(SerializeData)} (Try) {DataDictionary}");
 
-			SendEvents(MDataEvent.OnSerialization);
+			SendEvents(WJsonEvent.OnSerialization);
 
 			if (VRCJson.TrySerializeToJson(DataDictionary, JsonExportType.Beautify, out DataToken result))
 			{
@@ -122,7 +122,7 @@ namespace WRC.Woodon
 				MDebugLog($"{nameof(Deserialization)} (Success) {result}");
 
 				DataDictionary = result.DataDictionary;
-				SendEvents(MDataEvent.OnDeserialization);
+				SendEvents(WJsonEvent.OnDeserialization);
 			}
 			else
 			{

@@ -9,8 +9,8 @@ namespace WRC.Woodon
 	public class MSeat : MTarget
 	{
 		[Header("_" + nameof(MSeat))]
-		[SerializeField] protected MData mData;
-		protected DataDictionary DataDict => mData.DataDictionary;
+		[SerializeField] protected WJson wJson;
+		protected DataDictionary DataDict => wJson.DataDictionary;
 
 		public int IntData
 		{
@@ -37,8 +37,8 @@ namespace WRC.Woodon
 			foreach (UIMSeat ui in uis)
 				ui.Init(contentManager, this);
 
-			if (mData != null)
-				mData.RegisterListener(this, nameof(OnDataDeserialization), MDataEvent.OnDeserialization);
+			if (wJson != null)
+				wJson.RegisterListener(this, nameof(OnDataDeserialization), WJsonEvent.OnDeserialization);
 
 			if (Networking.IsMaster)
 			{
@@ -53,7 +53,7 @@ namespace WRC.Woodon
 		{
 			MDebugLog($"{nameof(OnDataDeserialization)}");
 
-			DataDictionary change = mData.ChangedData;
+			DataDictionary change = wJson.ChangedData;
 			DataList keys = change.GetKeys();
 			for (int i = 0; i < keys.Count; i++)
 			{
@@ -76,7 +76,7 @@ namespace WRC.Woodon
 
 		public void SerializeData()
 		{
-			mData.SerializeData();
+			wJson.SerializeData();
 		}
 
 		public void UpdateSeat()

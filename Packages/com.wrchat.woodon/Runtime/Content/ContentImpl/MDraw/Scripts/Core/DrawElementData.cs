@@ -15,19 +15,19 @@ namespace WRC.Woodon
 
 		public override void SerializeData()
 		{
-			mData.SetData("TeamType", (int)TeamType);
-			mData.SetData("Role", (int)Role);
-			mData.SetData("IsShowing", IsShowing);
-			mData.SetData("TeamType", (int)TeamType);
+			wJson.SetData("TeamType", (int)TeamType);
+			wJson.SetData("Role", (int)Role);
+			wJson.SetData("IsShowing", IsShowing);
+			wJson.SetData("TeamType", (int)TeamType);
 			base.SerializeData();
 		}
 
 		public override void ParseData()
 		{
 			base.ParseData();
-			TeamType = (TeamType)(int)mData.GetData("TeamType").Double;
-			Role = (DrawRole)(int)mData.GetData("Role").Double;
-			IsShowing = mData.GetData("IsShowing").Boolean;
+			TeamType = (TeamType)(int)wJson.GetData("TeamType").Double;
+			Role = (DrawRole)(int)wJson.GetData("Role").Double;
+			IsShowing = wJson.GetData("IsShowing").Boolean;
 
 			// MDebugLog($"{nameof(ParseDataPack)}, Index : {Index}, TeamType : {TeamType}, Role : {Role}");
 		}
