@@ -161,7 +161,7 @@ namespace WRC.Woodon
 				}
 			}
 
-			MDataUtil.ResizeArr(ref maxTurnDataSeats, maxTurnDataCount);
+			maxTurnDataSeats.Resize(maxTurnDataCount);
 
 			return maxTurnDataSeats;
 		}

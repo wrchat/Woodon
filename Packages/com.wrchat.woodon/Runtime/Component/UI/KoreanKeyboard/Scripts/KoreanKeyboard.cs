@@ -34,7 +34,7 @@ namespace WRC.Woodon
 		public void RegisterUI(UIKoreanKeyboard ui)
 		{
 			// 기존 배열에 추가
-			MDataUtil.Add(ref uis, ui);
+			uis.Add(ui);
 
 			// 새로 추가된 UI에 현재 정보 전달
 			ui.UpdateShift(IsShifting);

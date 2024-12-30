@@ -1,12 +1,14 @@
 using System;
 using UnityEngine;
+using VRC.SDKBase;
 using VRC.SDK3.Data;
 
 namespace WRC.Woodon
 {
-	public static class MDataUtil
+	// Util & Helper
+	public static class WExtension
 	{
-		public static void ResizeArr<T>(ref T[] originArr, int size)
+		public static void Resize<T>(this T[] originArr, int size)
 		{
 			T[] newArr = new T[size];
 
@@ -21,23 +23,29 @@ namespace WRC.Woodon
 			originArr = newArr;
 		}
 
-		public static void Add<T>(ref T[] originArr, T element)
+		public static void Add<T>(this T[] originArr, T element)
 		{
-			ResizeArr(ref originArr, originArr.Length + 1);
+			originArr.Resize(originArr.Length + 1);
 			originArr[originArr.Length - 1] = element;
 		}
 
-		public static void AddRange<T>(ref T[] originArr, T[] elements)
+		public static void AddRange<T>(this T[] originArr, T[] elements)
 		{
-			ResizeArr(ref originArr, originArr.Length + elements.Length);
+			originArr.Resize(originArr.Length + elements.Length);
 			Array.Copy(elements, 0, originArr, originArr.Length - elements.Length, elements.Length);
 		}
 
-		public static void RemoveAt<T>(ref T[] originArr, int index)
+		public static void Remove<T>(this T[] originArr, T element)
+		{
+			int index = Array.IndexOf(originArr, element);
+			originArr.RemoveAt(index);
+		}
+
+		public static void RemoveAt<T>(this T[] originArr, int index)
 		{
 			if (index < 0 || index >= originArr.Length)
 			{
-				Debug.LogError($"{nameof(MDataUtil)}.{nameof(RemoveAt)} : Index out of range");
+				Debug.LogError($"{nameof(WUtil)}.{nameof(RemoveAt)} : Index out of range");
 				return;
 			}
 

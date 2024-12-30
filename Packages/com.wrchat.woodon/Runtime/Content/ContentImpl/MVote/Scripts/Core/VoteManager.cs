@@ -186,7 +186,7 @@ namespace WRC.Woodon
 					maxIndexes[maxIndexCount++] = i;
 			}
 
-			MDataUtil.ResizeArr(ref maxIndexes, maxIndexCount);
+			maxIndexes.Resize(maxIndexCount);
 
 			if (DEBUG)
 				for (int i = 0; i < maxIndexes.Length; i++)

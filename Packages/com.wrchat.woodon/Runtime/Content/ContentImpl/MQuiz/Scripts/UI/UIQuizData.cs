@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UdonSharp;
 using UnityEngine;
-using static WRC.Woodon.MUtil;
+using static WRC.Woodon.WUtil;
 
 namespace WRC.Woodon
 {

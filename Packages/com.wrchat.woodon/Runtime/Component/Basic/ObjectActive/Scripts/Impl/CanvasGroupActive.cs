@@ -26,7 +26,7 @@ namespace WRC.Woodon
 						continue;
 
 					Collider[] colliders = activeCanvasGroups[i].GetComponentsInChildren<Collider>(true);
-					MDataUtil.AddRange(ref activeColliders, colliders);
+					activeColliders.AddRange(colliders);
 				}
 
 				for (int i = 0; i < disableCanvasGroups.Length; i++)
@@ -35,7 +35,7 @@ namespace WRC.Woodon
 						continue;
 
 					Collider[] colliders = disableCanvasGroups[i].GetComponentsInChildren<Collider>(true);
-					MDataUtil.AddRange(ref disableColliders, colliders);
+					disableColliders.AddRange(colliders);
 				}
 			}
 
@@ -57,10 +57,10 @@ namespace WRC.Woodon
 			else
 			{
 				foreach (CanvasGroup c in activeCanvasGroups)
-					MUtil.SetCanvasGroupActive(c, Active);
+					WUtil.SetCanvasGroupActive(c, Active);
 
 				foreach (CanvasGroup c in disableCanvasGroups)
-					MUtil.SetCanvasGroupActive(c, !Active);
+					WUtil.SetCanvasGroupActive(c, !Active);
 			}
 
 			if (toggleColliders)
@@ -75,12 +75,12 @@ namespace WRC.Woodon
 
 		public void RegisterActiveCanvasGroup(CanvasGroup canvasGroup)
 		{
-			MDataUtil.Add(ref activeCanvasGroups, canvasGroup);
+			activeCanvasGroups.Add(canvasGroup);
 		}
 
 		public void RegisterDisableCanvasGroup(CanvasGroup canvasGroup)
 		{
-			MDataUtil.Add(ref disableCanvasGroups, canvasGroup);
+			disableCanvasGroups.Add(canvasGroup);
 		}
 	}
 }
