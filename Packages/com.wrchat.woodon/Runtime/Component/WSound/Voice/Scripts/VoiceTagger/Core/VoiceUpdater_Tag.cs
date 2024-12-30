@@ -8,6 +8,7 @@ namespace WRC.Woodon
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public class VoiceUpdater_Tag : VoiceUpdater
 	{
+		[Header("_" + nameof(VoiceUpdater_Tag))]
 		[SerializeField] private VoiceTagger[] voiceTaggers;
 
 		public override void UpdateVoice(VRCPlayerApi[] playerApis, VoiceState[] voiceStates)
@@ -39,7 +40,7 @@ namespace WRC.Woodon
 					continue;
 
 				string targetTags = string.Empty;
-				foreach (var areaTagger in voiceTaggers)
+				foreach (VoiceTagger areaTagger in voiceTaggers)
 				{
 					string tag = Networking.LocalPlayer.GetPlayerTag($"{player.playerId}{areaTagger.Tag}");
 

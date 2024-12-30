@@ -14,7 +14,7 @@ namespace WRC.Woodon
 		// [SerializeField] private MBool isLocked;
 		[SerializeField] private Timer isLocked_Timer;
 
-		public override bool IsPlayerIn(VRCPlayerApi player)
+		public override bool IsCondition(VRCPlayerApi player)
 		{
 			for (int j = 0; j < mTargets.Length; j++)
 			{

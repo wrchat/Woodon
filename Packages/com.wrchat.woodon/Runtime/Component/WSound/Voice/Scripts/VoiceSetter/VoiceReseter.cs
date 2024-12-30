@@ -12,10 +12,10 @@ namespace WRC.Woodon
 		[SerializeField] private MTarget[] ignoreTargets;
 
 		[SerializeField] private bool useIngnoreTargetTag;
-		[SerializeField] private VoiceAreaTag IgnoreTargetTag;
+		[SerializeField] private VoiceTag IgnoreTargetTag;
 
 		[SerializeField] private bool useTargetTag;
-		[SerializeField] private VoiceAreaTag targetTag;
+		[SerializeField] private VoiceTag targetTag;
 
 		public override void UpdateVoice(VRCPlayerApi[] playerApis, VoiceState[] voiceStates)
 		{

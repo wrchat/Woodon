@@ -4,16 +4,14 @@ using static WRC.Woodon.WUtil;
 
 namespace WRC.Woodon
 {
-	public class VoiceTagger : MBase
+	public abstract class VoiceTagger : MBase
 	{
 		[field: Header("_" + nameof(VoiceTagger))]
-		[field: SerializeField] public VoiceAreaTag Tag { get; private set; }
+		[field: SerializeField] public VoiceTag Tag { get; private set; }
 		[SerializeField] private float updateTerm = .5f;
 
 		[SerializeField] private MBool localPlayerIn;
-		private bool isLocalPlayerIn;
 		[SerializeField] private MBool someoneIn;
-		private bool isSomeoneIn;
 
 		protected virtual void Start() => UpdateVoiceLoop();
 		public void UpdateVoiceLoop()
@@ -27,25 +25,20 @@ namespace WRC.Woodon
 			if (IsNotOnline())
 				return;
 
-			isLocalPlayerIn = false;
-			isSomeoneIn = false;
+			bool isLocalPlayerIn = false;
+			bool isSomeoneIn = false;
 
 			VRCPlayerApi[] playerApis = new VRCPlayerApi[VRCPlayerApi.GetPlayerCount()];
 			VRCPlayerApi.GetPlayers(playerApis);
 
-			if (playerApis != null &&
-				playerApis.Length == VRCPlayerApi.GetPlayerCount())
+			for (int i = 0; i < playerApis.Length; i++)
 			{
-				for (int i = 0; i < playerApis.Length; i++)
-				{
-					bool isIn = IsPlayerIn(playerApis[i]);
+				bool isCondition = IsCondition(playerApis[i]);
+				VoiceUtil.SetVoiceTag(playerApis[i], Tag, isCondition);
 
-					UpdatePlayerTag(playerApis[i], isIn);
-
-					isSomeoneIn = isSomeoneIn || isIn;
-					if (playerApis[i].isLocal)
-						isLocalPlayerIn = isIn;
-				}
+				isSomeoneIn = isSomeoneIn || isCondition;
+				if (playerApis[i].isLocal)
+					isLocalPlayerIn = isCondition;
 			}
 
 			if (localPlayerIn)
@@ -54,13 +47,6 @@ namespace WRC.Woodon
 				someoneIn.SetValue(isSomeoneIn);
 		}
 
-		public virtual bool IsPlayerIn(VRCPlayerApi player) { return true; }
-
-		private bool UpdatePlayerTag(VRCPlayerApi player, bool isIn)
-		{
-			// MDebugLog($"{playerID}{Tag}" + (isin ? TRUE_STRING : FALSE_STRING));
-			Networking.LocalPlayer.SetPlayerTag($"{player.playerId}{Tag}", isIn ? TRUE_STRING : FALSE_STRING);
-			return isIn;
-		}
+		public abstract bool IsCondition(VRCPlayerApi player);
 	}
 }
