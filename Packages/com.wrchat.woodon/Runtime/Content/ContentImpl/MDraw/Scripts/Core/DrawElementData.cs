@@ -25,9 +25,9 @@ namespace WRC.Woodon
 		public override void ParseData()
 		{
 			base.ParseData();
-			TeamType = (TeamType)(int)mData.DataDictionary["TeamType"].Double;
-			Role = (DrawRole)(int)mData.DataDictionary["Role"].Double;
-			IsShowing = mData.DataDictionary["IsShowing"].Boolean;
+			TeamType = (TeamType)(int)mData.GetData("TeamType").Double;
+			Role = (DrawRole)(int)mData.GetData("Role").Double;
+			IsShowing = mData.GetData("IsShowing").Boolean;
 
 			// MDebugLog($"{nameof(ParseDataPack)}, Index : {Index}, TeamType : {TeamType}, Role : {Role}");
 		}

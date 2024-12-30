@@ -10,11 +10,79 @@ namespace WRC.Woodon
 		public DataDictionary DataDictionary { get; protected set; } = new DataDictionary();
 		public DataDictionary ChangedData { get; protected set; } = new DataDictionary();
 
-		public void SetData(DataToken key, DataToken value)
+		public DataToken GetData(DataToken key) => DataDictionary[key];
+		public int GetData(DataToken key, int defaultValue)
 		{
-			MDebugLog($"{nameof(SetData)}({key}, {value})");
-			DataDictionary.SetValue(key, value);
+			if (DataDictionary.TryGetValue(key, out DataToken value))
+			{
+				return (int)value.Double;
+			}
+			else
+			{
+				DataToken defaultToken = new DataToken(defaultValue);
+				DataDictionary.SetValue(key, defaultToken);
+				return defaultValue;
+			}
 		}
+
+		public string GetData(DataToken key, string defaultValue)
+		{
+			if (DataDictionary.TryGetValue(key, out DataToken value))
+			{
+				return value.String;
+			}
+			else
+			{
+				DataToken defaultToken = new DataToken(defaultValue);
+				DataDictionary.SetValue(key, defaultToken);
+				return defaultValue;
+			}
+		}
+
+		public bool GetData(DataToken key, bool defaultValue)
+		{
+			if (DataDictionary.TryGetValue(key, out DataToken value))
+			{
+				return value.Boolean;
+			}
+			else
+			{
+				DataToken defaultToken = new DataToken(defaultValue);
+				DataDictionary.SetValue(key, defaultToken);
+				return defaultValue;
+			}
+		}
+
+		public DataList GetData(DataToken key, DataList defaultValue)
+		{
+			if (DataDictionary.TryGetValue(key, out DataToken value))
+			{
+				return value.DataList;
+			}
+			else
+			{
+				DataToken defaultToken = new DataToken(defaultValue);
+				DataDictionary.SetValue(key, defaultToken);
+				return defaultValue;
+			}
+		}
+
+		public DataDictionary GetData(DataToken key, DataDictionary defaultValue)
+		{
+			if (DataDictionary.TryGetValue(key, out DataToken value))
+			{
+				return value.DataDictionary;
+			}
+			else
+			{
+				DataToken defaultToken = new DataToken(defaultValue);
+				DataDictionary.SetValue(key, defaultToken);
+				return defaultValue;
+			}
+		}
+
+		public bool TryGetData(DataToken key, out DataToken value) => DataDictionary.TryGetValue(key, out value);
+		public void SetData(DataToken key, DataToken value) => DataDictionary.SetValue(key, value);
 
 		[ContextMenu(nameof(SerializeData))]
 		public void SerializeData()
@@ -26,6 +94,13 @@ namespace WRC.Woodon
 			if (VRCJson.TrySerializeToJson(DataDictionary, JsonExportType.Beautify, out DataToken result))
 			{
 				MDebugLog($"{nameof(SerializeData)} (Success) {result}");
+
+				if (Value == result.String)
+				{
+					MDebugLog($"{nameof(SerializeData)} (Skip Same Value) {Value}");
+					return;
+				}
+
 				SetValue(result.String);
 			}
 			else
@@ -92,6 +167,103 @@ namespace WRC.Woodon
 			}
 
 			return diff;
+		}
+
+		public bool HasDataChanged(DataToken key, out DataToken origin, out DataToken cur)
+		{
+			if (ChangedData.TryGetValue(key, out DataToken diff))
+			{
+				DataDictionary diffBlock = diff.DataDictionary;
+				origin = diffBlock["origin"];
+				cur = diffBlock["cur"];
+				return true;
+			}
+			else
+			{
+				origin = new DataToken(DataError.None);
+				cur = new DataToken(DataError.None);
+				return false;
+			}
+		}
+
+		public bool HasDataChanged(DataToken key, out int origin, out int cur)
+		{
+			if (HasDataChanged(key, out DataToken originToken, out DataToken curToken))
+			{
+				origin = (int)originToken.Double;
+				cur = (int)curToken.Double;
+				return true;
+			}
+			else
+			{
+				origin = 0;
+				cur = 0;
+				return false;
+			}
+		}
+
+		public bool HasDataChanged(DataToken key, out string origin, out string cur)
+		{
+			if (HasDataChanged(key, out DataToken originToken, out DataToken curToken))
+			{
+				origin = originToken.String;
+				cur = curToken.String;
+				return true;
+			}
+			else
+			{
+				origin = string.Empty;
+				cur = string.Empty;
+				return false;
+			}
+		}
+
+		public bool HasDataChanged(DataToken key, out bool origin, out bool cur)
+		{
+			if (HasDataChanged(key, out DataToken originToken, out DataToken curToken))
+			{
+				origin = originToken.Boolean;
+				cur = curToken.Boolean;
+				return true;
+			}
+			else
+			{
+				origin = false;
+				cur = false;
+				return false;
+			}
+		}
+
+		public bool HasDataChanged(DataToken key, out DataList origin, out DataList cur)
+		{
+			if (HasDataChanged(key, out DataToken originToken, out DataToken curToken))
+			{
+				origin = originToken.DataList;
+				cur = curToken.DataList;
+				return true;
+			}
+			else
+			{
+				origin = new DataList();
+				cur = new DataList();
+				return false;
+			}
+		}
+
+		public bool HasDataChanged(DataToken key, out DataDictionary origin, out DataDictionary cur)
+		{
+			if (HasDataChanged(key, out DataToken originToken, out DataToken curToken))
+			{
+				origin = originToken.DataDictionary;
+				cur = curToken.DataDictionary;
+				return true;
+			}
+			else
+			{
+				origin = new DataDictionary();
+				cur = new DataDictionary();
+				return false;
+			}
 		}
 	}
 }

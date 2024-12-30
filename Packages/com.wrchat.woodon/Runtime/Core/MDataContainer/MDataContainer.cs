@@ -52,9 +52,9 @@ namespace WRC.Woodon
 			if (mData == null)
 				return;
 
-			RuntimeInt = (int)mData.DataDictionary["RuntimeInt"].Double;
-			RuntimeBool = mData.DataDictionary["RuntimeBool"].Boolean;
-			RuntimeString = mData.DataDictionary["RuntimeString"].String;
+			RuntimeInt = (int)mData.GetData("RuntimeInt").Double;
+			RuntimeBool = mData.GetData("RuntimeBool").Boolean;
+			RuntimeString = mData.GetData("RuntimeString").String;
 
 			SendEvents();
 		}
