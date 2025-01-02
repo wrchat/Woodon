@@ -76,7 +76,7 @@ namespace WRC.Woodon
 				}
 			}
 
-			noTeamDatas.Resize(noTeamDataCount);
+			WUtil.Resize(ref noTeamDatas, noTeamDataCount);
 
 			for (int i = 0; i < spinImages.Length - 1; i++)
 				spinImages[i].sprite = noTeamDatas[i % noTeamDatas.Length].Sprite;
