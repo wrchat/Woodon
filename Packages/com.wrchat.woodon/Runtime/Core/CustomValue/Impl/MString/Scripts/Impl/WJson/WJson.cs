@@ -141,25 +141,31 @@ namespace WRC.Woodon
 			Deserialization();
 		}
 
-		private DataDictionary GetDifference(DataDictionary origin, DataDictionary cur)
+		private DataDictionary GetDifference(DataDictionary originData, DataDictionary newData)
 		{
 			DataDictionary diff = new DataDictionary();
 
-			DataList keys = cur.GetKeys();
+			DataList keys = newData.GetKeys();
 			for (int i = 0; i < keys.Count; i++)
 			{
 				DataToken key = keys[i];
 
-				if (origin.TryGetValue(key, out DataToken originToken))
+				if (originData.TryGetValue(key, out DataToken originToken))
 				{
-					DataToken curToken = cur[key];
-					if (originToken.CompareTo(curToken) != 0)
+					DataToken newToken = newData[key];
+
+					bool isChanged = false;
+
+					isChanged |= originToken.CompareTo(newToken) != 0;
+					isChanged |= (originToken.TokenType == TokenType.Boolean) && (originToken.Boolean != newToken.Boolean);
+
+					if (isChanged)
 					{
 						DataDictionary diffBlock = new DataDictionary();
 						diffBlock.SetValue("origin", originToken);
-						diffBlock.SetValue("cur", curToken);
+						diffBlock.SetValue("cur", newToken);
 
-						MDebugLog($"{key} {originToken} -> {curToken}");
+						MDebugLog($"{key} {originToken} -> {newToken}");
 
 						diff.SetValue(key, diffBlock);
 					}
