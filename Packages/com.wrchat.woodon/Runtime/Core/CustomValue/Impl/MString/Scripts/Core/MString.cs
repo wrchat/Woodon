@@ -8,15 +8,15 @@ namespace WRC.Woodon
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class MString : WEventPublisher
 	{
-		[Header("_" + nameof(MString))]
+		[field: Header("_" + nameof(MString))]
+		[field: SerializeField, TextArea(3, 10)] public string DefaultString { get; protected set; } = string.Empty;
 
-		[Header("_" + nameof(MString) + " - Options")]
-		[SerializeField, TextArea(3, 10)] private string defaultString = string.Empty;
-		public string DefaultString => defaultString;
+		[field: Header("_" + nameof(MString) + " - Options")]
 		[SerializeField] private bool useDefaultWhenEmpty = true;
 		[SerializeField] private bool useSync;
 		[SerializeField] private bool onlyDigit;
 		[SerializeField] private int lengthLimit = 2147483647;
+
 		[UdonSynced, FieldChangeCallback(nameof(SyncedValue))] private string _syncedValue = string.Empty;
 		public string SyncedValue
 		{
@@ -52,19 +52,19 @@ namespace WRC.Woodon
 		{
 			Init();
 		}
-		
+
 		protected virtual void Init()
 		{
 			MDebugLog($"{nameof(Init)}");
-			
+
 			if (useSync)
 			{
 				if (Networking.IsMaster)
-					SetValue(defaultString);
+					SetValue(DefaultString);
 			}
 			else
 			{
-				SetValue(defaultString);
+				SetValue(DefaultString);
 			}
 
 			OnValueChange(string.Empty, Value);
@@ -89,16 +89,16 @@ namespace WRC.Woodon
 
 		public void ResetValue()
 		{
-			SetValue(defaultString);
+			SetValue(DefaultString);
 		}
-		
+
 		public string GetFormatString()
 		{
 			string formatString = Value;
 
 			if ((formatString == string.Empty) || (formatString.Length == 0))
 				if (useDefaultWhenEmpty)
-					formatString = defaultString;
+					formatString = DefaultString;
 
 			return formatString;
 		}
