@@ -26,7 +26,7 @@ namespace WRC.Woodon
 						continue;
 
 					Collider[] colliders = activeCanvasGroups[i].GetComponentsInChildren<Collider>(true);
-					activeColliders.AddRange(colliders);
+					WUtil.AddRange(ref activeColliders, colliders);
 				}
 
 				for (int i = 0; i < disableCanvasGroups.Length; i++)
@@ -35,7 +35,7 @@ namespace WRC.Woodon
 						continue;
 
 					Collider[] colliders = disableCanvasGroups[i].GetComponentsInChildren<Collider>(true);
-					disableColliders.AddRange(colliders);
+					WUtil.AddRange(ref disableColliders, colliders);
 				}
 			}
 
@@ -75,14 +75,12 @@ namespace WRC.Woodon
 
 		public void RegisterActiveCanvasGroup(CanvasGroup canvasGroup)
 		{
-			activeCanvasGroups.Add(canvasGroup);
+			WUtil.Add(ref activeCanvasGroups, canvasGroup);
 		}
 
 		public void RegisterDisableCanvasGroup(CanvasGroup canvasGroup)
 		{
-			disableCanvasGroups.Add(canvasGroup);
+			WUtil.Add(ref disableCanvasGroups, canvasGroup);
 		}
 	}
 }
-
-// 밥

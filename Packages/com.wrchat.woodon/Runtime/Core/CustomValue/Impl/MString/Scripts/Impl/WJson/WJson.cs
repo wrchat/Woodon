@@ -10,79 +10,7 @@ namespace WRC.Woodon
 		public DataDictionary DataDictionary { get; protected set; } = new DataDictionary();
 		public DataDictionary ChangedData { get; protected set; } = new DataDictionary();
 
-		public DataToken GetData(DataToken key) => DataDictionary[key];
-		public int GetData(DataToken key, int defaultValue)
-		{
-			if (DataDictionary.TryGetValue(key, out DataToken value))
-			{
-				return (int)value.Double;
-			}
-			else
-			{
-				DataToken defaultToken = new DataToken(defaultValue);
-				DataDictionary.SetValue(key, defaultToken);
-				return defaultValue;
-			}
-		}
-
-		public string GetData(DataToken key, string defaultValue)
-		{
-			if (DataDictionary.TryGetValue(key, out DataToken value))
-			{
-				return value.String;
-			}
-			else
-			{
-				DataToken defaultToken = new DataToken(defaultValue);
-				DataDictionary.SetValue(key, defaultToken);
-				return defaultValue;
-			}
-		}
-
-		public bool GetData(DataToken key, bool defaultValue)
-		{
-			if (DataDictionary.TryGetValue(key, out DataToken value))
-			{
-				return value.Boolean;
-			}
-			else
-			{
-				DataToken defaultToken = new DataToken(defaultValue);
-				DataDictionary.SetValue(key, defaultToken);
-				return defaultValue;
-			}
-		}
-
-		public DataList GetData(DataToken key, DataList defaultValue)
-		{
-			if (DataDictionary.TryGetValue(key, out DataToken value))
-			{
-				return value.DataList;
-			}
-			else
-			{
-				DataToken defaultToken = new DataToken(defaultValue);
-				DataDictionary.SetValue(key, defaultToken);
-				return defaultValue;
-			}
-		}
-
-		public DataDictionary GetData(DataToken key, DataDictionary defaultValue)
-		{
-			if (DataDictionary.TryGetValue(key, out DataToken value))
-			{
-				return value.DataDictionary;
-			}
-			else
-			{
-				DataToken defaultToken = new DataToken(defaultValue);
-				DataDictionary.SetValue(key, defaultToken);
-				return defaultValue;
-			}
-		}
-
-		public bool TryGetData(DataToken key, out DataToken value) => DataDictionary.TryGetValue(key, out value);
-		public void SetData(DataToken key, DataToken value) => DataDictionary.SetValue(key, value);
+		[SerializeField] private LogType logTypeWhenFailed = LogType.Error;
 
 		[ContextMenu(nameof(SerializeData))]
 		public void SerializeData()
@@ -126,7 +54,81 @@ namespace WRC.Woodon
 			}
 			else
 			{
-				MDebugLog(result.ToString(), LogType.Error);
+				MDebugLog($"Value:\n{Value} \n\n Result:\n{result}", logTypeWhenFailed);
+			}
+		}
+
+		public bool TryGetData(DataToken key, out DataToken value) => DataDictionary.TryGetValue(key, out value);
+		public void SetData(DataToken key, DataToken value) => DataDictionary.SetValue(key, value);
+
+		public DataToken GetData(DataToken key) => DataDictionary[key];
+		public int GetData(DataToken key, int defaultValue)
+		{
+			if (DataDictionary.TryGetValue(key, out DataToken value))
+			{
+				return (int)value.Double;
+			}
+			else
+			{
+				DataToken defaultToken = new DataToken(defaultValue);
+				DataDictionary.SetValue(key, defaultToken);
+				return defaultToken.Int();
+			}
+		}
+
+		public string GetData(DataToken key, string defaultValue)
+		{
+			if (DataDictionary.TryGetValue(key, out DataToken value))
+			{
+				return value.String;
+			}
+			else
+			{
+				DataToken defaultToken = new DataToken(defaultValue);
+				DataDictionary.SetValue(key, defaultToken);
+				return defaultToken.String;
+			}
+		}
+
+		public bool GetData(DataToken key, bool defaultValue)
+		{
+			if (DataDictionary.TryGetValue(key, out DataToken value))
+			{
+				return value.Boolean;
+			}
+			else
+			{
+				DataToken defaultToken = new DataToken(defaultValue);
+				DataDictionary.SetValue(key, defaultToken);
+				return defaultToken.Boolean;
+			}
+		}
+
+		public DataList GetData(DataToken key, DataList defaultValue)
+		{
+			if (DataDictionary.TryGetValue(key, out DataToken value))
+			{
+				return value.DataList;
+			}
+			else
+			{
+				DataToken defaultToken = new DataToken(defaultValue);
+				DataDictionary.SetValue(key, defaultToken);
+				return defaultToken.DataList;
+			}
+		}
+
+		public DataDictionary GetData(DataToken key, DataDictionary defaultValue)
+		{
+			if (DataDictionary.TryGetValue(key, out DataToken value))
+			{
+				return value.DataDictionary;
+			}
+			else
+			{
+				DataToken defaultToken = new DataToken(defaultValue);
+				DataDictionary.SetValue(key, defaultToken);
+				return defaultToken.DataDictionary;
 			}
 		}
 
@@ -141,25 +143,31 @@ namespace WRC.Woodon
 			Deserialization();
 		}
 
-		private DataDictionary GetDifference(DataDictionary origin, DataDictionary cur)
+		private DataDictionary GetDifference(DataDictionary originData, DataDictionary newData)
 		{
 			DataDictionary diff = new DataDictionary();
 
-			DataList keys = cur.GetKeys();
+			DataList keys = newData.GetKeys();
 			for (int i = 0; i < keys.Count; i++)
 			{
 				DataToken key = keys[i];
 
-				if (origin.TryGetValue(key, out DataToken originToken))
+				if (originData.TryGetValue(key, out DataToken originToken))
 				{
-					DataToken curToken = cur[key];
-					if (originToken.CompareTo(curToken) != 0)
+					DataToken newToken = newData[key];
+
+					bool isChanged = false;
+
+					isChanged |= originToken.CompareTo(newToken) != 0;
+					isChanged |= (originToken.TokenType == TokenType.Boolean) && (originToken.Boolean != newToken.Boolean);
+
+					if (isChanged)
 					{
 						DataDictionary diffBlock = new DataDictionary();
 						diffBlock.SetValue("origin", originToken);
-						diffBlock.SetValue("cur", curToken);
+						diffBlock.SetValue("cur", newToken);
 
-						MDebugLog($"{key} {originToken} -> {curToken}");
+						MDebugLog($"{key} {originToken} -> {newToken}");
 
 						diff.SetValue(key, diffBlock);
 					}

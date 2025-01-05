@@ -65,5 +65,51 @@ namespace WRC.Woodon
 			canvasGroup.blocksRaycasts = active;
 			canvasGroup.interactable = active;
 		}
+
+		#region Array
+		public static void Resize<T>(ref T[] originArr, int size)
+		{
+			T[] newArr = new T[size];
+
+			int copyLength = Math.Min(originArr.Length, size);
+			Array.Copy(originArr, 0, newArr, 0, copyLength);
+
+			for (int i = originArr.Length; i < size; i++)
+				newArr[i] = default;
+
+			originArr = newArr;
+		}
+
+		public static void Add<T>(ref T[] originArr, T element)
+		{
+			Resize(ref originArr, originArr.Length + 1);
+			originArr[originArr.Length - 1] = element;
+		}
+
+		public static void AddRange<T>(ref T[] originArr, T[] elements)
+		{
+			Resize(ref originArr, originArr.Length + elements.Length);
+			Array.Copy(elements, 0, originArr, originArr.Length - elements.Length, elements.Length);
+		}
+
+		public static void Remove<T>(ref T[] originArr, T element)
+		{
+			int index = Array.IndexOf(originArr, element);
+			RemoveAt(ref originArr, index);
+		}
+
+		public static void RemoveAt<T>(ref T[] originArr, int index)
+		{
+			if ((index < 0) || (index >= originArr.Length))
+				Debug.LogError($"{nameof(WUtil)}.{nameof(RemoveAt)} : Index out of range");
+
+			T[] newArr = new T[originArr.Length - 1];
+			if (index > 0)
+				Array.Copy(originArr, 0, newArr, 0, index);
+
+			if (index < originArr.Length - 1)
+				Array.Copy(originArr, index + 1, newArr, index, originArr.Length - index - 1);
+		}
+		#endregion
 	}
 }
