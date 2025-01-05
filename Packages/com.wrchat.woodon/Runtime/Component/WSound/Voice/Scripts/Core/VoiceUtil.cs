@@ -1,3 +1,4 @@
+using System;
 using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
@@ -12,13 +13,31 @@ namespace WRC.Woodon
 
 		public static void SetVoiceTag(VRCPlayerApi player, VoiceTag voiceTag, bool value)
 		{
-			player.SetPlayerTag($"{player.playerId}{voiceTag}", value ? TRUE_STRING : FALSE_STRING);
+			Networking.LocalPlayer.SetPlayerTag($"{player.playerId}{voiceTag}", value ? TRUE_STRING : FALSE_STRING);
+		}
+
+		public static string GetVoiceTag(VRCPlayerApi player, VoiceTag voiceTag)
+		{
+			string tag = Networking.LocalPlayer.GetPlayerTag($"{player.playerId}{voiceTag}");
+			if (tag == null)
+				return FALSE_STRING;
+			return tag;
+		}
+
+		public static bool HasVoiceTag(VoiceTag voiceTag, VRCPlayerApi players)
+		{
+			string tag = GetVoiceTag(players, voiceTag);
+			return tag == TRUE_STRING;
 		}
 		
-		public static bool HasVoiceTag(VRCPlayerApi player, VoiceTag voiceTag)
+		public static bool HasVoiceTag(VoiceTag voiceTag, params VRCPlayerApi[] players)
 		{
-			string tag = player.GetPlayerTag($"{player.playerId}{voiceTag}");
-			return tag == TRUE_STRING;
+			foreach (VRCPlayerApi player in players)
+			{
+				if (HasVoiceTag(voiceTag, player) == false)
+					return false;
+			}
+			return true;
 		}
 	}
 }

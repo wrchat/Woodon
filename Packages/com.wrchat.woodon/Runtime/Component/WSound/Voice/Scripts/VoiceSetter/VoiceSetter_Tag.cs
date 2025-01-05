@@ -12,7 +12,7 @@ namespace WRC.Woodon
 
 		protected override bool IsCondition(VRCPlayerApi playerAPI)
 		{
-			bool isCondition = VoiceUtil.HasVoiceTag(playerAPI, voiceTag);
+			bool isCondition = VoiceUtil.HasVoiceTag(voiceTag, playerAPI);
 			MDebugLog($"{nameof(IsCondition)} : {isCondition}");
 			return isCondition;
 		}
