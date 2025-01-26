@@ -67,13 +67,25 @@ namespace WRC.Woodon
 			eventBlock.Add("callback", callback);
 
 			// 중복 등록 처리
-			if (eventBlocks.Contains(eventBlock))
+			if (AlreadyContainsEvent(eventBlocks, eventBlock))
 			{
-				MDebugLog($"{nameof(RegisterListener)} : {nameof(listener)}.{nameof(callback)} is already registered", LogType.Warning);
+				MDebugLog($"{nameof(RegisterListener)} : {listener}.{callback} is already registered", LogType.Warning);
 				return;
 			}
 
 			eventBlocks.Add(eventBlock);
+		}
+
+		private bool AlreadyContainsEvent(DataList eventBlocks, DataDictionary eventBlock)
+		{
+			for (int i = 0; i < eventBlocks.Count; i++)
+			{
+				DataDictionary block = eventBlocks[i].DataDictionary;
+				if (block["listener"].Reference == eventBlock["listener"].Reference && block["callback"].String == eventBlock["callback"].String)
+					return true;
+			}
+
+			return false;
 		}
 
 		public void UnregisterListener(UdonSharpBehaviour listener, string callback, Enum eventType = null)
@@ -126,7 +138,7 @@ namespace WRC.Woodon
 					UdonSharpBehaviour listener = (UdonSharpBehaviour)eventBlock["listener"].Reference;
 					string callback = eventBlock["callback"].String;
 
-					MDebugLog($"[{key}] {listener}.{callback}");
+					MDebugLog($"[{key}].{j} : {listener}.{callback}");
 				}
 			}
 		}
