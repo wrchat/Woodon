@@ -19,6 +19,20 @@ namespace WRC.Woodon
 			}
 			return false;
 		}
+
+		public static bool RemoveInt(this DataList dataList, int intValue)
+		{
+			for (int i = 0; i < dataList.Count; i++)
+			{
+				if (dataList[i].Int() == intValue)
+				{
+					dataList.RemoveAt(i);
+					return true;
+				}
+			}
+
+			return false;
+		}
 		#endregion
 	}
 }

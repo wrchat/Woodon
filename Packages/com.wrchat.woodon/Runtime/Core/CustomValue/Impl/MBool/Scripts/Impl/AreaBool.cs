@@ -9,7 +9,7 @@ namespace WRC.Woodon
 	public class AreaBool : MBool
 	{
 		[Header("_" + nameof(AreaBool))]
-		[SerializeField] private BoxCollider[] areaColliders;
+		[SerializeField] private Collider[] areaColliders;
 		[SerializeField] private float updateDelay = 0.1f;
 		[SerializeField] private bool checkOnlyLocalPlayer = true;
 		private Bounds[] boundsArray;

@@ -15,6 +15,7 @@ namespace WRC.Woodon
 		[SerializeField] private KeyCode keyCode;
 		[SerializeField] private bool useKey;
 		[SerializeField] private bool enableWhenGetKey;
+		[SerializeField] private bool enableWhenGetKeyDown;
 
 		private void Start()
 		{
@@ -42,7 +43,9 @@ namespace WRC.Woodon
 				if (Input.GetKeyDown(keyCode))
 				{
 					UpdatePos();
-					// dummyCanvas.SetActive(!dummyCanvas.gameObject.activeSelf);
+
+					if (enableWhenGetKeyDown)
+						dummyCanvas.SetActive(dummyCanvas.gameObject.activeSelf == false);
 				}
 			}
 		}

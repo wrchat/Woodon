@@ -15,6 +15,7 @@ namespace WRC.Woodon
 		[Header("_" + nameof(CanvasGroupActive) + " - Options")]
 		[SerializeField] private bool toggleOnlyInteractable = false;
 		[SerializeField] private bool toggleColliders = false;
+		[SerializeField] private bool delayBlockRaycastsToggle = false;
 
 		protected override void Init()
 		{
@@ -71,6 +72,24 @@ namespace WRC.Woodon
 				foreach (Collider c in disableColliders)
 					c.enabled = !Active;
 			}
+
+			if (delayBlockRaycastsToggle && Active)
+			{
+				SetBlockRaycastsFalse();
+				SendCustomEventDelayedSeconds(nameof(SetBlockRaycastsTrue), 0.5f);
+			}
+		}
+
+		public void SetBlockRaycastsFalse() => SetBlockRaycasts(false);
+		public void SetBlockRaycastsTrue() => SetBlockRaycasts(true);
+
+		public void SetBlockRaycasts(bool blockRaycasts)
+		{
+			foreach (CanvasGroup c in activeCanvasGroups)
+				c.blocksRaycasts = blockRaycasts;
+
+			foreach (CanvasGroup c in disableCanvasGroups)
+				c.blocksRaycasts = !blockRaycasts;
 		}
 
 		public void RegisterActiveCanvasGroup(CanvasGroup canvasGroup)
