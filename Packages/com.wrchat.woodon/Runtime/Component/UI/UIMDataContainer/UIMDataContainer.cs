@@ -112,7 +112,13 @@ namespace WRC.Woodon
 
 				for (int i = 0; i < dataImages.Length; i++)
 				{
-					dataImages[i].enabled = mDataContainer.Sprites[i] != null;
+					if (i >= mDataContainer.Sprites.Length)
+					{
+						dataImages[i].enabled = false;
+						continue;
+					}
+
+					dataImages[i].enabled = true;
 					dataImages[i].sprite = mDataContainer.Sprites[i];
 				}
 
