@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace WRC.Woodon
 {
+	[DefaultExecutionOrder(-10000)]
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class DrawManager : WEventPublisher
 	{
@@ -15,7 +16,6 @@ namespace WRC.Woodon
 		[SerializeField] private DrawType drawType = DrawType.AllRandom;
 
 		public DrawElementData[] DrawElementDatas { get; private set; }
-		public bool IsInited { get; private set; } = false;
 
 		private void OnDataChanged()
 		{
@@ -33,10 +33,6 @@ namespace WRC.Woodon
 		private void Init()
 		{
 			MDebugLog(nameof(Init));
-
-			if (IsInited)
-				return;
-			IsInited = true;
 
 			DrawElementDatas = GetComponentsInChildren<DrawElementData>(true);
 
@@ -60,7 +56,7 @@ namespace WRC.Woodon
 			{
 				DrawElementDatas[i].Index = i;
 				DrawElementDatas[i].RegisterListener(this, nameof(OnDataChanged));
-				
+
 				SetElementData(
 					index: i,
 					teamType: DrawElementDatas[i].InitTeamType,
@@ -164,7 +160,7 @@ namespace WRC.Woodon
 		public DrawElementData GetRandomNoneTeamElement()
 		{
 			DrawElementData[] noneTeamDrawElementDatas = new DrawElementData[DrawElementDatas.Length];
-			
+
 			int noneTeamElementCount = 0;
 			foreach (DrawElementData drawElementData in DrawElementDatas)
 			{

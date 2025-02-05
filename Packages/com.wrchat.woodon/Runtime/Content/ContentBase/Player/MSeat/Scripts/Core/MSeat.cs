@@ -9,19 +9,19 @@ namespace WRC.Woodon
 	public class MSeat : MTarget
 	{
 		[Header("_" + nameof(MSeat))]
-		[SerializeField] protected WJson wJson;
-		protected DataDictionary DataDict => wJson.DataDictionary;
+		[SerializeField] protected WJson seatData;
+		protected DataDictionary SeatData => seatData.DataDictionary;
 
 		public int IntData
 		{
-			get => DataDict.TryGetValue("IntData", out DataToken dataToken) ? (int)dataToken.Double : default;
-			set => DataDict["IntData"] = value;
+			get => SeatData.TryGetValue("IntData", out DataToken dataToken) ? (int)dataToken.Double : default;
+			set => SeatData["IntData"] = value;
 		}
 
 		public int TurnData
 		{
-			get => DataDict.TryGetValue("TurnData", out DataToken dataToken) ? (int)dataToken.Double : default;
-			set => DataDict["TurnData"] = value;
+			get => SeatData.TryGetValue("TurnData", out DataToken dataToken) ? (int)dataToken.Double : default;
+			set => SeatData["TurnData"] = value;
 		}
 
 		protected ContentManager contentManager;
@@ -37,8 +37,8 @@ namespace WRC.Woodon
 			foreach (UIMSeat ui in uis)
 				ui.Init(contentManager, this);
 
-			if (wJson != null)
-				wJson.RegisterListener(this, nameof(OnDataDeserialization), WJsonEvent.OnDeserialization);
+			if (seatData != null)
+				seatData.RegisterListener(this, nameof(OnDataDeserialization), WJsonEvent.OnDeserialization);
 
 			if (Networking.IsMaster)
 			{
@@ -53,7 +53,7 @@ namespace WRC.Woodon
 		{
 			MDebugLog($"{nameof(OnDataDeserialization)}");
 
-			DataDictionary change = wJson.ChangedData;
+			DataDictionary change = seatData.ChangedData;
 			DataList keys = change.GetKeys();
 			for (int i = 0; i < keys.Count; i++)
 			{
@@ -76,7 +76,7 @@ namespace WRC.Woodon
 
 		public void SerializeData()
 		{
-			wJson.SerializeData();
+			seatData.SerializeData();
 		}
 
 		public void UpdateSeat()
@@ -121,7 +121,7 @@ namespace WRC.Woodon
 			// UpdateCurDataUI();
 
 			// 직접 구현하도록
-			
+
 			// if (DataChangeStateUtil.IsDataChanged(changeState))
 			// {
 			// 	if (contentManager != null)
@@ -136,7 +136,7 @@ namespace WRC.Woodon
 			// UpdateCurTurnDataUI();
 
 			// 직접 구현하도록
-			
+
 			// if (DataChangeStateUtil.IsDataChanged(changeState))
 			// 	contentManager.UpdateContent();
 		}

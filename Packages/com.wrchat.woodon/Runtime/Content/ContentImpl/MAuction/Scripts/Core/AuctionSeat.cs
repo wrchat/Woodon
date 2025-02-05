@@ -11,14 +11,14 @@ namespace WRC.Woodon
 		[field: UdonSynced] public int TryTime { get; private set; } = NONE_INT;
 		public int RemainPoint => IntData;
 		public int TryPoint => TurnData;
-		
+
 		[SerializeField] private MValue tryPoint_MValue;
 		[SerializeField] private Timer timer;
 		[SerializeField] private MSFXManager mSFXManager;
 
 		public void UpdateTryPoint()
 		{
-			if (contentManager.CurGameState != (int)AuctionState.AuctionTime)
+			if (contentManager.ContentState != (int)AuctionState.AuctionTime)
 				return;
 
 			AuctionManager auctionManager = (AuctionManager)contentManager;
@@ -51,7 +51,7 @@ namespace WRC.Woodon
 		protected override void OnTargetChanged(DataChangeState changeState)
 		{
 			base.OnTargetChanged(changeState);
-			
+
 			if (changeState != DataChangeState.None)
 			{
 				if (IsTargetPlayer())
@@ -63,7 +63,7 @@ namespace WRC.Woodon
 		{
 			base.OnTurnDataChange(changeState);
 
-			if (contentManager.CurGameState != (int)AuctionState.AuctionTime)
+			if (contentManager.ContentState != (int)AuctionState.AuctionTime)
 				return;
 
 			if (changeState != DataChangeState.Greater)
