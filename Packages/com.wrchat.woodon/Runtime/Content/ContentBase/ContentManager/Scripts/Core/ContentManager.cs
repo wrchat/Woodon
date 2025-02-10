@@ -1,6 +1,7 @@
 ﻿using System;
 using UdonSharp;
 using UnityEngine;
+using VRC.SDK3.Data;
 using VRC.SDKBase;
 using VRC.Udon;
 
@@ -31,7 +32,7 @@ namespace WRC.Woodon
 		{
 			MDebugLog($"{nameof(OnContentStateChange)}, {changeState}");
 
-			// UpdateContent();
+			UpdateContent();
 			SendEvents();
 		}
 
@@ -73,10 +74,10 @@ namespace WRC.Woodon
 
 		public virtual void OnContentDataChanged()
 		{
-			if (contentData.HasDataChanged("CurGameState", out int origin, out int cur))
-				OnContentStateChange(DataChangeStateUtil.GetChangeState(origin, cur));
+			MDebugLog($"{nameof(OnContentDataChanged)}");
 
-			UpdateContent();
+			if (contentData.HasDataChanged("ContentState", out int origin, out int cur))
+				OnContentStateChange(DataChangeStateUtil.GetChangeState(origin, cur));
 		}
 
 		public virtual void UpdateContent()
@@ -112,6 +113,7 @@ namespace WRC.Woodon
 
 		// ===================================
 
+		[field: Header("_" + nameof(ContentManager) + "_IntData")]
 		[field: SerializeField] public int DefaultData { get; private set; } = 0;
 		[field: SerializeField] public string[] DataToString { get; protected set; }
 		[field: SerializeField] public bool ResetDataWhenOwnerChange { get; private set; }

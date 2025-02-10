@@ -10,18 +10,19 @@ namespace WRC.Woodon
 	{
 		[Header("_" + nameof(MSeat))]
 		[SerializeField] protected WJson seatData;
-		protected DataDictionary SeatData => seatData.DataDictionary;
 
 		public int IntData
 		{
-			get => SeatData.TryGetValue("IntData", out DataToken dataToken) ? (int)dataToken.Double : default;
-			set => SeatData["IntData"] = value;
+			get => seatData.GetData("IntData",
+				contentManager != null ? contentManager.DefaultData : default);
+			set => seatData.SetData("CardList", value);
 		}
 
 		public int TurnData
 		{
-			get => SeatData.TryGetValue("TurnData", out DataToken dataToken) ? (int)dataToken.Double : default;
-			set => SeatData["TurnData"] = value;
+			get => seatData.GetData("TurnData",
+				contentManager != null ? contentManager.DefaultTurnData : default);
+			set => seatData.SetData("TurnData", value);
 		}
 
 		protected ContentManager contentManager;
@@ -38,7 +39,7 @@ namespace WRC.Woodon
 				ui.Init(contentManager, this);
 
 			if (seatData != null)
-				seatData.RegisterListener(this, nameof(OnDataDeserialization), WJsonEvent.OnDeserialization);
+				seatData.RegisterListener(this, nameof(OnSeatDataChanged), WJsonEvent.OnDeserialization);
 
 			if (Networking.IsMaster)
 			{
@@ -49,29 +50,15 @@ namespace WRC.Woodon
 			UpdateSeat_();
 		}
 
-		public virtual void OnDataDeserialization()
+		public virtual void OnSeatDataChanged()
 		{
-			MDebugLog($"{nameof(OnDataDeserialization)}");
+			MDebugLog($"{nameof(OnSeatDataChanged)}");
 
-			DataDictionary change = seatData.ChangedData;
-			DataList keys = change.GetKeys();
-			for (int i = 0; i < keys.Count; i++)
-			{
-				DataToken key = keys[i];
+			if (seatData.HasDataChanged("IntData", out int originIntData, out int curIntData))
+				OnDataChanged(DataChangeStateUtil.GetChangeState(seatData.GetData("IntData", 0), IntData));
 
-				DataDictionary block = change[key].DataDictionary;
-				DataToken origin = block["origin"];
-				DataToken cur = block["cur"];
-
-				if (key.String == "IntData")
-				{
-					OnDataChanged(DataChangeStateUtil.GetChangeState((int)origin.Double, (int)cur.Double));
-				}
-				else if (key.String == "TurnData")
-				{
-					OnTurnDataChange(DataChangeStateUtil.GetChangeState((int)origin.Double, (int)cur.Double));
-				}
-			}
+			if (seatData.HasDataChanged("TurnData", out int originTurnData, out int curTurnData))
+				OnTurnDataChange(DataChangeStateUtil.GetChangeState(originTurnData, curTurnData));
 		}
 
 		public void SerializeData()
@@ -163,12 +150,14 @@ namespace WRC.Woodon
 		{
 			MDebugLog($"{nameof(ResetData)}");
 			IntData = contentManager.DefaultData;
+			SerializeData();
 		}
 
 		public void ResetTurnData()
 		{
 			MDebugLog($"{nameof(ResetTurnData)}");
 			TurnData = contentManager.DefaultTurnData;
+			SerializeData();
 		}
 
 		public override void OnPlayerLeft(VRCPlayerApi player)
