@@ -1,4 +1,5 @@
-﻿using UdonSharp;
+﻿using System;
+using UdonSharp;
 using UnityEngine;
 using VRC.SDK3.Data;
 
@@ -60,6 +61,11 @@ namespace WRC.Woodon
 
 		public bool TryGetData(DataToken key, out DataToken value) => DataDictionary.TryGetValue(key, out value);
 		public void SetData(DataToken key, DataToken value) => DataDictionary.SetValue(key, value);
+		public void SetData(DataToken key, int value) => DataDictionary.SetValue(key, new DataToken(value));
+		public void SetData(DataToken key, string value) => DataDictionary.SetValue(key, new DataToken(value));
+		public void SetData(DataToken key, bool value) => DataDictionary.SetValue(key, new DataToken(value));
+		public void SetData(DataToken key, DataList value) => DataDictionary.SetValue(key, new DataToken(value));
+		public void SetData(DataToken key, DataDictionary value) => DataDictionary.SetValue(key, new DataToken(value));
 
 		public DataToken GetData(DataToken key) => DataDictionary[key];
 		public int GetData(DataToken key, int defaultValue)
