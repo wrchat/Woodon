@@ -18,6 +18,7 @@ namespace WRC.Woodon
 		[SerializeField] private MBool isMaxValue;
 		[SerializeField] private MBool isMinValue;
 
+		[UdonSynced, FieldChangeCallback(nameof(SyncedValue))] private int _syncedValue;
 		public int SyncedValue
 		{
 			get => _syncedValue;
@@ -29,8 +30,8 @@ namespace WRC.Woodon
 					SetValue(_syncedValue, isReciever: true);
 			}
 		}
-		[UdonSynced, FieldChangeCallback(nameof(SyncedValue))] private int _syncedValue;
 
+		private int _value;
 		public int Value
 		{
 			get => _value;
@@ -41,7 +42,6 @@ namespace WRC.Woodon
 				OnValueChange(DataChangeStateUtil.GetChangeState(origin, _value));
 			}
 		}
-		private int _value;
 
 		private void Start()
 		{
