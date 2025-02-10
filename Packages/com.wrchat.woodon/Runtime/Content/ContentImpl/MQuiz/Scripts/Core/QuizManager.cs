@@ -4,6 +4,7 @@ using static WRC.Woodon.WUtil;
 
 namespace WRC.Woodon
 {
+	[DefaultExecutionOrder(-10000)]
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class QuizManager : ContentManager
 	{
@@ -56,8 +57,8 @@ namespace WRC.Woodon
 		public override void UpdateContent()
 		{
 			CalcAnswerCount();
-			SetWaitObjectActive(IsCurGameState((int)QuizGameState.Wait));
-		
+			SetWaitObjectActive(IsContentState((int)QuizContentState.Wait));
+
 			base.UpdateContent();
 		}
 
@@ -79,20 +80,20 @@ namespace WRC.Woodon
 				waitTimeObject.SetActive(active);
 		}
 
-		protected override void OnGameStateChange(DataChangeState changeState)
+		protected override void OnContentStateChange(DataChangeState changeState)
 		{
 			if (changeState != DataChangeState.Less)
 			{
-				if (CurGameState == (int)QuizGameState.Wait) OnWait();
-				else if (CurGameState == (int)QuizGameState.ShowQuiz) OnQuizTime();
-				else if (CurGameState == (int)QuizGameState.SelectAnswer) OnSelectAnswer();
-				else if (CurGameState == (int)QuizGameState.ShowPlayerAnswer) OnShowPlayerAnswer();
-				else if (CurGameState == (int)QuizGameState.CheckAnswer) OnCheckAnswer();
-				else if (CurGameState == (int)QuizGameState.Explaining) OnExplaining();
-				else if (CurGameState == (int)QuizGameState.Scoring) OnScoring();
+				if (ContentState == (int)QuizContentState.Wait) OnWait();
+				else if (ContentState == (int)QuizContentState.ShowQuiz) OnQuizTime();
+				else if (ContentState == (int)QuizContentState.SelectAnswer) OnSelectAnswer();
+				else if (ContentState == (int)QuizContentState.ShowPlayerAnswer) OnShowPlayerAnswer();
+				else if (ContentState == (int)QuizContentState.CheckAnswer) OnCheckAnswer();
+				else if (ContentState == (int)QuizContentState.Explaining) OnExplaining();
+				else if (ContentState == (int)QuizContentState.Scoring) OnScoring();
 			}
 
-			base.OnGameStateChange(changeState);
+			base.OnContentStateChange(changeState);
 		}
 
 		public virtual void OnQuizIndexChange()

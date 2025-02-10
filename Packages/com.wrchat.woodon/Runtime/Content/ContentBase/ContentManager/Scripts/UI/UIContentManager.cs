@@ -25,23 +25,23 @@ namespace WRC.Woodon
 
 		public void PrevState()
 		{
-			contentManager.SetGameState(contentManager.CurGameState - 1);
+			contentManager.SetContentState(contentManager.ContentState - 1);
 		}
 
 		public void NextState()
 		{
-			contentManager.SetGameState(contentManager.CurGameState + 1);
+			contentManager.SetContentState(contentManager.ContentState + 1);
 		}
 
 		public void UpdateUI()
 		{
-			if (contentManager.CurGameState < 0 || contentManager.CurGameState >= stateToString.Length)
+			if (contentManager.ContentState < 0 || contentManager.ContentState >= stateToString.Length)
 			{
-				curStateText.text = contentManager.CurGameState.ToString();
+				curStateText.text = contentManager.ContentState.ToString();
 			}
 			else
 			{
-				curStateText.text = stateToString[contentManager.CurGameState];
+				curStateText.text = stateToString[contentManager.ContentState];
 			}
 		}
 	}

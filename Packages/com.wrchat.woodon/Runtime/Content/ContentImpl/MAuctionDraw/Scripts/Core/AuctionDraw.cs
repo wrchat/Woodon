@@ -4,7 +4,8 @@ using VRC.SDKBase;
 
 namespace WRC.Woodon
 {
-	// [DefaultExecutionOrder(100)]
+	// AuctionManager, DrawManager 보다 늦게 실행되어야 함
+	[DefaultExecutionOrder(-9000)]
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class AuctionDraw : MBase
 	{
@@ -32,27 +33,15 @@ namespace WRC.Woodon
 			UpdateUI();
 		}
 
-		public bool IsInited { get; private set; } = false;
-
-		private void Update()
+		private void Start()
 		{
-			if (IsInited == false)
-			{
-				if (AuctionManager.IsInited && DrawManager.IsInited)
-				{
-					Init();
-					UpdateUI();
-				}
-			}
+			Init();
+			UpdateUI();
 		}
 
 		private void Init()
 		{
 			MDebugLog(nameof(Init));
-		
-			if (IsInited)
-				return;
-			IsInited = true;
 
 			foreach (UIAuctionDraw ui in uis)
 				ui.Init(this);
@@ -62,7 +51,7 @@ namespace WRC.Woodon
 
 			UpdateUI();
 			AuctionManager.UpdateContent();
-			
+
 			if (Networking.IsMaster)
 				OnWait();
 		}
@@ -70,9 +59,6 @@ namespace WRC.Woodon
 		public void UpdateUI()
 		{
 			MDebugLog(nameof(UpdateUI));
-
-			if (IsInited == false)
-				return;
 
 			foreach (UIAuctionDraw ui in uis)
 				ui.UpdateUI();
@@ -82,7 +68,7 @@ namespace WRC.Woodon
 		{
 			MDebugLog(nameof(UpdateDrawByAuction));
 
-			switch ((AuctionState)AuctionManager.CurGameState)
+			switch ((AuctionState)AuctionManager.ContentState)
 			{
 				case AuctionState.Wait:
 					// 아직 팀이 정해지지 않은 랜덤한 한 명 (미리 설정)
@@ -121,7 +107,7 @@ namespace WRC.Woodon
 				return;
 
 			DrawElementData randomNoneTeamElement = DrawManager.GetRandomNoneTeamElement();
-			
+
 			if (randomNoneTeamElement != null)
 			{
 				SetTargetIndex(randomNoneTeamElement.Index);

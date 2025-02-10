@@ -1,6 +1,6 @@
 namespace WRC.Woodon
 {
-	public enum QuizGameState
+	public enum QuizContentState
 	{
 		Wait,
 		ShowQuiz,

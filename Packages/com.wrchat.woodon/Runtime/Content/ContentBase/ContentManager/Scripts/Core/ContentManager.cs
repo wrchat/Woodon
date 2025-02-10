@@ -7,44 +7,47 @@ using VRC.Udon;
 
 namespace WRC.Woodon
 {
+	/// <summary>
+	/// 상속 받는 경우, 해당 클래스에도 DefaultExecutionOrder 어트리뷰트를 달아줘야 함.
+	/// </summary>
+	[DefaultExecutionOrder(-10000)]
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class ContentManager : WEventPublisher
 	{
 		public MSeat[] MSeats { get; private set; }
 
 		[field: Header("_" + nameof(ContentManager))]
-		[SerializeField] private int stateMax = 1;
 
 		[SerializeField] protected WJson contentData;
 
-		public int CurGameState
+		#region ContentState
+		public int ContentState
 		{
-			get => contentData.GetData("CurGameState", 0);
-			private set => contentData.SetData("CurGameState", value);
+			get => contentData.GetData("ContentState", 0);
+			private set => contentData.SetData("ContentState", value);
 		}
+		[SerializeField] private int contentStateMax = 1;
 
-		protected virtual void OnGameStateChange(DataChangeState changeState)
+		protected virtual void OnContentStateChange(DataChangeState changeState)
 		{
-			MDebugLog($"{nameof(OnGameStateChange)}, {changeState}");
+			MDebugLog($"{nameof(OnContentStateChange)}, {changeState}");
 
-			// UpdateContent();
+			UpdateContent();
 			SendEvents();
 		}
 
-		public void SetGameState(int newGameState)
+		public bool IsContentState(int contentState) => ContentState == contentState;
+		public bool IsContentState(Enum contentState) => ContentState == Convert.ToInt32(contentState);
+
+		public void SetContentState(int newContentState)
 		{
-			CurGameState = (newGameState + stateMax) % stateMax;
+			ContentState = (newContentState + contentStateMax) % contentStateMax;
 			contentData.SerializeData();
 		}
-		public void SetGameState(Enum newGameState) => SetGameState(Convert.ToInt32(newGameState));
-
-		public bool IsCurGameState(int gameState) => CurGameState == gameState;
-		public bool IsCurGameState(Enum gameState) => CurGameState == Convert.ToInt32(gameState);
-
-		public void NextGameState() => SetGameState(CurGameState + 1);
-		public void PrevGameState() => SetGameState(CurGameState - 1);
-
-		public bool IsInited { get; protected set; } = false;
+		public void SetContentState(Enum newContentState) => SetContentState(Convert.ToInt32(newContentState));
+		public void SetContentStateNext() => SetContentState(ContentState + 1);
+		public void SetContentStatePrev() => SetContentState(ContentState - 1);
+		#endregion
 
 		protected virtual void Start()
 		{
@@ -55,40 +58,31 @@ namespace WRC.Woodon
 		protected virtual void Init()
 		{
 			// MDebugLog($"{nameof(Init)}");
-			if (IsInited)
-				return;
-			
-			{
-				MSeats = GetComponentsInChildren<MSeat>();
-				contentData.RegisterListener(this, nameof(OnContentDataChanged), WJsonEvent.OnDeserialization);
-			
-				for (int i = 0; i < MSeats.Length; i++)
-					MSeats[i].Init(this, i);
 
-				if (Networking.IsMaster)
-				{
-					CurGameState = 0;
-					contentData.SerializeData();
-				}
+			MSeats = GetComponentsInChildren<MSeat>();
+			contentData.RegisterListener(this, nameof(OnContentDataChanged), WJsonEvent.OnDeserialization);
+
+			for (int i = 0; i < MSeats.Length; i++)
+				MSeats[i].Init(this, i);
+
+			if (Networking.IsMaster)
+			{
+				ContentState = 0;
+				contentData.SerializeData();
 			}
-			
-			IsInited = true;
 		}
 
 		public virtual void OnContentDataChanged()
 		{
-			if (contentData.HasDataChanged("CurGameState", out int origin, out int cur))
-				OnGameStateChange(DataChangeStateUtil.GetChangeState(origin, cur));
+			MDebugLog($"{nameof(OnContentDataChanged)}");
 
-			UpdateContent();
+			if (contentData.HasDataChanged("ContentState", out int origin, out int cur))
+				OnContentStateChange(DataChangeStateUtil.GetChangeState(origin, cur));
 		}
 
 		public virtual void UpdateContent()
 		{
 			// MDebugLog($"{nameof(UpdateStuff)}");
-
-			if (IsInited == false)
-				Init();
 
 			foreach (MSeat seat in MSeats)
 				seat.UpdateSeat();
@@ -108,7 +102,7 @@ namespace WRC.Woodon
 				}
 			}
 		}
-		
+
 		public MSeat GetLocalPlayerSeat()
 		{
 			foreach (MSeat seat in MSeats)
@@ -116,9 +110,10 @@ namespace WRC.Woodon
 					return seat;
 			return null;
 		}
-		
+
 		// ===================================
 
+		[field: Header("_" + nameof(ContentManager) + "_IntData")]
 		[field: SerializeField] public int DefaultData { get; private set; } = 0;
 		[field: SerializeField] public string[] DataToString { get; protected set; }
 		[field: SerializeField] public bool ResetDataWhenOwnerChange { get; private set; }

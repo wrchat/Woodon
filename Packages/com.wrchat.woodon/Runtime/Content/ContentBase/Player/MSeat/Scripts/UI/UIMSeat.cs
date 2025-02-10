@@ -8,13 +8,16 @@ namespace WRC.Woodon
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public class UIMSeat : MBase
 	{
+		[Header("_" + nameof(UIMSeat))]
 		[SerializeField] private TextMeshProUGUI[] indexTexts;
-	
+
+		[Header("_" + nameof(UIMSeat) + " - CurData")]
 		[SerializeField] private TextMeshProUGUI[] curDataTexts;
 		[SerializeField] private Image[] curDataImages;
 		[SerializeField] private TextMeshProUGUI[] dataTexts;
 		[SerializeField] private Image[] dataImages;
 
+		[Header("_" + nameof(UIMSeat) + " - CurTurnData")]
 		[SerializeField] private TextMeshProUGUI[] curTurnDataTexts;
 		[SerializeField] private Image[] curTurnDataImages;
 		[SerializeField] private TextMeshProUGUI[] turnDataTexts;

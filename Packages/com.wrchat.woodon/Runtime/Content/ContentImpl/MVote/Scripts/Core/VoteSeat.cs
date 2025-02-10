@@ -11,7 +11,7 @@ namespace WRC.Woodon
 
 		protected void TryVote(int newTurnData)
 		{
-			if (contentManager.IsCurGameState((int)VoteState.VoteTime) == false)
+			if (contentManager.IsContentState((int)VoteState.VoteTime) == false)
 				return;
 
 			TurnData = newTurnData;

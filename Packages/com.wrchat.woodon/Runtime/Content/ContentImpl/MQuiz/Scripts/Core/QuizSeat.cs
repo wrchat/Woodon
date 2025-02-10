@@ -32,7 +32,7 @@ namespace WRC.Woodon
 		{
 			if (force == false)
 			{
-				if (QuizManager.CurGameState != (int)QuizGameState.SelectAnswer)
+				if (QuizManager.ContentState != (int)QuizContentState.SelectAnswer)
 					return;
 
 				if (QuizManager.CanSelectAnswer == false)

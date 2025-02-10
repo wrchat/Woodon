@@ -14,14 +14,14 @@ namespace WRC.Woodon
 
 		public int[] MaxVoteIndexes { get; protected set; } = new int[0];
 
-		protected override void OnGameStateChange(DataChangeState changeState)
+		protected override void OnContentStateChange(DataChangeState changeState)
 		{
 			if (changeState == DataChangeState.Equal)
 				return;
 
 			MaxVoteIndexes = GetMaxVoteIndex();
 
-			switch ((VoteState)CurGameState)
+			switch ((VoteState)ContentState)
 			{
 				case VoteState.Wait:
 					// 투표 대기
@@ -49,15 +49,15 @@ namespace WRC.Woodon
 					break;
 			}
 
-			base.OnGameStateChange(changeState);
+			base.OnContentStateChange(changeState);
 		}
 
 		protected virtual void OnWait()
 		{
 			MDebugLog(nameof(OnWait));
-			
+
 			debugText.text = $"";
-		
+
 			if (IsOwner() == false)
 				return;
 
@@ -80,10 +80,10 @@ namespace WRC.Woodon
 			MDebugLog(nameof(OnAuctionTime));
 
 			mSFXManager.PlaySFX_L(1);
-			
+
 			if (IsOwner() == false)
 				return;
-			
+
 			if (timer != null)
 				timer.StartTimer();
 		}
@@ -91,9 +91,9 @@ namespace WRC.Woodon
 		protected virtual void OnWaitForResult()
 		{
 			MDebugLog(nameof(OnWaitForResult));
-	
+
 			mSFXManager.PlaySFX_L(2);
-			
+
 			if (IsOwner() == false)
 				return;
 
@@ -133,7 +133,7 @@ namespace WRC.Woodon
 			MDebugLog(nameof(OnApplyResult));
 
 			mSFXManager.PlaySFX_L(5);
-		
+
 			// 투표 결과 적용
 			if (MaxVoteIndexes.Length == 0)
 			{
@@ -147,9 +147,9 @@ namespace WRC.Woodon
 		public void NextStateWhenTimeOver()
 		{
 			MDebugLog(nameof(NextStateWhenTimeOver));
-			
-			if (CurGameState == (int)VoteState.VoteTime)
-				SetGameState((int)VoteState.WaitForResult);
+
+			if (ContentState == (int)VoteState.VoteTime)
+				SetContentState((int)VoteState.WaitForResult);
 		}
 
 		protected int GetVoteCount(int voteIndex)
@@ -177,7 +177,7 @@ namespace WRC.Woodon
 				if (voteCounts[i] > maxCount)
 					maxCount = voteCounts[i];
 			}
-			
+
 			int[] maxIndexes = new int[voteSelectionCount];
 			int maxIndexCount = 0;
 			for (int i = 0; i < voteCounts.Length; i++)

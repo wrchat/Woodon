@@ -25,23 +25,20 @@ namespace WRC.Woodon
 
 		public virtual void UpdateUI()
 		{
-			if (quizManager.IsInited == false)
-				return;
-
 			if (quizManager.CurQuizIndex == NONE_INT)
 				return;
 
 			foreach (TextMeshProUGUI curQuizIndexText in curQuizIndexTexts)
 				curQuizIndexText.text = (quizManager.CurQuizIndex + 1).ToString();
 
-			bool nowWaiting = quizManager.CurGameState == (int)QuizGameState.Wait;
+			bool nowWaiting = quizManager.IsContentState(QuizContentState.Wait);
 			foreach (GameObject waitTimeHider in waitTimeHiders)
 				waitTimeHider.SetActive(nowWaiting);
 
 			UpdateUI(quizManager.CurQuizData);
 
 			foreach (MAnimator mAnimator in mAnimatorsByGameState)
-				mAnimator.SetInt_L(quizManager.CurGameState);
+				mAnimator.SetInt_L(quizManager.ContentState);
 
 			foreach (MAnimator mAnimator in mAnimatorsByCurQuizAnswer)
 				mAnimator.SetInt_L((int)quizManager.CurQuizData.QuizAnswer);
@@ -51,11 +48,11 @@ namespace WRC.Woodon
 		{
 			base.UpdateUI(mData);
 
-			bool checkAnswer = quizManager.CurGameState == (int)QuizGameState.CheckAnswer;
+			bool checkAnswer = quizManager.ContentState == (int)QuizContentState.CheckAnswer;
 			foreach (CanvasGroup answerCanvasGroup in answerCanvasGroups)
 				SetCanvasGroupActive(answerCanvasGroup, checkAnswer);
 
-			bool explain = quizManager.CurGameState >= (int)QuizGameState.Explaining;
+			bool explain = quizManager.ContentState >= (int)QuizContentState.Explaining;
 			foreach (CanvasGroup explainCanvasGroup in explainCanvasGroups)
 				SetCanvasGroupActive(explainCanvasGroup, explain);
 		}

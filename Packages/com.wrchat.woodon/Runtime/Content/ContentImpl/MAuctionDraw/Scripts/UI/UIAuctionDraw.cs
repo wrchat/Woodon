@@ -42,7 +42,7 @@ namespace WRC.Woodon
 				targetPanel.UpdateUI();
 
 			foreach (MAnimator mAnimator in mAnimators)
-				mAnimator.SetTrigger(auctionDraw.AuctionManager.CurGameState.ToString());
+				mAnimator.SetTrigger(auctionDraw.AuctionManager.ContentState.ToString());
 
 			if (auctionDraw.TargetIndex == NONE_INT)
 			{
@@ -52,7 +52,7 @@ namespace WRC.Woodon
 
 			// Spin
 			UpdateUI_Spin();
-			
+
 			// CurTarget
 			UpdateUI_CurTarget();
 

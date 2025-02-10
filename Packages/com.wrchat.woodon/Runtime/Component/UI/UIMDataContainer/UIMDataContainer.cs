@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace WRC.Woodon
 {
-	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
+	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public class UIMDataContainer : MBase
 	{
 		[field: Header("_" + nameof(UIMDataContainer))]
@@ -73,54 +73,87 @@ namespace WRC.Woodon
 			if (mDataContainer == null)
 			{
 				foreach (TextMeshProUGUI nameText in nameTexts)
-					nameText.text = string.Empty;
+					if (nameText != null)
+						nameText.text = string.Empty;
 
 				foreach (TextMeshProUGUI valueText in valueTexts)
-					valueText.text = string.Empty;
+					if (valueText != null)
+						valueText.text = string.Empty;
 
 				foreach (Image image in images)
-					image.enabled = false;
+					if (image != null)
+						image.enabled = false;
 
 				foreach (TextMeshProUGUI dataText in dataTexts)
 					dataText.text = string.Empty;
 
 				foreach (Image dataImage in dataImages)
-					dataImage.enabled = false;
+					if (dataImage != null)
+						dataImage.enabled = false;
 
 				foreach (TextMeshProUGUI runtimeIntText in runtimeIntTexts)
-					runtimeIntText.text = string.Empty;
+					if (runtimeIntText != null)
+						runtimeIntText.text = string.Empty;
 
 				foreach (TextMeshProUGUI runtimeStringText in runtimeStringTexts)
-					runtimeStringText.text = string.Empty;
+					if (runtimeStringText != null)
+						runtimeStringText.text = string.Empty;
 			}
 			else
 			{
 				foreach (TextMeshProUGUI nameText in nameTexts)
-					nameText.text = mDataContainer.Name;
+					if (nameText != null)
+						nameText.text = mDataContainer.Name;
 
 				foreach (TextMeshProUGUI valueText in valueTexts)
-					valueText.text = mDataContainer.Value;
+					if (valueText != null)
+						valueText.text = mDataContainer.Value;
 
 				foreach (Image image in images)
 				{
+					if (image == null)
+						continue;
+
 					image.enabled = mDataContainer.Sprite != null;
 					image.sprite = mDataContainer.Sprite;
 				}
 
 				for (int i = 0; i < dataTexts.Length; i++)
+				{
+					if (dataTexts[i] == null)
+						continue;
+
+					if (i >= mDataContainer.StringData.Length)
+					{
+						dataTexts[i].text = string.Empty;
+						continue;
+					}
+
 					dataTexts[i].text = mDataContainer.StringData[i];
+				}
 
 				for (int i = 0; i < dataImages.Length; i++)
 				{
-					dataImages[i].enabled = mDataContainer.Sprites[i] != null;
+					if (dataImages[i] == null)
+						continue;
+
+					if (i >= mDataContainer.Sprites.Length)
+					{
+						dataImages[i].enabled = false;
+						continue;
+					}
+
+					dataImages[i].enabled = true;
 					dataImages[i].sprite = mDataContainer.Sprites[i];
 				}
 
 				foreach (TextMeshProUGUI runtimeIntText in runtimeIntTexts)
-					runtimeIntText.text = mDataContainer.RuntimeInt.ToString();
+					if (runtimeIntText != null)
+						runtimeIntText.text = mDataContainer.RuntimeInt.ToString();
 
 				foreach (TextMeshProUGUI runtimeStringText in runtimeStringTexts)
-					runtimeStringText.text = mDataContainer.RuntimeString;
+					if (runtimeStringText != null)
+						runtimeStringText.text = mDataContainer.RuntimeString;
 			}
 		}
 	}

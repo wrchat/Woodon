@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace WRC.Woodon
 {
+	[DefaultExecutionOrder(-10000)]
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class AuctionManager : ContentManager
 	{
@@ -16,14 +17,14 @@ namespace WRC.Woodon
 		public int WinnerIndex { get; private set; } = NONE_INT;
 		public AuctionSeat MaxTryPointSeat { get; private set; } = null;
 
-		protected override void OnGameStateChange(DataChangeState changeState)
+		protected override void OnContentStateChange(DataChangeState changeState)
 		{
 			if (changeState == DataChangeState.Equal)
 				return;
 
 			MaxTryPointSeat = GetMaxTryPointSeat();
 
-			switch ((AuctionState)CurGameState)
+			switch ((AuctionState)ContentState)
 			{
 				case AuctionState.Wait:
 					// 경매 대기
@@ -52,13 +53,13 @@ namespace WRC.Woodon
 					break;
 			}
 
-			base.OnGameStateChange(changeState);
+			base.OnContentStateChange(changeState);
 		}
 
 		protected virtual void OnWait()
 		{
 			MDebugLog(nameof(OnWait));
-			
+
 			if (IsOwner() == false)
 				return;
 
@@ -75,7 +76,7 @@ namespace WRC.Woodon
 			MDebugLog(nameof(OnShowTarget));
 
 			mSFXManager.PlaySFX_L(0);
-			
+
 			if (IsOwner() == false)
 				return;
 		}
@@ -85,10 +86,10 @@ namespace WRC.Woodon
 			MDebugLog(nameof(OnAuctionTime));
 
 			mSFXManager.PlaySFX_L(1);
-			
+
 			if (IsOwner() == false)
 				return;
-			
+
 			if (timer != null)
 				timer.StartTimer();
 		}
@@ -96,9 +97,9 @@ namespace WRC.Woodon
 		protected virtual void OnWaitForResult()
 		{
 			MDebugLog(nameof(OnWaitForResult));
-	
+
 			mSFXManager.PlaySFX_L(2);
-			
+
 			if (IsOwner() == false)
 				return;
 
@@ -138,7 +139,7 @@ namespace WRC.Woodon
 
 			if (IsOwner() == false)
 				return;
-		
+
 			// 경매 결과 적용
 			if (MaxTryPointSeat == null)
 			{
@@ -171,15 +172,15 @@ namespace WRC.Woodon
 		public void NextStateWhenTimeOver()
 		{
 			MDebugLog(nameof(NextStateWhenTimeOver));
-			
-			if (CurGameState == (int)AuctionState.AuctionTime)
-				SetGameState((int)AuctionState.WaitForResult);
+
+			if (ContentState == (int)AuctionState.AuctionTime)
+				SetContentState((int)AuctionState.WaitForResult);
 		}
 
 		private AuctionSeat GetMaxTryPointSeat()
 		{
 			MSeat[] maxTryPointSeats = GetMaxTurnDataSeats();
-			
+
 			if (maxTryPointSeats.Length == 0)
 			{
 				debugText.text = $"No Winner.";
