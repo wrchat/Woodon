@@ -24,7 +24,6 @@ namespace WRC.Woodon
 		// 데이터가 요소로 사용되는 경우
 		[Header("_" + nameof(ContentDataOption) + "_Element")]
 		public bool IsElement = false;
-		public bool UseDataSprites = false;
 		public Sprite[] DataToSprites = new Sprite[0];
 		public Sprite DataNoneSprite = null;
 	}
