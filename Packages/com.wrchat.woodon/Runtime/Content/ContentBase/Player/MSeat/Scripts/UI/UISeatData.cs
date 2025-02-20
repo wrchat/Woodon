@@ -21,7 +21,7 @@ namespace WRC.Woodon
 
 		public void UpdateUI(ContentManager contentManager, MSeat mSeat)
 		{
-			ContentDataOption dataOption = contentManager.GetDataOption(dataName);
+			SeatDataOption dataOption = contentManager.GetSeatDataOption(dataName);
 			int data = mSeat.GetData(dataName);
 
 			UpdateDataUI(dataOption);
@@ -30,7 +30,7 @@ namespace WRC.Woodon
 
 		// 모든 데이터의 경우를 표현합니다
 		// 퀴즈쇼 컨텐츠로 예를 든다면, 모든 선택지를 표현합니다.
-		private void UpdateDataUI(ContentDataOption dataOption)
+		private void UpdateDataUI(SeatDataOption dataOption)
 		{
 			if (dataOption.IsElement)
 			{
@@ -67,7 +67,7 @@ namespace WRC.Woodon
 
 		// 현재 데이터를 표현합니다
 		// 퀴즈쇼 컨텐츠로 예를 든다면, 현재 선택한 선택지를 표현합니다.
-		private void UpdateCurDataUI(ContentDataOption dataOption, int data)
+		private void UpdateCurDataUI(SeatDataOption dataOption, int data)
 		{
 			if (dataOption.IsElement)
 			{

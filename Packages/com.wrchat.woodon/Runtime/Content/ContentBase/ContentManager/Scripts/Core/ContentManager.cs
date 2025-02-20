@@ -14,37 +14,75 @@ namespace WRC.Woodon
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class ContentManager : WEventPublisher
 	{
-		public MSeat[] Seats { get; private set; }
-
-		[field: Header("_" + nameof(ContentManager))]
-
-		[SerializeField] protected WJson contentData;
-		[field: SerializeField] public ContentDataOption[] ContentDataOptions { get; private set; }
 		public const string IntDataString = "IntData";
 		public const string TurnDataString = "TurnData";
+		public const string ContentStateString = "ContentState";
 
-		public ContentDataOption GetDataOption(string name)
-		{
-			foreach (ContentDataOption option in ContentDataOptions)
-				if (option.Name == name)
-					return option;
-			
-			MDebugLog($"Not Found DataOption: {name}", LogType.Error);
-			return null;
-		}
+		[Header("_" + nameof(ContentManager))]
+		[SerializeField] protected WJson contentData;
+		[SerializeField] private int defaultContentState = 0;
+		[SerializeField] private SeatDataOption[] seatDataOptions;
+		public MSeat[] Seats { get; private set; }
 
-		#region ContentState
 		public int ContentState
 		{
-			get => contentData.GetData("ContentState", 0);
-			private set => contentData.SetData("ContentState", value);
+			get => contentData.GetData(ContentStateString, 0);
+			private set => contentData.SetData(ContentStateString, value);
 		}
 		[SerializeField] private int contentStateMax = 1;
 
+		protected virtual void Start()
+		{
+			Init();
+			UpdateContent();
+		}
+
+		protected virtual void Init()
+		{
+			MDebugLog($"{nameof(Init)}");
+
+			Seats = GetComponentsInChildren<MSeat>();
+			contentData.RegisterListener(this, nameof(OnContentDataChanged), WJsonEvent.OnDeserialization);
+
+			for (int i = 0; i < Seats.Length; i++)
+				Seats[i].Init(this, i);
+
+			if (Networking.IsMaster)
+			{
+				ContentState = defaultContentState;
+				contentData.SerializeData();
+			}
+		}
+
+		public virtual void UpdateContent()
+		{
+			// MDebugLog($"{nameof(UpdateStuff)}");
+
+			foreach (MSeat seat in Seats)
+				seat.UpdateSeat();
+		}
+
+		public virtual void OnContentDataChanged()
+		{
+			MDebugLog($"{nameof(OnContentDataChanged)}");
+
+			if (contentData.HasDataChanged(ContentStateString, out int originState, out int curState))
+				OnContentStateChange(DataChangeStateUtil.GetChangeState(originState, curState));
+		}
+
+		public SeatDataOption GetSeatDataOption(string dataName)
+		{
+			foreach (SeatDataOption option in seatDataOptions)
+				if (option.Name == dataName)
+					return option;
+
+			MDebugLog($"Not Found DataOption: {dataName}", LogType.Error);
+			return null;
+		}
+
 		protected virtual void OnContentStateChange(DataChangeState changeState)
 		{
-			MDebugLog($"{nameof(OnContentStateChange)}, {changeState}");
-
+			MDebugLog($"{nameof(OnContentStateChange)}, {nameof(changeState)} = {changeState.ToFriendlyString()}");
 			UpdateContent();
 			SendEvents();
 		}
@@ -60,46 +98,6 @@ namespace WRC.Woodon
 		public void SetContentState(Enum newContentState) => SetContentState(Convert.ToInt32(newContentState));
 		public void SetContentStateNext() => SetContentState(ContentState + 1);
 		public void SetContentStatePrev() => SetContentState(ContentState - 1);
-		#endregion
-
-		protected virtual void Start()
-		{
-			Init();
-			UpdateContent();
-		}
-
-		protected virtual void Init()
-		{
-			// MDebugLog($"{nameof(Init)}");
-
-			Seats = GetComponentsInChildren<MSeat>();
-			contentData.RegisterListener(this, nameof(OnContentDataChanged), WJsonEvent.OnDeserialization);
-
-			for (int i = 0; i < Seats.Length; i++)
-				Seats[i].Init(this, i);
-
-			if (Networking.IsMaster)
-			{
-				ContentState = 0;
-				contentData.SerializeData();
-			}
-		}
-
-		public virtual void OnContentDataChanged()
-		{
-			MDebugLog($"{nameof(OnContentDataChanged)}");
-
-			if (contentData.HasDataChanged("ContentState", out int origin, out int cur))
-				OnContentStateChange(DataChangeStateUtil.GetChangeState(origin, cur));
-		}
-
-		public virtual void UpdateContent()
-		{
-			// MDebugLog($"{nameof(UpdateStuff)}");
-
-			foreach (MSeat seat in Seats)
-				seat.UpdateSeat();
-		}
 
 		public virtual void OnSeatTargetChanged(MSeat changedSeat)
 		{
@@ -122,6 +120,11 @@ namespace WRC.Woodon
 				if (seat.IsTargetPlayer())
 					return seat;
 			return null;
+		}
+
+		public virtual string GetContentStateString()
+		{
+			return ContentState.ToString();
 		}
 	}
 }

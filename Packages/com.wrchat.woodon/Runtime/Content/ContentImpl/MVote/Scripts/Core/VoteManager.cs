@@ -109,7 +109,7 @@ namespace WRC.Woodon
 
 			string debugS = string.Empty;
 
-			ContentDataOption turnDataOption = GetDataOption(TurnDataString);
+			SeatDataOption turnDataOption = GetSeatDataOption(TurnDataString);
 			for (int i = 0; i < turnDataOption.DataToString.Length; i++)
 				debugS += $"{turnDataOption.DataToString[i]} 투표 수 : {GetVoteCount(i)}\n";
 
@@ -168,7 +168,7 @@ namespace WRC.Woodon
 
 		protected int[] GetMaxVoteIndex()
 		{
-			ContentDataOption turnDataOption = GetDataOption(TurnDataString);
+			SeatDataOption turnDataOption = GetSeatDataOption(TurnDataString);
 			int voteSelectionCount = turnDataOption.DataToString.Length;
 			int[] voteCounts = new int[voteSelectionCount];
 

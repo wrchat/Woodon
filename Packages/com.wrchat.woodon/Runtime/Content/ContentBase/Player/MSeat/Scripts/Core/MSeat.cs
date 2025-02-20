@@ -19,7 +19,7 @@ namespace WRC.Woodon
 				contentManager != null ? IntDataOption.DefaultValue : default);
 			set => seatData.SetData(ContentManager.IntDataString, value);
 		}
-		protected ContentDataOption IntDataOption => contentManager.GetDataOption(ContentManager.IntDataString);
+		protected SeatDataOption IntDataOption => contentManager.GetSeatDataOption(ContentManager.IntDataString);
 
 		public int TurnData
 		{
@@ -27,7 +27,7 @@ namespace WRC.Woodon
 				contentManager != null ? TurnDataOption.DefaultValue : default);
 			set => seatData.SetData(ContentManager.TurnDataString, value);
 		}
-		protected ContentDataOption TurnDataOption => contentManager.GetDataOption(ContentManager.TurnDataString);
+		protected SeatDataOption TurnDataOption => contentManager.GetSeatDataOption(ContentManager.TurnDataString);
 
 		protected ContentManager contentManager;
 		public int Index { get; private set; }
@@ -58,11 +58,13 @@ namespace WRC.Woodon
 		{
 			MDebugLog($"{nameof(OnSeatDataChanged)}");
 
-			if (seatData.HasDataChanged("IntData", out int originIntData, out int curIntData))
+			if (seatData.HasDataChanged(ContentManager.IntDataString, out int originIntData, out int curIntData))
 				OnDataChanged(DataChangeStateUtil.GetChangeState(originIntData, curIntData));
 
-			if (seatData.HasDataChanged("TurnData", out int originTurnData, out int curTurnData))
+			if (seatData.HasDataChanged(ContentManager.TurnDataString, out int originTurnData, out int curTurnData))
 				OnTurnDataChange(DataChangeStateUtil.GetChangeState(originTurnData, curTurnData));
+
+			SendEvents();
 		}
 
 		public void SerializeData()

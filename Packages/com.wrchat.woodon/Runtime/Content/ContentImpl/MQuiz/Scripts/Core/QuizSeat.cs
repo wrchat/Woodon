@@ -9,10 +9,6 @@ namespace WRC.Woodon
 	{
 		[Header("_" + nameof(QuizSeat))]
 		[SerializeField] private Image[] selectAnswerDecoImages;
-		private readonly string[] answerToString =
-		{
-			"O", "X", "1", "2", "3", "4", "5", string.Empty
-		};
 
 		public int Score => IntData;
 		public QuizAnswerType ExpectedAnswer => (QuizAnswerType)TurnData;
@@ -30,9 +26,10 @@ namespace WRC.Woodon
 
 		public void SelectAnswer(QuizAnswerType newAnswer, bool force = false)
 		{
+			force |= QuizManager.HACK_CanSelectAnswerAnyTime;
 			if (force == false)
 			{
-				if (QuizManager.ContentState != (int)QuizContentState.SelectAnswer)
+				if (QuizManager.IsContentState(QuizContentState.SelectAnswer) == false)
 					return;
 
 				if (QuizManager.CanSelectAnswer == false)
@@ -43,26 +40,11 @@ namespace WRC.Woodon
 			SerializeData();
 		}
 
-		public virtual void OnWait()
-		{
-			MDebugLog($"{nameof(OnWait)}");
-		}
-		public virtual void OnQuizTime()
-		{
-			MDebugLog($"{nameof(OnQuizTime)}");
-		}
-		public virtual void OnSelectAnswer()
-		{
-			MDebugLog($"{nameof(OnSelectAnswer)}");
-		}
-		public virtual void OnShowPlayerAnswer()
-		{
-			MDebugLog($"{nameof(OnShowPlayerAnswer)}");
-		}
-		public virtual void OnCheckAnswer()
-		{
-			MDebugLog($"{nameof(OnCheckAnswer)}");
-		}
+		public virtual void OnWait() => MDebugLog($"{nameof(OnWait)}");
+		public virtual void OnQuizTime() => MDebugLog($"{nameof(OnQuizTime)}");
+		public virtual void OnSelectAnswer() => MDebugLog($"{nameof(OnSelectAnswer)}");
+		public virtual void OnShowPlayerAnswer() => MDebugLog($"{nameof(OnShowPlayerAnswer)}");
+		public virtual void OnCheckAnswer() => MDebugLog($"{nameof(OnCheckAnswer)}");
 		public virtual void OnScoring()
 		{
 			MDebugLog($"{nameof(OnScoring)}");

@@ -21,21 +21,15 @@ namespace WRC.Woodon
 		[field: SerializeField] public bool SubScoreWhenWrongAnswer { get; private set; } = false;
 		[field: SerializeField] public bool DropPlayerWhenWrongAnswer { get; private set; } = false;
 		[field: SerializeField] public bool DropPlayerWhenZeroScore { get; private set; } = false;
+		[field: SerializeField] public bool HACK_CanSelectAnswerAnyTime { get; private set; } = false;
 
-		protected int[] answerCount = new int[10];
+		protected int[] answerCount = new int[(int)QuizAnswerType.None + 1];
 
 		public QuizData[] QuizDatas { get; private set; }
-
 		public int CurQuizIndex => curQuizIndex.Value;
-
 		public QuizData CurQuizData => QuizDatas[CurQuizIndex];
-		public bool CanSelectAnswer { get; protected set; } = true;
 
-		protected override void Start()
-		{
-			base.Start();
-			UpdateContent();
-		}
+		public bool CanSelectAnswer { get; protected set; } = true;
 
 		protected override void Init()
 		{
@@ -133,38 +127,28 @@ namespace WRC.Woodon
 			if (IsOwner() == false)
 				return;
 
-			foreach (MSeat turnSeat in Seats)
-				turnSeat.ResetTurnData();
+			foreach (MSeat seat in Seats)
+				seat.ResetTurnData();
 		}
 
-		public virtual void OnQuizTime()
+		public virtual void OnQuizTime() => MDebugLog($"{nameof(OnQuizTime)}");
+		public virtual void OnSelectAnswer() => MDebugLog($"{nameof(OnSelectAnswer)}");
+		public virtual void OnShowPlayerAnswer() => MDebugLog($"{nameof(OnShowPlayerAnswer)}");
+		public virtual void OnCheckAnswer() => MDebugLog($"{nameof(OnCheckAnswer)}");
+		public virtual void OnExplaining() => MDebugLog($"{nameof(OnExplaining)}");
+		public virtual void OnScoring() => MDebugLog($"{nameof(OnScoring)}");
+
+		public override string GetContentStateString()
 		{
-			MDebugLog($"{nameof(OnQuizTime)}");
+			return ((QuizContentState)ContentState).ToFriendlyString();
 		}
 
-		public virtual void OnSelectAnswer()
-		{
-			MDebugLog($"{nameof(OnSelectAnswer)}");
-		}
-
-		public virtual void OnShowPlayerAnswer()
-		{
-			MDebugLog($"{nameof(OnShowPlayerAnswer)}");
-		}
-
-		public virtual void OnCheckAnswer()
-		{
-			MDebugLog($"{nameof(OnCheckAnswer)}");
-		}
-
-		public virtual void OnExplaining()
-		{
-			MDebugLog($"{nameof(OnExplaining)}");
-		}
-
-		public virtual void OnScoring()
-		{
-			MDebugLog($"{nameof(OnScoring)}");
-		}
+		public void SetContentState_Wait() => SetContentState(QuizContentState.Wait);
+		public void SetContentState_ShowQuiz() => SetContentState(QuizContentState.ShowQuiz);
+		public void SetContentState_SelectAnswer() => SetContentState(QuizContentState.SelectAnswer);
+		public void SetContentState_ShowPlayerAnswer() => SetContentState(QuizContentState.ShowPlayerAnswer);
+		public void SetContentState_CheckAnswer() => SetContentState(QuizContentState.CheckAnswer);
+		public void SetContentState_Explaining() => SetContentState(QuizContentState.Explaining);
+		public void SetContentState_Scoring() => SetContentState(QuizContentState.Scoring);
 	}
 }
