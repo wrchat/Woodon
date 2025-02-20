@@ -1,6 +1,6 @@
 namespace WRC.Woodon
 {
-	public class DataChangeStateUtil
+	public static class DataChangeStateUtil
 	{
 		public static DataChangeState GetChangeState(int origin, int value)
 		{
@@ -27,5 +27,24 @@ namespace WRC.Woodon
 		public static bool IsDataChanged(DataChangeState changeState) =>
 			changeState != DataChangeState.None &&
 			changeState != DataChangeState.Equal;
+
+		public static string ToFriendlyString(this DataChangeState state)
+		{
+			switch (state)
+			{
+				case DataChangeState.None:
+					return "None";
+				case DataChangeState.Equal:
+					return "Equal";
+				case DataChangeState.NotEqual:
+					return "NotEqual";
+				case DataChangeState.Greater:
+					return "Greater";
+				case DataChangeState.Less:
+					return "Less";
+				default:
+					return "ERROR";
+			}
+		}
 	}
 }
