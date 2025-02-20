@@ -5,6 +5,7 @@ using VRC.SDK3.Data;
 
 namespace WRC.Woodon
 {
+	[DefaultExecutionOrder(-100000)]
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class WJson : MString
 	{
