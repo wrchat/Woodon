@@ -14,11 +14,24 @@ namespace WRC.Woodon
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class ContentManager : WEventPublisher
 	{
-		public MSeat[] MSeats { get; private set; }
+		public MSeat[] Seats { get; private set; }
 
 		[field: Header("_" + nameof(ContentManager))]
 
 		[SerializeField] protected WJson contentData;
+		[field: SerializeField] public ContentDataOption[] ContentDataOptions { get; private set; }
+		public const string IntDataString = "IntData";
+		public const string TurnDataString = "TurnData";
+
+		public ContentDataOption GetDataOption(string name)
+		{
+			foreach (ContentDataOption option in ContentDataOptions)
+				if (option.Name == name)
+					return option;
+			
+			MDebugLog($"Not Found DataOption: {name}", LogType.Error);
+			return null;
+		}
 
 		#region ContentState
 		public int ContentState
@@ -59,11 +72,11 @@ namespace WRC.Woodon
 		{
 			// MDebugLog($"{nameof(Init)}");
 
-			MSeats = GetComponentsInChildren<MSeat>();
+			Seats = GetComponentsInChildren<MSeat>();
 			contentData.RegisterListener(this, nameof(OnContentDataChanged), WJsonEvent.OnDeserialization);
 
-			for (int i = 0; i < MSeats.Length; i++)
-				MSeats[i].Init(this, i);
+			for (int i = 0; i < Seats.Length; i++)
+				Seats[i].Init(this, i);
 
 			if (Networking.IsMaster)
 			{
@@ -84,7 +97,7 @@ namespace WRC.Woodon
 		{
 			// MDebugLog($"{nameof(UpdateStuff)}");
 
-			foreach (MSeat seat in MSeats)
+			foreach (MSeat seat in Seats)
 				seat.UpdateSeat();
 		}
 
@@ -92,7 +105,7 @@ namespace WRC.Woodon
 		{
 			// 중복 제거 (한 플레이어가 한 번에 하나의 자리에만 등록 가능하도록)
 			{
-				foreach (MSeat seat in MSeats)
+				foreach (MSeat seat in Seats)
 				{
 					if (seat == changedSeat)
 						continue;
@@ -105,60 +118,10 @@ namespace WRC.Woodon
 
 		public MSeat GetLocalPlayerSeat()
 		{
-			foreach (MSeat seat in MSeats)
+			foreach (MSeat seat in Seats)
 				if (seat.IsTargetPlayer())
 					return seat;
 			return null;
-		}
-
-		// ===================================
-
-		[field: Header("_" + nameof(ContentManager) + "_IntData")]
-		[field: SerializeField] public int DefaultData { get; private set; } = 0;
-		[field: SerializeField] public string[] DataToString { get; protected set; }
-		[field: SerializeField] public bool ResetDataWhenOwnerChange { get; private set; }
-		[field: SerializeField] public bool UseDataSprites { get; private set; }
-		[field: SerializeField] public bool IsDataElement { get; private set; }
-		[field: SerializeField] public Sprite[] DataSprites { get; protected set; }
-		[field: SerializeField] public Sprite DataNoneSprite { get; protected set; }
-
-		[field: Header("_" + nameof(ContentManager) + "_TurnData")]
-		[field: SerializeField] public int DefaultTurnData { get; private set; } = 0;
-		[field: SerializeField] public string[] TurnDataToString { get; protected set; }
-		[field: SerializeField] public bool ResetTurnDataWhenOwnerChange { get; private set; }
-		[field: SerializeField] public bool UseTurnDataSprites { get; private set; }
-		[field: SerializeField] public bool IsTurnDataElement { get; private set; }
-		[field: SerializeField] public Sprite[] TurnDataSprites { get; protected set; }
-		[field: SerializeField] public Sprite TurnDataNoneSprite { get; protected set; }
-
-		public int GetMaxTurnData()
-		{
-			int maxTurnData = 0;
-
-			foreach (MSeat mTurnSeat in MSeats)
-				maxTurnData = Mathf.Max(maxTurnData, mTurnSeat.TurnData);
-
-			return maxTurnData;
-		}
-
-		public MSeat[] GetMaxTurnDataSeats()
-		{
-			int maxTurnData = GetMaxTurnData();
-			int maxTurnDataCount = 0;
-			MSeat[] maxTurnDataSeats = new MSeat[MSeats.Length];
-
-			foreach (MSeat mTurnSeat in MSeats)
-			{
-				if (mTurnSeat.TurnData == maxTurnData)
-				{
-					maxTurnDataSeats[maxTurnDataCount] = mTurnSeat;
-					maxTurnDataCount++;
-				}
-			}
-
-			WUtil.Resize(ref maxTurnDataSeats, maxTurnDataCount);
-
-			return maxTurnDataSeats;
 		}
 	}
 }

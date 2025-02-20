@@ -1,0 +1,31 @@
+using System;
+using UdonSharp;
+using UnityEngine;
+using VRC.SDK3.Data;
+using VRC.SDKBase;
+using VRC.Udon;
+
+namespace WRC.Woodon
+{
+	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
+	public class ContentDataOption : MBase
+	{
+		[field: Header("_" + nameof(ContentDataOption))]
+
+		// 이름
+		[field: SerializeField] public string Name { get; private set; } = ContentManager.TurnDataString;
+
+		// 옵션
+		[Header("_" + nameof(ContentDataOption) + "_Option")]
+		public int DefaultValue = NONE_INT;
+		public string[] DataToString = new string[0];
+		public bool ResetWhenOwnerChange = true;
+
+		// 데이터가 요소로 사용되는 경우
+		[Header("_" + nameof(ContentDataOption) + "_Element")]
+		public bool IsElement = false;
+		public bool UseDataSprites = false;
+		public Sprite[] DataToSprites = new Sprite[0];
+		public Sprite DataNoneSprite = null;
+	}
+}

@@ -11,17 +11,16 @@ namespace WRC.Woodon
 		[Header("_" + nameof(QuizManager))]
 		[SerializeField] protected int playerCount = 10;
 		[SerializeField] protected MValue curQuizIndex;
-		[SerializeField] private GameObject[] waitTimeObjects;
 		[SerializeField] private Transform wrongPos;
 		[SerializeField] private Transform[] quizDataParents;
 		[SerializeField] protected MValue quizDataParentsIndex;
 		[SerializeField] private MString seatIndexInputField;
 
 		[field: Header("_" + nameof(QuizManager) + "_GameRule")]
-		[field: SerializeField] public bool GameRule_ADD_SCORE_WHEN_CORRECT_ANSWER { get; private set; } = false;
-		[field: SerializeField] public bool GameRule_SUB_SCORE_WHEN_WRONG_ANSWER { get; private set; } = false;
-		[field: SerializeField] public bool GameRule_DROP_PLAYER_WHEN_WRONG_ANSWER { get; private set; } = false;
-		[field: SerializeField] public bool GameRule_DROP_PLAYER_WHEN_ZERO_SCORE { get; private set; } = false;
+		[field: SerializeField] public bool AddScoreWhenCorrectAnswer { get; private set; } = false;
+		[field: SerializeField] public bool SubScoreWhenWrongAnswer { get; private set; } = false;
+		[field: SerializeField] public bool DropPlayerWhenWrongAnswer { get; private set; } = false;
+		[field: SerializeField] public bool DropPlayerWhenZeroScore { get; private set; } = false;
 
 		protected int[] answerCount = new int[10];
 
@@ -45,19 +44,20 @@ namespace WRC.Woodon
 			base.Init();
 
 			curQuizIndex.RegisterListener(this, nameof(OnQuizIndexChange));
-			quizDataParentsIndex.RegisterListener(this, nameof(OnQuizDataParentChange));
-
 			curQuizIndex.SetMinMaxValue(0, QuizDatas.Length - 1);
-			quizDataParentsIndex.SetMinMaxValue(0, quizDataParents.Length - 1);
-
 			OnQuizIndexChange();
-			OnQuizDataParentChange();
+
+			if (quizDataParentsIndex != null)
+			{
+				quizDataParentsIndex.RegisterListener(this, nameof(OnQuizDataParentChange));
+				quizDataParentsIndex.SetMinMaxValue(0, quizDataParents.Length - 1);
+				OnQuizDataParentChange();
+			}
 		}
 
 		public override void UpdateContent()
 		{
 			CalcAnswerCount();
-			SetWaitObjectActive(IsContentState((int)QuizContentState.Wait));
 
 			base.UpdateContent();
 		}
@@ -65,24 +65,18 @@ namespace WRC.Woodon
 		private void CalcAnswerCount()
 		{
 			answerCount = new int[(int)QuizAnswerType.None + 1];
-			foreach (QuizSeat quizSeat in MSeats)
+			foreach (QuizSeat seat in Seats)
 			{
-				if ((int)quizSeat.ExpectedAnswer < 0 || (int)quizSeat.ExpectedAnswer >= answerCount.Length)
+				if ((int)seat.ExpectedAnswer < 0 || (int)seat.ExpectedAnswer >= answerCount.Length)
 					continue;
 
-				answerCount[(int)quizSeat.ExpectedAnswer]++;
+				answerCount[(int)seat.ExpectedAnswer]++;
 			}
-		}
-
-		private void SetWaitObjectActive(bool active)
-		{
-			foreach (GameObject waitTimeObject in waitTimeObjects)
-				waitTimeObject.SetActive(active);
 		}
 
 		protected override void OnContentStateChange(DataChangeState changeState)
 		{
-			if (changeState != DataChangeState.Less)
+			// if (changeState != DataChangeState.Less)
 			{
 				if (ContentState == (int)QuizContentState.Wait) OnWait();
 				else if (ContentState == (int)QuizContentState.ShowQuiz) OnQuizTime();
@@ -104,6 +98,12 @@ namespace WRC.Woodon
 
 		public virtual void OnQuizDataParentChange()
 		{
+			if (quizDataParentsIndex == null)
+			{
+				MDebugLog($"{nameof(OnQuizDataParentChange)} : {nameof(quizDataParentsIndex)}가 null입니다.", LogType.Error);
+				return;
+			}
+
 			QuizDatas = quizDataParents[quizDataParentsIndex.Value].GetComponentsInChildren<QuizData>();
 			curQuizIndex.SetMinMaxValue(0, QuizDatas.Length - 1);
 			curQuizIndex.SetValue(0);
@@ -117,7 +117,7 @@ namespace WRC.Woodon
 			int seatIndex = int.Parse(seatIndexInputField.Value);
 
 			if (0 < seatIndex && seatIndex <= playerCount)
-				TP(MSeats[seatIndex - 1].transform);
+				TP(Seats[seatIndex - 1].transform);
 		}
 
 		public void TP_WrongPos()
@@ -133,8 +133,8 @@ namespace WRC.Woodon
 			if (IsOwner() == false)
 				return;
 
-			foreach (MSeat turnSeat in MSeats)
-				turnSeat.ResetData();
+			foreach (MSeat turnSeat in Seats)
+				turnSeat.ResetTurnData();
 		}
 
 		public virtual void OnQuizTime()

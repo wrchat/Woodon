@@ -61,10 +61,10 @@ namespace WRC.Woodon
 			if (IsOwner() == false)
 				return;
 
-			foreach (VoteSeat voteSeat in MSeats)
+			foreach (VoteSeat seat in Seats)
 			{
-				voteSeat.TurnData = NONE_INT;
-				voteSeat.SerializeData();
+				seat.TurnData = NONE_INT;
+				seat.SerializeData();
 			}
 		}
 
@@ -109,8 +109,9 @@ namespace WRC.Woodon
 
 			string debugS = string.Empty;
 
-			for (int i = 0; i < TurnDataToString.Length; i++)
-				debugS += $"{TurnDataToString[i]} 투표 수 : {GetVoteCount(i)}\n";
+			ContentDataOption turnDataOption = GetDataOption(TurnDataString);
+			for (int i = 0; i < turnDataOption.DataToString.Length; i++)
+				debugS += $"{turnDataOption.DataToString[i]} 투표 수 : {GetVoteCount(i)}\n";
 
 			if (MaxVoteIndexes.Length == 0 || (GetVoteCount(MaxVoteIndexes[0]) == 0))
 			{
@@ -119,7 +120,7 @@ namespace WRC.Woodon
 			}
 			else if (MaxVoteIndexes.Length == 1)
 			{
-				debugText.text = debugS + $"{TurnDataToString[MaxVoteIndexes[0]]} is Winner.";
+				debugText.text = debugS + $"{turnDataOption.DataToString[MaxVoteIndexes[0]]} is Winner.";
 				return;
 			}
 			else
@@ -156,7 +157,7 @@ namespace WRC.Woodon
 		{
 			int count = 0;
 
-			foreach (VoteSeat voteSeat in MSeats)
+			foreach (VoteSeat voteSeat in Seats)
 			{
 				if (voteSeat.VoteIndex == voteIndex)
 					count++;
@@ -167,7 +168,8 @@ namespace WRC.Woodon
 
 		protected int[] GetMaxVoteIndex()
 		{
-			int voteSelectionCount = TurnDataToString.Length;
+			ContentDataOption turnDataOption = GetDataOption(TurnDataString);
+			int voteSelectionCount = turnDataOption.DataToString.Length;
 			int[] voteCounts = new int[voteSelectionCount];
 
 			int maxCount = 0;

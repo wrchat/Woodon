@@ -63,11 +63,11 @@ namespace WRC.Woodon
 			if (IsOwner() == false)
 				return;
 
-			foreach (AuctionSeat auctionSeat in MSeats)
+			foreach (AuctionSeat seat in Seats)
 			{
-				auctionSeat.SetTryTime(NONE_INT);
-				auctionSeat.TurnData = 0;
-				auctionSeat.SerializeData();
+				seat.SetTryTime(NONE_INT);
+				seat.TurnData = 0;
+				seat.SerializeData();
 			}
 		}
 
@@ -164,7 +164,7 @@ namespace WRC.Woodon
 			MDebugLog(nameof(UpdateContent));
 			base.UpdateContent();
 
-			int maxPoint = GetMaxTurnData();
+			int maxPoint = ContentUtil.GetMaxData(this, TurnDataString);
 			foreach (TextMeshProUGUI maxTryPointText in maxTryPointTexts)
 				maxTryPointText.text = maxPoint.ToString();
 		}
@@ -179,7 +179,7 @@ namespace WRC.Woodon
 
 		private AuctionSeat GetMaxTryPointSeat()
 		{
-			MSeat[] maxTryPointSeats = GetMaxTurnDataSeats();
+			MSeat[] maxTryPointSeats = ContentUtil.GetMaxDataSeats(this, TurnDataString);
 
 			if (maxTryPointSeats.Length == 0)
 			{

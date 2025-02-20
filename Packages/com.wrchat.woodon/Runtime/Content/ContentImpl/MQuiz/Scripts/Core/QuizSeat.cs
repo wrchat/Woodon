@@ -72,7 +72,7 @@ namespace WRC.Woodon
 
 			if (IsAnswerCorrect)
 			{
-				if (QuizManager.GameRule_ADD_SCORE_WHEN_CORRECT_ANSWER)
+				if (QuizManager.AddScoreWhenCorrectAnswer)
 				{
 					IntData = Score + 1;
 					SerializeData();
@@ -80,17 +80,17 @@ namespace WRC.Woodon
 			}
 			else
 			{
-				if (QuizManager.GameRule_DROP_PLAYER_WHEN_WRONG_ANSWER)
+				if (QuizManager.DropPlayerWhenWrongAnswer)
 				{
 					ResetSeat();
 					QuizManager.TP_WrongPos();
 				}
-				else if (QuizManager.GameRule_SUB_SCORE_WHEN_WRONG_ANSWER)
+				else if (QuizManager.SubScoreWhenWrongAnswer)
 				{
 					IntData = Score - 1;
 					SerializeData();
 
-					if (QuizManager.GameRule_DROP_PLAYER_WHEN_ZERO_SCORE && (Score <= 0))
+					if (QuizManager.DropPlayerWhenZeroScore && (Score <= 0))
 					{
 						ResetSeat();
 						QuizManager.TP_WrongPos();

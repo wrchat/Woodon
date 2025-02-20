@@ -50,18 +50,19 @@ namespace WRC.Woodon
 			if (contentManager == null)
 				return;
 
-			if (contentManager.IsDataElement)
+			ContentDataOption dataOption = contentManager.GetDataOption(ContentManager.IntDataString);
+			if (dataOption.IsElement)
 			{
 				string curDataString = (IntData == NONE_INT) ? string.Empty :
-										(contentManager.DataToString.Length > IntData) ? contentManager.DataToString[IntData] : IntData.ToString();
+										(dataOption.DataToString.Length > IntData) ? dataOption.DataToString[IntData] : IntData.ToString();
 				foreach (TextMeshProUGUI curDataText in curDataTexts)
 					curDataText.text = curDataString;
 
-				Sprite[] dataSprites = contentManager.DataSprites;
-				Sprite noneSprite = contentManager.DataNoneSprite;
+				Sprite[] dataSprites = dataOption.DataToSprites;
+				Sprite noneSprite = dataOption.DataNoneSprite;
 				foreach (Image curDataImage in curDataImages)
 				{
-					if (contentManager.UseDataSprites)
+					if (dataOption.UseDataSprites)
 					{
 						curDataImage.sprite = (IntData != NONE_INT) ? dataSprites[IntData] : noneSprite;
 					}
@@ -83,18 +84,19 @@ namespace WRC.Woodon
 			if (contentManager == null)
 				return;
 
-			if (contentManager.IsTurnDataElement)
+			ContentDataOption dataOption = contentManager.GetDataOption(ContentManager.TurnDataString);
+			if (dataOption.IsElement)
 			{
 				string curTurnDataString = (TurnData == NONE_INT) ? string.Empty :
-										(contentManager.TurnDataToString.Length > TurnData) ? contentManager.TurnDataToString[TurnData] : TurnData.ToString();
+										(dataOption.DataToString.Length > TurnData) ? dataOption.DataToString[TurnData] : TurnData.ToString();
 				foreach (TextMeshProUGUI turnDataText in curTurnDataTexts)
 					turnDataText.text = curTurnDataString;
 
-				Sprite[] turnDataSprites = contentManager.TurnDataSprites;
-				Sprite noneSprite = contentManager.TurnDataNoneSprite;
+				Sprite[] turnDataSprites = dataOption.DataToSprites;
+				Sprite noneSprite = dataOption.DataNoneSprite;
 				foreach (Image curTurnDataImage in curTurnDataImages)
 				{
-					if (contentManager.UseTurnDataSprites)
+					if (dataOption.UseDataSprites)
 					{
 						curTurnDataImage.sprite = (TurnData != NONE_INT) ? turnDataSprites[TurnData] : noneSprite;
 					}
@@ -116,29 +118,30 @@ namespace WRC.Woodon
 			if (contentManager == null)
 				return;
 
-			if (contentManager.IsDataElement)
+			ContentDataOption dataOption = contentManager.GetDataOption(ContentManager.IntDataString);
+			if (dataOption.IsElement)
 			{
 				for (int i = 0; i < dataTexts.Length; i++)
 				{
-					if (i >= contentManager.DataToString.Length)
+					if (i >= dataOption.DataToString.Length)
 					{
 						dataTexts[i].text = i.ToString();
 					}
 					else
 					{
-						dataTexts[i].text = contentManager.DataToString[i];
+						dataTexts[i].text = dataOption.DataToString[i];
 					}
 				}
 
 				for (int i = 0; i < dataImages.Length; i++)
 				{
-					if (i >= contentManager.DataToString.Length)
+					if (i >= dataOption.DataToString.Length)
 					{
-						dataImages[i].sprite = contentManager.DataNoneSprite;
+						dataImages[i].sprite = dataOption.DataNoneSprite;
 					}
 					else
 					{
-						dataImages[i].sprite = contentManager.DataSprites[i];
+						dataImages[i].sprite = dataOption.DataToSprites[i];
 					}
 				}
 			}
@@ -154,29 +157,30 @@ namespace WRC.Woodon
 			if (contentManager == null)
 				return;
 
-			if (contentManager.IsTurnDataElement)
+			ContentDataOption dataOption = contentManager.GetDataOption(ContentManager.TurnDataString);
+			if (dataOption.IsElement)
 			{
 				for (int i = 0; i < turnDataTexts.Length; i++)
 				{
-					if (i >= contentManager.TurnDataToString.Length)
+					if (i >= dataOption.DataToString.Length)
 					{
 						turnDataTexts[i].text = i.ToString();
 					}
 					else
 					{
-						turnDataTexts[i].text = contentManager.TurnDataToString[i];
+						turnDataTexts[i].text = dataOption.DataToString[i];
 					}
 				}
 
 				for (int i = 0; i < turnDataImages.Length; i++)
 				{
-					if (i >= contentManager.TurnDataToString.Length)
+					if (i >= dataOption.DataToString.Length)
 					{
-						turnDataImages[i].sprite = contentManager.TurnDataNoneSprite;
+						turnDataImages[i].sprite = dataOption.DataNoneSprite;
 					}
 					else
 					{
-						turnDataImages[i].sprite = contentManager.TurnDataSprites[i];
+						turnDataImages[i].sprite = dataOption.DataToSprites[i];
 					}
 				}
 			}
