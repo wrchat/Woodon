@@ -10,7 +10,8 @@ namespace WRC.Woodon
 		[SerializeField] private int defaultValue;
 
 		[Header("_" + nameof(ActiveList) + " - Options")]
-		[SerializeField] protected MValue mValue;
+		[SerializeField] protected MValue mValue; // defaultValue를 무시합니다.
+		[SerializeField] private bool setMValueMinMax = true;
 		[SerializeField] protected ActiveListOption option;
 		[SerializeField] protected int targetIndex = NONE_INT;
 
@@ -32,12 +33,16 @@ namespace WRC.Woodon
 
 		private void Init()
 		{
-			SetValue(defaultValue);
-
 			if (mValue != null)
 			{
-				InitMValueMinMax();
+				if (setMValueMinMax)
+					InitMValueMinMax();
 				mValue.RegisterListener(this, nameof(UpdateActiveByMValue));
+				UpdateActiveByMValue();
+			}
+			else
+			{
+				SetValue(defaultValue);
 			}
 
 			UpdateActive();
@@ -77,7 +82,9 @@ namespace WRC.Woodon
 		public void SetMValue(MValue mValue)
 		{
 			this.mValue = mValue;
-			InitMValueMinMax();
+
+			if (setMValueMinMax)
+				InitMValueMinMax();
 			UpdateActiveByMValue();
 		}
 
