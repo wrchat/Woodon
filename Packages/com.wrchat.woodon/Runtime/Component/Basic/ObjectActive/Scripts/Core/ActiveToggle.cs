@@ -18,6 +18,7 @@ namespace WRC.Woodon
 			get => _active;
 			private set
 			{
+				MDebugLog($"{nameof(Active)} changed: {_active} -> {value}");
 				_active = value;
 				UpdateActive();
 			}
@@ -59,7 +60,7 @@ namespace WRC.Woodon
 
 		public void UpdateValueByMBool()
 		{
-			if (mBool)
+			if (mBool != null)
 				Active = mBool.Value;
 		}
 
