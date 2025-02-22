@@ -27,7 +27,7 @@ namespace WRC.Woodon
 			if (cameraDatas.Length == 0)
 				cameraDatas = transform.GetComponentsInChildren<WCameraData>();
 
-			// cameraIndex_MValue.SetMinMaxValue(NONE_INT, cameraDatas.Length - 1);
+			// cameraIndex.SetMinMaxValue(NONE_INT, cameraDatas.Length - 1);
 			cameraIndex.RegisterListener(this, nameof(UpdateCameraIndexByMValue));
 
 			TurnOffCamera();
@@ -50,8 +50,7 @@ namespace WRC.Woodon
 					Input.GetKeyDown(KeyCode.Backspace) ||
 					Input.GetKeyDown(KeyCode.Escape))
 				{
-					cameraIndex.SetValue(NONE_INT);
-					TurnOffCamera();
+					cameraIndex.SetValue(NONE_INT); // UpdateCameraIndexByMValue -> TurnOffCamera
 				}
 			}
 
@@ -63,7 +62,7 @@ namespace WRC.Woodon
 				if (Input.GetKeyDown(cameraDatas[i].KeyCode))
 				{
 					if (lastCameraIndex == i)
-						TurnOffCamera();
+						cameraIndex.SetValue(NONE_INT); // UpdateCameraIndexByMValue -> TurnOffCamera
 					else
 						SetCamera(i);
 				
