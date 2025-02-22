@@ -14,24 +14,75 @@ namespace WRC.Woodon
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class ContentManager : WEventPublisher
 	{
-		public MSeat[] MSeats { get; private set; }
+		public const string IntDataString = "IntData";
+		public const string TurnDataString = "TurnData";
+		public const string ContentStateString = "ContentState";
 
-		[field: Header("_" + nameof(ContentManager))]
-
+		[Header("_" + nameof(ContentManager))]
 		[SerializeField] protected WJson contentData;
+		[SerializeField] private int defaultContentState = 0;
+		[SerializeField] private SeatDataOption[] seatDataOptions;
+		public MSeat[] Seats { get; private set; }
 
-		#region ContentState
 		public int ContentState
 		{
-			get => contentData.GetData("ContentState", 0);
-			private set => contentData.SetData("ContentState", value);
+			get => contentData.GetData(ContentStateString, 0);
+			private set => contentData.SetData(ContentStateString, value);
 		}
 		[SerializeField] private int contentStateMax = 1;
 
+		protected virtual void Start()
+		{
+			Init();
+			UpdateContent();
+		}
+
+		protected virtual void Init()
+		{
+			MDebugLog($"{nameof(Init)}");
+
+			Seats = GetComponentsInChildren<MSeat>();
+			contentData.RegisterListener(this, nameof(OnContentDataChanged), WJsonEvent.OnDeserialization);
+
+			for (int i = 0; i < Seats.Length; i++)
+				Seats[i].Init(this, i);
+
+			if (Networking.IsMaster)
+			{
+				ContentState = defaultContentState;
+				contentData.SerializeData();
+			}
+		}
+
+		public virtual void UpdateContent()
+		{
+			// MDebugLog($"{nameof(UpdateStuff)}");
+
+			foreach (MSeat seat in Seats)
+				seat.UpdateSeat();
+		}
+
+		public virtual void OnContentDataChanged()
+		{
+			MDebugLog($"{nameof(OnContentDataChanged)}");
+
+			if (contentData.HasDataChanged(ContentStateString, out int originState, out int curState))
+				OnContentStateChange(DataChangeStateUtil.GetChangeState(originState, curState));
+		}
+
+		public SeatDataOption GetSeatDataOption(string dataName)
+		{
+			foreach (SeatDataOption option in seatDataOptions)
+				if (option.Name == dataName)
+					return option;
+
+			MDebugLog($"Not Found DataOption: {dataName}", LogType.Error);
+			return null;
+		}
+
 		protected virtual void OnContentStateChange(DataChangeState changeState)
 		{
-			MDebugLog($"{nameof(OnContentStateChange)}, {changeState}");
-
+			MDebugLog($"{nameof(OnContentStateChange)}, {nameof(changeState)} = {changeState.ToFriendlyString()}");
 			UpdateContent();
 			SendEvents();
 		}
@@ -47,52 +98,12 @@ namespace WRC.Woodon
 		public void SetContentState(Enum newContentState) => SetContentState(Convert.ToInt32(newContentState));
 		public void SetContentStateNext() => SetContentState(ContentState + 1);
 		public void SetContentStatePrev() => SetContentState(ContentState - 1);
-		#endregion
-
-		protected virtual void Start()
-		{
-			Init();
-			UpdateContent();
-		}
-
-		protected virtual void Init()
-		{
-			// MDebugLog($"{nameof(Init)}");
-
-			MSeats = GetComponentsInChildren<MSeat>();
-			contentData.RegisterListener(this, nameof(OnContentDataChanged), WJsonEvent.OnDeserialization);
-
-			for (int i = 0; i < MSeats.Length; i++)
-				MSeats[i].Init(this, i);
-
-			if (Networking.IsMaster)
-			{
-				ContentState = 0;
-				contentData.SerializeData();
-			}
-		}
-
-		public virtual void OnContentDataChanged()
-		{
-			MDebugLog($"{nameof(OnContentDataChanged)}");
-
-			if (contentData.HasDataChanged("ContentState", out int origin, out int cur))
-				OnContentStateChange(DataChangeStateUtil.GetChangeState(origin, cur));
-		}
-
-		public virtual void UpdateContent()
-		{
-			// MDebugLog($"{nameof(UpdateStuff)}");
-
-			foreach (MSeat seat in MSeats)
-				seat.UpdateSeat();
-		}
 
 		public virtual void OnSeatTargetChanged(MSeat changedSeat)
 		{
 			// 중복 제거 (한 플레이어가 한 번에 하나의 자리에만 등록 가능하도록)
 			{
-				foreach (MSeat seat in MSeats)
+				foreach (MSeat seat in Seats)
 				{
 					if (seat == changedSeat)
 						continue;
@@ -105,60 +116,15 @@ namespace WRC.Woodon
 
 		public MSeat GetLocalPlayerSeat()
 		{
-			foreach (MSeat seat in MSeats)
+			foreach (MSeat seat in Seats)
 				if (seat.IsTargetPlayer())
 					return seat;
 			return null;
 		}
 
-		// ===================================
-
-		[field: Header("_" + nameof(ContentManager) + "_IntData")]
-		[field: SerializeField] public int DefaultData { get; private set; } = 0;
-		[field: SerializeField] public string[] DataToString { get; protected set; }
-		[field: SerializeField] public bool ResetDataWhenOwnerChange { get; private set; }
-		[field: SerializeField] public bool UseDataSprites { get; private set; }
-		[field: SerializeField] public bool IsDataElement { get; private set; }
-		[field: SerializeField] public Sprite[] DataSprites { get; protected set; }
-		[field: SerializeField] public Sprite DataNoneSprite { get; protected set; }
-
-		[field: Header("_" + nameof(ContentManager) + "_TurnData")]
-		[field: SerializeField] public int DefaultTurnData { get; private set; } = 0;
-		[field: SerializeField] public string[] TurnDataToString { get; protected set; }
-		[field: SerializeField] public bool ResetTurnDataWhenOwnerChange { get; private set; }
-		[field: SerializeField] public bool UseTurnDataSprites { get; private set; }
-		[field: SerializeField] public bool IsTurnDataElement { get; private set; }
-		[field: SerializeField] public Sprite[] TurnDataSprites { get; protected set; }
-		[field: SerializeField] public Sprite TurnDataNoneSprite { get; protected set; }
-
-		public int GetMaxTurnData()
+		public virtual string GetContentStateString()
 		{
-			int maxTurnData = 0;
-
-			foreach (MSeat mTurnSeat in MSeats)
-				maxTurnData = Mathf.Max(maxTurnData, mTurnSeat.TurnData);
-
-			return maxTurnData;
-		}
-
-		public MSeat[] GetMaxTurnDataSeats()
-		{
-			int maxTurnData = GetMaxTurnData();
-			int maxTurnDataCount = 0;
-			MSeat[] maxTurnDataSeats = new MSeat[MSeats.Length];
-
-			foreach (MSeat mTurnSeat in MSeats)
-			{
-				if (mTurnSeat.TurnData == maxTurnData)
-				{
-					maxTurnDataSeats[maxTurnDataCount] = mTurnSeat;
-					maxTurnDataCount++;
-				}
-			}
-
-			WUtil.Resize(ref maxTurnDataSeats, maxTurnDataCount);
-
-			return maxTurnDataSeats;
+			return ContentState.ToString();
 		}
 	}
 }

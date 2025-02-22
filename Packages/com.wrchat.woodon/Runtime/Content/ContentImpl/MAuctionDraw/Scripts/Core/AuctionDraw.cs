@@ -162,7 +162,7 @@ namespace WRC.Woodon
 
 			// HACK: AuctionSeat와 DrawElementData의 Index가 같다면, 둘 다 동일한 플레이어를 대상으로 한다고 가정
 			TeamType teamType = DrawManager.DrawElementDatas[AuctionManager.WinnerIndex].TeamType;
-			int maxTryPoint = AuctionManager.GetMaxTurnData();
+			int maxTryPoint = ContentUtil.GetMaxData(AuctionManager, ContentManager.TurnDataString);
 			DrawManager.SetElementData(TargetIndex, teamType, DrawRole.Normal, true, maxTryPoint.ToString());
 		}
 

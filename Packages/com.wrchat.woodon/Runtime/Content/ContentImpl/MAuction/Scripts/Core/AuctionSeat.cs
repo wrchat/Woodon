@@ -21,9 +21,7 @@ namespace WRC.Woodon
 			if (contentManager.ContentState != (int)AuctionState.AuctionTime)
 				return;
 
-			AuctionManager auctionManager = (AuctionManager)contentManager;
-
-			if (auctionManager.GetMaxTurnData() >= tryPoint_MValue.Value)
+			if (ContentUtil.GetMaxData(contentManager, ContentManager.TurnDataString) >= tryPoint_MValue.Value)
 				return;
 
 			SetTryTime(Networking.GetServerTimeInMilliseconds());

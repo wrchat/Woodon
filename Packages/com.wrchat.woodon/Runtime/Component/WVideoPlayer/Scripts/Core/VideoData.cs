@@ -9,5 +9,10 @@ namespace WRC.Woodon
 	{
 		[field: Header("_" + nameof(VideoData))]
 		[field: SerializeField] public VRCUrl VRCUrl { get; private set; }
+
+		public void SetVRCUrl(VRCUrl url)
+		{
+			VRCUrl = url;
+		}
 	}
 }
