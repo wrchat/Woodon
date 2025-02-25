@@ -31,12 +31,14 @@ namespace WRC.Woodon
 
 		protected virtual void Init()
 		{
-			SetActive(defaultActive);
-
 			if (mBool != null)
 			{
 				mBool.RegisterListener(this, nameof(UpdateValueByMBool));
 				UpdateValueByMBool();
+			}
+			else
+			{
+				SetActive(defaultActive);
 			}
 
 			UpdateActive();
