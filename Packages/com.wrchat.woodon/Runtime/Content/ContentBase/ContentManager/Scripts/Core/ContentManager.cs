@@ -29,7 +29,7 @@ namespace WRC.Woodon
 			get => contentData.GetData(ContentStateString, 0);
 			private set => contentData.SetData(ContentStateString, value);
 		}
-		[SerializeField] private int contentStateMax = 1;
+		[SerializeField] protected int contentStateMax = 1;
 
 		protected virtual void Start()
 		{

@@ -33,6 +33,8 @@ namespace WRC.Woodon
 
 		protected override void Init()
 		{
+			contentStateMax = (int)QuizContentState.Scoring;
+
 			QuizDatas = quizDataParents[0].GetComponentsInChildren<QuizData>();
 
 			base.Init();
