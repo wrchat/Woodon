@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UdonSharp;
 
 namespace WRC.Woodon
 {
-	// [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
+	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public class SpriteList : MBase
 	{
 		[Header("_" + nameof(SpriteList))]
@@ -14,6 +15,7 @@ namespace WRC.Woodon
 		[SerializeField] private SpriteRenderer[] spriteRenderers;
 
 		[Header("_" + nameof(SpriteList) + " - Options")]
+		[SerializeField] private SpriteListInitType initType = SpriteListInitType.FirstSprite;
 		[SerializeField] private MValue mValue_SpriteIndex;
 
 		private void Start()
@@ -31,7 +33,15 @@ namespace WRC.Woodon
 			}
 			else
 			{
-				InitSprites();
+				switch (initType)
+				{
+					case SpriteListInitType.FirstSprite:
+						SetAll(0);
+						break;
+					case SpriteListInitType.EachIndex:
+						InitSprites();
+						break;
+				}
 			}
 		}
 
@@ -41,7 +51,7 @@ namespace WRC.Woodon
 
 			for (int i = 0; i < images.Length; i++)
 				images[i].sprite = sprites[i];
-			
+
 			for (int i = 0; i < spriteRenderers.Length; i++)
 				spriteRenderers[i].sprite = sprites[i];
 		}
@@ -54,21 +64,27 @@ namespace WRC.Woodon
 				SetAll(mValue_SpriteIndex.Value);
 		}
 
+		[ContextMenu(nameof(SetAll))]
+		public void SetAll()
+		{
+			SetAll(0);
+		}
+
 		public void SetAll(int spriteIndex)
 		{
 			MDebugLog(nameof(SetAll));
 
 			if (spriteIndex < 0 || spriteIndex >= sprites.Length)
 			{
-				MDebugLog($"Index out of range: {spriteIndex}");
+				MDebugLog($"{nameof(SetAll)}, Index out of range: {spriteIndex}", LogType.Error);
 				return;
 			}
 
-			foreach (Image targetImage in images)
-				targetImage.sprite = sprites[spriteIndex];
+			foreach (Image image in images)
+				image.sprite = sprites[spriteIndex];
 
-			foreach (SpriteRenderer targetSpriteRenderer in spriteRenderers)
-				targetSpriteRenderer.sprite = sprites[spriteIndex];
+			foreach (SpriteRenderer spriteRenderer in spriteRenderers)
+				spriteRenderer.sprite = sprites[spriteIndex];
 		}
 	}
 }
