@@ -9,7 +9,7 @@ namespace WRC.Woodon
 	public class UISeatData : MBase
 	{
 		[Header("_" + nameof(UISeatData))]
-		[SerializeField] private string dataName;
+		[SerializeField] private string dataName = NONE_STRING;
 
 		[Header("_" + nameof(UISeatData) + "_Data")]
 		[SerializeField] private TextMeshProUGUI[] dataTexts;
@@ -23,6 +23,12 @@ namespace WRC.Woodon
 		{
 			SeatDataOption dataOption = contentManager.GetSeatDataOption(dataName);
 			int data = mSeat.GetData(dataName);
+
+			if (dataOption == null)
+			{
+				MDebugLog($"{nameof(UpdateUI)} - {dataName} - {dataOption} is null. Please check the dataName.", LogType.Error);
+				return;
+			}
 
 			UpdateDataUI(dataOption);
 			UpdateCurDataUI(dataOption, data);
@@ -82,7 +88,6 @@ namespace WRC.Woodon
 				}
 				foreach (TextMeshProUGUI curDataText in curDataTexts)
 					curDataText.text = curDataString;
-
 
 				Sprite sprite;
 				{
