@@ -5,9 +5,9 @@ using VRC.SDK3.Data;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class MDataContainer : WEventPublisher
+	public class WDataContainer : WEventPublisher
 	{
-		[field: Header("_" + nameof(MDataContainer))]
+		[field: Header("_" + nameof(WDataContainer))]
 		[field: SerializeField] public string Name { get; set; }
 		[field: SerializeField, TextArea(3, 10)] public string Value { get; set; } = NONE_STRING;
 		[field: SerializeField] public Sprite Sprite { get; set; }

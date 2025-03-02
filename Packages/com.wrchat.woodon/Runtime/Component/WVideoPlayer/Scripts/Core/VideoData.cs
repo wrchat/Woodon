@@ -5,7 +5,7 @@ using VRC.SDKBase;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class VideoData : MDataContainer
+	public class VideoData : WDataContainer
 	{
 		[field: Header("_" + nameof(VideoData))]
 		[field: SerializeField] public VRCUrl VRCUrl { get; private set; }

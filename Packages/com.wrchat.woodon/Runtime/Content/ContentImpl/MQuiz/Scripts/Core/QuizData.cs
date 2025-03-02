@@ -4,7 +4,7 @@ using UnityEngine;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class QuizData : MDataContainer
+	public class QuizData : WDataContainer
 	{
 		[field: Header("_" + nameof(QuizData))]
 		[field: SerializeField] public QuizAnswerType QuizAnswer { get; set; } = QuizAnswerType.None;

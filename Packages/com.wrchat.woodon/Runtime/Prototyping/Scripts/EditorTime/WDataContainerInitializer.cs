@@ -6,7 +6,7 @@ using WRC.Woodon;
 namespace WRC
 {
 #if UNITY_EDITOR
-	public class MDataContainerInitializer : MonoBehaviour
+	public class WDataContainerInitializer : MonoBehaviour
 	{
 		[SerializeField] private string stringPrefix;
 		[SerializeField] private string[] strings;
@@ -15,27 +15,27 @@ namespace WRC
 		[ContextMenu(nameof(InitName))]
 		public void InitName()
 		{
-			ForEachMDataContainer((mDataContainer, index) =>
+			ForEachWDataContainer((wDataContainer, index) =>
 			{
-				mDataContainer.Name = $"{stringPrefix}{strings[0]}{index}";
+				wDataContainer.Name = $"{stringPrefix}{strings[0]}{index}";
 			});
 		}
 
 		[ContextMenu(nameof(InitValue))]
 		public void InitValue()
 		{
-			ForEachMDataContainer((mDataContainer, index) =>
+			ForEachWDataContainer((wDataContainer, index) =>
 			{
-				mDataContainer.Value = $"{stringPrefix}{strings[0]}{index}";
+				wDataContainer.Value = $"{stringPrefix}{strings[0]}{index}";
 			});
 		}
 
 		[ContextMenu(nameof(InitStringData))]
 		public void InitStringData()
 		{
-			ForEachMDataContainer((mDataContainer, index) =>
+			ForEachWDataContainer((wDataContainer, index) =>
 			{
-				mDataContainer.StringData = new string[] { $"{stringPrefix}{strings[0]}{index}" };
+				wDataContainer.StringData = new string[] { $"{stringPrefix}{strings[0]}{index}" };
 			});
 		}
 
@@ -45,12 +45,12 @@ namespace WRC
 			if (sprites == null || sprites.Length == 0)
 				return;
 
-			ForEachMDataContainer((mDataContainer, index) =>
+			ForEachWDataContainer((wDataContainer, index) =>
 			{
 				if (sprites.Length <= index)
 					return;
 
-				mDataContainer.Sprite = sprites[index];
+				wDataContainer.Sprite = sprites[index];
 			});
 		}
 
@@ -60,12 +60,12 @@ namespace WRC
 			if (sprites == null || sprites.Length == 0)
 				return;
 
-			ForEachMDataContainer((mDataContainer, index) =>
+			ForEachWDataContainer((wDataContainer, index) =>
 			{
 				if (sprites.Length <= index)
 					return;
 
-				mDataContainer.Sprites = sprites;
+				wDataContainer.Sprites = sprites;
 			});
 		}
 
@@ -75,23 +75,23 @@ namespace WRC
 			if (sprites == null || sprites.Length == 0)
 				return;
 
-			ForEachMDataContainer((mDataContainer, index) =>
+			ForEachWDataContainer((wDataContainer, index) =>
 			{
 				if (sprites.Length <= index)
 					return;
 
-				mDataContainer.Sprites = new Sprite[] { sprites[index] };
+				wDataContainer.Sprites = new Sprite[] { sprites[index] };
 			});
 		}
 
-		private void ForEachMDataContainer(Action<MDataContainer, int> action)
+		private void ForEachWDataContainer(Action<WDataContainer, int> action)
 		{
-			MDataContainer[] mDataContainer = GetComponentsInChildren<MDataContainer>(true);
+			WDataContainer[] wDataContainer = GetComponentsInChildren<WDataContainer>(true);
 
-			for (int i = 0; i < mDataContainer.Length; i++)
+			for (int i = 0; i < wDataContainer.Length; i++)
 			{
-				action(mDataContainer[i], i);
-				EditorUtility.SetDirty(mDataContainer[i]);
+				action(wDataContainer[i], i);
+				EditorUtility.SetDirty(wDataContainer[i]);
 			}
 
 			AssetDatabase.SaveAssets();

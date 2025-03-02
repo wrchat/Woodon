@@ -14,7 +14,7 @@ namespace WRC.Woodon
 		[SerializeField] protected CanvasGroup[] answerCanvasGroups;
 		[SerializeField] protected CanvasGroup[] explainCanvasGroups;
 		[SerializeField] protected MAnimator[] mAnimatorsByCurQuizAnswer;
-		[SerializeField] protected UIMDataContainer[] quizDataUIs;
+		[SerializeField] protected UIWDataContainer[] quizDataUIs;
 
 		[SerializeField] protected UIQuizAnswerBlock[] answerBlocks;
 		[SerializeField] protected QuizSeat quizSeat; // 대표자
@@ -68,8 +68,8 @@ namespace WRC.Woodon
 
 		public void UpdateQuizDataUIs()
 		{
-			// UIMDataContainer
-			foreach (UIMDataContainer quizDataUI in quizDataUIs)
+			// UIWDataContainer
+			foreach (UIWDataContainer quizDataUI in quizDataUIs)
 				quizDataUI.UpdateUI(QuizManager.CurQuizData);
 
 			// MAnimator

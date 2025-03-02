@@ -6,10 +6,10 @@ using UnityEngine.UI;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class UIMDataContainer : WBase
+	public class UIWDataContainer : WBase
 	{
-		[field: Header("_" + nameof(UIMDataContainer))]
-		[field: SerializeField] public MDataContainer TargetMDataContainer { get; protected set; }
+		[field: Header("_" + nameof(UIWDataContainer))]
+		[field: SerializeField] public WDataContainer TargetWDataContainer { get; protected set; }
 
 		[SerializeField] protected TextMeshProUGUI[] nameTexts;
 		[SerializeField] protected TextMeshProUGUI[] valueTexts;
@@ -21,10 +21,10 @@ namespace WRC.Woodon
 		[SerializeField] protected TextMeshProUGUI[] runtimeStringTexts;
 		[SerializeField] protected TextMeshProUGUI[] runtimeIntTexts;
 
-		[Header("_" + nameof(UIMDataContainer) + " - Options")]
-		[SerializeField] protected Transform mDataContainerParent;
-		[SerializeField] protected MDataContainer[] mDataContainers;
-		[SerializeField] protected WInt mDataContainerIndex;
+		[Header("_" + nameof(UIWDataContainer) + " - Options")]
+		[SerializeField] protected Transform wDataContainerParent;
+		[SerializeField] protected WDataContainer[] wDataContainers;
+		[SerializeField] protected WInt wDataContainerIndex;
 
 		protected virtual void Start()
 		{
@@ -35,42 +35,42 @@ namespace WRC.Woodon
 		{
 			WDebugLog($"{nameof(Init)}");
 
-			if (mDataContainers == null || mDataContainers.Length == 0)
+			if (wDataContainers == null || wDataContainers.Length == 0)
 			{
-				if (mDataContainerParent != null)
+				if (wDataContainerParent != null)
 				{
-					mDataContainers = mDataContainerParent.GetComponentsInChildren<MDataContainer>();
+					wDataContainers = wDataContainerParent.GetComponentsInChildren<WDataContainer>();
 				}
 			}
 
-			if (mDataContainerIndex != null)
-				mDataContainerIndex.RegisterListener(this, nameof(UpdateUIByWIntByIndex));
+			if (wDataContainerIndex != null)
+				wDataContainerIndex.RegisterListener(this, nameof(UpdateUIByWIntByIndex));
 		}
 
 		public void UpdateUIByWIntByIndex()
 		{
-			if (mDataContainers == null || mDataContainers.Length == 0)
+			if (wDataContainers == null || wDataContainers.Length == 0)
 				return;
 
-			if (mDataContainerIndex == null)
+			if (wDataContainerIndex == null)
 				return;
 
-			if ((mDataContainerIndex.Value < 0) || (mDataContainerIndex.Value >= mDataContainers.Length))
+			if ((wDataContainerIndex.Value < 0) || (wDataContainerIndex.Value >= wDataContainers.Length))
 			{
 				UpdateUI(null);
 				return;
 			}
 
-			UpdateUI(mDataContainers[mDataContainerIndex.Value]);
+			UpdateUI(wDataContainers[wDataContainerIndex.Value]);
 		}
 
-		public virtual void UpdateUI(MDataContainer mDataContainer)
+		public virtual void UpdateUI(WDataContainer wDataContainer)
 		{
-			this.TargetMDataContainer = mDataContainer;
+			this.TargetWDataContainer = wDataContainer;
 
 			WDebugLog($"{nameof(UpdateUI)}");
 
-			if (mDataContainer == null)
+			if (wDataContainer == null)
 			{
 				foreach (TextMeshProUGUI nameText in nameTexts)
 					if (nameText != null)
@@ -103,19 +103,19 @@ namespace WRC.Woodon
 			{
 				foreach (TextMeshProUGUI nameText in nameTexts)
 					if (nameText != null)
-						nameText.text = mDataContainer.Name;
+						nameText.text = wDataContainer.Name;
 
 				foreach (TextMeshProUGUI valueText in valueTexts)
 					if (valueText != null)
-						valueText.text = mDataContainer.Value;
+						valueText.text = wDataContainer.Value;
 
 				foreach (Image image in images)
 				{
 					if (image == null)
 						continue;
 
-					image.enabled = mDataContainer.Sprite != null;
-					image.sprite = mDataContainer.Sprite;
+					image.enabled = wDataContainer.Sprite != null;
+					image.sprite = wDataContainer.Sprite;
 				}
 
 				for (int i = 0; i < dataTexts.Length; i++)
@@ -123,13 +123,13 @@ namespace WRC.Woodon
 					if (dataTexts[i] == null)
 						continue;
 
-					if (i >= mDataContainer.StringData.Length)
+					if (i >= wDataContainer.StringData.Length)
 					{
 						dataTexts[i].text = string.Empty;
 						continue;
 					}
 
-					dataTexts[i].text = mDataContainer.StringData[i];
+					dataTexts[i].text = wDataContainer.StringData[i];
 				}
 
 				for (int i = 0; i < dataImages.Length; i++)
@@ -137,23 +137,23 @@ namespace WRC.Woodon
 					if (dataImages[i] == null)
 						continue;
 
-					if (i >= mDataContainer.Sprites.Length)
+					if (i >= wDataContainer.Sprites.Length)
 					{
 						dataImages[i].enabled = false;
 						continue;
 					}
 
 					dataImages[i].enabled = true;
-					dataImages[i].sprite = mDataContainer.Sprites[i];
+					dataImages[i].sprite = wDataContainer.Sprites[i];
 				}
 
 				foreach (TextMeshProUGUI runtimeIntText in runtimeIntTexts)
 					if (runtimeIntText != null)
-						runtimeIntText.text = mDataContainer.RuntimeInt.ToString();
+						runtimeIntText.text = wDataContainer.RuntimeInt.ToString();
 
 				foreach (TextMeshProUGUI runtimeStringText in runtimeStringTexts)
 					if (runtimeStringText != null)
-						runtimeStringText.text = mDataContainer.RuntimeString;
+						runtimeStringText.text = wDataContainer.RuntimeString;
 			}
 		}
 	}
