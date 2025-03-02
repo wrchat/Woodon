@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 4956670739430357527}
   - component: {fileID: 6453120220949936918}
   m_Layer: 0
-  m_Name: '[MString] Text [Temp]'
+  m_Name: '[WString] Text [Temp]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -318,7 +318,7 @@ MonoBehaviour:
   _udonSharpBackingUdonBehaviour: {fileID: 194328945814583518}
   DEBUG: 0
   defaultActive: 0
-  mBool: {fileID: 0}
+  wBool: {fileID: 0}
   activeObjects:
   - {fileID: 2573273444903386211}
   - {fileID: 3770554378607446726}
@@ -363,7 +363,7 @@ GameObject:
   - component: {fileID: 6725924684215784238}
   - component: {fileID: 2856414687151016026}
   m_Layer: 0
-  m_Name: '[UIMSeat] TurnData'
+  m_Name: '[UIWSeat] TurnData'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -684,7 +684,7 @@ GameObject:
   - component: {fileID: 807609826960225912}
   - component: {fileID: 7994089511503545719}
   m_Layer: 0
-  m_Name: '[MBool] IsExpectedAnswerNone'
+  m_Name: '[WBool] IsExpectedAnswerNone'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -983,7 +983,7 @@ MonoBehaviour:
   _udonSharpBackingUdonBehaviour: {fileID: 4615221296747910141}
   DEBUG: 1
   defaultActive: 0
-  mBool: {fileID: 807609826960225912}
+  wBool: {fileID: 807609826960225912}
   activeObjects:
   - {fileID: 887210879426927572}
   - {fileID: 6066001497114483928}
@@ -1071,7 +1071,7 @@ MonoBehaviour:
   _udonSharpBackingUdonBehaviour: {fileID: 1174851952838334364}
   DEBUG: 1
   defaultActive: 0
-  mBool: {fileID: 6847791886153857678}
+  wBool: {fileID: 6847791886153857678}
   activeObjects:
   - {fileID: 325555228495776658}
   disableObjects: []
@@ -1574,7 +1574,7 @@ GameObject:
   - component: {fileID: 6213453498136076780}
   - component: {fileID: 6213453498136076781}
   m_Layer: 0
-  m_Name: '[MString] KakaoTalk'
+  m_Name: '[WString] Talk'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2403,7 +2403,7 @@ GameObject:
   - component: {fileID: 6847791886153857678}
   - component: {fileID: 8134518025391433380}
   m_Layer: 0
-  m_Name: '[MBool] ContentState == SelectAnswer'
+  m_Name: '[WBool] ContentState == SelectAnswer'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3009,7 +3009,7 @@ PrefabInstance:
     - target: {fileID: 575807553034599862, guid: 258eef0f1d794c946b2aa714a32ebc40,
         type: 3}
       propertyPath: m_Name
-      value: '[MSFXManager]'
+      value: '[WSFXManager]'
       objectReference: {fileID: 0}
     - target: {fileID: 575807553034599863, guid: 258eef0f1d794c946b2aa714a32ebc40,
         type: 3}
@@ -4428,7 +4428,7 @@ PrefabInstance:
     - target: {fileID: 4774525052903376082, guid: 960c8edfe8ed4b84b9ba5fa9d4a24756,
         type: 3}
       propertyPath: m_Name
-      value: '[UIMString] Text [Temp]'
+      value: '[UIWString] Text [Temp]'
       objectReference: {fileID: 0}
     - target: {fileID: 6248727364057272414, guid: 960c8edfe8ed4b84b9ba5fa9d4a24756,
         type: 3}
@@ -4543,6 +4543,11 @@ PrefabInstance:
     - target: {fileID: 7105112632924901801, guid: 960c8edfe8ed4b84b9ba5fa9d4a24756,
         type: 3}
       propertyPath: mString
+      value: 
+      objectReference: {fileID: 4956670739430357527}
+    - target: {fileID: 7105112632924901801, guid: 960c8edfe8ed4b84b9ba5fa9d4a24756,
+        type: 3}
+      propertyPath: wString
       value: 
       objectReference: {fileID: 4956670739430357527}
     - target: {fileID: 7105112632924901801, guid: 960c8edfe8ed4b84b9ba5fa9d4a24756,
