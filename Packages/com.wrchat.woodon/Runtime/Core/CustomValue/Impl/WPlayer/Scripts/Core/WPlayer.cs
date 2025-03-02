@@ -5,9 +5,9 @@ using VRC.SDKBase;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class MTarget : WEventPublisher
+	public class WPlayer : WEventPublisher
 	{
-		[Header("_" + nameof(MTarget))]
+		[Header("_" + nameof(WPlayer))]
 		[SerializeField] private string autoTargetName = "-";
 
 		[UdonSynced, FieldChangeCallback(nameof(TargetPlayerID))] private int _targetPlayerID = NONE_INT;
@@ -28,7 +28,7 @@ namespace WRC.Woodon
 				SendEvents();
 		}
 
-		[field: Header("_" + nameof(MTarget) + " - Options")]
+		[field: Header("_" + nameof(WPlayer) + " - Options")]
 		[field: SerializeField] public bool UseNone { get; private set; } = true;
 
 		// ---- ---- ---- ----

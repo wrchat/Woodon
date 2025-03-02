@@ -6,7 +6,7 @@ using VRC.SDKBase;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class MSeat : MTarget
+	public class MSeat : WPlayer
 	{
 		[Header("_" + nameof(MSeat))]
 		[SerializeField] protected WJson seatData;

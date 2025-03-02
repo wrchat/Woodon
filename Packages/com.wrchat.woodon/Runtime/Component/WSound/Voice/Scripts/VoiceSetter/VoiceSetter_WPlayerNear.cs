@@ -5,10 +5,10 @@ using VRC.SDKBase;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class VoiceSetter_MTargetNear : VoiceSetter
+	public class VoiceSetter_WPlayerNear : VoiceSetter
 	{
-		[field: Header("_" + nameof(VoiceSetter_MTargetNear))]
-		[field: SerializeField] public MTarget TargetPlayer { get; private set; }
+		[field: Header("_" + nameof(VoiceSetter_WPlayerNear))]
+		[field: SerializeField] public WPlayer TargetPlayer { get; private set; }
 		[SerializeField] private float amplificationDistance = 10;
 
 		protected override bool IsCondition(VRCPlayerApi playerApi)

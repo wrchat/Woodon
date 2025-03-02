@@ -28,8 +28,8 @@ namespace WRC.Woodon
 			WDebugLog(
 				$"{nameof(PlayerChanged)} : {nameof(TeamType)} = {teamType}, {nameof(UIMTeamButton)} = {targetTeamButton}");
 
-			if (targetTeamButton.MTarget.TargetPlayerID == NONE_INT ||
-				targetTeamButton.MTarget.TargetPlayerID == Networking.LocalPlayer.playerId)
+			if (targetTeamButton.WPlayer.TargetPlayerID == NONE_INT ||
+				targetTeamButton.WPlayer.TargetPlayerID == Networking.LocalPlayer.playerId)
 			{
 				WDebugLog($"Invalid ID");
 				return;
@@ -43,7 +43,7 @@ namespace WRC.Woodon
 
 					foreach (UIMTeamButton teamButton in mTeam.TeamButtons)
 						if (teamButton.IsPlayer())
-							teamButton.MTarget.SetTargetNone();
+							teamButton.WPlayer.SetTargetNone();
 				}
 
 			SendEvents();

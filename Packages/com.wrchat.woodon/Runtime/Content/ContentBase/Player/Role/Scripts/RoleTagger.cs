@@ -10,7 +10,7 @@ namespace WRC.Woodon
 		[Header("_" + nameof(RoleTagger))]
 		[SerializeField] private RoleTag roleTag;
 		[SerializeField] private WBool wBool;
-		[SerializeField] private MTarget[] mTargets;
+		[SerializeField] private WPlayer[] wPlayers;
 
 		private void Start()
 		{
@@ -26,9 +26,9 @@ namespace WRC.Woodon
 		public void UpdateTag()
 		{
 			bool isTarget = false;
-			foreach (MTarget mTarget in mTargets)
+			foreach (WPlayer wPlayer in wPlayers)
 			{
-				if (mTarget.IsTargetPlayer())
+				if (wPlayer.IsTargetPlayer())
 				{
 					isTarget = true;
 					break;

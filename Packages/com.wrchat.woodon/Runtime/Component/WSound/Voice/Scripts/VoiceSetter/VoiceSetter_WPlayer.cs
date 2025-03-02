@@ -5,14 +5,14 @@ using VRC.SDKBase;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class VoiceSetter_MTarget : VoiceSetter
+	public class VoiceSetter_WPlayer : VoiceSetter
 	{
-		[field: Header("_" + nameof(VoiceSetter_MTarget))]
-		[field: SerializeField] public MTarget[] TargetPlayers { get; private set; }
+		[field: Header("_" + nameof(VoiceSetter_WPlayer))]
+		[field: SerializeField] public WPlayer[] TargetPlayers { get; private set; }
 
 		protected override bool IsCondition(VRCPlayerApi playerAPI)
 		{
-			foreach (MTarget targetPlayer in TargetPlayers)
+			foreach (WPlayer targetPlayer in TargetPlayers)
 			{
 				if (playerAPI.playerId == targetPlayer.TargetPlayerID)
 					return true;

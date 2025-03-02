@@ -5,7 +5,7 @@ using VRC.SDKBase;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class MStation : MTarget
+	public class MStation : WPlayer
 	{
 		[Header("_" + nameof(MStation))]
 		[SerializeField] private VRCStation station;

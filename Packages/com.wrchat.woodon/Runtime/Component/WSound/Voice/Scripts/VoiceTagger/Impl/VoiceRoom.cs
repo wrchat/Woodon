@@ -8,7 +8,7 @@ namespace WRC.Woodon
 	public class VoiceRoom : VoiceTagger
 	{
 		[Header("_" + nameof(VoiceRoom))]
-		[SerializeField] private MTarget[] mTargets;
+		[SerializeField] private WPlayer[] wPlayers;
 		[field: SerializeField] public WBool[] IsPlayerInside { get; private set; }
 
 		// [SerializeField] private WBool isLocked;
@@ -16,9 +16,9 @@ namespace WRC.Woodon
 
 		public override bool IsCondition(VRCPlayerApi player)
 		{
-			for (int j = 0; j < mTargets.Length; j++)
+			for (int j = 0; j < wPlayers.Length; j++)
 			{
-				if (mTargets[j].TargetPlayerID == player.playerId && IsPlayerInside[j].Value)
+				if (wPlayers[j].TargetPlayerID == player.playerId && IsPlayerInside[j].Value)
 				{
 					return true;
 				}
@@ -36,7 +36,7 @@ namespace WRC.Woodon
 				return;
 
 			int inPlayerCount = 0;
-			for (int i = 0; i < mTargets.Length; i++)
+			for (int i = 0; i < wPlayers.Length; i++)
 			{
 				if (IsPlayerInside[i].Value)
 					inPlayerCount++;
@@ -65,9 +65,9 @@ namespace WRC.Woodon
 
 		private int GetLocalPlayerNum()
 		{
-			for (int i = 0; i < mTargets.Length; i++)
+			for (int i = 0; i < wPlayers.Length; i++)
 			{
-				if (mTargets[i].IsTargetPlayer())
+				if (wPlayers[i].IsTargetPlayer())
 					return i;
 			}
 
@@ -87,7 +87,7 @@ namespace WRC.Woodon
 
 		public void ResetSync()
 		{
-			for (int i = 0; i < mTargets.Length; i++)
+			for (int i = 0; i < wPlayers.Length; i++)
 				IsPlayerInside[i].SetValue(false);
 
 			Unlock();

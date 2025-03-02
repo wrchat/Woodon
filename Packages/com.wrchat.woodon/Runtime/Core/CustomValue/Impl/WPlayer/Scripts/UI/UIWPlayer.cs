@@ -6,18 +6,18 @@ using VRC.SDKBase;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class UIMTarget : MTargetFollower
+	public class UIWPlayer : WPlayerFollower
 	{
-		[Header("_" + nameof(UIMTarget))]
+		[Header("_" + nameof(UIWPlayer))]
 		[SerializeField] private TextMeshProUGUI[] targetPlayerTexts;
 		[SerializeField] private GameObject noneButton;
 		[SerializeField] private TextMeshProUGUI localPlayerUI;
 
-		[Header("_" + nameof(UIMTarget) + " - Options")]
+		[Header("_" + nameof(UIWPlayer) + " - Options")]
 		[SerializeField] private bool printPlayerID = true;
 
 		private readonly int[] playerIDBuffer = new int[80];
-		private UIMTargetPlayerSelectButton[] playerSelectButtons;
+		private UIWPlayerSelectButton[] playerSelectButtons;
 
 		// ---- ---- ---- ----
 
@@ -28,15 +28,15 @@ namespace WRC.Woodon
 	
 		private void Init()
 		{
-			playerSelectButtons = transform.GetComponentsInChildren<UIMTargetPlayerSelectButton>(true);
+			playerSelectButtons = transform.GetComponentsInChildren<UIWPlayerSelectButton>(true);
 			for (int i = 0; i < playerSelectButtons.Length; i++)
 				playerSelectButtons[i].Init(this, i);
 
 			if (localPlayerUI != null)
 				localPlayerUI.text = $"LocalPlayer ID : {Networking.LocalPlayer.playerId}";
 
-			if (mTarget != null)
-				mTarget.RegisterListener(this, nameof(UpdateUI));
+			if (wPlayer != null)
+				wPlayer.RegisterListener(this, nameof(UpdateUI));
 
 			UpdateUI();
 			UpdatePlayerIDBuffer();
@@ -44,11 +44,11 @@ namespace WRC.Woodon
 
 		public void UpdateUI()
 		{
-			if (mTarget == null)
+			if (wPlayer == null)
 				return;
 			
-			SetNoneButton(mTarget.UseNone);
-			UpdateTargetPlayerUI(mTarget.TargetPlayerID);
+			SetNoneButton(wPlayer.UseNone);
+			UpdateTargetPlayerUI(wPlayer.TargetPlayerID);
 		}
 
 		private void SetNoneButton(bool active)
@@ -121,21 +121,21 @@ namespace WRC.Woodon
 
 		public void SetNone()
 		{
-			mTarget.SetTargetNone();
+			wPlayer.SetTargetNone();
 		}
 
 		public void SelectPlayer(int index)
 		{
 			WDebugLog($"{nameof(SelectPlayer)} : {index}");
-			mTarget.SetTarget(playerIDBuffer[index]);
+			wPlayer.SetTarget(playerIDBuffer[index]);
 		}
 
-		public override void SetMTarget(MTarget mTarget)
+		public override void SetWPlayer(WPlayer wPlayer)
 		{
-			if (this.mTarget != null)
-				this.mTarget.UnregisterListener(this, nameof(UpdateUI));
+			if (this.wPlayer != null)
+				this.wPlayer.UnregisterListener(this, nameof(UpdateUI));
 
-			this.mTarget = mTarget;
+			this.wPlayer = wPlayer;
 			Init();
 		}
 	}

@@ -9,7 +9,7 @@ namespace WRC.Woodon
 	public class VoiceReseter : VoiceUpdater
 	{
 		[Header("_" + nameof(VoiceReseter))]
-		[SerializeField] private MTarget[] ignoreTargets;
+		[SerializeField] private WPlayer[] ignoreTargets;
 
 		[SerializeField] private bool useIngnoreTargetTag;
 		[SerializeField] private VoiceTag IgnoreTargetTag;
@@ -28,8 +28,8 @@ namespace WRC.Woodon
 			if (Enable == false)
 				return;
 
-			// 무시 MTarget 대상이라면 return
-			foreach (MTarget ignoreTarget in ignoreTargets)
+			// 무시 WPlayer 대상이라면 return
+			foreach (WPlayer ignoreTarget in ignoreTargets)
 			{
 				if (ignoreTarget.IsTargetPlayer(Networking.LocalPlayer))
 					return;

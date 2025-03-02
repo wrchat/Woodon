@@ -5,16 +5,16 @@ using UnityEngine;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class UIMTargetPlayerSelectButton : WBase
+	public class UIWPlayerSelectButton : WBase
 	{
-		[Header("_" + nameof(UIMTargetPlayerSelectButton))]
+		[Header("_" + nameof(UIWPlayerSelectButton))]
 		[SerializeField] private TextMeshProUGUI playerNameText;
-		private UIMTarget mTargetUI;
+		private UIWPlayer wPlayerUI;
 		private int index;
 
-		public void Init(UIMTarget mTargetUI, int index)
+		public void Init(UIWPlayer wPlayerUI, int index)
 		{
-			this.mTargetUI = mTargetUI;
+			this.wPlayerUI = wPlayerUI;
 			this.index = index;
 		}
 
@@ -25,7 +25,7 @@ namespace WRC.Woodon
 
 		public void Click()
 		{
-			mTargetUI.SelectPlayer(index);
+			wPlayerUI.SelectPlayer(index);
 		}
 	}
 }

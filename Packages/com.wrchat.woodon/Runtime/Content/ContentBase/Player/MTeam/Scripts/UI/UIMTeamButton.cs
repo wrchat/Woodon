@@ -8,7 +8,7 @@ namespace WRC.Woodon
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public class UIMTeamButton : WBase
 	{
-		[field: SerializeField] public MTarget MTarget { get; private set; }
+		[field: SerializeField] public WPlayer WPlayer { get; private set; }
 		[SerializeField] private TextMeshProUGUI nameText;
 		[SerializeField] private string noneString = "-";
 
@@ -16,7 +16,7 @@ namespace WRC.Woodon
 
 		public void Init(MTeam mTeam)
 		{
-			MTarget.RegisterListener(this, nameof(OnPlayerChanged));
+			WPlayer.RegisterListener(this, nameof(OnPlayerChanged));
 			OnPlayerChanged();
 
 			this.mTeam = mTeam;
@@ -24,7 +24,7 @@ namespace WRC.Woodon
 
 		public void OnPlayerChanged()
 		{
-			VRCPlayerApi targetPlayerAPI = MTarget.GetTargetPlayerAPI();
+			VRCPlayerApi targetPlayerAPI = WPlayer.GetTargetPlayerAPI();
 			nameText.text = targetPlayerAPI != null ? targetPlayerAPI.displayName : noneString;
 
 			mTeam.PlayerChanged(this);
@@ -37,12 +37,12 @@ namespace WRC.Woodon
 
 		private void ToggleLocalPlayer()
 		{
-			MTarget.ToggleLocalPlayer();
+			WPlayer.ToggleLocalPlayer();
 		}
 
 		public bool IsPlayer(VRCPlayerApi targetPlayer = null)
 		{
-			return MTarget.IsTargetPlayer(targetPlayer);
+			return WPlayer.IsTargetPlayer(targetPlayer);
 		}
 	}
 }
