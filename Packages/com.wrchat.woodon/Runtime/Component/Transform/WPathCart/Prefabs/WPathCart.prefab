@@ -67,7 +67,7 @@ GameObject:
   - component: {fileID: 6826756332251442720}
   - component: {fileID: 9030975927836637612}
   m_Layer: 0
-  m_Name: MPathCart
+  m_Name: WPathCart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -114,8 +114,8 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 9030975927836637612}
   DEBUG: 1
-  targetUdons: []
-  eventNames: []
+  listeners: []
+  callbacks: []
   sendEventGlobal: 0
   cart: {fileID: 4126769235643296380}
   station: {fileID: 6133205863288570652}
@@ -212,7 +212,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6569343228181608233}
   m_Layer: 0
-  m_Name: '[MPathCart]'
+  m_Name: '[WPathCart'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -378,6 +378,11 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 5965873169555769596}
   DEBUG: 1
+  listeners: []
+  callbacks: []
+  sendEventGlobal: 0
+  autoTargetName: '-'
+  <UseNone>k__BackingField: 1
   station: {fileID: 6350725029715910420}
 --- !u!114 &5965873169555769596
 MonoBehaviour:
@@ -428,10 +433,8 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 4528511410610675245}
   DEBUG: 1
-  targetUdons:
-  - {fileID: 6826756332251442720}
-  eventNames:
-  - StartCurPath
+  listeners: []
+  callbacks: []
   sendEventGlobal: 0
 --- !u!114 &4528511410610675245
 MonoBehaviour:

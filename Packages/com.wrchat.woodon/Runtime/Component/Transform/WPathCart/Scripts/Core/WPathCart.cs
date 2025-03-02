@@ -3,23 +3,23 @@ using UnityEngine;
 
 namespace WRC.Woodon
 {
-	public class MPathCart : WEventPublisher
+	public class WPathCart : WEventPublisher
 	{
-		[Header("_" + nameof(MPathCart))]
+		[Header("_" + nameof(WPathCart))]
 		[SerializeField] private CinemachineDollyCart cart;
 		[SerializeField] private MStation station;
 		[SerializeField] private float pathLength = 10f;
 
-		[Header("_" + nameof(MPathCart) + " - Options")]
+		[Header("_" + nameof(WPathCart) + " - Options")]
 		[SerializeField] private float speed = 1f;
 		[SerializeField] private float duration = NONE_INT;
-		[SerializeField] private MPathCartMovementType defaultMovementType;
+		[SerializeField] private WPathCartMovementType defaultMovementType;
 		[SerializeField] private bool isOneWay = true;
 		[SerializeField] private Transform cartTransform;
 		[SerializeField] private bool setCartRotationWhenUseStation = false;
 
-		private MPathCartState curState = MPathCartState.Stop;
-		private MPathCartMovementType curMovementType;
+		private WPathCartState curState = WPathCartState.Stop;
+		private WPathCartMovementType curMovementType;
 
 		private void Start()
 		{
@@ -32,30 +32,30 @@ namespace WRC.Woodon
 			InitCart(defaultMovementType);
 		}
 
-		private void InitCart(MPathCartMovementType movementType)
+		private void InitCart(WPathCartMovementType movementType)
 		{
-			curState = MPathCartState.Stop;
+			curState = WPathCartState.Stop;
 			this.curMovementType = movementType;
 
 			cart.m_Position = GetDestinationPos(GetOppositeMovementType(movementType));
 
 			if (setCartRotationWhenUseStation)
 			{
-				float rotationY = movementType == MPathCartMovementType.Backward ? 180 : 0;
+				float rotationY = movementType == WPathCartMovementType.Backward ? 180 : 0;
 				cartTransform.localRotation = Quaternion.Euler(0, rotationY, 0);
 			}
 		}
 
-		private float GetDestinationPos(MPathCartMovementType movementType)
+		private float GetDestinationPos(WPathCartMovementType movementType)
 		{
 			switch (movementType)
 			{
-				case MPathCartMovementType.Forward:
+				case WPathCartMovementType.Forward:
 					return pathLength;
-				case MPathCartMovementType.Backward:
+				case WPathCartMovementType.Backward:
 					return 0;
 				default:
-					WDebugLog($"Invalid {nameof(MPathCartMovementType)}: {movementType}");
+					WDebugLog($"Invalid {nameof(WPathCartMovementType)}: {movementType}");
 					return pathLength;
 			}
 		}
@@ -67,17 +67,17 @@ namespace WRC.Woodon
 		}
 
 		[ContextMenu(nameof(StartPath))]
-		public void StartPath(MPathCartMovementType movementType)
+		public void StartPath(WPathCartMovementType movementType)
 		{
 			if (curMovementType != movementType)
 				InitCart(movementType);
 
-			curState = MPathCartState.Move;
+			curState = WPathCartState.Move;
 
 			station.UseStation();
 
-			SendEvents(MPathCartEvent.StartPath);
-			SendEvents((MPathCartEvent)((int)MPathCartEvent.StartPath + (int)movementType));
+			SendEvents(WPathCartEvent.StartPath);
+			SendEvents((WPathCartEvent)((int)WPathCartEvent.StartPath + (int)movementType));
 		}
 
 		private void Update()
@@ -88,7 +88,7 @@ namespace WRC.Woodon
 
 		private void MoveCart()
 		{
-			if (curState != MPathCartState.Move)
+			if (curState != WPathCartState.Move)
 				return;
 
 			cart.m_Position += GetMoveAmount(curMovementType);
@@ -96,7 +96,7 @@ namespace WRC.Woodon
 		}
 
 		// Tick당 (Update) 이동량
-		private float GetMoveAmount(MPathCartMovementType movementType)
+		private float GetMoveAmount(WPathCartMovementType movementType)
 		{
 			float moveAmount;
 
@@ -110,7 +110,7 @@ namespace WRC.Woodon
 				moveAmount = speed * Time.deltaTime;
 			}
 
-			if (movementType == MPathCartMovementType.Backward)
+			if (movementType == WPathCartMovementType.Backward)
 			{
 				moveAmount *= -1;
 			}
@@ -120,7 +120,7 @@ namespace WRC.Woodon
 
 		private void CheckEnd()
 		{
-			if (curState != MPathCartState.Move)
+			if (curState != WPathCartState.Move)
 				return;
 
 			if (IsPathEnd())
@@ -131,12 +131,12 @@ namespace WRC.Woodon
 
 		private void EndPath()
 		{
-			curState = MPathCartState.Stop;
+			curState = WPathCartState.Stop;
 
 			station.ExitStation();
 
-			SendEvents(MPathCartEvent.EndPath);
-			SendEvents((MPathCartEvent)((int)MPathCartEvent.EndPath + (int)curMovementType));
+			SendEvents(WPathCartEvent.EndPath);
+			SendEvents((WPathCartEvent)((int)WPathCartEvent.EndPath + (int)curMovementType));
 
 			if (isOneWay)
 			{
@@ -155,24 +155,24 @@ namespace WRC.Woodon
 			return Mathf.Approximately(cart.m_Position, destinationPos);
 		}
 
-		private MPathCartMovementType GetOppositeMovementType(MPathCartMovementType curMovementType)
+		private WPathCartMovementType GetOppositeMovementType(WPathCartMovementType curMovementType)
 		{
 			switch (curMovementType)
 			{
-				case MPathCartMovementType.Forward:
-					return MPathCartMovementType.Backward;
-				case MPathCartMovementType.Backward:
-					return MPathCartMovementType.Forward;
+				case WPathCartMovementType.Forward:
+					return WPathCartMovementType.Backward;
+				case WPathCartMovementType.Backward:
+					return WPathCartMovementType.Forward;
 				default:
-					WDebugLog($"Invalid {nameof(MPathCartMovementType)}: {curMovementType}");
-					return MPathCartMovementType.Forward;
+					WDebugLog($"Invalid {nameof(WPathCartMovementType)}: {curMovementType}");
+					return WPathCartMovementType.Forward;
 			}
 		}
 
 		#region HorribleEvents
 		public void StartCurPath() => StartPath(curMovementType);
-		public void StartPathForward() => StartPath(MPathCartMovementType.Forward);
-		public void StartPathBackward() => StartPath(MPathCartMovementType.Backward);
+		public void StartPathForward() => StartPath(WPathCartMovementType.Forward);
+		public void StartPathBackward() => StartPath(WPathCartMovementType.Backward);
 		#endregion
 	}
 }

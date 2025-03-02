@@ -1,6 +1,6 @@
 namespace WRC.Woodon
 {
-	public enum MPathCartEvent
+	public enum WPathCartEvent
 	{
 		StartPath = 0,
 		StartFowardPath = 1,

@@ -1,6 +1,6 @@
 namespace WRC.Woodon
 {
-	public enum MPathCartMovementType
+	public enum WPathCartMovementType
 	{
 		Forward = 1,
 		Backward = 2,
