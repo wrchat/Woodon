@@ -22,7 +22,7 @@ namespace WRC.Woodon
 		[SerializeField] protected WJson contentData;
 		[SerializeField] private int defaultContentState = 0;
 		[SerializeField] private SeatDataOption[] seatDataOptions;
-		public MSeat[] Seats { get; private set; }
+		public WSeat[] Seats { get; private set; }
 
 		public int ContentState
 		{
@@ -41,7 +41,7 @@ namespace WRC.Woodon
 		{
 			WDebugLog($"{nameof(Init)}");
 
-			Seats = GetComponentsInChildren<MSeat>();
+			Seats = GetComponentsInChildren<WSeat>();
 			contentData.RegisterListener(this, nameof(OnContentDataChanged), WJsonEvent.OnDeserialization);
 
 			for (int i = 0; i < Seats.Length; i++)
@@ -58,7 +58,7 @@ namespace WRC.Woodon
 		{
 			// WDebugLog($"{nameof(UpdateStuff)}");
 
-			foreach (MSeat seat in Seats)
+			foreach (WSeat seat in Seats)
 				seat.UpdateSeat();
 		}
 
@@ -99,11 +99,11 @@ namespace WRC.Woodon
 		public void SetContentStateNext() => SetContentState(ContentState + 1);
 		public void SetContentStatePrev() => SetContentState(ContentState - 1);
 
-		public virtual void OnSeatTargetChanged(MSeat changedSeat)
+		public virtual void OnSeatTargetChanged(WSeat changedSeat)
 		{
 			// 중복 제거 (한 플레이어가 한 번에 하나의 자리에만 등록 가능하도록)
 			{
-				foreach (MSeat seat in Seats)
+				foreach (WSeat seat in Seats)
 				{
 					if (seat == changedSeat)
 						continue;
@@ -114,9 +114,9 @@ namespace WRC.Woodon
 			}
 		}
 
-		public MSeat GetLocalPlayerSeat()
+		public WSeat GetLocalPlayerSeat()
 		{
-			foreach (MSeat seat in Seats)
+			foreach (WSeat seat in Seats)
 				if (seat.IsTargetPlayer())
 					return seat;
 			return null;

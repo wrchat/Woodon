@@ -7,7 +7,7 @@ namespace WRC.Woodon
 	{
 		[Header("_" + nameof(WPathCart))]
 		[SerializeField] private CinemachineDollyCart cart;
-		[SerializeField] private MStation station;
+		[SerializeField] private WStation station;
 		[SerializeField] private float pathLength = 10f;
 
 		[Header("_" + nameof(WPathCart) + " - Options")]

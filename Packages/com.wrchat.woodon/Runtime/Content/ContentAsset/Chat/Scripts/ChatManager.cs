@@ -12,7 +12,7 @@ namespace WRC.Woodon
 	public class ChatManager : WBase
 	{
 		[Header("_" + nameof(ChatManager))]
-		[SerializeField] private MPlayerUdonIndex mPlayerUdonIndex;
+		[SerializeField] private WPlayerUdonIndex mPlayerUdonIndex;
 		[SerializeField] private WJson[] chatDatas;
 
 		[SerializeField] private WSFXManager wSFXManager;
