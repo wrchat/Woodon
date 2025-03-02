@@ -1,6 +1,6 @@
 namespace WRC.Woodon
 {
-	public enum MColorPreset
+	public enum WColorPreset
 	{
 		White,
 		WhiteGray,

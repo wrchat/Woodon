@@ -38,8 +38,8 @@ namespace WRC.Woodon
 
 		public void UpdateShift(bool shifting)
 		{
-			shiftButtonImage.color = MColorUtil.GetWhiteOrBlack(shifting == true);
-			shiftButtonText.color = MColorUtil.GetWhiteOrBlack(shifting == false);
+			shiftButtonImage.color = WColorUtil.GetWhiteOrBlack(shifting == true);
+			shiftButtonText.color = WColorUtil.GetWhiteOrBlack(shifting == false);
 
 			foreach (UIKoreanKey koreanKey in _koreanKeys)
 				koreanKey.UpdateShift(shifting);

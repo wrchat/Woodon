@@ -6,14 +6,14 @@ using VRC.SDKBase;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class MColor : WEventPublisher
+	public class WColor : WEventPublisher
 	{
-		[Header("_" + nameof(MColor))]
+		[Header("_" + nameof(WColor))]
 		[SerializeField] private MeshRenderer[] targetMeshRenderers;
 		[SerializeField] private Image[] targetImages;
 		[field: SerializeField] public Color DefaultColor { get; private set; }
 
-		[Header("_" + nameof(MColor) + " - Options")]
+		[Header("_" + nameof(WColor) + " - Options")]
 		[SerializeField] private bool useSync;
 
 		[UdonSynced, FieldChangeCallback(nameof(SyncedValue))] private Color _syncedValue;

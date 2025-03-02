@@ -49,7 +49,7 @@ namespace WRC.Woodon
 
 			for (int i = 0; i < hardButtons.Length; i++)
 			{
-				hardButtons[i].color = MColorUtil.GetBlackOrGray(i != value);
+				hardButtons[i].color = WColorUtil.GetBlackOrGray(i != value);
 
 				// AutosizeButton
 				hardButtons[i].transform.parent.gameObject.SetActive(wInt.MinValue <= i && i <= wInt.MaxValue);

@@ -10,8 +10,8 @@ namespace WRC.Woodon
 		[Header("_" + nameof(MParticle))]
 		[SerializeField] private ParticleSystem[] particleSystems;
 
-		[Header("_" + nameof(MColor) + " - Option")]
-		[SerializeField] private MColor mColor;
+		[Header("_" + nameof(WColor) + " - Option")]
+		[SerializeField] private WColor wColor;
 		[SerializeField] private float delay = 0f;
 		[SerializeField] private ParticleSystemStopBehavior stopBehavior = ParticleSystemStopBehavior.StopEmittingAndClear;
 
@@ -22,19 +22,19 @@ namespace WRC.Woodon
 
 		private void Init()
 		{
-			if (mColor != null)
+			if (wColor != null)
 			{
-				mColor.RegisterListener(this, nameof(UpdateColorByMColor));
-				UpdateColorByMColor();
+				wColor.RegisterListener(this, nameof(UpdateColorByWColor));
+				UpdateColorByWColor();
 			}
 		}
 
-		public void UpdateColorByMColor()
+		public void UpdateColorByWColor()
 		{
 			foreach (ParticleSystem particleSystem in particleSystems)
 			{
 				ParticleSystem.MainModule mainModule = particleSystem.main;
-				mainModule.startColor = mColor.Value;
+				mainModule.startColor = wColor.Value;
 			}
 		}
 

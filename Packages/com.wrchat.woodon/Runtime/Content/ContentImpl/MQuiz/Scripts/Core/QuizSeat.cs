@@ -20,7 +20,7 @@ namespace WRC.Woodon
 		protected override void OnTurnDataChange(DataChangeState changeState)
 		{
 			for (int i = 0; i < selectAnswerDecoImages.Length; i++)
-				selectAnswerDecoImages[i].color = MColorUtil.GetColorByBool(i == (int)ExpectedAnswer, MColorPreset.Green, MColorPreset.WhiteGray);
+				selectAnswerDecoImages[i].color = WColorUtil.GetColorByBool(i == (int)ExpectedAnswer, WColorPreset.Green, WColorPreset.WhiteGray);
 			base.OnTurnDataChange(changeState);
 		}
 

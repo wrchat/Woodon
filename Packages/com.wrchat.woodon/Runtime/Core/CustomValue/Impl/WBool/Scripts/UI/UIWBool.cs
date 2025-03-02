@@ -44,7 +44,7 @@ namespace WRC.Woodon
 			// Update Color
 			else
 			{
-				Color color = MColorUtil.GetGreenOrRed(wBool.Value);
+				Color color = WColorUtil.GetGreenOrRed(wBool.Value);
 				foreach (Image image in images)
 					image.color = color;
 			}

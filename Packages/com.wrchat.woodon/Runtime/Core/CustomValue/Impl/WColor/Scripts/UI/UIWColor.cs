@@ -6,10 +6,10 @@ using UnityEngine.UI;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class UIMColor : WBase
+	public class UIWColor : WBase
 	{
-		[Header("_" + nameof(UIMColor))]
-		[SerializeField] private MColor mColor;
+		[Header("_" + nameof(UIWColor))]
+		[SerializeField] private WColor wColor;
 
 		[SerializeField] private Image syncedColorImage;
 		[SerializeField] private Image previewColorImage;
@@ -29,13 +29,13 @@ namespace WRC.Woodon
 
 		private void Init()
 		{
-			mColor.RegisterListener(this, nameof(UpdateSyncedColorUI));
+			wColor.RegisterListener(this, nameof(UpdateSyncedColorUI));
 			UpdateSyncedColorUI();
 		}
 
 		public void UpdateSyncedColorUI()
 		{
-			Color curColor = mColor.Value;
+			Color curColor = wColor.Value;
 			syncedColorImage.color = curColor;
 
 			rSlider.value = curColor.r;
@@ -58,12 +58,12 @@ namespace WRC.Woodon
 
 		public void SetColor()
 		{
-			mColor.SetValue(new Color(rSlider.value, gSlider.value, bSlider.value));
+			wColor.SetValue(new Color(rSlider.value, gSlider.value, bSlider.value));
 		}
 
 		public void SetColorOrigin()
 		{
-			mColor.SetValue(mColor.DefaultColor);
+			wColor.SetValue(wColor.DefaultColor);
 		}
 	}
 }
