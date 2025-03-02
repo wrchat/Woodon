@@ -14,7 +14,7 @@ namespace WRC.Woodon
 		[SerializeField] private WInt chatRoomIndex;
 		public TeamType ChatRoom => (TeamType)chatRoomIndex.Value;
 
-		[SerializeField] private MString additionalData;
+		[SerializeField] private WString additionalData;
 		[SerializeField] private float jumpImpulse = 4;
 
 		public void SendChatMessage()

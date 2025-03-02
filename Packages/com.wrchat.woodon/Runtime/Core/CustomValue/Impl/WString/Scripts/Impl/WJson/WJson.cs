@@ -7,7 +7,7 @@ namespace WRC.Woodon
 {
 	[DefaultExecutionOrder(-100000)]
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class WJson : MString
+	public class WJson : WString
 	{
 		public DataDictionary DataDictionary { get; protected set; } = new DataDictionary();
 		public DataDictionary ChangedData { get; protected set; } = new DataDictionary();

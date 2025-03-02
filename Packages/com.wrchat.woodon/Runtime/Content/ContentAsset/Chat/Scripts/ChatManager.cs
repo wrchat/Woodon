@@ -17,7 +17,7 @@ namespace WRC.Woodon
 
 		[SerializeField] private MSFXManager mSFXManager;
 
-		[SerializeField] private MString nickname;
+		[SerializeField] private WString nickname;
 		[SerializeField] private UIChat[] chatUIs;
 
 		[SerializeField] private int chatSaveCount = 10; // 각 채팅방에 저장할 메시지 수

@@ -14,7 +14,7 @@ namespace WRC.Woodon
 		[SerializeField] private Transform wrongPos;
 		[SerializeField] private Transform[] quizDataParents;
 		[SerializeField] protected WInt quizDataParentsIndex;
-		[SerializeField] private MString seatIndexInputField;
+		[SerializeField] private WString seatIndexInputField;
 
 		[field: Header("_" + nameof(QuizManager) + "_GameRule")]
 		[field: SerializeField] public bool AddScoreWhenCorrectAnswer { get; private set; } = false;

@@ -5,10 +5,10 @@ using UnityEngine;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class UIMString : UdonSharpBehaviour
+	public class UIWString : UdonSharpBehaviour
 	{
-		[Header("_" + nameof(UIMString))]
-		[SerializeField] private MString mString;
+		[Header("_" + nameof(UIWString))]
+		[SerializeField] private WString wString;
 		[SerializeField] private TMP_InputField inputField;
 		[SerializeField] private TextMeshProUGUI[] texts;
 
@@ -19,19 +19,19 @@ namespace WRC.Woodon
 
 		private void Init()
 		{
-			if (mString == null)
+			if (wString == null)
 				return;
 
-			mString.RegisterListener(this, nameof(UpdateUI));
+			wString.RegisterListener(this, nameof(UpdateUI));
 			UpdateUI();
 		}
 
 		public void UpdateUI()
 		{
-			if (mString == null)
+			if (wString == null)
 				return;
 
-			string newText = mString.GetFormatString();
+			string newText = wString.GetFormatString();
 
 			if (inputField != null)
 				inputField.text = newText;
@@ -49,10 +49,10 @@ namespace WRC.Woodon
 			newText = newText.TrimStart('\n', ' ');
 			newText = newText.TrimEnd('\n', ' ');
 
-			bool IsValidText = mString.IsValidText(newText);
+			bool IsValidText = wString.IsValidText(newText);
 
 			if (IsValidText)
-				mString.SetValue(newText);
+				wString.SetValue(newText);
 			else
 			{
 				// TODO: 직접 InputField에 표시하지 않고 (기존 입력이 날라가니까) 다른 방법으로

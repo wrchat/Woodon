@@ -6,12 +6,12 @@ using static WRC.Woodon.WUtil;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class MString : WEventPublisher
+	public class WString : WEventPublisher
 	{
-		[field: Header("_" + nameof(MString))]
+		[field: Header("_" + nameof(WString))]
 		[field: SerializeField, TextArea(3, 10)] public string DefaultString { get; protected set; } = string.Empty;
 
-		[field: Header("_" + nameof(MString) + " - Options")]
+		[field: Header("_" + nameof(WString) + " - Options")]
 		[SerializeField] private bool useDefaultWhenEmpty = true;
 		[SerializeField] private bool useSync;
 		[SerializeField] private bool onlyDigit;
