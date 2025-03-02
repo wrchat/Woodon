@@ -14,13 +14,13 @@ namespace WRC.Woodon
 		{
 			get
 			{
-				if (_videoDatas == null)
+				if (_videoDatas == null || _videoDatas.Length == 0)
 					_videoDatas = videoDatasParent.GetComponentsInChildren<VideoData>();
 
 				return _videoDatas;
 			}
 		}
-		private VideoData[] _videoDatas;
+		private VideoData[] _videoDatas = null;
 
 		private void Start()
 		{
