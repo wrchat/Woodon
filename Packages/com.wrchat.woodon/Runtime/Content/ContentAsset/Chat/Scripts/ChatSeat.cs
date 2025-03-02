@@ -11,7 +11,7 @@ namespace WRC.Woodon
 		[SerializeField] private InputField chatInputField;
 		[SerializeField] private ChatManager chatManager;
 		
-		[SerializeField] private MValue chatRoomIndex;
+		[SerializeField] private WInt chatRoomIndex;
 		public TeamType ChatRoom => (TeamType)chatRoomIndex.Value;
 
 		[SerializeField] private MString additionalData;

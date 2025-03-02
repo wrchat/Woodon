@@ -16,7 +16,7 @@ namespace WRC.Woodon
 		[Header("_" + nameof(MAnimator) + " - Options")]
 		[SerializeField] private bool defaultState;
 		[SerializeField] private WBool wBool;
-		[SerializeField] private MValue mValue;
+		[SerializeField] private WInt wInt;
 
 		private void Start()
 		{
@@ -40,9 +40,9 @@ namespace WRC.Woodon
 				UpdateValue();
 			}
 
-			if (mValue)
+			if (wInt)
 			{
-				mValue.RegisterListener(this, nameof(UpdateValue));
+				wInt.RegisterListener(this, nameof(UpdateValue));
 				UpdateValue();
 			}
 		}
@@ -53,8 +53,8 @@ namespace WRC.Woodon
 			if (wBool)
 				SetBool(wBool.Value);
 
-			if (mValue)
-				SetInt_L(mValue.Value);
+			if (wInt)
+				SetInt_L(wInt.Value);
 		}
 
 		public void SetBool(string boolName, bool value)

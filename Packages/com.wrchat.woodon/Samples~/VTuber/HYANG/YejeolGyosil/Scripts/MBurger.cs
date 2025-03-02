@@ -12,9 +12,9 @@ namespace Mascari4615.Project.VTuber.HYANG.YejolGyosil
 		[SerializeField] private GameObject[] ingredientActive;
 		[SerializeField] private MSFXManager sfxManager;
 
-		[SerializeField] private MValue mValue;
+		[SerializeField] private WInt wInt;
 		[SerializeField] private int activeValue = 1;
-		private bool IsActiveValue => (mValue == null) || mValue.Value == activeValue;
+		private bool IsActiveValue => (wInt == null) || wInt.Value == activeValue;
 
 		[UdonSynced, FieldChangeCallback(nameof(Data))] private string data = string.Empty;
 		public string Data

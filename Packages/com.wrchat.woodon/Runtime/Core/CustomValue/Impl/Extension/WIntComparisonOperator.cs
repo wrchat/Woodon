@@ -7,11 +7,11 @@ using WRC.Woodon;
 namespace WRC
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class MValueComparisonOperator : WBase
+	public class WIntComparisonOperator : WBase
 	{
-		[Header("_" + nameof(MValueComparisonOperator))]
-		[SerializeField] private MValue mValue1;
-		[SerializeField] private MValue mValue2;
+		[Header("_" + nameof(WIntComparisonOperator))]
+		[SerializeField] private WInt mInt1;
+		[SerializeField] private WInt mInt2;
 		[SerializeField] private int value;
 		[SerializeField] private ComparisonOperatorType comparisonOperatorType;
 
@@ -25,22 +25,22 @@ namespace WRC
 
 		private void Init()
 		{
-			mValue1.RegisterListener(this, nameof(UpdateValue));
+			mInt1.RegisterListener(this, nameof(UpdateValue));
 
-			if (mValue2 != null)
-				mValue2.RegisterListener(this, nameof(UpdateValue));
+			if (mInt2 != null)
+				mInt2.RegisterListener(this, nameof(UpdateValue));
 		}
 
 		public void UpdateValue()
 		{
-			if (mValue2 == null)
+			if (mInt2 == null)
 			{
-				bool result = Compare(mValue1.Value, value);
+				bool result = Compare(mInt1.Value, value);
 				resultWBool.SetValue(result);
 			}
 			else
 			{
-				bool result = Compare(mValue1.Value, mValue2.Value);
+				bool result = Compare(mInt1.Value, mInt2.Value);
 				resultWBool.SetValue(result);
 			}
 		}

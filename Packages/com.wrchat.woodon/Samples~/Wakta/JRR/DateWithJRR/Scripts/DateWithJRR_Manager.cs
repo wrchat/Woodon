@@ -18,7 +18,7 @@ namespace Mascari4615.Project.ISD.JRR.DateWithJRR
 		[SerializeField] private Image[] kakaotalkButtonImages;
 		[SerializeField] private MString[] kakaotalkTextSyncs;
 
-		[SerializeField] private MValue curDetailAnswerIndex;
+		[SerializeField] private WInt curDetailAnswerIndex;
 		public int CurDetailAnswerIndex => curDetailAnswerIndex.Value;
 
 		protected override void Init()
@@ -75,7 +75,7 @@ namespace Mascari4615.Project.ISD.JRR.DateWithJRR
 					turnSeat.ResetData();
 		}
 
-		[SerializeField] private MValue CurKakaotalkIndex;
+		[SerializeField] private WInt CurKakaotalkIndex;
 
 		[SerializeField] private M_CCManager cameraManager;
 

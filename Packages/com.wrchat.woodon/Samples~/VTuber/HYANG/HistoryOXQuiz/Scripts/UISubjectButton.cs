@@ -8,7 +8,7 @@ namespace Mascari4615.Project.VTuber.HYANG.HistoryOXQuiz
 	public class UISubjectButton : MBase
 	{
 		[Header("_" + nameof(UISubjectButton))]
-		[SerializeField] private MValue animatorState;
+		[SerializeField] private WInt animatorState;
 
 		private UIHistoryOXQuiz historyOXQuizUI;
 		private int index;

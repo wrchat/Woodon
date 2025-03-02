@@ -9,7 +9,7 @@ namespace Mascari4615.Project.VTuber.HYANG.HistoryOXQuiz
 	{
 		[Header("_" + nameof(UIHistoryOXQuiz))]
 		[SerializeField] private int startIndex;
-		[SerializeField] private MValue curQuizIndex;
+		[SerializeField] private WInt curQuizIndex;
 
 		private UISubjectButton[] subjectButtons;
 

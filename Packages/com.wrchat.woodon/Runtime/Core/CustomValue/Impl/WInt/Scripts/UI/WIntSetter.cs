@@ -6,36 +6,36 @@ using VRC.Udon;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class MValueSetter : MValueFollower
+	public class WIntSetter : WIntFollower
 	{
-		[Header("_" + nameof(MValueSetter))]
+		[Header("_" + nameof(WIntSetter))]
 		[SerializeField] private int value;
 
 		[ContextMenu(nameof(SetValue))]
 		public void SetValue()
 		{
-			if (mValue == null)
+			if (wInt == null)
 				return;
 
-			mValue.SetValue(value);
+			wInt.SetValue(value);
 		}
 
 		[ContextMenu(nameof(AddValue))]
 		public void AddValue()
 		{
-			if (mValue == null)
+			if (wInt == null)
 				return;
 
-			mValue.AddValue(value);
+			wInt.AddValue(value);
 		}
 
 		[ContextMenu(nameof(SubValue))]
 		public void SubValue()
 		{
-			if (mValue == null)
+			if (wInt == null)
 				return;
 
-			mValue.SubValue(value);
+			wInt.SubValue(value);
 		}
 	}
 }

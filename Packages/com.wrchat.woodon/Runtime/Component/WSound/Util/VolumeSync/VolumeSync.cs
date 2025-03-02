@@ -4,7 +4,7 @@ namespace WRC.Woodon
 {
 	public class VolumeSync : WBase
 	{
-		[SerializeField] private MValue volumeValue;
+		[SerializeField] private WInt volumeValue;
 		[SerializeField] private AudioSource[] audioSources;
 		// [SerializeField] private float volumeCorrection = 1;
 

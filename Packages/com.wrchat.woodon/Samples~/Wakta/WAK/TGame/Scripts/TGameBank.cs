@@ -13,8 +13,8 @@ namespace Mascari4615.Project.Wakta.WAK.TGame
 		[Header("_" + nameof(TGameBank))]
 		[SerializeField] private TGameManager gameManager;
 
-		[SerializeField] private MValue stealCoinAmount;
-		[SerializeField] private MValueSlider mScoreSlider;
+		[SerializeField] private WInt stealCoinAmount;
+		[SerializeField] private WIntSlider mScoreSlider;
 		[SerializeField] private TextMeshProUGUI remainCoinText;
 		[SerializeField] private GameObject closedUI;
 

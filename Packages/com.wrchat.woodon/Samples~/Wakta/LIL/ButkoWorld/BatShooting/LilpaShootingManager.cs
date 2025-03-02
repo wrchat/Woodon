@@ -13,7 +13,7 @@ namespace Mascari4615.Project.Wakta.LIL.ButkoWorld
 	{
 		[Header("_" + nameof(LilpaShootingManager))]
 		[SerializeField] private WBool[] isShooted;
-		[SerializeField] private MValue score;
+		[SerializeField] private WInt score;
 
 		[SerializeField] private TextMeshProUGUI scoreText;
 		[SerializeField] private TextMeshProUGUI timeText;

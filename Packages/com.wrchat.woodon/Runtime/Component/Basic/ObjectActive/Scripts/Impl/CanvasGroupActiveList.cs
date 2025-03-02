@@ -9,9 +9,9 @@ namespace WRC.Woodon
 		[Header("_" + nameof(CanvasGroupActiveList))]
 		[SerializeField] private CanvasGroup[] canvasGroups;
 
-		protected override void InitMValueMinMax()
+		protected override void InitWIntMinMax()
 		{
-			// mValue.SetMinMaxValue(0, canvasGroups.Length - 1);
+			// wInt.SetMinMaxValue(0, canvasGroups.Length - 1);
 		}
 
 		protected override void UpdateActive()

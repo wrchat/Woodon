@@ -9,7 +9,7 @@ namespace WRC.Woodon
 	public class MGun : MPickup
 	{
 		[Header("_" + nameof(MGun))]
-		[SerializeField] private MValue curAmmo;
+		[SerializeField] private WInt curAmmo;
 
 		[SerializeField] private AudioSource audioSource;
 		[SerializeField] private AudioClip shootSFX;

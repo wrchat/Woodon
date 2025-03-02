@@ -8,15 +8,15 @@ namespace WRC.Woodon
 	public class UIDrawTeamSetter : WBase
 	{
 		[SerializeField] private DrawManager drawManager;
-		[SerializeField] private MValue mValue;
+		[SerializeField] private WInt wInt;
 		[SerializeField] private TMP_Dropdown dropdown;
 
 		public void SetPlayerTeamByDropdown()
 		{
-			if ((drawManager.DrawElementDatas.Length <= mValue.Value) || (0 > mValue.Value))
+			if ((drawManager.DrawElementDatas.Length <= wInt.Value) || (0 > wInt.Value))
 				return;
 
-			drawManager.SetElementData(mValue.Value, (TeamType)(dropdown.value - 1), DrawRole.Normal, true);
+			drawManager.SetElementData(wInt.Value, (TeamType)(dropdown.value - 1), DrawRole.Normal, true);
 		}
 	}
 }

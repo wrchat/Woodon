@@ -10,10 +10,10 @@ namespace WRC.Woodon
 	{
 		[Header("_" + nameof(QuizManager))]
 		[SerializeField] protected int playerCount = 10;
-		[SerializeField] protected MValue curQuizIndex;
+		[SerializeField] protected WInt curQuizIndex;
 		[SerializeField] private Transform wrongPos;
 		[SerializeField] private Transform[] quizDataParents;
-		[SerializeField] protected MValue quizDataParentsIndex;
+		[SerializeField] protected WInt quizDataParentsIndex;
 		[SerializeField] private MString seatIndexInputField;
 
 		[field: Header("_" + nameof(QuizManager) + "_GameRule")]

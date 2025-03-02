@@ -9,7 +9,7 @@ namespace WRC.Woodon
 		[Header("_" + nameof(MTargetFollowerSetter))]
 		[SerializeField] private MTargetFollower[] mTargetFollowers;
 		[SerializeField] private MTarget[] mTargets;
-		[SerializeField] private MValue mTargetIndex;
+		[SerializeField] private WInt mTargetIndex;
 
 		private void Start()
 		{

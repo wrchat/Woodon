@@ -164,9 +164,9 @@ namespace WRC.Woodon
 		#region HorribleEvents
 		public void ResetTimer() => timer.ResetTimer();
 		public void SetTimer() => timer.StartTimer();
-		public void SetTimeByMValue() => timer.StartTimerByMValue();
+		public void SetTimeByWInt() => timer.StartTimerByWInt();
 		public void AddTime() => timer.AddTime();
-		public void AddTimeByMValue() => timer.AddTimeByMValue();
+		public void AddTimeByWInt() => timer.AddTimeByWInt();
 		public void ToggleTimer() => timer.ToggleTimer();
 		#endregion
 	}

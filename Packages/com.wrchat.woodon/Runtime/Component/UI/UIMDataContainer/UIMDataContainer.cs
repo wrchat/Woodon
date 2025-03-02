@@ -24,7 +24,7 @@ namespace WRC.Woodon
 		[Header("_" + nameof(UIMDataContainer) + " - Options")]
 		[SerializeField] protected Transform mDataContainerParent;
 		[SerializeField] protected MDataContainer[] mDataContainers;
-		[SerializeField] protected MValue mDataContainerIndex;
+		[SerializeField] protected WInt mDataContainerIndex;
 
 		protected virtual void Start()
 		{
@@ -44,10 +44,10 @@ namespace WRC.Woodon
 			}
 
 			if (mDataContainerIndex != null)
-				mDataContainerIndex.RegisterListener(this, nameof(UpdateUIByMValueIndex));
+				mDataContainerIndex.RegisterListener(this, nameof(UpdateUIByWIntByIndex));
 		}
 
-		public void UpdateUIByMValueIndex()
+		public void UpdateUIByWIntByIndex()
 		{
 			if (mDataContainers == null || mDataContainers.Length == 0)
 				return;

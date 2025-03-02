@@ -16,7 +16,7 @@ namespace WRC.Woodon
 
 		[Header("_" + nameof(SpriteList) + " - Options")]
 		[SerializeField] private SpriteListInitType initType = SpriteListInitType.FirstSprite;
-		[SerializeField] private MValue mValue_SpriteIndex;
+		[SerializeField] private WInt spriteIndex;
 
 		private void Start()
 		{
@@ -25,11 +25,11 @@ namespace WRC.Woodon
 
 		private void Init()
 		{
-			if (mValue_SpriteIndex != null)
+			if (spriteIndex != null)
 			{
-				mValue_SpriteIndex.SetMinMaxValue(0, sprites.Length - 1);
-				mValue_SpriteIndex.RegisterListener(this, nameof(SetAllByMValue));
-				SetAllByMValue();
+				spriteIndex.SetMinMaxValue(0, sprites.Length - 1);
+				spriteIndex.RegisterListener(this, nameof(SetAllByWInt));
+				SetAllByWInt();
 			}
 			else
 			{
@@ -56,12 +56,12 @@ namespace WRC.Woodon
 				spriteRenderers[i].sprite = sprites[i];
 		}
 
-		[ContextMenu(nameof(SetAllByMValue))]
-		public void SetAllByMValue()
+		[ContextMenu(nameof(SetAllByWInt))]
+		public void SetAllByWInt()
 		{
-			WDebugLog(nameof(SetAllByMValue));
-			if (mValue_SpriteIndex)
-				SetAll(mValue_SpriteIndex.Value);
+			WDebugLog(nameof(SetAllByWInt));
+			if (spriteIndex)
+				SetAll(spriteIndex.Value);
 		}
 
 		[ContextMenu(nameof(SetAll))]

@@ -13,7 +13,7 @@ namespace Mascari4615
 		public Transform aRespawn;
 		public Transform bRespawn;
 		[SerializeField] private float shootPowerDefault = 30;
-		[SerializeField] private MValue shootPower; // TODO: Slider
+		[SerializeField] private WInt shootPower; // TODO: Slider
 		[SerializeField] private VRC_Pickup shootPos;
 		[SerializeField] private VRC_Pickup ballPickup;
 		private VRCObjectSync ballObjectSync;

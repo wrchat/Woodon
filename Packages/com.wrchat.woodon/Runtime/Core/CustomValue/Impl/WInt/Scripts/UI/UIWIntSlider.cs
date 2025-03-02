@@ -4,15 +4,15 @@ using UnityEngine.UI;
 
 namespace WRC.Woodon
 {
-	// TODO: 슬라이버 보정을 IncreaseAmount, DecreaseAmount로 해야할지
+	// TODO: 슬라이더 보정을 IncreaseAmount, DecreaseAmount로 해야할지
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class UIMValueSlider : MValueFollower
+	public class UIWIntSlider : WIntFollower
 	{
-		[Header("_" + nameof(UIMValueSlider))]
+		[Header("_" + nameof(UIWIntSlider))]
 		[SerializeField] private Slider slider;
 		[SerializeField] private Slider fakeSlider;
 
-		[Header("_" + nameof(UIMValueSlider) + " - Options")]
+		[Header("_" + nameof(UIWIntSlider) + " - Options")]
 		[SerializeField] private bool logDetail = false;
 		[SerializeField] private WBool isSliderPressed;
 		private Animator sliderAnimator;
@@ -32,7 +32,7 @@ namespace WRC.Woodon
 			if (isSliderPressed != null)
 				sliderAnimator = slider.GetComponent<Animator>();
 
-			mValue.RegisterListener(this, nameof(UpdateSlider));
+			wInt.RegisterListener(this, nameof(UpdateSlider));
 			UpdateSlider();
 		}
 
@@ -46,38 +46,38 @@ namespace WRC.Woodon
 				return;
 			}
 
-			int newValue = mValue.MinValue + (int)(slider.value * (mValue.MaxValue - mValue.MinValue));
-			if (mValue.Value != newValue)
+			int newValue = wInt.MinValue + (int)(slider.value * (wInt.MaxValue - wInt.MinValue));
+			if (wInt.Value != newValue)
 			{
 				if (logDetail)
 					WDebugLog($"{nameof(OnSliderValueChanged)} = {newValue}");
 				else
 					WDebugLog($"{nameof(OnSliderValueChanged)}");
 
-				mValue.SetValue(newValue);
+				wInt.SetValue(newValue);
 			}
 		}
 
 		public void UpdateSlider()
 		{
-			int curFakeSliderValue = mValue.MinValue + (int)(fakeSlider.value * (mValue.MaxValue - mValue.MinValue));
-			if (mValue.Value != curFakeSliderValue)
-				fakeSlider.value = (float)(mValue.Value - mValue.MinValue) / (mValue.MaxValue - mValue.MinValue);
+			int curFakeSliderValue = wInt.MinValue + (int)(fakeSlider.value * (wInt.MaxValue - wInt.MinValue));
+			if (wInt.Value != curFakeSliderValue)
+				fakeSlider.value = (float)(wInt.Value - wInt.MinValue) / (wInt.MaxValue - wInt.MinValue);
 
-			if (IsOwner(mValue.gameObject))
+			if (IsOwner(wInt.gameObject))
 				return;
 
-			int curSliderValue = mValue.MinValue + (int)(slider.value * (mValue.MaxValue - mValue.MinValue));
-			if (mValue.Value != curSliderValue)
+			int curSliderValue = wInt.MinValue + (int)(slider.value * (wInt.MaxValue - wInt.MinValue));
+			if (wInt.Value != curSliderValue)
 			{
 				forceChange = true;
 
 				if (logDetail)
-					WDebugLog($"{nameof(UpdateSlider)} = {mValue.Value}");
+					WDebugLog($"{nameof(UpdateSlider)} = {wInt.Value}");
 				else
 					WDebugLog($"{nameof(UpdateSlider)}");
 
-				slider.value = (float)(mValue.Value - mValue.MinValue) / (mValue.MaxValue - mValue.MinValue);
+				slider.value = (float)(wInt.Value - wInt.MinValue) / (wInt.MaxValue - wInt.MinValue);
 			}
 		}
 
@@ -87,14 +87,14 @@ namespace WRC.Woodon
 				isSliderPressed.SetValue(sliderAnimator.GetCurrentAnimatorStateInfo(0).IsName("Pressed"));
 		}
 
-		public override void SetMValue(MValue mValue)
+		public override void SetWInt(WInt wInt)
 		{
-			WDebugLog($"{nameof(SetMValue)} : {mValue}");
+			WDebugLog($"{nameof(SetWInt)} : {wInt}");
 
-			if (this.mValue != null)
-				this.mValue.UnregisterListener(this, nameof(UpdateSlider));
+			if (this.wInt != null)
+				this.wInt.UnregisterListener(this, nameof(UpdateSlider));
 
-			this.mValue = mValue;
+			this.wInt = wInt;
 			Init();
 		}
 	}

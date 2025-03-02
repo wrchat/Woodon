@@ -31,22 +31,22 @@ namespace WRC
 			AssetDatabase.SaveAssets();
 		}
 
-		[SerializeField] private Transform mValuesParent;
-		[SerializeField] private Transform uimValuesParent;
+		[SerializeField] private Transform wIntsParent;
+		[SerializeField] private Transform uiWIntsParent;
 
-		[ContextMenu(nameof(MappingMValue2UI))]
-		public void MappingMValue2UI()
+		[ContextMenu(nameof(MappingWInt2UI))]
+		public void MappingWInt2UI()
 		{
-			MValue[] mValues = mValuesParent.GetComponentsInChildren<MValue>(true);
-			UIMValue[] uiMValues = uimValuesParent.GetComponentsInChildren<UIMValue>(true);
+			WInt[] wInts = wIntsParent.GetComponentsInChildren<WInt>(true);
+			UIWInt[] uiWInts = uiWIntsParent.GetComponentsInChildren<UIWInt>(true);
 
-			for (int i = 0; i < mValues.Length; i++)
+			for (int i = 0; i < wInts.Length; i++)
 			{
-				MValue mValue = mValues[i];
-				UIMValue uiMValue = uiMValues[i];
+				WInt wInt = wInts[i];
+				UIWInt uiWInt = uiWInts[i];
 
-				uiMValue.SetMValue(mValue);
-				EditorUtility.SetDirty(uiMValue);
+				uiWInt.SetWInt(wInt);
+				EditorUtility.SetDirty(uiWInt);
 			}
 
 			AssetDatabase.SaveAssets();

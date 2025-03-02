@@ -17,7 +17,7 @@ namespace Mascari4615.Project.ISD.GSG.RealMeeting
 		[SerializeField] private string[] profileNames;
 
 		[SerializeField] private Transform mScoresParent;
-		private MValue[] mScores = new MValue[0];
+		private WInt[] mScores = new WInt[0];
 
 		[SerializeField] private WBool isPollTargetMale;
 
@@ -31,7 +31,7 @@ namespace Mascari4615.Project.ISD.GSG.RealMeeting
 
 		public void Init()
 		{
-			mScores = new MValue[mScoresParent.childCount];
+			mScores = new WInt[mScoresParent.childCount];
 			for (int i = 0; i < mScoresParent.childCount; i++)
 			{
 				Transform c = mScoresParent.GetChild(i).GetChild(0);
@@ -39,7 +39,7 @@ namespace Mascari4615.Project.ISD.GSG.RealMeeting
 				TextMeshProUGUI debugNameText = c.GetChild(1).GetChild(5).GetComponent<TextMeshProUGUI>();
 				debugNameText.text = profileNames[i];
 
-				mScores[i] = c.GetComponent<MValue>();
+				mScores[i] = c.GetComponent<WInt>();
 			}
 
 			heartBlocks = GetComponentsInChildren<UIHeartBlock>(true);

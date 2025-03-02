@@ -1,6 +1,6 @@
 namespace WRC.Woodon
 {
-	public enum MValueEvent
+	public enum WIntEvent
 	{
 		OnValueIncreased,
 		OnValueDecreased

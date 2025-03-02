@@ -9,7 +9,7 @@ namespace WRC.Woodon
 		[Header("_" + nameof(WBoolFollowerSetter))]
 		[SerializeField] private WBoolFollower[] wBoolFollowers;
 		[SerializeField] private WBool[] wBools;
-		[SerializeField] private MValue wBoolIndex;
+		[SerializeField] private WInt wBoolIndex;
 
 		private void Start()
 		{

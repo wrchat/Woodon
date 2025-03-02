@@ -6,11 +6,11 @@ using WRC.Woodon;
 
 namespace Mascari4615
 {
-    public class OGameManagerBase : MBase
-    { 
-        [SerializeField] private MValue curGame;
-        [SerializeField] private int gameIndex;
-        
-        public bool IsCurGame => curGame.SyncedValue == gameIndex;
-    }
+	public class OGameManagerBase : MBase
+	{
+		[SerializeField] private WInt curGame;
+		[SerializeField] private int gameIndex;
+
+		public bool IsCurGame => curGame.SyncedValue == gameIndex;
+	}
 }

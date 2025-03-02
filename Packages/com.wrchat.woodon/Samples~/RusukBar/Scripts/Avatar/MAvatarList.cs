@@ -14,8 +14,8 @@ namespace Mascari4615
 	{
 		[SerializeField] private GameObject loadingPanel;
 		[SerializeField] private VRCUrl jsonLink;
-		[SerializeField] private MValue mScore_Type;
-		[SerializeField] private MValue mScore_Page;
+		[SerializeField] private WInt mScore_Type;
+		[SerializeField] private WInt mScore_Page;
 		[SerializeField] private TextMeshProUGUI typeText;
 
 		private int maxAvatarPerPage;

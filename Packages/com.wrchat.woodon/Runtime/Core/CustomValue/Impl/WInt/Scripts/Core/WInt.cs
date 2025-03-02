@@ -5,15 +5,15 @@ using VRC.SDKBase;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class MValue : WEventPublisher
+	public class WInt : WEventPublisher
 	{
-		[field: Header("_" + nameof(MValue))]
+		[field: Header("_" + nameof(WInt))]
 		[field: SerializeField] public int MinValue { get; private set; } = 0;
 		[field: SerializeField] public int MaxValue { get; private set; } = int.MaxValue;
 		[field: SerializeField] public int IncreaseAmount { get; private set; } = 1;
 		[field: SerializeField] public int DecreaseAmount { get; private set; } = 1;
 		[field: SerializeField] public int DefaultValue { get; private set; } = 0;
-		[field: SerializeField] public MValueStyle Style { get; private set; } = MValueStyle.Clamp;
+		[field: SerializeField] public WIntStyle Style { get; private set; } = WIntStyle.Clamp;
 		[field: SerializeField] public bool UseSync { get; private set; } = true;
 		[SerializeField] private WBool isMaxValue;
 		[SerializeField] private WBool isMinValue;
@@ -84,21 +84,21 @@ namespace WRC.Woodon
 
 			switch (Style)
 			{
-				case MValueStyle.None:
+				case WIntStyle.None:
 					if (actualValue > MaxValue)
 						return;
 					if (actualValue < MinValue)
 						return;
 					break;
 				// Clamp
-				case MValueStyle.Clamp:
+				case WIntStyle.Clamp:
 					actualValue = Mathf.Clamp(actualValue, MinValue, MaxValue);
 					break;
 				// LoopA : 초과/미만 시 반대쪽으로 이동 (이때 MinValue, MaxValue는 포함되지 않음)
 				// { ..., Max - 1, Max == Min, Min + 1, ... }
 				// ex) MinValue : 0, MaxValue : 100, Value : 101 -> 1
 				// ex) MinValue : 0, MaxValue : 100, Value : -1 -> 99
-				case MValueStyle.LoopA:
+				case WIntStyle.LoopA:
 					if (actualValue > MaxValue)
 						actualValue = MinValue + (actualValue - MaxValue);
 					else if (actualValue < MinValue)
@@ -108,7 +108,7 @@ namespace WRC.Woodon
 				// { ..., Max - 1, Max, Min, Min + 1, ... }
 				// ex) MinValue : 0, MaxValue : 100, Value : 101 -> 0
 				// ex) MinValue : 0, MaxValue : 100, Value : -1 -> 100
-				case MValueStyle.LoopB:
+				case WIntStyle.LoopB:
 					if (actualValue > MaxValue)
 						actualValue = MinValue + (actualValue - MaxValue) - 1;
 					else if (actualValue < MinValue)
@@ -144,9 +144,9 @@ namespace WRC.Woodon
 			SendEvents();
 
 			if (dataChangeState == DataChangeState.Greater)
-				SendEvents(MValueEvent.OnValueIncreased);
+				SendEvents(WIntEvent.OnValueIncreased);
 			else if (dataChangeState == DataChangeState.Less)
-				SendEvents(MValueEvent.OnValueDecreased);
+				SendEvents(WIntEvent.OnValueDecreased);
 		}
 
 		[ContextMenu(nameof(IncreaseValue))]

@@ -10,8 +10,8 @@ namespace WRC.Woodon
 		[SerializeField] private int defaultValue;
 
 		[Header("_" + nameof(ActiveList) + " - Options")]
-		[SerializeField] protected MValue mValue; // defaultValue를 무시합니다.
-		[SerializeField] private bool setMValueMinMax = true;
+		[SerializeField] protected WInt wInt; // defaultValue를 무시합니다.
+		[SerializeField] private bool setWIntMinMax = true;
 		[SerializeField] protected ActiveListOption option;
 		[SerializeField] protected int targetIndex = NONE_INT;
 
@@ -33,12 +33,12 @@ namespace WRC.Woodon
 
 		private void Init()
 		{
-			if (mValue != null)
+			if (wInt != null)
 			{
-				if (setMValueMinMax)
-					InitMValueMinMax();
-				mValue.RegisterListener(this, nameof(UpdateActiveByMValue));
-				UpdateActiveByMValue();
+				if (setWIntMinMax)
+					InitWIntMinMax();
+				wInt.RegisterListener(this, nameof(UpdateActiveByWInt));
+				UpdateActiveByWInt();
 			}
 			else
 			{
@@ -49,9 +49,9 @@ namespace WRC.Woodon
 		}
 
 		/// <summary>
-		/// 대상이 되는 요소들의 수를 바탕으로 mValue.SetMinMaxValue
+		/// 대상이 되는 요소들의 수를 바탕으로 wInt.SetMinMaxValue
 		/// </summary>
-		protected abstract void InitMValueMinMax();
+		protected abstract void InitWIntMinMax();
 
 		/// <summary>
 		/// ActiveListOption에 대하여 각 케이스 별로 구현
@@ -63,9 +63,9 @@ namespace WRC.Woodon
 		{
 			WDebugLog($"{nameof(SetValue)}({newValue})");
 		
-			if (mValue != null)
+			if (wInt != null)
 			{
-				mValue.SetValue(newValue);
+				wInt.SetValue(newValue);
 			}
 			else
 			{
@@ -73,19 +73,20 @@ namespace WRC.Woodon
 			}
 		}
 
-		public void UpdateActiveByMValue()
+		public void UpdateActiveByWInt()
 		{
-			if (mValue)
-				Value = mValue.Value;
+			if (wInt)
+				Value = wInt.Value;
 		}
 
-		public void SetMValue(MValue mValue)
+		// TODO: WIntFollowers
+		public void SetWInt(WInt wInt)
 		{
-			this.mValue = mValue;
+			this.wInt = wInt;
 
-			if (setMValueMinMax)
-				InitMValueMinMax();
-			UpdateActiveByMValue();
+			if (setWIntMinMax)
+				InitWIntMinMax();
+			UpdateActiveByWInt();
 		}
 
 		#region HorribleEvents

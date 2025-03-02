@@ -37,7 +37,7 @@ namespace Mascari4615.Project.ISD.GSG.RotatingMeeting
 		[SerializeField] private DollyCartSync[] runningCupPlatforms;
 		[SerializeField] private DollyCartSync[] waitingCupPlatforms;
 		[SerializeField] private WaitingData[] waitingDatas;
-		[SerializeField] private MValue curSpeedFactor;
+		[SerializeField] private WInt curSpeedFactor;
 		[SerializeField] private MSFXManager sfxManager;
 
 		[field: SerializeField] public WBool IsRailStop { get; private set; }

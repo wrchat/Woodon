@@ -12,7 +12,7 @@ namespace WRC.Woodon
 		public int RemainPoint => IntData;
 		public int TryPoint => TurnData;
 
-		[SerializeField] private MValue tryPoint_MValue;
+		[SerializeField] private WInt tryPoint;
 		[SerializeField] private Timer timer;
 		[SerializeField] private MSFXManager mSFXManager;
 
@@ -21,11 +21,11 @@ namespace WRC.Woodon
 			if (contentManager.ContentState != (int)AuctionState.AuctionTime)
 				return;
 
-			if (ContentUtil.GetMaxData(contentManager, ContentManager.TurnDataString) >= tryPoint_MValue.Value)
+			if (ContentUtil.GetMaxData(contentManager, ContentManager.TurnDataString) >= tryPoint.Value)
 				return;
 
 			SetTryTime(Networking.GetServerTimeInMilliseconds());
-			TurnData = tryPoint_MValue.Value;
+			TurnData = tryPoint.Value;
 			SerializeData();
 		}
 
@@ -42,7 +42,7 @@ namespace WRC.Woodon
 
 			if (changeState != DataChangeState.None)
 			{
-				tryPoint_MValue.SetMinMaxValue(0, IntData, IsOwner());
+				tryPoint.SetMinMaxValue(0, IntData, IsOwner());
 			}
 		}
 
@@ -53,7 +53,7 @@ namespace WRC.Woodon
 			if (changeState != DataChangeState.None)
 			{
 				if (IsTargetPlayer())
-					tryPoint_MValue.SetValue(0);
+					tryPoint.SetValue(0);
 			}
 		}
 

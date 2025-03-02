@@ -13,7 +13,7 @@ namespace WRC.Woodon
 	{
 		[Header("_" + nameof(UIChat))]
 		[SerializeField] private TextMeshProUGUI[] chatTexts;
-		[SerializeField] private MValue chatRoomIndex;
+		[SerializeField] private WInt chatRoomIndex;
 
 		// TODO: UIChat 인터페이스와 분리, UIChat을 상속 받는 별개의 구현으로
 		[SerializeField] private GameObject[] chatObjects;

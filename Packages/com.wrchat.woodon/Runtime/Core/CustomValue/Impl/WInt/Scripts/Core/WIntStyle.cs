@@ -1,6 +1,6 @@
 namespace WRC.Woodon
 {
-	public enum MValueStyle
+	public enum WIntStyle
 	{
 		None = -1,
 		Clamp,

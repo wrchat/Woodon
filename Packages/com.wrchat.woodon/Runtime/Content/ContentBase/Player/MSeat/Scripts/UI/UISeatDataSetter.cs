@@ -7,11 +7,11 @@ namespace WRC.Woodon
 	public class UISeatDataSetter : WBase
 	{
 		[SerializeField] private MSeat mSeat;
-		[SerializeField] private MValue mValue;
+		[SerializeField] private WInt wInt;
 
-		public void SetSeatDataByMValue()
+		public void SetSeatDataByWInt()
 		{
-			mSeat.IntData = mValue.Value;
+			mSeat.IntData = wInt.Value;
 			mSeat.SerializeData();
 		}
 	}
