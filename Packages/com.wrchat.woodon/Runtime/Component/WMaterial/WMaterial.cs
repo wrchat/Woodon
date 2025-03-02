@@ -4,9 +4,9 @@ using UnityEngine;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class MMaterial : WBase
+	public class WMaterial : WBase
 	{
-		[Header("_" + nameof(MMaterial))]
+		[Header("_" + nameof(WMaterial))]
 		[SerializeField] protected MeshRenderer[] meshRenderers;
 		[SerializeField] private int[] rendererMaterialIndexes;
 		[SerializeField] protected Material[] materials;
