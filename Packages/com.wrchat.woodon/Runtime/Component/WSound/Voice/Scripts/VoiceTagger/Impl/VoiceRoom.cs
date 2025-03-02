@@ -9,9 +9,9 @@ namespace WRC.Woodon
 	{
 		[Header("_" + nameof(VoiceRoom))]
 		[SerializeField] private MTarget[] mTargets;
-		[field: SerializeField] public MBool[] IsPlayerInside { get; private set; }
+		[field: SerializeField] public WBool[] IsPlayerInside { get; private set; }
 
-		// [SerializeField] private MBool isLocked;
+		// [SerializeField] private WBool isLocked;
 		[SerializeField] private Timer isLocked_Timer;
 
 		public override bool IsCondition(VRCPlayerApi player)

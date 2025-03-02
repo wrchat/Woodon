@@ -9,7 +9,7 @@ namespace WRC.Woodon
 	public class WMike : MPickup
 	{
 		[Header("_" + nameof(WMike))]
-		[SerializeField] private MBool mikeEnable;
+		[SerializeField] private WBool mikeEnable;
 		
 		public bool IsMikeEnabled()
 		{

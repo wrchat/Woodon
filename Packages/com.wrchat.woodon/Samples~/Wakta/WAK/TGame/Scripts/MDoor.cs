@@ -14,7 +14,7 @@ namespace Mascari4615.Project.Wakta.WAK.TGame
 		[SerializeField] private MSFXManager sfxManager;
 		[SerializeField] private Animator lockAnimator;
 
-		[SerializeField] private MBool IsLock;
+		[SerializeField] private WBool IsLock;
 
 		public void EnterDoor()
 		{

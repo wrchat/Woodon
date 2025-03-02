@@ -22,7 +22,7 @@ namespace Mascari4615.Project.Wakta.WAK.TGame
 		[SerializeField] private Material originGoldBarMaterial;
 		[SerializeField] private Material selectedGoldBarMaterial;
 
-		[SerializeField] private MBool hasGateOpen;
+		[SerializeField] private WBool hasGateOpen;
 
 		public int RemainCoin
 		{

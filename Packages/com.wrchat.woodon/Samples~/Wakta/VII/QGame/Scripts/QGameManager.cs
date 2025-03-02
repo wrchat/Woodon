@@ -97,12 +97,12 @@ namespace Mascari4615.Project.Wakta.VII.QGame
 		}
 
 		[SerializeField] private MTargetBool wallActiveViichanBool;
-		[SerializeField] private MBool trueBool;
-		[SerializeField] private MBool wallActiveBool;
+		[SerializeField] private WBool trueBool;
+		[SerializeField] private WBool wallActiveBool;
 		[SerializeField] private ObjectActive wallActive;
 		public void UpdateWall()
 		{
-			wallActive.SetMBool(wallActiveBool.Value ? wallActiveViichanBool : trueBool);
+			wallActive.SetWBool(wallActiveBool.Value ? wallActiveViichanBool : trueBool);
 		}
 	}
 }

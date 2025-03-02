@@ -66,7 +66,7 @@ namespace Mascari4615.Project.Wakta.WAK.TGame
 		private int shootCount = 0;
 		private float t = 0;
 		[SerializeField] private GameObject pointingTimeSFX;
-		[SerializeField] private MBool videoScreenActive;
+		[SerializeField] private WBool videoScreenActive;
 		[SerializeField] private VRCUnityVideoPlayer unityVideoPlayer;
 		[SerializeField] private VRCUrl endingVideoURL;
 

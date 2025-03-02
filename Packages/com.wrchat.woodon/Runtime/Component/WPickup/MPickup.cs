@@ -20,9 +20,9 @@ namespace WRC.Woodon
 		[field: SerializeField] public Rigidbody Rigidbody { get; private set; }
 		[SerializeField] protected bool useGravityWhenOncePickedUp = false;
 
-		[SerializeField] protected MBool isHolding;
-		[SerializeField] protected MBool isSomeoneHolding;
-		// [field: SerializeField] public MBool MBool { get; private set; }
+		[SerializeField] protected WBool isHolding;
+		[SerializeField] protected WBool isSomeoneHolding;
+		// [field: SerializeField] public WBool WBool { get; private set; }
 
 		private bool _enabled = true;
 		public bool Enabled

@@ -10,7 +10,7 @@ namespace WRC.Woodon
 		[SerializeField] private bool defaultActive;
 
 		[Header("_" + nameof(ActiveToggle) + " - Options")]
-		[SerializeField] private MBool mBool;
+		[SerializeField] private WBool wBool;
 
 		private bool _active;
 		public bool Active
@@ -31,10 +31,10 @@ namespace WRC.Woodon
 
 		protected virtual void Init()
 		{
-			if (mBool != null)
+			if (wBool != null)
 			{
-				mBool.RegisterListener(this, nameof(UpdateValueByMBool));
-				UpdateValueByMBool();
+				wBool.RegisterListener(this, nameof(UpdateValueByWBool));
+				UpdateValueByWBool();
 			}
 			else
 			{
@@ -50,9 +50,9 @@ namespace WRC.Woodon
 		{
 			MDebugLog($"{nameof(SetActive)}({newActive})");
 
-			if (mBool != null)
+			if (wBool != null)
 			{
-				mBool.SetValue(newActive);
+				wBool.SetValue(newActive);
 			}
 			else
 			{
@@ -60,16 +60,16 @@ namespace WRC.Woodon
 			}
 		}
 
-		public void UpdateValueByMBool()
+		public void UpdateValueByWBool()
 		{
-			if (mBool != null)
-				Active = mBool.Value;
+			if (wBool != null)
+				Active = wBool.Value;
 		}
 
-		public void SetMBool(MBool mBool)
+		public void SetWBool(WBool wBool)
 		{
-			this.mBool = mBool;
-			UpdateValueByMBool();
+			this.wBool = wBool;
+			UpdateValueByWBool();
 		}
 
 		#region HorribleEvents

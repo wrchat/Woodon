@@ -12,7 +12,7 @@ namespace WRC.Woodon
 		[SerializeField] protected Material[] materials;
 
 		[Header("_Options : 아래 중 하나를 채워 넣으세요.")]
-		[SerializeField] private MBool switcher;
+		[SerializeField] private WBool switcher;
 		[SerializeField] private MValue materialIndex;
 
 		private Material[] originalMaterials;

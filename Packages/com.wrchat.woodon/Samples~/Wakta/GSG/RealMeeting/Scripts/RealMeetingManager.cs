@@ -19,7 +19,7 @@ namespace Mascari4615.Project.ISD.GSG.RealMeeting
 		[SerializeField] private Transform mScoresParent;
 		private MValue[] mScores = new MValue[0];
 
-		[SerializeField] private MBool isPollTargetMale;
+		[SerializeField] private WBool isPollTargetMale;
 
 		private UIHeartBlock[] heartBlocks;
 

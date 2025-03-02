@@ -10,8 +10,8 @@ namespace WRC.Woodon
 		[field: SerializeField] public VoiceTag Tag { get; private set; }
 		[SerializeField] private float updateTerm = .5f;
 
-		[SerializeField] private MBool localPlayerIn;
-		[SerializeField] private MBool someoneIn;
+		[SerializeField] private WBool localPlayerIn;
+		[SerializeField] private WBool someoneIn;
 
 		protected virtual void Start() => UpdateVoiceLoop();
 		public void UpdateVoiceLoop()

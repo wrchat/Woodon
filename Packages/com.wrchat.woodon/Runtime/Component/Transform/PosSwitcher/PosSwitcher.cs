@@ -9,7 +9,7 @@ namespace WRC.Woodon
 		[Header("_" + nameof(PosSwitcher))]
 		[SerializeField] private GameObject[] targetObjects;
 		[SerializeField] private Transform posA, posB;
-		[SerializeField] private MBool isPosA;
+		[SerializeField] private WBool isPosA;
 
 		[Header("_" + nameof(PosSwitcher) + " - Options")]
 		[SerializeField] private bool useLocalTransform = true;

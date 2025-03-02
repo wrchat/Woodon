@@ -10,7 +10,7 @@ namespace WRC.Woodon
 
 	// public abstract class CustomValue<T> : WEventPublisher
 	// {
-	// 	[field: Header("_" + nameof(MBool))]
+	// 	[field: Header("_" + nameof(CustomValue))]
 	// 	[field: SerializeField] public T DefaultValue { get; protected set; }
 	// 	[SerializeField] protected bool useSync = true;
 

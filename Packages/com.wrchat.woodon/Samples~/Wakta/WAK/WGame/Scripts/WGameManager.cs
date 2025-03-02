@@ -25,8 +25,8 @@ namespace Mascari4615.Project.Wakta.WAK.WGame
 		[SerializeField] private Button rightSelectButton;
 		[SerializeField] private MAnimator leftAnimator;
 		[SerializeField] private MAnimator rightAnimator;
-		[SerializeField] private MBool leftAnimatorStateCustomBool;
-		[SerializeField] private MBool rightAnimatorStateCustomBool;
+		[SerializeField] private WBool leftAnimatorStateCustowBool;
+		[SerializeField] private WBool rightAnimatorStateCustowBool;
 
 		// 어떤 거 선택했는지
 		[SerializeField] private TextMeshProUGUI totalSelectCountText;
@@ -156,8 +156,8 @@ namespace Mascari4615.Project.Wakta.WAK.WGame
 
 				// UpdateAnim();
 
-				bool allOpened = leftAnimatorStateCustomBool.SyncedValue && rightAnimatorStateCustomBool.SyncedValue;
-				// MDebugLog($"allOpened : {allOpened}, {leftAnimatorStateCustomBool.SyncValue}, {rightAnimatorStateCustomBool.SyncValue} = {leftAnimatorStateCustomBool.Value}, {rightAnimatorStateCustomBool.Value}");
+				bool allOpened = leftAnimatorStateCustowBool.SyncedValue && rightAnimatorStateCustowBool.SyncedValue;
+				// MDebugLog($"allOpened : {allOpened}, {leftAnimatorStateCustowBool.SyncValue}, {rightAnimatorStateCustowBool.SyncValue} = {leftAnimatorStateCustowBool.Value}, {rightAnimatorStateCustowBool.Value}");
 
 				leftSelectButton.interactable = allOpened;
 				rightSelectButton.interactable = allOpened;
@@ -235,8 +235,8 @@ namespace Mascari4615.Project.Wakta.WAK.WGame
 			if (IsOwner() == false)
 				return;
 
-			leftAnimatorStateCustomBool.SetValue(false);
-			rightAnimatorStateCustomBool.SetValue(false);
+			leftAnimatorStateCustowBool.SetValue(false);
+			rightAnimatorStateCustowBool.SetValue(false);
 			SetGameState((int)QuizGameState.SelectAnswer);
 		}
 

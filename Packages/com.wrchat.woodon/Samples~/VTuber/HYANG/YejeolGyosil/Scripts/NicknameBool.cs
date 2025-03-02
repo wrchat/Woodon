@@ -7,7 +7,7 @@ namespace Mascari4615.Project.VTuber.HYANG.YejolGyosil
 {
 	// HACK:
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class NicknameBool : MBool
+	public class NicknameBool : WBool
 	{
 		[SerializeField] private string[] targetNicknames;
 

@@ -13,7 +13,7 @@ namespace WRC.Woodon
 		[field: SerializeField] public int TimeByDecisecond { get; private set; } = 50;
 		[SerializeField] private MValue mValueForSetTime;
 		[SerializeField] private MValue mValueForAddTime;
-		[SerializeField] private MBool isCounting;
+		[SerializeField] private WBool isCounting;
 
 		[UdonSynced, FieldChangeCallback(nameof(ExpireTime))] private int _expireTime = NONE_INT;
 		public int ExpireTime

@@ -15,8 +15,8 @@ namespace WRC.Woodon
 		[field: SerializeField] public int DefaultValue { get; private set; } = 0;
 		[field: SerializeField] public MValueStyle Style { get; private set; } = MValueStyle.Clamp;
 		[field: SerializeField] public bool UseSync { get; private set; } = true;
-		[SerializeField] private MBool isMaxValue;
-		[SerializeField] private MBool isMinValue;
+		[SerializeField] private WBool isMaxValue;
+		[SerializeField] private WBool isMinValue;
 
 		[UdonSynced, FieldChangeCallback(nameof(SyncedValue))] private int _syncedValue;
 		public int SyncedValue

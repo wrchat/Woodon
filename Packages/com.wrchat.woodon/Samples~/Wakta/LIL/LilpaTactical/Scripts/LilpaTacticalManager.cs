@@ -24,7 +24,7 @@ namespace Mascari4615.Project.Wakta.LIL.LilpaTactical
 		[SerializeField] private GameObject[] hits;
 		[SerializeField] private VRC_Pickup[] pickups;
 
-		[SerializeField] private MBool[] hitActives;
+		[SerializeField] private WBool[] hitActives;
 
 		[SerializeField] private Image hitsActiveButtonImage;
 
@@ -32,8 +32,8 @@ namespace Mascari4615.Project.Wakta.LIL.LilpaTactical
 
 		private VRCObjectSync[] objectSyncs;
 
-		[SerializeField] private MBool hitsActive;
-		[SerializeField] private MBool gameState;
+		[SerializeField] private WBool hitsActive;
+		[SerializeField] private WBool gameState;
 
 		private void Start()
 		{

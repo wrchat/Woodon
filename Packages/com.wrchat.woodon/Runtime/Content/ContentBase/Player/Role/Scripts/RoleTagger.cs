@@ -9,7 +9,7 @@ namespace WRC.Woodon
 	{
 		[Header("_" + nameof(RoleTagger))]
 		[SerializeField] private RoleTag roleTag;
-		[SerializeField] private MBool mBool;
+		[SerializeField] private WBool wBool;
 		[SerializeField] private MTarget[] mTargets;
 
 		private void Start()
@@ -19,7 +19,7 @@ namespace WRC.Woodon
 		
 		private void Init()
 		{
-			mBool.RegisterListener(this, nameof(UpdateTag));
+			wBool.RegisterListener(this, nameof(UpdateTag));
 			UpdateTag();
 		}
 
@@ -35,7 +35,7 @@ namespace WRC.Woodon
 				}
 			}
 
-			if (isTarget || mBool.Value)
+			if (isTarget || wBool.Value)
 				RoleUtil.SetPlayerTag(roleTag, Networking.LocalPlayer);
 			else
 				RoleUtil.SetPlayerTag(RoleTag.None, Networking.LocalPlayer);

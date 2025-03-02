@@ -40,7 +40,7 @@ namespace Mascari4615.Project.ISD.GSG.RotatingMeeting
 		[SerializeField] private MValue curSpeedFactor;
 		[SerializeField] private MSFXManager sfxManager;
 
-		[field: SerializeField] public MBool IsRailStop { get; private set; }
+		[field: SerializeField] public WBool IsRailStop { get; private set; }
 
 		[SerializeField] private Animator flyingCupDestinationAnimator;
 

@@ -12,7 +12,7 @@ namespace Mascari4615.Project.Wakta.LIL.ButkoWorld
 	public class LilpaShootingManager : MBase
 	{
 		[Header("_" + nameof(LilpaShootingManager))]
-		[SerializeField] private MBool[] isShooted;
+		[SerializeField] private WBool[] isShooted;
 		[SerializeField] private MValue score;
 
 		[SerializeField] private TextMeshProUGUI scoreText;
@@ -162,7 +162,7 @@ namespace Mascari4615.Project.Wakta.LIL.ButkoWorld
 			if (IsGaming)
 				SpawnData = GetRandomSpawnData();
 
-			foreach (MBool isShooted_ in isShooted)
+			foreach (WBool isShooted_ in isShooted)
 				isShooted_.SetValueFalse();
 
 			RequestSerialization();

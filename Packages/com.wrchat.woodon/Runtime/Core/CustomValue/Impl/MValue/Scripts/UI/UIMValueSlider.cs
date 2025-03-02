@@ -14,7 +14,7 @@ namespace WRC.Woodon
 
 		[Header("_" + nameof(UIMValueSlider) + " - Options")]
 		[SerializeField] private bool logDetail = false;
-		[SerializeField] private MBool isSliderPressed;
+		[SerializeField] private WBool isSliderPressed;
 		private Animator sliderAnimator;
 
 		private bool forceChange = false;

@@ -8,7 +8,7 @@ namespace Mascari4615.Project.VTuber.HYANG.HistoryOXQuiz
 	public class VolumeToggle : MBase
 	{
 		[Header("_" + nameof(VolumeToggle))]
-		[SerializeField] private MBool mBool;
+		[SerializeField] private WBool wBool;
 		[SerializeField] private AudioSource[] audioSources;
 
 		private void Start()
@@ -18,13 +18,13 @@ namespace Mascari4615.Project.VTuber.HYANG.HistoryOXQuiz
 
 		private void Init()
 		{
-			mBool.RegisterListener(this, nameof(UpdateVolume));
+			wBool.RegisterListener(this, nameof(UpdateVolume));
 		}
 		
 		public void UpdateVolume()
 		{
 			foreach (AudioSource audioSource in audioSources)
-				audioSource.mute = mBool.Value;
+				audioSource.mute = wBool.Value;
 		}
 	}
 }

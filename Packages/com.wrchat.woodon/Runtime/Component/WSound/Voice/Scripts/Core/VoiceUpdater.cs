@@ -10,7 +10,7 @@ namespace WRC.Woodon
 	public abstract class VoiceUpdater : WBase
 	{
 		[Header("_" + nameof(VoiceUpdater))]
-		[SerializeField] private MBool enable;
+		[SerializeField] private WBool enable;
 		[SerializeField] protected bool usePrevData;
 	
 		public virtual void Init(VoiceManager voiceManager) {}

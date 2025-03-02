@@ -10,9 +10,9 @@ namespace WRC.Woodon
 	{
 		[Header("_" + nameof(UIQuizAnswerBlock))]
 		[SerializeField] protected QuizAnswerType targetAnswerType;
-		[SerializeField] protected MBool showResult;
-		[SerializeField] protected MBool isCorrectAnswer;
-		[SerializeField] protected MBool selectedThisAnswer;
+		[SerializeField] protected WBool showResult;
+		[SerializeField] protected WBool isCorrectAnswer;
+		[SerializeField] protected WBool selectedThisAnswer;
 
 		public virtual void UpdateUI(bool showResult, QuizAnswerType correctAnswer, QuizAnswerType selectedAnswer)
 		{

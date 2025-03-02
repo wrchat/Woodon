@@ -15,7 +15,7 @@ namespace WRC
 		[SerializeField] private int value;
 		[SerializeField] private ComparisonOperatorType comparisonOperatorType;
 
-		[SerializeField] private MBool resultMBool;
+		[SerializeField] private WBool resultWBool;
 
 		private void Start()
 		{
@@ -36,12 +36,12 @@ namespace WRC
 			if (mValue2 == null)
 			{
 				bool result = Compare(mValue1.Value, value);
-				resultMBool.SetValue(result);
+				resultWBool.SetValue(result);
 			}
 			else
 			{
 				bool result = Compare(mValue1.Value, mValue2.Value);
-				resultMBool.SetValue(result);
+				resultWBool.SetValue(result);
 			}
 		}
 
