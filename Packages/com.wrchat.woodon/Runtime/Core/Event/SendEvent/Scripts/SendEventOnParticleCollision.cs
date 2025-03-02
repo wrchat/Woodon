@@ -4,7 +4,7 @@ using VRC.Udon.Common.Interfaces;
 
 namespace WRC.Woodon
 {
-	public class SendEventOnParticleCollision : MCollisionEventSender
+	public class SendEventOnParticleCollision : WCollisionEventSender
 	{
 		private void OnParticleCollision(GameObject other)
 		{

@@ -5,7 +5,7 @@ using VRC.Udon.Common.Interfaces;
 namespace WRC.Woodon
 {
 	// [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class SendEventOnCollisionEnter : MCollisionEventSender
+	public class SendEventOnCollisionEnter : WCollisionEventSender
 	{
 		private void OnCollisionEnter(Collision collision)
 		{
