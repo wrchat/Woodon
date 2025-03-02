@@ -12,7 +12,7 @@ namespace WRC.Woodon
 		[SerializeField] private TextMeshProUGUI debugText;
 		[SerializeField] private Timer timer;
 		[SerializeField] private TextMeshProUGUI[] maxTryPointTexts;
-		[SerializeField] private MSFXManager mSFXManager;
+		[SerializeField] private WSFXManager wSFXManager;
 
 		public int WinnerIndex { get; private set; } = NONE_INT;
 		public AuctionSeat MaxTryPointSeat { get; private set; } = null;
@@ -75,7 +75,7 @@ namespace WRC.Woodon
 		{
 			WDebugLog(nameof(OnShowTarget));
 
-			mSFXManager.PlaySFX_L(0);
+			wSFXManager.PlaySFX_L(0);
 
 			if (IsOwner() == false)
 				return;
@@ -85,7 +85,7 @@ namespace WRC.Woodon
 		{
 			WDebugLog(nameof(OnAuctionTime));
 
-			mSFXManager.PlaySFX_L(1);
+			wSFXManager.PlaySFX_L(1);
 
 			if (IsOwner() == false)
 				return;
@@ -98,7 +98,7 @@ namespace WRC.Woodon
 		{
 			WDebugLog(nameof(OnWaitForResult));
 
-			mSFXManager.PlaySFX_L(2);
+			wSFXManager.PlaySFX_L(2);
 
 			if (IsOwner() == false)
 				return;
@@ -115,11 +115,11 @@ namespace WRC.Woodon
 
 			if (MaxTryPointSeat != null)
 			{
-				mSFXManager.PlaySFX_L(3);
+				wSFXManager.PlaySFX_L(3);
 			}
 			else
 			{
-				mSFXManager.PlaySFX_L(4);
+				wSFXManager.PlaySFX_L(4);
 				debugText.text = $"No Winner.";
 				return;
 			}
@@ -135,7 +135,7 @@ namespace WRC.Woodon
 		{
 			WDebugLog(nameof(OnApplyResult));
 
-			mSFXManager.PlaySFX_L(5);
+			wSFXManager.PlaySFX_L(5);
 
 			if (IsOwner() == false)
 				return;

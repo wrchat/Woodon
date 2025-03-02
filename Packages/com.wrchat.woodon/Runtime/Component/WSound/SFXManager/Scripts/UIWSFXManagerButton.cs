@@ -5,13 +5,13 @@ using UnityEngine;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class UIMSFXManagerButton : WBase
+	public class UIWSFXManagerButton : WBase
 	{
 		[SerializeField] private TextMeshProUGUI sfxNameText;
-		private UIMSFXManager sfxManagerUI;
+		private UIWSFXManager sfxManagerUI;
 		private int index;
 
-		public void Init(UIMSFXManager sfxManagerUI, int index, string sfxName)
+		public void Init(UIWSFXManager sfxManagerUI, int index, string sfxName)
 		{
 			this.sfxManagerUI = sfxManagerUI;
 			this.index = index;

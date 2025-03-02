@@ -5,14 +5,14 @@ using VRC.Udon.Common.Interfaces;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class MSFXManager : WBase
+	public class WSFXManager : WBase
 	{
-		[field: Header("_" + nameof(MSFXManager))]
+		[field: Header("_" + nameof(WSFXManager))]
 		[field: SerializeField] public AudioClip[] AudioClips { get; private set; }
 		[field: SerializeField] public float[] VolumeScaleWhenPlayOneShot { get; private set; }
 		[SerializeField] private AudioSource audioSource;
 
-		[Header("_" + nameof(MSFXManager) + " - Options")]
+		[Header("_" + nameof(WSFXManager) + " - Options")]
 		[SerializeField] private bool stopWhenEvent = true;
 		[SerializeField] private bool playOneShot = true;
 		[SerializeField] private bool stopWhenStart = true;

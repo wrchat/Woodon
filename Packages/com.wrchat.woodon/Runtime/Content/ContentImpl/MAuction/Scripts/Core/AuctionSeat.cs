@@ -14,7 +14,7 @@ namespace WRC.Woodon
 
 		[SerializeField] private WInt tryPoint;
 		[SerializeField] private Timer timer;
-		[SerializeField] private MSFXManager mSFXManager;
+		[SerializeField] private WSFXManager wSFXManager;
 
 		public void UpdateTryPoint()
 		{
@@ -73,7 +73,7 @@ namespace WRC.Woodon
 			if (timer != null)
 			{
 				timer.StartTimer();
-				mSFXManager.PlaySFX_G(1);
+				wSFXManager.PlaySFX_G(1);
 			}
 		}
 	}

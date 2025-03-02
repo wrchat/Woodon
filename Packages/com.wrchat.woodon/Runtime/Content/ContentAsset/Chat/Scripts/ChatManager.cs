@@ -15,7 +15,7 @@ namespace WRC.Woodon
 		[SerializeField] private MPlayerUdonIndex mPlayerUdonIndex;
 		[SerializeField] private WJson[] chatDatas;
 
-		[SerializeField] private MSFXManager mSFXManager;
+		[SerializeField] private WSFXManager wSFXManager;
 
 		[SerializeField] private WString nickname;
 		[SerializeField] private UIChat[] chatUIs;
@@ -145,7 +145,7 @@ namespace WRC.Woodon
 				}
 			}
 
-			mSFXManager.PlaySFX_L((int)chatRoom);
+			wSFXManager.PlaySFX_L((int)chatRoom);
 			ProcessChat(chatRoom);
 
 			// if (udonIndex == mPlayerUdonIndex.GetUdonIndex())

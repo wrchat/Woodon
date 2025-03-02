@@ -4,13 +4,13 @@ using UnityEngine;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class UIMSFXManager : WBase
+	public class UIWSFXManager : WBase
 	{
-		[Header("_" + nameof(UIMSFXManager))]
-		[SerializeField] private MSFXManager sfxManager;
+		[Header("_" + nameof(UIWSFXManager))]
+		[SerializeField] private WSFXManager sfxManager;
 		[SerializeField] private bool global = false;
 		
-		private UIMSFXManagerButton[] buttons;
+		private UIWSFXManagerButton[] buttons;
 
 		private void Start()
 		{
@@ -19,7 +19,7 @@ namespace WRC.Woodon
 
 		private void Init()
 		{
-			buttons = GetComponentsInChildren<UIMSFXManagerButton>(true);
+			buttons = GetComponentsInChildren<UIWSFXManagerButton>(true);
 
 			if (buttons == null)
 				return;

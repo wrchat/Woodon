@@ -10,7 +10,7 @@ namespace WRC.Woodon
 		[Header("_" + nameof(VoteManager))]
 		[SerializeField] protected TextMeshProUGUI debugText;
 		[SerializeField] protected Timer timer;
-		[SerializeField] protected MSFXManager mSFXManager;
+		[SerializeField] protected WSFXManager wSFXManager;
 
 		public int[] MaxVoteIndexes { get; protected set; } = new int[0];
 
@@ -72,14 +72,14 @@ namespace WRC.Woodon
 		{
 			WDebugLog(nameof(OnShowTarget));
 
-			mSFXManager.PlaySFX_L(0);
+			wSFXManager.PlaySFX_L(0);
 		}
 
 		protected virtual void OnAuctionTime()
 		{
 			WDebugLog(nameof(OnAuctionTime));
 
-			mSFXManager.PlaySFX_L(1);
+			wSFXManager.PlaySFX_L(1);
 
 			if (IsOwner() == false)
 				return;
@@ -92,7 +92,7 @@ namespace WRC.Woodon
 		{
 			WDebugLog(nameof(OnWaitForResult));
 
-			mSFXManager.PlaySFX_L(2);
+			wSFXManager.PlaySFX_L(2);
 
 			if (IsOwner() == false)
 				return;
@@ -133,7 +133,7 @@ namespace WRC.Woodon
 		{
 			WDebugLog(nameof(OnApplyResult));
 
-			mSFXManager.PlaySFX_L(5);
+			wSFXManager.PlaySFX_L(5);
 
 			// 투표 결과 적용
 			if (MaxVoteIndexes.Length == 0)
