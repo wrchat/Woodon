@@ -2,86 +2,96 @@
 using UnityEngine;
 using UnityEngine.UI;
 using WRC.Woodon;
+using UdonSharp;
 
 namespace Mascari4615.Project.ISD.JRR.DateWithJRR
 {
+	[DefaultExecutionOrder(-10000)]
+	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class DateWithJRR_Manager : QuizManager
 	{
-		[Header("⭐" + nameof(DateWithJRR_Manager))]
-		[SerializeField] private Image answerImage;
-		[SerializeField] private Sprite[] answerSprites;
-		[SerializeField] private TextMeshProUGUI answerText;
-		[SerializeField] private Image[] detailAnswerButtonImages;
+		public const int NO_KAKAOTALK = 5;
 
+		[Header("_" + nameof(DateWithJRR_Manager))]
+		[SerializeField] private WInt curDetailAnswerIndex;
+		public int CurDetailAnswerIndex => curDetailAnswerIndex.Value;
+		[SerializeField] private TextMeshProUGUI answerDetailText;
+
+		[SerializeField] private Sprite[] answerNumSprites;
+		[SerializeField] private Image answerNumImage;
+
+		[Header("_" + nameof(DateWithJRR_Manager) + " - KakaoTalk")]
+		[SerializeField] private WInt curKakaotalkIndex;
+		[SerializeField] private WString[] kakaotalkTextSyncs;
 		[SerializeField] private Image[] kakaotalkBackgrounds;
 		[SerializeField] private TextMeshProUGUI[] kakaotalkTexts;
 		[SerializeField] private Image[] kakaotalkButtonImages;
-		[SerializeField] private MString[] kakaotalkTextSyncs;
-
-		[SerializeField] private WInt curDetailAnswerIndex;
-		public int CurDetailAnswerIndex => curDetailAnswerIndex.Value;
 
 		protected override void Init()
 		{
-			if (IsInited)
-				return;
-
 			base.Init();
-			IsInited = true;
-
-			curDetailAnswerIndex.RegisterListener(this, nameof(UpdateStuff));
+			curDetailAnswerIndex.RegisterListener(this, nameof(UpdateContent));
 		}
 
-		public override void UpdateStuff()
+		public override void UpdateContent()
 		{
-			base.UpdateStuff();
+			CanSelectAnswer = IsContentState((int)QuizContentState.SelectAnswer);
 
+			UpdateAnswerDatail();
+			UpdateKaKaoTalk();
+
+			base.UpdateContent();
+		}
+
+		private void UpdateAnswerDatail()
+		{
+			string[] quizAnswerStringArr = CurQuizData.QuizAnswerString.Split(DATA_SEPARATOR);
+			bool noImage = (curDetailAnswerIndex.Value == 6)
+				|| (curDetailAnswerIndex.Value >= quizAnswerStringArr.Length)
+				|| (curDetailAnswerIndex.Value < 0);
+
+			answerNumImage.gameObject.SetActive(noImage == false);
+			if (noImage == false)
 			{
-				for (int i = 0; i < detailAnswerButtonImages.Length; i++)
-					detailAnswerButtonImages[i].color = MColorUtil.GetBlackOrGray(i != curDetailAnswerIndex.Value);
+				Sprite sprite = answerNumSprites[curDetailAnswerIndex.Value];
+				answerNumImage.color = (sprite == null) ? Color.clear : Color.white;
+				answerNumImage.sprite = sprite;
 
-				string[] qasArr = CurQuizData.QuizAnswerString.Split(DATA_SEPARATOR);
-
-				bool noImage = (curDetailAnswerIndex.Value == 6) || (curDetailAnswerIndex.Value >= qasArr.Length);
-
-				answerImage.gameObject.SetActive(!noImage);
-				if (!noImage)
-				{
-					answerImage.sprite = answerSprites[curDetailAnswerIndex.Value];
-					answerText.text = qasArr[curDetailAnswerIndex.Value].Split('_')[0];
-				}
+				answerDetailText.text = quizAnswerStringArr[curDetailAnswerIndex.Value];
 			}
+		}
 
-			{
-				for (int i = 0; i < kakaotalkButtonImages.Length; i++)
-					kakaotalkButtonImages[i].color = MColorUtil.GetBlackOrGray(i != CurKakaotalkIndex.Value);
+		private void UpdateKaKaoTalk()
+		{
+			int curKakaotalkIndex = this.curKakaotalkIndex.Value;
+			for (int i = 0; i < kakaotalkButtonImages.Length; i++)
+				kakaotalkButtonImages[i].color = WColorUtil.GetBlackOrGray(i != curKakaotalkIndex);
 
-				bool noKakao = (CurKakaotalkIndex.Value == 5);
+			bool noKakao = curKakaotalkIndex == NO_KAKAOTALK;
 
-				foreach (Image kakaotalkBackground in kakaotalkBackgrounds)
-					kakaotalkBackground.gameObject.SetActive(!noKakao);
-				if (!noKakao)
-					foreach (TextMeshProUGUI kakaotalkText in kakaotalkTexts)
-						kakaotalkText.text = kakaotalkTextSyncs[CurKakaotalkIndex.Value].Value;
-			}
+			foreach (Image kakaotalkBackground in kakaotalkBackgrounds)
+				kakaotalkBackground.gameObject.SetActive(noKakao == false);
 
-			CanSelectAnsewr = CurGameState == (int)QuizGameState.SelectAnswer;
+			if (noKakao == false)
+				foreach (TextMeshProUGUI kakaotalkText in kakaotalkTexts)
+					kakaotalkText.text = kakaotalkTextSyncs[curKakaotalkIndex].Value;
 		}
 
 		public void ResetAnswers()
 		{
-			if (IsOwner())
-				foreach (MTurnSeat turnSeat in TurnSeats)
-					turnSeat.ResetData();
+			// if (IsOwner())
+				foreach (WSeat seat in Seats)
+					seat.ResetTurnData();
 		}
 
-		[SerializeField] private WInt CurKakaotalkIndex;
+		public void SetCurGameState_Wait()
+		{
+			SetContentState((int)QuizContentState.Wait);
+		}
 
-		[SerializeField] private M_CCManager cameraManager;
-
-		public void FullScreenOn_Global() => SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, nameof(FullScreenOn));
-		public void FullScreenOn() => cameraManager.SetCamera(4, alwaysOn: true);
-		public void FullScreenOff_Global() => SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, nameof(FullScreenOff));
-		public void FullScreenOff() => cameraManager.TurnOffCamera();
+		public void SetCurGameState_SelectAnswer()
+		{
+			SetContentState((int)QuizContentState.SelectAnswer);
+		}
 	}
 }
