@@ -33,7 +33,7 @@ namespace WRC.Woodon
 
 		protected virtual void Init()
 		{
-			MDebugLog($"{nameof(Init)}");
+			WDebugLog($"{nameof(Init)}");
 
 			if (mDataContainers == null || mDataContainers.Length == 0)
 			{
@@ -68,7 +68,7 @@ namespace WRC.Woodon
 		{
 			this.TargetMDataContainer = mDataContainer;
 
-			MDebugLog($"{nameof(UpdateUI)}");
+			WDebugLog($"{nameof(UpdateUI)}");
 
 			if (mDataContainer == null)
 			{

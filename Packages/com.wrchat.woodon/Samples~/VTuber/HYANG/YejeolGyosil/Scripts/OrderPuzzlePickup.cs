@@ -41,7 +41,7 @@ namespace Mascari4615.Project.VTuber.HYANG.YejolGyosil
 
 			if (Order < 0 || Order >= manager.Positions.Length)
 			{
-				MDebugLog($"Order is out of range: {Order}");
+				WDebugLog($"Order is out of range: {Order}");
 				return;
 			}
 			
@@ -51,7 +51,7 @@ namespace Mascari4615.Project.VTuber.HYANG.YejolGyosil
 
 		public override void OnPickup()
 		{
-			MDebugLog($"{Index}번째 아이템을 픽업합니다. 순서: {Order}");
+			WDebugLog($"{Index}번째 아이템을 픽업합니다. 순서: {Order}");
 			manager.StartPickup(Index, Order);
 		}
 

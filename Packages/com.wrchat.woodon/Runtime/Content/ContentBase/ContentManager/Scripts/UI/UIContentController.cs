@@ -23,7 +23,7 @@ namespace WRC.Woodon
 
 		public override void UpdateUI()
 		{
-			MDebugLog($"{nameof(UpdateUI)}");
+			WDebugLog($"{nameof(UpdateUI)}");
 
 			// Override가 불가능하다면
 			if ((contentManager.ContentState < 0) || (contentManager.ContentState >= stateToStringOverride.Length))

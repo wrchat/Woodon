@@ -263,7 +263,7 @@ namespace WRC.Woodon
 
 		public void InputBackspace()
 		{
-			// MDebugLog($"{nameof(InputBackspace)} {gameObject.transform.parent.name} : : {CurString}, {CurString == string.Empty}");
+			// WDebugLog($"{nameof(InputBackspace)} {gameObject.transform.parent.name} : : {CurString}, {CurString == string.Empty}");
 
 			if (CurString == string.Empty) return;
 
@@ -324,7 +324,7 @@ namespace WRC.Woodon
 						jong = 0;
 					}
 
-					// MDebugLog($"{cho}, {jung}, {jong} = {Encoding(cho, jung, jong)}");
+					// WDebugLog($"{cho}, {jung}, {jong} = {Encoding(cho, jung, jong)}");
 
 					char c = Encoding(cho, jung, jong);
 					SetString(CurString.Substring(0, CurString.Length - 1) + c);

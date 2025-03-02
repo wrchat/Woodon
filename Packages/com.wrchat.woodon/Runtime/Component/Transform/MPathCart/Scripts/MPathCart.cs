@@ -55,7 +55,7 @@ namespace WRC.Woodon
 				case MPathCartMovementType.Backward:
 					return 0;
 				default:
-					MDebugLog($"Invalid {nameof(MPathCartMovementType)}: {movementType}");
+					WDebugLog($"Invalid {nameof(MPathCartMovementType)}: {movementType}");
 					return pathLength;
 			}
 		}
@@ -164,7 +164,7 @@ namespace WRC.Woodon
 				case MPathCartMovementType.Backward:
 					return MPathCartMovementType.Forward;
 				default:
-					MDebugLog($"Invalid {nameof(MPathCartMovementType)}: {curMovementType}");
+					WDebugLog($"Invalid {nameof(MPathCartMovementType)}: {curMovementType}");
 					return MPathCartMovementType.Forward;
 			}
 		}

@@ -49,7 +49,7 @@ namespace Mascari4615.Project.Wakta.Wak.SearchHistoryGame
 				historyButtons[1].SetEnabled(false);
 				historyButtons[2].SetEnabled(false);
 
-				MDebugLog($"Data length is less than 3: {data.Length}");
+				WDebugLog($"Data length is less than 3: {data.Length}");
 				return;
 			}
 

@@ -17,7 +17,7 @@ namespace WRC.Woodon
 
 		public void LoadVideo()
 		{
-			MDebugLog(nameof(LoadVideo));
+			WDebugLog(nameof(LoadVideo));
 			unityVideoPlayer.LoadURL(videoURL);
 		}
 	}

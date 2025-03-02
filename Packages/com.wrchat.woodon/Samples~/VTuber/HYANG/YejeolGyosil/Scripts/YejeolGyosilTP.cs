@@ -34,7 +34,7 @@ namespace Mascari4615.Project.VTuber.HYANG.YejolGyosil
 
 		public void TP_MJJ()
 		{
-			MDebugLog($"{nameof(TP_MJJ)}");
+			WDebugLog($"{nameof(TP_MJJ)}");
 
 			if (Networking.LocalPlayer.displayName == kingName)
 				TP(kingPos);
@@ -65,21 +65,21 @@ namespace Mascari4615.Project.VTuber.HYANG.YejolGyosil
 
 		public void TP_MJJ_G()
 		{
-			MDebugLog($"{nameof(TP_MJJ_G)}");
+			WDebugLog($"{nameof(TP_MJJ_G)}");
 
 			SendCustomNetworkEvent(NetworkEventTarget.All, nameof(TP_MJJ));
 		}
 
 		public void TP_Ending()
 		{
-			MDebugLog($"{nameof(TP_Ending)}");
+			WDebugLog($"{nameof(TP_Ending)}");
 
 			TP(endingPos);
 		}
 
 		public void TP_Ending_G()
 		{
-			MDebugLog($"{nameof(TP_Ending_G)}");
+			WDebugLog($"{nameof(TP_Ending_G)}");
 
 			SendCustomNetworkEvent(NetworkEventTarget.All, nameof(TP_Ending));
 		}

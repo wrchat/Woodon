@@ -57,7 +57,7 @@ namespace Mascari4615.Project.Wakta.Wak.SearchHistoryGame
 
 		private void OnSelectedDataChanged()
 		{
-			MDebugLog(nameof(OnSelectedDataChanged));
+			WDebugLog(nameof(OnSelectedDataChanged));
 
 			if (_isInit == false)
 				Init();

@@ -11,7 +11,7 @@ namespace WRC.Woodon
 
 		public override void OnPlayerTriggerEnter(VRCPlayerApi player)
 		{
-			MDebugLog($"{nameof(OnPlayerTriggerEnter)} : {player.displayName} | {player.playerId}");
+			WDebugLog($"{nameof(OnPlayerTriggerEnter)} : {player.displayName} | {player.playerId}");
 
 			bool isLocalPlayer = player == Networking.LocalPlayer;
 

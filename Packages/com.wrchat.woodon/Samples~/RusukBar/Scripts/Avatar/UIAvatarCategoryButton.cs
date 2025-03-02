@@ -20,7 +20,7 @@ namespace Mascari4615
 
 		public void SetData(int avatarType, string name)
 		{
-			MDebugLog($"{nameof(SetData)} : {avatarType}, {name}");
+			WDebugLog($"{nameof(SetData)} : {avatarType}, {name}");
 		
 			this.avatarType = avatarType;
 			nameText.text = name;

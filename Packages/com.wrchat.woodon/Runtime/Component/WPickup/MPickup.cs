@@ -119,7 +119,7 @@ namespace WRC.Woodon
 
 		public override void OnPickup()
 		{
-			// MDebugLog(nameof(OnPickup));
+			// WDebugLog(nameof(OnPickup));
 
 			if (useGravityWhenOncePickedUp)
 				UseGravity(true);
@@ -130,7 +130,7 @@ namespace WRC.Woodon
 
 		public override void OnDrop()
 		{
-			// MDebugLog(nameof(OnDrop));
+			// WDebugLog(nameof(OnDrop));
 		
 			if (isHolding != null)
 				isHolding.SetValue(false);

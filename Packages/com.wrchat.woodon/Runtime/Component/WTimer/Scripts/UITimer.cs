@@ -114,7 +114,7 @@ namespace WRC.Woodon
 				{
 					int diff = lastSavedExpireTime - timer.CalcedCurTime + (int)(changedTimeDiff * (curLerpTime / lerpTime));
 					timeSpan = TimeSpan.FromMilliseconds(diff);
-					MDebugLog($"curLerpTime: {curLerpTime}, ||| ((curLerpTime / lerpTime) : {curLerpTime / lerpTime}");
+					WDebugLog($"curLerpTime: {curLerpTime}, ||| ((curLerpTime / lerpTime) : {curLerpTime / lerpTime}");
 				}
 			}
 			else
@@ -153,7 +153,7 @@ namespace WRC.Woodon
 				else
 				{
 					changedTimeDiff = Mathf.Abs(lastSavedExpireTime - timer.ExpireTime);
-					MDebugLog($"remainChangeTime: {changedTimeDiff} = {lastSavedExpireTime} - {timer.ExpireTime}");
+					WDebugLog($"remainChangeTime: {changedTimeDiff} = {lastSavedExpireTime} - {timer.ExpireTime}");
 
 					lastSavedExpireTime = timer.ExpireTime;
 					curLerpTime = lerpTime;

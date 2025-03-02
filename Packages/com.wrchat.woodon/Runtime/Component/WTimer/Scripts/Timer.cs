@@ -63,14 +63,14 @@ namespace WRC.Woodon
 
 			if (CalcedCurTime >= ExpireTime)
 			{
-				MDebugLog("Expired!");
+				WDebugLog("Expired!");
 				ResetTimer();
 			}
 		}
 
 		private void OnExpireTimeChange(int origin)
 		{
-			MDebugLog($"{nameof(OnExpireTimeChange)} : ChangeTo = {ExpireTime}");
+			WDebugLog($"{nameof(OnExpireTimeChange)} : ChangeTo = {ExpireTime}");
 
 			SendEvents();
 			SendEvents(TimerEvent.ExpireTimeChanged);
@@ -95,18 +95,18 @@ namespace WRC.Woodon
 		public void StopTimer() => ResetTimer();
 		public void ResetTimer()
 		{
-			MDebugLog(nameof(ResetTimer));
+			WDebugLog(nameof(ResetTimer));
 			SetExpireTime(NONE_INT);
 		}
 
 		public void SetTimer(int timeByDecisecond)
 		{
-			MDebugLog($"{nameof(SetTimer)} : {timeByDecisecond} Decisecond");
+			WDebugLog($"{nameof(SetTimer)} : {timeByDecisecond} Decisecond");
 			TimeByDecisecond = timeByDecisecond;
 		}
 		public void SetTimerByMValue()
 		{
-			MDebugLog(nameof(SetTimerByMValue));
+			WDebugLog(nameof(SetTimerByMValue));
 			SetTimer(mValueForSetTime.Value);
 		}
 
@@ -119,12 +119,12 @@ namespace WRC.Woodon
 		}
 		public void StartTimer(int timeByDecisecond)
 		{
-			MDebugLog($"{nameof(StartTimer)} : {timeByDecisecond} Decisecond");
+			WDebugLog($"{nameof(StartTimer)} : {timeByDecisecond} Decisecond");
 			SetExpireTime(CalcedCurTime + (timeByDecisecond * 100));
 		}
 		public void StartTimerByMValue()
 		{
-			MDebugLog(nameof(StartTimerByMValue));
+			WDebugLog(nameof(StartTimerByMValue));
 
 			if (mValueForSetTime != null)
 				SetExpireTime(CalcedCurTime + (mValueForSetTime.Value * 100));
@@ -132,7 +132,7 @@ namespace WRC.Woodon
 
 		public void AddTime()
 		{
-			MDebugLog(nameof(AddTime));
+			WDebugLog(nameof(AddTime));
 
 			if (ExpireTime != NONE_INT)
 				SetExpireTime(ExpireTime + TimeByDecisecond * 100);
@@ -140,7 +140,7 @@ namespace WRC.Woodon
 
 		public void AddTimeByMValue()
 		{
-			MDebugLog(nameof(AddTimeByMValue));
+			WDebugLog(nameof(AddTimeByMValue));
 
 			if (mValueForAddTime == null)
 				return;
@@ -153,7 +153,7 @@ namespace WRC.Woodon
 
 		public void ToggleTimer()
 		{
-			MDebugLog(nameof(ToggleTimer));
+			WDebugLog(nameof(ToggleTimer));
 
 			if (ExpireTime == NONE_INT)
 				StartTimer();

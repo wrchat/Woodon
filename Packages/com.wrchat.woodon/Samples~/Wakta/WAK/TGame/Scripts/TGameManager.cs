@@ -105,7 +105,7 @@ namespace Mascari4615.Project.Wakta.WAK.TGame
 		private int round = NONE_INT;
 		public void OnRoundChange()
 		{
-			MDebugLog($"{nameof(OnRoundChange)} : {round} -> {Data.CurRound}");
+			WDebugLog($"{nameof(OnRoundChange)} : {round} -> {Data.CurRound}");
 
 			// Only If Value Changed
 			if (round != Data.CurRound)
@@ -115,7 +115,7 @@ namespace Mascari4615.Project.Wakta.WAK.TGame
 				// Only If Valid Value
 				if (Data.CurRound > NONE_INT)
 				{
-					MDebugLog($"{nameof(OnRoundChange)}, Popup");
+					WDebugLog($"{nameof(OnRoundChange)}, Popup");
 
 					//HACK
 					videoScreenActive.SetValue(false);
@@ -143,7 +143,7 @@ namespace Mascari4615.Project.Wakta.WAK.TGame
 					return Data.RoundDatas[Data.CurRound];
 				else
 				{
-					MDebugLog($"CurRoundData, Invalid round {Data.CurRound}");
+					WDebugLog($"CurRoundData, Invalid round {Data.CurRound}");
 					return null;
 				}
 			}
@@ -223,7 +223,7 @@ namespace Mascari4615.Project.Wakta.WAK.TGame
 
 		private void Start()
 		{
-			MDebugLog($"{nameof(Start)}");
+			WDebugLog($"{nameof(Start)}");
 
 			/*Networking.LocalPlayer.CombatSetup();
 			Networking.LocalPlayer.CombatSetDamageGraphic(null);
@@ -288,7 +288,7 @@ namespace Mascari4615.Project.Wakta.WAK.TGame
 
 		public void NextRound()
 		{
-			MDebugLog($"{nameof(NextRound)}");
+			WDebugLog($"{nameof(NextRound)}");
 
 			// 마지막 라운드
 			if (Data.IsLastRound) return;
@@ -368,7 +368,7 @@ namespace Mascari4615.Project.Wakta.WAK.TGame
 			if (Data.GameData == string.Empty || !Data.GameData.Contains(DATA_PACK_SEPARATOR.ToString()))
 				return;
 
-			MDebugLog($"{nameof(OnGameDataChange)}");
+			WDebugLog($"{nameof(OnGameDataChange)}");
 
 			Bank.UpdateUI();
 
@@ -382,8 +382,8 @@ namespace Mascari4615.Project.Wakta.WAK.TGame
 			{
 				if ((int)CurRoundData.CurState <= (int)TGameRoundState.Steal6)
 				{
-					// MDebugLog($"{CurRoundData.PlayerNumberByOrder} = {CurRoundData.PlayerNumberByOrder.Length}");
-					// MDebugLog($"AAA = {(int)CurRoundData.CurState - (int)TGameRoundState.Steal0}");
+					// WDebugLog($"{CurRoundData.PlayerNumberByOrder} = {CurRoundData.PlayerNumberByOrder.Length}");
+					// WDebugLog($"AAA = {(int)CurRoundData.CurState - (int)TGameRoundState.Steal0}");
 					int curPlayerIndex =
 						CurRoundData.NumberByOrder[(int)CurRoundData.CurState - (int)TGameRoundState.Steal0];
 					curPlayerImage.sprite = GetPlayerImage(curPlayerIndex);
@@ -442,7 +442,7 @@ namespace Mascari4615.Project.Wakta.WAK.TGame
 
 		public void StartPointing()
 		{
-			MDebugLog(nameof(StartPointing));
+			WDebugLog(nameof(StartPointing));
 			InfoPopup(TGameRoundState.Pointing, 1);
 
 			shootCount = 0;
@@ -471,7 +471,7 @@ namespace Mascari4615.Project.Wakta.WAK.TGame
 
 		public void SitSeat()
 		{
-			MDebugLog(nameof(SitSeat));
+			WDebugLog(nameof(SitSeat));
 			foreach (ThiefSeat thiefSeat in thiefSeats)
 			{
 				thiefSeat.SetMemoActive(false);
@@ -514,12 +514,12 @@ namespace Mascari4615.Project.Wakta.WAK.TGame
 
 		public void Exit(int seatIndex)
 		{
-			MDebugLog(nameof(Exit));
+			WDebugLog(nameof(Exit));
 
 			int targetNum = GetPlayerNumBySeatIndex(seatIndex);
 			if (targetNum == NONE_INT)
 			{
-				MDebugLog($"{nameof(Exit)} Invalid TargetNum : {targetNum}");
+				WDebugLog($"{nameof(Exit)} Invalid TargetNum : {targetNum}");
 				return;
 			}
 			bool isLocalPlayerVictim = IsLocalPlayerNumber(targetNum);
@@ -534,7 +534,7 @@ namespace Mascari4615.Project.Wakta.WAK.TGame
 
 			if (isLocalPlayerVictim)
 			{
-				MDebugLog("Goto Jail");
+				WDebugLog("Goto Jail");
 				thiefSeats[seatIndex].ExitStation();
 				TP(jailPos);
 
@@ -546,7 +546,7 @@ namespace Mascari4615.Project.Wakta.WAK.TGame
 		// When Player(Seat) Shooted
 		public void ShootPlayer_G(int seatIndex)
 		{
-			MDebugLog(nameof(ShootPlayer_G));
+			WDebugLog(nameof(ShootPlayer_G));
 			SendCustomNetworkEvent(NetworkEventTarget.All, nameof(ShootPlayer) + seatIndex);
 		}
 
@@ -562,13 +562,13 @@ namespace Mascari4615.Project.Wakta.WAK.TGame
 			int victimNum = GetPlayerNumBySeatIndex(seatIndex);
 			if (victimNum == NONE_INT)
 			{
-				MDebugLog($"{nameof(ShootPlayer)} Invalid TargetNum : {victimNum}, {nameof(seatIndex)} : {seatIndex}");
+				WDebugLog($"{nameof(ShootPlayer)} Invalid TargetNum : {victimNum}, {nameof(seatIndex)} : {seatIndex}");
 				return;
 			}
 			bool isValidShoot = CurRoundData.IsPlayerCoinOrder(victimNum, shootCount);
 			bool isLocalPlayerPointer = IsLocalPlayerNumber(CurRoundData.PointerNumber);
 
-			MDebugLog($"{nameof(ShootPlayer)} : " +
+			WDebugLog($"{nameof(ShootPlayer)} : " +
 				$"{nameof(seatIndex)} = {seatIndex}, " +
 				$"{nameof(victimNum)} = {victimNum}/{GetPlayerName(victimNum, false)} " +
 				$"{nameof(isValidShoot)} = {isValidShoot}, " +
@@ -587,7 +587,7 @@ namespace Mascari4615.Project.Wakta.WAK.TGame
 				// 잘 쏜 경우
 				if (isValidShoot)
 				{
-					MDebugLog($"{nameof(ShootPlayer)}, {victimNum}, Success");
+					WDebugLog($"{nameof(ShootPlayer)}, {victimNum}, Success");
 
 					CurRoundData.ShootedNumbers[shootCount - 1] = victimNum;
 					SendCustomNetworkEvent(NetworkEventTarget.All, nameof(Exit) + seatIndex);
@@ -610,7 +610,7 @@ namespace Mascari4615.Project.Wakta.WAK.TGame
 				// 실패한 경우
 				else
 				{
-					MDebugLog($"{nameof(ShootPlayer)}, {victimNum}, Fail");
+					WDebugLog($"{nameof(ShootPlayer)}, {victimNum}, Fail");
 
 					// 스틸 실패
 					CurRoundData.ShootedNumbers[PLAYER_COUNT - 1] = (int)TGamePointingResult.Fail;
@@ -645,12 +645,12 @@ namespace Mascari4615.Project.Wakta.WAK.TGame
 
 				// 엔딩
 				if (IsEnding)
-					MDebugLog($"{nameof(ShootPlayer)}, Staff Ending");
+					WDebugLog($"{nameof(ShootPlayer)}, Staff Ending");
 				// 심판 단계
 				else if (CurRoundData.CurState == TGameRoundState.Judge)
-					MDebugLog($"{nameof(ShootPlayer)}, Staff Judge");
+					WDebugLog($"{nameof(ShootPlayer)}, Staff Judge");
 				else
-					MDebugLog($"{nameof(ShootPlayer)}, Staff Invalid ??? ???");
+					WDebugLog($"{nameof(ShootPlayer)}, Staff Invalid ??? ???");
 
 				SendCustomNetworkEvent(NetworkEventTarget.All, nameof(Exit) + seatIndex);
 			}
@@ -659,7 +659,7 @@ namespace Mascari4615.Project.Wakta.WAK.TGame
 		// 지목 중도 포기
 		public void StopPointing()
 		{
-			MDebugLog(nameof(StopPointing));
+			WDebugLog(nameof(StopPointing));
 			CurRoundData.ShootedNumbers[PLAYER_COUNT - 1] = (int)TGamePointingResult.Success;
 			Data.SyncGameData();
 
@@ -669,7 +669,7 @@ namespace Mascari4615.Project.Wakta.WAK.TGame
 
 		public void StartJudge()
 		{
-			MDebugLog(nameof(StartJudge));
+			WDebugLog(nameof(StartJudge));
 			SendCustomNetworkEvent(NetworkEventTarget.All, nameof(InitGunPos));
 			SendCustomNetworkEvent(NetworkEventTarget.All, nameof(SitSeatOnlyPicker));
 			SendCustomNetworkEvent(NetworkEventTarget.All, nameof(InfoPopup_Jugde));
@@ -678,7 +678,7 @@ namespace Mascari4615.Project.Wakta.WAK.TGame
 
 		public void SitSeatOnlyPicker()
 		{
-			MDebugLog(nameof(SitSeatOnlyPicker));
+			WDebugLog(nameof(SitSeatOnlyPicker));
 			foreach (ThiefSeat thiefSeat in thiefSeats)
 			{
 				thiefSeat.SetShootingTargetActive(true);
@@ -718,7 +718,7 @@ namespace Mascari4615.Project.Wakta.WAK.TGame
 
 		public void StopJudge()
 		{
-			MDebugLog(nameof(StopJudge));
+			WDebugLog(nameof(StopJudge));
 			CurRoundData.isRoundEnd = true;
 			Data.SyncGameData();
 
@@ -727,7 +727,7 @@ namespace Mascari4615.Project.Wakta.WAK.TGame
 
 		public void RoundEnd()
 		{
-			MDebugLog(nameof(RoundEnd));
+			WDebugLog(nameof(RoundEnd));
 
 			SFXManager.PlaySFX_L(3);
 			HideGun();
@@ -743,7 +743,7 @@ namespace Mascari4615.Project.Wakta.WAK.TGame
 
 		public void ShowOrder_G()
 		{
-			MDebugLog(nameof(ShowOrder_G));
+			WDebugLog(nameof(ShowOrder_G));
 			CurRoundData.isRoundEnd = true;
 			Data.SyncGameData();
 
@@ -752,7 +752,7 @@ namespace Mascari4615.Project.Wakta.WAK.TGame
 
 		public void ShowOrder()
 		{
-			MDebugLog(nameof(ShowOrder));
+			WDebugLog(nameof(ShowOrder));
 			InfoPopup_End();
 			HideGun();
 			ResetPointingTime();
@@ -760,13 +760,13 @@ namespace Mascari4615.Project.Wakta.WAK.TGame
 
 		public void ExitAll_G()
 		{
-			MDebugLog(nameof(ExitAll_G));
+			WDebugLog(nameof(ExitAll_G));
 			SendCustomNetworkEvent(NetworkEventTarget.All, nameof(ExitAll));
 		}
 
 		public void ExitAll()
 		{
-			MDebugLog(nameof(ExitAll));
+			WDebugLog(nameof(ExitAll));
 
 			foreach (ThiefSeat thiefSeat in thiefSeats)
 			{
@@ -804,7 +804,7 @@ namespace Mascari4615.Project.Wakta.WAK.TGame
 
 		public void Ending_G()
 		{
-			MDebugLog(nameof(Ending_G));
+			WDebugLog(nameof(Ending_G));
 
 			if (IsGaming)
 			{
@@ -817,7 +817,7 @@ namespace Mascari4615.Project.Wakta.WAK.TGame
 
 		public void Ending()
 		{
-			MDebugLog(nameof(Ending));
+			WDebugLog(nameof(Ending));
 
 			InitGunPos();
 			videoScreenActive.SetValue(true);
@@ -828,13 +828,13 @@ namespace Mascari4615.Project.Wakta.WAK.TGame
 
 		public void EndingSeat_G()
 		{
-			MDebugLog(nameof(EndingSeat_G));
+			WDebugLog(nameof(EndingSeat_G));
 			SendCustomNetworkEvent(NetworkEventTarget.All, nameof(EndingSeat));
 		}
 
 		public void EndingSeat()
 		{
-			MDebugLog(nameof(EndingSeat));
+			WDebugLog(nameof(EndingSeat));
 
 			InitGunPos();
 			
@@ -885,7 +885,7 @@ namespace Mascari4615.Project.Wakta.WAK.TGame
 				(int)CurRoundData.CurState > (int)TGameRoundState.Steal6)
 				return;
 
-			MDebugLog(nameof(Test));
+			WDebugLog(nameof(Test));
 
 			CurRoundData.CoinByOrder[0] = 20;
 			CurRoundData.CoinByOrder[1] = 20;
@@ -901,7 +901,7 @@ namespace Mascari4615.Project.Wakta.WAK.TGame
 
 		public void LoadVideo()
 		{
-			MDebugLog(nameof(LoadVideo));
+			WDebugLog(nameof(LoadVideo));
 			unityVideoPlayer.LoadURL(endingVideoURL);
 		}
 

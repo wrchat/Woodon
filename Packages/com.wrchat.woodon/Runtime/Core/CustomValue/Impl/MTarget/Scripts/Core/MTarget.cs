@@ -45,7 +45,7 @@ namespace WRC.Woodon
 
 		public void SetTarget(int id)
 		{
-			MDebugLog($"{nameof(SetTarget)} : {id}");
+			WDebugLog($"{nameof(SetTarget)} : {id}");
 
 			SetOwner();
 			TargetPlayerID = id;

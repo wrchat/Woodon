@@ -58,7 +58,7 @@ namespace Mascari4615.Project.ISD.GSG.RotatingMeeting
 		/// </summary>
 		public Transform GetTargetPosTransform(CupPosition cupPosition)
 		{
-			// MDebugLog(nameof(GetTargetPosTransform) + cupPosition);
+			// WDebugLog(nameof(GetTargetPosTransform) + cupPosition);
 
 			if (cupPosition == CupPosition.None)
 				return null;
@@ -76,7 +76,7 @@ namespace Mascari4615.Project.ISD.GSG.RotatingMeeting
 		/// </summary>
 		public DollyCartSync GetDollyCart(CupPosition cupPosition)
 		{
-			// MDebugLog(nameof(GetDollyCart) + cupPosition);
+			// WDebugLog(nameof(GetDollyCart) + cupPosition);
 
 			if ((cupPosition != CupPosition.None) && ((int)cupPosition <= (int)CupPosition.Platform7))
 				return runningCupPlatforms[(int)cupPosition];
@@ -133,7 +133,7 @@ namespace Mascari4615.Project.ISD.GSG.RotatingMeeting
 			// (timeFromPointToPointByMilli * SushiCarts.Length * 2);
 			float posByTime = (float)timeDiffByMilli / TIME_FROM_POINT_TO_POINT_BY_MILLI;
 
-			// MDebugLog(posByTime.ToString());
+			// WDebugLog(posByTime.ToString());
 			// debugText.text = posByTime.ToString();
 
 			for (int i = 0; i < runningCupPlatforms.Length; i++)
@@ -146,7 +146,7 @@ namespace Mascari4615.Project.ISD.GSG.RotatingMeeting
 		/// <param name="targetCup"></param>
 		public void UploadCup(Cup targetCup)
 		{
-			MDebugLog(nameof(UploadCup) + targetCup.gameObject.name);
+			WDebugLog(nameof(UploadCup) + targetCup.gameObject.name);
 			CupPosition targetPos = CupPosition.None;
 
 			// 루프 수
@@ -172,9 +172,9 @@ namespace Mascari4615.Project.ISD.GSG.RotatingMeeting
 			}
 
 			if (targetPos == CupPosition.None)
-				MDebugLog("Something Wrong !!!!!!!!!!!!!!!!!!!!!!!");
+				WDebugLog("Something Wrong !!!!!!!!!!!!!!!!!!!!!!!");
 
-			MDebugLog(nameof(UploadCup) + $" - Move to {targetPos}");
+			WDebugLog(nameof(UploadCup) + $" - Move to {targetPos}");
 
 			targetCup.SetTargetPos(targetPos);
 			waitingDatas[(int)targetPos - (int)CupPosition.Down0].SetCurTime(0);
@@ -299,7 +299,7 @@ namespace Mascari4615.Project.ISD.GSG.RotatingMeeting
 
 		public void OpenVote(int index)
 		{
-			MDebugLog(nameof(OpenVote));
+			WDebugLog(nameof(OpenVote));
 
 			sfxManager.PlaySFX_G(3);
 			voteTargetCupIndex = index;
@@ -315,7 +315,7 @@ namespace Mascari4615.Project.ISD.GSG.RotatingMeeting
 
 		public void CloseVote()
 		{
-			MDebugLog(nameof(CloseVote));
+			WDebugLog(nameof(CloseVote));
 			foreach (CupPicker cupPicker in CupPickers)
 				cupPicker.CloseVote();
 		}
@@ -325,7 +325,7 @@ namespace Mascari4615.Project.ISD.GSG.RotatingMeeting
 			if (CanSetAmplification())
 				return;
 
-			MDebugLog($"yes = {yes}");
+			WDebugLog($"yes = {yes}");
 			voteCurCount++;
 			voteScore += yes ? 1 : 0;
 
@@ -338,7 +338,7 @@ namespace Mascari4615.Project.ISD.GSG.RotatingMeeting
 				{
 					sfxManager.PlaySFX_G(5);
 					ResetAppealTime();
-					MDebugLog("Success");
+					WDebugLog("Success");
 				}
 				else
 				{
@@ -346,7 +346,7 @@ namespace Mascari4615.Project.ISD.GSG.RotatingMeeting
 
 					sfxManager.PlaySFX_G(4);
 					ResetAppealTime();
-					MDebugLog("Fail");
+					WDebugLog("Fail");
 				}
 			}
 		}

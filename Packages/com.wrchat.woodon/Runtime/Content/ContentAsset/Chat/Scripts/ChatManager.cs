@@ -51,7 +51,7 @@ namespace WRC.Woodon
 		#region SendChat
 		public void SendChatMessage(string message, TeamType chatRoom, string additionalData = "")
 		{
-			MDebugLog($"{nameof(SendChatMessage)} : {message}");
+			WDebugLog($"{nameof(SendChatMessage)} : {message}");
 
 			if (string.IsNullOrEmpty(message))
 				return;
@@ -66,7 +66,7 @@ namespace WRC.Woodon
 			// 클라이언트가 호출
 			if (udonIndex == NONE_INT)
 			{
-				MDebugLog("Udon Index is None.");
+				WDebugLog("Udon Index is None.");
 				return;
 			}
 
@@ -84,18 +84,18 @@ namespace WRC.Woodon
 		#region ReceieveChat
 		public void ReceieveChat(int udonIndex)
 		{
-			MDebugLog($"{nameof(ReceieveChat)} : {udonIndex}");
+			WDebugLog($"{nameof(ReceieveChat)} : {udonIndex}");
 
 			WJson wJson = chatDatas[udonIndex];
 
 			if (wJson.Value == string.Empty)
 			{
-				MDebugLog("Value is Empty.");
+				WDebugLog("Value is Empty.");
 				return;
 			}
 
 			DataDictionary chatData = wJson.DataDictionary.DeepClone();
-			MDebugLog($"ChatData : {wJson.Value} || {chatData}");
+			WDebugLog($"ChatData : {wJson.Value} || {chatData}");
 			TeamType chatRoom = chatData.GetChatRoom();
 			string chatRoomString = chatRoom.ToString();
 
@@ -117,7 +117,7 @@ namespace WRC.Woodon
 
 			// 정렬 (시간순)
 			{
-				MDebugLog($"Sort : {curDataList.Count}");
+				WDebugLog($"Sort : {curDataList.Count}");
 				for (int i = 0; i < curDataList.Count; i++)
 				{
 					DataDictionary curChatData = curDataList[i].DataDictionary;

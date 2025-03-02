@@ -40,14 +40,14 @@ namespace WRC.Woodon
 			SerializeData();
 		}
 
-		public virtual void OnWait() => MDebugLog($"{nameof(OnWait)}");
-		public virtual void OnQuizTime() => MDebugLog($"{nameof(OnQuizTime)}");
-		public virtual void OnSelectAnswer() => MDebugLog($"{nameof(OnSelectAnswer)}");
-		public virtual void OnShowPlayerAnswer() => MDebugLog($"{nameof(OnShowPlayerAnswer)}");
-		public virtual void OnCheckAnswer() => MDebugLog($"{nameof(OnCheckAnswer)}");
+		public virtual void OnWait() => WDebugLog($"{nameof(OnWait)}");
+		public virtual void OnQuizTime() => WDebugLog($"{nameof(OnQuizTime)}");
+		public virtual void OnSelectAnswer() => WDebugLog($"{nameof(OnSelectAnswer)}");
+		public virtual void OnShowPlayerAnswer() => WDebugLog($"{nameof(OnShowPlayerAnswer)}");
+		public virtual void OnCheckAnswer() => WDebugLog($"{nameof(OnCheckAnswer)}");
 		public virtual void OnScoring()
 		{
-			MDebugLog($"{nameof(OnScoring)}");
+			WDebugLog($"{nameof(OnScoring)}");
 
 			if (IsTargetPlayer() == false)
 				return;

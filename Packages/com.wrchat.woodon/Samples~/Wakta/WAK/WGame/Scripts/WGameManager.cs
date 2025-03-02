@@ -75,7 +75,7 @@ namespace Mascari4615.Project.Wakta.WAK.WGame
 			bool isLeftMore = leftCount > rightCount;
 			selectBlockAnimator.SetInteger("STATE", (!showingResult || leftCount == rightCount) ? 0 : (isLeftMore ? -1 : 1));
 
-			// MDebugLog($"STATE : {showingResult}, {leftCount}, {rightCount}, {isLeftMore}, {(!showingResult ? 0 : (isLeftMore ? -1 : 1))}");
+			// WDebugLog($"STATE : {showingResult}, {leftCount}, {rightCount}, {isLeftMore}, {(!showingResult ? 0 : (isLeftMore ? -1 : 1))}");
 		}
 
 		private void UpdatePlayerIcon(Image[] iconImages, QuizAnswerType targetAnswerType, bool onWhenSame)
@@ -157,7 +157,7 @@ namespace Mascari4615.Project.Wakta.WAK.WGame
 				// UpdateAnim();
 
 				bool allOpened = leftAnimatorStateCustowBool.SyncedValue && rightAnimatorStateCustowBool.SyncedValue;
-				// MDebugLog($"allOpened : {allOpened}, {leftAnimatorStateCustowBool.SyncValue}, {rightAnimatorStateCustowBool.SyncValue} = {leftAnimatorStateCustowBool.Value}, {rightAnimatorStateCustowBool.Value}");
+				// WDebugLog($"allOpened : {allOpened}, {leftAnimatorStateCustowBool.SyncValue}, {rightAnimatorStateCustowBool.SyncValue} = {leftAnimatorStateCustowBool.Value}, {rightAnimatorStateCustowBool.Value}");
 
 				leftSelectButton.interactable = allOpened;
 				rightSelectButton.interactable = allOpened;
@@ -210,17 +210,17 @@ namespace Mascari4615.Project.Wakta.WAK.WGame
 
 			if (localPlayerUdonIndex == NONE_INT)
 			{
-				MDebugLog("!!! : A");
+				WDebugLog("!!! : A");
 				debugText2.text = "A";
 				return null;
 			}
 
 			QuizSeat localplayerQuizSeat = (QuizSeat)TurnSeats[localPlayerUdonIndex];
-			MDebugLog(localplayerQuizSeat.ToString());
+			WDebugLog(localplayerQuizSeat.ToString());
 
 			if (TurnSeats[localPlayerUdonIndex].TargetPlayerID != Networking.LocalPlayer.playerId)
 			{
-				MDebugLog("!!! : B");
+				WDebugLog("!!! : B");
 				debugText2.text = "B";
 				TurnSeats[localPlayerUdonIndex].UseSeat();
 			}

@@ -54,7 +54,7 @@ namespace Mascari4615.Project.Wakta.WAK.TGame
 		// 갱신
 		public void UpdateMemo()
 		{
-			MDebugLog(nameof(UpdateMemo));
+			WDebugLog(nameof(UpdateMemo));
 			coinText.text = coinMemo.MScore.Value.ToString();
 
 			if (gameManager.IsGaming == false)

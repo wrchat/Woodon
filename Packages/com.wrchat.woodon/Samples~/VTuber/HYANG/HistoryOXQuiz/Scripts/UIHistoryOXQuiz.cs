@@ -30,7 +30,7 @@ namespace Mascari4615.Project.VTuber.HYANG.HistoryOXQuiz
 		
 		public void SelectFinalQuiz(int index)
 		{
-			MDebugLog($"{nameof(SelectFinalQuiz)}: {index}");
+			WDebugLog($"{nameof(SelectFinalQuiz)}: {index}");
 
 			for (int i = 0; i < subjectButtons.Length; i++)
 				subjectButtons[i].SetAnimatorValue(i == index ? 2 : 3);

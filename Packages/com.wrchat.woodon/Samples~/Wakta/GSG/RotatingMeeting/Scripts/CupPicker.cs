@@ -94,7 +94,7 @@ namespace Mascari4615.Project.ISD.GSG.RotatingMeeting
 			}
 			else
 			{
-				// MDebugLog(nameof(CheckTime) + TotalMeetingTime());
+				// WDebugLog(nameof(CheckTime) + TotalMeetingTime());
 
 				int totalMeetingTime = TotalMeetingTime();
 				totalTimeText.text = totalMeetingTime <= targetTotalTime ? TimeSpan.FromSeconds(totalMeetingTime).ToString(@"mm\:ss") : "-";
@@ -125,7 +125,7 @@ namespace Mascari4615.Project.ISD.GSG.RotatingMeeting
 			if (!manager.TryGetNearestPlatform_Meeting(out CupPosition platformPos, index))
 			{
 				// DEBUG_Text.text = "_No Platform";
-				MDebugLog(nameof(PickNearestCup) + "_No Platform");
+				WDebugLog(nameof(PickNearestCup) + "_No Platform");
 				return;
 			}
 
@@ -149,12 +149,12 @@ namespace Mascari4615.Project.ISD.GSG.RotatingMeeting
 			}
 
 			// DEBUG_Text.text = "_No Cup";
-			MDebugLog(nameof(PickNearestCup) + "_No Cup");
+			WDebugLog(nameof(PickNearestCup) + "_No Cup");
 		}
 
 		private void StartMeeting(int _targetCupIndex)
 		{
-			MDebugLog(nameof(StartMeeting) + ((int)CupPosition.Meeting0 + index));
+			WDebugLog(nameof(StartMeeting) + ((int)CupPosition.Meeting0 + index));
 			// DEBUG_Text.text = "StartMeeting";
 
 			SetOwner();
@@ -173,7 +173,7 @@ namespace Mascari4615.Project.ISD.GSG.RotatingMeeting
 				if ((int)cup.TargetPos == (int)CupPosition.Meeting0 + index)
 					if (cup.OwnerID == Networking.LocalPlayer.playerId)
 					{
-						MDebugLog(nameof(Success));
+						WDebugLog(nameof(Success));
 
 						TargetCup.SetTotalMeetingTime(0, index);
 						TargetCup.SetTurn(100);
@@ -195,7 +195,7 @@ namespace Mascari4615.Project.ISD.GSG.RotatingMeeting
 
 		public void TriggerAnimator()
 		{
-			// MDebugLog(nameof(TriggerAnimator));
+			// WDebugLog(nameof(TriggerAnimator));
 			tableAnimator.SetTrigger("GO");
 			sfxManager.PlaySFX_G(0);
 			sfxManager.PlaySFX_G(2);
@@ -215,7 +215,7 @@ namespace Mascari4615.Project.ISD.GSG.RotatingMeeting
 
 		public void SitCup()
 		{
-			// MDebugLog(nameof(SitCup));
+			// WDebugLog(nameof(SitCup));
 			if (OwnerID != NONE_INT)
 				return;
 
@@ -226,7 +226,7 @@ namespace Mascari4615.Project.ISD.GSG.RotatingMeeting
 
 		public void ExitCup()
 		{
-			// MDebugLog(nameof(ExitCup));
+			// WDebugLog(nameof(ExitCup));
 			if (OwnerID != Networking.LocalPlayer.playerId)
 				return;
 
@@ -250,7 +250,7 @@ namespace Mascari4615.Project.ISD.GSG.RotatingMeeting
 			if (OwnerID != Networking.LocalPlayer.playerId)
 				return;
 
-			// MDebugLog(nameof(ReturnCup));
+			// WDebugLog(nameof(ReturnCup));
 
 			// 시간이 끝나고 컵이 돌아감
 			// 시간을 컵에 기록

@@ -13,7 +13,7 @@ namespace WRC.Woodon
 
 		public override void UpdateUI()
 		{
-			MDebugLog($"{nameof(UpdateUI)}");
+			WDebugLog($"{nameof(UpdateUI)}");
 
 			foreach (MAnimator mAnimator in mAnimatorsByGameState)
 				mAnimator.SetInt_L(contentManager.ContentState);

@@ -70,7 +70,7 @@ namespace WRC.Woodon
 			newValue = Mathf.Clamp(newValue, fovMin, fovMax);
 
 			SetValue(newValue);
-			MDebugLog($"{nameof(UpdateFov)} : +{scroll} = {newValue}");
+			WDebugLog($"{nameof(UpdateFov)} : +{scroll} = {newValue}");
 		}
 	}
 }

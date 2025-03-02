@@ -9,7 +9,7 @@ namespace WRC.Woodon
 
 	// 	public virtual void SetCustomValue(T customValue)
 	// 	{
-	// 		// MDebugLog($"{nameof(SetCustomValue)} - {customValue}");
+	// 		// WDebugLog($"{nameof(SetCustomValue)} - {customValue}");
 	// 		this.customValue = customValue;
 	// 	}
 	// }

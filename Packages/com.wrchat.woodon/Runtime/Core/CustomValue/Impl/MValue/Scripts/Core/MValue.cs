@@ -50,7 +50,7 @@ namespace WRC.Woodon
 
 		private void Init()
 		{
-			MDebugLog($"{nameof(Init)}");
+			WDebugLog($"{nameof(Init)}");
 
 			if (UseSync)
 			{
@@ -67,7 +67,7 @@ namespace WRC.Woodon
 
 		public void SetMinMaxValue(int min, int max, bool recalcValue = true)
 		{
-			MDebugLog($"{nameof(SetMinMaxValue)}");
+			WDebugLog($"{nameof(SetMinMaxValue)}");
 
 			MinValue = min;
 			MaxValue = max;
@@ -78,7 +78,7 @@ namespace WRC.Woodon
 
 		public void SetValue(int newValue, bool isReciever = false)
 		{
-			MDebugLog($"{nameof(SetValue)}");
+			WDebugLog($"{nameof(SetValue)}");
 
 			int actualValue = newValue;
 
@@ -133,7 +133,7 @@ namespace WRC.Woodon
 
 		private void OnValueChange(DataChangeState dataChangeState)
 		{
-			MDebugLog($"{nameof(OnValueChange)} : {Value}");
+			WDebugLog($"{nameof(OnValueChange)} : {Value}");
 
 			if (isMaxValue != null)
 				isMaxValue.SetValue(Value == MaxValue);

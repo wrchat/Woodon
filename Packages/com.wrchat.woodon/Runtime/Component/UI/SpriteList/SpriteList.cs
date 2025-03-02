@@ -47,7 +47,7 @@ namespace WRC.Woodon
 
 		public void InitSprites()
 		{
-			MDebugLog(nameof(InitSprites));
+			WDebugLog(nameof(InitSprites));
 
 			for (int i = 0; i < images.Length; i++)
 				images[i].sprite = sprites[i];
@@ -59,7 +59,7 @@ namespace WRC.Woodon
 		[ContextMenu(nameof(SetAllByMValue))]
 		public void SetAllByMValue()
 		{
-			MDebugLog(nameof(SetAllByMValue));
+			WDebugLog(nameof(SetAllByMValue));
 			if (mValue_SpriteIndex)
 				SetAll(mValue_SpriteIndex.Value);
 		}
@@ -72,11 +72,11 @@ namespace WRC.Woodon
 
 		public void SetAll(int spriteIndex)
 		{
-			MDebugLog(nameof(SetAll));
+			WDebugLog(nameof(SetAll));
 
 			if (spriteIndex < 0 || spriteIndex >= sprites.Length)
 			{
-				MDebugLog($"{nameof(SetAll)}, Index out of range: {spriteIndex}", LogType.Error);
+				WDebugLog($"{nameof(SetAll)}, Index out of range: {spriteIndex}", LogType.Error);
 				return;
 			}
 

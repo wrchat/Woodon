@@ -17,7 +17,7 @@ namespace Mascari4615
 
         public void PlayerChanged(int index)
         {
-            MDebugLog($"{nameof(PlayerChanged)} : Index = {index}");
+            WDebugLog($"{nameof(PlayerChanged)} : Index = {index}");
 
             SendEvents();
             mTargetTeamManager.PlayerChanged(TeamType, index, mTargets[index].TargetPlayerID);

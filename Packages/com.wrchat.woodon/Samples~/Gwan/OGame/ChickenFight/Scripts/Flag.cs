@@ -93,7 +93,7 @@ namespace Mascari4615
 
 		public void TryUseShield()
 		{
-			MDebugLog(nameof(TryUseShield));
+			WDebugLog(nameof(TryUseShield));
 
 			if (IsLocalPlayerOwner)
 				if (shieldCoolTime.ExpireTime == NONE_INT)
@@ -111,7 +111,7 @@ namespace Mascari4615
 		// 오너가 아닌 사람이 아웃 시키는 것
 		public void Touch()
 		{
-			MDebugLog(nameof(Touch));
+			WDebugLog(nameof(Touch));
 
 			if (IsLocalPlayerOwner)
 				return;
@@ -138,7 +138,7 @@ namespace Mascari4615
 		// 오너가 아웃 당하는 것
 		public void Out()
 		{
-			MDebugLog(nameof(Out));
+			WDebugLog(nameof(Out));
 
 			if (IsLocalPlayerOwner || (mTargetHorse.TargetPlayerID == Networking.LocalPlayer.playerId))
 			{

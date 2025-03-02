@@ -126,7 +126,7 @@ namespace WRC.Woodon
 
 		public void SelectPlayer(int index)
 		{
-			MDebugLog($"{nameof(SelectPlayer)} : {index}");
+			WDebugLog($"{nameof(SelectPlayer)} : {index}");
 			mTarget.SetTarget(playerIDBuffer[index]);
 		}
 

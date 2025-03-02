@@ -15,7 +15,7 @@ namespace Mascari4615
 
 		public void SetData(string id, string name)
 		{
-			MDebugLog($"{nameof(SetData)} : {id}, {name}");
+			WDebugLog($"{nameof(SetData)} : {id}, {name}");
 
 			avatarPedestal.blueprintId = id;
 			nameText.text = name;

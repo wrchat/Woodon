@@ -21,9 +21,9 @@ namespace WRC.Woodon
 		[SerializeField] protected bool DEBUG = false;
 
 		// 아래 메서드들은 확장 메서드들로 만들까 했는데, 일반 메서드와 크게 성능상 차이가 없다고 함.
-		// this.MDebugLog(); 같이 쓰기 번거로워지기만 할 것 같아서 그냥 일반 메서드로 둠.
+		// this.WDebugLog(); 같이 쓰기 번거로워지기만 할 것 같아서 그냥 일반 메서드로 둠.
 
-		// 정적 메소드로 만들더라도 마찬가지로 MBase.MDebugLog(); 같이 써야 하거나,
+		// 정적 메소드로 만들더라도 마찬가지로 MBase.WDebugLog(); 같이 써야 하거나,
 		// 대신 위에 using static WRC.MBase; 를 써주면 되는데,
 		// 클래스 이름 : MBase 로 상속 받는 것이 더 빠르고 편하기도 하고, 상속 받을 때만의 이점이 있어서 (아래 참고) 패스
 
@@ -33,7 +33,7 @@ namespace WRC.Woodon
 
 		// DEBUG 옵션도 딱히 대체 방법이 생각나지 않아서, 직접 상속 받게하는 것이 여러모로 편하고 좋아보임.
 
-		protected void MDebugLog(string log, LogType logType = LogType.Log)
+		protected void WDebugLog(string log, LogType logType = LogType.Log)
 		{
 			// To Not Log Error When Player Left The World.
 			if (IsNotOnline())

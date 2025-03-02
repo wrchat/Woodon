@@ -49,7 +49,7 @@ namespace Mascari4615.Project.RusukBar
 
 		private void Init()
 		{
-			MDebugLog(nameof(Init));
+			WDebugLog(nameof(Init));
 
 			qvPens = GameObject.Find("Pens").GetComponentsInChildren<UdonSharpBehaviour>();
 

@@ -25,10 +25,10 @@ namespace WRC.Woodon
 
 		private void OnTargetIndexChanged()
 		{
-			MDebugLog($"{nameof(OnTargetIndexChanged)}, TargetIndex : {TargetIndex}");
+			WDebugLog($"{nameof(OnTargetIndexChanged)}, TargetIndex : {TargetIndex}");
 
 			if (TargetIndex != NONE_INT)
-				MDebugLog($"{nameof(OnTargetIndexChanged)}, DrawElementData : {DrawManager.DrawElementDatas[TargetIndex].Name}");
+				WDebugLog($"{nameof(OnTargetIndexChanged)}, DrawElementData : {DrawManager.DrawElementDatas[TargetIndex].Name}");
 
 			UpdateUI();
 		}
@@ -41,7 +41,7 @@ namespace WRC.Woodon
 
 		private void Init()
 		{
-			MDebugLog(nameof(Init));
+			WDebugLog(nameof(Init));
 
 			foreach (UIAuctionDraw ui in uis)
 				ui.Init(this);
@@ -58,7 +58,7 @@ namespace WRC.Woodon
 
 		public void UpdateUI()
 		{
-			MDebugLog(nameof(UpdateUI));
+			WDebugLog(nameof(UpdateUI));
 
 			foreach (UIAuctionDraw ui in uis)
 				ui.UpdateUI();
@@ -66,7 +66,7 @@ namespace WRC.Woodon
 
 		public void UpdateDrawByAuction()
 		{
-			MDebugLog(nameof(UpdateDrawByAuction));
+			WDebugLog(nameof(UpdateDrawByAuction));
 
 			switch ((AuctionState)AuctionManager.ContentState)
 			{
@@ -101,7 +101,7 @@ namespace WRC.Woodon
 
 		protected virtual void OnWait()
 		{
-			MDebugLog(nameof(OnWait));
+			WDebugLog(nameof(OnWait));
 
 			if (IsOwner() == false)
 				return;
@@ -114,13 +114,13 @@ namespace WRC.Woodon
 			}
 			else
 			{
-				MDebugLog("NoneTeamDrawElementData is null");
+				WDebugLog("NoneTeamDrawElementData is null");
 			}
 		}
 
 		protected virtual void OnShowTarget()
 		{
-			MDebugLog(nameof(OnShowTarget));
+			WDebugLog(nameof(OnShowTarget));
 
 			if (IsOwner() == false)
 				return;
@@ -128,7 +128,7 @@ namespace WRC.Woodon
 
 		protected virtual void OnAuctionTime()
 		{
-			MDebugLog(nameof(OnAuctionTime));
+			WDebugLog(nameof(OnAuctionTime));
 
 			if (IsOwner() == false)
 				return;
@@ -136,7 +136,7 @@ namespace WRC.Woodon
 
 		protected virtual void OnWaitForResult()
 		{
-			MDebugLog(nameof(OnWaitForResult));
+			WDebugLog(nameof(OnWaitForResult));
 
 			if (IsOwner() == false)
 				return;
@@ -144,7 +144,7 @@ namespace WRC.Woodon
 
 		protected virtual void OnCheckResult()
 		{
-			MDebugLog(nameof(OnCheckResult));
+			WDebugLog(nameof(OnCheckResult));
 
 			if (IsOwner() == false)
 				return;
@@ -152,7 +152,7 @@ namespace WRC.Woodon
 
 		protected virtual void OnApplyResult()
 		{
-			MDebugLog(nameof(OnApplyResult));
+			WDebugLog(nameof(OnApplyResult));
 
 			if (IsOwner(DrawManager.gameObject) == false)
 				return;
@@ -168,7 +168,7 @@ namespace WRC.Woodon
 
 		public void SetTargetIndex(int targetIndex)
 		{
-			MDebugLog($"{nameof(SetTargetIndex)}, TargetIndex : {targetIndex}");
+			WDebugLog($"{nameof(SetTargetIndex)}, TargetIndex : {targetIndex}");
 
 			SetOwner();
 			TargetIndex = targetIndex;
@@ -177,7 +177,7 @@ namespace WRC.Woodon
 
 		public void SetAllRemainRandomAndSync()
 		{
-			MDebugLog(nameof(SetAllRemainRandomAndSync));
+			WDebugLog(nameof(SetAllRemainRandomAndSync));
 
 			DrawManager.SetAllRemainRandom(true, "0");
 		}

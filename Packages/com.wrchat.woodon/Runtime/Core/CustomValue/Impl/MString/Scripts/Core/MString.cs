@@ -44,7 +44,7 @@ namespace WRC.Woodon
 
 		protected virtual void OnValueChange(string origin, string cur)
 		{
-			MDebugLog($"{nameof(OnValueChange)} : {origin} -> {cur}");
+			WDebugLog($"{nameof(OnValueChange)} : {origin} -> {cur}");
 			SendEvents();
 		}
 
@@ -55,7 +55,7 @@ namespace WRC.Woodon
 
 		protected virtual void Init()
 		{
-			MDebugLog($"{nameof(Init)}");
+			WDebugLog($"{nameof(Init)}");
 
 			if (useSync)
 			{

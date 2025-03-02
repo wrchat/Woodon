@@ -9,7 +9,7 @@ namespace WRC.Woodon
 
 		public virtual void SetWBool(WBool wBool)
 		{
-			MDebugLog($"{nameof(SetWBool)} - {wBool}");
+			WDebugLog($"{nameof(SetWBool)} - {wBool}");
 			this.wBool = wBool;
 		}
 	}

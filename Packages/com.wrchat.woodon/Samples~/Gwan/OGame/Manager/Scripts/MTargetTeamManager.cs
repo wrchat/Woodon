@@ -17,18 +17,18 @@ namespace Mascari4615
 
         public void PlayerChanged(TeamType teamType, int playerIndex, int playerID)
         {
-            MDebugLog(
+            WDebugLog(
                 $"{gameObject.name}, {nameof(PlayerChanged)} : {nameof(TeamType)} = {teamType}, {nameof(playerIndex)} = {playerIndex}, {nameof(playerID)} = {playerID}, {Networking.LocalPlayer.playerId}");
 
             if (playerID == NONE_INT)
             {
-                MDebugLog("mTarget.CurTargetPlayerID == None");
+                WDebugLog("mTarget.CurTargetPlayerID == None");
                 return;
             }
 
             if (playerID != Networking.LocalPlayer.playerId)
             {
-                MDebugLog("mTarget.CurTargetPlayerID != Networking.LocalPlayer.playerId");
+                WDebugLog("mTarget.CurTargetPlayerID != Networking.LocalPlayer.playerId");
                 return;
             }
 

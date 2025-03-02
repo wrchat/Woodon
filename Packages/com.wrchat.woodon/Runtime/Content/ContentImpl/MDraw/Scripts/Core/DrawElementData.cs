@@ -29,7 +29,7 @@ namespace WRC.Woodon
 			Role = (DrawRole)(int)wJson.GetData("Role").Double;
 			IsShowing = wJson.GetData("IsShowing").Boolean;
 
-			// MDebugLog($"{nameof(ParseDataPack)}, Index : {Index}, TeamType : {TeamType}, Role : {Role}");
+			// WDebugLog($"{nameof(ParseDataPack)}, Index : {Index}, TeamType : {TeamType}, Role : {Role}");
 		}
 	}
 }

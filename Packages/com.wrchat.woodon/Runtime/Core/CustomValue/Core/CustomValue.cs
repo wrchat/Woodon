@@ -60,14 +60,14 @@ namespace WRC.Woodon
 
 	// 	protected virtual void OnValueChange()
 	// 	{
-	// 		MDebugLog($"{nameof(OnValueChange)}");
+	// 		WDebugLog($"{nameof(OnValueChange)}");
 
 	// 		SendEvents();
 	// 	}
 
 	// 	public virtual void SetValue(T newValue, bool isReciever = false)
 	// 	{
-	// 		// MDebugLog($"{nameof(SetValue)}({newValue})");
+	// 		// WDebugLog($"{nameof(SetValue)}({newValue})");
 
 	// 		if (isReciever == false)
 	// 		{

@@ -26,7 +26,7 @@ namespace WRC.Woodon
 
 			if (dataOption == null)
 			{
-				MDebugLog($"{nameof(UpdateUI)} - {dataName} - {dataOption} is null. Please check the dataName.", LogType.Error);
+				WDebugLog($"{nameof(UpdateUI)} - {dataName} - {dataOption} is null. Please check the dataName.", LogType.Error);
 				return;
 			}
 

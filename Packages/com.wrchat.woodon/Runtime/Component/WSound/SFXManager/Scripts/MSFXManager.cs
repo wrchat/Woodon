@@ -39,7 +39,7 @@ namespace WRC.Woodon
 
 		public void PlaySFX_G(int index)
 		{
-			MDebugLog($"{nameof(PlaySFX_G)} : {nameof(index)} = {index}");
+			WDebugLog($"{nameof(PlaySFX_G)} : {nameof(index)} = {index}");
 
 			SetOwner();
 			SendCustomNetworkEvent(NetworkEventTarget.All, $"{nameof(PlaySFX_L)}{index}");
@@ -47,7 +47,7 @@ namespace WRC.Woodon
 
 		public void PlaySFX_L(int index)
 		{
-			MDebugLog($"{nameof(PlaySFX_L)} : {nameof(index)} = {index}");
+			WDebugLog($"{nameof(PlaySFX_L)} : {nameof(index)} = {index}");
 
 			bool isInvalidIndex = index >= AudioClips.Length;
 			bool isElementNull = isInvalidIndex || AudioClips[index] == null;
@@ -63,7 +63,7 @@ namespace WRC.Woodon
 
 		public void StopSFX_Global()
 		{
-			MDebugLog(nameof(StopSFX_Global));
+			WDebugLog(nameof(StopSFX_Global));
 
 			SetOwner();
 			SendCustomNetworkEvent(NetworkEventTarget.All, nameof(StopSFX));
@@ -74,7 +74,7 @@ namespace WRC.Woodon
 			if (audioClip == null)
 				return;
 
-			MDebugLog($"{nameof(PlaySFX)} : {nameof(audioClip)} = {audioClip.name}");
+			WDebugLog($"{nameof(PlaySFX)} : {nameof(audioClip)} = {audioClip.name}");
 
 			if (stopWhenEvent)
 			{
@@ -94,7 +94,7 @@ namespace WRC.Woodon
 
 		public void StopSFX()
 		{
-			MDebugLog(nameof(StopSFX));
+			WDebugLog(nameof(StopSFX));
 			audioSource.Stop();
 		}
 

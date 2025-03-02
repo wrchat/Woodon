@@ -78,7 +78,7 @@ namespace WRC.Woodon
 		#region HorribleEvents
 		public void TogglePos()
 		{
-			MDebugLog(nameof(TogglePos));
+			WDebugLog(nameof(TogglePos));
 			IsOriginPos = !IsOriginPos;
 		}
 		public void SetPosOrigin() => IsOriginPos = true;

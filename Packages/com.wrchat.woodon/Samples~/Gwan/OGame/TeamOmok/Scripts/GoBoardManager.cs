@@ -52,7 +52,7 @@ namespace Mascari4615
 
         private void OnCurPlayingPlayerChange()
         {
-            MDebugLog(nameof(OnCurPlayingPlayerChange));
+            WDebugLog(nameof(OnCurPlayingPlayerChange));
 
             curPlayerIDText.text = CurPlayingPlayerID.ToString();
 			VRCPlayerApi targetPlayer = VRCPlayerApi.GetPlayerById(curPlayingPlayerID);
@@ -62,7 +62,7 @@ namespace Mascari4615
         public void SetBlind()
         {
 			TeamType teamType = teamManager.GetTargetPlayerTeamType();
-            MDebugLog($"{nameof(SetBlind)} : teamType = {teamType}");
+            WDebugLog($"{nameof(SetBlind)} : teamType = {teamType}");
 
             if (teamType == TeamType.None)
             {
@@ -115,7 +115,7 @@ namespace Mascari4615
 
         public void ReturnCurPlayingPlayer()
         {
-            MDebugLog(nameof(ReturnCurPlayingPlayer));
+            WDebugLog(nameof(ReturnCurPlayingPlayer));
 
             if (curPlayingPlayerID != Networking.LocalPlayer.playerId)
                 return;
@@ -140,13 +140,13 @@ namespace Mascari4615
 
         public void ReturnCurPlayingPlayer_Global()
         {
-            MDebugLog(nameof(ReturnCurPlayingPlayer_Global));
+            WDebugLog(nameof(ReturnCurPlayingPlayer_Global));
             SendCustomNetworkEvent(NetworkEventTarget.All, nameof(ReturnCurPlayingPlayer));
         }
         
         public void ReturnAllPlayer_Global()
         {
-            MDebugLog(nameof(ReturnAllPlayer_Global));
+            WDebugLog(nameof(ReturnAllPlayer_Global));
             
             SetOwner();
             if (timeEvent.ExpireTime != NONE_INT)
@@ -159,14 +159,14 @@ namespace Mascari4615
 
         public void ReturnAllPlayer()
         {
-            MDebugLog(nameof(ReturnCurPlayingPlayer));
+            WDebugLog(nameof(ReturnCurPlayingPlayer));
 
 			TeamType teamType = teamManager.GetTargetPlayerTeamType();
             if (teamType == TeamType.None)
                 return;
-            MDebugLog(teamType.ToString());
-            MDebugLog(teamManager.MTargetTeams[(int)teamType].ToString());
-            MDebugLog(teamManager.MTargetTeams[(int)teamType].GetTargetPlayerIndex().ToString());
+            WDebugLog(teamType.ToString());
+            WDebugLog(teamManager.MTargetTeams[(int)teamType].ToString());
+            WDebugLog(teamManager.MTargetTeams[(int)teamType].GetTargetPlayerIndex().ToString());
 
 			Transform tpPos = (teamType == TeamType.A
                 ? blackRoomPos

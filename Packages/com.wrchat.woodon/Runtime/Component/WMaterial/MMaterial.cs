@@ -40,7 +40,7 @@ namespace WRC.Woodon
 		[ContextMenu(nameof(UpdateMaterial))]
 		public virtual void UpdateMaterial()
 		{
-			MDebugLog(nameof(UpdateMaterial));
+			WDebugLog(nameof(UpdateMaterial));
 
 			if (meshRenderers == null || meshRenderers.Length == 0)
 				return;

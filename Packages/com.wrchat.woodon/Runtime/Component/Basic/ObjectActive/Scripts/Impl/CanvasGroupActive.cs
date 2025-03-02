@@ -45,7 +45,7 @@ namespace WRC.Woodon
 
 		protected override void UpdateActive()
 		{
-			MDebugLog($"{nameof(UpdateActive)}");
+			WDebugLog($"{nameof(UpdateActive)}");
 
 			if (toggleOnlyInteractable)
 			{

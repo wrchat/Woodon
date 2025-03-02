@@ -32,7 +32,7 @@ namespace WRC.Woodon
 
 		public void Teleport()
 		{
-			MDebugLog(nameof(Teleport));
+			WDebugLog(nameof(Teleport));
 			Networking.LocalPlayer.TeleportTo(targetPos.position, targetPos.rotation);
 		}
 	}

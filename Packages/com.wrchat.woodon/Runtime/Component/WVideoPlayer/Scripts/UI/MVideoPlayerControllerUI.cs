@@ -26,12 +26,12 @@ namespace WRC.Woodon
 		public void PlayVideo(int index) => videoPlayerController.PlayVideo(index);
 		public void StopVideo()
 		{
-			MDebugLog(nameof(StopVideo));
+			WDebugLog(nameof(StopVideo));
 			videoPlayerController.StopVideo();
 		}
 		public void PauseVideo()
 		{
-			MDebugLog(nameof(PauseVideo));
+			WDebugLog(nameof(PauseVideo));
 			videoPlayerController.PauseResumeVideo();
 		}
 	}

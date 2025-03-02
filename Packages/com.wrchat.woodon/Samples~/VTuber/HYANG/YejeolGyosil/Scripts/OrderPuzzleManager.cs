@@ -21,7 +21,7 @@ namespace Mascari4615.Project.VTuber.HYANG.YejolGyosil
 			get => _orderSync;
 			private set
 			{
-				MDebugLog($"OrderSync: {OrderSync} -> {value}");
+				WDebugLog($"OrderSync: {OrderSync} -> {value}");
 				_orderSync = value;
 
 				if (string.IsNullOrEmpty(value))
@@ -47,13 +47,13 @@ namespace Mascari4615.Project.VTuber.HYANG.YejolGyosil
 
 			if (string.IsNullOrEmpty(str))
 			{
-				// MDebugLog("Empty OrderSync");
+				// WDebugLog("Empty OrderSync");
 				return;
 			}
 			
 			if (OrderSync == str)
 			{
-				// MDebugLog("Same OrderSync");
+				// WDebugLog("Same OrderSync");
 				return;
 			}
 

@@ -19,7 +19,7 @@ namespace WRC.Woodon
 
 		public void SendChatMessage()
 		{
-			MDebugLog($"{nameof(SendChatMessage)}");
+			WDebugLog($"{nameof(SendChatMessage)}");
 
 			if (string.IsNullOrEmpty(chatInputField.text))
 				return;
@@ -65,13 +65,13 @@ namespace WRC.Woodon
 
 		private void Init()
 		{
-			MDebugLog($"{nameof(Init)}");
+			WDebugLog($"{nameof(Init)}");
 			// jumpImpulse = Networking.LocalPlayer.GetJumpImpulse();
 		}
 
 		public void OnEnter()
 		{
-			MDebugLog($"{nameof(OnEnter)}");
+			WDebugLog($"{nameof(OnEnter)}");
 			Networking.LocalPlayer.SetVelocity(Vector3.zero);
 			Networking.LocalPlayer.SetJumpImpulse(0);
 			Networking.LocalPlayer.Immobilize(true);
@@ -79,7 +79,7 @@ namespace WRC.Woodon
 
 		public void OnExit()
 		{
-			MDebugLog($"{nameof(OnExit)}");
+			WDebugLog($"{nameof(OnExit)}");
 			Networking.LocalPlayer.SetJumpImpulse(jumpImpulse);
 			Networking.LocalPlayer.Immobilize(false);
 		}

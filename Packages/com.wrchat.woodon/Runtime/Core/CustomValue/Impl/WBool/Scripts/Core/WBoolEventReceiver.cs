@@ -20,7 +20,7 @@ namespace WRC.Woodon
 
 		private void Init()
 		{
-			MDebugLog($"{nameof(Init)}");
+			WDebugLog($"{nameof(Init)}");
 
 			if (wBool == null)
 				return;
@@ -34,7 +34,7 @@ namespace WRC.Woodon
 
 		public override void SetWBool(WBool wBool)
 		{
-			MDebugLog($"{nameof(SetWBool)} : {wBool}");
+			WDebugLog($"{nameof(SetWBool)} : {wBool}");
 
 			if (this.wBool != null)
 			{

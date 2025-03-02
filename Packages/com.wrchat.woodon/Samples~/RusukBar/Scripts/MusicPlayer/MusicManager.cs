@@ -49,7 +49,7 @@ namespace Mascari4615.Project.RusukBar
 
 		private void Init()
 		{
-			MDebugLog(nameof(Init));
+			WDebugLog(nameof(Init));
 
 			videoPlayer = GetComponent<BaseVRCVideoPlayer>();
 
@@ -136,7 +136,7 @@ namespace Mascari4615.Project.RusukBar
 
 		public void SelectPlayList(int index)
 		{
-			MDebugLog($"{nameof(SelectPlayList)} : {index}");
+			WDebugLog($"{nameof(SelectPlayList)} : {index}");
 
 			foreach (UIMusicPlayer ui in uis)
 				ui.SetMusicPlaylist(MusicPlaylists[musicPlaylistIndex = index]);
@@ -146,7 +146,7 @@ namespace Mascari4615.Project.RusukBar
 
 		public void NextPlayList()
 		{
-			MDebugLog($"{nameof(NextPlayList)}");
+			WDebugLog($"{nameof(NextPlayList)}");
 
 			musicPlaylistIndex = (musicPlaylistIndex + 1) % MusicPlaylists.Length;
 			foreach (UIMusicPlayer ui in uis)
@@ -157,7 +157,7 @@ namespace Mascari4615.Project.RusukBar
 
 		public void PauseMusic()
 		{
-			MDebugLog($"{nameof(PauseMusic)}");
+			WDebugLog($"{nameof(PauseMusic)}");
 
 			if (videoPlayer.IsPlaying && isPause == false)
 			{
@@ -176,7 +176,7 @@ namespace Mascari4615.Project.RusukBar
 
 		public void NextMusic()
 		{
-			MDebugLog($"{nameof(NextMusic)}");
+			WDebugLog($"{nameof(NextMusic)}");
 
 			if (isLoading)
 				return;
@@ -192,7 +192,7 @@ namespace Mascari4615.Project.RusukBar
 
 		public void PrevMusic()
 		{
-			MDebugLog($"{nameof(PrevMusic)}");
+			WDebugLog($"{nameof(PrevMusic)}");
 
 			if (isLoading)
 				return;
@@ -208,7 +208,7 @@ namespace Mascari4615.Project.RusukBar
 
 		private void RandomMusic()
 		{
-			MDebugLog($"{nameof(RandomMusic)}");
+			WDebugLog($"{nameof(RandomMusic)}");
 
 			int randomIndex;
 			do
@@ -221,7 +221,7 @@ namespace Mascari4615.Project.RusukBar
 
 		public void MusicShuffleToggle()
 		{
-			MDebugLog($"{nameof(MusicShuffleToggle)}");
+			WDebugLog($"{nameof(MusicShuffleToggle)}");
 
 			musicShuffle = !musicShuffle;
 
@@ -231,7 +231,7 @@ namespace Mascari4615.Project.RusukBar
 
 		public void SetMusicLoop(int loopType)
 		{
-			MDebugLog($"{nameof(SetMusicLoop)} : {loopType}");
+			WDebugLog($"{nameof(SetMusicLoop)} : {loopType}");
 
 			this.loopType = loopType;
 
@@ -241,7 +241,7 @@ namespace Mascari4615.Project.RusukBar
 
 		public void MusicLoopSwitch()
 		{
-			MDebugLog($"{nameof(MusicLoopSwitch)}");
+			WDebugLog($"{nameof(MusicLoopSwitch)}");
 
 			if (loopType == 2) // None
 			{
@@ -265,7 +265,7 @@ namespace Mascari4615.Project.RusukBar
 
 		private void PlayMusic()
 		{
-			MDebugLog($"{nameof(PlayMusic)}");
+			WDebugLog($"{nameof(PlayMusic)}");
 
 			if (isLoading || Cooling)
 				return;
@@ -289,7 +289,7 @@ namespace Mascari4615.Project.RusukBar
 
 		public void SetMusicAndPlay(int index)
 		{
-			MDebugLog($"{nameof(SetMusicAndPlay)} : {index}");
+			WDebugLog($"{nameof(SetMusicAndPlay)} : {index}");
 
 			if (isLoading)
 				return;
@@ -301,7 +301,7 @@ namespace Mascari4615.Project.RusukBar
 
 		public void ToggleMusic(int index)
 		{
-			MDebugLog($"{nameof(ToggleMusic)} : {index}");
+			WDebugLog($"{nameof(ToggleMusic)} : {index}");
 
 			/*
             int curOnMusicCount = 0;
@@ -322,39 +322,39 @@ namespace Mascari4615.Project.RusukBar
 
 		public override void OnVideoReady()
 		{
-			MDebugLog($"{nameof(OnVideoReady)}");
+			WDebugLog($"{nameof(OnVideoReady)}");
 			isLoading = false;
 		}
 
 		public override void OnVideoPlay()
 		{
-			MDebugLog($"{nameof(OnVideoPlay)}");
+			WDebugLog($"{nameof(OnVideoPlay)}");
 		}
 
 		public override void OnVideoStart()
 		{
-			MDebugLog($"{nameof(OnVideoStart)}");
+			WDebugLog($"{nameof(OnVideoStart)}");
 		}
 
 		public override void OnVideoPause()
 		{
-			MDebugLog($"{nameof(OnVideoPause)}");
+			WDebugLog($"{nameof(OnVideoPause)}");
 		}
 
 		public override void OnVideoEnd()
 		{
-			MDebugLog($"{nameof(OnVideoEnd)}");
+			WDebugLog($"{nameof(OnVideoEnd)}");
 			NextMusic();
 		}
 
 		public override void OnVideoLoop()
 		{
-			MDebugLog($"{nameof(OnVideoLoop)}");
+			WDebugLog($"{nameof(OnVideoLoop)}");
 		}
 
 		public override void OnVideoError(VideoError videoError)
 		{
-			MDebugLog($"{nameof(OnVideoError)} : {videoError}");
+			WDebugLog($"{nameof(OnVideoError)} : {videoError}");
 		}
 	}
 }

@@ -34,7 +34,7 @@ namespace Mascari4615
 
 		private void Init()
 		{
-			MDebugLog($"{nameof(Init)}");
+			WDebugLog($"{nameof(Init)}");
 		
 			categoryButtons = GetComponentsInChildren<UIAvatarCategoryButton>(true);
 			avatarButtons = GetComponentsInChildren<UIAvatarButton>(true);
@@ -73,12 +73,12 @@ namespace Mascari4615
 
 		public override void OnStringLoadSuccess(IVRCStringDownload result)
 		{
-			MDebugLog($"{nameof(OnStringLoadSuccess)} : {result.Result} - {result}");
+			WDebugLog($"{nameof(OnStringLoadSuccess)} : {result.Result} - {result}");
 
 			if (!VRCJson.TryDeserializeFromJson(result.Result, out DataToken dataToken) ||
 				(dataToken.TokenType != TokenType.DataDictionary))
 			{
-				MDebugLog($"Failed to Deserialize json : {result.Result} - {result}");
+				WDebugLog($"Failed to Deserialize json : {result.Result} - {result}");
 				return;
 			}
 
@@ -93,11 +93,11 @@ namespace Mascari4615
 
 		public void UpdateUI()
 		{
-			MDebugLog($"{nameof(UpdateUI)}");
+			WDebugLog($"{nameof(UpdateUI)}");
 
 			// Type
 			DataList types = data.GetKeys();
-			MDebugLog($"All Categorys : {types.Count}");
+			WDebugLog($"All Categorys : {types.Count}");
 			typeText.text = $"{types[mScore_Type.Value]}";
 
 			for (int i = 0; i < categoryButtons.Length; i++)

@@ -25,7 +25,7 @@ namespace WRC.Woodon
 
 		public void UpdateUI()
 		{
-			MDebugLog($"{nameof(UpdateUI)} - {mStringIndex.Value}");
+			WDebugLog($"{nameof(UpdateUI)} - {mStringIndex.Value}");
 
 			int index = mStringIndex.Value;
 			MString mString = mStrings[index];

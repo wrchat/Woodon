@@ -27,11 +27,11 @@ namespace WRC.Woodon
 
 		private void Init()
 		{
-			MDebugLog($"{nameof(Init)}");
+			WDebugLog($"{nameof(Init)}");
 
 			if (targetUdons.Length != methodNames.Length)
 			{
-				MDebugLog($"{nameof(targetUdons)}.Length != {nameof(methodNames)}.Length", LogType.Error);
+				WDebugLog($"{nameof(targetUdons)}.Length != {nameof(methodNames)}.Length", LogType.Error);
 				return;
 			}
 
@@ -39,13 +39,13 @@ namespace WRC.Woodon
 			{
 				if (targetUdons[i] == null)
 				{
-					MDebugLog($"{nameof(targetUdons)}[{i}] == null", LogType.Error);
+					WDebugLog($"{nameof(targetUdons)}[{i}] == null", LogType.Error);
 					return;
 				}
 
 				if (string.IsNullOrEmpty(methodNames[i]))
 				{
-					MDebugLog($"{nameof(methodNames)}[{i}] == null", LogType.Warning);
+					WDebugLog($"{nameof(methodNames)}[{i}] == null", LogType.Warning);
 					return;
 				}
 			}
@@ -54,7 +54,7 @@ namespace WRC.Woodon
 		[ContextMenu(nameof(Invoke))]
 		public void Invoke()
 		{
-			MDebugLog($"{nameof(Invoke)}");
+			WDebugLog($"{nameof(Invoke)}");
 
 			if ((ownerObject != null) && (IsOwner(ownerObject.gameObject) == false))
 				return;
@@ -66,7 +66,7 @@ namespace WRC.Woodon
 		[ContextMenu(nameof(Invoke_G))]
 		public void Invoke_G()
 		{
-			MDebugLog($"{nameof(Invoke_G)}");
+			WDebugLog($"{nameof(Invoke_G)}");
 
 			SendCustomNetworkEvent(NetworkEventTarget.All, nameof(Invoke));
 		}

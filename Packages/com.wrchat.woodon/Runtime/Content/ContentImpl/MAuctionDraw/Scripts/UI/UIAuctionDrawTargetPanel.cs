@@ -10,7 +10,7 @@ namespace WRC.Woodon
 
 		public void Init(AuctionDraw auctionDraw)
 		{
-			MDebugLog($"{nameof(Init)}({auctionDraw})");
+			WDebugLog($"{nameof(Init)}({auctionDraw})");
 			
 			this.auctionDraw = auctionDraw;
 
@@ -39,7 +39,7 @@ namespace WRC.Woodon
 
 		public void UpdateUI()
 		{
-			MDebugLog(nameof(UpdateUI));
+			WDebugLog(nameof(UpdateUI));
 		
 			int uiIndex = 0;
 			for (int i = 0; i < auctionDraw.DrawManager.DrawElementDatas.Length; i++)

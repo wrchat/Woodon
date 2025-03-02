@@ -9,7 +9,7 @@ namespace WRC.Woodon
 
 		public virtual void SetMTarget(MTarget mTarget)
 		{
-			MDebugLog($"{nameof(SetMTarget)} - {mTarget}");
+			WDebugLog($"{nameof(SetMTarget)} - {mTarget}");
 			this.mTarget = mTarget;
 		}
 	}

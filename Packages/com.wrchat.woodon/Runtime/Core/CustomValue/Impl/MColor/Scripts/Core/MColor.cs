@@ -42,7 +42,7 @@ namespace WRC.Woodon
 
 		private void OnValueChange()
 		{
-			MDebugLog(nameof(OnValueChange));
+			WDebugLog(nameof(OnValueChange));
 
 			foreach (MeshRenderer target in targetMeshRenderers)
 				target.material.color = _value;

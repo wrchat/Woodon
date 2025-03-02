@@ -49,7 +49,7 @@ namespace Mascari4615.Project.VTuber.HYANG.YejolGyosil
 
 		private void OnShowingResultChanged()
 		{
-			MDebugLog($"{nameof(OnShowingResultChanged)}, IsShowingResult = {IsShowingResult}");
+			WDebugLog($"{nameof(OnShowingResultChanged)}, IsShowingResult = {IsShowingResult}");
 
 			foreach (MBurgerIngredient ingredient in ingredients)
 				ingredient.SetEnabled(IsShowingResult == false && Data.Contains(ingredient.Index.ToString()) == false);
@@ -97,7 +97,7 @@ namespace Mascari4615.Project.VTuber.HYANG.YejolGyosil
 
 		private void OnDataChange()
 		{
-			MDebugLog(data.ToString());
+			WDebugLog(data.ToString());
 
 			foreach (MBurgerIngredient ingredient in ingredients)
 				ingredient.SetEnabled(IsShowingResult == false && IsActiveValue && Data.Contains(ingredient.Index.ToString()) == false);
@@ -123,7 +123,7 @@ namespace Mascari4615.Project.VTuber.HYANG.YejolGyosil
 			if (IsShowingResult)
 				return;
 
-			MDebugLog($"{nameof(OnTriggerEnter)}, other.name = {other.name}");
+			WDebugLog($"{nameof(OnTriggerEnter)}, other.name = {other.name}");
 
 			for (int i = 0; i < ingredients.Length; i++)
 			{
@@ -136,7 +136,7 @@ namespace Mascari4615.Project.VTuber.HYANG.YejolGyosil
 				if (IsOwner(ingredients[i].gameObject) == false)
 					return;
 
-				MDebugLog($"{nameof(OnTriggerEnter)}, ingredients[i].name = {ingredients[i].name}");
+				WDebugLog($"{nameof(OnTriggerEnter)}, ingredients[i].name = {ingredients[i].name}");
 				StackData(i);
 				ingredients[i].DropAndRespawn();
 				break;

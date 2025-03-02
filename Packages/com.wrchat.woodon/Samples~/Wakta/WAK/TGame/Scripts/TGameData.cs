@@ -36,7 +36,7 @@ namespace Mascari4615.Project.Wakta.WAK.TGame
 			get => _gameData;
 			set
 			{
-				MDebugLog($"{nameof(GameData)} Changed : {value}");
+				WDebugLog($"{nameof(GameData)} Changed : {value}");
 				_gameData = value;
 
 				debugText.text = string.Empty;
@@ -71,7 +71,7 @@ namespace Mascari4615.Project.Wakta.WAK.TGame
 
 		public void SyncGameData()
 		{
-			MDebugLog($"{nameof(SyncGameData)}");
+			WDebugLog($"{nameof(SyncGameData)}");
 			SetOwner();
 
 			// CurRound = NONE_INT;
@@ -82,7 +82,7 @@ namespace Mascari4615.Project.Wakta.WAK.TGame
 
 		public void Init()
 		{
-			MDebugLog($"{nameof(Init)}");
+			WDebugLog($"{nameof(Init)}");
 			SetOwner();
 
 			CurRound = NONE_INT;
@@ -95,7 +95,7 @@ namespace Mascari4615.Project.Wakta.WAK.TGame
 
 		public void NextRound()
 		{
-			MDebugLog($"{nameof(NextRound)}");
+			WDebugLog($"{nameof(NextRound)}");
 
 			// 마지막 라운드
 			if (CurRound == 5) return;

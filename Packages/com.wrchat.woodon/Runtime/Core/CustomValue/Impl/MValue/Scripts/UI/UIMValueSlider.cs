@@ -38,7 +38,7 @@ namespace WRC.Woodon
 
 		public void OnSliderValueChanged()
 		{
-			MDebugLog($"{nameof(OnSliderValueChanged)}");
+			WDebugLog($"{nameof(OnSliderValueChanged)}");
 
 			if (forceChange)
 			{
@@ -50,9 +50,9 @@ namespace WRC.Woodon
 			if (mValue.Value != newValue)
 			{
 				if (logDetail)
-					MDebugLog($"{nameof(OnSliderValueChanged)} = {newValue}");
+					WDebugLog($"{nameof(OnSliderValueChanged)} = {newValue}");
 				else
-					MDebugLog($"{nameof(OnSliderValueChanged)}");
+					WDebugLog($"{nameof(OnSliderValueChanged)}");
 
 				mValue.SetValue(newValue);
 			}
@@ -73,9 +73,9 @@ namespace WRC.Woodon
 				forceChange = true;
 
 				if (logDetail)
-					MDebugLog($"{nameof(UpdateSlider)} = {mValue.Value}");
+					WDebugLog($"{nameof(UpdateSlider)} = {mValue.Value}");
 				else
-					MDebugLog($"{nameof(UpdateSlider)}");
+					WDebugLog($"{nameof(UpdateSlider)}");
 
 				slider.value = (float)(mValue.Value - mValue.MinValue) / (mValue.MaxValue - mValue.MinValue);
 			}
@@ -89,7 +89,7 @@ namespace WRC.Woodon
 
 		public override void SetMValue(MValue mValue)
 		{
-			MDebugLog($"{nameof(SetMValue)} : {mValue}");
+			WDebugLog($"{nameof(SetMValue)} : {mValue}");
 
 			if (this.mValue != null)
 				this.mValue.UnregisterListener(this, nameof(UpdateSlider));

@@ -36,7 +36,7 @@ namespace WRC.Woodon
 
 		public void UpdateUI()
 		{
-			MDebugLog($"{nameof(UpdateUI)}");
+			WDebugLog($"{nameof(UpdateUI)}");
 
 			foreach (UIAuctionDrawTargetPanel targetPanel in targetPanels)
 				targetPanel.UpdateUI();
@@ -46,7 +46,7 @@ namespace WRC.Woodon
 
 			if (auctionDraw.TargetIndex == NONE_INT)
 			{
-				MDebugLog($"{nameof(UpdateUI)}, TargetIndex is NONE_INT");
+				WDebugLog($"{nameof(UpdateUI)}, TargetIndex is NONE_INT");
 				return;
 			}
 
@@ -89,7 +89,7 @@ namespace WRC.Woodon
 
 		public void UpdateUI_CurTarget()
 		{
-			MDebugLog(nameof(UpdateUI_CurTarget));
+			WDebugLog(nameof(UpdateUI_CurTarget));
 
 			DrawElementData targetData = auctionDraw.DrawManager.DrawElementDatas[auctionDraw.TargetIndex];
 
@@ -103,7 +103,7 @@ namespace WRC.Woodon
 
 		public void UpdateUI_Result()
 		{
-			MDebugLog(nameof(UpdateUI_Result));
+			WDebugLog(nameof(UpdateUI_Result));
 
 			AuctionSeat winner = auctionDraw.AuctionManager.MaxTryPointSeat;
 

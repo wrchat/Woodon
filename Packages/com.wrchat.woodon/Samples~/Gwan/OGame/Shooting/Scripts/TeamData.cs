@@ -48,7 +48,7 @@ namespace Mascari4615
 
         private void OnTeamFandomIndexChange()
         {
-            MDebugLog($"{nameof(OnTeamFandomIndexChange)} : {teamFandomIndex}");
+            WDebugLog($"{nameof(OnTeamFandomIndexChange)} : {teamFandomIndex}");
             selectedFandomImage.sprite = shootingGameManager.GetFandomSprite(teamFandomIndex);
             // teamFandomText.text = fandomDic[teamFandomIndex];
         }
@@ -62,7 +62,7 @@ namespace Mascari4615
 
         private void OnTeamScoreChange()
         {
-            MDebugLog($"{nameof(OnTeamScoreChange)} : {teamScore}");
+            WDebugLog($"{nameof(OnTeamScoreChange)} : {teamScore}");
             teamScoreText.text = teamScore.ToString();
         }
 
@@ -75,7 +75,7 @@ namespace Mascari4615
 
         public void Ahoy(GameObject shootingTargetObject)
         {
-            MDebugLog($"{nameof(Ahoy)} : {shootingTargetObject.name}");
+            WDebugLog($"{nameof(Ahoy)} : {shootingTargetObject.name}");
 
             SetOwner();
 

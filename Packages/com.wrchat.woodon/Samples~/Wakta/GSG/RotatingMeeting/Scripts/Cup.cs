@@ -98,7 +98,7 @@ namespace Mascari4615.Project.ISD.GSG.RotatingMeeting
 
 		public void SetTurn(int newValue)
 		{
-			// MDebugLog(nameof(SetTurn) + newValue);
+			// WDebugLog(nameof(SetTurn) + newValue);
 			SetOwner();
 			turn = newValue;
 			RequestSerialization();
@@ -134,7 +134,7 @@ namespace Mascari4615.Project.ISD.GSG.RotatingMeeting
 
 			if (turn >= 10 * 2)
 			{
-				// MDebugLog((targetDollyCart.Position > 11).ToString());
+				// WDebugLog((targetDollyCart.Position > 11).ToString());
 
 				if (targetDollyCart.Position > 11.5f)
 				{
@@ -183,7 +183,7 @@ namespace Mascari4615.Project.ISD.GSG.RotatingMeeting
 			if ((int)TargetPos <= (int)CupPosition.Platform7)
 			{
 				// debugText.text = "_Not Meeting";
-				// MDebugLog(nameof(TryReturnToPlatform) + "_Not Meeting");
+				// WDebugLog(nameof(TryReturnToPlatform) + "_Not Meeting");
 				return;
 			}
 
@@ -196,7 +196,7 @@ namespace Mascari4615.Project.ISD.GSG.RotatingMeeting
 				if (!manager.CupPickers[sushiPickerIndex].CupHaveToReturn)
 				{
 					// debugText.text = "_No State";
-					// MDebugLog(nameof(TryReturnToPlatform) + "_No State");
+					// WDebugLog(nameof(TryReturnToPlatform) + "_No State");
 					return;
 				}
 
@@ -204,7 +204,7 @@ namespace Mascari4615.Project.ISD.GSG.RotatingMeeting
 				if (!manager.TryGetNearestPlatform_Meeting(out CupPosition platformIndex, sushiPickerIndex))
 				{
 					// debugText.text = "_No Platform";
-					// MDebugLog(nameof(TryReturnToPlatform) + "_No Platform");
+					// WDebugLog(nameof(TryReturnToPlatform) + "_No Platform");
 					return;
 				}
 
@@ -214,12 +214,12 @@ namespace Mascari4615.Project.ISD.GSG.RotatingMeeting
 					if (cup.TargetPos == platformIndex)
 					{
 						// debugText.text = "_Already Cart";
-						// MDebugLog(nameof(TryReturnToPlatform) + "_Already Cart");
+						// WDebugLog(nameof(TryReturnToPlatform) + "_Already Cart");
 						return;
 					}
 				}
 
-				// MDebugLog(nameof(TryReturnToPlatform) + "_ReturnA");
+				// WDebugLog(nameof(TryReturnToPlatform) + "_ReturnA");
 				SetTargetPos(platformIndex);
 			}
 			// 진입 대기 중이었다면
@@ -229,7 +229,7 @@ namespace Mascari4615.Project.ISD.GSG.RotatingMeeting
 				if (!manager.CanDownload(TargetPos))
 				{
 					// debugText.text = "_Cant Download";
-					// MDebugLog(nameof(TryReturnToPlatform) + "_No Platform");
+					// WDebugLog(nameof(TryReturnToPlatform) + "_No Platform");
 					return;
 				}
 
@@ -240,7 +240,7 @@ namespace Mascari4615.Project.ISD.GSG.RotatingMeeting
 				if (!manager.TryGetNearestPlatform_Download(out CupPosition platformIndex))
 				{
 					// debugText.text = "_No Platform";
-					// MDebugLog(nameof(TryReturnToPlatform) + "_No Platform");
+					// WDebugLog(nameof(TryReturnToPlatform) + "_No Platform");
 					return;
 				}
 
@@ -250,12 +250,12 @@ namespace Mascari4615.Project.ISD.GSG.RotatingMeeting
 					if (sushiCart.TargetPos == platformIndex)
 					{
 						// debugText.text = "_Already Cart";
-						// MDebugLog(nameof(TryReturnToPlatform) + "_Already Cart");
+						// WDebugLog(nameof(TryReturnToPlatform) + "_Already Cart");
 						return;
 					}
 				}
 
-				// MDebugLog(nameof(TryReturnToPlatform) + "_ReturnB");
+				// WDebugLog(nameof(TryReturnToPlatform) + "_ReturnB");
 				SetTargetPos(platformIndex);
 			}
 		}
@@ -303,7 +303,7 @@ namespace Mascari4615.Project.ISD.GSG.RotatingMeeting
 
 		public void SitCup()
 		{
-			// MDebugLog(nameof(SitCup));
+			// WDebugLog(nameof(SitCup));
 
 			if (OwnerID != NONE_INT)
 				return;
@@ -315,7 +315,7 @@ namespace Mascari4615.Project.ISD.GSG.RotatingMeeting
 
 		public void ExitCup()
 		{
-			// MDebugLog(nameof(ExitCup));
+			// WDebugLog(nameof(ExitCup));
 
 			if (OwnerID != Networking.LocalPlayer.playerId)
 				return;
@@ -352,7 +352,7 @@ namespace Mascari4615.Project.ISD.GSG.RotatingMeeting
 		public void AppealTime()
 		{
 			bool canApealTime = manager.CanSetAmplification();
-			MDebugLog(nameof(AppealTime) + canApealTime);
+			WDebugLog(nameof(AppealTime) + canApealTime);
 			if (canApealTime == false)
 				return;
 

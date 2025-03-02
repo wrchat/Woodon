@@ -29,7 +29,7 @@ namespace WRC.Woodon
 
 		public void GoRoom()
 		{
-			// MDebugLog(nameof(GoRoom));
+			// WDebugLog(nameof(GoRoom));
 
 			int localPlayerNum = GetLocalPlayerNum();
 			if (localPlayerNum == NONE_INT)

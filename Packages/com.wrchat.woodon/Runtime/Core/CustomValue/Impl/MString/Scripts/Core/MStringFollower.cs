@@ -9,7 +9,7 @@ namespace WRC.Woodon
 
 		public virtual void SetMString(MString mString)
 		{
-			MDebugLog($"{nameof(SetMString)} - {mString}");
+			WDebugLog($"{nameof(SetMString)} - {mString}");
 			this.mString = mString;
 		}
 	}

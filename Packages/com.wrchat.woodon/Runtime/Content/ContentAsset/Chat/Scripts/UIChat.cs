@@ -29,13 +29,13 @@ namespace WRC.Woodon
 
 		private void Init()
 		{
-			MDebugLog($"{nameof(Init)}");
+			WDebugLog($"{nameof(Init)}");
 			SetChatText(null, string.Empty);
 		}
 
 		public virtual void SetChatText(DataList chatDataList, string debugText)
 		{
-			MDebugLog($"{nameof(SetChatText)}: {debugText}");
+			WDebugLog($"{nameof(SetChatText)}: {debugText}");
 
 			if (chatDataList == null || chatDataList.Count == 0)
 			{

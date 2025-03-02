@@ -31,7 +31,7 @@ namespace Mascari4615.Project.Wakta.WAK.TGame
 
 		public void ResetMemo()
 		{
-			MDebugLog(nameof(ResetMemo));
+			WDebugLog(nameof(ResetMemo));
 			foreach (CoinMemoPanel ui in uis)
 				ui.ActualReset();
 			

@@ -18,7 +18,7 @@ namespace WRC.Woodon
 
 		private void Init()
 		{
-			MDebugLog($"{nameof(Init)}");
+			WDebugLog($"{nameof(Init)}");
 
 			wBoolIndex.SetMinMaxValue(0, wBools.Length - 1);
 			wBoolIndex.RegisterListener(this, nameof(UpdateUI));
@@ -27,7 +27,7 @@ namespace WRC.Woodon
 
 		public void UpdateUI()
 		{
-			MDebugLog($"{nameof(UpdateUI)} : {wBoolIndex.Value}");
+			WDebugLog($"{nameof(UpdateUI)} : {wBoolIndex.Value}");
 
 			int index = wBoolIndex.Value;
 			WBool wBool = wBools[index];

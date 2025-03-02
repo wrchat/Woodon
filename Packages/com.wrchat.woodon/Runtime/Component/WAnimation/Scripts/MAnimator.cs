@@ -79,34 +79,34 @@ namespace WRC.Woodon
 
 		public void SetTrigger(string triggerName)
 		{
-			MDebugLog(nameof(SetTrigger_L) + triggerName);
+			WDebugLog(nameof(SetTrigger_L) + triggerName);
 			foreach (Animator animator in Animators)
 				animator.SetTrigger(triggerName);
 		}
 
 		public void SetTrigger_L(int index)
 		{
-			MDebugLog(nameof(SetTrigger_L) + index);
+			WDebugLog(nameof(SetTrigger_L) + index);
 			foreach (Animator animator in Animators)
 				animator.SetTrigger(triggerNames[index]);
 		}
 
 		public void SetTrigger_G(int index)
 		{
-			MDebugLog(nameof(SetTrigger_G) + index);
+			WDebugLog(nameof(SetTrigger_G) + index);
 			SendCustomNetworkEvent(NetworkEventTarget.All, nameof(SetTrigger_L) + index);
 		}
 
 		public void SetInt_L(int value)
 		{
-			MDebugLog(nameof(SetInt_L) + value);
+			WDebugLog(nameof(SetInt_L) + value);
 			foreach (Animator animator in Animators)
 				animator.SetInteger(intName, value);
 		}
 
 		public void SetInt_G(int value)
 		{
-			MDebugLog(nameof(SetInt_G) + value);
+			WDebugLog(nameof(SetInt_G) + value);
 			SendCustomNetworkEvent(NetworkEventTarget.All, nameof(SetInt_L) + value);
 		}
 

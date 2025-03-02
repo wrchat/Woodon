@@ -35,7 +35,7 @@ namespace WRC.Woodon
 
 		public void UpdateCameraIndexByMValue()
 		{
-			MDebugLog($"{nameof(UpdateCameraIndexByMValue)} : {cameraIndex.Value}");
+			WDebugLog($"{nameof(UpdateCameraIndexByMValue)} : {cameraIndex.Value}");
 			if ((cameraIndex.Value < 0) || (cameraIndex.Value >= cameraDatas.Length))
 				TurnOffCamera();
 			else
@@ -73,12 +73,12 @@ namespace WRC.Woodon
 
 		public void SetCamera(int newCameraIndex, bool alwaysOn = false, bool isReciever = false)
 		{
-			MDebugLog($"{nameof(SetCamera)}({newCameraIndex}) : {alwaysOn}, {isReciever}");
+			WDebugLog($"{nameof(SetCamera)}({newCameraIndex}) : {alwaysOn}, {isReciever}");
 
 			// None | Invalid index
 			if ((newCameraIndex < 0) || (newCameraIndex >= cameraDatas.Length))
 			{
-				MDebugLog($"{nameof(SetCamera)} : Invalid index");
+				WDebugLog($"{nameof(SetCamera)} : Invalid index");
 				TurnOffCamera();
 				return;
 			}
@@ -86,7 +86,7 @@ namespace WRC.Woodon
 			// Toggle if same index
 			if ((newCameraIndex == lastCameraIndex) && (alwaysOn == false))
 			{
-				MDebugLog($"{nameof(SetCamera)} : Same index");
+				WDebugLog($"{nameof(SetCamera)} : Same index");
 				TurnOffCamera();
 				return;
 			}
@@ -107,7 +107,7 @@ namespace WRC.Woodon
 
 		public void TurnOffCamera()
 		{
-			MDebugLog($"{nameof(TurnOffCamera)}");
+			WDebugLog($"{nameof(TurnOffCamera)}");
 
 			cameraBrain.enabled = false;
 			lastCameraIndex = NONE_INT;

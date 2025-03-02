@@ -22,7 +22,7 @@ namespace WRC.Woodon
 
 		public void Init()
 		{
-			MDebugLog($"{nameof(Init)}");
+			WDebugLog($"{nameof(Init)}");
 
 			if (mValue == null)
 				return;
@@ -36,7 +36,7 @@ namespace WRC.Woodon
 			if (mValue == null)
 				return;
 
-			MDebugLog($"{nameof(UpdateUI)} : {mValue.Value}");
+			WDebugLog($"{nameof(UpdateUI)} : {mValue.Value}");
 
 			int value = mValue.Value;
 
@@ -58,7 +58,7 @@ namespace WRC.Woodon
 
 		public override void SetMValue(MValue mValue)
 		{
-			MDebugLog($"{nameof(SetMValue)} : {mValue}");
+			WDebugLog($"{nameof(SetMValue)} : {mValue}");
 
 			if (this.mValue != null)
 				this.mValue.UnregisterListener(this, nameof(UpdateUI));

@@ -56,7 +56,7 @@ namespace WRC.Woodon
 
 		public virtual void OnSeatDataChanged()
 		{
-			MDebugLog($"{nameof(OnSeatDataChanged)}");
+			WDebugLog($"{nameof(OnSeatDataChanged)}");
 
 			if (seatData.HasDataChanged(ContentManager.IntDataString, out int originIntData, out int curIntData))
 				OnDataChanged(DataChangeStateUtil.GetChangeState(originIntData, curIntData));
@@ -74,7 +74,7 @@ namespace WRC.Woodon
 
 		public void UpdateSeat()
 		{
-			MDebugLog($"{nameof(UpdateSeat)}");
+			WDebugLog($"{nameof(UpdateSeat)}");
 
 			if (contentManager != null)
 				UpdateSeat_();
@@ -82,7 +82,7 @@ namespace WRC.Woodon
 
 		protected virtual void UpdateSeat_()
 		{
-			MDebugLog($"{nameof(UpdateSeat_)}");
+			WDebugLog($"{nameof(UpdateSeat_)}");
 
 			foreach (UIMSeat ui in uis)
 				ui.UpdateUI();
@@ -90,7 +90,7 @@ namespace WRC.Woodon
 
 		protected override void OnTargetChanged(DataChangeState changeState)
 		{
-			MDebugLog($"{nameof(OnTargetChanged)} : {changeState}");
+			WDebugLog($"{nameof(OnTargetChanged)} : {changeState}");
 
 			base.OnTargetChanged(changeState);
 
@@ -109,7 +109,7 @@ namespace WRC.Woodon
 
 		protected virtual void OnDataChanged(DataChangeState changeState)
 		{
-			MDebugLog($"{nameof(OnDataChanged)} : {IntData} ({changeState})");
+			WDebugLog($"{nameof(OnDataChanged)} : {IntData} ({changeState})");
 
 			// UpdateCurDataUI();
 
@@ -124,7 +124,7 @@ namespace WRC.Woodon
 
 		protected virtual void OnTurnDataChange(DataChangeState changeState)
 		{
-			MDebugLog($"{nameof(OnTurnDataChange)}, {TurnData}");
+			WDebugLog($"{nameof(OnTurnDataChange)}, {TurnData}");
 
 			// UpdateCurTurnDataUI();
 
@@ -146,7 +146,7 @@ namespace WRC.Woodon
 
 		public virtual void ResetSeat()
 		{
-			MDebugLog($"{nameof(ResetSeat)}");
+			WDebugLog($"{nameof(ResetSeat)}");
 			ResetPlayer();
 			ResetData();
 			ResetTurnData();
@@ -154,14 +154,14 @@ namespace WRC.Woodon
 
 		public virtual void ResetData()
 		{
-			MDebugLog($"{nameof(ResetData)}");
+			WDebugLog($"{nameof(ResetData)}");
 			IntData = IntDataOption.DefaultValue;
 			SerializeData();
 		}
 
 		public void ResetTurnData()
 		{
-			MDebugLog($"{nameof(ResetTurnData)}");
+			WDebugLog($"{nameof(ResetTurnData)}");
 			TurnData = TurnDataOption.DefaultValue;
 			SerializeData();
 		}

@@ -55,7 +55,7 @@ namespace Mascari4615.Project.Wakta.LIL.LilpaTactical
 
 		public void OnHitsActiveChange()
 		{
-			MDebugLog(nameof(OnHitsActiveChange));
+			WDebugLog(nameof(OnHitsActiveChange));
 
 			hitsActiveButtonImage.color = MColorUtil.GetGreenOrRed(hitsActive);
 
@@ -65,14 +65,14 @@ namespace Mascari4615.Project.Wakta.LIL.LilpaTactical
 
 		public void ToggleHitsActive()
 		{
-			MDebugLog(nameof(ToggleHitsActive));
+			WDebugLog(nameof(ToggleHitsActive));
 
 			hitsActive.ToggleValue();
 		}
 
 		public void OnGameStateChange()
 		{
-			MDebugLog(nameof(OnGameStateChange));
+			WDebugLog(nameof(OnGameStateChange));
 
 			gameActiveStateUIImage.color = MColorUtil.GetGreenOrRed(!gameState);
 			gameStateText.text = gameState ? "RESET" : "START";
@@ -80,7 +80,7 @@ namespace Mascari4615.Project.Wakta.LIL.LilpaTactical
 
 		public void ToggleGameState()
 		{
-			MDebugLog(nameof(ToggleGameState));
+			WDebugLog(nameof(ToggleGameState));
 
 			SetOwner();
 			ResetGame();
@@ -96,7 +96,7 @@ namespace Mascari4615.Project.Wakta.LIL.LilpaTactical
 
 		public void ResetGame()
 		{
-			MDebugLog(nameof(ResetGame));
+			WDebugLog(nameof(ResetGame));
 
 			for (int i = 0; i < pickups.Length; i++)
 			{
@@ -110,7 +110,7 @@ namespace Mascari4615.Project.Wakta.LIL.LilpaTactical
 
 		public void TryTeleport()
 		{
-			MDebugLog(nameof(TryTeleport));
+			WDebugLog(nameof(TryTeleport));
 
 			TeamType localTeamType = mTeamManager.GetTargetPlayerTeamType();
 
@@ -139,7 +139,7 @@ namespace Mascari4615.Project.Wakta.LIL.LilpaTactical
 
 		public void TryRespawn()
 		{
-			MDebugLog(nameof(TryRespawn));
+			WDebugLog(nameof(TryRespawn));
 
 			TeamType localTeamType = mTeamManager.GetTargetPlayerTeamType();
 

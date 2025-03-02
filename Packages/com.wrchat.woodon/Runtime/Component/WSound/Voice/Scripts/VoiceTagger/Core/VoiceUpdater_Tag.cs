@@ -50,7 +50,7 @@ namespace WRC.Woodon
 
 				bool equal = localTags == targetTags;
 
-				// MDebugLog($"{Networking.LocalPlayer.playerId + localTags}, {player.playerId + targetTags}, == {equal}");
+				// WDebugLog($"{Networking.LocalPlayer.playerId + localTags}, {player.playerId + targetTags}, == {equal}");
 				voiceStates[i] = ((voiceStates[i] != VoiceState.Mute) && equal)
 					? VoiceState.Default
 					: VoiceState.Mute;

@@ -9,7 +9,7 @@ namespace WRC.Woodon
 
 		public virtual void SetMValue(MValue mValue)
 		{
-			MDebugLog($"{nameof(SetMValue)} - {mValue}");
+			WDebugLog($"{nameof(SetMValue)} - {mValue}");
 			this.mValue = mValue;
 		}
 	}

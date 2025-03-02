@@ -34,7 +34,7 @@ namespace WRC.Woodon
 				}
 			}
 			
-			MDebugLog(nameof(IsCondition) + isTarget);
+			WDebugLog(nameof(IsCondition) + isTarget);
 			return isTarget;
 		}
 	}

@@ -28,7 +28,7 @@ namespace Mascari4615
 
         private void Start()
         {
-            MDebugLog($"{nameof(goBoardButtons)} {goBoardButtons.Length}");
+            WDebugLog($"{nameof(goBoardButtons)} {goBoardButtons.Length}");
 
             for (int i = 0; i < goBoardButtons.Length; i++)
                 goBoardButtons[i].transform.localPosition = Vector3.right * i * .5f;
@@ -54,7 +54,7 @@ namespace Mascari4615
 
         public void SetStoneData(int index, int color)
         {
-            MDebugLog($"{nameof(SetStoneData)}, ButtonIndex = {index}, Color = {color}");
+            WDebugLog($"{nameof(SetStoneData)}, ButtonIndex = {index}, Color = {color}");
 
             stoneData[index] = color;
 
@@ -69,7 +69,7 @@ namespace Mascari4615
 
         public void ResetStoneData()
         {
-            MDebugLog(nameof(ResetStoneData));
+            WDebugLog(nameof(ResetStoneData));
             
             SetOwner();
             stoneDataPack = "0000000000000000000";

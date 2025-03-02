@@ -17,7 +17,7 @@ namespace WRC.Woodon
 		[ContextMenu(nameof(SetMirror))]
 		public void SetMirror()
 		{
-			MDebugLog($"{nameof(SetMirror)}");
+			WDebugLog($"{nameof(SetMirror)}");
 
 			if (transforms.Length != mirrors.Length)
 			{

@@ -13,7 +13,7 @@ namespace Mascari4615.Project.RusukBar
 
 		public override void OnPlayerJoined(VRCPlayerApi player)
 		{
-			MDebugLog(nameof(OnPlayerJoined));
+			WDebugLog(nameof(OnPlayerJoined));
 
 			if (player == Networking.LocalPlayer)
 				mSFXManager.PlaySFX_G(0);

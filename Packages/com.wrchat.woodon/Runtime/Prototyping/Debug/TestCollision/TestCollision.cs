@@ -18,12 +18,12 @@ namespace WRC.Woodon
 
 		private void OnTestIntChange()
 		{
-			MDebugLog(testInt.ToString());
+			WDebugLog(testInt.ToString());
 		}
 
 		private void Start()
 		{
-			MDebugLog(nameof(Start));
+			WDebugLog(nameof(Start));
 			OnTestIntChange();
 		}
 

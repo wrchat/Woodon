@@ -61,7 +61,7 @@ namespace WRC.Woodon
 
 		public void SetValue(int newValue)
 		{
-			MDebugLog($"{nameof(SetValue)}({newValue})");
+			WDebugLog($"{nameof(SetValue)}({newValue})");
 		
 			if (mValue != null)
 			{

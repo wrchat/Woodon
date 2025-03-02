@@ -15,13 +15,13 @@ namespace WRC.Woodon
 		{
 			if (whenGetKeyDown && Input.GetKeyDown(keyCode))
 			{
-				MDebugLog($"{nameof(Update)} : {nameof(keyCode)} = {keyCode}");
+				WDebugLog($"{nameof(Update)} : {nameof(keyCode)} = {keyCode}");
 				SendEvents();
 			}
 
 			if (whenGetKeyUp && Input.GetKeyUp(keyCode))
 			{
-				MDebugLog($"{nameof(Update)} : {nameof(keyCode)} = {keyCode}");
+				WDebugLog($"{nameof(Update)} : {nameof(keyCode)} = {keyCode}");
 				SendEvents();
 			}
 		}

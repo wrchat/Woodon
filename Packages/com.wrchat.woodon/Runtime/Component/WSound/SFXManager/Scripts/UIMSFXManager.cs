@@ -31,7 +31,7 @@ namespace WRC.Woodon
 
 				if (isInvalidIndex || isElementNull)
 				{
-					MDebugLog($"Invalid index: {i} | Element is null: {isElementNull}");
+					WDebugLog($"Invalid index: {i} | Element is null: {isElementNull}");
 					buttons[i].gameObject.SetActive(false);
 					continue;
 				}

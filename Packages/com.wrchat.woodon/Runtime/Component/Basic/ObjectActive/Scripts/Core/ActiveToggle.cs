@@ -18,7 +18,7 @@ namespace WRC.Woodon
 			get => _active;
 			private set
 			{
-				MDebugLog($"{nameof(Active)} changed: {_active} -> {value}");
+				WDebugLog($"{nameof(Active)} changed: {_active} -> {value}");
 				_active = value;
 				UpdateActive();
 			}
@@ -48,7 +48,7 @@ namespace WRC.Woodon
 
 		public void SetActive(bool newActive)
 		{
-			MDebugLog($"{nameof(SetActive)}({newActive})");
+			WDebugLog($"{nameof(SetActive)}({newActive})");
 
 			if (wBool != null)
 			{

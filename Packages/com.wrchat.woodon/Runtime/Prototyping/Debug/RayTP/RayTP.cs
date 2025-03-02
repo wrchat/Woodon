@@ -15,7 +15,7 @@ namespace WRC.Woodon
 
 		public void TryRayTP()
 		{
-			MDebugLog($"{nameof(TryRayTP)}");
+			WDebugLog($"{nameof(TryRayTP)}");
 
 			// Ray 쏴서 해당 위치로 TP
 			ray.origin = Networking.LocalPlayer.GetBonePosition(HumanBodyBones.Head);

@@ -15,7 +15,7 @@ namespace Mascari4615.Project.Wakta.WAK.TGame
         public void BoxUp(int boxIndex)
         {
 			int curSiblingIndex = orderBoxes[boxIndex].transform.GetSiblingIndex();
-            MDebugLog(curSiblingIndex.ToString());
+            WDebugLog(curSiblingIndex.ToString());
 
             if (curSiblingIndex == 0)
                 return;
@@ -26,7 +26,7 @@ namespace Mascari4615.Project.Wakta.WAK.TGame
         public void BoxDown(int boxIndex)
         {
 			int curSiblingIndex = orderBoxes[boxIndex].transform.GetSiblingIndex();
-            MDebugLog(curSiblingIndex.ToString());
+            WDebugLog(curSiblingIndex.ToString());
 
             if (curSiblingIndex == orderBoxes.Length - 1)
                 return;

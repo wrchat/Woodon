@@ -52,7 +52,7 @@ namespace Mascari4615.Project.Wakta.LIL.ButkoWorld
 			set
 			{
 				spawnData = value;
-				MDebugLog($"{nameof(SpawnData)} Changed to : {SpawnData}");
+				WDebugLog($"{nameof(SpawnData)} Changed to : {SpawnData}");
 				spawnDatas = spawnData.Split(new[] { DATA_PACK_SEPARATOR }, StringSplitOptions.None);
 
 				nextSpawnIndex = 0;
@@ -108,13 +108,13 @@ namespace Mascari4615.Project.Wakta.LIL.ButkoWorld
 
 		private void OnScoreChange()
 		{
-			MDebugLog(nameof(OnScoreChange));
+			WDebugLog(nameof(OnScoreChange));
 			scoreText.text = score.Value.ToString();
 		}
 
 		public void TryGetScore(int index)
 		{
-			MDebugLog($"{nameof(TryGetScore)} : index = {index}");
+			WDebugLog($"{nameof(TryGetScore)} : index = {index}");
 
 			if (isShooted[index].Value)
 			{
@@ -125,7 +125,7 @@ namespace Mascari4615.Project.Wakta.LIL.ButkoWorld
 
 		private void OnGameStateChange()
 		{
-			MDebugLog(nameof(OnGameStateChange));
+			WDebugLog(nameof(OnGameStateChange));
 			gameStateMeshRenderer.material.color = IsGaming ? Color.green : Color.red;
 		}
 
@@ -175,7 +175,7 @@ namespace Mascari4615.Project.Wakta.LIL.ButkoWorld
 			nextSpawnTime = int.Parse(s[0]);
 			int batIndex = int.Parse(s[1]);
 
-			MDebugLog($"{nameof(StandUp)} : dataIndex = {nextSpawnIndex}, batIndex{int.Parse(s[1])}");
+			WDebugLog($"{nameof(StandUp)} : dataIndex = {nextSpawnIndex}, batIndex{int.Parse(s[1])}");
 
 			if (IsOwner(isShooted[batIndex].gameObject))
 				isShooted[batIndex].SetValueTrue();

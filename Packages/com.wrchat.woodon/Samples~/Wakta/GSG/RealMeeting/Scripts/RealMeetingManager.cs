@@ -46,7 +46,7 @@ namespace Mascari4615.Project.ISD.GSG.RealMeeting
 			foreach (UIHeartBlock heartBlock in heartBlocks)
 				heartBlock.Init();
 
-			MDebugLog($"Initialized {mScores.Length} Scores");
+			WDebugLog($"Initialized {mScores.Length} Scores");
 		}
 
 		public void UpdateScreen()

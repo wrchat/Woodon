@@ -42,7 +42,7 @@ namespace WRC.Woodon
 
 		protected virtual void Init()
 		{
-			MDebugLog($"{nameof(Init)}");
+			WDebugLog($"{nameof(Init)}");
 
 			if (useSync)
 			{
@@ -59,7 +59,7 @@ namespace WRC.Woodon
 
 		protected virtual void OnValueChange()
 		{
-			MDebugLog($"{nameof(OnValueChange)}");
+			WDebugLog($"{nameof(OnValueChange)}");
 
 			SendEvents();
 
@@ -71,7 +71,7 @@ namespace WRC.Woodon
 
 		public virtual void SetValue(bool newValue, bool isReciever = false)
 		{
-			MDebugLog($"{nameof(SetValue)}({newValue})");
+			WDebugLog($"{nameof(SetValue)}({newValue})");
 
 			if (isReciever == false)
 			{

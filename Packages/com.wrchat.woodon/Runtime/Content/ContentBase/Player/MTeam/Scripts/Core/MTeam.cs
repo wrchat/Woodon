@@ -23,7 +23,7 @@ namespace WRC.Woodon
 
 		public void PlayerChanged(UIMTeamButton teamButton)
 		{
-			MDebugLog($"{nameof(PlayerChanged)} : {teamButton}");
+			WDebugLog($"{nameof(PlayerChanged)} : {teamButton}");
 
 			SendEvents();
 			mTeamManager.PlayerChanged(TeamType, teamButton);

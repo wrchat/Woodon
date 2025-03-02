@@ -22,7 +22,7 @@ namespace WRC.Woodon
 			private set
 			{
 				_playerUdonIndexDataPack = value;
-				MDebugLog($"{nameof(_playerUdonIndexDataPack)}, = {_playerUdonIndexDataPack}");
+				WDebugLog($"{nameof(_playerUdonIndexDataPack)}, = {_playerUdonIndexDataPack}");
 
 				if (DEBUG && debugText != null)
 				{
@@ -51,7 +51,7 @@ namespace WRC.Woodon
 
 		public int GetUdonIndex(VRCPlayerApi targetPlayer = null)
 		{
-			MDebugLog($"{nameof(GetUdonIndex)} : {targetPlayer}");
+			WDebugLog($"{nameof(GetUdonIndex)} : {targetPlayer}");
 
 			if (IsNotOnline())
 				return NONE_INT;
@@ -71,7 +71,7 @@ namespace WRC.Woodon
 
 		public VRCPlayerApi GetPlayerApi(int udonIndex)
 		{
-			MDebugLog($"{nameof(GetPlayerApi)} : {udonIndex}");
+			WDebugLog($"{nameof(GetPlayerApi)} : {udonIndex}");
 
 			if (IsNotOnline())
 				return null;
@@ -92,7 +92,7 @@ namespace WRC.Woodon
 
 		public void ReqUpdatePlayerList()
 		{
-			MDebugLog(nameof(ReqUpdatePlayerList));
+			WDebugLog(nameof(ReqUpdatePlayerList));
 			UpdatePlayerList();
 		}
 
@@ -104,7 +104,7 @@ namespace WRC.Woodon
 
 		private void UpdatePlayerList()
 		{
-			MDebugLog($"{nameof(UpdatePlayerList)}, PlayerCount = {VRCPlayerApi.GetPlayerCount()}");
+			WDebugLog($"{nameof(UpdatePlayerList)}, PlayerCount = {VRCPlayerApi.GetPlayerCount()}");
 
 			PlayerApis = new VRCPlayerApi[VRCPlayerApi.GetPlayerCount()];
 			VRCPlayerApi.GetPlayers(PlayerApis);
@@ -112,8 +112,8 @@ namespace WRC.Woodon
 			string[] datas = PlayerUdonIndexDataPack.Split(DATA_SEPARATOR);
 			playerNameByUdonIndex = new string[80];
 			enableUdonCount = 0;
-			MDebugLog($"PlayerUdonIndexDataPack = {PlayerUdonIndexDataPack}");
-			MDebugLog($"datasLength = {datas.Length}");
+			WDebugLog($"PlayerUdonIndexDataPack = {PlayerUdonIndexDataPack}");
+			WDebugLog($"datasLength = {datas.Length}");
 			for (int i = 0; i < datas.Length; i++)
 				playerNameByUdonIndex[i] = datas[i];
 

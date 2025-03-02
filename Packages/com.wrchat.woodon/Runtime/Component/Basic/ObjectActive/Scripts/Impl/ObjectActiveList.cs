@@ -18,7 +18,7 @@ namespace WRC.Woodon
 
 		protected override void UpdateActive()
 		{
-			MDebugLog($"{nameof(UpdateActive)}({Value})");
+			WDebugLog($"{nameof(UpdateActive)}({Value})");
 
 			switch (option)
 			{
@@ -45,7 +45,7 @@ namespace WRC.Woodon
 					break;
 				
 				default:
-					MDebugLog($"{nameof(UpdateActive)}({Value}) - {option}, Invalid Option");
+					WDebugLog($"{nameof(UpdateActive)}({Value}) - {option}, Invalid Option");
 					break;
 			}
 		}

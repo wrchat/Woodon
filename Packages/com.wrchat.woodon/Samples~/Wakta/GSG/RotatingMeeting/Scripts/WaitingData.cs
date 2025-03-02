@@ -13,7 +13,7 @@ namespace Mascari4615.Project.ISD.GSG.RotatingMeeting
 
 		public void SetCurTime(float newTime)
 		{
-			// MDebugLog(nameof(SetCurTime) + newTime);
+			// WDebugLog(nameof(SetCurTime) + newTime);
 
 			SetOwner();
 			CurTime = newTime;
@@ -27,22 +27,22 @@ namespace Mascari4615.Project.ISD.GSG.RotatingMeeting
 			{
 				if (isUploading)
 				{
-					// MDebugLog(nameof(AddCurTime) + amount);
-					// MDebugLog(nameof(AddCurTime));
+					// WDebugLog(nameof(AddCurTime) + amount);
+					// WDebugLog(nameof(AddCurTime));
 					CurTime += amount;
 				}
 			}
 			else
 			{
-				// MDebugLog(nameof(AddCurTime) + amount);
-				// MDebugLog(nameof(AddCurTime));
+				// WDebugLog(nameof(AddCurTime) + amount);
+				// WDebugLog(nameof(AddCurTime));
 				CurTime += amount;
 			}
 		}
 
 		public void SetUpload(bool value)
 		{
-			// MDebugLog(nameof(SetGoUp) + value);
+			// WDebugLog(nameof(SetGoUp) + value);
 			SetOwner();
 			isUploading = value;
 		}

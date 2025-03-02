@@ -32,7 +32,7 @@ namespace WRC.Woodon
 
 		private void Init()
 		{
-			MDebugLog(nameof(Init));
+			WDebugLog(nameof(Init));
 
 			DrawElementDatas = GetComponentsInChildren<DrawElementData>(true);
 
@@ -47,7 +47,7 @@ namespace WRC.Woodon
 
 		private void InitData()
 		{
-			MDebugLog(nameof(InitData));
+			WDebugLog(nameof(InitData));
 
 			// 팀당 인원 수 * 팀 수 만큼 데이터 생성
 
@@ -78,14 +78,14 @@ namespace WRC.Woodon
 
 		public void InitDataAndSync()
 		{
-			MDebugLog(nameof(InitDataAndSync));
+			WDebugLog(nameof(InitDataAndSync));
 
 			InitData();
 		}
 
 		public void SetAllRemainRandom(bool isShowing = false, string syncData = NONE_STRING)
 		{
-			MDebugLog($"{nameof(SetAllRemainRandom)}, IsShowing : {isShowing}, SyncData : {syncData}");
+			WDebugLog($"{nameof(SetAllRemainRandom)}, IsShowing : {isShowing}, SyncData : {syncData}");
 
 			// 랜덤으로 데이터 생성해서 남은 자리 채워넣기
 			int[] remainTeamPlayerCounts = new int[teamCount];
@@ -123,7 +123,7 @@ namespace WRC.Woodon
 
 		public void SetElementData(int index, TeamType teamType, DrawRole role, bool isShowing, string runtimeString = NONE_STRING)
 		{
-			MDebugLog($"{nameof(SetElementData)}, Index : {index}, TeamType : {teamType}, Role : {role}, IsShowing : {isShowing}, runtimeString : {runtimeString}");
+			WDebugLog($"{nameof(SetElementData)}, Index : {index}, TeamType : {teamType}, Role : {role}, IsShowing : {isShowing}, runtimeString : {runtimeString}");
 
 			DrawElementDatas[index].TeamType = teamType;
 			DrawElementDatas[index].Role = role;
@@ -134,7 +134,7 @@ namespace WRC.Woodon
 
 		public void ShowTeam(TeamType teamType)
 		{
-			MDebugLog($"{nameof(ShowTeam)}, TeamType : {teamType}");
+			WDebugLog($"{nameof(ShowTeam)}, TeamType : {teamType}");
 
 			foreach (DrawElementData drawElementData in DrawElementDatas)
 			{

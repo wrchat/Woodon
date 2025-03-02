@@ -39,7 +39,7 @@ namespace WRC.Woodon
 
 		protected virtual void Init()
 		{
-			MDebugLog($"{nameof(Init)}");
+			WDebugLog($"{nameof(Init)}");
 
 			Seats = GetComponentsInChildren<MSeat>();
 			contentData.RegisterListener(this, nameof(OnContentDataChanged), WJsonEvent.OnDeserialization);
@@ -56,7 +56,7 @@ namespace WRC.Woodon
 
 		public virtual void UpdateContent()
 		{
-			// MDebugLog($"{nameof(UpdateStuff)}");
+			// WDebugLog($"{nameof(UpdateStuff)}");
 
 			foreach (MSeat seat in Seats)
 				seat.UpdateSeat();
@@ -64,7 +64,7 @@ namespace WRC.Woodon
 
 		public virtual void OnContentDataChanged()
 		{
-			MDebugLog($"{nameof(OnContentDataChanged)}");
+			WDebugLog($"{nameof(OnContentDataChanged)}");
 
 			if (contentData.HasDataChanged(ContentStateString, out int originState, out int curState))
 				OnContentStateChange(DataChangeStateUtil.GetChangeState(originState, curState));
@@ -76,13 +76,13 @@ namespace WRC.Woodon
 				if (option.Name == dataName)
 					return option;
 
-			MDebugLog($"Not Found DataOption: {dataName}", LogType.Error);
+			WDebugLog($"Not Found DataOption: {dataName}", LogType.Error);
 			return null;
 		}
 
 		protected virtual void OnContentStateChange(DataChangeState changeState)
 		{
-			MDebugLog($"{nameof(OnContentStateChange)}, {nameof(changeState)} = {changeState.ToFriendlyString()}");
+			WDebugLog($"{nameof(OnContentStateChange)}, {nameof(changeState)} = {changeState.ToFriendlyString()}");
 			UpdateContent();
 			SendEvents();
 		}

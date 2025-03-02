@@ -35,19 +35,19 @@ namespace Mascari4615
 
         public void CalcHit()
         {
-            MDebugLog($"{nameof(CalcHit)} : {nameof(teamType)} = {teamType}, {nameof(hitPlayerIndex)} = {hitPlayerIndex}");
+            WDebugLog($"{nameof(CalcHit)} : {nameof(teamType)} = {teamType}, {nameof(hitPlayerIndex)} = {hitPlayerIndex}");
 
             if (!IsLocalPlayerBallOwner)
             {
-                MDebugLog("IsBallOwner == false");
+                WDebugLog("IsBallOwner == false");
                 return;
             }
 
 			TeamType localPlayerTeamType = teamManager.GetTargetPlayerTeamType();                                    
-            MDebugLog($"{localPlayerTeamType}");
+            WDebugLog($"{localPlayerTeamType}");
             if (localPlayerTeamType == teamType || localPlayerTeamType == TeamType.None)
             {
-                MDebugLog($"Invalid TeamType {localPlayerTeamType}");
+                WDebugLog($"Invalid TeamType {localPlayerTeamType}");
                 return;
             }
 
@@ -77,14 +77,14 @@ namespace Mascari4615
                 }
             }
 
-            MDebugLog("Send Out");
+            WDebugLog("Send Out");
             SendCustomNetworkEvent(NetworkEventTarget.All, nameof(Out));
         }
 
         // 맞은 사람 아웃시키기
         public void Out()
         {
-            MDebugLog(nameof(Out));
+            WDebugLog(nameof(Out));
 
             if (!IsLocalPlayerOwner)
                 return;

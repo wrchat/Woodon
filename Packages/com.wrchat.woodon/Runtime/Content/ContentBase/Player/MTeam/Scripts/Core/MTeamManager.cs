@@ -25,13 +25,13 @@ namespace WRC.Woodon
 
 		public void PlayerChanged(TeamType teamType, UIMTeamButton targetTeamButton)
 		{
-			MDebugLog(
+			WDebugLog(
 				$"{nameof(PlayerChanged)} : {nameof(TeamType)} = {teamType}, {nameof(UIMTeamButton)} = {targetTeamButton}");
 
 			if (targetTeamButton.MTarget.TargetPlayerID == NONE_INT ||
 				targetTeamButton.MTarget.TargetPlayerID == Networking.LocalPlayer.playerId)
 			{
-				MDebugLog($"Invalid ID");
+				WDebugLog($"Invalid ID");
 				return;
 			}
 

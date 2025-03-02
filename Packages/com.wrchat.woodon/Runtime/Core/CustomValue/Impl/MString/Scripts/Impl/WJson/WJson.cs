@@ -17,17 +17,17 @@ namespace WRC.Woodon
 		[ContextMenu(nameof(SerializeData))]
 		public void SerializeData()
 		{
-			MDebugLog($"{nameof(SerializeData)} (Try) {DataDictionary}");
+			WDebugLog($"{nameof(SerializeData)} (Try) {DataDictionary}");
 
 			SendEvents(WJsonEvent.OnSerialization);
 
 			if (VRCJson.TrySerializeToJson(DataDictionary, JsonExportType.Beautify, out DataToken result))
 			{
-				MDebugLog($"{nameof(SerializeData)} (Success) {result}");
+				WDebugLog($"{nameof(SerializeData)} (Success) {result}");
 
 				if (Value == result.String)
 				{
-					MDebugLog($"{nameof(SerializeData)} (Skip Same Value) {Value}");
+					WDebugLog($"{nameof(SerializeData)} (Skip Same Value) {Value}");
 					return;
 				}
 
@@ -35,28 +35,28 @@ namespace WRC.Woodon
 			}
 			else
 			{
-				MDebugLog(result.ToString(), LogType.Error);
+				WDebugLog(result.ToString(), LogType.Error);
 			}
 		}
 
 		[ContextMenu(nameof(Deserialization))]
 		public void Deserialization()
 		{
-			MDebugLog($"{nameof(Deserialization)} (Try) {Value}");
+			WDebugLog($"{nameof(Deserialization)} (Try) {Value}");
 
 			if (Value == string.Empty)
 				return;
 
 			if (VRCJson.TryDeserializeFromJson(Value, out DataToken result))
 			{
-				MDebugLog($"{nameof(Deserialization)} (Success) {result}");
+				WDebugLog($"{nameof(Deserialization)} (Success) {result}");
 
 				DataDictionary = result.DataDictionary;
 				SendEvents(WJsonEvent.OnDeserialization);
 			}
 			else
 			{
-				MDebugLog($"Value:\n{Value} \n\n Result:\n{result}", logTypeWhenFailed);
+				WDebugLog($"Value:\n{Value} \n\n Result:\n{result}", logTypeWhenFailed);
 			}
 		}
 
@@ -174,7 +174,7 @@ namespace WRC.Woodon
 						diffBlock.SetValue("origin", originToken);
 						diffBlock.SetValue("cur", newToken);
 
-						MDebugLog($"{key} {originToken} -> {newToken}");
+						WDebugLog($"{key} {originToken} -> {newToken}");
 
 						diff.SetValue(key, diffBlock);
 					}

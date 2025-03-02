@@ -96,7 +96,7 @@ namespace WRC.Woodon
 		{
 			if (quizDataParentsIndex == null)
 			{
-				MDebugLog($"{nameof(OnQuizDataParentChange)} : {nameof(quizDataParentsIndex)}가 null입니다.", LogType.Error);
+				WDebugLog($"{nameof(OnQuizDataParentChange)} : {nameof(quizDataParentsIndex)}가 null입니다.", LogType.Error);
 				return;
 			}
 
@@ -124,7 +124,7 @@ namespace WRC.Woodon
 
 		public virtual void OnWait()
 		{
-			MDebugLog($"{nameof(OnWait)}");
+			WDebugLog($"{nameof(OnWait)}");
 
 			if (IsOwner() == false)
 				return;
@@ -133,12 +133,12 @@ namespace WRC.Woodon
 				seat.ResetTurnData();
 		}
 
-		public virtual void OnQuizTime() => MDebugLog($"{nameof(OnQuizTime)}");
-		public virtual void OnSelectAnswer() => MDebugLog($"{nameof(OnSelectAnswer)}");
-		public virtual void OnShowPlayerAnswer() => MDebugLog($"{nameof(OnShowPlayerAnswer)}");
-		public virtual void OnCheckAnswer() => MDebugLog($"{nameof(OnCheckAnswer)}");
-		public virtual void OnExplaining() => MDebugLog($"{nameof(OnExplaining)}");
-		public virtual void OnScoring() => MDebugLog($"{nameof(OnScoring)}");
+		public virtual void OnQuizTime() => WDebugLog($"{nameof(OnQuizTime)}");
+		public virtual void OnSelectAnswer() => WDebugLog($"{nameof(OnSelectAnswer)}");
+		public virtual void OnShowPlayerAnswer() => WDebugLog($"{nameof(OnShowPlayerAnswer)}");
+		public virtual void OnCheckAnswer() => WDebugLog($"{nameof(OnCheckAnswer)}");
+		public virtual void OnExplaining() => WDebugLog($"{nameof(OnExplaining)}");
+		public virtual void OnScoring() => WDebugLog($"{nameof(OnScoring)}");
 
 		public override string GetContentStateString()
 		{
