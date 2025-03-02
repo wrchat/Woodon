@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class UIMSeat : MBase
+	public class UIMSeat : WBase
 	{
 		[Header("_" + nameof(UIMSeat))]
 		[SerializeField] private TextMeshProUGUI[] indexTexts;

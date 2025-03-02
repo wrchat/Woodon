@@ -5,7 +5,7 @@ using UnityEngine;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class UIDrawControllerTeamButton : MBase
+	public class UIDrawControllerTeamButton : WBase
 	{
 		[SerializeField] private TextMeshProUGUI buttonText;
 

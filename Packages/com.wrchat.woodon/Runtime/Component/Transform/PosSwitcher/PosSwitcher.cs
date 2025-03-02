@@ -4,7 +4,7 @@ using UnityEngine;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class PosSwitcher : MBase
+	public class PosSwitcher : WBase
 	{
 		[Header("_" + nameof(PosSwitcher))]
 		[SerializeField] private GameObject[] targetObjects;

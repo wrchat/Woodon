@@ -6,7 +6,7 @@ using VRC.Udon.Common.Interfaces;
 
 namespace WRC.Woodon
 {
-	public abstract class WEventPublisher : MBase
+	public abstract class WEventPublisher : WBase
 	{
 		public const int DEFAULT_EVENT = -1;
 

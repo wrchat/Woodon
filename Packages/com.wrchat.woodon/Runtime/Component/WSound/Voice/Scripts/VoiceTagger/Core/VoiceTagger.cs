@@ -4,7 +4,7 @@ using static WRC.Woodon.WUtil;
 
 namespace WRC.Woodon
 {
-	public abstract class VoiceTagger : MBase
+	public abstract class VoiceTagger : WBase
 	{
 		[field: Header("_" + nameof(VoiceTagger))]
 		[field: SerializeField] public VoiceTag Tag { get; private set; }

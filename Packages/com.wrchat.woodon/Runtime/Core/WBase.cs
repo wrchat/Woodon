@@ -5,7 +5,7 @@ using static WRC.Woodon.WUtil;
 
 namespace WRC.Woodon
 {
-	public abstract class MBase : UdonSharpBehaviour
+	public abstract class WBase : UdonSharpBehaviour
 	{
 		public const string DEBUG_PREFIX = "WRChat";
 
@@ -17,7 +17,7 @@ namespace WRC.Woodon
 		public const string TRUE_STRING = "TRUE";
 		public const string FALSE_STRING = "FALSE";
 
-		[Header("_" + nameof(MBase))]
+		[Header("_" + nameof(WBase))]
 		[SerializeField] protected bool DEBUG = false;
 
 		// 아래 메서드들은 확장 메서드들로 만들까 했는데, 일반 메서드와 크게 성능상 차이가 없다고 함.

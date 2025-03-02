@@ -4,7 +4,7 @@ using UnityEngine;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class TransformMirror : MBase
+	public class TransformMirror : WBase
 	{
 		[SerializeField] private Transform[] transforms;
 		[SerializeField] private Transform[] mirrors;

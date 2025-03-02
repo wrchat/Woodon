@@ -7,7 +7,7 @@ namespace WRC.Woodon
 	// AuctionManager, DrawManager 보다 늦게 실행되어야 함
 	[DefaultExecutionOrder(-9000)]
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class AuctionDraw : MBase
+	public class AuctionDraw : WBase
 	{
 		[field: SerializeField] public DrawManager DrawManager { get; private set; }
 		[field: SerializeField] public AuctionManager AuctionManager { get; private set; }

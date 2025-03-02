@@ -4,7 +4,7 @@ using UnityEngine;
 namespace WRC.Woodon
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-    public class ShootingManager : MBase
+    public class ShootingManager : WBase
     {
         [SerializeField] private ShootingTarget[] shootingTargets;
 

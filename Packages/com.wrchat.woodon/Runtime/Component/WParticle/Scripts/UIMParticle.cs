@@ -4,7 +4,7 @@ using UnityEngine;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class UIMParticle : MBase
+	public class UIMParticle : WBase
 	{
 		[Header("_" + nameof(UIMParticle))]
 		[SerializeField] private MParticle mParticle;

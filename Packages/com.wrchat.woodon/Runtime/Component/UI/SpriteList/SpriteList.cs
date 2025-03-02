@@ -5,7 +5,7 @@ using UdonSharp;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class SpriteList : MBase
+	public class SpriteList : WBase
 	{
 		[Header("_" + nameof(SpriteList))]
 		[SerializeField] private Sprite[] sprites;

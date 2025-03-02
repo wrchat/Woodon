@@ -8,7 +8,7 @@ using VRC.Udon;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class WCameraData : MBase
+	public class WCameraData : WBase
 	{
 		[field: Header("_" + nameof(WCameraData))]
 		[field: SerializeField] public KeyCode KeyCode { get; set; } = KeyCode.None;

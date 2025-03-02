@@ -6,7 +6,7 @@ using VRC.SDKBase;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class UIMTeamButton : MBase
+	public class UIMTeamButton : WBase
 	{
 		[field: SerializeField] public MTarget MTarget { get; private set; }
 		[SerializeField] private TextMeshProUGUI nameText;

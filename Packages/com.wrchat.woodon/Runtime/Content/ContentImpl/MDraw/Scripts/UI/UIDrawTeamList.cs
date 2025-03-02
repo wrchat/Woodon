@@ -4,7 +4,7 @@ using UnityEngine;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class UIDrawTeamList : MBase
+	public class UIDrawTeamList : WBase
 	{
 		[SerializeField] private UIDrawTeamBlock[] teamBlocks;
 

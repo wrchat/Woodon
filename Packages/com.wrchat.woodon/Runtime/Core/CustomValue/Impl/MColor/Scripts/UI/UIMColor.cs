@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class UIMColor : MBase
+	public class UIMColor : WBase
 	{
 		[Header("_" + nameof(UIMColor))]
 		[SerializeField] private MColor mColor;

@@ -7,7 +7,7 @@ using WRC.Woodon;
 namespace WRC
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class MBooleanOperator : MBase
+	public class MBooleanOperator : WBase
 	{
 		[Header("_" + nameof(MBooleanOperator))]
 		[SerializeField] private MBool[] mBools;

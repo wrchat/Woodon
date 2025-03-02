@@ -4,7 +4,7 @@ using UnityEngine.UI;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class UIDrawTeamBlock : MBase
+	public class UIDrawTeamBlock : WBase
 	{
 		private TeamType teamType = TeamType.None;
 		private UIDrawElementBlock[] elementBlocks;

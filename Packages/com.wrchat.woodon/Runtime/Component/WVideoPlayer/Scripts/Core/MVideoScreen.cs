@@ -5,7 +5,7 @@ using UnityEngine.UI;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class MVideoScreen : MBase
+	public class MVideoScreen : WBase
 	{
 		[SerializeField] private MVideoPlayer mVideoPlayer;
 		[SerializeField] private RawImage[] rawImages;

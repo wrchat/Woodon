@@ -7,7 +7,7 @@ using static WRC.Woodon.WUtil;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class MPlayerUdonIndex : MBase
+	public class MPlayerUdonIndex : WBase
 	{
 		// https://cafe.naver.com/steamindiegame/14065241
 		private const char NICK_SEPARATER = '#';

@@ -6,7 +6,7 @@ using UnityEngine;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class UITimer : MBase
+	public class UITimer : WBase
 	{
 		[Header("_" + nameof(UITimer))]
 		[SerializeField] private Timer timer;

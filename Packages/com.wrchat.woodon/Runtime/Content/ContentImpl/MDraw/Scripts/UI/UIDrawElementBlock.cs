@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class UIDrawElementBlock : MBase
+	public class UIDrawElementBlock : WBase
 	{
 		[SerializeField] private TextMeshProUGUI nameText;
 		[SerializeField] private Image spriteImage;

@@ -4,7 +4,7 @@ using UnityEngine;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class MStringFollowerSetter : MBase
+	public class MStringFollowerSetter : WBase
 	{
 		[Header("_" + nameof(MStringFollowerSetter))]
 		[SerializeField] private MStringFollower[] mStringFollowers;

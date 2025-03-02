@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class UIMDataContainer : MBase
+	public class UIMDataContainer : WBase
 	{
 		[field: Header("_" + nameof(UIMDataContainer))]
 		[field: SerializeField] public MDataContainer TargetMDataContainer { get; protected set; }

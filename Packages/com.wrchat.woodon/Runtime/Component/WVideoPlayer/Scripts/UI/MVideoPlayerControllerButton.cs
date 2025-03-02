@@ -8,7 +8,7 @@ using VRC.Udon;
 namespace WRC.Woodon
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class MVideoPlayerControllerButton : MBase
+	public class MVideoPlayerControllerButton : WBase
 	{
 		[SerializeField] private TextMeshProUGUI videoNameText;
 		private MVideoPlayerControllerUI videoPlayerControllerUI;

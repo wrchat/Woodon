@@ -5,7 +5,7 @@ using VRC.SDKBase;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Continuous)]
-	public class MCameraFovSync : MBase
+	public class MCameraFovSync : WBase
 	{
 		[Header("_" + nameof(MCameraFovSync))]
 		[SerializeField] private bool useSync = true;

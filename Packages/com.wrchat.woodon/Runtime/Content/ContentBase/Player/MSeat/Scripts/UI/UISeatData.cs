@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class UISeatData : MBase
+	public class UISeatData : WBase
 	{
 		[Header("_" + nameof(UISeatData))]
 		[SerializeField] private string dataName = NONE_STRING;

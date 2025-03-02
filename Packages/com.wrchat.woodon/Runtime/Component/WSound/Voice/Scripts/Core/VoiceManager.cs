@@ -5,7 +5,7 @@ using VRC.SDKBase;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class VoiceManager : MBase
+	public class VoiceManager : WBase
 	{
 		protected const int VOICE_QUIET_GAIN = 5;
 		protected const int VOICE_QUIET_FAR = 10;

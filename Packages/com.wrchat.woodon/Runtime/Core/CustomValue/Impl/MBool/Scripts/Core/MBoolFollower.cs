@@ -2,7 +2,7 @@
 
 namespace WRC.Woodon
 {
-	public abstract class MBoolFollower : MBase
+	public abstract class MBoolFollower : WBase
 	{
 		[Header("_" + nameof(MBoolFollower))]
 		[SerializeField] protected MBool mBool;

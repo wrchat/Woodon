@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class UIQuizAnswerBlock : MBase
+	public class UIQuizAnswerBlock : WBase
 	{
 		[Header("_" + nameof(UIQuizAnswerBlock))]
 		[SerializeField] protected QuizAnswerType targetAnswerType;

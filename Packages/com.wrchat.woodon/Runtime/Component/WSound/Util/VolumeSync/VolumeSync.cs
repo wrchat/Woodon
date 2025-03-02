@@ -2,7 +2,7 @@
 
 namespace WRC.Woodon
 {
-	public class VolumeSync : MBase
+	public class VolumeSync : WBase
 	{
 		[SerializeField] private MValue volumeValue;
 		[SerializeField] private AudioSource[] audioSources;

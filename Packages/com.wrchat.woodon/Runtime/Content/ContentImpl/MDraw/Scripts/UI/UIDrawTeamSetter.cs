@@ -5,7 +5,7 @@ using UnityEngine;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class UIDrawTeamSetter : MBase
+	public class UIDrawTeamSetter : WBase
 	{
 		[SerializeField] private DrawManager drawManager;
 		[SerializeField] private MValue mValue;

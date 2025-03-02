@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace WRC.Woodon
 {
-	public abstract class MTargetFollower : MBase
+	public abstract class MTargetFollower : WBase
 	{
 		[Header("_" + nameof(MTargetFollower))]
 		[SerializeField] protected MTarget mTarget;

@@ -6,7 +6,7 @@ using VRC.Udon;
 
 namespace WRC.Woodon
 {
-	public class MAnimatorSpeed : MBase
+	public class MAnimatorSpeed : WBase
 	{
 		[Header("_" + nameof(MAnimatorSpeed))]
 		[SerializeField] private float speed;

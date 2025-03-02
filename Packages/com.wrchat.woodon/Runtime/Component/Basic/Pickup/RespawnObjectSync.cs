@@ -7,7 +7,7 @@ using VRC.Udon;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class RespawnObjectSync : MBase
+	public class RespawnObjectSync : WBase
 	{
 		[SerializeField] private VRCObjectSync[] objectSyncs;
 		private Vector3[] originalLocalPositions;

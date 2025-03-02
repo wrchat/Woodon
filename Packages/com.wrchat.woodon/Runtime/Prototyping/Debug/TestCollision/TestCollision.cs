@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace WRC.Woodon
 {
-	public class TestCollision : MBase
+	public class TestCollision : WBase
 	{
 		[UdonSynced, FieldChangeCallback(nameof(TestInt))] private int testInt;
 		public int TestInt

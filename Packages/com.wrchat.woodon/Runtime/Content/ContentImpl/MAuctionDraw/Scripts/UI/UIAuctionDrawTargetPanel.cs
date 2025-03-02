@@ -3,7 +3,7 @@
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class UIAuctionDrawTargetPanel : MBase
+	public class UIAuctionDrawTargetPanel : WBase
 	{
 		private AuctionDraw auctionDraw;
 		private UIAuctionDrawTargetElement[] elements;

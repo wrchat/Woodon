@@ -8,7 +8,7 @@ namespace WRC.Woodon
 {
 	// [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	[DefaultExecutionOrder(0)]
-	public class SendEventOnStationEvent : MBase
+	public class SendEventOnStationEvent : WBase
 	{
 		[Header("_" + nameof(SendEventOnStationEvent))]
 		[SerializeField] private UdonSharpBehaviour[] enterListeners;

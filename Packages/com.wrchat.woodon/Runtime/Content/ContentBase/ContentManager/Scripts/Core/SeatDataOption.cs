@@ -8,7 +8,7 @@ using VRC.Udon;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class SeatDataOption : MBase
+	public class SeatDataOption : WBase
 	{
 		[field: Header("_" + nameof(SeatDataOption))]
 

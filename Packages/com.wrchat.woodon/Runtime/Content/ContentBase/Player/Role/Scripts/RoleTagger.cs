@@ -5,7 +5,7 @@ using VRC.SDKBase;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class RoleTagger : MBase
+	public class RoleTagger : WBase
 	{
 		[Header("_" + nameof(RoleTagger))]
 		[SerializeField] private RoleTag roleTag;

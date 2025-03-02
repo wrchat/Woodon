@@ -4,7 +4,7 @@ using UnityEngine;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class UIDrawController : MBase
+	public class UIDrawController : WBase
 	{
 		private DrawManager drawManager;
 		private UIDrawControllerTeamButton[] teamButtons;

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class UIMTargetPlayerSelectButton : MBase
+	public class UIMTargetPlayerSelectButton : WBase
 	{
 		[Header("_" + nameof(UIMTargetPlayerSelectButton))]
 		[SerializeField] private TextMeshProUGUI playerNameText;

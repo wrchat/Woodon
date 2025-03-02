@@ -5,7 +5,7 @@ using VRC.SDKBase;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class RayTP : MBase
+	public class RayTP : WBase
 	{
 		[SerializeField] private float distance;
 		private RaycastHit raycastHit;

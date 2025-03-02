@@ -7,7 +7,7 @@ using WRC.Woodon;
 namespace WRC
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class MValueComparisonOperator : MBase
+	public class MValueComparisonOperator : WBase
 	{
 		[Header("_" + nameof(MValueComparisonOperator))]
 		[SerializeField] private MValue mValue1;

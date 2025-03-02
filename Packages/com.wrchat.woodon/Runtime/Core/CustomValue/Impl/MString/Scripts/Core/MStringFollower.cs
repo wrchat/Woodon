@@ -2,7 +2,7 @@
 
 namespace WRC.Woodon
 {
-	public abstract class MStringFollower : MBase
+	public abstract class MStringFollower : WBase
 	{
 		[Header("_" + nameof(MStringFollower))]
 		[SerializeField] protected MString mString;

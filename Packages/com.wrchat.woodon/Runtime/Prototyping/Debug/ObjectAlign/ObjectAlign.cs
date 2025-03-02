@@ -4,7 +4,7 @@ using UnityEngine;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class ObjectAlign : MBase
+	public class ObjectAlign : WBase
 	{
 		[SerializeField] private Transform parent;
 		[SerializeField] private float spacing = .1f;

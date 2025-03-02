@@ -5,7 +5,7 @@ using VRC.Udon.Common.Interfaces;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class MParticle : MBase
+	public class MParticle : WBase
 	{
 		[Header("_" + nameof(MParticle))]
 		[SerializeField] private ParticleSystem[] particleSystems;

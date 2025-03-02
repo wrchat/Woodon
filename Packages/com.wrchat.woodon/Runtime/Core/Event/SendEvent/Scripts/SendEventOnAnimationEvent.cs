@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace WRC.Woodon
 {
-	public class SendEventOnAnimationEvent : MBase
+	public class SendEventOnAnimationEvent : WBase
 	{
 		[Header("_" + nameof(SendEventOnAnimationEvent))]
 		[SerializeField] private UdonSharpBehaviour[] targetUdons = new UdonSharpBehaviour[0];

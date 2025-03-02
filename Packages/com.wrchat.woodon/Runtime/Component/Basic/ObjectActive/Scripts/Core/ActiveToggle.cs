@@ -4,7 +4,7 @@ using UnityEngine;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public abstract class ActiveToggle : MBase
+	public abstract class ActiveToggle : WBase
 	{
 		[Header("_" + nameof(ActiveToggle))]
 		[SerializeField] private bool defaultActive;

@@ -7,7 +7,7 @@ using VRC.Udon;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class SetHome : MBase
+	public class SetHome : WBase
 	{
 		private readonly Vector3[] homePositions = new Vector3[4];
 		private readonly Quaternion[] homeRotations = new Quaternion[4];

@@ -6,7 +6,7 @@ using VRC.Udon.Common.Interfaces;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class QvPenSketchbook : MBase
+	public class QvPenSketchbook : WBase
 	{
 		[field: Header("_" + nameof(QvPenSketchbook))]
 		[field: SerializeField] public RenderTexture SketchbookRenderTexture { get; private set; }

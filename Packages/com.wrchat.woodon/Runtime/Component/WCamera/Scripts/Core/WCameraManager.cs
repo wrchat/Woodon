@@ -4,7 +4,7 @@ using UnityEngine;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class WCameraManager : MBase
+	public class WCameraManager : WBase
 	{
 		[Header("_" + nameof(WCameraManager))]
 		[SerializeField] private WCameraData[] cameraDatas;

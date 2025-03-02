@@ -4,7 +4,7 @@ using UnityEngine;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class MBoolFollowerSetter : MBase
+	public class MBoolFollowerSetter : WBase
 	{
 		[Header("_" + nameof(MBoolFollowerSetter))]
 		[SerializeField] private MBoolFollower[] mBoolFollowers;

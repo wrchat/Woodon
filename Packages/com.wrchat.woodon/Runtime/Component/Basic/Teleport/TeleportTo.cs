@@ -5,7 +5,7 @@ using VRC.SDKBase;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class TeleportTo : MBase
+	public class TeleportTo : WBase
 	{
 		[Header("_" + nameof(TeleportTo))]
 		[SerializeField] private Transform targetPos;

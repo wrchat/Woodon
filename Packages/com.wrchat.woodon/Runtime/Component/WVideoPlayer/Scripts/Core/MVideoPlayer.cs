@@ -13,7 +13,7 @@ namespace WRC.Woodon
 	// https://github.com/MerlinVR/USharpVideo
 
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class MVideoPlayer : MBase
+	public class MVideoPlayer : WBase
 	{
 		private BaseVRCVideoPlayer _currentPlayer;
 

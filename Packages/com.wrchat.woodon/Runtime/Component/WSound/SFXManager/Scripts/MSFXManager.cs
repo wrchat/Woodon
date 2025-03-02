@@ -5,7 +5,7 @@ using VRC.Udon.Common.Interfaces;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class MSFXManager : MBase
+	public class MSFXManager : WBase
 	{
 		[field: Header("_" + nameof(MSFXManager))]
 		[field: SerializeField] public AudioClip[] AudioClips { get; private set; }

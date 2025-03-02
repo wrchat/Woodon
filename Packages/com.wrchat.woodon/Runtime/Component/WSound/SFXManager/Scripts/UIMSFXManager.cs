@@ -4,7 +4,7 @@ using UnityEngine;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class UIMSFXManager : MBase
+	public class UIMSFXManager : WBase
 	{
 		[Header("_" + nameof(UIMSFXManager))]
 		[SerializeField] private MSFXManager sfxManager;

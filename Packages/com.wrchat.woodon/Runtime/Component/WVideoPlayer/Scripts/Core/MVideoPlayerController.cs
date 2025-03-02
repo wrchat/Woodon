@@ -4,7 +4,7 @@ using UnityEngine;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class MVideoPlayerController : MBase
+	public class MVideoPlayerController : WBase
 	{
 		[SerializeField] private MVideoPlayer mVideoPlayer;
 		[SerializeField] private Transform videoDatasParent;

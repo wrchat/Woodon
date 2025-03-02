@@ -5,7 +5,7 @@ using VRC.SDKBase;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class FollowBone : MBase
+	public class FollowBone : WBase
 	{
 		[Header("_" + nameof(FollowBone))]
 		[SerializeField] private HumanBodyBones targetBone = HumanBodyBones.Head;

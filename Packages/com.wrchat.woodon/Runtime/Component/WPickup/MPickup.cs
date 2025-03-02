@@ -9,7 +9,7 @@ using static WRC.Woodon.WUtil;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Continuous)]
-	public class MPickup : MBase
+	public class MPickup : WBase
 	{
 		[field: Header("_" + nameof(MPickup))]
 		[field: SerializeField] public VRC_Pickup Pickup { get; private set; }

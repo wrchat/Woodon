@@ -9,7 +9,7 @@ using VRC.Udon;
 
 namespace WRC.Woodon
 {
-	public class UIChat : MBase
+	public class UIChat : WBase
 	{
 		[Header("_" + nameof(UIChat))]
 		[SerializeField] private TextMeshProUGUI[] chatTexts;

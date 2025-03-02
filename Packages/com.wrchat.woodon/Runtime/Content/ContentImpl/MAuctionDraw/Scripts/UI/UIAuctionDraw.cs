@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class UIAuctionDraw : MBase
+	public class UIAuctionDraw : WBase
 	{
 		[SerializeField] private Image[] teamLeaderImages;
 		[SerializeField] private TextMeshProUGUI[] teamLeaderNameTexts;

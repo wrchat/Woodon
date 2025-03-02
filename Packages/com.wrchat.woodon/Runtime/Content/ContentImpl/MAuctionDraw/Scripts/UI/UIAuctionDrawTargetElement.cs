@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class UIAuctionDrawTargetElement : MBase
+	public class UIAuctionDrawTargetElement : WBase
 	{
 		[SerializeField] private Image elementImage;
 		[SerializeField] private TextMeshProUGUI elementText;

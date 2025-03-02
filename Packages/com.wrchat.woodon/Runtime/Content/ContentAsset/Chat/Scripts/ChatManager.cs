@@ -9,7 +9,7 @@ using WRC.Woodon.Chat;
 
 namespace WRC.Woodon
 {
-	public class ChatManager : MBase
+	public class ChatManager : WBase
 	{
 		[Header("_" + nameof(ChatManager))]
 		[SerializeField] private MPlayerUdonIndex mPlayerUdonIndex;

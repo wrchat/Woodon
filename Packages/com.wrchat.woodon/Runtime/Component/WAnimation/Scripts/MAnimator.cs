@@ -3,7 +3,7 @@ using VRC.Udon.Common.Interfaces;
 
 namespace WRC.Woodon
 {
-	public class MAnimator : MBase
+	public class MAnimator : WBase
 	{
 		public const string STATE_STRING = "STATE";
 

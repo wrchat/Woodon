@@ -6,7 +6,7 @@ using VRC.SDKBase;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class RayInfo : MBase
+	public class RayInfo : WBase
 	{
 		[Header("_" + nameof(RayInfo))]
 		[SerializeField] private HumanBodyBones bone = HumanBodyBones.Head;

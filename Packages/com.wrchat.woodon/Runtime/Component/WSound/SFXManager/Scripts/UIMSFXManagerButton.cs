@@ -5,7 +5,7 @@ using UnityEngine;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class UIMSFXManagerButton : MBase
+	public class UIMSFXManagerButton : WBase
 	{
 		[SerializeField] private TextMeshProUGUI sfxNameText;
 		private UIMSFXManager sfxManagerUI;

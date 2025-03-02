@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class UIKoreanKeyboard : MBase
+	public class UIKoreanKeyboard : WBase
 	{
 		[Header("_" + nameof(UIKoreanKeyboard))]
 		[SerializeField] private KoreanKeyboard koreanKeyboard;

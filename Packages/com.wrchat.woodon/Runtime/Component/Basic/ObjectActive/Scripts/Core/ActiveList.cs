@@ -4,7 +4,7 @@ using UnityEngine;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public abstract class ActiveList : MBase
+	public abstract class ActiveList : WBase
 	{
 		[Header("_" + nameof(ActiveList))]
 		[SerializeField] private int defaultValue;

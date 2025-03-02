@@ -6,7 +6,7 @@ using static WRC.Woodon.WUtil;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class VoiceSeparateByPos : MBase
+	public class VoiceSeparateByPos : WBase
 	{
 		[SerializeField] private bool targetX;
 		[SerializeField] private bool targetY;

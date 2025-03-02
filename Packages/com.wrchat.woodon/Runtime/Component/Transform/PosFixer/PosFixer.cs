@@ -3,7 +3,7 @@ using VRC.SDKBase;
 
 namespace WRC.Woodon
 {
-	public class PosFixer : MBase
+	public class PosFixer : WBase
 	{
 		[SerializeField] private GameObject meshObject;
 

@@ -4,7 +4,7 @@ using UnityEngine;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class MMaterial : MBase
+	public class MMaterial : WBase
 	{
 		[Header("_" + nameof(MMaterial))]
 		[SerializeField] protected MeshRenderer[] meshRenderers;

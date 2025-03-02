@@ -5,7 +5,7 @@ using VRC.Udon.Common.Interfaces;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class EventBlock : MBase
+	public class EventBlock : WBase
 	{
 		[Header("_" + nameof(EventBlock))]
 		
