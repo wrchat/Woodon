@@ -6,7 +6,7 @@ namespace WRC.Woodon
 {
 	[RequireComponent(typeof(VRC_Pickup))]
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Continuous)]
-	public class WMike : MPickup
+	public class WMike : WPickup
 	{
 		[Header("_" + nameof(WMike))]
 		[SerializeField] private WBool mikeEnable;

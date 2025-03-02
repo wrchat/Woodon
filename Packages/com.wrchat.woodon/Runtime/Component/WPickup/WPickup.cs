@@ -9,9 +9,9 @@ using static WRC.Woodon.WUtil;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Continuous)]
-	public class MPickup : WBase
+	public class WPickup : WBase
 	{
-		[field: Header("_" + nameof(MPickup))]
+		[field: Header("_" + nameof(WPickup))]
 		[field: SerializeField] public VRC_Pickup Pickup { get; private set; }
 		[field: SerializeField] public VRCObjectSync ObjectSync { get; private set; }
 		[field: SerializeField] public MeshRenderer[] MeshRenderers { get; private set; }

@@ -6,7 +6,7 @@ using VRC.Udon.Common.Interfaces;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Continuous)]
-	public class MGun : MPickup
+	public class MGun : WPickup
 	{
 		[Header("_" + nameof(MGun))]
 		[SerializeField] private WInt curAmmo;
