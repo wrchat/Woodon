@@ -5,9 +5,9 @@ using VRC.Udon.Common.Interfaces;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class MParticle : WBase
+	public class WParticle : WBase
 	{
-		[Header("_" + nameof(MParticle))]
+		[Header("_" + nameof(WParticle))]
 		[SerializeField] private ParticleSystem[] particleSystems;
 
 		[Header("_" + nameof(WColor) + " - Option")]
