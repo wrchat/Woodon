@@ -7,11 +7,11 @@ namespace WRC.Woodon
 	public class WBoolEventReceiver : WBoolFollower
 	{
 		[Header("_" + nameof(WBoolEventReceiver))]
-		[SerializeField] private UdonSharpBehaviour[] trueEventUdons = new UdonSharpBehaviour[0];
-		[SerializeField] private string[] trueEventMethodNames = new string[0];
+		[SerializeField] private UdonSharpBehaviour[] trueEventListeners = new UdonSharpBehaviour[0];
+		[SerializeField] private string[] trueEventCallbacks = new string[0];
 
-		[SerializeField] private UdonSharpBehaviour[] falseEventUdons = new UdonSharpBehaviour[0];
-		[SerializeField] private string[] falseEventMethodNames = new string[0];
+		[SerializeField] private UdonSharpBehaviour[] falseEventListeners = new UdonSharpBehaviour[0];
+		[SerializeField] private string[] falseEventCallbacks = new string[0];
 
 		private void Start()
 		{
@@ -25,11 +25,34 @@ namespace WRC.Woodon
 			if (wBool == null)
 				return;
 
-			for (int i = 0; i < trueEventUdons.Length; i++)
-				wBool.RegisterListener(trueEventUdons[i], trueEventMethodNames[i], WBoolEvent.OnTrue);
+			wBool.RegisterListener(this, nameof(RunTrueEvents), WBoolEvent.OnTrue);
+			wBool.RegisterListener(this, nameof(RunFalseEvents), WBoolEvent.OnFalse);
 
-			for (int i = 0; i < falseEventUdons.Length; i++)
-				wBool.RegisterListener(falseEventUdons[i], falseEventMethodNames[i], WBoolEvent.OnFalse);
+			// wBool의 초기 값으로 한 번 실행합니다. 초기화 단계에서 wBool의 값이 바뀔 경우, 이벤트가 중복으로 발생할 수 있습니다.
+			if (wBool.Value)
+			{
+				RunTrueEvents();
+			}
+			else
+			{
+				RunFalseEvents();
+			}
+		}
+
+		public void RunTrueEvents()
+		{
+			WDebugLog($"{nameof(RunTrueEvents)}");
+
+			for (int i = 0; i < trueEventListeners.Length; i++)
+				trueEventListeners[i].SendCustomEvent(trueEventCallbacks[i]);
+		}
+
+		public void RunFalseEvents()
+		{
+			WDebugLog($"{nameof(RunFalseEvents)}");
+
+			for (int i = 0; i < falseEventListeners.Length; i++)
+				falseEventListeners[i].SendCustomEvent(falseEventCallbacks[i]);
 		}
 
 		public override void SetWBool(WBool wBool)
@@ -38,11 +61,8 @@ namespace WRC.Woodon
 
 			if (this.wBool != null)
 			{
-				for (int i = 0; i < trueEventUdons.Length; i++)
-					this.wBool.UnregisterListener(trueEventUdons[i], trueEventMethodNames[i], WBoolEvent.OnTrue);
-
-				for (int i = 0; i < falseEventUdons.Length; i++)
-					this.wBool.UnregisterListener(falseEventUdons[i], falseEventMethodNames[i], WBoolEvent.OnFalse);
+				this.wBool.UnregisterListener(this, nameof(RunTrueEvents), WBoolEvent.OnTrue);
+				this.wBool.UnregisterListener(this, nameof(RunFalseEvents), WBoolEvent.OnFalse);
 			}
 
 			this.wBool = wBool;
