@@ -131,7 +131,7 @@ namespace WRC.Woodon
 		public override void OnDrop()
 		{
 			// WDebugLog(nameof(OnDrop));
-		
+
 			if (isHolding != null)
 				isHolding.SetValue(false);
 		}
@@ -162,5 +162,10 @@ namespace WRC.Woodon
 				Rigidbody.useGravity = useGravity;
 			}
 		}
+
+		#region HorribleEvents
+		public void SetEnabledTrue() => SetEnabled(true);
+		public void SetEnabledFalse() => SetEnabled(false);
+		#endregion
 	}
 }
