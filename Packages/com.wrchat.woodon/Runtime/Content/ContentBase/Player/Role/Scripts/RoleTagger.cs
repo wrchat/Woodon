@@ -5,12 +5,12 @@ using VRC.SDKBase;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class RoleTagger : MBase
+	public class RoleTagger : WBase
 	{
 		[Header("_" + nameof(RoleTagger))]
 		[SerializeField] private RoleTag roleTag;
-		[SerializeField] private MBool mBool;
-		[SerializeField] private MTarget[] mTargets;
+		[SerializeField] private WBool wBool;
+		[SerializeField] private WPlayer[] wPlayers;
 
 		private void Start()
 		{
@@ -19,23 +19,23 @@ namespace WRC.Woodon
 		
 		private void Init()
 		{
-			mBool.RegisterListener(this, nameof(UpdateTag));
+			wBool.RegisterListener(this, nameof(UpdateTag));
 			UpdateTag();
 		}
 
 		public void UpdateTag()
 		{
 			bool isTarget = false;
-			foreach (MTarget mTarget in mTargets)
+			foreach (WPlayer wPlayer in wPlayers)
 			{
-				if (mTarget.IsTargetPlayer())
+				if (wPlayer.IsTargetPlayer())
 				{
 					isTarget = true;
 					break;
 				}
 			}
 
-			if (isTarget || mBool.Value)
+			if (isTarget || wBool.Value)
 				RoleUtil.SetPlayerTag(roleTag, Networking.LocalPlayer);
 			else
 				RoleUtil.SetPlayerTag(RoleTag.None, Networking.LocalPlayer);

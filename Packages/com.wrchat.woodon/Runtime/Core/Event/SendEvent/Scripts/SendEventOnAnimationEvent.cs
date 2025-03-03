@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace WRC.Woodon
 {
-	public class SendEventOnAnimationEvent : MBase
+	public class SendEventOnAnimationEvent : WBase
 	{
 		[Header("_" + nameof(SendEventOnAnimationEvent))]
 		[SerializeField] private UdonSharpBehaviour[] targetUdons = new UdonSharpBehaviour[0];
@@ -12,11 +12,11 @@ namespace WRC.Woodon
 		// TODO: Editor로 보여주기
 		private void Start()
 		{
-			MDebugLog($"{nameof(Start)}");
+			WDebugLog($"{nameof(Start)}");
 
 			if (targetUdons.Length != eventNames.Length)
 			{
-				MDebugLog($"{nameof(Start)} : {nameof(targetUdons)}.Length != {nameof(eventNames)}.Length", LogType.Error);
+				WDebugLog($"{nameof(Start)} : {nameof(targetUdons)}.Length != {nameof(eventNames)}.Length", LogType.Error);
 				return;
 			}
 
@@ -24,13 +24,13 @@ namespace WRC.Woodon
 			{
 				if (targetUdons[i] == null)
 				{
-					MDebugLog($"{nameof(Start)} : {nameof(targetUdons)}[{i}] is null, Skip {nameof(eventNames)}[{i}] = {eventNames[i]}", LogType.Error);
+					WDebugLog($"{nameof(Start)} : {nameof(targetUdons)}[{i}] is null, Skip {nameof(eventNames)}[{i}] = {eventNames[i]}", LogType.Error);
 					continue;
 				}
 
 				if (string.IsNullOrEmpty(eventNames[i]))
 				{
-					MDebugLog($"{nameof(Start)} : {nameof(eventNames)}[{i}] is null or empty, Skip {nameof(targetUdons)}[{i}]", LogType.Warning);
+					WDebugLog($"{nameof(Start)} : {nameof(eventNames)}[{i}] is null or empty, Skip {nameof(targetUdons)}[{i}]", LogType.Warning);
 					continue;
 				}
 			}
@@ -38,11 +38,11 @@ namespace WRC.Woodon
 
 		public void SendEvent(int index)
 		{
-			MDebugLog($"{nameof(SendEvent)} : {index}");
+			WDebugLog($"{nameof(SendEvent)} : {index}");
 
 			if (index < 0 || index >= targetUdons.Length)
 			{
-				MDebugLog($"{nameof(SendEvent)} : Invalid index {index}", LogType.Error);
+				WDebugLog($"{nameof(SendEvent)} : Invalid index {index}", LogType.Error);
 				return;
 			}
 

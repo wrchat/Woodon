@@ -9,14 +9,14 @@ namespace WRC.Woodon
 		[Header("_" + nameof(CanvasGroupActiveList))]
 		[SerializeField] private CanvasGroup[] canvasGroups;
 
-		protected override void InitMValueMinMax()
+		protected override void InitWIntMinMax()
 		{
-			// mValue.SetMinMaxValue(0, canvasGroups.Length - 1);
+			// wInt.SetMinMaxValue(0, canvasGroups.Length - 1);
 		}
 
 		protected override void UpdateActive()
 		{
-			MDebugLog($"{nameof(UpdateActive)}({Value})");
+			WDebugLog($"{nameof(UpdateActive)}({Value})");
 
 			switch (option)
 			{
@@ -45,7 +45,7 @@ namespace WRC.Woodon
 					}
 					break;
 				default:
-					MDebugLog($"{nameof(UpdateActive)}({Value}) - {option}, Invalid Option");
+					WDebugLog($"{nameof(UpdateActive)}({Value}) - {option}, Invalid Option");
 					break;
 			}
 		}

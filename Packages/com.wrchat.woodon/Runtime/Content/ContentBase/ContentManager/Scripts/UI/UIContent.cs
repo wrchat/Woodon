@@ -6,7 +6,7 @@ namespace WRC.Woodon
 {
 	[DefaultExecutionOrder(-5000)]
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public abstract class UIContent : MBase
+	public abstract class UIContent : WBase
 	{
 		[Header("_" + nameof(UIContent))]
 		[SerializeField] protected ContentManager contentManager;
@@ -19,7 +19,7 @@ namespace WRC.Woodon
 
 		protected virtual void Init()
 		{
-			MDebugLog($"{nameof(Init)}");
+			WDebugLog($"{nameof(Init)}");
 			contentManager.RegisterListener(this, nameof(UpdateUI));
 		}
 

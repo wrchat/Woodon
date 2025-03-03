@@ -46,9 +46,9 @@ namespace WRC.Woodon
 		/// 현재 입력된 문자(열)
 		/// 다른 스크립트에서 꺼내 쓰시면 됩니다.
 		/// </summary>
-		[SerializeField] private MString curMString;
+		[SerializeField] private WString curWString;
 
-		public string CurString => curMString.Value;
+		public string CurString => curWString.Value;
 
 		/// <summary>
 		/// Shift가 눌린 상태인가?
@@ -75,7 +75,7 @@ namespace WRC.Woodon
 
 		private void Init()
 		{
-			curMString.RegisterListener(this, nameof(OnStringChanged));
+			curWString.RegisterListener(this, nameof(OnStringChanged));
 			IsShifting = false;
 		}
 
@@ -263,7 +263,7 @@ namespace WRC.Woodon
 
 		public void InputBackspace()
 		{
-			// MDebugLog($"{nameof(InputBackspace)} {gameObject.transform.parent.name} : : {CurString}, {CurString == string.Empty}");
+			// WDebugLog($"{nameof(InputBackspace)} {gameObject.transform.parent.name} : : {CurString}, {CurString == string.Empty}");
 
 			if (CurString == string.Empty) return;
 
@@ -324,7 +324,7 @@ namespace WRC.Woodon
 						jong = 0;
 					}
 
-					// MDebugLog($"{cho}, {jung}, {jong} = {Encoding(cho, jung, jong)}");
+					// WDebugLog($"{cho}, {jung}, {jong} = {Encoding(cho, jung, jong)}");
 
 					char c = Encoding(cho, jung, jong);
 					SetString(CurString.Substring(0, CurString.Length - 1) + c);
@@ -349,7 +349,7 @@ namespace WRC.Woodon
 
 		private void SetString(string newString)
 		{
-			curMString.SetValue(newString);
+			curWString.SetValue(newString);
 		}
 
 		public void Clear()

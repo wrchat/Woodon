@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace WRC.Woodon
 {
-	public class TestCollision : MBase
+	public class TestCollision : WBase
 	{
 		[UdonSynced, FieldChangeCallback(nameof(TestInt))] private int testInt;
 		public int TestInt
@@ -18,12 +18,12 @@ namespace WRC.Woodon
 
 		private void OnTestIntChange()
 		{
-			MDebugLog(testInt.ToString());
+			WDebugLog(testInt.ToString());
 		}
 
 		private void Start()
 		{
-			MDebugLog(nameof(Start));
+			WDebugLog(nameof(Start));
 			OnTestIntChange();
 		}
 

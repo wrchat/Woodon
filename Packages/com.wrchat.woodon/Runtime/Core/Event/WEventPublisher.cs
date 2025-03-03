@@ -6,7 +6,7 @@ using VRC.Udon.Common.Interfaces;
 
 namespace WRC.Woodon
 {
-	public abstract class WEventPublisher : MBase
+	public abstract class WEventPublisher : WBase
 	{
 		public const int DEFAULT_EVENT = -1;
 
@@ -38,7 +38,7 @@ namespace WRC.Woodon
 					UdonSharpBehaviour listener = (UdonSharpBehaviour)block["listener"].Reference;
 					string callback = block["callback"].String;
 
-					MDebugLog($"{nameof(SendEvents)}({eventTypeInt}) : {listener}.{callback}()");
+					WDebugLog($"{nameof(SendEvents)}({eventTypeInt}) : {listener}.{callback}()");
 
 					if (sendEventGlobal)
 						listener.SendCustomNetworkEvent(NetworkEventTarget.All, callback);
@@ -55,7 +55,7 @@ namespace WRC.Woodon
 		/// <param name="callback"></param>
 		public void RegisterListener(UdonSharpBehaviour listener, string callback, Enum eventType = null)
 		{
-			MDebugLog($"{nameof(RegisterListener)}({listener}, {callback}, {eventType})");
+			WDebugLog($"{nameof(RegisterListener)}({listener}, {callback}, {eventType})");
 			
 			int eventTypeInt = ConvertEventTypeToInt(eventType);
 			if (eventData.ContainsKey(eventTypeInt) == false)
@@ -69,7 +69,7 @@ namespace WRC.Woodon
 			// 중복 등록 처리
 			if (AlreadyContainsEvent(eventBlocks, eventBlock))
 			{
-				MDebugLog($"{nameof(RegisterListener)} : {listener}.{callback} is already registered", LogType.Warning);
+				WDebugLog($"{nameof(RegisterListener)} : {listener}.{callback} is already registered", LogType.Warning);
 				return;
 			}
 
@@ -90,7 +90,7 @@ namespace WRC.Woodon
 
 		public void UnregisterListener(UdonSharpBehaviour listener, string callback, Enum eventType = null)
 		{
-			MDebugLog($"{nameof(UnregisterListener)}({listener}, {callback}, {eventType})");
+			WDebugLog($"{nameof(UnregisterListener)}({listener}, {callback}, {eventType})");
 
 			int eventTypeInt = ConvertEventTypeToInt(eventType);
 			if (eventData.TryGetValue(eventTypeInt, out DataToken dataToken))
@@ -138,7 +138,7 @@ namespace WRC.Woodon
 					UdonSharpBehaviour listener = (UdonSharpBehaviour)eventBlock["listener"].Reference;
 					string callback = eventBlock["callback"].String;
 
-					MDebugLog($"[{key}].{j} : {listener}.{callback}");
+					WDebugLog($"[{key}].{j} : {listener}.{callback}");
 				}
 			}
 		}

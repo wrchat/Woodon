@@ -6,7 +6,7 @@ using UnityEngine;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class UITimer : MBase
+	public class UITimer : WBase
 	{
 		[Header("_" + nameof(UITimer))]
 		[SerializeField] private Timer timer;
@@ -114,7 +114,7 @@ namespace WRC.Woodon
 				{
 					int diff = lastSavedExpireTime - timer.CalcedCurTime + (int)(changedTimeDiff * (curLerpTime / lerpTime));
 					timeSpan = TimeSpan.FromMilliseconds(diff);
-					MDebugLog($"curLerpTime: {curLerpTime}, ||| ((curLerpTime / lerpTime) : {curLerpTime / lerpTime}");
+					WDebugLog($"curLerpTime: {curLerpTime}, ||| ((curLerpTime / lerpTime) : {curLerpTime / lerpTime}");
 				}
 			}
 			else
@@ -153,7 +153,7 @@ namespace WRC.Woodon
 				else
 				{
 					changedTimeDiff = Mathf.Abs(lastSavedExpireTime - timer.ExpireTime);
-					MDebugLog($"remainChangeTime: {changedTimeDiff} = {lastSavedExpireTime} - {timer.ExpireTime}");
+					WDebugLog($"remainChangeTime: {changedTimeDiff} = {lastSavedExpireTime} - {timer.ExpireTime}");
 
 					lastSavedExpireTime = timer.ExpireTime;
 					curLerpTime = lerpTime;
@@ -164,9 +164,9 @@ namespace WRC.Woodon
 		#region HorribleEvents
 		public void ResetTimer() => timer.ResetTimer();
 		public void SetTimer() => timer.StartTimer();
-		public void SetTimeByMValue() => timer.StartTimerByMValue();
+		public void SetTimeByWInt() => timer.StartTimerByWInt();
 		public void AddTime() => timer.AddTime();
-		public void AddTimeByMValue() => timer.AddTimeByMValue();
+		public void AddTimeByWInt() => timer.AddTimeByWInt();
 		public void ToggleTimer() => timer.ToggleTimer();
 		#endregion
 	}

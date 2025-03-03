@@ -5,7 +5,7 @@ using UnityEngine;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class TimerSound : MBase
+	public class TimerSound : WBase
 	{
 		[Header("_" + nameof(Timer))]
 		[SerializeField] private Timer timer;

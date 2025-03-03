@@ -5,7 +5,7 @@ using UnityEngine.UI;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class UITimerBar : MBase
+	public class UITimerBar : WBase
 	{
 		[Header("_" + nameof(UITimerBar))]
 		[SerializeField] private Timer timer;
@@ -16,7 +16,7 @@ namespace WRC.Woodon
 		{
 			if (timer == null)
 			{
-				MDebugLog($"{nameof(timer)} is null!");
+				WDebugLog($"{nameof(timer)} is null!");
 				return;
 			}
 		}
@@ -39,7 +39,7 @@ namespace WRC.Woodon
 			else
 				canvasGroup.alpha = 1;
 
-			// MDebugLog($"{nameof(fillAmount)} = {fillAmount} = {}");
+			// WDebugLog($"{nameof(fillAmount)} = {fillAmount} = {}");
 		}
 	}
 }

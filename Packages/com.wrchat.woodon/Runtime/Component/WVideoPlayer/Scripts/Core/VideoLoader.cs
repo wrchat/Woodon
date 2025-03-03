@@ -8,7 +8,7 @@ using VRC.SDK3.Video.Components;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class VideoLoader : MBase
+	public class VideoLoader : WBase
 	{
 		[SerializeField] private VRCUnityVideoPlayer unityVideoPlayer;
 		[SerializeField] private VRCUrl videoURL;
@@ -17,7 +17,7 @@ namespace WRC.Woodon
 
 		public void LoadVideo()
 		{
-			MDebugLog(nameof(LoadVideo));
+			WDebugLog(nameof(LoadVideo));
 			unityVideoPlayer.LoadURL(videoURL);
 		}
 	}

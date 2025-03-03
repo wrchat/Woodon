@@ -9,7 +9,7 @@ using UnityEngine;
 namespace WRC.Woodon
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-    public class AudVisManager : MBase
+    public class AudVisManager : WBase
     {
         [SerializeField] private int arrCount = 512;
 

@@ -13,18 +13,18 @@ namespace WRC.Woodon
 		{
 			int maxValue = 0;
 
-			foreach (MSeat seat in contentManager.Seats)
+			foreach (WSeat seat in contentManager.Seats)
 				maxValue = Mathf.Max(maxValue, seat.GetData(dataName));
 
 			return maxValue;
 		}
 
-		public static MSeat[] GetMaxDataSeats(ContentManager contentManager, string dataName)
+		public static WSeat[] GetMaxDataSeats(ContentManager contentManager, string dataName)
 		{
 			int maxData = GetMaxData(contentManager, dataName);
-			MSeat[] maxDataSeats = new MSeat[0];
+			WSeat[] maxDataSeats = new WSeat[0];
 
-			foreach (MSeat seat in contentManager.Seats)
+			foreach (WSeat seat in contentManager.Seats)
 			{
 				if (seat.TurnData == maxData)
 					WUtil.Add(ref maxDataSeats, seat);

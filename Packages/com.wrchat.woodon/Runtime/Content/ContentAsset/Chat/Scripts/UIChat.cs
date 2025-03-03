@@ -9,11 +9,11 @@ using VRC.Udon;
 
 namespace WRC.Woodon
 {
-	public class UIChat : MBase
+	public class UIChat : WBase
 	{
 		[Header("_" + nameof(UIChat))]
 		[SerializeField] private TextMeshProUGUI[] chatTexts;
-		[SerializeField] private MValue chatRoomIndex;
+		[SerializeField] private WInt chatRoomIndex;
 
 		// TODO: UIChat 인터페이스와 분리, UIChat을 상속 받는 별개의 구현으로
 		[SerializeField] private GameObject[] chatObjects;
@@ -29,13 +29,13 @@ namespace WRC.Woodon
 
 		private void Init()
 		{
-			MDebugLog($"{nameof(Init)}");
+			WDebugLog($"{nameof(Init)}");
 			SetChatText(null, string.Empty);
 		}
 
 		public virtual void SetChatText(DataList chatDataList, string debugText)
 		{
-			MDebugLog($"{nameof(SetChatText)}: {debugText}");
+			WDebugLog($"{nameof(SetChatText)}: {debugText}");
 
 			if (chatDataList == null || chatDataList.Count == 0)
 			{

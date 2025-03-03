@@ -11,9 +11,9 @@ namespace WRC.Woodon
 		// 서버 시간은 밀리초 단위지만, 계산은 데시초 단위로 할 것
 		// 데시초 = 1/10초
 		[field: SerializeField] public int TimeByDecisecond { get; private set; } = 50;
-		[SerializeField] private MValue mValueForSetTime;
-		[SerializeField] private MValue mValueForAddTime;
-		[SerializeField] private MBool isCounting;
+		[SerializeField] private WInt wIntForSetTime;
+		[SerializeField] private WInt wIntForAddTime;
+		[SerializeField] private WBool isCounting;
 
 		[UdonSynced, FieldChangeCallback(nameof(ExpireTime))] private int _expireTime = NONE_INT;
 		public int ExpireTime
@@ -41,10 +41,10 @@ namespace WRC.Woodon
 
 		private void Init()
 		{
-			if (mValueForSetTime != null)
+			if (wIntForSetTime != null)
 			{
-				mValueForSetTime.RegisterListener(this, nameof(SetTimerByMValue));
-				SetTimerByMValue();
+				wIntForSetTime.RegisterListener(this, nameof(SetTimerByWInt));
+				SetTimerByWInt();
 			}
 
 			SendEvents();
@@ -63,14 +63,14 @@ namespace WRC.Woodon
 
 			if (CalcedCurTime >= ExpireTime)
 			{
-				MDebugLog("Expired!");
+				WDebugLog("Expired!");
 				ResetTimer();
 			}
 		}
 
 		private void OnExpireTimeChange(int origin)
 		{
-			MDebugLog($"{nameof(OnExpireTimeChange)} : ChangeTo = {ExpireTime}");
+			WDebugLog($"{nameof(OnExpireTimeChange)} : ChangeTo = {ExpireTime}");
 
 			SendEvents();
 			SendEvents(TimerEvent.ExpireTimeChanged);
@@ -95,65 +95,65 @@ namespace WRC.Woodon
 		public void StopTimer() => ResetTimer();
 		public void ResetTimer()
 		{
-			MDebugLog(nameof(ResetTimer));
+			WDebugLog(nameof(ResetTimer));
 			SetExpireTime(NONE_INT);
 		}
 
 		public void SetTimer(int timeByDecisecond)
 		{
-			MDebugLog($"{nameof(SetTimer)} : {timeByDecisecond} Decisecond");
+			WDebugLog($"{nameof(SetTimer)} : {timeByDecisecond} Decisecond");
 			TimeByDecisecond = timeByDecisecond;
 		}
-		public void SetTimerByMValue()
+		public void SetTimerByWInt()
 		{
-			MDebugLog(nameof(SetTimerByMValue));
-			SetTimer(mValueForSetTime.Value);
+			WDebugLog(nameof(SetTimerByWInt));
+			SetTimer(wIntForSetTime.Value);
 		}
 
 		public void StartTimer()
 		{
-			if (mValueForSetTime != null)
-				StartTimer(mValueForSetTime.Value);
+			if (wIntForSetTime != null)
+				StartTimer(wIntForSetTime.Value);
 			else
 				StartTimer(TimeByDecisecond);
 		}
 		public void StartTimer(int timeByDecisecond)
 		{
-			MDebugLog($"{nameof(StartTimer)} : {timeByDecisecond} Decisecond");
+			WDebugLog($"{nameof(StartTimer)} : {timeByDecisecond} Decisecond");
 			SetExpireTime(CalcedCurTime + (timeByDecisecond * 100));
 		}
-		public void StartTimerByMValue()
+		public void StartTimerByWInt()
 		{
-			MDebugLog(nameof(StartTimerByMValue));
+			WDebugLog(nameof(StartTimerByWInt));
 
-			if (mValueForSetTime != null)
-				SetExpireTime(CalcedCurTime + (mValueForSetTime.Value * 100));
+			if (wIntForSetTime != null)
+				SetExpireTime(CalcedCurTime + (wIntForSetTime.Value * 100));
 		}
 
 		public void AddTime()
 		{
-			MDebugLog(nameof(AddTime));
+			WDebugLog(nameof(AddTime));
 
 			if (ExpireTime != NONE_INT)
 				SetExpireTime(ExpireTime + TimeByDecisecond * 100);
 		}
 
-		public void AddTimeByMValue()
+		public void AddTimeByWInt()
 		{
-			MDebugLog(nameof(AddTimeByMValue));
+			WDebugLog(nameof(AddTimeByWInt));
 
-			if (mValueForAddTime == null)
+			if (wIntForAddTime == null)
 				return;
 
 			if (ExpireTime == NONE_INT)
 				return;
 
-			SetExpireTime(ExpireTime + mValueForAddTime.Value * 100);
+			SetExpireTime(ExpireTime + wIntForAddTime.Value * 100);
 		}
 
 		public void ToggleTimer()
 		{
-			MDebugLog(nameof(ToggleTimer));
+			WDebugLog(nameof(ToggleTimer));
 
 			if (ExpireTime == NONE_INT)
 				StartTimer();

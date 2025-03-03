@@ -7,7 +7,7 @@ using VRC.Udon;
 namespace WRC.Woodon
 {
     [UdonBehaviourSyncMode(BehaviourSyncMode.Continuous)]
-    public class TransformSync : MBase
+    public class TransformSync : WBase
     {
         [UdonSynced] private Vector3 syncPos;
         [UdonSynced] private Quaternion syncRot;

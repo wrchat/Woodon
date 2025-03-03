@@ -47,7 +47,7 @@ namespace WRC.Woodon.Chat
 			if (chatData.TryGetValue("UdonIndex", out DataToken dataToken))
 				return (int)dataToken.Double;
 
-			return MBase.NONE_INT;
+			return WBase.NONE_INT;
 		}
 
 		public static TeamType GetChatRoom(this DataDictionary chatData)

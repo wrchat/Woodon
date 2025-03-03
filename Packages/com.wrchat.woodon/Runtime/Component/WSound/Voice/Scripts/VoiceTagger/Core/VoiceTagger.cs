@@ -4,14 +4,14 @@ using static WRC.Woodon.WUtil;
 
 namespace WRC.Woodon
 {
-	public abstract class VoiceTagger : MBase
+	public abstract class VoiceTagger : WBase
 	{
 		[field: Header("_" + nameof(VoiceTagger))]
 		[field: SerializeField] public VoiceTag Tag { get; private set; }
 		[SerializeField] private float updateTerm = .5f;
 
-		[SerializeField] private MBool localPlayerIn;
-		[SerializeField] private MBool someoneIn;
+		[SerializeField] private WBool localPlayerIn;
+		[SerializeField] private WBool someoneIn;
 
 		protected virtual void Start() => UpdateVoiceLoop();
 		public void UpdateVoiceLoop()

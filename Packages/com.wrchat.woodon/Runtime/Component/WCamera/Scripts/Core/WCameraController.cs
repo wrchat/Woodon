@@ -6,7 +6,7 @@ using static WRC.Woodon.WUtil;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class WCameraController : MPickup
+	public class WCameraController : WPickup
 	{
 		[Header("_" + nameof(WCameraController))]
 		[SerializeField] private MCameraFovSync mCameraFovSync;

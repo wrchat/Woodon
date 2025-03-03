@@ -10,43 +10,43 @@ namespace WRC
 #if UNITY_EDITOR
 	public class CustomValueUIMapping : MonoBehaviour
 	{
-		[SerializeField] private Transform mBoolsParent;
-		[SerializeField] private Transform uimBoolsParent;
+		[SerializeField] private Transform wBoolsParent;
+		[SerializeField] private Transform uiWBoolsParent;
 
-		[ContextMenu(nameof(MappingMBool2UI))]
-		public void MappingMBool2UI()
+		[ContextMenu(nameof(MappingWBool2UI))]
+		public void MappingWBool2UI()
 		{
-			MBool[] mBools = mBoolsParent.GetComponentsInChildren<MBool>(true);
-			UIMBool[] uimBools = uimBoolsParent.GetComponentsInChildren<UIMBool>(true);
+			WBool[] wBools = wBoolsParent.GetComponentsInChildren<WBool>(true);
+			UIWBool[] uiWBools = uiWBoolsParent.GetComponentsInChildren<UIWBool>(true);
 
-			for (int i = 0; i < mBools.Length; i++)
+			for (int i = 0; i < wBools.Length; i++)
 			{
-				MBool mBool = mBools[i];
-				UIMBool uimBool = uimBools[i];
+				WBool wBool = wBools[i];
+				UIWBool uiWBool = uiWBools[i];
 
-				uimBool.SetMBool(mBool);
-				EditorUtility.SetDirty(uimBool);
+				uiWBool.SetWBool(wBool);
+				EditorUtility.SetDirty(uiWBool);
 			}
 
 			AssetDatabase.SaveAssets();
 		}
 
-		[SerializeField] private Transform mValuesParent;
-		[SerializeField] private Transform uimValuesParent;
+		[SerializeField] private Transform wIntsParent;
+		[SerializeField] private Transform uiWIntsParent;
 
-		[ContextMenu(nameof(MappingMValue2UI))]
-		public void MappingMValue2UI()
+		[ContextMenu(nameof(MappingWInt2UI))]
+		public void MappingWInt2UI()
 		{
-			MValue[] mValues = mValuesParent.GetComponentsInChildren<MValue>(true);
-			UIMValue[] uiMValues = uimValuesParent.GetComponentsInChildren<UIMValue>(true);
+			WInt[] wInts = wIntsParent.GetComponentsInChildren<WInt>(true);
+			UIWInt[] uiWInts = uiWIntsParent.GetComponentsInChildren<UIWInt>(true);
 
-			for (int i = 0; i < mValues.Length; i++)
+			for (int i = 0; i < wInts.Length; i++)
 			{
-				MValue mValue = mValues[i];
-				UIMValue uiMValue = uiMValues[i];
+				WInt wInt = wInts[i];
+				UIWInt uiWInt = uiWInts[i];
 
-				uiMValue.SetMValue(mValue);
-				EditorUtility.SetDirty(uiMValue);
+				uiWInt.SetWInt(wInt);
+				EditorUtility.SetDirty(uiWInt);
 			}
 
 			AssetDatabase.SaveAssets();

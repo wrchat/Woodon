@@ -6,7 +6,7 @@ using VRC.Udon.Common.Interfaces;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class QvPenSketchbook : MBase
+	public class QvPenSketchbook : WBase
 	{
 		[field: Header("_" + nameof(QvPenSketchbook))]
 		[field: SerializeField] public RenderTexture SketchbookRenderTexture { get; private set; }
@@ -35,7 +35,7 @@ namespace WRC.Woodon
 		public void ScreenShot_G() => SendCustomNetworkEvent(NetworkEventTarget.All, nameof(ScreenShot));
 		public void ScreenShot()
 		{
-			MDebugLog($"{nameof(ScreenShot)}");
+			WDebugLog($"{nameof(ScreenShot)}");
 			SetCameraActive(true);
 			SendCustomEventDelayedSeconds(nameof(TurnOffCamera), screenShotDelay);
 		}
@@ -49,7 +49,7 @@ namespace WRC.Woodon
 		public void ResetQvPen_G() => SendCustomNetworkEvent(NetworkEventTarget.All, nameof(ResetQvPen));
 		public void ResetQvPen()
 		{
-			MDebugLog($"{nameof(ResetQvPen)}");
+			WDebugLog($"{nameof(ResetQvPen)}");
 			ClearQvPen();
 			RespawnQvPen();
 		}
@@ -57,14 +57,14 @@ namespace WRC.Woodon
 		public void ClearQvPen_G() => SendCustomNetworkEvent(NetworkEventTarget.All, nameof(ClearQvPen));
 		public void ClearQvPen()
 		{
-			MDebugLog($"{nameof(ClearQvPen)}");
+			WDebugLog($"{nameof(ClearQvPen)}");
 			foreach (UdonSharpBehaviour qvPenManager in qvPenManagers)
 				qvPenManager.SendCustomEvent("Clear");
 		}
 
 		public void RespawnQvPen()
 		{
-			MDebugLog($"{nameof(RespawnQvPen)}");
+			WDebugLog($"{nameof(RespawnQvPen)}");
 			foreach (UdonSharpBehaviour qvPenManager in qvPenManagers)
 				qvPenManager.SendCustomEvent("Respawn");
 		}

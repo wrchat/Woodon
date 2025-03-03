@@ -10,15 +10,15 @@ namespace WRC.Woodon
 		[SerializeField] private GameObject[] objectList;
 		// [SerializeField] private Behaviour[] behaviours; // 240819 : U#에서 .enabled set을 지원하지 않음
 
-		protected override void InitMValueMinMax()
+		protected override void InitWIntMinMax()
 		{
-			int maxLen = Mathf.Max(mValue.MaxValue, objectList.Length - 1);
-			mValue.SetMinMaxValue(mValue.MinValue, maxLen);
+			int maxLen = Mathf.Max(wInt.MaxValue, objectList.Length - 1);
+			wInt.SetMinMaxValue(wInt.MinValue, maxLen);
 		}
 
 		protected override void UpdateActive()
 		{
-			MDebugLog($"{nameof(UpdateActive)}({Value})");
+			WDebugLog($"{nameof(UpdateActive)}({Value})");
 
 			switch (option)
 			{
@@ -45,7 +45,7 @@ namespace WRC.Woodon
 					break;
 				
 				default:
-					MDebugLog($"{nameof(UpdateActive)}({Value}) - {option}, Invalid Option");
+					WDebugLog($"{nameof(UpdateActive)}({Value}) - {option}, Invalid Option");
 					break;
 			}
 		}

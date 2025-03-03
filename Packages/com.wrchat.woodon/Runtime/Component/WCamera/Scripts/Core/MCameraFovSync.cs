@@ -5,7 +5,7 @@ using VRC.SDKBase;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Continuous)]
-	public class MCameraFovSync : MBase
+	public class MCameraFovSync : WBase
 	{
 		[Header("_" + nameof(MCameraFovSync))]
 		[SerializeField] private bool useSync = true;
@@ -70,7 +70,7 @@ namespace WRC.Woodon
 			newValue = Mathf.Clamp(newValue, fovMin, fovMax);
 
 			SetValue(newValue);
-			MDebugLog($"{nameof(UpdateFov)} : +{scroll} = {newValue}");
+			WDebugLog($"{nameof(UpdateFov)} : +{scroll} = {newValue}");
 		}
 	}
 }

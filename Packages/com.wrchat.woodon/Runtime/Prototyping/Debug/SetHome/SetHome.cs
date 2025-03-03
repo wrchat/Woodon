@@ -7,7 +7,7 @@ using VRC.Udon;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class SetHome : MBase
+	public class SetHome : WBase
 	{
 		private readonly Vector3[] homePositions = new Vector3[4];
 		private readonly Quaternion[] homeRotations = new Quaternion[4];
@@ -40,7 +40,7 @@ namespace WRC.Woodon
 
 		public void SetHomeData(int index)
 		{
-			MDebugLog($"{nameof(SetHomeData)}, Index : {index}");
+			WDebugLog($"{nameof(SetHomeData)}, Index : {index}");
 
 			homePositions[index] = Networking.LocalPlayer.GetPosition();
 			homeRotations[index] = Networking.LocalPlayer.GetRotation();
@@ -48,12 +48,12 @@ namespace WRC.Woodon
 
 		public void TPTo(int index)
 		{
-			MDebugLog($"{nameof(TPTo)}, Index : {index}");
+			WDebugLog($"{nameof(TPTo)}, Index : {index}");
 
 			if (homePositions[index] == Vector3.zero ||
 				homeRotations[index] == Quaternion.identity)
 			{
-				MDebugLog($"{nameof(TPTo)}, No Home Data");
+				WDebugLog($"{nameof(TPTo)}, No Home Data");
 			}
 
 			Networking.LocalPlayer.TeleportTo(homePositions[index], homeRotations[index]);

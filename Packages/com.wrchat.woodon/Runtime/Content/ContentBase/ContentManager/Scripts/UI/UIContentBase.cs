@@ -9,13 +9,13 @@ namespace WRC.Woodon
 	public class UIContentBase : UIContent
 	{
 		[Header("_" + nameof(UIContentBase))]
-		[SerializeField] protected MAnimator[] mAnimatorsByGameState;
+		[SerializeField] protected WAnimator[] mAnimatorsByGameState;
 
 		public override void UpdateUI()
 		{
-			MDebugLog($"{nameof(UpdateUI)}");
+			WDebugLog($"{nameof(UpdateUI)}");
 
-			foreach (MAnimator mAnimator in mAnimatorsByGameState)
+			foreach (WAnimator mAnimator in mAnimatorsByGameState)
 				mAnimator.SetInt_L(contentManager.ContentState);
 		}
 	}

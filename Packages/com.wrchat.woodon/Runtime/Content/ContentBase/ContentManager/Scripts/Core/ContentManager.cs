@@ -22,14 +22,14 @@ namespace WRC.Woodon
 		[SerializeField] protected WJson contentData;
 		[SerializeField] private int defaultContentState = 0;
 		[SerializeField] private SeatDataOption[] seatDataOptions;
-		public MSeat[] Seats { get; private set; }
+		public WSeat[] Seats { get; private set; }
 
 		public int ContentState
 		{
 			get => contentData.GetData(ContentStateString, 0);
 			private set => contentData.SetData(ContentStateString, value);
 		}
-		[SerializeField] private int contentStateMax = 1;
+		[SerializeField] protected int contentStateMax = 1;
 
 		protected virtual void Start()
 		{
@@ -39,9 +39,9 @@ namespace WRC.Woodon
 
 		protected virtual void Init()
 		{
-			MDebugLog($"{nameof(Init)}");
+			WDebugLog($"{nameof(Init)}");
 
-			Seats = GetComponentsInChildren<MSeat>();
+			Seats = GetComponentsInChildren<WSeat>();
 			contentData.RegisterListener(this, nameof(OnContentDataChanged), WJsonEvent.OnDeserialization);
 
 			for (int i = 0; i < Seats.Length; i++)
@@ -56,15 +56,15 @@ namespace WRC.Woodon
 
 		public virtual void UpdateContent()
 		{
-			// MDebugLog($"{nameof(UpdateStuff)}");
+			// WDebugLog($"{nameof(UpdateStuff)}");
 
-			foreach (MSeat seat in Seats)
+			foreach (WSeat seat in Seats)
 				seat.UpdateSeat();
 		}
 
 		public virtual void OnContentDataChanged()
 		{
-			MDebugLog($"{nameof(OnContentDataChanged)}");
+			WDebugLog($"{nameof(OnContentDataChanged)}");
 
 			if (contentData.HasDataChanged(ContentStateString, out int originState, out int curState))
 				OnContentStateChange(DataChangeStateUtil.GetChangeState(originState, curState));
@@ -76,13 +76,13 @@ namespace WRC.Woodon
 				if (option.Name == dataName)
 					return option;
 
-			MDebugLog($"Not Found DataOption: {dataName}", LogType.Error);
+			WDebugLog($"Not Found DataOption: {dataName}", LogType.Error);
 			return null;
 		}
 
 		protected virtual void OnContentStateChange(DataChangeState changeState)
 		{
-			MDebugLog($"{nameof(OnContentStateChange)}, {nameof(changeState)} = {changeState.ToFriendlyString()}");
+			WDebugLog($"{nameof(OnContentStateChange)}, {nameof(changeState)} = {changeState.ToFriendlyString()}");
 			UpdateContent();
 			SendEvents();
 		}
@@ -99,11 +99,11 @@ namespace WRC.Woodon
 		public void SetContentStateNext() => SetContentState(ContentState + 1);
 		public void SetContentStatePrev() => SetContentState(ContentState - 1);
 
-		public virtual void OnSeatTargetChanged(MSeat changedSeat)
+		public virtual void OnSeatTargetChanged(WSeat changedSeat)
 		{
 			// 중복 제거 (한 플레이어가 한 번에 하나의 자리에만 등록 가능하도록)
 			{
-				foreach (MSeat seat in Seats)
+				foreach (WSeat seat in Seats)
 				{
 					if (seat == changedSeat)
 						continue;
@@ -114,9 +114,9 @@ namespace WRC.Woodon
 			}
 		}
 
-		public MSeat GetLocalPlayerSeat()
+		public WSeat GetLocalPlayerSeat()
 		{
-			foreach (MSeat seat in Seats)
+			foreach (WSeat seat in Seats)
 				if (seat.IsTargetPlayer())
 					return seat;
 			return null;

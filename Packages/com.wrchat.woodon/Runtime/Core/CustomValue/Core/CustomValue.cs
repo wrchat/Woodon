@@ -10,7 +10,7 @@ namespace WRC.Woodon
 
 	// public abstract class CustomValue<T> : WEventPublisher
 	// {
-	// 	[field: Header("_" + nameof(MBool))]
+	// 	[field: Header("_" + nameof(CustomValue))]
 	// 	[field: SerializeField] public T DefaultValue { get; protected set; }
 	// 	[SerializeField] protected bool useSync = true;
 
@@ -60,14 +60,14 @@ namespace WRC.Woodon
 
 	// 	protected virtual void OnValueChange()
 	// 	{
-	// 		MDebugLog($"{nameof(OnValueChange)}");
+	// 		WDebugLog($"{nameof(OnValueChange)}");
 
 	// 		SendEvents();
 	// 	}
 
 	// 	public virtual void SetValue(T newValue, bool isReciever = false)
 	// 	{
-	// 		// MDebugLog($"{nameof(SetValue)}({newValue})");
+	// 		// WDebugLog($"{nameof(SetValue)}({newValue})");
 
 	// 		if (isReciever == false)
 	// 		{

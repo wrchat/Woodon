@@ -5,7 +5,7 @@ using VRC.Udon;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class ShootingTarget : MBase
+	public class ShootingTarget : WBase
 	{
 		[SerializeField] private ShootingManager shootingManager;
 		[SerializeField] private UdonSharpBehaviour[] targetUdonBehaviours;

@@ -5,7 +5,7 @@ using VRC.SDKBase;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class RayTP : MBase
+	public class RayTP : WBase
 	{
 		[SerializeField] private float distance;
 		private RaycastHit raycastHit;
@@ -15,7 +15,7 @@ namespace WRC.Woodon
 
 		public void TryRayTP()
 		{
-			MDebugLog($"{nameof(TryRayTP)}");
+			WDebugLog($"{nameof(TryRayTP)}");
 
 			// Ray 쏴서 해당 위치로 TP
 			ray.origin = Networking.LocalPlayer.GetBonePosition(HumanBodyBones.Head);

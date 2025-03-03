@@ -2,7 +2,7 @@
 
 namespace WRC.Woodon
 {
-    public class PosFixerReset : MBase
+    public class PosFixerReset : WBase
     {
         [SerializeField] private PosFixer[] posFixers;
 

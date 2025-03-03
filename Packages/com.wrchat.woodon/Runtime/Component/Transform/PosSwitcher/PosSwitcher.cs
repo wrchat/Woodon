@@ -4,12 +4,12 @@ using UnityEngine;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class PosSwitcher : MBase
+	public class PosSwitcher : WBase
 	{
 		[Header("_" + nameof(PosSwitcher))]
 		[SerializeField] private GameObject[] targetObjects;
 		[SerializeField] private Transform posA, posB;
-		[SerializeField] private MBool isPosA;
+		[SerializeField] private WBool isPosA;
 
 		[Header("_" + nameof(PosSwitcher) + " - Options")]
 		[SerializeField] private bool useLocalTransform = true;
@@ -78,7 +78,7 @@ namespace WRC.Woodon
 		#region HorribleEvents
 		public void TogglePos()
 		{
-			MDebugLog(nameof(TogglePos));
+			WDebugLog(nameof(TogglePos));
 			IsOriginPos = !IsOriginPos;
 		}
 		public void SetPosOrigin() => IsOriginPos = true;

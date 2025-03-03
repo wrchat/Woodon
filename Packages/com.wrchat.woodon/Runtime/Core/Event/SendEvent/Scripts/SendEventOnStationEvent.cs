@@ -8,7 +8,7 @@ namespace WRC.Woodon
 {
 	// [UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	[DefaultExecutionOrder(0)]
-	public class SendEventOnStationEvent : MBase
+	public class SendEventOnStationEvent : WBase
 	{
 		[Header("_" + nameof(SendEventOnStationEvent))]
 		[SerializeField] private UdonSharpBehaviour[] enterListeners;
@@ -24,7 +24,7 @@ namespace WRC.Woodon
 
 		public override void OnStationEntered(VRCPlayerApi player)
 		{
-			MDebugLog($"{nameof(OnStationEntered)}");
+			WDebugLog($"{nameof(OnStationEntered)}");
 
 			if (onlyIfLocalPlayer && (player != Networking.LocalPlayer))
 				return;
@@ -40,7 +40,7 @@ namespace WRC.Woodon
 
 		public override void OnStationExited(VRCPlayerApi player)
 		{
-			MDebugLog($"{nameof(OnStationExited)}");
+			WDebugLog($"{nameof(OnStationExited)}");
 
 			if (onlyIfLocalPlayer && (player != Networking.LocalPlayer))
 				return;

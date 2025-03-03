@@ -6,11 +6,11 @@ using static WRC.Woodon.WUtil;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class LookAtPlayer : MBase
+	public class LookAtPlayer : WBase
 	{
 		[Header("_" + nameof(LookAtPlayer))]
 		[SerializeField] private HumanBodyBones targetBone = HumanBodyBones.Head;
-		[SerializeField] private MTarget mTarget;
+		[SerializeField] private WPlayer wPlayer;
 		[SerializeField] private bool lerp;
 		[SerializeField] private float lerpSpeed = 5;
 		[SerializeField] private bool isForUI = false;
@@ -26,9 +26,9 @@ namespace WRC.Woodon
 
 				targetPlayer = Networking.LocalPlayer;
 
-				if (mTarget != null)
+				if (wPlayer != null)
 				{
-					targetPlayer = VRCPlayerApi.GetPlayerById(mTarget.TargetPlayerID);
+					targetPlayer = VRCPlayerApi.GetPlayerById(wPlayer.TargetPlayerID);
 					if (targetPlayer == null)
 						targetPlayer = Networking.LocalPlayer;
 				}

@@ -4,13 +4,13 @@ using UnityEngine;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public abstract class ActiveToggle : MBase
+	public abstract class ActiveToggle : WBase
 	{
 		[Header("_" + nameof(ActiveToggle))]
 		[SerializeField] private bool defaultActive;
 
 		[Header("_" + nameof(ActiveToggle) + " - Options")]
-		[SerializeField] private MBool mBool;
+		[SerializeField] private WBool wBool;
 
 		private bool _active;
 		public bool Active
@@ -18,7 +18,7 @@ namespace WRC.Woodon
 			get => _active;
 			private set
 			{
-				MDebugLog($"{nameof(Active)} changed: {_active} -> {value}");
+				WDebugLog($"{nameof(Active)} changed: {_active} -> {value}");
 				_active = value;
 				UpdateActive();
 			}
@@ -31,12 +31,14 @@ namespace WRC.Woodon
 
 		protected virtual void Init()
 		{
-			SetActive(defaultActive);
-
-			if (mBool != null)
+			if (wBool != null)
 			{
-				mBool.RegisterListener(this, nameof(UpdateValueByMBool));
-				UpdateValueByMBool();
+				wBool.RegisterListener(this, nameof(UpdateValueByWBool));
+				UpdateValueByWBool();
+			}
+			else
+			{
+				SetActive(defaultActive);
 			}
 
 			UpdateActive();
@@ -46,11 +48,11 @@ namespace WRC.Woodon
 
 		public void SetActive(bool newActive)
 		{
-			MDebugLog($"{nameof(SetActive)}({newActive})");
+			WDebugLog($"{nameof(SetActive)}({newActive})");
 
-			if (mBool != null)
+			if (wBool != null)
 			{
-				mBool.SetValue(newActive);
+				wBool.SetValue(newActive);
 			}
 			else
 			{
@@ -58,16 +60,16 @@ namespace WRC.Woodon
 			}
 		}
 
-		public void UpdateValueByMBool()
+		public void UpdateValueByWBool()
 		{
-			if (mBool != null)
-				Active = mBool.Value;
+			if (wBool != null)
+				Active = wBool.Value;
 		}
 
-		public void SetMBool(MBool mBool)
+		public void SetWBool(WBool wBool)
 		{
-			this.mBool = mBool;
-			UpdateValueByMBool();
+			this.wBool = wBool;
+			UpdateValueByWBool();
 		}
 
 		#region HorribleEvents

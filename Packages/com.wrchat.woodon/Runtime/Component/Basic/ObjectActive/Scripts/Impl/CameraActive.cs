@@ -11,7 +11,7 @@ namespace WRC.Woodon
 
 		protected override void UpdateActive()
 		{
-			MDebugLog($"{nameof(UpdateActive)}");
+			WDebugLog($"{nameof(UpdateActive)}");
 
 			foreach (Camera camera in cameras)
 				camera.enabled = Active;

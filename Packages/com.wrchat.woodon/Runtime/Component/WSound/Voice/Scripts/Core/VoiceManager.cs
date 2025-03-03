@@ -5,7 +5,7 @@ using VRC.SDKBase;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class VoiceManager : MBase
+	public class VoiceManager : WBase
 	{
 		protected const int VOICE_QUIET_GAIN = 5;
 		protected const int VOICE_QUIET_FAR = 10;
@@ -99,7 +99,7 @@ namespace WRC.Woodon
 
 		private void UpdatePlayerList()
 		{
-			MDebugLog($"{nameof(UpdatePlayerList)}, PlayerCount = {VRCPlayerApi.GetPlayerCount()}");
+			WDebugLog($"{nameof(UpdatePlayerList)}, PlayerCount = {VRCPlayerApi.GetPlayerCount()}");
 
 			playerApis = new VRCPlayerApi[VRCPlayerApi.GetPlayerCount()];
 			voiceStates = new VoiceState[playerApis.Length];
@@ -110,7 +110,7 @@ namespace WRC.Woodon
 
 		protected void SetVoice(VRCPlayerApi player, VoiceState voiceState)
 		{
-			// MDebugLog($"{nameof(SetVoice)} : {player.playerId}, {voiceState}");
+			// WDebugLog($"{nameof(SetVoice)} : {player.playerId}, {voiceState}");
 
 			player.SetVoiceDistanceNear(0);
 			switch (voiceState)
@@ -136,7 +136,7 @@ namespace WRC.Woodon
 
 		public void SetVoiceLerp(int index)
 		{
-			MDebugLog(nameof(SetVoiceLerp));
+			WDebugLog(nameof(SetVoiceLerp));
 
 			VRCPlayerApi player = playerApis[index];
 			VoiceState voiceState = voiceStates[index];

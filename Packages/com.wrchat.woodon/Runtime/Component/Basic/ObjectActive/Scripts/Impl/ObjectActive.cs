@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using UdonSharp;
+using UnityEngine;
 
 namespace WRC.Woodon
 {
-	// [UdonBehaviourSyncMode(BehaviourSyncMode.None)]
+	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public class ObjectActive : ActiveToggle
 	{
 		[Header("_" + nameof(ObjectActive))]
@@ -11,20 +12,34 @@ namespace WRC.Woodon
 
 		protected override void UpdateActive()
 		{
-			MDebugLog($"{nameof(UpdateActive)}");
+			WDebugLog($"{nameof(UpdateActive)}");
 
-			foreach (GameObject o in activeObjects)
-				o.SetActive(Active);
+			foreach (GameObject activeObject in activeObjects)
+			{
+				if (activeObject == null)
+				{
+					continue;
+				}
 
-			foreach (GameObject o in disableObjects)
-				o.SetActive(!Active);
+				activeObject.SetActive(Active);
+			}
+
+			foreach (GameObject disableObject in disableObjects)
+			{
+				if (disableObject == null)
+				{
+					continue;
+				}
+
+				disableObject.SetActive(!Active);
+			}
 		}
 
-		#region EditorTime
+#if UNITY_EDITOR
 		public void SetActiveObjects(GameObject[] activeObjects)
 		{
 			this.activeObjects = activeObjects;
 		}
-		#endregion
+#endif
 	}
 }

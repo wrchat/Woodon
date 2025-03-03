@@ -5,7 +5,7 @@ using VRC.SDKBase;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
-	public class FollowBone : MBase
+	public class FollowBone : WBase
 	{
 		[Header("_" + nameof(FollowBone))]
 		[SerializeField] private HumanBodyBones targetBone = HumanBodyBones.Head;
@@ -21,7 +21,7 @@ namespace WRC.Woodon
 		private Quaternion[] originRots;
 
 		[Header("_TargetPlayer")]
-		[SerializeField] private MTarget mTarget;
+		[SerializeField] private WPlayer wPlayer;
 
 		private void Start()
 		{
@@ -39,10 +39,10 @@ namespace WRC.Woodon
 		{
 			VRCPlayerApi targetPlayer;
 
-			if (mTarget)
+			if (wPlayer)
 			{
-				targetPlayer = (mTarget != null) && (mTarget.TargetPlayerID != NONE_INT)
-					? VRCPlayerApi.GetPlayerById(mTarget.TargetPlayerID)
+				targetPlayer = (wPlayer != null) && (wPlayer.TargetPlayerID != NONE_INT)
+					? VRCPlayerApi.GetPlayerById(wPlayer.TargetPlayerID)
 					: null;
 			}
 			else

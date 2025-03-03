@@ -4,7 +4,7 @@ using UnityEngine;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class WaktaMemberData : MDataContainer
+	public class WaktaMemberData : WDataContainer
 	{
 		[field: Header("Member Data")]
 		[field: SerializeField] public string Nickname { get; private set; }
