@@ -6,7 +6,8 @@
 
 ## 설치 및 사용
 
-- [위키](https://github.com/wrchat/Woodon/wiki/GettingStarted)를 확인해주세요.
+- [How to Use](https://github.com/wrchat/Woodon/wiki/HowToUse)를 참고해주세요.
+- [Introduction](https://github.com/wrchat/Woodon/wiki/Introduction)을 참고해주세요.
 
 ## 제발 내 코드에 훈수하세요
 
