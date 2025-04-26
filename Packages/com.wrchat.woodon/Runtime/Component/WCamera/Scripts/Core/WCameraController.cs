@@ -9,7 +9,7 @@ namespace WRC.Woodon
 	public class WCameraController : WPickup
 	{
 		[Header("_" + nameof(WCameraController))]
-		[SerializeField] private MCameraFovSync mCameraFovSync;
+		[SerializeField] private WCameraFovSync mCameraFovSync;
 		[SerializeField] private Camera targetCamera;
 
 		private int curCCPosData;

@@ -5,9 +5,9 @@ using VRC.SDKBase;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Continuous)]
-	public class MCameraFovSync : WBase
+	public class WCameraFovSync : WBase
 	{
-		[Header("_" + nameof(MCameraFovSync))]
+		[Header("_" + nameof(WCameraFovSync))]
 		[SerializeField] private bool useSync = true;
 		[SerializeField] private float fovDefault = 60;
 		[SerializeField] private float fovSpeed = 1;
@@ -27,11 +27,11 @@ namespace WRC.Woodon
 			}
 		}
 
-		private WCameraController mCameraController;
+		private WCameraController cameraController;
 
 		public void Init(WCameraController cameraController)
 		{
-			mCameraController = cameraController;
+			this.cameraController = cameraController;
 			SetValue(fovDefault);
 		}
 
@@ -55,10 +55,10 @@ namespace WRC.Woodon
 
 		private void UpdateFov()
 		{
-			if (mCameraController == null)
+			if (cameraController == null)
 				return;
 
-			if (mCameraController.IsHolding() == false)
+			if (cameraController.IsHolding() == false)
 				return;
 
 			// float scroll = Input.GetAxis("Mouse ScrollWheel");
