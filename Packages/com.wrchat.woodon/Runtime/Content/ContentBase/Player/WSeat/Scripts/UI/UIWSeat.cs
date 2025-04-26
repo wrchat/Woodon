@@ -11,6 +11,7 @@ namespace WRC.Woodon
 		[Header("_" + nameof(UIWSeat))]
 		[SerializeField] private TextMeshProUGUI[] indexTexts;
 		[SerializeField] private UISeatData[] seatDataUIs;
+		[SerializeField] private WInt contentState; // ContentManager로부터 받아오는 값 입니다. - KarmoDDrine 250427
 
 		private ContentManager contentManager;
 		private WSeat wSeat;
@@ -29,6 +30,10 @@ namespace WRC.Woodon
 
 			foreach (UISeatData seatDataUI in seatDataUIs)
 				seatDataUI.UpdateUI(contentManager, wSeat);
+
+			if (contentState == null)
+				return;
+			contentState.SetValue(contentManager.ContentState);
 		}
 	}
 }
