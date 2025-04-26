@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7620585882092926631}
   - component: {fileID: 7832829582550142616}
   m_Layer: 0
-  m_Name: '[MBool]'
+  m_Name: '[WBool] ObjectActive'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56,8 +56,8 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 7832829582550142616}
   DEBUG: 1
-  targetUdons: []
-  eventNames: []
+  listeners: []
+  callbacks: []
   sendEventGlobal: 0
   defaultValue: 0
   useSync: 1
@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 663563172873480261}
   - component: {fileID: 663563172873480260}
   m_Layer: 0
-  m_Name: '[Mesh] Button'
+  m_Name: '[Mesh] Button ActiveToggle'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -188,7 +188,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -217,9 +217,9 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 663563172873480260}
   DEBUG: 0
-  targetUdons:
+  listeners:
   - {fileID: 7620585882092926631}
-  eventNames:
+  callbacks:
   - ToggleValue
   sendEventGlobal: 0
 --- !u!114 &663563172873480260
@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 663563173535624864}
   - component: {fileID: 663563173535624879}
   m_Layer: 0
-  m_Name: ObjectActiveWithButton
+  m_Name: '[ObjectActive] WithMesh'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -275,7 +275,7 @@ Transform:
   m_GameObject: {fileID: 663563173535624876}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.057, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -306,10 +306,10 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 663563173535624879}
   DEBUG: 0
+  defaultActive: 0
+  wBool: {fileID: 7620585882092926631}
   activeObjects: []
   disableObjects: []
-  defaultActive: 0
-  mBool: {fileID: 7620585882092926631}
 --- !u!114 &663563173535624879
 MonoBehaviour:
   m_ObjectHideFlags: 0

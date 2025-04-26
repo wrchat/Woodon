@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace WRC.Woodon
 {
+	// Toggle 개념을 통해 `무언가` 활성화/비활성화 하는 것
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public abstract class ActiveToggle : WBase
 	{
