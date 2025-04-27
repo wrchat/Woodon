@@ -9,7 +9,6 @@ namespace WRC.Woodon
 		[SerializeField] private UdonSharpBehaviour[] targetUdons = new UdonSharpBehaviour[0];
 		[SerializeField] private string[] eventNames = new string[0];
 
-		// TODO: Editor로 보여주기
 		private void Start()
 		{
 			WDebugLog($"{nameof(Start)}");
@@ -50,8 +49,11 @@ namespace WRC.Woodon
 		}
 
 		#region HorribleEvents
+		[ContextMenu(nameof(SendEvent0))]
 		public void SendEvent0() => SendEvent(0);
+		[ContextMenu(nameof(SendEvent1))]
 		public void SendEvent1() => SendEvent(1);
+		[ContextMenu(nameof(SendEvent2))]
 		public void SendEvent2() => SendEvent(2);
 		public void SendEvent3() => SendEvent(3);
 		public void SendEvent4() => SendEvent(4);
