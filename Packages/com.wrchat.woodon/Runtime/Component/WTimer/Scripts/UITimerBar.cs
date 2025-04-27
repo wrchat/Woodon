@@ -32,7 +32,7 @@ namespace WRC.Woodon
 
 		public void UpdateUI()
 		{
-			float fillAmount = ((timer.TimeByDecisecond * 100f) - (timer.ExpireTime - ServerTimeAdjusted)) / (timer.TimeByDecisecond * 100f);
+			float fillAmount = ((timer.TimeByDecisecond * 100f) - (timer.ExpireTime - ServerTimeAdjusted())) / (timer.TimeByDecisecond * 100f);
 			bar.fillAmount = fillAmount;
 
 			if (timer.IsTimerStopped)

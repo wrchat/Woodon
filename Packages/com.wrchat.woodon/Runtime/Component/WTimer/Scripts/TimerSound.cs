@@ -80,7 +80,7 @@ namespace WRC.Woodon
 			}
 			loopAudioSource.mute = false;
 
-			int diff = expireTime - ServerTimeAdjusted;
+			int diff = expireTime - ServerTimeAdjusted();
 			TimeSpan timeSpan = TimeSpan.FromMilliseconds(diff);
 
 			bool isInFlag = false;

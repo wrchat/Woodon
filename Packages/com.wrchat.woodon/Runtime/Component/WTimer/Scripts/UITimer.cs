@@ -113,14 +113,14 @@ namespace WRC.Woodon
 
 				if (lastSavedExpireTime != NONE_INT)
 				{
-					int diff = lastSavedExpireTime - ServerTimeAdjusted + (int)(changedTimeDiff * (curLerpTime / lerpTime));
+					int diff = lastSavedExpireTime - ServerTimeAdjusted() + (int)(changedTimeDiff * (curLerpTime / lerpTime));
 					timeSpan = TimeSpan.FromMilliseconds(diff);
 					WDebugLog($"curLerpTime: {curLerpTime}, ||| ((curLerpTime / lerpTime) : {curLerpTime / lerpTime}");
 				}
 			}
 			else
 			{
-				int diff = timer.ExpireTime - ServerTimeAdjusted;
+				int diff = timer.ExpireTime - ServerTimeAdjusted();
 				diff = Mathf.Max(diff, 0);
 				timeSpan = TimeSpan.FromMilliseconds(diff);
 			}

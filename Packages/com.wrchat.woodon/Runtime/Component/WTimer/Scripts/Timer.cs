@@ -57,7 +57,7 @@ namespace WRC.Woodon
 			if (ExpireTime == NONE_INT)
 				return;
 
-			if (ServerTimeAdjusted >= ExpireTime)
+			if (ServerTimeAdjusted() >= ExpireTime)
 			{
 				WDebugLog("Expired!");
 				ResetTimer();
@@ -116,14 +116,14 @@ namespace WRC.Woodon
 		public void StartTimer(int timeByDecisecond)
 		{
 			WDebugLog($"{nameof(StartTimer)} : {timeByDecisecond} Decisecond");
-			SetExpireTime(ServerTimeAdjusted + (timeByDecisecond * 100));
+			SetExpireTime(ServerTimeAdjusted() + (timeByDecisecond * 100));
 		}
 		public void StartTimerByWInt()
 		{
 			WDebugLog(nameof(StartTimerByWInt));
 
 			if (wIntForSetTime != null)
-				SetExpireTime(ServerTimeAdjusted + (wIntForSetTime.Value * 100));
+				SetExpireTime(ServerTimeAdjusted() + (wIntForSetTime.Value * 100));
 		}
 
 		public void AddTime()
