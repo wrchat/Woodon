@@ -15,7 +15,7 @@ namespace WRC.Woodon
 
 		private void Start()
 		{
-			index.SetMinMaxValue(0, strings.Length - 1, recalcValue: false);
+			index.SetMinMaxValue(0, strings.Length - 1, shouldRecalculate: false);
 			index.RegisterListener(this, nameof(OnIndexChanged));
 
 			OnIndexChanged();

@@ -27,7 +27,7 @@ namespace WRC.Woodon
 				_syncedValue = value;
 
 				if (UseSync)
-					SetValue(_syncedValue, isReciever: true);
+					SetValue(_syncedValue, isReceiverContext: true);
 			}
 		}
 
@@ -65,18 +65,18 @@ namespace WRC.Woodon
 			OnValueChange(DataChangeState.None);
 		}
 
-		public void SetMinMaxValue(int min, int max, bool recalcValue = true)
+		public void SetMinMaxValue(int min, int max, bool shouldRecalculate = true)
 		{
 			WDebugLog($"{nameof(SetMinMaxValue)}");
 
 			MinValue = min;
 			MaxValue = max;
 
-			if (recalcValue)
+			if (shouldRecalculate)
 				SetValue(Value);
 		}
 
-		public void SetValue(int newValue, bool isReciever = false)
+		public void SetValue(int newValue, bool isReceiverContext = false)
 		{
 			WDebugLog($"{nameof(SetValue)}");
 
@@ -116,7 +116,7 @@ namespace WRC.Woodon
 					break;
 			}
 
-			if (isReciever == false)
+			if (isReceiverContext == false)
 			{
 				if (UseSync && SyncedValue != newValue)
 				{

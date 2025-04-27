@@ -38,7 +38,7 @@ namespace WRC.Woodon
 		{
 			shootingManager = GameObject.Find(nameof(ShootingManager)).GetComponent<ShootingManager>();
 
-			curAmmo.SetMinMaxValue(0, maxAmmo, recalcValue: false);
+			curAmmo.SetMinMaxValue(0, maxAmmo, shouldRecalculate: false);
 
 			if (Networking.IsMaster)
 				curAmmo.SetValue(maxAmmo);
