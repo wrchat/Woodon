@@ -47,7 +47,7 @@ namespace WRC.Woodon
 				IsPlayerInside[localPlayerNum].SetValue(false);
 
 				// if ((inPlayerCount == 1) && (isLocked.Value == true))
-				if ((inPlayerCount == 1) && (isLocked_Timer.IsExpiredOrStoped == false))
+				if ((inPlayerCount == 1) && (isLocked_Timer.IsTimerStopped == false))
 				{
 					// isLocked.SetValue(false);
 					isLocked_Timer.ResetTimer();
@@ -56,7 +56,7 @@ namespace WRC.Woodon
 			else
 			{
 				// if (isLocked.Value)
-				if (isLocked_Timer.IsExpiredOrStoped == false)
+				if (isLocked_Timer.IsTimerStopped == false)
 					return;
 
 				IsPlayerInside[localPlayerNum].SetValue(true);

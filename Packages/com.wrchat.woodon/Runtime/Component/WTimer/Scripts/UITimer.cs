@@ -2,6 +2,7 @@
 using TMPro;
 using UdonSharp;
 using UnityEngine;
+using static WRC.Woodon.WUtil;
 
 namespace WRC.Woodon
 {
@@ -75,7 +76,7 @@ namespace WRC.Woodon
 
 			// Text Color
 			Color color = default;
-			if (timer.IsExpiredOrStoped)
+			if (timer.IsTimerStopped)
 			{
 				if (useFlagColorOnDefault && remainTimeFlags.Length > 0)
 					color = remainTimeColors[0];
@@ -112,14 +113,14 @@ namespace WRC.Woodon
 
 				if (lastSavedExpireTime != NONE_INT)
 				{
-					int diff = lastSavedExpireTime - timer.CalcedCurTime + (int)(changedTimeDiff * (curLerpTime / lerpTime));
+					int diff = lastSavedExpireTime - ServerTimeAdjusted + (int)(changedTimeDiff * (curLerpTime / lerpTime));
 					timeSpan = TimeSpan.FromMilliseconds(diff);
 					WDebugLog($"curLerpTime: {curLerpTime}, ||| ((curLerpTime / lerpTime) : {curLerpTime / lerpTime}");
 				}
 			}
 			else
 			{
-				int diff = timer.ExpireTime - timer.CalcedCurTime;
+				int diff = timer.ExpireTime - ServerTimeAdjusted;
 				diff = Mathf.Max(diff, 0);
 				timeSpan = TimeSpan.FromMilliseconds(diff);
 			}
@@ -127,7 +128,7 @@ namespace WRC.Woodon
 
 		private void CalcLerpTime()
 		{
-			if (timer.IsExpiredOrStoped)
+			if (timer.IsTimerStopped)
 			{
 				lastSavedExpireTime = NONE_INT;
 				changedTimeDiff = 0;

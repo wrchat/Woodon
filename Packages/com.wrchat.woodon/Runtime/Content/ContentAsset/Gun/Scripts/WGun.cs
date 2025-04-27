@@ -65,7 +65,7 @@ namespace WRC.Woodon
 		{
 			base.Update();
 		
-			if (reloadCooltime.IsExpiredOrStoped == false)
+			if (reloadCooltime.IsTimerStopped == false)
 				return;
 
 			if (pcCanReloadByKeyR)
@@ -90,7 +90,7 @@ namespace WRC.Woodon
 		{
 			if (IsHolding())
 			{
-				if (reloadCooltime.IsExpiredOrStoped == false)
+				if (reloadCooltime.IsTimerStopped == false)
 					return;
 
 				if (maxAmmo != 0)
@@ -117,7 +117,7 @@ namespace WRC.Woodon
 			if (maxAmmo == 0)
 				return;
 
-			if (reloadCooltime.IsExpiredOrStoped == false)
+			if (reloadCooltime.IsTimerStopped == false)
 				return;
 
 			// if (LocalPlayerHolding())
