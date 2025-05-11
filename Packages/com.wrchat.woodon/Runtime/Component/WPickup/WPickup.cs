@@ -22,15 +22,16 @@ namespace WRC.Woodon
 
 		[SerializeField] protected WBool isHolding;
 		[SerializeField] protected WBool isSomeoneHolding;
+		[SerializeField] protected WBool isEnabledWBool;
 		// [field: SerializeField] public WBool WBool { get; private set; }
 
-		private bool _enabled = true;
-		public bool Enabled
+		private bool isEnabled = true;
+		public bool IsEnabled
 		{
-			get => _enabled;
+			get => isEnabled;
 			private set
 			{
-				_enabled = value;
+				isEnabled = value;
 				OnEnableChange();
 			}
 		}
@@ -38,23 +39,30 @@ namespace WRC.Woodon
 		private void OnEnableChange()
 		{
 			foreach (MeshRenderer meshRenderer in MeshRenderers)
-				meshRenderer.enabled = _enabled;
+				meshRenderer.enabled = isEnabled;
 
 			foreach (Collider collider in Colliders)
-				collider.enabled = _enabled;
+				collider.enabled = isEnabled;
 
 			foreach (GameObject child in Childs)
-				child.SetActive(_enabled);
+				child.SetActive(isEnabled);
 
-			Pickup.pickupable = _enabled;
+			Pickup.pickupable = isEnabled;
 
-			if (_enabled == false)
+			if (isEnabled == false)
 				Drop();
 		}
 
 		public void SetEnabled(bool enabled)
 		{
-			Enabled = enabled;
+			if (isEnabledWBool != null)
+			{
+				isEnabledWBool.SetValue(enabled);
+			}
+			else
+			{
+				IsEnabled = enabled;
+			}
 		}
 
 		public bool IsHolding(VRCPlayerApi targetPlayer = null)
@@ -136,6 +144,21 @@ namespace WRC.Woodon
 				isHolding.SetValue(false);
 		}
 
+		private void Start()
+		{
+			Init();
+		}
+
+		protected virtual void Init()
+		{
+			if (isEnabledWBool != null)
+			{
+				isEnabledWBool.RegisterListener(this, nameof(SetEnabledTrue), WBoolEvent.OnTrue);
+				isEnabledWBool.RegisterListener(this, nameof(SetEnabledFalse), WBoolEvent.OnFalse);
+				IsEnabled = isEnabledWBool.Value;
+			}
+		}
+
 		protected virtual void Update()
 		{
 			if (isSomeoneHolding == null)
@@ -164,8 +187,9 @@ namespace WRC.Woodon
 		}
 
 		#region HorribleEvents
-		public void SetEnabledTrue() => SetEnabled(true);
-		public void SetEnabledFalse() => SetEnabled(false);
+		// 아래는 로컬로 동작합니다. (isEnabled 값이 바뀌지 않습니다.)
+		public void SetEnabledTrue() => IsEnabled = true;
+		public void SetEnabledFalse() => IsEnabled = false;
 		#endregion
 	}
 }

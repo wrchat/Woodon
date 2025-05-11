@@ -34,8 +34,10 @@ namespace WRC.Woodon
 
 		private ShootingManager shootingManager;
 
-		private void Start()
+		protected override void Init()
 		{
+			base.Init();
+
 			shootingManager = GameObject.Find(nameof(ShootingManager)).GetComponent<ShootingManager>();
 
 			curAmmo.SetMinMaxValue(0, maxAmmo, shouldRecalculate: false);

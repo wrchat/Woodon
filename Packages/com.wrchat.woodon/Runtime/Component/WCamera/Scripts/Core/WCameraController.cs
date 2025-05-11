@@ -28,13 +28,9 @@ namespace WRC.Woodon
 			targetCamera.fieldOfView = mCameraFovSync.SyncedValue;
 		}
 
-		private void Start()
+		protected override void Init()
 		{
-			Init();
-		}
-
-		private void Init()
-		{
+			base.Init();
 			mCameraFovSync.Init(this);
 		}
 
