@@ -54,6 +54,7 @@ namespace WRC.Woodon
 			UpdateSeat_();
 		}
 
+		// 콜백으로 호출 하는 함수라 Public 이여야 합니다.
 		public virtual void OnSeatDataChanged()
 		{
 			WDebugLog($"{nameof(OnSeatDataChanged)}");
