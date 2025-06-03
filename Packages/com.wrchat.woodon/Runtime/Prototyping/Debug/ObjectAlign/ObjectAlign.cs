@@ -22,9 +22,8 @@ namespace WRC.Woodon
 			for (int i = 0; i < parent.childCount; i++)
 			{
 				Transform obj = parent.GetChild(i);
-				obj.localPosition = new Vector3(i + spacing * i, 0, 0);
+				obj.localPosition = new Vector3(spacing * i, 0, 0);
 			}
 		}
-
 	}
 }
