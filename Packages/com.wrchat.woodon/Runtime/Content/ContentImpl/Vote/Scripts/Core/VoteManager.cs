@@ -11,6 +11,8 @@ namespace WRC.Woodon
 		[SerializeField] protected TextMeshProUGUI debugText;
 		[SerializeField] protected Timer timer;
 		[SerializeField] protected WSFXManager wSFXManager;
+		[SerializeField] protected TextMeshProUGUI[] resultTexts;
+		[SerializeField] protected TextMeshProUGUI[] elseResultTexts;
 
 		public int[] MaxVoteIndexes { get; protected set; } = new int[0];
 
@@ -20,6 +22,43 @@ namespace WRC.Woodon
 				return;
 
 			MaxVoteIndexes = GetMaxVoteIndex();
+
+			// 1등 투표 결과
+			{
+				string resultString = string.Empty;
+				SeatDataOption temp = GetSeatDataOption("TurnData");
+				for (int i = 0; i < MaxVoteIndexes.Length; i++)
+				{
+					int index = MaxVoteIndexes[i];
+
+					if (i == 0)
+						resultString += $"{temp.DataToString[index]}";
+					else
+						resultString += $",\n{temp.DataToString[index]}";
+				}
+
+				for (int j = 0; j < resultTexts.Length; j++)
+				{
+					resultTexts[j].text = resultString;
+				}
+			}
+
+			// 나머지 투표 결과
+			{
+				string resultString = string.Empty;
+				SeatDataOption temp = GetSeatDataOption("TurnData");
+				int[] sortIndexes = GetSortVoteIndex();
+				for (int i = 0; i < sortIndexes.Length; i++)
+				{
+					int index = sortIndexes[i];
+					resultString += $"{temp.DataToString[index]} \t: {GetVoteCount(index)}표\n";
+				}
+
+				for (int j = 0; j < elseResultTexts.Length; j++)
+				{
+					elseResultTexts[j].text = resultString;
+				}
+			}
 
 			switch ((VoteState)ContentState)
 			{
@@ -33,7 +72,7 @@ namespace WRC.Woodon
 					break;
 				case VoteState.VoteTime:
 					// 투표 시간
-					OnAuctionTime();
+					OnVoteTime();
 					break;
 				case VoteState.WaitForResult:
 					// 투표 결과 대기
@@ -72,14 +111,16 @@ namespace WRC.Woodon
 		{
 			WDebugLog(nameof(OnShowTarget));
 
-			wSFXManager.PlaySFX_L(0);
+			if (wSFXManager != null)
+				wSFXManager.PlaySFX_L(0);
 		}
 
-		protected virtual void OnAuctionTime()
+		protected virtual void OnVoteTime()
 		{
-			WDebugLog(nameof(OnAuctionTime));
+			WDebugLog(nameof(OnVoteTime));
 
-			wSFXManager.PlaySFX_L(1);
+			if (wSFXManager != null)
+				wSFXManager.PlaySFX_L(1);
 
 			if (IsOwner() == false)
 				return;
@@ -92,7 +133,8 @@ namespace WRC.Woodon
 		{
 			WDebugLog(nameof(OnWaitForResult));
 
-			wSFXManager.PlaySFX_L(2);
+			if (wSFXManager != null)
+				wSFXManager.PlaySFX_L(2);
 
 			if (IsOwner() == false)
 				return;
@@ -133,7 +175,8 @@ namespace WRC.Woodon
 		{
 			WDebugLog(nameof(OnApplyResult));
 
-			wSFXManager.PlaySFX_L(5);
+			if (wSFXManager != null)
+				wSFXManager.PlaySFX_L(5);
 
 			// 투표 결과 적용
 			if (MaxVoteIndexes.Length == 0)
@@ -195,6 +238,41 @@ namespace WRC.Woodon
 					WDebugLog($"MaxVoteIndex: {maxIndexes[i]}");
 
 			return maxIndexes;
+		}
+
+		protected int[] GetSortVoteIndex()
+		{
+			SeatDataOption turnDataOption = GetSeatDataOption(TurnDataString);
+			int voteSelectionCount = turnDataOption.DataToString.Length;
+			int[] voteCounts = new int[voteSelectionCount];
+
+			for (int i = 0; i < voteSelectionCount; i++)
+				voteCounts[i] = GetVoteCount(i);
+
+			int[] sortIndexes = new int[voteSelectionCount];
+			for (int i = 0; i < voteCounts.Length; i++)
+				sortIndexes[i] = i;
+
+			// System.Array.Sort(voteCounts, sortIndexes);
+
+			for (int i = 0; i < voteCounts.Length - 1; i++)
+			{
+				for (int j = 0; j < voteCounts.Length - i - 1; j++)
+				{
+					if (voteCounts[j] < voteCounts[j + 1])
+					{
+						int tempCount = voteCounts[j];
+						voteCounts[j] = voteCounts[j + 1];
+						voteCounts[j + 1] = tempCount;
+
+						int tempIndex = sortIndexes[j];
+						sortIndexes[j] = sortIndexes[j + 1];
+						sortIndexes[j + 1] = tempIndex;
+					}
+				}
+			}
+
+			return sortIndexes;
 		}
 	}
 }

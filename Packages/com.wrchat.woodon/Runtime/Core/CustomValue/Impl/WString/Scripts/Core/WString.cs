@@ -12,6 +12,7 @@ namespace WRC.Woodon
 		[field: SerializeField, TextArea(3, 10)] public string DefaultString { get; protected set; } = string.Empty;
 
 		[field: Header("_" + nameof(WString) + " - Options")]
+		[SerializeField] private bool useDefault = true;
 		[SerializeField] private bool useDefaultWhenEmpty = true;
 		[SerializeField] private bool useSync;
 		[SerializeField] private bool onlyDigit;
@@ -60,11 +61,15 @@ namespace WRC.Woodon
 			if (useSync)
 			{
 				if (Networking.IsMaster)
-					SetValue(DefaultString);
+				{
+					if (useDefault)
+						SetValue(DefaultString);
+				}
 			}
 			else
 			{
-				SetValue(DefaultString);
+				if (useDefault)
+					SetValue(DefaultString);
 			}
 
 			OnValueChange(string.Empty, Value);

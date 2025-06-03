@@ -35,5 +35,23 @@ namespace WRC.Woodon
 				curStateText.text = stateToStringOverride[contentManager.ContentState];
 			}
 		}
+
+		#region HorriableEvents
+		public void SetState(int state)
+		{
+			contentManager.SetContentState(state);
+		}
+		public void SetState0() => SetState(0);
+		public void SetState1() => SetState(1);
+		public void SetState2() => SetState(2);
+		public void SetState3() => SetState(3);
+		public void SetState4() => SetState(4);
+		public void SetState5() => SetState(5);
+		public void SetState6() => SetState(6);
+		public void SetState7() => SetState(7);
+		public void SetState8() => SetState(8);
+		public void SetState9() => SetState(9);
+		public void SetState10() => SetState(10);
+		#endregion
 	}
 }

@@ -1,6 +1,7 @@
 ﻿using UdonSharp;
 using UnityEngine;
 using VRC.SDKBase;
+using static WRC.Woodon.WUtil;
 
 namespace WRC.Woodon
 {
@@ -27,12 +28,7 @@ namespace WRC.Woodon
 			}
 		}
 
-		// Idea By 'Listing'
-		// 서버 시간이 음수가 되는 경우를 방지하기 위해 (관측된 최솟값 -20.4억), 서버 시간에 int.MaxValue(2147483647)을 더함
-		public const int TIME_ADJUSTMENT = int.MaxValue;
-		public int CalcedCurTime =>
-			Networking.GetServerTimeInMilliseconds() + (Networking.GetServerTimeInMilliseconds() < 0 ? TIME_ADJUSTMENT : 0);
-		public bool IsExpiredOrStoped => ExpireTime == NONE_INT;
+		public bool IsTimerStopped => ExpireTime == NONE_INT;
 
 		private void Start()
 		{
@@ -61,7 +57,7 @@ namespace WRC.Woodon
 			if (ExpireTime == NONE_INT)
 				return;
 
-			if (CalcedCurTime >= ExpireTime)
+			if (ServerTimeAdjusted() >= ExpireTime)
 			{
 				WDebugLog("Expired!");
 				ResetTimer();
@@ -120,14 +116,14 @@ namespace WRC.Woodon
 		public void StartTimer(int timeByDecisecond)
 		{
 			WDebugLog($"{nameof(StartTimer)} : {timeByDecisecond} Decisecond");
-			SetExpireTime(CalcedCurTime + (timeByDecisecond * 100));
+			SetExpireTime(ServerTimeAdjusted() + (timeByDecisecond * 100));
 		}
 		public void StartTimerByWInt()
 		{
 			WDebugLog(nameof(StartTimerByWInt));
 
 			if (wIntForSetTime != null)
-				SetExpireTime(CalcedCurTime + (wIntForSetTime.Value * 100));
+				SetExpireTime(ServerTimeAdjusted() + (wIntForSetTime.Value * 100));
 		}
 
 		public void AddTime()

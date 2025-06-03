@@ -85,7 +85,8 @@ namespace WRC.Woodon
 						image.enabled = false;
 
 				foreach (TextMeshProUGUI dataText in dataTexts)
-					dataText.text = string.Empty;
+					if (dataText != null)
+						dataText.text = string.Empty;
 
 				foreach (Image dataImage in dataImages)
 					if (dataImage != null)

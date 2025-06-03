@@ -19,10 +19,10 @@ namespace WRC.Woodon
 		[SerializeField] private TextMeshProUGUI[] curDataTexts;
 		[SerializeField] private Image[] curDataImages;
 
-		public void UpdateUI(ContentManager contentManager, WSeat mSeat)
+		public void UpdateUI(ContentManager contentManager, WSeat wSeat)
 		{
 			SeatDataOption dataOption = contentManager.GetSeatDataOption(dataName);
-			int data = mSeat.GetData(dataName);
+			int data = wSeat.GetData(dataName);
 
 			if (dataOption == null)
 			{

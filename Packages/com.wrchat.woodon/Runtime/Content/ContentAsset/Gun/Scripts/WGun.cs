@@ -34,11 +34,13 @@ namespace WRC.Woodon
 
 		private ShootingManager shootingManager;
 
-		private void Start()
+		protected override void Init()
 		{
+			base.Init();
+
 			shootingManager = GameObject.Find(nameof(ShootingManager)).GetComponent<ShootingManager>();
 
-			curAmmo.SetMinMaxValue(0, maxAmmo, recalcValue: false);
+			curAmmo.SetMinMaxValue(0, maxAmmo, shouldRecalculate: false);
 
 			if (Networking.IsMaster)
 				curAmmo.SetValue(maxAmmo);
@@ -65,7 +67,7 @@ namespace WRC.Woodon
 		{
 			base.Update();
 		
-			if (reloadCooltime.IsExpiredOrStoped == false)
+			if (reloadCooltime.IsTimerStopped == false)
 				return;
 
 			if (pcCanReloadByKeyR)
@@ -90,7 +92,7 @@ namespace WRC.Woodon
 		{
 			if (IsHolding())
 			{
-				if (reloadCooltime.IsExpiredOrStoped == false)
+				if (reloadCooltime.IsTimerStopped == false)
 					return;
 
 				if (maxAmmo != 0)
@@ -117,7 +119,7 @@ namespace WRC.Woodon
 			if (maxAmmo == 0)
 				return;
 
-			if (reloadCooltime.IsExpiredOrStoped == false)
+			if (reloadCooltime.IsTimerStopped == false)
 				return;
 
 			// if (LocalPlayerHolding())

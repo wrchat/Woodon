@@ -2,10 +2,19 @@
 using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon;
-using WRC.Woodon;
 
-namespace WRC
+namespace WRC.Woodon
 {
+	public enum ComparisonOperatorType
+	{
+		EQUAL,
+		NOT_EQUAL,
+		GREATER_THAN,
+		GREATER_THAN_OR_EQUAL,
+		LESS_THAN,
+		LESS_THAN_OR_EQUAL,
+	}
+
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class WIntComparisonOperator : WBase
 	{

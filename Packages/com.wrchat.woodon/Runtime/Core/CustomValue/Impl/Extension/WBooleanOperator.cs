@@ -2,10 +2,15 @@
 using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon;
-using WRC.Woodon;
 
-namespace WRC
+namespace WRC.Woodon
 {
+	public enum BooleanOperatorType
+	{
+		AND,
+		OR,
+	}
+
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class WBooleanOperator : WBase
 	{

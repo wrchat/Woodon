@@ -66,6 +66,15 @@ namespace WRC.Woodon
 			canvasGroup.interactable = active;
 		}
 
+		// Idea By 'Listing'
+		// 서버 시간이 음수인 경우가 있음 (관측된 최솟값 -20.4억)
+		// Timer, Buzzer 등에서 서버 시간을 이용한 계산 시, 음수를 다루기 까다로운 부분이 있음.
+		// 서버 시간이 음수인 경우 서버 시간에 int.MaxValue(2147483647)을 더해 이를 방지함.
+		// (서버 시간이 음수에서 양수로 넘어가는 순간에는 문제가 발생할 수 있지만, 그 확률은 매우 작음)
+		public const int TIME_ADJUSTMENT = int.MaxValue;
+		public static int ServerTimeAdjusted() =>
+			Networking.GetServerTimeInMilliseconds() + ((Networking.GetServerTimeInMilliseconds() < 0) ? TIME_ADJUSTMENT : 0);
+
 		#region Array
 		public static void Resize<T>(ref T[] originArr, int size)
 		{

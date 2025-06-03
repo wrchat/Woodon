@@ -1,6 +1,7 @@
 ﻿using System;
 using UdonSharp;
 using UnityEngine;
+using static WRC.Woodon.WUtil;
 
 namespace WRC.Woodon
 {
@@ -79,7 +80,7 @@ namespace WRC.Woodon
 			}
 			loopAudioSource.mute = false;
 
-			int diff = expireTime - timer.CalcedCurTime;
+			int diff = expireTime - ServerTimeAdjusted();
 			TimeSpan timeSpan = TimeSpan.FromMilliseconds(diff);
 
 			bool isInFlag = false;
