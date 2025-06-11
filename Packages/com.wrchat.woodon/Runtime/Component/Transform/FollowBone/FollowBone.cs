@@ -11,6 +11,7 @@ namespace WRC.Woodon
 		[SerializeField] private HumanBodyBones targetBone = HumanBodyBones.Head;
 		[SerializeField] private GameObject[] targetObjects;
 		[SerializeField] private Transform targetTrans;
+		[SerializeField] private Vector3 targetOffset = Vector3.zero;
 		[SerializeField] private float forwardPower = 1;
 		[SerializeField] private bool followRotation = true;
 		[SerializeField] private bool followRoot;
@@ -73,8 +74,9 @@ namespace WRC.Woodon
 			}
 
 			targetTrans.position += targetTrans.transform.forward * forwardPower;
+			targetTrans.position += targetOffset;
 
-			foreach (var targetObject in targetObjects)
+			foreach (GameObject targetObject in targetObjects)
 				if (lerp)
 				{
 					targetObject.transform.position = Vector3.Lerp(targetObject.transform.position,
