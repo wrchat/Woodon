@@ -5,7 +5,7 @@ using UnityEngine;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class UIWString : UdonSharpBehaviour
+	public class UIWString : WBase
 	{
 		[Header("_" + nameof(UIWString))]
 		[SerializeField] private WString wString;
