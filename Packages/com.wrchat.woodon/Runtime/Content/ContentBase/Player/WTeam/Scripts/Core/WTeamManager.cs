@@ -43,7 +43,7 @@ namespace WRC.Woodon
 
 					foreach (UIWTeamButton teamButton in mTeam.TeamButtons)
 						if (teamButton.IsPlayer())
-							teamButton.WPlayer.SetTargetNone();
+							teamButton.WPlayer.SetTargetPlayerNone();
 				}
 
 			SendEvents();

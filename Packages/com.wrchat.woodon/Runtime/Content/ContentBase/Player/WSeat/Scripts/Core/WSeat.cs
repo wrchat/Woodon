@@ -51,7 +51,7 @@ namespace WRC.Woodon
 				SerializeData();
 			}
 
-			UpdateSeat_();
+			UpdateSeat();
 		}
 
 		// 콜백으로 호출 하는 함수라 Public 이여야 합니다.
@@ -73,18 +73,12 @@ namespace WRC.Woodon
 			seatData.SerializeData();
 		}
 
-		public void UpdateSeat()
+		public virtual void UpdateSeat()
 		{
 			WDebugLog($"{nameof(UpdateSeat)}");
 
-			if (contentManager != null)
-				UpdateSeat_();
-		}
-
-		protected virtual void UpdateSeat_()
-		{
-			WDebugLog($"{nameof(UpdateSeat_)}");
-
+			contentManager.OnSeatUpdate();
+		
 			foreach (UIWSeat ui in uis)
 				ui.UpdateUI();
 		}
@@ -104,7 +98,7 @@ namespace WRC.Woodon
 					if (TurnDataOption.ResetWhenOwnerChange)
 						ResetTurnData();
 				}
-				UpdateSeat_();
+				UpdateSeat();
 			}
 		}
 
@@ -126,7 +120,7 @@ namespace WRC.Woodon
 		protected virtual void OnTurnDataChange(DataChangeState changeState)
 		{
 			WDebugLog($"{nameof(OnTurnDataChange)}, {TurnData}");
-			UpdateSeat_();
+			UpdateSeat();
 			// UpdateCurTurnDataUI();
 
 			// 직접 구현하도록

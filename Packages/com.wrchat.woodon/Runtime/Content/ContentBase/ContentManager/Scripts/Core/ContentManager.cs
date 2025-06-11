@@ -22,6 +22,7 @@ namespace WRC.Woodon
 		[SerializeField] protected WJson contentData;
 		[SerializeField] private int defaultContentState = 0;
 		[SerializeField] private SeatDataOption[] seatDataOptions;
+		[SerializeField] private Transform seatParent;
 		public WSeat[] Seats { get; private set; }
 
 		public int ContentState
@@ -41,7 +42,8 @@ namespace WRC.Woodon
 		{
 			WDebugLog($"{nameof(Init)}");
 
-			Seats = GetComponentsInChildren<WSeat>();
+			Transform seatParent = this.seatParent == null ? transform : this.seatParent;
+			Seats = seatParent.GetComponentsInChildren<WSeat>();
 			contentData.RegisterListener(this, nameof(OnContentDataChanged), WJsonEvent.OnDeserialization);
 
 			for (int i = 0; i < Seats.Length; i++)
@@ -60,6 +62,10 @@ namespace WRC.Woodon
 
 			foreach (WSeat seat in Seats)
 				seat.UpdateSeat();
+		}
+
+		public virtual void OnSeatUpdate()
+		{
 		}
 
 		public virtual void OnContentDataChanged()

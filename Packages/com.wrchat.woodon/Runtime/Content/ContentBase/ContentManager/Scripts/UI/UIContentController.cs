@@ -11,14 +11,14 @@ namespace WRC.Woodon
 		[SerializeField] private TextMeshProUGUI curStateText;
 		[SerializeField] private string[] stateToStringOverride;
 
-		public void PrevState()
+		public virtual void PrevState()
 		{
-			contentManager.SetContentState(contentManager.ContentState - 1);
+			contentManager.SetContentStatePrev();
 		}
 
-		public void NextState()
+		public virtual void NextState()
 		{
-			contentManager.SetContentState(contentManager.ContentState + 1);
+			contentManager.SetContentStateNext();
 		}
 
 		public override void UpdateUI()
@@ -36,7 +36,7 @@ namespace WRC.Woodon
 			}
 		}
 
-		#region HorriableEvents
+		#region HorribleEvents
 		public void SetState(int state)
 		{
 			contentManager.SetContentState(state);
