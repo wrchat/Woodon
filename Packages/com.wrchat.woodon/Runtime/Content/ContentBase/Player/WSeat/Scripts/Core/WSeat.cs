@@ -89,11 +89,11 @@ namespace WRC.Woodon
 				ui.UpdateUI();
 		}
 
-		protected override void OnTargetChanged(DataChangeState changeState)
+		protected override void OnTargetPlayerChanged(DataChangeState changeState)
 		{
-			WDebugLog($"{nameof(OnTargetChanged)} : {changeState}");
+			WDebugLog($"{nameof(OnTargetPlayerChanged)} : {changeState}");
 
-			base.OnTargetChanged(changeState);
+			base.OnTargetPlayerChanged(changeState);
 
 			if (DataChangeStateUtil.IsDataChanged(changeState))
 			{
@@ -142,13 +142,13 @@ namespace WRC.Woodon
 				if (seat.IsTargetPlayer(Networking.LocalPlayer))
 					seat.ResetSeat();
 			}
-			SetTargetLocalPlayer();
+			SetTargetPlayerLocalPlayer();
 		}
 
 		public virtual void ResetSeat()
 		{
 			WDebugLog($"{nameof(ResetSeat)}");
-			ResetPlayer();
+			ResetTargetPlayer();
 			ResetData();
 			ResetTurnData();
 		}

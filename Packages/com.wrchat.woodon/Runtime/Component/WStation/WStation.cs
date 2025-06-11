@@ -10,9 +10,9 @@ namespace WRC.Woodon
 		[Header("_" + nameof(WStation))]
 		[SerializeField] private VRCStation station;
 
-		protected override void OnTargetChanged(DataChangeState changeState)
+		protected override void OnTargetPlayerChanged(DataChangeState changeState)
 		{
-			base.OnTargetChanged(changeState);
+			base.OnTargetPlayerChanged(changeState);
 
 			if (IsTargetPlayer())
 				UseStation();
@@ -44,7 +44,7 @@ namespace WRC.Woodon
 		public override void OnPlayerRespawn(VRCPlayerApi player)
 		{
 			if (IsTargetPlayer(player))
-				ResetPlayer();
+				ResetTargetPlayer();
 		}
 	}
 }

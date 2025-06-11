@@ -18,11 +18,11 @@ namespace WRC.Woodon
 			{
 				int origin = _targetPlayerID;
 				_targetPlayerID = value;
-				OnTargetChanged(DataChangeStateUtil.GetChangeState(origin, value));
+				OnTargetPlayerChanged(DataChangeStateUtil.GetChangeState(origin, value));
 			}
 		}
 
-		protected virtual void OnTargetChanged(DataChangeState changeState)
+		protected virtual void OnTargetPlayerChanged(DataChangeState changeState)
 		{
 			if (DataChangeStateUtil.IsDataChanged(changeState))
 				SendEvents();
@@ -52,18 +52,18 @@ namespace WRC.Woodon
 			RequestSerialization();
 		}
 
-		public void SetTargetLocalPlayer() => SetTarget(Networking.LocalPlayer.playerId);
-		public void SetTargetNone() => SetTarget(NONE_INT);
+		public void SetTargetPlayerLocalPlayer() => SetTarget(Networking.LocalPlayer.playerId);
+		public void SetTargetPlayerNone() => SetTarget(NONE_INT);
 
 		public void ToggleLocalPlayer()
 		{
 			if (IsTargetPlayer(Networking.LocalPlayer))
-				SetTargetNone();
+				SetTargetPlayerNone();
 			else
-				SetTargetLocalPlayer();
+				SetTargetPlayerLocalPlayer();
 		}
 
-		public virtual void ResetPlayer() => SetTarget(UseNone ? NONE_INT : Networking.LocalPlayer.playerId);
+		public virtual void ResetTargetPlayer() => SetTarget(UseNone ? NONE_INT : Networking.LocalPlayer.playerId);
 
 		// ---- ---- ---- ----
 
@@ -76,7 +76,7 @@ namespace WRC.Woodon
 		{
 			if (Networking.IsMaster)
 			{
-				ResetPlayer();
+				ResetTargetPlayer();
 			}
 		}
 
@@ -92,7 +92,7 @@ namespace WRC.Woodon
 		{
 			if (IsOwner() && (player.playerId == TargetPlayerID))
 			{
-				ResetPlayer();
+				ResetTargetPlayer();
 			}
 		}
 	}

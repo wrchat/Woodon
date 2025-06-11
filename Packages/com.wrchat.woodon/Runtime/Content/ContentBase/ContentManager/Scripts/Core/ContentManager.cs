@@ -109,7 +109,7 @@ namespace WRC.Woodon
 						continue;
 
 					if (seat.IsTargetPlayer() && seat.TargetPlayerID == changedSeat.TargetPlayerID)
-						seat.SetTargetNone();
+						seat.SetTargetPlayerNone();
 				}
 			}
 		}

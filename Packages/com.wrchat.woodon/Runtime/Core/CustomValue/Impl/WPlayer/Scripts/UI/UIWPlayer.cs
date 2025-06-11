@@ -121,7 +121,7 @@ namespace WRC.Woodon
 
 		public void SetNone()
 		{
-			wPlayer.SetTargetNone();
+			wPlayer.SetTargetPlayerNone();
 		}
 
 		public void SelectPlayer(int index)

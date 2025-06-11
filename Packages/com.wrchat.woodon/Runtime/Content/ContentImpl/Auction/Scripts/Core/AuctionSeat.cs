@@ -46,9 +46,9 @@ namespace WRC.Woodon
 			}
 		}
 
-		protected override void OnTargetChanged(DataChangeState changeState)
+		protected override void OnTargetPlayerChanged(DataChangeState changeState)
 		{
-			base.OnTargetChanged(changeState);
+			base.OnTargetPlayerChanged(changeState);
 
 			if (changeState != DataChangeState.None)
 			{
