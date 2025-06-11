@@ -1,5 +1,4 @@
-﻿
-using TMPro;
+﻿using TMPro;
 using UdonSharp;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,6 +8,7 @@ using VRC.Udon;
 
 namespace WRC.Woodon
 {
+	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public class UIChat : WBase
 	{
 		[Header("_" + nameof(UIChat))]
@@ -21,6 +21,7 @@ namespace WRC.Woodon
 		[SerializeField] private TextMeshProUGUI[] overrideTexts;
 
 		public TeamType ChatRoom => (TeamType)chatRoomIndex.Value;
+		private ChatManager chatManager;
 
 		private void Start()
 		{
@@ -30,7 +31,27 @@ namespace WRC.Woodon
 		private void Init()
 		{
 			WDebugLog($"{nameof(Init)}");
-			SetChatText(null, string.Empty);
+
+			chatManager = GameObject.Find(nameof(ChatManager)).GetComponent<ChatManager>();
+			chatManager.RegisterListener(this, nameof(UpdateUI));
+			chatRoomIndex.RegisterListener(this, nameof(UpdateUI));
+			UpdateUI();
+		}
+
+		public void UpdateUI()
+		{
+			WDebugLog($"{nameof(UpdateUI)}");
+
+			DataList chatDataList = chatManager.GetChatDataList(ChatRoom);
+
+			if (chatDataList == null || chatDataList.Count == 0)
+			{
+				SetChatText(null, string.Empty);
+				return;
+			}
+
+			string debugText = chatManager.GetDebugText(chatDataList);
+			SetChatText(chatDataList, debugText);
 		}
 
 		public virtual void SetChatText(DataList chatDataList, string debugText)

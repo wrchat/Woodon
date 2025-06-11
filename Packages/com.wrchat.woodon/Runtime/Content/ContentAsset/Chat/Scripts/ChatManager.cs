@@ -9,43 +9,32 @@ using WRC.Woodon.Chat;
 
 namespace WRC.Woodon
 {
-	public class ChatManager : WBase
+	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
+	public class ChatManager : WEventPublisher
 	{
 		[Header("_" + nameof(ChatManager))]
 		[SerializeField] private WPlayerUdonIndex mPlayerUdonIndex;
 		[SerializeField] private WJson[] chatDatas;
 
-		[SerializeField] private WSFXManager wSFXManager;
-
 		[SerializeField] private WString nickname;
-		[SerializeField] private UIChat[] chatUIs;
 
 		[SerializeField] private int chatSaveCount = 10; // 각 채팅방에 저장할 메시지 수
 		[SerializeField] private bool useInitChat = true;
+
 		private DataDictionary curChatData = new DataDictionary();
 
 		private void Start()
 		{
 			Init();
-			
-			for (int i = (int)TeamType.A; i <= (int)TeamType.Z; i++)
-				ProcessChat((TeamType)i);
 		}
 
 		private void Init()
 		{
-			// DataDictionary chatData = new DataDictionary();
-			// for (int i = (int)TeamType.A; i <= (int)TeamType.Z; i++)
-			// {
-			// 	string key = i.ToString();
-			// 	chatData.Add(key, new DataList());
-			// }
-
-			// curChattingRoomValue.SetMinMaxValue((int)TeamType.A, (int)TeamType.Z);
-			// curChattingRoomValue.RegisterListener(this, nameof(ProcessChat));
-
 			for (int i = 0; i < chatDatas.Length; i++)
-				chatDatas[i].RegisterListener(this, nameof(ReceieveChat) + i, WJsonEvent.OnDeserialization);
+				chatDatas[i].RegisterListener(this, nameof(ReceiveChat) + i, WJsonEvent.OnDeserialization);
+
+			for (int i = (int)TeamType.A; i <= (int)TeamType.Z; i++)
+				ProcessChat((TeamType)i);
 		}
 
 		#region SendChat
@@ -60,7 +49,6 @@ namespace WRC.Woodon
 				Networking.LocalPlayer.displayName : nickname.Value;
 			string formattedMessage = message.Trim();
 			int udonIndex = mPlayerUdonIndex.GetUdonIndex();
-			// int curChattingRoom = (int)this.curChattingRoom;
 			int curChattingRoom = (int)chatRoom;
 
 			// 클라이언트가 호출
@@ -81,10 +69,10 @@ namespace WRC.Woodon
 		}
 		#endregion
 
-		#region ReceieveChat
-		public void ReceieveChat(int udonIndex)
+		#region ReceiveChat
+		public void ReceiveChat(int udonIndex)
 		{
-			WDebugLog($"{nameof(ReceieveChat)} : {udonIndex}");
+			WDebugLog($"{nameof(ReceiveChat)} : {udonIndex}");
 
 			WJson wJson = chatDatas[udonIndex];
 
@@ -145,14 +133,10 @@ namespace WRC.Woodon
 				}
 			}
 
-			wSFXManager.PlaySFX_L((int)chatRoom);
 			ProcessChat(chatRoom);
 
-			// if (udonIndex == mPlayerUdonIndex.GetUdonIndex())
-			// {
-			// 	// chatInputField.Select();
-			// 	// chatInputField.ActivateInputField();
-			// }
+			SendEvents(chatRoom);
+			SendEvents();
 		}
 
 		public void ProcessChat(TeamType chatRoom)
@@ -195,39 +179,41 @@ namespace WRC.Woodon
 						curDataList.Add(tempChatData);
 						curDataList.RemoveAt(0);
 					}
-					
+
 					curChatData.Add(curChatRoomString, curDataList);
 				}
 			}
+		}
 
-			string debugText;
+		public DataList GetChatDataList(TeamType chatRoom)
+		{
+			string curChatRoomString = chatRoom.ToString();
+			if (curChatData.TryGetValue(curChatRoomString, out DataToken dataToken))
 			{
-				StringBuilder stringBuilder = new StringBuilder();
-				for (int i = 0; i < curDataList.Count; i++)
-				{
-					DataDictionary curChatData = curDataList[i].DataDictionary;
-					int time = curChatData.GetChatTime();
-					string name = curChatData.GetChatName();
-					string message = curChatData.GetChatMessage();
-					int udonIndex = curChatData.GetChatUdonIndex();
-
-					stringBuilder.Append($"{time}\t\t| {udonIndex}-{name} : {message}\n");
-				}
-
-				debugText = stringBuilder.ToString();
+				return dataToken.DataList;
 			}
-
-			UpdateUI(chatRoom, curDataList, debugText);
+			else
+			{
+				WDebugLog($"No chat data found for {curChatRoomString}. Returning empty DataList.");
+				return new DataList();
+			}
 		}
 		#endregion
 
-		private void UpdateUI(TeamType chatRoom, DataList chatDataList, string debugText)
+		public string GetDebugText(DataList chatDataList)
 		{
-			foreach (UIChat chatUI in chatUIs)
+			StringBuilder stringBuilder = new StringBuilder();
+			for (int i = 0; i < chatDataList.Count; i++)
 			{
-				if (chatUI.ChatRoom == chatRoom)
-					chatUI.SetChatText(chatDataList, debugText);
+				DataDictionary curChatData = chatDataList[i].DataDictionary;
+				int time = curChatData.GetChatTime();
+				string name = curChatData.GetChatName();
+				string message = curChatData.GetChatMessage();
+				int udonIndex = curChatData.GetChatUdonIndex();
+
+				stringBuilder.Append($"{time}\t\t| {udonIndex}-{name} : {message}\n");
 			}
+			return stringBuilder.ToString();
 		}
 
 		public void ClearChatData_G() => SendCustomNetworkEvent(NetworkEventTarget.All, nameof(ClearChatData));
@@ -235,91 +221,95 @@ namespace WRC.Woodon
 		{
 			curChatData.Clear();
 			for (int i = (int)TeamType.A; i <= (int)TeamType.Z; i++)
+			{
 				ProcessChat((TeamType)i);
+				SendEvents((TeamType)i);
+			}
+			SendEvents();
 		}
 
 		#region HorribleEvents
-		public void ReceieveChat0() => ReceieveChat(0);
-		public void ReceieveChat1() => ReceieveChat(1);
-		public void ReceieveChat2() => ReceieveChat(2);
-		public void ReceieveChat3() => ReceieveChat(3);
-		public void ReceieveChat4() => ReceieveChat(4);
-		public void ReceieveChat5() => ReceieveChat(5);
-		public void ReceieveChat6() => ReceieveChat(6);
-		public void ReceieveChat7() => ReceieveChat(7);
-		public void ReceieveChat8() => ReceieveChat(8);
-		public void ReceieveChat9() => ReceieveChat(9);
-		public void ReceieveChat10() => ReceieveChat(10);
-		public void ReceieveChat11() => ReceieveChat(11);
-		public void ReceieveChat12() => ReceieveChat(12);
-		public void ReceieveChat13() => ReceieveChat(13);
-		public void ReceieveChat14() => ReceieveChat(14);
-		public void ReceieveChat15() => ReceieveChat(15);
-		public void ReceieveChat16() => ReceieveChat(16);
-		public void ReceieveChat17() => ReceieveChat(17);
-		public void ReceieveChat18() => ReceieveChat(18);
-		public void ReceieveChat19() => ReceieveChat(19);
-		public void ReceieveChat20() => ReceieveChat(20);
-		public void ReceieveChat21() => ReceieveChat(21);
-		public void ReceieveChat22() => ReceieveChat(22);
-		public void ReceieveChat23() => ReceieveChat(23);
-		public void ReceieveChat24() => ReceieveChat(24);
-		public void ReceieveChat25() => ReceieveChat(25);
-		public void ReceieveChat26() => ReceieveChat(26);
-		public void ReceieveChat27() => ReceieveChat(27);
-		public void ReceieveChat28() => ReceieveChat(28);
-		public void ReceieveChat29() => ReceieveChat(29);
-		public void ReceieveChat30() => ReceieveChat(30);
-		public void ReceieveChat31() => ReceieveChat(31);
-		public void ReceieveChat32() => ReceieveChat(32);
-		public void ReceieveChat33() => ReceieveChat(33);
-		public void ReceieveChat34() => ReceieveChat(34);
-		public void ReceieveChat35() => ReceieveChat(35);
-		public void ReceieveChat36() => ReceieveChat(36);
-		public void ReceieveChat37() => ReceieveChat(37);
-		public void ReceieveChat38() => ReceieveChat(38);
-		public void ReceieveChat39() => ReceieveChat(39);
-		public void ReceieveChat40() => ReceieveChat(40);
-		public void ReceieveChat41() => ReceieveChat(41);
-		public void ReceieveChat42() => ReceieveChat(42);
-		public void ReceieveChat43() => ReceieveChat(43);
-		public void ReceieveChat44() => ReceieveChat(44);
-		public void ReceieveChat45() => ReceieveChat(45);
-		public void ReceieveChat46() => ReceieveChat(46);
-		public void ReceieveChat47() => ReceieveChat(47);
-		public void ReceieveChat48() => ReceieveChat(48);
-		public void ReceieveChat49() => ReceieveChat(49);
-		public void ReceieveChat50() => ReceieveChat(50);
-		public void ReceieveChat51() => ReceieveChat(51);
-		public void ReceieveChat52() => ReceieveChat(52);
-		public void ReceieveChat53() => ReceieveChat(53);
-		public void ReceieveChat54() => ReceieveChat(54);
-		public void ReceieveChat55() => ReceieveChat(55);
-		public void ReceieveChat56() => ReceieveChat(56);
-		public void ReceieveChat57() => ReceieveChat(57);
-		public void ReceieveChat58() => ReceieveChat(58);
-		public void ReceieveChat59() => ReceieveChat(59);
-		public void ReceieveChat60() => ReceieveChat(60);
-		public void ReceieveChat61() => ReceieveChat(61);
-		public void ReceieveChat62() => ReceieveChat(62);
-		public void ReceieveChat63() => ReceieveChat(63);
-		public void ReceieveChat64() => ReceieveChat(64);
-		public void ReceieveChat65() => ReceieveChat(65);
-		public void ReceieveChat66() => ReceieveChat(66);
-		public void ReceieveChat67() => ReceieveChat(67);
-		public void ReceieveChat68() => ReceieveChat(68);
-		public void ReceieveChat69() => ReceieveChat(69);
-		public void ReceieveChat70() => ReceieveChat(70);
-		public void ReceieveChat71() => ReceieveChat(71);
-		public void ReceieveChat72() => ReceieveChat(72);
-		public void ReceieveChat73() => ReceieveChat(73);
-		public void ReceieveChat74() => ReceieveChat(74);
-		public void ReceieveChat75() => ReceieveChat(75);
-		public void ReceieveChat76() => ReceieveChat(76);
-		public void ReceieveChat77() => ReceieveChat(77);
-		public void ReceieveChat78() => ReceieveChat(78);
-		public void ReceieveChat79() => ReceieveChat(79);
-		public void ReceieveChat80() => ReceieveChat(80);
+		public void ReceiveChat0() => ReceiveChat(0);
+		public void ReceiveChat1() => ReceiveChat(1);
+		public void ReceiveChat2() => ReceiveChat(2);
+		public void ReceiveChat3() => ReceiveChat(3);
+		public void ReceiveChat4() => ReceiveChat(4);
+		public void ReceiveChat5() => ReceiveChat(5);
+		public void ReceiveChat6() => ReceiveChat(6);
+		public void ReceiveChat7() => ReceiveChat(7);
+		public void ReceiveChat8() => ReceiveChat(8);
+		public void ReceiveChat9() => ReceiveChat(9);
+		public void ReceiveChat10() => ReceiveChat(10);
+		public void ReceiveChat11() => ReceiveChat(11);
+		public void ReceiveChat12() => ReceiveChat(12);
+		public void ReceiveChat13() => ReceiveChat(13);
+		public void ReceiveChat14() => ReceiveChat(14);
+		public void ReceiveChat15() => ReceiveChat(15);
+		public void ReceiveChat16() => ReceiveChat(16);
+		public void ReceiveChat17() => ReceiveChat(17);
+		public void ReceiveChat18() => ReceiveChat(18);
+		public void ReceiveChat19() => ReceiveChat(19);
+		public void ReceiveChat20() => ReceiveChat(20);
+		public void ReceiveChat21() => ReceiveChat(21);
+		public void ReceiveChat22() => ReceiveChat(22);
+		public void ReceiveChat23() => ReceiveChat(23);
+		public void ReceiveChat24() => ReceiveChat(24);
+		public void ReceiveChat25() => ReceiveChat(25);
+		public void ReceiveChat26() => ReceiveChat(26);
+		public void ReceiveChat27() => ReceiveChat(27);
+		public void ReceiveChat28() => ReceiveChat(28);
+		public void ReceiveChat29() => ReceiveChat(29);
+		public void ReceiveChat30() => ReceiveChat(30);
+		public void ReceiveChat31() => ReceiveChat(31);
+		public void ReceiveChat32() => ReceiveChat(32);
+		public void ReceiveChat33() => ReceiveChat(33);
+		public void ReceiveChat34() => ReceiveChat(34);
+		public void ReceiveChat35() => ReceiveChat(35);
+		public void ReceiveChat36() => ReceiveChat(36);
+		public void ReceiveChat37() => ReceiveChat(37);
+		public void ReceiveChat38() => ReceiveChat(38);
+		public void ReceiveChat39() => ReceiveChat(39);
+		public void ReceiveChat40() => ReceiveChat(40);
+		public void ReceiveChat41() => ReceiveChat(41);
+		public void ReceiveChat42() => ReceiveChat(42);
+		public void ReceiveChat43() => ReceiveChat(43);
+		public void ReceiveChat44() => ReceiveChat(44);
+		public void ReceiveChat45() => ReceiveChat(45);
+		public void ReceiveChat46() => ReceiveChat(46);
+		public void ReceiveChat47() => ReceiveChat(47);
+		public void ReceiveChat48() => ReceiveChat(48);
+		public void ReceiveChat49() => ReceiveChat(49);
+		public void ReceiveChat50() => ReceiveChat(50);
+		public void ReceiveChat51() => ReceiveChat(51);
+		public void ReceiveChat52() => ReceiveChat(52);
+		public void ReceiveChat53() => ReceiveChat(53);
+		public void ReceiveChat54() => ReceiveChat(54);
+		public void ReceiveChat55() => ReceiveChat(55);
+		public void ReceiveChat56() => ReceiveChat(56);
+		public void ReceiveChat57() => ReceiveChat(57);
+		public void ReceiveChat58() => ReceiveChat(58);
+		public void ReceiveChat59() => ReceiveChat(59);
+		public void ReceiveChat60() => ReceiveChat(60);
+		public void ReceiveChat61() => ReceiveChat(61);
+		public void ReceiveChat62() => ReceiveChat(62);
+		public void ReceiveChat63() => ReceiveChat(63);
+		public void ReceiveChat64() => ReceiveChat(64);
+		public void ReceiveChat65() => ReceiveChat(65);
+		public void ReceiveChat66() => ReceiveChat(66);
+		public void ReceiveChat67() => ReceiveChat(67);
+		public void ReceiveChat68() => ReceiveChat(68);
+		public void ReceiveChat69() => ReceiveChat(69);
+		public void ReceiveChat70() => ReceiveChat(70);
+		public void ReceiveChat71() => ReceiveChat(71);
+		public void ReceiveChat72() => ReceiveChat(72);
+		public void ReceiveChat73() => ReceiveChat(73);
+		public void ReceiveChat74() => ReceiveChat(74);
+		public void ReceiveChat75() => ReceiveChat(75);
+		public void ReceiveChat76() => ReceiveChat(76);
+		public void ReceiveChat77() => ReceiveChat(77);
+		public void ReceiveChat78() => ReceiveChat(78);
+		public void ReceiveChat79() => ReceiveChat(79);
+		public void ReceiveChat80() => ReceiveChat(80);
 		#endregion
 	}
 }

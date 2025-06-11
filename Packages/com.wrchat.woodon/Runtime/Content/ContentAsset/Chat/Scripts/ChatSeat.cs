@@ -6,6 +6,7 @@ using VRC.Udon;
 
 namespace WRC.Woodon
 {
+	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public class ChatSeat : WBase
 	{
 		[SerializeField] private InputField chatInputField;
