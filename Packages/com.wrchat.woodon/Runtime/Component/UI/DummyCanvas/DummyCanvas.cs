@@ -8,7 +8,9 @@ namespace WRC.Woodon
 	public class DummyCanvas : UdonSharpBehaviour
 	{
 		[SerializeField] private GameObject dummyCanvas;
+		[SerializeField] private bool followRoot;
 		[SerializeField] private bool usePlayerRot;
+		[SerializeField] private Vector3 targetOffset = Vector3.zero;
 		[SerializeField] private HumanBodyBones targetBone = HumanBodyBones.Head;
 		[SerializeField] private float distance = 2;
 
@@ -58,11 +60,22 @@ namespace WRC.Woodon
 
 		public void UpdatePos()
 		{
-			dummyCanvas.transform.SetPositionAndRotation(
-				Networking.LocalPlayer.GetBonePosition(targetBone),
-				usePlayerRot ? Networking.LocalPlayer.GetRotation() : Networking.LocalPlayer.GetBoneRotation(targetBone));
+			if (followRoot)
+			{
+				dummyCanvas.transform.SetPositionAndRotation(
+					Networking.LocalPlayer.GetPosition() + targetOffset,
+					usePlayerRot ? Networking.LocalPlayer.GetRotation() : Networking.LocalPlayer.GetRotation());
 
-			dummyCanvas.transform.position += dummyCanvas.transform.forward * distance;
+				dummyCanvas.transform.position += dummyCanvas.transform.forward * distance;
+			}
+			else
+			{
+				dummyCanvas.transform.SetPositionAndRotation(
+					Networking.LocalPlayer.GetBonePosition(targetBone) + targetOffset,
+					usePlayerRot ? Networking.LocalPlayer.GetRotation() : Networking.LocalPlayer.GetBoneRotation(targetBone));
+
+				dummyCanvas.transform.position += dummyCanvas.transform.forward * distance;
+			}
 		}
 	}
 }
