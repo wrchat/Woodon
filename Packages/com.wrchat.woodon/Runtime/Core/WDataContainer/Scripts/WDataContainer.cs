@@ -52,9 +52,9 @@ namespace WRC.Woodon
 			if (wJson == null)
 				return;
 
-			RuntimeInt = (int)wJson.GetData("RuntimeInt").Double;
-			RuntimeBool = wJson.GetData("RuntimeBool").Boolean;
-			RuntimeString = wJson.GetData("RuntimeString").String;
+			RuntimeInt = wJson.GetData("RuntimeInt", RuntimeInt);
+			RuntimeBool = wJson.GetData("RuntimeBool", RuntimeBool);
+			RuntimeString = wJson.GetData("RuntimeString", RuntimeString);
 
 			SendEvents();
 		}

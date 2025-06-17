@@ -21,7 +21,7 @@ namespace WRC.Woodon.Chat
 		public static int GetChatTime(this DataDictionary chatData)
 		{
 			if (chatData.TryGetValue("Time", out DataToken dataToken))
-				return (int)dataToken.Double;
+				return dataToken.Int();
 		
 			return 0;
 		}
@@ -45,7 +45,7 @@ namespace WRC.Woodon.Chat
 		public static int GetChatUdonIndex(this DataDictionary chatData)
 		{
 			if (chatData.TryGetValue("UdonIndex", out DataToken dataToken))
-				return (int)dataToken.Double;
+				return dataToken.Int();
 
 			return WBase.NONE_INT;
 		}
@@ -54,7 +54,7 @@ namespace WRC.Woodon.Chat
 		{
 			if (chatData.TryGetValue("ChatRoom", out DataToken dataToken))
 			{
-				int chatRoomInt = (int)dataToken.Double;
+				int chatRoomInt = dataToken.Int();
 				return (TeamType)chatRoomInt;
 			}
 

@@ -37,7 +37,7 @@ namespace Mascari4615.Project.ISD.GSG.ImSoloSinceBirth
 			{
 				DataDictionary chatData = chatDataList[i].DataDictionary;
 				// string name = chatData["Name"].String;
-				// int udonIndex = (int)chatData["UdonIndex"].Double;
+				// int udonIndex = chatData["UdonIndex"].Int();
 				bool isLeft = chatData.GetChatAdditionalData() == "Left";
 
 				if (chatDataCombo.Count == 0)
@@ -48,7 +48,7 @@ namespace Mascari4615.Project.ISD.GSG.ImSoloSinceBirth
 				{
 					DataDictionary lastChatData = chatDataCombo[0].DataDictionary;
 					// string lastName = lastChatData["Name"].String;
-					// int lastUdonIndex = (int)lastChatData["UdonIndex"].Double;
+					// int lastUdonIndex = lastChatData["UdonIndex"].Int();
 					bool isLastLeft = chatDataCombo[0].DataDictionary.GetChatAdditionalData() == "Left";
 
 					if (isLeft == isLastLeft)
