@@ -89,7 +89,7 @@ MonoBehaviour:
   _udonSharpBackingUdonBehaviour: {fileID: 266469573570728717}
   DEBUG: 0
   defaultActive: 0
-  mBool: {fileID: 2745868949541451616}
+  wBool: {fileID: 2745868949541451616}
   activeObjects: []
   disableObjects: []
 --- !u!114 &266469573570728717
@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 2745868949541451616}
   - component: {fileID: 8571949806281330495}
   m_Layer: 0
-  m_Name: '[MBool] IsStaff'
+  m_Name: '[WBool] IsStaff'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -355,11 +355,12 @@ MonoBehaviour:
   _udonSharpBackingUdonBehaviour: {fileID: 8132474210911902920}
   DEBUG: 0
   defaultActive: 0
-  mBool: {fileID: 2745868949541451616}
+  wBool: {fileID: 2745868949541451616}
   activeCanvasGroups: []
   disableCanvasGroups: []
   toggleOnlyInteractable: 0
   toggleColliders: 0
+  delayBlockRaycastsToggle: 0
 --- !u!114 &8132474210911902920
 MonoBehaviour:
   m_ObjectHideFlags: 0

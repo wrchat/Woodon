@@ -147,7 +147,7 @@ namespace WRC.Woodon
 			return diff;
 		}
 
-		private bool HasDataChanged(DataToken key, out DataToken origin, out DataToken cur)
+		private bool HasDataChanged(string key, out DataToken origin, out DataToken cur)
 		{
 			if (ChangedData.TryGetValue(key, out DataToken diff))
 			{
@@ -164,7 +164,7 @@ namespace WRC.Woodon
 			}
 		}
 
-		public bool HasDataChanged(DataToken key, out int origin, out int cur)
+		public bool HasDataChanged(string key, out int origin, out int cur)
 		{
 			if (HasDataChanged(key, out DataToken originToken, out DataToken curToken))
 			{
@@ -180,7 +180,7 @@ namespace WRC.Woodon
 			}
 		}
 
-		public bool HasDataChanged(DataToken key, out string origin, out string cur)
+		public bool HasDataChanged(string key, out string origin, out string cur)
 		{
 			if (HasDataChanged(key, out DataToken originToken, out DataToken curToken))
 			{
@@ -196,7 +196,7 @@ namespace WRC.Woodon
 			}
 		}
 
-		public bool HasDataChanged(DataToken key, out bool origin, out bool cur)
+		public bool HasDataChanged(string key, out bool origin, out bool cur)
 		{
 			if (HasDataChanged(key, out DataToken originToken, out DataToken curToken))
 			{
@@ -212,7 +212,7 @@ namespace WRC.Woodon
 			}
 		}
 
-		public bool HasDataChanged(DataToken key, out DataList origin, out DataList cur)
+		public bool HasDataChanged(string key, out DataList origin, out DataList cur)
 		{
 			if (HasDataChanged(key, out DataToken originToken, out DataToken curToken))
 			{
@@ -228,7 +228,7 @@ namespace WRC.Woodon
 			}
 		}
 
-		public bool HasDataChanged(DataToken key, out DataDictionary origin, out DataDictionary cur)
+		public bool HasDataChanged(string key, out DataDictionary origin, out DataDictionary cur)
 		{
 			if (HasDataChanged(key, out DataToken originToken, out DataToken curToken))
 			{

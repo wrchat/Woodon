@@ -11,7 +11,7 @@ namespace WRC.Woodon
 		OR,
 	}
 
-	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
+	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public class WBooleanOperator : WBase
 	{
 		[Header("_" + nameof(WBooleanOperator))]

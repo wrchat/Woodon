@@ -8,7 +8,7 @@ using VRC.SDKBase;
 using VRC.Udon;
 using WRC.Woodon;
 
-namespace Mascari4615.Project.ISD.GSG.ImSoloSinceBirth
+namespace KarmoDDrine.Project.ISD.GSG.ImSoloSinceBirth
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class ISSB_UIChatBlock_Kakao : WBase

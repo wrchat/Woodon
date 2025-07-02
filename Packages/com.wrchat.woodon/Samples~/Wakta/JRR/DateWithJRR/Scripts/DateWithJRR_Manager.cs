@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using WRC.Woodon;
 using UdonSharp;
 
-namespace Mascari4615.Project.ISD.JRR.DateWithJRR
+namespace KarmoDDrine.Project.ISD.JRR.DateWithJRR
 {
 	[DefaultExecutionOrder(-10000)]
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]

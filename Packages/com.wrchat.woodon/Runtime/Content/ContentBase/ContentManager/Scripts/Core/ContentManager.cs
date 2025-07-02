@@ -7,6 +7,12 @@ using VRC.Udon;
 
 namespace WRC.Woodon
 {
+	public enum ContentMode
+	{
+		Main, // 메인 컨텐츠
+		Sub, // 서브 컨텐츠
+	}
+
 	/// <summary>
 	/// 상속 받는 경우, 해당 클래스에도 DefaultExecutionOrder 어트리뷰트를 달아줘야 함.
 	/// </summary>
@@ -14,23 +20,21 @@ namespace WRC.Woodon
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class ContentManager : WEventPublisher
 	{
-		public const string IntDataString = "IntData";
-		public const string TurnDataString = "TurnData";
-		public const string ContentStateString = "ContentState";
-
 		[Header("_" + nameof(ContentManager))]
 		[SerializeField] protected WJson contentData;
-		[SerializeField] private int defaultContentState = 0;
-		[SerializeField] private SeatDataOption[] seatDataOptions;
-		[SerializeField] private Transform seatParent;
-		public WSeat[] Seats { get; private set; }
-
+		[field: SerializeField] public ContentMode ContentMode { get; private set; } = ContentMode.Main;
+	
 		public int ContentState
 		{
-			get => contentData.GetData(ContentStateString, 0);
-			private set => contentData.SetData(ContentStateString, value);
+			get => contentData.GetData(nameof(ContentState), defaultContentState);
+			private set => contentData.SetData(nameof(ContentState), value);
 		}
+		[SerializeField] private int defaultContentState = 0;
 		[SerializeField] protected int contentStateMax = 1;
+
+		public WSeat[] Seats { get; private set; } = new WSeat[0];
+		[SerializeField] private Transform seatParent = null;
+		[SerializeField] private SeatDataOption[] seatDataOptions = new SeatDataOption[0];
 
 		protected virtual void Start()
 		{
@@ -51,9 +55,14 @@ namespace WRC.Woodon
 
 			if (Networking.IsMaster)
 			{
-				ContentState = defaultContentState;
-				contentData.SerializeData();
+				InitData();
 			}
+		}
+
+		protected virtual void InitData()
+		{
+			ContentState = defaultContentState;
+			contentData.SerializeData();
 		}
 
 		public virtual void UpdateContent()
@@ -64,15 +73,13 @@ namespace WRC.Woodon
 				seat.UpdateSeat();
 		}
 
-		public virtual void OnSeatUpdate()
-		{
-		}
+		public virtual void OnSeatUpdate() { }
 
 		public virtual void OnContentDataChanged()
 		{
 			WDebugLog($"{nameof(OnContentDataChanged)}");
 
-			if (contentData.HasDataChanged(ContentStateString, out int originState, out int curState))
+			if (contentData.HasDataChanged(nameof(ContentState), out int originState, out int curState))
 				OnContentStateChange(DataChangeStateUtil.GetChangeState(originState, curState));
 		}
 
@@ -118,6 +125,12 @@ namespace WRC.Woodon
 						seat.SetTargetPlayerNone();
 				}
 			}
+		}
+
+		public bool TryGetLocalPlayerSeat(out WSeat localPlayerSeat)
+		{
+			localPlayerSeat = GetLocalPlayerSeat();
+			return localPlayerSeat != null;
 		}
 
 		public WSeat GetLocalPlayerSeat()

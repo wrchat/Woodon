@@ -2,7 +2,7 @@
 // Thanks to 메르보, 캡틴 설리반
 
 // 24.06.01
-// refactor by Mascari4615
+// refactor by KarmoDDrine
 
 using VRC.SDKBase;
 using static WRC.Woodon.WUtil;

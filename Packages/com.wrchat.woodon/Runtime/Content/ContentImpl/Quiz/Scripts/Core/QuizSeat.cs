@@ -12,7 +12,7 @@ namespace WRC.Woodon
 
 		public int Score => IntData;
 		public QuizAnswerType ExpectedAnswer => (QuizAnswerType)TurnData;
-		protected QuizManager QuizManager => (QuizManager)contentManager;
+		protected QuizManager QuizManager => (QuizManager)mainContentManager;
 
 		public bool HasSelectedAnswer => ExpectedAnswer != QuizAnswerType.None;
 		public bool IsAnswerCorrect => ExpectedAnswer == QuizManager.CurQuizData.QuizAnswer;

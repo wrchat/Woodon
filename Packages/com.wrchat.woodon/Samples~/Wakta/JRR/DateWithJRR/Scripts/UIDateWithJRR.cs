@@ -2,7 +2,7 @@
 using UnityEngine;
 using WRC.Woodon;
 
-namespace Mascari4615.Project.ISD.JRR.DateWithJRR
+namespace KarmoDDrine.Project.ISD.JRR.DateWithJRR
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public class UIDateWithJRR : UIQuiz

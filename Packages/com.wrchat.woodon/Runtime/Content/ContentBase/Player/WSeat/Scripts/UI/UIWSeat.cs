@@ -9,21 +9,25 @@ namespace WRC.Woodon
 	public class UIWSeat : WBase
 	{
 		[Header("_" + nameof(UIWSeat))]
-		[SerializeField] private TextMeshProUGUI[] indexTexts;
-		[SerializeField] private UISeatData[] seatDataUIs;
-		[SerializeField] private WInt contentState; // ContentManager로부터 받아오는 값 입니다. - KarmoDDrine 250427
+		[SerializeField] protected TextMeshProUGUI[] indexTexts;
+		[SerializeField] protected UISeatData[] seatDataUIs;
+		[SerializeField] protected WInt contentState; // ContentManager로부터 받아오는 값 입니다. - KarmoDDrine 250427
 
-		private ContentManager contentManager;
-		private WSeat wSeat;
+		protected ContentManager contentManager;
+		protected WSeat wSeat;
 
-		public void Init(ContentManager contentManager, WSeat mSeat)
+		public virtual void Init(ContentManager contentManager, WSeat wSeat)
 		{
+			WDebugLog($"{nameof(Init)}: {wSeat.Index}");
+
 			this.contentManager = contentManager;
-			this.wSeat = mSeat;
+			this.wSeat = wSeat;
 		}
 
-		public void UpdateUI()
+		public virtual void UpdateUI()
 		{
+			WDebugLog($"{nameof(UpdateUI)}: {wSeat.Index}");
+
 			int index = wSeat.Index;
 			foreach (TextMeshProUGUI seatIndexText in indexTexts)
 				seatIndexText.text = index.ToString();
@@ -35,5 +39,8 @@ namespace WRC.Woodon
 				return;
 			contentState.SetValue(contentManager.ContentState);
 		}
+
+		public void SetTargetPlayerLocalPlayer()
+			=> wSeat.SetTargetPlayerLocalPlayer();
 	}
 }

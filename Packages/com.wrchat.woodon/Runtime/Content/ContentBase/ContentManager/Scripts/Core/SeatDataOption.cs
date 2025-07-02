@@ -13,7 +13,7 @@ namespace WRC.Woodon
 		[field: Header("_" + nameof(SeatDataOption))]
 
 		// 이름
-		[field: SerializeField] public string Name { get; private set; } = ContentManager.TurnDataString;
+		[field: SerializeField] public string Name { get; private set; } = nameof(WSeat.TurnData);
 
 		// 옵션
 		[Header("_" + nameof(SeatDataOption) + "_Option")]

@@ -15,7 +15,7 @@ namespace WRC.Woodon
 		LESS_THAN_OR_EQUAL,
 	}
 
-	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
+	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
 	public class WIntComparisonOperator : WBase
 	{
 		[Header("_" + nameof(WIntComparisonOperator))]

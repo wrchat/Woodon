@@ -4,7 +4,7 @@ using VRC.SDKBase;
 using VRC.Udon;
 using WRC.Woodon;
 
-namespace Mascari4615.Project.ISD.JRR.DateWithJRR
+namespace KarmoDDrine.Project.ISD.JRR.DateWithJRR
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class DateWithJRR_Seat : QuizSeat

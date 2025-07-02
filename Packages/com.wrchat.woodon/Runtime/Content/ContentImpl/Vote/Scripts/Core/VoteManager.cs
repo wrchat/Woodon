@@ -1,20 +1,44 @@
 ﻿using TMPro;
 using UdonSharp;
 using UnityEngine;
+using VRC.SDKBase;
 
 namespace WRC.Woodon
 {
+	public enum VoteState
+	{
+		Wait,
+		ShowTarget,
+		VoteTime,
+		WaitForResult,
+		CheckResult,
+		ApplyResult
+	}
+
+	[DefaultExecutionOrder(-9000)]
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class VoteManager : ContentManager
 	{
 		[Header("_" + nameof(VoteManager))]
-		[SerializeField] protected TextMeshProUGUI debugText;
+		[SerializeField] protected TextMeshProUGUI[] debugTexts;
 		[SerializeField] protected Timer timer;
 		[SerializeField] protected WSFXManager wSFXManager;
 		[SerializeField] protected TextMeshProUGUI[] resultTexts;
 		[SerializeField] protected TextMeshProUGUI[] elseResultTexts;
 
 		public int[] MaxVoteIndexes { get; protected set; } = new int[0];
+
+		public override void OnSeatUpdate()
+		{
+			WDebugLog($"{nameof(OnSeatUpdate)}");
+			UpdateDebug();
+		}
+
+		public override void UpdateContent()
+		{
+			base.UpdateContent();
+			UpdateDebug();
+		}
 
 		protected override void OnContentStateChange(DataChangeState changeState)
 		{
@@ -26,7 +50,7 @@ namespace WRC.Woodon
 			// 1등 투표 결과
 			{
 				string resultString = string.Empty;
-				SeatDataOption temp = GetSeatDataOption("TurnData");
+				SeatDataOption temp = GetSeatDataOption(nameof(VoteSeat.VoteIndex));
 				for (int i = 0; i < MaxVoteIndexes.Length; i++)
 				{
 					int index = MaxVoteIndexes[i];
@@ -46,7 +70,7 @@ namespace WRC.Woodon
 			// 나머지 투표 결과
 			{
 				string resultString = string.Empty;
-				SeatDataOption temp = GetSeatDataOption("TurnData");
+				SeatDataOption temp = GetSeatDataOption(nameof(VoteSeat.VoteIndex));
 				int[] sortIndexes = GetSortVoteIndex();
 				for (int i = 0; i < sortIndexes.Length; i++)
 				{
@@ -95,16 +119,61 @@ namespace WRC.Woodon
 		{
 			WDebugLog(nameof(OnWait));
 
-			debugText.text = $"";
-
 			if (IsOwner() == false)
 				return;
 
-			foreach (VoteSeat seat in Seats)
+			foreach (WSeat seat in Seats)
 			{
-				seat.TurnData = NONE_INT;
+				seat.SeatData.SetData(nameof(VoteSeat.VoteIndex), NONE_INT); // 초기화
 				seat.SerializeData();
 			}
+		}
+
+		private void UpdateDebug()
+		{
+			string debugString = string.Empty;
+
+			switch ((VoteState)ContentState)
+			{
+				case VoteState.Wait:
+				case VoteState.ShowTarget:
+					break;
+				case VoteState.VoteTime:
+					// 누가 투표했는지 확인
+					foreach (WSeat seat in Seats)
+					{
+						VRCPlayerApi targetPlayer = seat.GetTargetPlayerAPI();
+						string targetPlayerName = targetPlayer == null ? "-" : targetPlayer.displayName;
+						debugString += $"{targetPlayerName} {(IsVoted(seat) ? "투표함" : "투표 안함")}.\n";
+					}
+					break;
+				case VoteState.WaitForResult:
+				case VoteState.CheckResult:
+					string[] turnDataToString = GetSeatDataOption(nameof(VoteSeat.VoteIndex)).DataToString;
+					for (int i = 0; i < turnDataToString.Length; i++)
+						debugString += $"{turnDataToString[i]} 투표 수 : {GetVoteCount(i)}\n";
+
+					if (MaxVoteIndexes.Length == 0 || (GetVoteCount(MaxVoteIndexes[0]) == 0))
+					{
+						debugString += $"No Winner.";
+					}
+					else if (MaxVoteIndexes.Length == 1)
+					{
+						debugString += $"{turnDataToString[MaxVoteIndexes[0]]} is Winner.";
+					}
+					else
+					{
+						debugString += $"Multiple Winners.";
+					}
+					break;
+				case VoteState.ApplyResult:
+					if (MaxVoteIndexes.Length == 0)
+						debugString = $"No Winner.";
+					break;
+			}
+
+			foreach (TextMeshProUGUI debugText in debugTexts)
+				debugText.text = debugString;
 		}
 
 		protected virtual void OnShowTarget()
@@ -146,29 +215,6 @@ namespace WRC.Woodon
 		protected virtual void OnCheckResult()
 		{
 			WDebugLog(nameof(OnCheckResult));
-
-			// 투표 결과 확인 (적용 전)
-
-			string debugS = string.Empty;
-
-			SeatDataOption turnDataOption = GetSeatDataOption(TurnDataString);
-			for (int i = 0; i < turnDataOption.DataToString.Length; i++)
-				debugS += $"{turnDataOption.DataToString[i]} 투표 수 : {GetVoteCount(i)}\n";
-
-			if (MaxVoteIndexes.Length == 0 || (GetVoteCount(MaxVoteIndexes[0]) == 0))
-			{
-				debugText.text = debugS + $"No Winner.";
-				return;
-			}
-			else if (MaxVoteIndexes.Length == 1)
-			{
-				debugText.text = debugS + $"{turnDataOption.DataToString[MaxVoteIndexes[0]]} is Winner.";
-				return;
-			}
-			else
-			{
-				debugText.text = debugS + $"Multiple Winners.";
-			}
 		}
 
 		protected virtual void OnApplyResult()
@@ -177,15 +223,6 @@ namespace WRC.Woodon
 
 			if (wSFXManager != null)
 				wSFXManager.PlaySFX_L(5);
-
-			// 투표 결과 적용
-			if (MaxVoteIndexes.Length == 0)
-			{
-				debugText.text = $"No Winner.";
-
-				if (IsOwner() == false)
-					return;
-			}
 		}
 
 		public void NextStateWhenTimeOver()
@@ -198,11 +235,12 @@ namespace WRC.Woodon
 
 		protected int GetVoteCount(int voteIndex)
 		{
-			int count = 0;
+			int defaultValue = GetSeatDataOption(nameof(VoteSeat.VoteIndex)).DefaultValue;
 
-			foreach (VoteSeat voteSeat in Seats)
+			int count = 0;
+			foreach (WSeat voteSeat in Seats)
 			{
-				if (voteSeat.VoteIndex == voteIndex)
+				if (voteSeat.SeatData.GetData(nameof(VoteSeat.VoteIndex), defaultValue) == voteIndex)
 					count++;
 			}
 
@@ -211,7 +249,7 @@ namespace WRC.Woodon
 
 		protected int[] GetMaxVoteIndex()
 		{
-			SeatDataOption turnDataOption = GetSeatDataOption(TurnDataString);
+			SeatDataOption turnDataOption = GetSeatDataOption(nameof(VoteSeat.VoteIndex));
 			int voteSelectionCount = turnDataOption.DataToString.Length;
 			int[] voteCounts = new int[voteSelectionCount];
 
@@ -242,7 +280,7 @@ namespace WRC.Woodon
 
 		protected int[] GetSortVoteIndex()
 		{
-			SeatDataOption turnDataOption = GetSeatDataOption(TurnDataString);
+			SeatDataOption turnDataOption = GetSeatDataOption(nameof(VoteSeat.VoteIndex));
 			int voteSelectionCount = turnDataOption.DataToString.Length;
 			int[] voteCounts = new int[voteSelectionCount];
 
@@ -273,6 +311,12 @@ namespace WRC.Woodon
 			}
 
 			return sortIndexes;
+		}
+
+		private bool IsVoted(WSeat seat)
+		{
+			int defaultValue = GetSeatDataOption(nameof(VoteSeat.VoteIndex)).DefaultValue;
+			return seat.SeatData.GetData(nameof(VoteSeat.VoteIndex), defaultValue) != defaultValue;
 		}
 	}
 }

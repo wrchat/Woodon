@@ -164,7 +164,7 @@ namespace WRC.Woodon
 			WDebugLog(nameof(UpdateContent));
 			base.UpdateContent();
 
-			int maxPoint = ContentUtil.GetMaxData(this, TurnDataString);
+			int maxPoint = ContentUtil.GetMaxData(this, nameof(WSeat.TurnData));
 			foreach (TextMeshProUGUI maxTryPointText in maxTryPointTexts)
 				maxTryPointText.text = maxPoint.ToString();
 		}
@@ -179,7 +179,7 @@ namespace WRC.Woodon
 
 		private AuctionSeat GetMaxTryPointSeat()
 		{
-			WSeat[] maxTryPointSeats = ContentUtil.GetMaxDataSeats(this, TurnDataString);
+			WSeat[] maxTryPointSeats = ContentUtil.GetMaxDataSeats(this, nameof(WSeat.TurnData));
 
 			if (maxTryPointSeats.Length == 0)
 			{

@@ -33,6 +33,17 @@ namespace WRC.Woodon
 
 			return false;
 		}
+
+		public static void Shuffle(this DataList dataList)
+		{
+			for (int i = 0; i < dataList.Count; i++)
+			{
+				int randomIndex = UnityEngine.Random.Range(i, dataList.Count);
+				DataToken temp = dataList[i];
+				dataList[i] = dataList[randomIndex];
+				dataList[randomIndex] = temp;
+			}
+		}
 		#endregion
 	}
 }

@@ -7,14 +7,18 @@ namespace WRC.Woodon
 	public class VoteSeat : WSeat
 	{
 		// [Header("_" + nameof(VoteSeat))]
-		public int VoteIndex => TurnData;
-
-		protected void TryVote(int newTurnData)
+		public int VoteIndex
 		{
-			if (contentManager.IsContentState((int)VoteState.VoteTime) == false)
+			get => SeatData.GetData(nameof(VoteIndex), mainContentManager.GetSeatDataOption(nameof(VoteIndex)).DefaultValue);
+			set => SeatData.SetData(nameof(VoteIndex), value);
+		}
+
+		public virtual void TryVote(int newTurnData)
+		{
+			if (mainContentManager.IsContentState((int)VoteState.VoteTime) == false)
 				return;
 
-			TurnData = newTurnData;
+			VoteIndex = newTurnData;
 			SerializeData();
 		}
 

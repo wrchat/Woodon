@@ -18,10 +18,10 @@ namespace WRC.Woodon
 
 		public void UpdateTryPoint()
 		{
-			if (contentManager.ContentState != (int)AuctionState.AuctionTime)
+			if (mainContentManager.ContentState != (int)AuctionState.AuctionTime)
 				return;
 
-			if (ContentUtil.GetMaxData(contentManager, ContentManager.TurnDataString) >= tryPoint.Value)
+			if (ContentUtil.GetMaxData(mainContentManager, nameof(TurnData)) >= tryPoint.Value)
 				return;
 
 			SetTryTime(Networking.GetServerTimeInMilliseconds());
@@ -61,13 +61,13 @@ namespace WRC.Woodon
 		{
 			base.OnTurnDataChange(changeState);
 
-			if (contentManager.ContentState != (int)AuctionState.AuctionTime)
+			if (mainContentManager.ContentState != (int)AuctionState.AuctionTime)
 				return;
 
 			if (changeState != DataChangeState.Greater)
 				return;
 
-			if (IsOwner(contentManager.gameObject) == false)
+			if (IsOwner(mainContentManager.gameObject) == false)
 				return;
 
 			if (timer != null)

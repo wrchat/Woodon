@@ -8,7 +8,7 @@ using VRC.Udon;
 using WRC.Woodon;
 using WRC.Woodon.Chat;
 
-namespace Mascari4615.Project.ISD.GSG.ImSoloSinceBirth
+namespace KarmoDDrine.Project.ISD.GSG.ImSoloSinceBirth
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
 	public class ISSB_UIChat : UIChat
