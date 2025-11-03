@@ -8,7 +8,7 @@ namespace WRC.Woodon
 	public class WPlayer : WEventPublisher
 	{
 		[Header("_" + nameof(WPlayer))]
-		[SerializeField] private string autoTargetName = "-";
+		[SerializeField] protected string autoTargetName = "-";
 
 		[UdonSynced, FieldChangeCallback(nameof(TargetPlayerID))] private int _targetPlayerID = NONE_INT;
 		public int TargetPlayerID
@@ -82,9 +82,11 @@ namespace WRC.Woodon
 
 		public override void OnPlayerJoined(VRCPlayerApi player)
 		{
-			if (IsOwner() && (Networking.LocalPlayer.displayName == autoTargetName))
+			string autoTargetName = this.autoTargetName.Trim();
+			bool isAutoTarget = (player.displayName == autoTargetName) || player.displayName.Contains(autoTargetName);
+			if (IsOwner() && isAutoTarget)
 			{
-				SetTarget(Networking.LocalPlayer.playerId);
+				SetTarget(player.playerId);
 			}
 		}
 

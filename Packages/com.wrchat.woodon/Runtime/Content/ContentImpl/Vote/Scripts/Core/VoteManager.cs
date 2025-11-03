@@ -23,8 +23,6 @@ namespace WRC.Woodon
 		[SerializeField] protected TextMeshProUGUI[] debugTexts;
 		[SerializeField] protected Timer timer;
 		[SerializeField] protected WSFXManager wSFXManager;
-		[SerializeField] protected TextMeshProUGUI[] resultTexts;
-		[SerializeField] protected TextMeshProUGUI[] elseResultTexts;
 
 		public int[] MaxVoteIndexes { get; protected set; } = new int[0];
 
@@ -46,43 +44,6 @@ namespace WRC.Woodon
 				return;
 
 			MaxVoteIndexes = GetMaxVoteIndex();
-
-			// 1등 투표 결과
-			{
-				string resultString = string.Empty;
-				SeatDataOption temp = GetSeatDataOption(nameof(VoteSeat.VoteIndex));
-				for (int i = 0; i < MaxVoteIndexes.Length; i++)
-				{
-					int index = MaxVoteIndexes[i];
-
-					if (i == 0)
-						resultString += $"{temp.DataToString[index]}";
-					else
-						resultString += $",\n{temp.DataToString[index]}";
-				}
-
-				for (int j = 0; j < resultTexts.Length; j++)
-				{
-					resultTexts[j].text = resultString;
-				}
-			}
-
-			// 나머지 투표 결과
-			{
-				string resultString = string.Empty;
-				SeatDataOption temp = GetSeatDataOption(nameof(VoteSeat.VoteIndex));
-				int[] sortIndexes = GetSortVoteIndex();
-				for (int i = 0; i < sortIndexes.Length; i++)
-				{
-					int index = sortIndexes[i];
-					resultString += $"{temp.DataToString[index]} \t: {GetVoteCount(index)}표\n";
-				}
-
-				for (int j = 0; j < elseResultTexts.Length; j++)
-				{
-					elseResultTexts[j].text = resultString;
-				}
-			}
 
 			switch ((VoteState)ContentState)
 			{
@@ -131,6 +92,12 @@ namespace WRC.Woodon
 
 		private void UpdateDebug()
 		{
+			foreach (TextMeshProUGUI debugText in debugTexts)
+				debugText.text = GetDebugString();
+		}
+
+		public string GetDebugString()
+		{
 			string debugString = string.Empty;
 
 			switch ((VoteState)ContentState)
@@ -172,8 +139,7 @@ namespace WRC.Woodon
 					break;
 			}
 
-			foreach (TextMeshProUGUI debugText in debugTexts)
-				debugText.text = debugString;
+			return debugString;
 		}
 
 		protected virtual void OnShowTarget()
@@ -233,7 +199,7 @@ namespace WRC.Woodon
 				SetContentState((int)VoteState.WaitForResult);
 		}
 
-		protected int GetVoteCount(int voteIndex)
+		public int GetVoteCount(int voteIndex)
 		{
 			int defaultValue = GetSeatDataOption(nameof(VoteSeat.VoteIndex)).DefaultValue;
 
@@ -247,7 +213,7 @@ namespace WRC.Woodon
 			return count;
 		}
 
-		protected int[] GetMaxVoteIndex()
+		public int[] GetMaxVoteIndex()
 		{
 			SeatDataOption turnDataOption = GetSeatDataOption(nameof(VoteSeat.VoteIndex));
 			int voteSelectionCount = turnDataOption.DataToString.Length;
@@ -278,7 +244,7 @@ namespace WRC.Woodon
 			return maxIndexes;
 		}
 
-		protected int[] GetSortVoteIndex()
+		public int[] GetSortVoteIndex()
 		{
 			SeatDataOption turnDataOption = GetSeatDataOption(nameof(VoteSeat.VoteIndex));
 			int voteSelectionCount = turnDataOption.DataToString.Length;
@@ -313,7 +279,7 @@ namespace WRC.Woodon
 			return sortIndexes;
 		}
 
-		private bool IsVoted(WSeat seat)
+		public bool IsVoted(WSeat seat)
 		{
 			int defaultValue = GetSeatDataOption(nameof(VoteSeat.VoteIndex)).DefaultValue;
 			return seat.SeatData.GetData(nameof(VoteSeat.VoteIndex), defaultValue) != defaultValue;

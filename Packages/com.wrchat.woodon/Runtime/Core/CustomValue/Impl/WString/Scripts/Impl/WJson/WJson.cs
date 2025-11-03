@@ -19,8 +19,6 @@ namespace WRC.Woodon
 		{
 			WDebugLog($"{nameof(SerializeData)} (Try) {DataDictionary}");
 
-			SendEvents(WJsonEvent.OnSerialization);
-
 			if (VRCJson.TrySerializeToJson(DataDictionary, JsonExportType.Beautify, out DataToken result))
 			{
 				WDebugLog($"{nameof(SerializeData)} (Success) {result}");
@@ -32,6 +30,7 @@ namespace WRC.Woodon
 				}
 
 				SetValue(result.String);
+				SendEvents(WJsonEvent.OnSerialization);
 			}
 			else
 			{

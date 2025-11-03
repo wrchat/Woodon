@@ -5,10 +5,9 @@ using UnityEngine;
 namespace WRC.Woodon
 {
 	[UdonBehaviourSyncMode(BehaviourSyncMode.Manual)]
-	public class UIWString : WBase
+	public class UIWString : WStringFollower
 	{
 		[Header("_" + nameof(UIWString))]
-		[SerializeField] private WString wString;
 		[SerializeField] private TMP_InputField inputField;
 		[SerializeField] private TextMeshProUGUI[] texts;
 
@@ -23,6 +22,12 @@ namespace WRC.Woodon
 				return;
 
 			wString.RegisterListener(this, nameof(UpdateUI));
+			UpdateUI();
+		}
+
+		public override void SetWString(WString wString)
+		{
+			base.SetWString(wString);
 			UpdateUI();
 		}
 

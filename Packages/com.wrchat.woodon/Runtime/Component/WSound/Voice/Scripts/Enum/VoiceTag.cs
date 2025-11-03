@@ -21,5 +21,10 @@ namespace WRC.Woodon
 		ROOM_B,
 		ROOM_C,
 		ROOM_D,
+
+		ELSE_1,
+		ELSE_2,
+		ELSE_3,
+		ELSE_4,
 	}
 }

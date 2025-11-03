@@ -31,7 +31,7 @@ namespace WRC.Woodon
 			Init();
 		}
 
-		private void Init()
+		protected virtual void Init()
 		{
 			if (wInt != null)
 			{

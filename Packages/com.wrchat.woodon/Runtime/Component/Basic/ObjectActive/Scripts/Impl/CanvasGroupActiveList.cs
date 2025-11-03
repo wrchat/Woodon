@@ -9,6 +9,31 @@ namespace WRC.Woodon
 		[Header("_" + nameof(CanvasGroupActiveList))]
 		[SerializeField] private CanvasGroup[] canvasGroups;
 
+		private Collider[][] colliders = new Collider[0][];
+
+		[Header("_" + nameof(CanvasGroupActiveList) + " - Options")]
+		[SerializeField] private bool toggleOnlyInteractable = false;
+		[SerializeField] private bool toggleColliders = false;
+
+		protected override void Init()
+		{
+			if (toggleColliders)
+			{
+				colliders = new Collider[canvasGroups.Length][];
+
+				for (int i = 0; i < canvasGroups.Length; i++)
+				{
+					if (canvasGroups[i] == null)
+						continue;
+
+					Collider[] cs = canvasGroups[i].GetComponentsInChildren<Collider>(true);
+					colliders[i] = cs;
+				}
+			}
+
+			base.Init();
+		}
+
 		protected override void InitWIntMinMax()
 		{
 			// wInt.SetMinMaxValue(0, canvasGroups.Length - 1);
@@ -26,22 +51,44 @@ namespace WRC.Woodon
 						if (canvasGroups[i] == null)
 							continue;
 
-						canvasGroups[i].alpha = i == Value ? 1 : 0;
-						canvasGroups[i].blocksRaycasts = i == Value;
-						canvasGroups[i].interactable = i == Value;
+						if (toggleOnlyInteractable)
+						{
+							canvasGroups[i].interactable = i == Value;
+						}
+						else
+						{
+							WUtil.SetCanvasGroupActive(canvasGroups[i], i == Value);
+						}
+
+						if (toggleColliders)
+						{
+							foreach (Collider c in colliders[i])
+								c.enabled = i == Value;
+						}
 					}
 
 					break;
 				case ActiveListOption.UseValueAsTargetIndex:
 					bool isTargetIndex = Value == targetIndex;
-					foreach (CanvasGroup canvasGroup in canvasGroups)
+					for (int i = 0; i < canvasGroups.Length; i++)
 					{
-						if (canvasGroup == null)
+						if (canvasGroups[i] == null)
 							continue;
 
-						canvasGroup.alpha = isTargetIndex ? 1 : 0;
-						canvasGroup.blocksRaycasts = isTargetIndex;
-						canvasGroup.interactable = isTargetIndex;
+						if (toggleOnlyInteractable)
+						{
+							canvasGroups[i].interactable = isTargetIndex;
+						}
+						else
+						{
+							WUtil.SetCanvasGroupActive(canvasGroups[i], isTargetIndex);
+						}
+						
+						if (toggleColliders)
+						{
+							foreach (Collider c in colliders[i])
+								c.enabled = isTargetIndex;
+						}
 					}
 					break;
 				default:
