@@ -9,6 +9,8 @@ namespace WRC
 	public class WDataContainerInitializer : MonoBehaviour
 	{
 		[SerializeField] private string stringPrefix;
+		[Multiline]
+		[SerializeField] private string someString;
 		[SerializeField] private string[] strings;
 		[SerializeField] private Sprite[] sprites;
 
@@ -36,6 +38,31 @@ namespace WRC
 			ForEachWDataContainer((wDataContainer, index) =>
 			{
 				wDataContainer.StringData = new string[] { $"{stringPrefix}{strings[0]}{index}" };
+			});
+		}
+
+		[ContextMenu(nameof(TheSuspect_ItemText))]
+		public void TheSuspect_ItemText()
+		{
+			string[] lines = someString.Split("\n");
+			Debug.Log($"Lines Length: {lines.Length}");
+			Debug.Log($"Lines: {string.Join("|", lines)}");
+
+			ForEachWDataContainer((wDataContainer, index) =>
+			{
+				string line = lines.Length > index ? lines[index] : "";
+				string[] element = line.Split('\t');
+				string number = element.Length > 0 ? element[0] : "";
+				string place = element.Length > 1 ? element[1] : "";
+				string name = element.Length > 2 ? element[2] : "";
+				string _ = element.Length > 3 ? element[3] : "";
+				string __ = element.Length > 4 ? element[4] : "";
+				string description = element.Length > 5 ? element[5].Trim() : "";
+				Debug.Log($"Processing index: {index}");
+				Debug.Log($"Number: {number}, Place: {place}, Name: {name}, Description: {description}");
+
+				wDataContainer.Name = name;
+				wDataContainer.StringData = new string[] { description, place };
 			});
 		}
 

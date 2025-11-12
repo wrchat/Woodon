@@ -77,6 +77,12 @@ namespace WRC.Woodon
 
 		public void SetValue(string newValue, bool isReceiver = false)
 		{
+			if (IsValidText(newValue) == false)
+			{
+				WDebugLog($"{nameof(SetValue)}: 유효하지 않은 문자열입니다. ({newValue})");
+				return;
+			}
+
 			if (isReceiver == false)
 			{
 				if (useSync && SyncedValue != newValue)
