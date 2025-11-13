@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2853981575527858641}
   - component: {fileID: 543766884914645513}
   m_Layer: 0
-  m_Name: '[MAnimator]'
+  m_Name: '[WAnimator]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65,8 +65,8 @@ MonoBehaviour:
   intName: 
   triggerNames: []
   defaultState: 0
-  mBool: {fileID: 1358787152617867623}
-  mValue: {fileID: 0}
+  wBool: {fileID: 1358787152617867623}
+  wInt: {fileID: 0}
 --- !u!114 &543766884914645513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,7 +86,7 @@ MonoBehaviour:
   SynchronizePosition: 0
   AllowCollisionOwnershipTransfer: 0
   Reliable: 0
-  _syncMethod: 2
+  _syncMethod: 1
   serializedProgramAsset: {fileID: 11400000, guid: 36cf64129b7f69d4a99962a9a35b2afb,
     type: 2}
   programSource: {fileID: 11400000, guid: 578ef9a2b6cdacb428918c01782de8d6, type: 2}
@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 1358787152617867623}
   - component: {fileID: 9080609807834414396}
   m_Layer: 0
-  m_Name: '[MBool]'
+  m_Name: '[WBool]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -149,8 +149,8 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 9080609807834414396}
   DEBUG: 1
-  targetUdons: []
-  eventNames: []
+  listeners: []
+  callbacks: []
   sendEventGlobal: 0
   defaultValue: 0
   useSync: 1
@@ -272,9 +272,9 @@ MonoBehaviour:
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 514337456024689042}
   DEBUG: 1
-  targetUdons:
+  listeners:
   - {fileID: 1358787152617867623}
-  eventNames:
+  callbacks:
   - ToggleValue
   sendEventGlobal: 0
   keyCode: 282
@@ -299,7 +299,7 @@ MonoBehaviour:
   SynchronizePosition: 0
   AllowCollisionOwnershipTransfer: 0
   Reliable: 0
-  _syncMethod: 2
+  _syncMethod: 1
   serializedProgramAsset: {fileID: 11400000, guid: e3b31bbdc5444b04b99ae67547a8222f,
     type: 2}
   programSource: {fileID: 11400000, guid: e7de534a8bc397d4ea4b96a863fa713b, type: 2}

@@ -22,6 +22,7 @@ namespace WRC.Woodon
 	{
 		[Header("_" + nameof(ContentManager))]
 		[SerializeField] protected WJson contentData;
+		[SerializeField] protected WInt contentStateWInt = null;
 		[field: SerializeField] public ContentMode ContentMode { get; private set; } = ContentMode.Main;
 	
 		public int ContentState
@@ -96,6 +97,8 @@ namespace WRC.Woodon
 		protected virtual void OnContentStateChange(DataChangeState changeState)
 		{
 			WDebugLog($"{nameof(OnContentStateChange)}, {nameof(changeState)} = {changeState.ToFriendlyString()}");
+			if (contentStateWInt != null)
+				contentStateWInt.SetValue(ContentState);
 			UpdateContent();
 			SendEvents();
 		}
