@@ -90,7 +90,7 @@ namespace WRC.Woodon
 				if (option.Name == dataName)
 					return option;
 
-			WDebugLog($"Not Found DataOption: {dataName}", LogType.Error);
+			WDebugLog($"Not Found DataOption: {dataName}", WLogType.Error);
 			return null;
 		}
 

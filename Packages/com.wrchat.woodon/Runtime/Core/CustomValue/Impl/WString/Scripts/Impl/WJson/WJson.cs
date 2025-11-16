@@ -12,7 +12,7 @@ namespace WRC.Woodon
 		public DataDictionary DataDictionary { get; protected set; } = new DataDictionary();
 		public DataDictionary ChangedData { get; protected set; } = new DataDictionary();
 
-		[SerializeField] private LogType logTypeWhenFailed = LogType.Error;
+		[SerializeField] private WLogType logTypeWhenFailed = WLogType.Error;
 
 		[ContextMenu(nameof(SerializeData))]
 		public void SerializeData()
@@ -34,7 +34,7 @@ namespace WRC.Woodon
 			}
 			else
 			{
-				WDebugLog(result.ToString(), LogType.Error);
+				WDebugLog(result.ToString(), WLogType.Error);
 			}
 		}
 

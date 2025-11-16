@@ -69,7 +69,7 @@ namespace WRC.Woodon
 			// 중복 등록 처리
 			if (AlreadyContainsEvent(eventBlocks, eventBlock))
 			{
-				WDebugLog($"{nameof(RegisterListener)} : {listener}.{callback} is already registered", LogType.Warning);
+				WDebugLog($"{nameof(RegisterListener)} : {listener}.{callback} is already registered", WLogType.Warning);
 				return;
 			}
 

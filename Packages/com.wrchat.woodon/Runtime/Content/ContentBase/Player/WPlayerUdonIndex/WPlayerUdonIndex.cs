@@ -10,7 +10,7 @@ namespace WRC.Woodon
 	public class WPlayerUdonIndex : WBase
 	{
 		// https://cafe.naver.com/steamindiegame/14065241
-		private const char NICK_SEPARATER = '#';
+		private const char NICK_SEPARATOR = '#';
 
 		[Header("_" + nameof(WPlayerUdonIndex))]
 		[SerializeField] private TextMeshProUGUI debugText;
@@ -24,16 +24,16 @@ namespace WRC.Woodon
 				_playerUdonIndexDataPack = value;
 				WDebugLog($"{nameof(_playerUdonIndexDataPack)}, = {_playerUdonIndexDataPack}");
 
-				if (DEBUG && debugText != null)
+				if ((debugMode == WLogMode.None) && (debugText != null))
 				{
 					string debugS = $"{_playerUdonIndexDataPack}\n" +
 						$"LOCAL = {Networking.LocalPlayer.displayName} - {Networking.LocalPlayer.playerId}, {Networking.IsMaster}\n" +
 						$"PlayerCount = {VRCPlayerApi.GetPlayerCount()},\n" +
 						$"{nameof(enableUdonCount)} = {enableUdonCount}, {CanUpdateNow}\n";
 					
-					string[] datas = _playerUdonIndexDataPack.Split(DATA_SEPARATOR);
-					for (int i = 0; i < datas.Length; i++)
-						debugS += datas[i] + '\n';
+					string[] data = _playerUdonIndexDataPack.Split(DATA_SEPARATOR);
+					for (int i = 0; i < data.Length; i++)
+						debugS += data[i] + '\n';
 						
 					debugText.text = debugS;
 				}
@@ -61,7 +61,7 @@ namespace WRC.Woodon
 
 			for (int i = 0; i < playerNameByUdonIndex.Length; i++)
 			{
-				if (playerNameByUdonIndex[i] == (targetPlayer.displayName + NICK_SEPARATER + targetPlayer.playerId))
+				if (playerNameByUdonIndex[i] == (targetPlayer.displayName + NICK_SEPARATOR + targetPlayer.playerId))
 					return i;
 			}
 
@@ -82,11 +82,11 @@ namespace WRC.Woodon
 			if (string.IsNullOrEmpty(playerNameByUdonIndex[udonIndex]))
 				return null;
 
-			string[] datas = playerNameByUdonIndex[udonIndex].Split(NICK_SEPARATER);
-			if (datas == null || datas.Length != 2)
+			string[] data = playerNameByUdonIndex[udonIndex].Split(NICK_SEPARATOR);
+			if (data == null || data.Length != 2)
 				return null;
 
-			int playerId = int.Parse(datas[1]);
+			int playerId = int.Parse(data[1]);
 			return VRCPlayerApi.GetPlayerById(playerId);
 		}
 
@@ -109,13 +109,13 @@ namespace WRC.Woodon
 			PlayerApis = new VRCPlayerApi[VRCPlayerApi.GetPlayerCount()];
 			VRCPlayerApi.GetPlayers(PlayerApis);
 
-			string[] datas = PlayerUdonIndexDataPack.Split(DATA_SEPARATOR);
+			string[] data = PlayerUdonIndexDataPack.Split(DATA_SEPARATOR);
 			playerNameByUdonIndex = new string[80];
 			enableUdonCount = 0;
 			WDebugLog($"PlayerUdonIndexDataPack = {PlayerUdonIndexDataPack}");
-			WDebugLog($"datasLength = {datas.Length}");
-			for (int i = 0; i < datas.Length; i++)
-				playerNameByUdonIndex[i] = datas[i];
+			WDebugLog($"dataLength = {data.Length}");
+			for (int i = 0; i < data.Length; i++)
+				playerNameByUdonIndex[i] = data[i];
 
 			// 존재하지 않는 플레이어는 제거
 			for (int i = 0; i < playerNameByUdonIndex.Length; i++)
@@ -123,7 +123,7 @@ namespace WRC.Woodon
 				if (string.IsNullOrEmpty(playerNameByUdonIndex[i]))
 					continue;
 
-				VRCPlayerApi targetPlayerAPI = VRCPlayerApi.GetPlayerById(int.Parse(playerNameByUdonIndex[i].Split(NICK_SEPARATER)[1]));
+				VRCPlayerApi targetPlayerAPI = VRCPlayerApi.GetPlayerById(int.Parse(playerNameByUdonIndex[i].Split(NICK_SEPARATOR)[1]));
 
 				if (targetPlayerAPI == null)
 				{
@@ -143,7 +143,7 @@ namespace WRC.Woodon
 					if (string.IsNullOrEmpty(playerNameByUdonIndex[i]))
 						continue;
 
-					if (playerNameByUdonIndex[i] == player.displayName + NICK_SEPARATER + player.playerId)
+					if (playerNameByUdonIndex[i] == player.displayName + NICK_SEPARATOR + player.playerId)
 					{
 						hasUdon = true;
 						enableUdonCount++;
@@ -159,7 +159,7 @@ namespace WRC.Woodon
 				{
 					if (string.IsNullOrEmpty(playerNameByUdonIndex[i]))
 					{
-						playerNameByUdonIndex[i] = player.displayName + NICK_SEPARATER + player.playerId;
+						playerNameByUdonIndex[i] = player.displayName + NICK_SEPARATOR + player.playerId;
 						enableUdonCount++;
 						break;
 					}

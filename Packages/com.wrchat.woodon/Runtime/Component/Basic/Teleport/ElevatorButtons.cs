@@ -14,7 +14,7 @@ namespace WRC.Woodon
 		{
 			if (teleportManager == null)
 			{
-				WDebugLog($"{nameof(teleportManager)} is not assigned!", LogType.Error);
+				WDebugLog($"{nameof(teleportManager)} is not assigned!", WLogType.Error);
 				return;
 			}
 

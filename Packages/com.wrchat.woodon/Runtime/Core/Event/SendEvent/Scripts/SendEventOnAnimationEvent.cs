@@ -15,7 +15,7 @@ namespace WRC.Woodon
 
 			if (targetUdons.Length != eventNames.Length)
 			{
-				WDebugLog($"{nameof(Start)} : {nameof(targetUdons)}.Length != {nameof(eventNames)}.Length", LogType.Error);
+				WDebugLog($"{nameof(Start)} : {nameof(targetUdons)}.Length != {nameof(eventNames)}.Length", WLogType.Error);
 				return;
 			}
 
@@ -23,13 +23,13 @@ namespace WRC.Woodon
 			{
 				if (targetUdons[i] == null)
 				{
-					WDebugLog($"{nameof(Start)} : {nameof(targetUdons)}[{i}] is null, Skip {nameof(eventNames)}[{i}] = {eventNames[i]}", LogType.Error);
+					WDebugLog($"{nameof(Start)} : {nameof(targetUdons)}[{i}] is null, Skip {nameof(eventNames)}[{i}] = {eventNames[i]}", WLogType.Error);
 					continue;
 				}
 
 				if (string.IsNullOrEmpty(eventNames[i]))
 				{
-					WDebugLog($"{nameof(Start)} : {nameof(eventNames)}[{i}] is null or empty, Skip {nameof(targetUdons)}[{i}]", LogType.Warning);
+					WDebugLog($"{nameof(Start)} : {nameof(eventNames)}[{i}] is null or empty, Skip {nameof(targetUdons)}[{i}]", WLogType.Warning);
 					continue;
 				}
 			}
@@ -41,7 +41,7 @@ namespace WRC.Woodon
 
 			if (index < 0 || index >= targetUdons.Length)
 			{
-				WDebugLog($"{nameof(SendEvent)} : Invalid index {index}", LogType.Error);
+				WDebugLog($"{nameof(SendEvent)} : Invalid index {index}", WLogType.Error);
 				return;
 			}
 

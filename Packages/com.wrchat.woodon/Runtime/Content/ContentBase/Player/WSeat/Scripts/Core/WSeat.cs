@@ -178,5 +178,22 @@ namespace WRC.Woodon
 				ResetSeat();
 			}
 		}
+
+		// 추가, 이미 인스펙터에서 등록된 UI랑 중복될 수 있어서 Contain 확인 - KarmoDDrine 2025.11.15
+		public void RegisterUI(UIWSeat uiWSeat)
+		{
+			if (Contains(uis, uiWSeat))
+				return;
+
+			Add(ref uis, uiWSeat);
+		}
+		
+		public void UnregisterUI(UIWSeat uiWSeat)
+		{
+			if (Contains(uis, uiWSeat) == false)
+				return;
+
+			Remove(ref uis, uiWSeat);
+		}
 	}
 }

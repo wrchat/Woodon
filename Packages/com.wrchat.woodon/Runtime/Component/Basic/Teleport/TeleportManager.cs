@@ -18,7 +18,7 @@ namespace WRC.Woodon
 
 			if (index < 0 || index >= targetPoses.Length)
 			{
-				WDebugLog($"Index {index} is out of bounds (0-{targetPoses.Length - 1})", LogType.Error);
+				WDebugLog($"Index {index} is out of bounds (0-{targetPoses.Length - 1})", WLogType.Error);
 				return;
 			}
 

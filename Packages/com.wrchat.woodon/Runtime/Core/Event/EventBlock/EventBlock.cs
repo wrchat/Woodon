@@ -31,7 +31,7 @@ namespace WRC.Woodon
 
 			if (targetUdons.Length != methodNames.Length)
 			{
-				WDebugLog($"{nameof(targetUdons)}.Length != {nameof(methodNames)}.Length", LogType.Error);
+				WDebugLog($"{nameof(targetUdons)}.Length != {nameof(methodNames)}.Length", WLogType.Error);
 				return;
 			}
 
@@ -39,13 +39,13 @@ namespace WRC.Woodon
 			{
 				if (targetUdons[i] == null)
 				{
-					WDebugLog($"{nameof(targetUdons)}[{i}] == null", LogType.Error);
+					WDebugLog($"{nameof(targetUdons)}[{i}] == null", WLogType.Error);
 					return;
 				}
 
 				if (string.IsNullOrEmpty(methodNames[i]))
 				{
-					WDebugLog($"{nameof(methodNames)}[{i}] == null", LogType.Warning);
+					WDebugLog($"{nameof(methodNames)}[{i}] == null", WLogType.Warning);
 					return;
 				}
 			}

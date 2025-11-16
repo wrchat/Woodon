@@ -39,6 +39,17 @@ namespace WRC.Woodon
 			// 	   targetPlayer.GetPickupInHand(VRC_Pickup.PickupHand.Right) == pickup;
 		}
 
+		public static VRCPlayerApi GetPlayerByID(int targetID)
+		{
+			VRCPlayerApi[] players = GetPlayers();
+
+			foreach (VRCPlayerApi player in players)
+				if (player.playerId == targetID)
+					return player;
+
+			return null;
+		}
+
 		public static VRCPlayerApi GetPlayerByName(string targetName)
 		{
 			VRCPlayerApi[] players = GetPlayers();
@@ -118,6 +129,15 @@ namespace WRC.Woodon
 
 			if (index < originArr.Length - 1)
 				Array.Copy(originArr, index + 1, newArr, index, originArr.Length - index - 1);
+		}
+
+		public static bool Contains<T>(T[] arr, T element)
+		{
+			foreach (T item in arr)
+				if (item.Equals(element))
+					return true;
+
+			return false;
 		}
 		#endregion
 	}

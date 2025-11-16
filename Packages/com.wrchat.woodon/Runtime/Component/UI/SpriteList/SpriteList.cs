@@ -76,7 +76,7 @@ namespace WRC.Woodon
 
 			if (spriteIndex < 0 || spriteIndex >= sprites.Length)
 			{
-				WDebugLog($"{nameof(SetAll)}, Index out of range: {spriteIndex}", LogType.Error);
+				WDebugLog($"{nameof(SetAll)}, Index out of range: {spriteIndex}", WLogType.Error);
 				return;
 			}
 

@@ -5,6 +5,21 @@ using static WRC.Woodon.WUtil;
 
 namespace WRC.Woodon
 {
+	public enum WLogType
+	{
+		Common,
+		CommonImportant,
+		Warning,
+		Error,
+	}
+
+	public enum WLogMode
+	{
+		None,
+		All,
+		OnlyImportant,
+	}
+
 	public abstract class WBase : UdonSharpBehaviour
 	{
 		public const string DEBUG_PREFIX = "WRChat";
@@ -18,7 +33,7 @@ namespace WRC.Woodon
 		public const string FALSE_STRING = "FALSE";
 
 		[Header("_" + nameof(WBase))]
-		[SerializeField] protected bool DEBUG = false;
+		[SerializeField] protected WLogMode debugMode = WLogMode.None;
 
 		// 아래 메서드들은 확장 메서드들로 만들까 했는데, 일반 메서드와 크게 성능상 차이가 없다고 함.
 		// this.WDebugLog(); 같이 쓰기 번거로워지기만 할 것 같아서 그냥 일반 메서드로 둠.
@@ -33,26 +48,29 @@ namespace WRC.Woodon
 
 		// DEBUG 옵션도 딱히 대체 방법이 생각나지 않아서, 직접 상속 받게하는 것이 여러모로 편하고 좋아보임.
 
-		protected void WDebugLog(string log, LogType logType = LogType.Log)
+		protected void WDebugLog(string logMessage) => WDebugLog(logMessage, WLogType.Common);
+		protected void WDebugLog(string logMessage, WLogType logType)
 		{
 			// To Not Log Error When Player Left The World.
 			if (IsNotOnline())
 				return;
 
+			bool isImportantLog = (logType == WLogType.CommonImportant) || (logType == WLogType.Warning) || (logType == WLogType.Error);
+
 			// DEBUG 옵션 유무와 별개로, 에러 로그는 무조건 출력합니다.
-			if (DEBUG == false && (logType != LogType.Error))
+			if (((debugMode == WLogMode.None) || (debugMode == WLogMode.OnlyImportant && isImportantLog == false)) && (logType != WLogType.Error))
 				return;
 
 			string formattedLog = $@"" +
 				$@"[<color=#3a9e00>{DEBUG_PREFIX}</color>] " +
 				$@"[<color=#fc6203>{Networking.LocalPlayer.playerId}</color>] " +
-				$@"<color=#00a6ff>{gameObject.name}</color> {log}";
+				$@"<color=#00a6ff>{gameObject.name}</color> {logMessage}";
 
-			if (logType == LogType.Log)
+			if (logType == WLogType.Common)
 				Debug.Log(formattedLog);
-			else if (logType == LogType.Warning)
+			else if (logType == WLogType.Warning)
 				Debug.LogWarning(formattedLog);
-			else if (logType == LogType.Error)
+			else if (logType == WLogType.Error)
 				Debug.LogError(formattedLog);
 		}
 

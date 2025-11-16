@@ -45,7 +45,7 @@ namespace WRC.Woodon
 
 		protected virtual void OnValueChange(string origin, string cur)
 		{
-			WDebugLog($"{nameof(OnValueChange)} : {origin} -> {cur}");
+			WDebugLog($"{nameof(OnValueChange)} : {origin} -> {cur}", WLogType.CommonImportant);
 			SendEvents();
 		}
 
@@ -79,7 +79,7 @@ namespace WRC.Woodon
 		{
 			if (IsValidText(newValue) == false)
 			{
-				WDebugLog($"{nameof(SetValue)}: 유효하지 않은 문자열입니다. ({newValue})");
+				WDebugLog($"{nameof(SetValue)}: 유효하지 않은 문자열입니다. ({newValue})", WLogType.Warning);
 				return;
 			}
 

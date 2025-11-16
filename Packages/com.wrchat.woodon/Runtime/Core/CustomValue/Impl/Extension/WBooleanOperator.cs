@@ -9,6 +9,7 @@ namespace WRC.Woodon
 	{
 		AND,
 		OR,
+		NEGATIVE
 	}
 
 	[UdonBehaviourSyncMode(BehaviourSyncMode.None)]
@@ -46,6 +47,12 @@ namespace WRC.Woodon
 						break;
 				}
 			}
+
+			if (booleanOperatorType == BooleanOperatorType.NEGATIVE && wBools.Length == 1)
+			{
+				result = !result;
+			}
+
 			resultWBool.SetValue(result);
 		}
 	}

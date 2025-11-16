@@ -50,10 +50,16 @@ namespace WRC.Woodon
 			if (toggleOnlyInteractable)
 			{
 				foreach (CanvasGroup c in activeCanvasGroups)
+				{
 					c.interactable = Active;
+					c.blocksRaycasts = Active;
+				}
 
 				foreach (CanvasGroup c in disableCanvasGroups)
+				{
 					c.interactable = !Active;
+					c.blocksRaycasts = !Active;
+				}
 			}
 			else
 			{

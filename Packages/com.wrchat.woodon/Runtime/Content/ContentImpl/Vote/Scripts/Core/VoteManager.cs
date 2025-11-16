@@ -22,7 +22,9 @@ namespace WRC.Woodon
 		[Header("_" + nameof(VoteManager))]
 		[SerializeField] protected TextMeshProUGUI[] debugTexts;
 		[SerializeField] protected Timer timer;
+		
 		[SerializeField] protected WSFXManager wSFXManager;
+		[SerializeField] protected bool useSFX = true;
 
 		public int[] MaxVoteIndexes { get; protected set; } = new int[0];
 
@@ -142,20 +144,22 @@ namespace WRC.Woodon
 			return debugString;
 		}
 
+		protected virtual void PlaySFX(int sfxIndex)
+		{
+			if (useSFX && wSFXManager != null)
+				wSFXManager.PlaySFX_L(sfxIndex);
+		}
+
 		protected virtual void OnShowTarget()
 		{
 			WDebugLog(nameof(OnShowTarget));
-
-			if (wSFXManager != null)
-				wSFXManager.PlaySFX_L(0);
+			PlaySFX(0);
 		}
 
 		protected virtual void OnVoteTime()
 		{
 			WDebugLog(nameof(OnVoteTime));
-
-			if (wSFXManager != null)
-				wSFXManager.PlaySFX_L(1);
+			PlaySFX(1);
 
 			if (IsOwner() == false)
 				return;
@@ -167,9 +171,7 @@ namespace WRC.Woodon
 		protected virtual void OnWaitForResult()
 		{
 			WDebugLog(nameof(OnWaitForResult));
-
-			if (wSFXManager != null)
-				wSFXManager.PlaySFX_L(2);
+			PlaySFX(2);
 
 			if (IsOwner() == false)
 				return;
@@ -186,9 +188,7 @@ namespace WRC.Woodon
 		protected virtual void OnApplyResult()
 		{
 			WDebugLog(nameof(OnApplyResult));
-
-			if (wSFXManager != null)
-				wSFXManager.PlaySFX_L(5);
+			PlaySFX(5);
 		}
 
 		public void NextStateWhenTimeOver()
@@ -237,9 +237,8 @@ namespace WRC.Woodon
 
 			WUtil.Resize(ref maxIndexes, maxIndexCount);
 
-			if (DEBUG)
-				for (int i = 0; i < maxIndexes.Length; i++)
-					WDebugLog($"MaxVoteIndex: {maxIndexes[i]}");
+			for (int i = 0; i < maxIndexes.Length; i++)
+				WDebugLog($"MaxVoteIndex: {maxIndexes[i]}");
 
 			return maxIndexes;
 		}

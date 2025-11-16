@@ -96,7 +96,7 @@ namespace WRC.Woodon
 		{
 			if (quizDataParentsIndex == null)
 			{
-				WDebugLog($"{nameof(OnQuizDataParentChange)} : {nameof(quizDataParentsIndex)}가 null입니다.", LogType.Error);
+				WDebugLog($"{nameof(OnQuizDataParentChange)} : {nameof(quizDataParentsIndex)}가 null입니다.", WLogType.Error);
 				return;
 			}
 
