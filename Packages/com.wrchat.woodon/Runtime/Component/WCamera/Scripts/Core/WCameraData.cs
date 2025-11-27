@@ -1,9 +1,6 @@
-﻿
-using Cinemachine;
+﻿using Cinemachine;
 using UdonSharp;
 using UnityEngine;
-using VRC.SDKBase;
-using VRC.Udon;
 
 namespace WRC.Woodon
 {
@@ -12,6 +9,7 @@ namespace WRC.Woodon
 	{
 		[field: Header("_" + nameof(WCameraData))]
 		[field: SerializeField] public KeyCode KeyCode { get; set; } = KeyCode.None;
+		[field: SerializeField] public bool IsUseKeyCode { get; set; } = true;
 
 		public CinemachineVirtualCamera Camera
 		{

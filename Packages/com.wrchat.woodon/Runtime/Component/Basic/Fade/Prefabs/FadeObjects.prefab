@@ -299,17 +299,18 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 5411332266370032497}
-  DEBUG: 1
+  debugMode: 0
   targetBone: 10
   targetObjects:
   - {fileID: 3177684784217531216}
   targetTrans: {fileID: 6437546313819622554}
-  fowardPower: 0
+  targetOffset: {x: 0, y: 0, z: 0}
+  forwardPower: 1
   followRotation: 1
   followRoot: 0
   lerp: 0
   lerpValue: 5
-  mTarget: {fileID: 0}
+  wPlayer: {fileID: 0}
 --- !u!114 &5411332266370032497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -350,7 +351,7 @@ GameObject:
   - component: {fileID: 8245201779893908781}
   - component: {fileID: 5988763032784560581}
   m_Layer: 5
-  m_Name: '[Canvas] Fade'
+  m_Name: '[OLCanvas] Fade'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

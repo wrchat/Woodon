@@ -82,8 +82,10 @@ namespace WRC.Woodon
 
 		public override void OnPlayerJoined(VRCPlayerApi player)
 		{
-			string autoTargetName = this.autoTargetName.Trim();
-			bool isAutoTarget = (player.displayName == autoTargetName) || player.displayName.Contains(autoTargetName);
+			// [TS] Upper로 비교 - KarmoDDrine 2025.11.24
+			string autoTargetName = this.autoTargetName.Trim().ToUpper();
+			string playerName = player.displayName.ToUpper();
+			bool isAutoTarget = (playerName == autoTargetName) || playerName.Contains(autoTargetName);
 			if (IsOwner() && isAutoTarget)
 			{
 				SetTarget(player.playerId);

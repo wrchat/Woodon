@@ -39,7 +39,7 @@ namespace WRC.Woodon
 			if ((cameraIndex.Value < 0) || (cameraIndex.Value >= cameraDatas.Length))
 				TurnOffCamera();
 			else
-				SetCamera(cameraIndex.Value, isReciever: true);
+				SetCamera(cameraIndex.Value, isReceiver: true);
 		}
 
 		private void Update()
@@ -56,7 +56,7 @@ namespace WRC.Woodon
 
 			for (int i = 0; i < cameraDatas.Length; i++)
 			{
-				if (cameraDatas[i].KeyCode == KeyCode.None)
+				if (cameraDatas[i].KeyCode == KeyCode.None || cameraDatas[i].IsUseKeyCode == false)
 					continue;
 
 				if (Input.GetKeyDown(cameraDatas[i].KeyCode))
@@ -71,9 +71,9 @@ namespace WRC.Woodon
 			}
 		}
 
-		public void SetCamera(int newCameraIndex, bool alwaysOn = false, bool isReciever = false)
+		public void SetCamera(int newCameraIndex, bool alwaysOn = false, bool isReceiver = false)
 		{
-			WDebugLog($"{nameof(SetCamera)}({newCameraIndex}) : {alwaysOn}, {isReciever}");
+			WDebugLog($"{nameof(SetCamera)}({newCameraIndex}) : {alwaysOn}, {isReceiver}");
 
 			// None | Invalid index
 			if ((newCameraIndex < 0) || (newCameraIndex >= cameraDatas.Length))
@@ -91,7 +91,7 @@ namespace WRC.Woodon
 				return;
 			}
 
-			if (isReciever == false)
+			if (isReceiver == false)
 				if (cameraIndex != null)
 				{
 					lastCameraIndex = cameraIndex.Value;

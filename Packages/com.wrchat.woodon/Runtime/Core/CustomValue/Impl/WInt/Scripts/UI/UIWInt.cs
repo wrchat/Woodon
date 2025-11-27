@@ -70,8 +70,10 @@ namespace WRC.Woodon
 		#region HorribleEvents
 		public void IncreaseValue() => wInt.IncreaseValue();
 		public void AddValue10() => wInt.AddValue(wInt.IncreaseAmount * 10);
+		public void AddValue100() => wInt.AddValue(wInt.IncreaseAmount * 100);
 		public void DecreaseValue() => wInt.DecreaseValue();
 		public void SubValue10() => wInt.SubValue(wInt.DecreaseAmount * 10);
+		public void SubValue100() => wInt.SubValue(wInt.DecreaseAmount * 100);
 		public void ResetValue() => wInt.ResetValue();
 
 		public void SetValue0() => wInt.SetValue(0);

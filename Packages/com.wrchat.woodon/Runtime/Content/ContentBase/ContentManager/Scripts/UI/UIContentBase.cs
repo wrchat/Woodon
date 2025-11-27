@@ -1,4 +1,3 @@
-using TMPro;
 using UdonSharp;
 using UnityEngine;
 
