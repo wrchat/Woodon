@@ -13,7 +13,7 @@ namespace WRC.Woodon
 
 		[Header("_" + nameof(WCameraManager) + " - Options")]
 		[SerializeField] private bool canTurnOffCamera = true;
-		private int lastCameraIndex = NONE_INT;
+		public int LastCameraIndex { get; private set; } = NONE_INT;
 
 		[SerializeField] private KeyCode camOffKeyCode = KeyCode.Backspace;
 
@@ -61,7 +61,7 @@ namespace WRC.Woodon
 
 				if (Input.GetKeyDown(cameraDatas[i].KeyCode))
 				{
-					if (lastCameraIndex == i)
+					if (LastCameraIndex == i)
 						cameraIndex.SetValue(NONE_INT); // UpdateCameraIndexByWInt -> TurnOffCamera
 					else
 						SetCamera(i);
@@ -84,7 +84,7 @@ namespace WRC.Woodon
 			}
 
 			// Toggle if same index
-			if ((newCameraIndex == lastCameraIndex) && (alwaysOn == false))
+			if ((newCameraIndex == LastCameraIndex) && (alwaysOn == false))
 			{
 				WDebugLog($"{nameof(SetCamera)} : Same index");
 				TurnOffCamera();
@@ -94,12 +94,12 @@ namespace WRC.Woodon
 			if (isReceiver == false)
 				if (cameraIndex != null)
 				{
-					lastCameraIndex = cameraIndex.Value;
+					LastCameraIndex = cameraIndex.Value;
 					cameraIndex.SetValue(newCameraIndex);
 				}
 
 			cameraBrain.enabled = true;
-			lastCameraIndex = cameraIndex.Value;
+			LastCameraIndex = cameraIndex.Value;
 		
 			for (int i = 0; i < cameraDatas.Length; i++)
 				cameraDatas[i].Camera.Priority = (newCameraIndex == i) ? 4444 : NONE_INT;
@@ -110,7 +110,7 @@ namespace WRC.Woodon
 			WDebugLog($"{nameof(TurnOffCamera)}");
 
 			cameraBrain.enabled = false;
-			lastCameraIndex = NONE_INT;
+			LastCameraIndex = NONE_INT;
 		}
 	}
 }

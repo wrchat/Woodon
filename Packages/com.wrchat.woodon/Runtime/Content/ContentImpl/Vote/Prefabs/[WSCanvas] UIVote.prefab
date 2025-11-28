@@ -1343,7 +1343,7 @@ PrefabInstance:
     - target: {fileID: 8635415116690155197, guid: 4f57e62219b6d8647ae6d1ad7f67b079,
         type: 3}
       propertyPath: m_PresetInfoIsWorld
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1394,7 +1394,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 5236820013246803736}
-  DEBUG: 0
+  debugMode: 0
   voteManager: {fileID: 0}
   debugTexts:
   - {fileID: 2493194718046898806}
@@ -1402,6 +1402,7 @@ MonoBehaviour:
   - {fileID: 8529119166005053133}
   elseResultTexts:
   - {fileID: 2950325208217503857}
+  excludeZeroVote: 1
 --- !u!114 &5236820013246803736
 MonoBehaviour:
   m_ObjectHideFlags: 0

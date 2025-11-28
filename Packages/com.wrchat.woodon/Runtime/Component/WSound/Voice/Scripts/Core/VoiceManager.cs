@@ -124,8 +124,6 @@ namespace WRC.Woodon
 					gain = 0;
 					break;
 				case VoiceState.Amplification:
-					distanceFar = VOICE_AMPLIFICATION_FAR + VoiceAmplificationFarBoost;
-
 					// 로컬 플레이어와 해당 플레이어와의 거리가 가까울 때는 증폭 키면 조금 귀 아픔. 거리 기준으로 Lerp 적용. [고선파] - KarmoDDrine 2025.11.02, 2025 11.16
 					float distance = Vector3.Distance(Networking.LocalPlayer.GetPosition(), player.GetPosition());
 					bool isFarEnough = distance >= VoiceFarBoostDistance;
@@ -133,17 +131,20 @@ namespace WRC.Woodon
 					float normalGain = VOICE_DEFAULT_GAIN + VoiceDefaultGainBoost;
 					float amplifiedGain = VOICE_AMPLIFICATION_GAIN + VoiceAmplificationGainBoost;
 
+					float normalFar = VOICE_DEFAULT_FAR + VoiceDefaultFarBoost;
+					float amplifiedFar = VOICE_AMPLIFICATION_FAR + VoiceAmplificationFarBoost;
+
 					if (isFarEnough)
 					{
-						gain = VOICE_AMPLIFICATION_GAIN + VoiceAmplificationGainBoost;
+						gain = amplifiedGain;
+						distanceFar = amplifiedFar;
 					}
 					else
 					{
 						float t = distance / VoiceFarBoostDistance;
 						gain = Mathf.Lerp(normalGain, amplifiedGain, t);
+						distanceFar = Mathf.Lerp(normalFar, amplifiedFar, t);
 					}
-
-					player.SetVoiceGain(gain);
 					break;
 			}
 
