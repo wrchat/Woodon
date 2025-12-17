@@ -14,6 +14,9 @@ namespace WRC.Woodon
 		// 0표는 제외하고 출력
 		[SerializeField] protected bool excludeZeroVote = true;
 
+		// 결과에 줄바꿈할지
+		[SerializeField] protected bool useNewLineInResult = false;
+
 		private void Start()
 		{
 			voteManager.RegisterListener(this, nameof(UpdateUI));
@@ -34,7 +37,7 @@ namespace WRC.Woodon
 					if (i == 0)
 						resultString += $"{temp.DataToString[index]}";
 					else
-						resultString += $",\n{temp.DataToString[index]}";
+						resultString += useNewLineInResult ? $",\n{temp.DataToString[index]}" : $", {temp.DataToString[index]}";
 				}
 
 				// 1-2. UI 업데이트

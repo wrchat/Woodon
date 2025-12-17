@@ -9,8 +9,10 @@ namespace WRC.Woodon
 	{
 		[Header("_" + nameof(TeleportManager))]
 		[SerializeField] private Transform[] targetPoses;
+
 		[SerializeField] private WSFXManager sfxManager;
 		[SerializeField] private AudioClip sfxClip;
+		[SerializeField] private float volumeScale = 1.0f;
 
 		public void Teleport(int index)
 		{
@@ -25,7 +27,7 @@ namespace WRC.Woodon
 			Networking.LocalPlayer.TeleportTo(targetPoses[index].position, targetPoses[index].rotation);
 
 			if (sfxManager != null && sfxClip != null)
-				sfxManager.PlaySFX(sfxClip);
+				sfxManager.PlaySFX(sfxClip, volumeScale);
 		}
 
 		#region Horrible UdonEvents
